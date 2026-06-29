@@ -1,4 +1,3 @@
-import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
 import {populateNav,loadNavData,loadUserData,setEnabledLinks} from '../../modules/nav';
 
 class iamSTDNav extends HTMLElement {
@@ -8,9 +7,13 @@ class iamSTDNav extends HTMLElement {
 
   async connectedCallback(): void {
 
+
+    const nav = this.closest('iam-nav');
+    const mode = this.hasAttribute('data-mode') ? this.getAttribute('data-mode') : 'dev';
+
     // if not an sso use load default from component
 
-    if(!this.hasAttribute('data-sso-user') || this.getAttribute('data-sso-user') == 'false' || this.getAttribute('data-sso-user') == false || this.getAttribute('data-sso-user') == null){
+    if(!this.hasAttribute('data-sso-subject') || this.getAttribute('data-sso-subject') == 'false' || this.getAttribute('data-sso-subject') == false || this.getAttribute('data-sso-subject') == null){
 
       if(this.hasAttribute('slot') && this.getAttribute('slot') == "secondary"){
 
@@ -24,8 +27,7 @@ class iamSTDNav extends HTMLElement {
       return;
     }
 
-    // else
-    const data = await loadNavData(Cookies).then(
+    const data = await loadNavData(mode).then(
 
       (data) => {
 
@@ -56,13 +58,19 @@ class iamSTDNav extends HTMLElement {
       }
     );
 
-    const userData = await loadUserData(Cookies).then(
+    if(!this.hasAttribute('data-sso-subject') && !this.hasAttribute('data-product'))
+      return;
+
+    const subject = this.getAttribute('data-sso-subject');
+    const product = this.getAttribute('data-product');
+
+    const userData = await loadUserData(mode, subject, product).then(
       (data) => {
 
         if(!data.attributes)
           return false;
 
-        setEnabledLinks(this,data);
+        setEnabledLinks(nav,data);
 
         Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
 

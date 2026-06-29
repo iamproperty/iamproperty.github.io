@@ -24,20 +24,21 @@
     <p>The one platform Hub view uses the <a href="/nav/nav-dual">navbar dual component</a>.</p>
 
 
-    <a href="/standalone/hub" class="btn btn-secondary">Eco hub demo</a>
+    <a href="/standalone/hub" class="btn btn-secondary" target="_blank">Eco hub demo</a>
 
     <h2 class="mt-5">One platform menu within products</h2>
 
-    <p>The product view of the one platform menu uses the <a href="/nav/nav-secondary">navbar secondary</a> with the inclusion of the <a href="http://localhost:5173/nav/branch-selector">branch selector component</a> as a slotted item.</p>
+    <p>The product view of the one platform menu uses the <a href="/nav/nav-secondary">navbar secondary</a> with the inclusion of the <a href="/nav/branch-selector">branch selector component</a> as a slotted item.</p>
 
-    <a href="/standalone/eco-product" class="btn btn-secondary">Product with One platform menu demo</a>
+    <a href="/standalone/eco-product" class="btn btn-secondary" target="_blank">Product with One platform menu demo</a>
 
     <Integration component="std-nav" componentName="iam-nav">
+
       <template #web-component>
-        <pre><code>{{`<iam-std-nav></iam-std-nav>`}}</code></pre>
+        <pre><code>{{`<iam-std-nav data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm"></iam-std-nav>`}}</code></pre>
       </template>
       <template #vue-component>
-        <p class="pb-3">The Vue component will need to be added to the existing UI Nav component, the new standadised component will then transform into a series of link/details elements with the appropriate slot added. If the slot of secondary is added to the standadised component the elements created will also have the slot of secondary assigned to it.</p>
+        <p class="pb-3">The Vue component will need to be added to the existing UI Nav component, the new standardised component will then transform into a series of link/details elements with the appropriate slot added. If the slot of secondary is added to the standadised component the elements created will also have the slot of secondary assigned to it.</p>
         <pre><code>{{`<script setup>import Nav from '@/components/Nav/Nav.vue</script>
 <script setup>import STDNav from '@/components/STDNav/STDNav.vue</script>
 <script setup>import BranchSelector from '@/components/BranchSelector/BranchSelector.vue</script>
@@ -81,7 +82,7 @@
     </BranchSelector>
 
     <!-- The below element will load data from an API and create links  -->
-    <STDNav></STDNav>
+    <STDNav data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm"></STDNav>
 
   </Nav>
 </nav>
@@ -101,12 +102,34 @@
           </thead>
           <tbody>
             <tr>
+              <th class="text-nowrap">data-sso-subject</th>
+              <td></td>
+              <td>String</td>
+              <td>Yes</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>data-product</th>
+              <td></td>
+              <td>String</td>
+              <td>Yes</td>
+              <td>The product identifier i.e. CRM</td>
+            </tr>
+            <tr>
+              <th>data-mode</th>
+              <td>Dev</td>
+              <td>String</td>
+              <td>No</td>
+              <td>This will change the endpoint used by default the endpoint is a 'dev' environment.</td>
+            </tr>
+            <tr>
               <th>slot</th>
               <td></td>
               <td>String</td>
               <td>No</td>
               <td>Due to the component being added to an existing UI component a slot attribute can be added. The value of 'secondary' should be used to have the nav created as a secondary bar.</td>
             </tr>
+
           </tbody>
         </table>
 
