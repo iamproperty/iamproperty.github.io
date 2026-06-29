@@ -37,7 +37,7 @@
     </div>
 
     <div class="demo visualtest pe-none">
-      <Nav data-css="/assets/css/components/nav.docs.css" >
+      <Nav class="open nav-open" >
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>
@@ -262,7 +262,7 @@
 
     <div class="demo visualtest pe-none">
       <Nav
-        class=""
+        class="search-open"
         data-search="/search"
         data-prevent-search
         data-search-open
@@ -473,11 +473,21 @@
         <a href="/">Tech of a life</a>
 
         <button class="btn btn-primary">Lorem ipsum</button>
+
+
+        <form novalidate="" method="GET" slot="search" id="searchform" action="/search">
+          <label class="mb-0">
+            <span class="visually-hidden">Search pages</span>
+            <iam-search class="mt-0" data-original-placeholder="Search pages..."><input type="text" name="search" autocomplete="off" aria-autocomplete="none" list="" placeholder="Search pages..." class="mt-0" data-list="searchterms"></iam-search>
+          </label></form>
       </Nav>
     </div>
 
     <div class="container pt-4 pb-0">
       <h2>Anatomy</h2>
+
+      <img :src="anatomy" class="mb-4" />
+
       <ol>
         <li>Logo slot (width 144px on desktop)</li>
         <li>Primary menu slot (width 696px on desktop)</li>
@@ -490,9 +500,6 @@
           like 5 & 6)
         </li>
       </ol>
-
-      <img :src="anatomy" class="mb-4" />
-
       <h2>Usage notes</h2>
       <p>The mega menu can only be triggered from a nav-link-dropdown menu link</p>
       <p>
@@ -532,7 +539,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Nav from '@/components/nav/nav.vue</script>
-        
+
 <Nac>
   <a href="/" class="brand brand--property" slot="logo">
     <svg>
@@ -613,7 +620,7 @@
           </tbody>
         </table>
       </template>
-      
+
     </Integration>
     <Versions pdf="/pdfs/navbar-duel.pdf">
       <table>
@@ -636,50 +643,80 @@
 
   </main>
 </template>
-
 <style lang="scss">
-  //@media screen and (max-width: 62em) {
+
+  @media screen and (max-width: 36em) {
+    body:has(:is(iam-nav,.iam-nav).nav-open) {
+        max-height: unset!important;
+        overflow: unset!important;
+    }
+  }
+
+  @media screen and (min-width: 36em) {
+    body:has(:is(iam-nav,.iam-nav).nav-open) {
+      max-height: unset!important;
+      overflow: unset!important;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    html:has(:is(iam-nav,.iam-nav).nav-open) {
+      overflow: unset!important;
+    }
+
+    nav:has(:is(iam-nav,.iam-nav).nav-open) {
+      min-height: 100vh !important;
+      max-height: 100vh!important;
+      overflow: visible!important;
+
+      margin-bottom: calc((100vh - var(--nav-height)) * -1)!important;
+    }
+
+  }
+</style>
+
+<style lang="scss" scoped>
+
+
+
   .demo {
     background-color: #f2f2f2;
     overflow: hidden;
-    padding: 1rem 1rem 0 1rem;
-    height: 100vh;
+    padding: 2rem;
+    height: calc(100vh + 4rem);
+    grid-column: container;
+    margin-inline: -2rem;
+    overflow-x: clip;
 
     iam-nav {
       position: relative;
       z-index: 1;
-    }
-
-    iam-nav:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      height: calc(100vh - 6rem);
-      width: 100%;
-      z-index: -1;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(2px);
+      overflow-x: clip;
     }
   }
 
-  #visualtest:target ~ main > .demo {
-    padding: 0 !important;
+  main {
+    max-width: 100vw;
+    overflow-x: hidden;
   }
-
-  //}
 
   @media screen and (max-width: 62em) {
-    .demo-xs {
-      background-color: #f2f2f2;
-      overflow: hidden;
-      padding: 1rem 1rem 0 1rem;
-      height: 100vh;
+    .demo iam-nav::part(menu-outer) {
+      background: rgba(0, 0, 0, .2);
+      backdrop-filter: blur(2px);
     }
 
-    #visualtest:target ~ main > .demo-xs {
-      padding: 0 !important;
+    .demo iam-nav::part(menu) {
+      left: calc(100% - 23.4375rem);
+      -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, .2);
+      box-shadow: 0 6px 12px 0px rgba(0, 0, 0, .2);
+    }
+  }
+
+
+  @media screen and (min-width: 62em) {
+    :is(iam-nav,.iam-nav) details:not([slot=secondary])[open] > div {
+      max-width: 80rem;
     }
   }
 </style>
