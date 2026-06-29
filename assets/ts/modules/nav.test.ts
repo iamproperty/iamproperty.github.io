@@ -26,16 +26,19 @@ describe('Navigation module', () => {
       dataFeature: 'dashboard',
       dataEnabled: '/linked',
       href: '/sales',
+      title: 'Learn more',
       target: '_blank',
     });
     append(component, link);
 
     setEnabledLinks(component, {
-      attributes: { products: { sales: { features: { dashboard: true } } } },
+      attributes: { features: { sales: ['dashboard'] } },
     });
 
     expect(populateLinks(links).includes('data-product="sales"'));
+    expect(link.getAttribute('data-is-enabled') === 'true');
     expect(link.getAttribute('href') === '/linked');
     expect(!link.hasAttribute('target'));
+    expect(!link.hasAttribute('title'));
   });
 });

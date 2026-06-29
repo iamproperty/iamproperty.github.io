@@ -28,7 +28,7 @@
 
     <h2 class="mt-5">One platform menu within products</h2>
 
-    <p>The product view of the one platform menu uses the <a href="/nav/nav-secondary">navbar secondary</a> with the inclusion of the <a href="http://localhost:5173/nav/branch-selector">branch selector component</a> as a slotted item.</p>
+    <p>The product view of the one platform menu uses the <a href="/nav/nav-secondary">navbar secondary</a> with the inclusion of the <a href="/nav/branch-selector">branch selector component</a> as a slotted item.</p>
 
     <a href="/standalone/eco-product" class="btn btn-secondary" target="_blank">Product with One platform menu demo</a>
 
@@ -132,8 +132,6 @@
 
           </tbody>
         </table>
-
-        <p>* If the SSO subject and product is not set then the navigation items will still load but not user context will be given and all the links will be marketing links that open in a new window.</p>
 
       </template>
 

@@ -701,7 +701,7 @@
   }
 
   @media screen and (max-width: 62em) {
-    .demo iam-nav::part(menu-outer) {
+    .demo iam-nav::part(menu__outer) {
       background: rgba(0, 0, 0, .2);
       backdrop-filter: blur(2px);
     }
