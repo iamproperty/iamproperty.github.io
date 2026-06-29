@@ -16,6 +16,15 @@
     &:is(:active, .active) {
       color: var(--colour-active);
     }
+
+    &:is(:active, .active,.selected,[aria-current='page']) {
+      --colour-underline: var(--colour-info);
+      text-decoration-color: var(--colour-info) !important;
+      
+    }
+    &:is(.selected,[aria-current='page']) {
+      pointer-events: none;
+    }
   }
 
   a:not([href]):not([class]),

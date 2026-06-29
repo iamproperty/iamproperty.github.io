@@ -68,7 +68,7 @@ export const populateSections = (data):void => {
 
     html += `<span class="section section--${section.layout}">
       ${section.title ? `<span class="lead section-title" data-product="${section.id}" data-title>${section.title}:</span>` : ''}
-      ${section.description ? `<span class="lead section-desc" data-product="${section.id}"><i class="fa-solid fa-sparkles colour-warning"></i> ${section.description}</span>` : ''}
+      ${section.description ? `<span class="lead section-desc text-body" data-product="${section.id}"><i class="fa-solid fa-rocket colour-warning"></i> ${section.description}</span>` : ''}
       ${populateLinks(section.links)}
     </span>`;
   });
@@ -82,7 +82,7 @@ export const populateLinks = (data):void => {
   data.forEach((link) => {
 
 
-    html += `<a href="${link.destinations.unlinked}" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
+    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
 
   });
 
@@ -212,9 +212,9 @@ export const menuEvents = (component,menu,menuButton,accountMenu,accountMenuButt
 
 
     if (menu.classList.contains('open')) {
-      iamNav.classList.add('open');
+      component.classList.add('open');
     } else {
-      iamNav.classList.remove('open');
+      component.classList.remove('open');
     }
 
     accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
@@ -296,7 +296,7 @@ export const backdropEvents = (component,menu,menuButton,accountMenu,accountMenu
 
     if (openMenu) openMenu.removeAttribute('open');
 
-    iamNav.classList.remove('open');
+    component.classList.remove('open');
     menu.classList.remove('open');
     accountMenu.classList.remove('open');
     accountMenuButton?.querySelector('.btn-primary').classList.remove('active');

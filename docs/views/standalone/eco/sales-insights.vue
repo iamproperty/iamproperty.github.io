@@ -269,7 +269,7 @@ const searchOutcodes = async(event):void => {
 
         <Modal class="modal--lg">
 
-          <dialog id="competitor-list" aria-labelledby="competitor-list-title" open>
+          <dialog id="competitor-list" aria-labelledby="competitor-list-title">
             <h3 id="competitor-list-title">Customise your competitor list</h3>
             <p>Update the competitors you see within your the sales insights widget.</p>
 

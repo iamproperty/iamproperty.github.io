@@ -522,7 +522,7 @@ const routes = [
         name: 'iamproperty eco nav',
         meta: {
           title: 'iamproperty eco nav | Components | iamkey',
-          status: 'alpha',
+          status: 'beta',
           jira: 'FEG-939'
         },
         component: () => import('./views/standardised/NavDoc.vue'),
