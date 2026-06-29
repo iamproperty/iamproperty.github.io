@@ -13,12 +13,24 @@
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
-      <h1>Nav standardised component</h1>
+      <h1>Standardised one platform menu  </h1>
     </DSHeader>
 
-    <div class="visualtest">
+    <p class="lead">The one platform menu allows user to navigate to other product features within our ecosystem seamlessly, whilst better surfacing upsell of products/features the user doesn’t have.</p>
 
-    </div>
+    <p>This standardised component will use menu items coming from an API and will be delivered to the user view two views - one on the one platform hub and one within the products.</p>
+
+    <h2>One platform menu on the hub</h2>
+    <p>The one platform Hub view uses the <a href="/nav/nav-dual">navbar dual component</a>.</p>
+
+
+    <a href="/standalone/hub" class="btn btn-secondary">Eco hub demo</a>
+
+    <h2 class="mt-5">One platform menu within products</h2>
+
+    <p>The product view of the one platform menu uses the <a href="/nav/nav-secondary">navbar secondary</a> with the inclusion of the <a href="http://localhost:5173/nav/branch-selector">branch selector component</a> as a slotted item.</p>
+
+    <a href="/standalone/eco-product" class="btn btn-secondary">Product with One platform menu demo</a>
 
     <Integration component="std-nav" componentName="iam-nav">
       <template #web-component>
@@ -109,7 +121,7 @@
       </template>
 
     </Integration>
-    <Versions pdf="/pdfs/nav_standardised.pdf">
+    <Versions pdf="/pdfs/one-platform-menu.pdf">
       <table>
         <thead>
           <tr>
