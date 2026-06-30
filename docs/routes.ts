@@ -1761,6 +1761,22 @@ const routes = [
         component: () => import('./views/standalone/pc/add-onward.vue'),
       },
       {
+        path: 'switch-account',
+        name: 'Switch account',
+        meta: {
+          title: 'Switch account | iamkey',
+        },
+        component: () => import('./views/standalone/SwitchAccount.vue'),
+      },
+      {
+        path: 'account-switched',
+        name: 'Account switched',
+        meta: {
+          title: 'Account switched | iamkey',
+        },
+        component: () => import('./views/standalone/AccountSwitched.vue'),
+      },
+      {
         path: 'movebutler',
         name: 'movebutler',
         meta: {

@@ -136,7 +136,6 @@
   /* #region Support card component */
   :is(a, button, label):has(.card, iam-card) {
 
-
     border: none;
     background: none;
     padding: 0;
@@ -144,7 +143,6 @@
     margin-bottom: 1.5rem;
     text-decoration: none;
     border-radius: var(--card-border-radius) !important;
-
 
     $theme-colors: (
       'primary': var(--colour-primary),
@@ -168,7 +166,7 @@
       }
     }
 
-    &:not(:hover, :focus, .hover, :active, .active) {
+    &:not(:hover, :focus, .hover, :active, .active):not(:has(input)) {
 
       outline: none !important;
     }
@@ -207,6 +205,23 @@
       --card-icon-right: var(--card-icon-right-overide, 0.5rem);
     }
 
+    &:has(input) {
+      cursor: pointer;
+      outline: 1px solid var(--colour-border,red);
+    }
+
+    &:has(input):is(:hover,:focus) {
+      
+      --card-bg: var(--colour-light);
+    }
+
+    &:has(:checked) {
+      
+      --card-icon-bg: var(--colour-primary-theme);
+      --card-icon-colour: #ffffff;
+      outline: 2px solid var(--hover-outline-colour,red);
+    }
+
     &:before {
       display: none;
     }
@@ -221,8 +236,10 @@
 
     iam-card {
       width: 100%;
+      height: stretch;
     }
   }
+
 
   iam-carousel.carousel--article-cards :is(a, button, label):is(:hover,.hover,:focus) iam-card,
   :is(a, button, label):is(:hover,.hover,:focus) iam-card.card--article,

@@ -25,7 +25,7 @@
   flex-direction: column;
   overflow: hidden;
   z-index: 0;
-  background: var(--colour-canvas-2);
+  background: var(--card-bg, var(--colour-canvas-2));
   outline: 2px solid var(--outline-colour, --colour-canvas-2);
   outline-offset: -2px;
 
@@ -173,3 +173,13 @@
   text-align: end;
 }
 /* #endregion */
+
+/* #region Plain card */
+
+:host(.card--plain) {
+  --card-right-arrow-display: none;
+  --card-body-top-padding: 1rem;
+  --card-body-bottom-padding: 1rem;
+}
+/* #endregion */
+

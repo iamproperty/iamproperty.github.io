@@ -149,4 +149,58 @@
       }
     }
   }
+
+  
+  .tooltip__content {
+    position: absolute;
+    
+    max-width: 16.875rem; /* 270 */ 
+    background: var(--colour-primary);
+    color: var(--colour-white);
+    padding: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
+    margin: 0.75rem;
+    overflow: visible;
+
+    > strong:first-child {
+      display: block;
+      padding-bottom: 1rem;
+      color: inherit;
+    }
+
+    @media screen and (min-width: 36em) {
+      max-width: 20.9375rem; /* 335 */ 
+    }
+
+    @media screen and (min-width: 62em) {
+      max-width: 22.5rem;  /* 360 */
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      transform: translate(-50%, 0);
+      border-width: 0.5rem;
+      border-style: solid;
+      left: 50%;
+      bottom: auto;
+      top: 100%;
+      border-color: var(--colour-primary) transparent transparent transparent;
+      margin-bottom: -1px;
+    }
+  }
+
+  label .tooltip__content {
+    display: none;
+    left: 50%;
+    translate: -50% 0;
+    width: 100%;
+  }
+  label:is(:hover,:focus) .tooltip__content {
+    display: block;
+    z-index: 2;
+    bottom: 100%;
+  }
 }

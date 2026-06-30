@@ -46,21 +46,6 @@
     .optional-text {
       display: none;
     }
-
-    &:has(:checked) {
-      .card:defined {
-        outline: 2px solid var(--colour, var(--colour-primary));
-        outline-offset: -2px;
-
-        ::part(body) {
-          background: none;
-        }
-
-        ::part(footer) {
-          background: none;
-        }
-      }
-    }
   }
 
   iam-filter-card:not(:has(i)) {
