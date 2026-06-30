@@ -38,6 +38,9 @@
         <a href="/standalone/switch-account" class="btn btn-tertiary switch-account" slot="account"><i class="fa-regular fa-arrow-up-arrow-down me-1"></i>Switch account</a>
         <hr class="mb-5" slot="account" />
 
+        <a href="/" slot="account">Agency settings</a>
+        <a href="/" slot="account">Control panel</a>
+        <a href="/" slot="account">Contact us</a>
       </Nav>
     </div>
 
