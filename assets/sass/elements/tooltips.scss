@@ -198,7 +198,7 @@
     translate: -50% 0;
     width: 100%;
   }
-  label:is(:hover,:focus) .tooltip__content {
+  label:is(:hover,:focus-within) .tooltip__content {
     display: block;
     z-index: 2;
     bottom: 100%;
