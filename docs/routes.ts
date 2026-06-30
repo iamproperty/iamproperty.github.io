@@ -519,10 +519,10 @@ const routes = [
       },
       {
         path: 'nav',
-        name: 'iamproperty eco nav',
+        name: 'Standardised one platform menu',
         meta: {
-          title: 'iamproperty eco nav | Components | iamkey',
-          status: 'alpha',
+          title: 'Standardised one platform menu | Components | iamkey',
+          status: 'beta',
           jira: 'FEG-939'
         },
         component: () => import('./views/standardised/NavDoc.vue'),

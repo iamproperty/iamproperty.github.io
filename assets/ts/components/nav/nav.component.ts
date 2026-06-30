@@ -9,7 +9,7 @@ class iamNav extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
     const navCSS = `@import "${assetLocation}/css/components/nav.component.css";`;
-    //const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */`
@@ -46,7 +46,7 @@ class iamNav extends HTMLElement {
     // #endregion
 
     if(this.hasAttribute('data-account-btn-title') ?? accountBtnTitle)
-      accountBtnTitle.innerHTML = this.getAttribute('data-account-btn-title');
+      accountBtnTitle.innerHTML = this.hasAttribute('data-account-btn-title') ? this.getAttribute('data-account-btn-title') : 'My account';
 
     if(!this.querySelector('[slot="account"]')){
       accountMenuButton?.remove();

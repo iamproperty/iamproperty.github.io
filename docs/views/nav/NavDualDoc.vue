@@ -32,8 +32,8 @@
       </p>
     </div>
 
-    <div class="demo visualtest pe-none">
-      <Nav data-css="/assets/css/components/nav.docs.css">
+    <div class="full-width visualtest pe-none">
+      <Nav>
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>
@@ -238,7 +238,7 @@
 
         <a href="/" slot="dual">Tech of a life</a>
 
-        <button class="btn btn-primary">Lorem ipsum</button>
+        <button class="btn btn-primary" slot="actions">Lorem ipsum</button>
       </Nav>
     </div>
 
@@ -258,7 +258,7 @@
       </p>
     </div>
 
-    
+
 
 
     <Integration component="nav" componentName="iam-nav">
@@ -283,7 +283,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Nav from '@/components/nav/nav.vue</script>
-        
+
 <Nac>
   <a href="/" class="brand brand--property" slot="logo">
     <svg>
@@ -364,7 +364,7 @@
           </tbody>
         </table>
       </template>
-      
+
     </Integration>
     <Versions pdf="/pdfs/navbar-duel.pdf">
       <table>
@@ -385,42 +385,5 @@
       </table>
     </Versions>
 
-
-
   </main>
 </template>
-
-<style lang="scss">
-  @media screen and (max-width: 62em) {
-    .demo {
-      background-color: #f2f2f2;
-      overflow: hidden;
-      padding: 1rem 1rem 0 1rem;
-      height: 100vh;
-
-      iam-nav {
-        position: relative;
-        z-index: 1;
-      }
-
-      iam-nav:after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        height: calc(100vh - 6rem);
-        width: 100%;
-        z-index: -1;
-        background: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(2px);
-      }
-    }
-
-    #visualtest:target ~ main > .demo {
-      padding: 0 !important;
-    }
-  }
-</style>
-
-

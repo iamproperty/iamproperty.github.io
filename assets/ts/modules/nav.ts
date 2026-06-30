@@ -16,8 +16,8 @@ export const navTemplate = /* HTML */`<div class="container">
     </button>
   </div>
 
-  <div class="menu__outer">
-    <div class="menu closed">
+  <div class="menu__outer" part="menu__outer">
+    <div class="menu closed" part="menu">
 
       <div class="menu__primary">
         <slot></slot>
@@ -40,7 +40,6 @@ export const navTemplate = /* HTML */`<div class="container">
   </div>
 </div>
 <div class="backdrop" part="backdrop"></div>`;
-
 
 // #region Standadised Nav
 export const populateNav = (data, slot = ''):void => {
@@ -68,7 +67,7 @@ export const populateSections = (data):void => {
 
     html += `<span class="section section--${section.layout}">
       ${section.title ? `<span class="lead section-title" data-product="${section.id}" data-title>${section.title}:</span>` : ''}
-      ${section.description ? `<span class="lead section-desc" data-product="${section.id}"><i class="fa-solid fa-sparkles colour-warning"></i> ${section.description}</span>` : ''}
+      ${section.description ? `<span class="lead section-desc text-body" data-product="${section.id}"><i class="fa-solid fa-rocket colour-warning"></i> ${section.description}</span>` : ''}
       ${populateLinks(section.links)}
     </span>`;
   });
@@ -82,32 +81,19 @@ export const populateLinks = (data):void => {
   data.forEach((link) => {
 
 
-    html += `<a href="${link.destinations.unlinked}" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
+    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
 
   });
 
   return html;
 }
 
-export const loadNavData = async(Cookies): any => {
+export const loadNavData = async(mode): any => {
 
-  const ajaxURL = 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
-
-  //const ajaxURL = '/nav.json';
-
-  // Setup controller vars if not already set
-  if (!window.controller) window.controller = [];
-
-  // Abort if controller already present for this url
-  if (window.controller[ajaxURL]) window.controller[ajaxURL].abort();
-
-  // Create a new controller so it can be aborted if new fetch made
-  window.controller[ajaxURL] = new AbortController();
-  const { signal } = window.controller[ajaxURL];
+  const ajaxURL = mode != 'dev' ? 'https://hub.iamproperty.group/data/ecosystem-switcher.json' : 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
 
   try {
     const response = await fetch(ajaxURL, {
-      signal,
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -126,30 +112,28 @@ export const loadNavData = async(Cookies): any => {
   }
 }
 
-export const loadUserData = async(Cookies): any => {
+export const loadUserData = async(mode, subject, product): any => {
 
-  const ajaxURL = 'https://dev.hub.iamproperty.group/navigation/access-context';
-
-  // Setup controller vars if not already set
-  if (!window.controller) window.controller = [];
-
-  // Abort if controller already present for this url
-  if (window.controller[ajaxURL]) window.controller[ajaxURL].abort();
-
-  // Create a new controller so it can be aborted if new fetch made
-  window.controller[ajaxURL] = new AbortController();
-  const { signal } = window.controller[ajaxURL];
+  const ajaxURL = mode != 'dev' ? 'https://api.sso.iamproperty.group/navigation/access-context' : 'https://api.dev.sso.iamproperty.group/navigation/access-context';
 
   try {
 
-    console.log('hey')
     const response = await fetch(ajaxURL, {
-      signal,
-      method: 'GET',
-      credentials: 'include',
+      method: 'post',
       headers: {
-        Accept: 'application/json',
+        Accept: 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json'
       },
+      body: JSON.stringify({
+        "data": {
+          "type": "navigation-access-context-request",
+          "attributes": {
+            "subject": subject,
+            "requestingProduct": product,
+            "navigationSchemaVersion": "2026-04-16"
+          }
+        }
+      })
     });
 
     const json = await response.json();
@@ -166,20 +150,21 @@ export const loadUserData = async(Cookies): any => {
 
 export const setEnabledLinks = (component,data):void => {
 
-  const selector = `[data-product][data-feature]`;
-  const elements = component
-    ? [
-      ...component.querySelectorAll(selector),
-      ...(component.shadowRoot ? component.shadowRoot.querySelectorAll(selector) : []),
-    ]
-    : document.querySelectorAll(`iam-nav ${selector}`);
+  const elements = component.querySelectorAll('[data-product][data-feature]');
 
   elements.forEach((element) => {
-    const isEnabled = data.attributes.products[element.getAttribute('data-product')].features[element.getAttribute('data-feature')];
-    element.setAttribute('data-is-enabled',isEnabled);
-    if(isEnabled && element.getAttribute('data-enabled')){
-      element.setAttribute('href',element.getAttribute('data-enabled'));
-      element.removeAttribute('target');
+
+    if(data.attributes.features[element.getAttribute('data-product')]){
+
+      const isEnabled = data.attributes.features[element.getAttribute('data-product')].includes(element.getAttribute('data-feature'));
+
+      element.setAttribute('data-is-enabled',isEnabled);
+      if(isEnabled && element.getAttribute('data-enabled')){
+        element.setAttribute('href',element.getAttribute('data-enabled'));
+        element.removeAttribute('target');
+        element.removeAttribute('title');
+      }
+
     }
   });
 
@@ -212,12 +197,13 @@ export const menuEvents = (component,menu,menuButton,accountMenu,accountMenuButt
 
 
     if (menu.classList.contains('open')) {
-      iamNav.classList.add('open');
+      component.classList.add('open');
     } else {
-      iamNav.classList.remove('open');
+      component.classList.remove('open');
     }
 
     accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+    accountMenuButton?.removeAttribute('aria-expanded');
 
     component.querySelector(':scope > details[open]')?.removeAttribute('open');
 
@@ -227,11 +213,12 @@ export const menuEvents = (component,menu,menuButton,accountMenu,accountMenuButt
 export const megaMenuTitles = (component):void => {
 
   // Mega menu title
-  component.querySelectorAll(':Scope > details:not([slot="account"])').forEach((detailsElement) => {
+  component.querySelectorAll('details').forEach((detailsElement) => {
     const summary = detailsElement.querySelector('summary');
     const containerDiv = detailsElement.querySelector(':Scope > div');
 
-    containerDiv.setAttribute('data-title', summary.textContent);
+    if(containerDiv)
+      containerDiv.setAttribute('data-title', summary.textContent);
   });
 }
 
@@ -242,7 +229,6 @@ export const megaMenusEvents = (component,menu,menuButton,accountMenu,accountMen
 
       const summary = event.target.closest('summary');
       const details = summary.closest('details');
-
 
       if (window.innerWidth > 992 && !event.target.closest('.nav--menu')) {
 
@@ -258,11 +244,25 @@ export const megaMenusEvents = (component,menu,menuButton,accountMenu,accountMen
 
           if(details?.hasAttribute('slot') && details?.getAttribute('slot') == "secondary")
             component.classList.add('open-secondary');
+
+          // Open the first details element if one isn't open
+          if(!details.querySelector('details[open]') && details.querySelector('details'))
+            details.querySelector('details').setAttribute('open', true);
         }
+
+        // Close all other siblings of details
+        details?.parentNode.querySelectorAll(':scope > details').forEach(element => {
+
+          if(element != details)
+            element.removeAttribute('open');
+        });
+
 
         menu.classList.remove('open');
         accountMenu.classList.remove('open');
         accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+        menuButton?.removeAttribute('aria-expanded');
+        accountMenuButton?.removeAttribute('aria-expanded');
       }
     }
   });
@@ -279,12 +279,15 @@ export const accountMenuEvents = (component,menu,menuButton,accountMenu,accountM
     if (accountMenu.classList.contains('open')) {
       component.classList.add('open');
       accountMenuButton?.querySelector('.btn-primary').classList.add('active');
+      accountMenuButton?.setAttribute('aria-expanded', true);
     } else {
       component.classList.remove('open');
       accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+      accountMenuButton?.removeAttribute('aria-expanded');
     }
 
     component.querySelector(':scope > details[open]')?.removeAttribute('open');
+    menuButton?.removeAttribute('aria-expanded');
   });
 }
 
@@ -296,10 +299,12 @@ export const backdropEvents = (component,menu,menuButton,accountMenu,accountMenu
 
     if (openMenu) openMenu.removeAttribute('open');
 
-    iamNav.classList.remove('open');
+    component.classList.remove('open');
     menu.classList.remove('open');
+    menuButton?.removeAttribute('aria-expanded');
     accountMenu.classList.remove('open');
     accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+    accountMenuButton?.removeAttribute('aria-expanded');
 
     backdrop.classList.remove('show');
   });

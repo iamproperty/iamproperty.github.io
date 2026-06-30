@@ -1,37 +1,34 @@
-import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
 import {populateNav,loadNavData,loadUserData,setEnabledLinks} from '../../modules/nav';
-//import iamNav from '../nav/nav.component';
-
-
-// Data layer Web component created
-declare global {
-  interface Window {
-    dataLayer: Array<object>;
-  }
-}
 
 class iamSTDNav extends HTMLElement {
   constructor() {
     super();
   }
 
-  transformToSecondary = (data):void => {
-
-    this.innerHTML = populateNav(data);
-
-    // Set links and details to secondary slot
-    Array.from(this.querySelectorAll(':scope > a, :scope > details')).forEach((element) => {
-
-      element.setAttribute('slot','secondary');
-    });
-
-    const defaultContent = this.innerHTML;
-    this.outerHTML = `${defaultContent}`;
-  }
-
   async connectedCallback(): void {
 
-    const data = await loadNavData(Cookies).then(
+
+    const nav = this.closest('iam-nav');
+    const mode = this.hasAttribute('data-mode') ? this.getAttribute('data-mode') : 'dev';
+
+    // if not an sso use load default from component
+
+    if(!this.hasAttribute('data-sso-subject') || this.getAttribute('data-sso-subject') == 'false' || this.getAttribute('data-sso-subject') == false || this.getAttribute('data-sso-subject') == null){
+
+      if(this.hasAttribute('slot') && this.getAttribute('slot') == "secondary"){
+
+        this.outerHTML = `<a href="https://my.iamproperty.com" slot="secondary">iamproperty</a>
+<a href="https://crm.iamproperty.com/MyDay" slot="secondary">CRM</a>
+<a href="https://my.iamproperty.com/ic/dashboard" slot="secondary">movebutler</a>
+<a href="https://my.iamproperty.com/auction" slot="secondary">iamsold</a>`;
+
+        document.querySelector(`a[href*='${window.location.hostname}'][slot="secondary"]`)?.classList.add('selected');
+      }
+      return;
+    }
+
+    const data = await loadNavData(mode).then(
+
       (data) => {
 
         if(typeof data == 'string'){
@@ -39,36 +36,41 @@ class iamSTDNav extends HTMLElement {
           return data;
         }
 
-        //console.log(data);
-        if(!this.hasAttribute('slot')){
+        if(!this.hasAttribute('slot')){ // This is the nav on the hub page
 
-          const filteredData = data.filter(section => section.attributes.title != "Learning and support");
-
-
+          const filteredData = data.filter(section => section.attributes.title != "Learning and support"); // Not needed for the hub page
           this.closest('iam-nav').querySelectorAll(`:scope > *:not([slot]):not(iam-std-nav)`).forEach((element) => {
-
-            element.remove();
+            element.remove(); // Remove the default links
           });
 
           this.outerHTML = populateNav(filteredData);
         }
         else {
 
-          this.outerHTML = populateNav(data, 'secondary');
+          this.closest('iam-nav').querySelectorAll(`:scope > *[slot="secondary"]:not(iam-std-nav):not(iam-branch-selector)`).forEach((element) => {
+            element.remove(); // Remove the default links
+          });
 
+          this.outerHTML = populateNav(data, 'secondary');
         }
 
         return true;
       }
     );
 
-    const userData = await loadUserData(Cookies).then(
+    if(!this.hasAttribute('data-sso-subject') && !this.hasAttribute('data-product'))
+      return;
+
+    const subject = this.getAttribute('data-sso-subject');
+    const product = this.getAttribute('data-product');
+
+    const userData = await loadUserData(mode, subject, product).then(
       (data) => {
 
         if(!data.attributes)
           return false;
 
-        setEnabledLinks(component,data);
+        setEnabledLinks(nav,data);
 
         Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
 

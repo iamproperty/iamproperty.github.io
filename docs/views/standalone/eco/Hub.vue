@@ -66,14 +66,7 @@ function addProductSearch(event): void {
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <span class="mt-4 title h3" slot="account">John Jones</span>
-      <hr class="mt-3" slot="account">
-      <a href="/" slot="account">Agency settings</a>
-      <a href="/" slot="account">Control panel</a>
-      <a href="/" class="mb-4" slot="account">Contact us</a>
-
-
-      <STDNav></STDNav>
+      <STDNav data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm"></STDNav>
 
     </Nav>
   </nav>

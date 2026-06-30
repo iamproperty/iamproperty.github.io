@@ -4,7 +4,7 @@
 
   import Nav from '@/components/Nav/Nav.vue';
 
-  
+
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
@@ -37,7 +37,7 @@
       </p>
     </div>
 
-    <div class="demo visualtest">
+    <div class="full-width visualtest pe-none">
       <Nav data-css="/assets/css/components/nav.docs.css">
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
@@ -46,7 +46,7 @@
           </svg>
         </a>
 
-        <a href="/" class="selected">Lorem ipsum</a>
+        <a href="/">Lorem ipsum</a>
         <a href="/">Lorem ipsum</a>
         <a href="/">Lorem ipsum</a>
         <a href="/">Lorem ipsum</a>
@@ -55,26 +55,15 @@
       </Nav>
     </div>
 
-    <div class="container pt-4 pb-0">
-      <span class="lead text-body pb-3 d-block">VARIATION (DEEP SLATE)</span>
+    <h2 class="pt-5">Navigation item behaviour</h2>
+
+    <div class="col-end-6 md-col-end-2">
+      <span class="d-block pb-2">DEFAULT</span>
+      <a href="/">Lorum ipsum</a>
     </div>
-
-    <div class="demo visualtest">
-      <Nav class="bg-primary" data-css="/assets/css/components/nav.docs.css">
-        <a href="/" class="brand brand--property" slot="logo">
-          <svg>
-            <title>iamproperty</title>
-            <use xlink:href="/svg/logo.svg#logo-property"></use>
-          </svg>
-        </a>
-
-        <a href="/" class="selected">Lorem ipsum</a>
-        <a href="/">Lorem ipsum</a>
-        <a href="/">Lorem ipsum</a>
-        <a href="/">Lorem ipsum</a>
-
-        <button class="btn btn-primary">Lorem ipsum</button>
-      </Nav>
+    <div class="col-start-7 md-col-start-3">
+      <span class="d-block pb-2">SELECTED</span>
+      <a href="/" class="selected">Lorum ipsum</a>
     </div>
 
     <div class="container pt-5">
@@ -117,7 +106,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Nav from '@/components/nav/nav.vue</script>
-        
+
 <Nav>
   <a href="/" class="brand brand--property" slot="logo">
     <svg>
@@ -184,10 +173,6 @@
           </thead>
           <tbody>
             <tr>
-              <th>.bg-primary</th>
-              <td>will change the background of the navbar without chaning the menu background.</td>
-            </tr>
-            <tr>
               <th>.nav-sticky</th>
               <td>will add etxra styling to make the navbar stick to the top of the page</td>
             </tr>
@@ -198,7 +183,7 @@
           </tbody>
         </table>
       </template>
-      
+
     </Integration>
     <Versions pdf="/pdfs/navbar.pdf">
       <table>
@@ -222,17 +207,4 @@
   </main>
 </template>
 
-<style lang="scss">
-  @media screen and (max-width: 62em) {
-    .demo {
-      background-color: #f2f2f2;
-      overflow: hidden;
-      padding: 1rem 1rem 0 1rem;
-      height: 100vh;
-    }
 
-    #visualtest:target ~ main > .demo {
-      padding: 0 !important;
-    }
-  }
-</style>

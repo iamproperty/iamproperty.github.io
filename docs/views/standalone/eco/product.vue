@@ -44,7 +44,7 @@
       <a href="/" slot="account">Contact us</a>
 
 
-      <STDNav slot="secondary">
+      <STDNav slot="secondary" data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm">
         <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
       </STDNav>
 

@@ -168,9 +168,6 @@
     overflow: auto;
   }
 
-  .demo {
-    grid-column: container;
-  }
 
   .dark-theme .ds-header {
 

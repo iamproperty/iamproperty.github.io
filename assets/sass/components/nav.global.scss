@@ -110,7 +110,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     &[data-product][data-feature]:not([data-is-enabled="true"]) {
       padding-left: 2rem!important;
       &:before {
-        content: "\f890";
+        content: "\f135";
         font-family: var(--fa-family, var(--fa-style-family, "Font Awesome 7 Pro"));
         padding-right: 0.5em;
         position: absolute;
@@ -118,7 +118,6 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
         font-weight: 700;
       }
     }
-    
   }
 
   /* #region standard nav sections */
@@ -450,7 +449,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       position: absolute;
       display: block;
       top: 100%;
-      left: 0;
+      left: 50%;
       width: 100%;
       padding-inline: max(
         var(--padding-inline),
@@ -459,8 +458,9 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
       max-height: calc(100vh - var(--nav-height));
       width: 100svw;
-      overflow: auto;
+      //overflow: auto;
       flex-wrap: wrap;
+      translate: -50% 0;
 
       .lead {
 
