@@ -869,50 +869,16 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 /* #region navbar additional menus */
 
-:is(iam-nav,.iam-nav) .nav--menu {
-  outline: none !important;
-
-  hr {
-    width: 100% !important;
-    border-top: 2px solid var(--colour-border) !important;
-  }
-  a {
-    display: block !important;
-    line-height: 1.25rem !important;
-    padding: 1.5rem 0 !important;
-    margin: 0 !important;
-
-    &:not(.mb-0):not(:has(+ a)) {
-      margin: 0 0 2.25rem 0 !important;
-    }
-
-    flex-shrink: 0;
-    font-size: 1rem !important;
-    font-weight: normal !important;
-
-    &:has(+ a) {
-      margin-bottom: 0 !important;
-    }
-
-    &:after {
-      content: '';
-      display: block;
-      height: 2px;
-      width: 100% !important;
-      background-color: var(--colour-border) !important;
-      top: calc(100% - 2px) !important;
-    }
-  }
-
-  > button {
-    min-width: 100%;
-    text-align: center;
-  }
-
-  &.closed * {
-    //display: none !important;
-  }
+iam-nav .title[slot="account"] {
+  display: block;
 }
 
+iam-nav .title[slot="account"]:has(+ .switch-account[slot="account"]) {
+  padding-bottom: 0.5rem!important;
+}
+
+iam-nav .switch-account[slot="account"] {
+  margin-bottom: 3rem;
+}
 
 /* #endregion */

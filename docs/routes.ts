@@ -1240,7 +1240,7 @@ const routes = [
       },
       {
         path: 'input-fields',
-        name: 'Input fields (alpha)',
+        name: 'Input fields',
         meta: {
           title: 'Input fields | Components | iamkey',
         },
@@ -1248,11 +1248,21 @@ const routes = [
       },
       {
         path: 'loading-states',
-        name: 'Loading states (alpha)',
+        name: 'Loading states',
         meta: {
           title: 'Loading states| Components | iamkey',
         },
         component: () => import('./views/patterns/LoadingDoc.vue'),
+      },
+      {
+        path: 'switching-account',
+        name: 'Switching account',
+        meta: {
+          title: 'Switching account | Components | iamkey',
+          jira: 'FEG-991',
+          status: 'beta'
+        },
+        component: () => import('./views/patterns/SwitchingAccountDoc.vue'),
       },
     ],
   },
@@ -1749,6 +1759,22 @@ const routes = [
           title: 'Premium conveyancing | iamkey',
         },
         component: () => import('./views/standalone/pc/add-onward.vue'),
+      },
+      {
+        path: 'switch-account',
+        name: 'Switch account',
+        meta: {
+          title: 'Switch account | iamkey',
+        },
+        component: () => import('./views/standalone/SwitchAccount.vue'),
+      },
+      {
+        path: 'account-switched',
+        name: 'Account switched',
+        meta: {
+          title: 'Account switched | iamkey',
+        },
+        component: () => import('./views/standalone/AccountSwitched.vue'),
       },
       {
         path: 'movebutler',
