@@ -62,7 +62,7 @@
     &.btn-secondary {
       --colour-btn-bg: transparent;
       --colour-btn-border: transparent;
-      border-color: transparent;
+      outline-color: transparent;
 
       &:not([class*='colour-']) {
         --colour: var(--colour-light);
@@ -74,7 +74,7 @@
       ) {
       background-color: var(--colour);
       color: var(--colour-primary-theme);
-      border-color: var(--colour);
+      outline-color: var(--colour);
 
       &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
         color: var(--colour-inverted);

@@ -10,10 +10,6 @@
     line-height: inherit;
   }
 
-  button:focus:not(:focus-visible) {
-    outline: 0;
-  }
-
   :is(button,[type="button"],[type="reset"],[type="submit"],[role='button']) {
     -webkit-appearance: button;
 
@@ -74,7 +70,9 @@
 
     &:not(.border-0) {
       background: var(--colour-btn-bg);
-      border: var(--btn-border-width) solid var(--colour-btn-border);
+      border: none!important;
+      outline: var(--btn-border-width) solid var(--colour-btn-border);
+      outline-offset: -2px;
     }
 
     &:not(:last-child) {
@@ -84,7 +82,6 @@
 
   a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) .btn,
   .btn:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-    outline: 0;
     text-decoration: none;
 
     background: var(--colour-btn-bg-hover);
