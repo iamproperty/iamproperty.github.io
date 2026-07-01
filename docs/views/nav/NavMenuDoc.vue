@@ -35,7 +35,7 @@
     </div>
 
     <div class="demo visualtest pe-none">
-      <Nav class="demo-open" style="--modifier:2rem;">
+      <Nav class="nav-open" style="--modifier:2rem;">
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>
