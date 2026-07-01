@@ -34,7 +34,7 @@ export const navTemplate = /* HTML */`<div class="container">
         </div>
       </div>
     </div>
-    <div class="nav--menu" data-btn-class="btn-compact" data-title="My account" data-icon="fa-user fa-solid" slot="menus">
+    <div class="nav--menu" part="nav--menu">
       <slot name="account"></slot>
     </div>
   </div>
