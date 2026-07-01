@@ -5,7 +5,7 @@
 
     &:not(.border-0) {
       background: var(--colour-btn-secondary-bg);
-      border: 2px solid var(--colour-btn-secondary-border);
+      outline: 2px solid var(--colour-btn-secondary-border);
     }
   }
 
