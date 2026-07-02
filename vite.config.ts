@@ -29,7 +29,7 @@ export default ({ mode }) => {
           },
         },
       },
-      cssMinify: 'esbuild',
+      cssMinify: false,
     } : {},
     resolve:{
       alias:{
