@@ -63,6 +63,11 @@
       </thead>
       <tbody class="text-body">
         <tr>
+            <td>V1</td>
+            <td>29.06.2026</td>
+            <td>Updates to the text sizing on desktop form 16px to 12px.  </td>
+          </tr>
+        <tr>
             <td>V0.1</td>
             <td>25.08.2023</td>
             <td>N/A</td>

@@ -62,7 +62,11 @@
     &.btn-secondary {
       --colour-btn-bg: transparent;
       --colour-btn-border: transparent;
-      outline-color: transparent;
+
+      :not(:focus-visible){
+        outline-color: transparent;
+      }
+      
 
       &:not([class*='colour-']) {
         --colour: var(--colour-light);
