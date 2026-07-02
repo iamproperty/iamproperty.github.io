@@ -476,8 +476,12 @@
     }
   }
 
-  ::slotted(a:not([slot='logo']):not([slot='dual']):not(.switch-account)) {
+  ::slotted(a:not([slot='logo']):not([slot='dual']):not(.switch-account):not([slot='secondary'])) {
     margin-left: 2rem !important;
+  }
+
+  ::slotted(a[slot='secondary']) {
+    margin-left: 1.125rem !important;
   }
 
   ::slotted(.btn-primary) {
@@ -506,6 +510,7 @@
   #search-close,
   #search-button {
     margin: 0;
+    outline: none!important;
   }
 
   #search-dialog[open] {
