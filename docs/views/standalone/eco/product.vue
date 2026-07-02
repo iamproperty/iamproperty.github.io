@@ -23,7 +23,7 @@
 
 
       <span class="mt-4 title h3" slot="account">John Jones</span>
-      <BranchSelector data-indicator="4" slot="account">
+      <BranchSelector data-indicator="3" slot="account">
 
         <label>
           <input type="checkbox" name="branch" value="gosforth" />
