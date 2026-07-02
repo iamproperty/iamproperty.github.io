@@ -30,6 +30,7 @@ export default ({ mode }) => {
         },
       },
       cssMinify: false,
+      target: 'es2015'
     } : {},
     resolve:{
       alias:{
