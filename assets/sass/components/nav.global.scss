@@ -364,7 +364,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 /* #region tablet mega menu tweaks */
 :is(iam-nav,.iam-nav) details {
 
-  @container style(--tabletDetails) {
+  @media screen and (max-width: 62em) and (min-width: 36em) {
     padding-right: 2.5rem;
     margin-right: -2.5rem;
 
