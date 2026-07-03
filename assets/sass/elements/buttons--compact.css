@@ -31,12 +31,12 @@
       width: 100%;
       height: 100%;
       text-indent: 0;
-      line-height: calc(var(--compact-size) - 0.25rem);
+      line-height: var(--compact-size);
       font-weight: 900;
     }
 
     [class*='fa-']:before {
-      line-height: calc(var(--compact-size) - 0.25rem);
+      line-height: var(--compact-size);
 
       @container style(--theme: dark) {
         color: white;
@@ -63,8 +63,8 @@
       --colour-btn-bg: transparent;
       --colour-btn-border: transparent;
 
-      :not(:focus-visible){
-        outline-color: transparent;
+      &:not(:focus-visible){
+        outline: none!important;
       }
       
 

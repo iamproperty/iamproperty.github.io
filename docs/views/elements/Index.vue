@@ -20,7 +20,7 @@ const route = useRoute();
     <DSHeader :route="route"></DSHeader>
 
       <div class="sub-grid mb-5">
-          <a :href="item.link" v-for="item in elements" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in elements" class="md-col-span-4 md-col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
@@ -28,7 +28,7 @@ const route = useRoute();
       <h2>Link and button Elements</h2>
 
       <div class="sub-grid mb-5">
-          <a :href="item.link" v-for="item in linkElements" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in linkElements" class="md-col-span-4 md-col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
@@ -36,8 +36,8 @@ const route = useRoute();
       <h2>Form Elements</h2>
 
       <div class="sub-grid mb-5">
-        
-          <a :href="item.link" v-for="item in formElements" class="md-col-span-4 col-start-auto">
+
+          <a :href="item.link" v-for="item in formElements" class="md-col-span-4 md-col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
