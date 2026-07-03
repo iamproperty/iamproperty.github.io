@@ -65,7 +65,7 @@
 ::slotted(*:is(button, a, label, span, iam-button)) {
   /* all: unset !important; */
   background: unset !important;
-  border: unset !important;
+  outline: unset !important;
   color: var(--colour-primary) !important;
   font-weight: inherit !important;
   font-family: inherit !important;
@@ -152,6 +152,7 @@
 /* #region sub menu */
 ::slotted(iam-menu:not([popover])) {
   border: none !important;
+  outline: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 0;

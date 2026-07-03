@@ -26,7 +26,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   if(displayInputField.hasAttribute('placeholder'))
     displayInputField.setAttribute('data-original-placeholder', displayInputField.getAttribute('placeholder'));
 
-  
+
 
   const checkIfEmpty = (): void => {
 
@@ -40,13 +40,13 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     }
 
   };
-  
+
   checkIfEmpty();
 
   displayInputField.addEventListener('focus', function () {
-    
+
     if(displayInputField.value != ""){
-        
+
       displayInputField.setAttribute('placeholder', displayInputField.value);
       displayInputField.setAttribute('data-value', displayInputField.value);
     }
@@ -91,7 +91,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       }
 
       option.classList.add('active');
-      
+
       checkIfEmpty();
       setTimeout(() => {
         advancedSelect.dispatchEvent(new CustomEvent('update-value', {
@@ -108,7 +108,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   displayInputField.addEventListener('input', function () {
     displayInputField.removeAttribute('data-value');
     currentFocus = -1;
-    
+
     checkIfEmpty();
 
     if (advancedSelect.tagName != "IAM-ADDRESS-LOOKUP") {
@@ -129,7 +129,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   });
 
   advancedSelect.addEventListener('keydown', function (e) {
-    
+
     if (e.keyCode == 40) {
       currentFocus++;
       addActive(datalist.options);
@@ -161,6 +161,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   }
 
   // Add the empty button
+  /*
   if(displayInputField.closest('.input__wrapper')){
     displayInputField.closest('.input__wrapper').insertAdjacentHTML(
       'beforeend',
@@ -174,7 +175,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       '<button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>'
     );
   }
-
+  */
   const emptyField = (): void => {
     const originalInput = advancedSelect.querySelector('input[type="hidden"]') as HTMLInputElement | null;
 
@@ -187,8 +188,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
     if(displayInputField.hasAttribute('data-original-placeholder'))
       displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-original-placeholder'));
-    
-    
+
+
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
     displayInputField.classList.add('empty');
@@ -210,7 +211,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       },
     }));
 
-    
+
     checkIfEmpty();
   }
 

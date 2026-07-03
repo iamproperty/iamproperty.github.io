@@ -14,6 +14,7 @@ window.dataLayer.push({
   element: 'Address Lookup',
 });
 
+
 class iamAddressLookup extends HTMLElement {
   constructor() {
     super();
@@ -56,7 +57,7 @@ class iamAddressLookup extends HTMLElement {
 
           <div class="datalist__wrapper dropdown ${this.hasAttribute('data-list-class') ? this.getAttribute('data-list-class') : ''}" tabindex="0" part="list-wrapper">
             <slot name="beforeList"></slot>
-            
+
             <datalist id="address-lookup__addressess" class=""></datalist>
             <div id="paginationWrapper"></div>
             <slot name="afterList"></slot>
