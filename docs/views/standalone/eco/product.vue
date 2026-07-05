@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
-  import Nav from '@/components/Nav/Nav.vue';
+  //import Nav from '@/components/Nav/Nav.vue';
   import STDNav from '@/components/STDNav/STDNav.vue';
   import Card from '@/components/Card/Card.vue';
 
@@ -43,9 +43,9 @@
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
-
+      <router-link to="/standalone/premium-conveyancing" slot="secondary">Eco Hub</router-link>
       <STDNav slot="secondary" data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm">
-        <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
+
       </STDNav>
 
 

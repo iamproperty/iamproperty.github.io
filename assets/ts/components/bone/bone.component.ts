@@ -17,7 +17,6 @@ class iamBone extends HTMLElement {
   }
 
   connectedCallback(): void {
-    console.log('bone');
   }
 }
 

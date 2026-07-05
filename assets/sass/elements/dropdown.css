@@ -112,6 +112,9 @@
   [popover] {
     top: calc(anchor(top) + anchor-size(height));
     left: anchor(left);
+    bottom: auto;
+    right: auto;
+    border: unset !important;
   }
 
   /* #endregion */
