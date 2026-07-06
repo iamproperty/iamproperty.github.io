@@ -10,6 +10,7 @@
   iam-bone {
     background-color: #D9D9D9; /* TODO: needs to be a variable */
     border: unset;
+    outline: unset;
     display: block;
     width: 100%;
     min-height: var(--bone-height);
@@ -26,6 +27,4 @@
   hr {
     width: 100%;
   }
-
-  
 }
