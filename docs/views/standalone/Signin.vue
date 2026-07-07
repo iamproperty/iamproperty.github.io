@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div class="template--auth row">
-      <main>
+
+      <main class="template--auth">
         <div class="pb-0 pe-2 mb-0 brand brand--property">
           <svg>
             <title>iam property</title>
@@ -13,8 +12,7 @@
         <form method="POST" action="http://my.iamproperty.test/login">
           <label>Username <input type="text" name="username" autocomplete="username" required="" autofocus="" /></label>
 
-          <label
-            >Password
+          <label>Password
 
             <span>
               <input type="password" id="password" name="password" required="" autocomplete="on" />
@@ -34,14 +32,14 @@
 
           <label><input type="checkbox" name="remember" id="remember" />Remember me</label>
           <hr />
-          <a href="http://my.iamproperty.test/password/reset" class="text-nowrap mb-5">Forgot your password?</a>
+          <a href="http://my.iamproperty.test/password/reset" class="text-nowrap mb-5 mw-fit-content">Forgot your password?</a>
           <hr />
           <button class="btn btn-primary px-5" type="submit" value="submit" data-cy="login-submit">Sign In</button>
           <hr />
-          <p>By signing in, I agree to the iamproperty <a href="">Privacy Policy</a>.</p>
+          <p>By signing in, I agree to the iamproperty <a href="https://iamproperty.com/privacy-and-cookies/">Privacy Policy</a>.</p>
         </form>
       </main>
-      <aside>
+      <aside class="bg-primary">
         <figure><img src="/img/signin-bg.png" alt="" /></figure>
 
         <span class="h4">Your partner for today and tomorrow</span>
@@ -51,10 +49,8 @@
           put you in control, freeing you up to do what you do best.
         </p>
 
-        <a href="/" class="btn btn-secondary"><i class="fa-regular fa-arrow-up-right-from-square"></i>Find out more</a>
+        <a href="https://iamproperty.com/" class="btn btn-secondary"><i class="fa-regular fa-arrow-up-right-from-square"></i>Find out more</a>
       </aside>
-    </div>
-  </div>
 </template>
 <style lang="scss"></style>
 
