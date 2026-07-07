@@ -51,9 +51,12 @@
       background 0.5s,
       color 0.5s;
     height: auto;
-    max-width: fit-content;
+    width: fit-content;
+    max-width: 100%;
     appearance: none;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     @media screen and (min-width: 36em) {
       --btn-margin: 1.5rem;

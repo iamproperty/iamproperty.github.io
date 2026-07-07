@@ -150,7 +150,7 @@
 @for $i from 1 to 10 {
   .chart__outer input[type='checkbox']:focus:nth-child(#{$i}) ~ .chart__key .key:nth-child(#{$i}) {
     background: var(--colour-btn-action-hover-bg) !important;
-    border: var(--btn-border-width) solid var(--colour-muted) !important;
+    outline: var(--btn-border-width) solid var(--colour-muted) !important;
   }
 }
 

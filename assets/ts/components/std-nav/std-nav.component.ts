@@ -22,7 +22,18 @@ class iamSTDNav extends HTMLElement {
 <a href="https://my.iamproperty.com/ic/dashboard" slot="secondary">movebutler</a>
 <a href="https://my.iamproperty.com/auction" slot="secondary">iamsold</a>`;
 
-        document.querySelector(`a[href*='${window.location.hostname}'][slot="secondary"]`)?.classList.add('selected');
+        nav.querySelector(`a[href*='${window.location.hostname}'][slot="secondary"]`)?.classList.add('selected');
+
+        /* For local environments */
+        if(this.hasAttribute('data-product') && this.getAttribute('data-product') == "movebutler")
+          nav.querySelector(`a[href='https://my.iamproperty.com/ic/dashboard'][slot="secondary"]`)?.classList.add('selected');
+
+        if(this.hasAttribute('data-product') && this.getAttribute('data-product') == "crm")
+          nav.querySelector(`a[href='https://crm.iamproperty.com/MyDay'][slot="secondary"]`)?.classList.add('selected');
+
+        if(this.hasAttribute('data-product') && this.getAttribute('data-product') == "iamsold")
+          nav.querySelector(`a[href='https://my.iamproperty.com/auction'][slot="secondary"]`)?.classList.add('selected');
+
       }
       return;
     }

@@ -131,7 +131,10 @@ class iamMultiselect extends HTMLElement {
 
     search.addEventListener('input', () => {
 
-      if (multiselect.hasAttribute('data-url') && search.value.length == minLength) {
+      if(multiselect.hasAttribute('data-url') && search.value.length == 0){
+
+        search.innerHTML = '';
+      } else if (multiselect.hasAttribute('data-url') && search.value.length == minLength) {
 
         searchAjax(multiselect, search, filterList);
       } else {
@@ -205,7 +208,7 @@ class iamMultiselect extends HTMLElement {
         }
         else{
 
-          multiselect.classList.remove('hover');
+          //multiselect.classList.remove('hover');
         }
       }
     });

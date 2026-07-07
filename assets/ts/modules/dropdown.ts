@@ -59,6 +59,7 @@ export const searchAjax = async (component, search, callback): any => {
       .then((response) => {
 
         let items = '';
+        component.innerHTML = '';
 
         for (let i = 0; i < response['data'].length; i++) {
 
@@ -67,7 +68,7 @@ export const searchAjax = async (component, search, callback): any => {
         }
 
         component.insertAdjacentHTML('beforeend', `${items}`);
-        
+
         callback(component, search);
         return response;
       });
@@ -93,7 +94,7 @@ export const setTag = (tag):void => {
   if(!tags.includes(tag.textContent)){
 
     tags.push(tag.textContent);
-    
+
     localStorage.setItem('tags-'+inputName,JSON.stringify(tags));
   }
 

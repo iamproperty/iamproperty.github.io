@@ -43,8 +43,7 @@
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
-      <router-link to="/standalone/premium-conveyancing" slot="secondary">Eco Hub</router-link>
-      <STDNav slot="secondary" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
+      <STDNav slot="secondary" data-sso-subject="" data-product="iamsold"></STDNav>
 
     </Nav>
   </nav>

@@ -25,11 +25,13 @@
   .btn-action {
     font-size: 0.75rem;
     margin-right: -0.375rem !important; /* -6 */
-    border-color: transparent !important;
+    outline-color: transparent !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .btn-action:not(:hover):not(:focus) {
-    border-color: transparent !important;
+    outline-color: transparent !important;
     background: transparent !important;
   }
 }
@@ -44,7 +46,7 @@
     .chart__key {
       flex-direction: column;
       justify-content: center;
-      overflow: visible;
+      overflow: hidden;
 
       .btn-action {
         margin-right: 0 !important;
