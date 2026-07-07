@@ -38,7 +38,13 @@
           Newcastle Agent & Co
         </label>
       </BranchSelector>
-
+      <details slot="account" class="mt-4">
+        <summary>Switch product</summary>
+          <a href="/">Premium Conveyancing</a>
+          <a href="/">Premium Lettings</a>
+          <a href="/">Premium Estate Agency</a>
+          <a href="/">Premium Auctions</a>
+        </details>
       <a href="/" slot="account">Agency settings</a>
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>

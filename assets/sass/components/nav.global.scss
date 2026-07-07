@@ -188,16 +188,106 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 /* #endregion */
 
 /* #region mobile and tablet mega menu */
-:is(iam-nav,.iam-nav) details {
-  @media screen and (max-width: 62em) {
+
+@mixin mobileMenu(){
+  background-color: #eeeeee;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding-inline: 1.5rem;
+  width: auto;
+  position: relative;
+
+  summary {
+    background-color: var(--colour-canvas-2);
+    display: block;
+    border: none;
+    color: var(--colour-link);
+    margin: 0;
 
     margin-left: -1.5rem;
     margin-right: -1.5rem;
-    padding-inline: 1.5rem;
-    width: auto;
+    padding: 1.5rem 4rem 1.5rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    min-height: 1.5rem;
     position: relative;
+    font-weight: normal;
 
-    .section [data-title].section-title {
+    &:after {
+      content: '\f055';
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 300;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: var(--fa-family-classic);
+      line-height: 1em;
+    }
+  }
+
+  &[open] > summary:after {
+    content: '\f056';
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none;
+    display: block;
+    border: none;
+    color: var(--colour-link);
+    margin: 0;
+    margin-left: 3rem!important;
+    padding: 1.5rem 0 1.5rem 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    min-height: 1.5rem;
+    position: relative;
+    font-weight: normal;
+
+    &:after {
+      background: var(--colour-border) !important;
+      top: calc(100% - 2px) !important;
+      width: 100% !important;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 1.5rem;
+    height: 2px;
+    width: calc(100% - 3rem);
+    display: block;
+    height: 2px;
+    background-color: var(--colour-border) !important;
+  }
+}
+
+@media screen and (max-width: 62em) {
+
+  :is(iam-nav,.iam-nav) details {
+
+    @include mobileMenu();
+  }
+
+  /* secondary menus */
+  :is(iam-nav,.iam-nav) > details[slot="secondary"] {
+    
+    background-color: transparent;
+
+    summary {
+      background-color: transparent;
+    }
+  }
+
+  /* sub menus */
+  :is(iam-nav,.iam-nav) {
+    --mobDetails: 'true';
+
+    
+    details .section [data-title].section-title {
 
       color: var(--colour-body) !important;
       font-size: 1rem;
@@ -205,117 +295,23 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       font-weight: normal;
     }
 
-    summary {
-      background-color: var(--colour-canvas-2);
-
-      /*
-      @container style(--theme: dark) {
-        background-color: var(--colour-canvas-2);
-      }
-        */
-      display: block;
-      border: none;
-      color: var(--colour-link);
-      margin: 0;
-
-      margin-left: -1.5rem;
-      margin-right: -1.5rem;
-      padding: 1.5rem 4rem 1.5rem 1.5rem;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      min-height: 1.5rem;
-      position: relative;
-      font-weight: normal;
-
-      &:after {
-        content: '\f055';
-        display: block;
-        font-size: 1.5rem;
-        font-weight: 300;
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        font-family: var(--fa-family-classic);
-        line-height: 1em;
-      }
-    }
-
-    &[open] > summary:after {
-      content: '\f056';
-      font-weight: bold;
-    }
-
-    a {
-      text-decoration: none;
-      display: block;
-      border: none;
-      color: var(--colour-link);
-      margin: 0;
-      margin-left: 3rem!important;
-      padding: 1.5rem 0 1.5rem 0;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      min-height: 1.5rem;
-      position: relative;
-      font-weight: normal;
-
-      &:after {
-        background: var(--colour-border) !important;
-        top: calc(100% - 2px) !important;
-        width: 100% !important;
-      }
-    }
-
-    /*  Hide cards */
-    a:has(iam-card) {
-      display: none !important;
-    }
-
-    > div .lead {
+    details > div .lead {
 
       padding: 1rem 0 0 3rem!important;
     }
 
-    > div a:last-child {
+    details > div a:last-child {
       margin-bottom: 0 !important;
     }
 
-    > div a:last-child:after {
+    details > div a:last-child:after {
       display: none;
     }
 
-    &:after {
-      content: '';
-      position: absolute;
-      top: calc(100% - 2px);
-      left: 1.5rem;
-      height: 2px;
-      width: calc(100% - 3rem);
-      display: block;
-      height: 2px;
-      background-color: var(--colour-border) !important;
+    /*  Hide cards */
+    details a:has(iam-card) {
+      display: none !important;
     }
-
-    /* secondary nav */
-
-    &[slot="secondary"] {
-      background-color: transparent;
-
-      summary {
-        background-color: transparent;
-      }
-    }
-  }
-}
-@media screen and (max-width: 62em) {
-
-  :is(iam-nav,.iam-nav) details {
-
-    background-color: #eeeeee;
-  }
-  :is(iam-nav,.iam-nav) {
-    --mobDetails: 'true';
-
     /*  Sub details */
     details details {
       &:after {
@@ -385,10 +381,35 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 /* #endregion */
 
+/* maintain the mobile mega menu for the account menu on desktop */
+:is(iam-nav,.iam-nav) > details[slot="account"] {
+
+  
+  @include mobileMenu();
+
+  @media screen and (min-width: 36em) {
+    padding-right: 2.5rem;
+    margin-right: -2.5rem;
+
+    &:after {
+      width: calc(100% - 4rem);
+    }
+
+    summary {
+      padding-right: 2.5rem;
+      margin-right: -2.5rem;
+
+      &:after {
+        right: 2.5rem;
+      }
+    }
+  }
+}
+
+
 /* #region Desktop mega menu */
 @media screen and (min-width: 62em) {
-  :is(iam-nav,.iam-nav) > details:not([slot="secondary"]),
-  :is(iam-nav,.iam-nav) *:not(.nav--menu) > details:not([slot="secondary"]) {
+  :is(iam-nav,.iam-nav) > details:not([slot="secondary"]):not([slot="account"]) {
     width: auto;
 
     > summary {

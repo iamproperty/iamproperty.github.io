@@ -230,6 +230,10 @@ export const megaMenusEvents = (component,menu,menuButton,accountMenu,accountMen
       const summary = event.target.closest('summary');
       const details = summary.closest('details');
 
+      if(details.hasAttribute('slot') && details.getAttribute('slot') == "account"){
+        return false;
+      }
+
       if (window.innerWidth > 992 && !event.target.closest('.nav--menu')) {
 
 
