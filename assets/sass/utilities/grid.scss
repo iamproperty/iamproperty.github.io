@@ -231,7 +231,7 @@ $breakpoints: (
       $count: math.div($columns, $i);
 
       .sm-cols-#{$i} > * {
-        grid-column: auto / span #{math.floor($count)};
+        grid-column: auto / span #{math.floor($count)} !important;
       }
     }
   }
@@ -240,7 +240,7 @@ $breakpoints: (
       $count: math.div($columns, $i);
 
       .md-cols-#{$i} > * {
-        grid-column: auto / span #{math.floor($count)};
+        grid-column: auto / span #{math.floor($count)} !important;
       }
     }
   }

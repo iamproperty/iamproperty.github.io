@@ -11,21 +11,21 @@
   import Form from '@/components/Form/Form.vue';
   import Menu from '@/components/Menu/Menu.vue';
   import IamButton from '@/components/Button/Button.vue';
-  
-  
+
+
 </script>
 
 <template>
   <main>
     <Header>
-      
+
       <ul class="breadcrumbs">
         <li><a href="/standalone/movebutler">Dashboard</a></li>
         <li>Premium Conveyancing</li>
       </ul>
 
       <h1 class="pb-4">Transaction overview</h1>
-      
+
 
       <div class="d-flex flex-wrap gap-3 pb-4">
         <div>
@@ -55,14 +55,14 @@
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add client</a>
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add note</a>
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add document</a>
-    
+
     </Header>
 
     <Menu id="property-report">
       <a href="/report" class="btn btn-action">View report</a>
       <IamButton data-copy-text="/report"><button class="btn btn-action">Copy report link</button></IamButton>
     </Menu>
-    
+
     <div class="admin-panel">
       <h2 class="bg-light">Clients</h2>
       <Actionbar>
@@ -92,7 +92,7 @@
                             <div class="dialog__wrapper">
                                 <button class="btn btn-secondary btn-compact fa fa-ellipsis-vertical btn-sm m-0" popovertarget="menu751614186369" aria-haspopup="true" aria-controls="menu751614186369" style="anchor-name: --menu751614186369;"></button>
                                 <iam-menu class="dialog--list" x-data="" id="menu751614186369" popover="auto" role="menu" style="position-anchor: --menu751614186369;">
-                                  
+
                                     <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
                                     <!--[if BLOCK]><![endif]-->                                        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
                                     <!--[if ENDBLOCK]><![endif]-->
@@ -128,14 +128,14 @@
       </table>
       </Table>
     </div>
-    
+
 <Modal class="modal--lg">
     <dialog id="notes-modal">
         <h2>Add note</h2>
         <p>You are adding a note for the transaction: .</p>
         <Form>
             <form class="fill-row" method="POST" action="/">
-                
+
                 <label class="transaction-note hidden">
                     Add note
                     <textarea class="isg-input" name="content" placeholder="Add note..." rows="10" required></textarea>
@@ -154,11 +154,11 @@
       <div class="md-col-end-8">
         <h2 class="h3 text-info pb-2">Save up to 41 days on this transaction</h2>
         <p class="pb-3">Forecasted time saved if this transaction uses Premium Conveyancing. <a href="/">Find out more</a></p>
-        
+
         <a href="/" class="btn btn-primary colour-warning">Request callback for client</a>
         <a href="/" class="btn btn-secondary">Send insights and service details</a>
       </div>
-      
+
       <ul class="tick-list mb-0 pt-1 pb-3 md-col-start-9">
         <li class="tick--danger pb-1">21 days for current area search times</li>
         <li class="tick--danger pb-1">3 category search alerts</li>
@@ -170,7 +170,7 @@
 
     <a href="/">
       <Card>
-        
+
 
         <div slot="badges" >
           <div class="text-end">
@@ -179,10 +179,10 @@
           </div>
         </div>
         <p class="lead text-heading pb-2">Conveyancing case</p>
-        
+
         <p class="me-auto pb-0">Solicitor office: <strong class="pe-2">JD Conveyancing </strong> Branch assignee: <strong class="pe-2">Chris Holmes</strong> Lead vendor: <strong class="pe-2">John Smith</strong></p>
 
-      
+
       </Card>
     </a>
 
@@ -196,8 +196,8 @@
             <span class="badge border-gradient m-0">Beta</span>
             <span class="badge bg-info gradient-primary gradient-direction-left text-white m-0"><i class="fa-sparkles fa-solid"></i> AI insight</span>
           </div>
-          
-          
+
+
 
           <Tabs class="tabs--md-hidden">
 
@@ -227,7 +227,7 @@
                     <tr class="border-0 no-hover">
                       <th class="text-nowrap">Covenants</th>
                       <td>
-                        You must not use the property for anything other than a private residence. 
+                        You must not use the property for anything other than a private residence.
                       </td>
                       <td>
                         <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
@@ -249,13 +249,13 @@
                   <p>The following are details of the covenants contained in the Conveyance dated 23 April 1897 referred to in the Charges Register:-JOINTLY AND SEVERALLY covenant by the said George Gosney, Alexander Henderson and Joseph Earl not to erect on any part of the said premises any building other than private dwellinghouses of the minimum value of £500 for each detached house or £750 for a pair of houses except stabling greenhouses or other similar appurtenances to such dwellinghouse when erected nor erect more than six houses on any acre of the said premises not permit any building erected on the said premises to be used otherwise than as a private dwellinghouse or an appurtenance thereto nor permit such appurtenance to be used except by person occupying the dwellinghouse to which it belongs nor permit or suffer any trade or business whatsoever to be set up or carried on nor any Tavern Hotel School Cemetary Tea Garden Livery Stable Beer Shop or Manufactory of any kind to be carried on or opened nor any Fair Steeplechase public game or games or race or other sport to be held nor any goods or wares to be exposed for sale nor any bricks or tiles to be made or burned on the said premises or on any part thereof nor do or suffer to be done any acts that might be or become a nuisance or annoyance to the tenants or occupiers of adjoining land of the said William Moffat Douglas-Willan. </p>
 
                   <span class="h4">Agent actions - 4</span>
-                  
+
                   <Notification data-status="danger" class="notification--no-bg mb-0">A covenant restricting building works or extensions has been identified. This may limit alterations the buyer can make. This could be material information</Notification>
-                        
+
                   <Notification data-status="danger" class="notification--no-bg mb-0">A covenant preventing commercial use has been identified. This may be material information for buyers intending business activities.</Notification>
 
                   <Notification data-status="danger" class="notification--no-bg mb-0">A covenant restricting building works or extensions has been identified. This may limit alterations the buyer can make. This could be material information</Notification>
-                        
+
                   <Notification data-status="danger" class="notification--no-bg mb-0">A covenant preventing commercial use has been identified. This may be material information for buyers intending business activities.</Notification>
                   </div>
                 </dialog>
@@ -264,7 +264,7 @@
             </details>
             <details id="title-insights-2" name="title-insights" class="pt-0">
               <summary>Forms</summary>
-              
+
               <Actionbar>
 
                 <label class="tag tag--toggle" slot="filters"><input type="radio" name="title-insight-buttons-2" value="1" checked command="show-tab" commandfor="title-insights-1">Title ID 1</label>
@@ -273,12 +273,12 @@
                 <a href="/" class="btn btn-action fa-cart-shopping">Order another title register</a>
                 <a href="/" class="btn btn-action fa-download">Download title register 2</a>
               </Actionbar>
-              
+
 
             </details>
           </Tabs>
 
-          
+
 
 
 
@@ -297,7 +297,7 @@
           <div class="sub-grid pb-1">
             <span class="col-start-1 col-end-5 pb-1">Tenure type: <strong>Freehold</strong></span>
             <span class="col-start-6 col-end-12 pb-1">EPC rating: <strong>C (79), potential B (83)</strong></span>
-              
+
             <span class="col-start-1 col-end-5 pb-1">Price: <strong>£180,000</strong></span>
             <span class="col-start-6 col-end-12 pb-1">Council tax band: <strong>B</strong></span>
           </div>
@@ -353,7 +353,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="md-col-start-7">
       <div class="admin-panel">
         <h2 class=" bg-light">Local planning permission and development proposals</h2>
@@ -416,14 +416,15 @@
                 <a href="/" class="btn btn-action fa-cart-shopping icon-only">Order another title  register</a>
                 <a href="/" class="btn btn-action fa-download icon-only">Download title register</a>
               </Actionbar>
-              <div class="d-flex gap-3 ">
-                
+              <div class="mh-md">
+              <div class="sm-cols-2 md-cols-3 ">
+
               <a href="">
                 <Card>
                   <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
                   Property information questionnaire
 
-                  <label slot="footer" data-percent="50">
+                  <label slot="footer" class="pb-0" data-percent="50">
                     24 Lynx road, NE2 6AT
                     <progress max="100" value="50" class="progress--inline"></progress>
                   </label>
@@ -452,11 +453,39 @@
                 </Card>
               </a>
 
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+
+
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+
+
+
+              </div>
               </div>
             </details>
             <details id="forms" name="insights" class="pt-0">
               <summary>Forms</summary>
-              
+
               <Actionbar>
 
                 <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="1" checked command="show-tab" commandfor="documents">Documents</label>
@@ -465,7 +494,7 @@
                 <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
                 <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
               </Actionbar>
-              
+
 
             </details>
           </Tabs>
@@ -494,7 +523,7 @@
 
             <tbody>
               <tr class="show">
-                
+
                     <td data-label="Added by">
                                                     <a href="http://my.iamproperty.test/ic/user/3/view">
                                 Testing Account
@@ -512,7 +541,7 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
 
                 </tr>
           <tr class="show">
-            
+
             <td data-label="Added by">
                                             <a href="http://my.iamproperty.test/ic/user/3/view">
                         Testing Account
@@ -526,7 +555,7 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
             <td data-label="Note"><p>yo</p></td>
             <td class="td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down mt-0" data-expand-button="" data-index="0">Expand</button></td>
           </tr>
-                            
+
         </tbody>
       </table>
       </Table>
