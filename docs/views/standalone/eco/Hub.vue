@@ -24,6 +24,11 @@ const hubEnv = import.meta.env as unknown as {
   VITE_MI_API_KEY: string
 };
 
+onMounted(() => {
+
+
+});
+
 // todo load from api call
 
 

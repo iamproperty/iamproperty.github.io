@@ -49,7 +49,7 @@
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
-      <STDNav slot="secondary" data-sso-subject="" data-product="iamsold"></STDNav>
+      <STDNav slot="secondary" data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="iamsold"></STDNav>
 
     </Nav>
   </nav>
