@@ -110,6 +110,7 @@
     width: 90vw;
     max-width: 20.25rem; /*  col-width*4 */
     max-height: min(90vh, 47rem);
+    min-height: var(--modal-min-height, 16rem);
     overscroll-behavior: contain;
 
     @media screen and (min-width: 36em) {

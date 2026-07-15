@@ -11,6 +11,10 @@
 
 }
 
+:host(.has-parent-dialog) {
+  display: contents!important;
+}
+
 :host(.has-parent-dialog) dialog {
   display: contents!important;
 }
@@ -33,6 +37,8 @@
     width: 90vw;
     max-width: 20.25rem; /* col-width*4 324px */
 
+    height: fit-content;
+    min-height: var(--modal-min-height, 16rem);
     max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
     overflow-y: hidden;
