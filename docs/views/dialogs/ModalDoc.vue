@@ -139,7 +139,7 @@
 
     <Modal>
       <dialog id="modal-passive">
-      
+
       <span>Optional label</span>
       <span class="h3">Passive modal title</span>
 
@@ -254,7 +254,7 @@
       <h4>Preview</h4>
       <button command="show-modal" commandfor="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
-    
+
     <Modal data-type="transactional" data-icon="trash-can">
       <dialog id="modal-transactional">
         <span class="h3">Delete property file</span>
@@ -312,7 +312,7 @@
       <button command="show-modal" commandfor="modal-ack" class="btn btn-secondary">Open Modal</button>
     </div>
 
-    
+
     <Modal data-type="acknowledgement" class="modal--sm">
       <dialog id="modal-ack">
         <span class="h3">Acknowledgment modal title</span>
@@ -338,7 +338,7 @@
     <!-- #region Adding buttons -->
 
     <div class="bg-light container">
-      
+
     <h2>Adding buttons</h2>
     <p>To ensure that the modal component can be integrated flexibly there are numerous ways to add buttons. The transactional and acknowledgement type modals will have buttons created by default with text that can be updated via the two attributes; <code>[data-cancel-text]</code> and <code>[data-agree-text]</code>. Alternatively you can use the 'agreed-button' slot to add a primary button to override the default one; useful to add extra functionality to the submit function.</p>
 
@@ -355,9 +355,9 @@
   <button class="btn btn-secondary" formmethod="dialog">Cancel</button>
   <button class="btn btn-primary" type="submit">Close case</button>
 </div></form>` }}</code></pre>
-    
+
     </div>
-    
+
 
 
     <Integration component="Modal" componentName="iam-modal">
@@ -368,7 +368,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Modal from '@/components/Modal/Modal.vue</script>
-        
+
 <Modal>
   <p>...</p>
 </Modal>
@@ -481,7 +481,7 @@
         </table>
       </template>
 
-      
+
       <template #slots>
         <table>
           <thead>
@@ -503,7 +503,7 @@
         </table>
       </template>
 
-      
+
     </Integration>
 
 
