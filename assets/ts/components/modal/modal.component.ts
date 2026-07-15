@@ -110,7 +110,14 @@ class iamModal extends HTMLElement {
         dialog?.showModal();
 
       Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
-        this.moveBefore(element, originalDialog);
+
+        if (typeof this.moveBefore === 'function') {
+          // Supported: Chrome, Firefox
+          this.moveBefore(element, originalDialog);
+        } else {
+          // Fallback: Safari and older browsers
+          this.insertBefore(element, originalDialog);
+        }
       });
     }
 
