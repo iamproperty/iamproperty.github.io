@@ -27,6 +27,27 @@ const hubEnv = import.meta.env as unknown as {
 onMounted(() => {
 
 
+
+  const iFrameID = document.getElementById('inlineFrameExample');
+  if(iFrameID) {
+        // Reset the height first, then set it to the content's height
+        iFrameID.height = "";
+        iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+
+        console.log(iFrameID.contentWindow.document.body);
+
+    iFrameID.contentWindow.addEventListener('dashboard:loaded', () => {
+
+      var elmnt = iFrameID.contentWindow.document.querySelector('[aria-label="Dashboard Header"]');
+
+      console.log(elmnt);
+      elmnt.style.display = "none";
+    });
+
+  }
+
+
+
 });
 
 // todo load from api call
@@ -85,6 +106,16 @@ function addProductSearch(event): void {
         <div class="md-col-start-9"><SearchContacts></SearchContacts></div>
       </div>
     </div>
+
+
+    <iframe
+      id="inlineFrameExample"
+      title="Inline Frame Example"
+      src="https://iampropertypbl.cloud.looker.com/embed/dashboards/155?Agent+Name=&Branch+Name="
+      style="width: 100%; min-height: 100vh;"
+    >
+</iframe>
+
 
     <hr/>
     <Content :data-url="hubEnv.VITE_HUB_CONTENT_BANNER_URL" data-save-variable="shortname">
