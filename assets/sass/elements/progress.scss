@@ -118,7 +118,7 @@
   @container (width <= 10.625rem) {
     label:has(.progress--circular:not(.progress--sm):not(.progress--md)) {
       --max-width: 10.625rem;
-      --pt: 4.78125rem
+      --pt: 4.78125rem;
       --pt-percent: 45%;
       --bar-width: 1.25rem;
       --value-pb: 1.5rem;
