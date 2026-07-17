@@ -11,7 +11,7 @@
 
   .template--form {
     --input-max-width: 28.125rem;
-    --select-max-width: 31.25rem
+    --select-max-width: 31.25rem;
 
     .container {
 
@@ -20,11 +20,11 @@
 
     @supports selector(:has(*)) {
       label:has(> :is(.suffix, .prefix)) {
-        --input-max-width: 31.25rem
+        --input-max-width: 31.25rem;
         max-width: var(--input-max-width);
       }
       div:has(> :is(.suffix, .prefix)) {
-        --input-max-width: 31.25rem
+        --input-max-width: 31.25rem;
         max-width: var(--input-max-width);
       }
     }
