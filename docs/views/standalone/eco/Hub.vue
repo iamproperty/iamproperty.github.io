@@ -16,6 +16,8 @@ import Content from '@/components/Content/Content.vue';
 import Skeleton from '@/components/Skeleton/Skeleton.vue';
 import Bone from '@/components/Skeleton/Bone.vue';
 
+import Questions from './Questions.vue';
+
 const hubEnv = import.meta.env as unknown as {
   VITE_HUB_CONTENT_BANNER_URL: string,
   VITE_HUB_LEARNING_URL: string,
@@ -24,34 +26,12 @@ const hubEnv = import.meta.env as unknown as {
   VITE_MI_API_KEY: string
 };
 
+
 onMounted(() => {
-
-
-
-  const iFrameID = document.getElementById('inlineFrameExample');
-  if(iFrameID) {
-        // Reset the height first, then set it to the content's height
-        iFrameID.height = "";
-        iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
-
-        console.log(iFrameID.contentWindow.document.body);
-
-    iFrameID.contentWindow.addEventListener('dashboard:loaded', () => {
-
-      var elmnt = iFrameID.contentWindow.document.querySelector('[aria-label="Dashboard Header"]');
-
-      console.log(elmnt);
-      elmnt.style.display = "none";
-    });
-
-  }
-
-
 
 });
 
 // todo load from api call
-
 
 function addLearningSearch(event): void {
 
@@ -98,24 +78,15 @@ function addProductSearch(event): void {
   </nav>
 
   <main>
-    <div class="bg-primary full-width mb-4">
+    <div class="bg-primary full-width questions-container">
       <div class="container">
 
         <h1 class="pb-2 md-col-end-7 h2">Welcome, <span data-variable="shortname"></span></h1>
 
         <div class="md-col-start-9"><SearchContacts></SearchContacts></div>
       </div>
+      <Questions></Questions>
     </div>
-
-
-    <iframe
-      id="inlineFrameExample"
-      title="Inline Frame Example"
-      src="https://iampropertypbl.cloud.looker.com/embed/dashboards/155?Agent+Name=&Branch+Name="
-      style="width: 100%; min-height: 100vh;"
-    >
-</iframe>
-
 
     <hr/>
     <Content :data-url="hubEnv.VITE_HUB_CONTENT_BANNER_URL" data-save-variable="shortname">
@@ -188,3 +159,9 @@ function addProductSearch(event): void {
 
 
 </template>
+
+<style lang="css" scoped>
+.questions-container {
+  margin-bottom: 7rem;
+}
+</style>

@@ -1387,6 +1387,14 @@ const routes = [
         component: () => import('./views/standalone/eco/Hub.vue'),
       },
       {
+        path: 'hub-question',
+        name: 'iamproperty hub question',
+        meta: {
+          title: 'iamproperty hub | iamkey',
+        },
+        component: () => import('./views/standalone/eco/HubQuestion.vue'),
+      },
+      {
         path: 'eco-product',
         name: 'iamproperty hub product',
         meta: {

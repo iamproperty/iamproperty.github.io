@@ -45,7 +45,7 @@ class iamModal extends HTMLElement {
     const originalDialog = this.querySelector('dialog');
 
     const id = this.hasAttribute('id') ? this.getAttribute('id') : originalDialog?.getAttribute('id');
-    let dialog = this.shadowRoot?.querySelector('dialog');
+    let dialog = this.closest('dialog') ? this.closest('dialog') : this.shadowRoot?.querySelector('dialog');
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
     const cancelButton = this.shadowRoot?.querySelector('[data-cancel]');
     const agreedButton = this.querySelector('button[slot="agreed-button"]') ? this.querySelector('button[slot="agreed-button"]') : this.shadowRoot?.querySelector('[data-agreed]');
@@ -171,7 +171,9 @@ class iamModal extends HTMLElement {
 
       // Small fix to make sure the dialog isn't a dialog inside of a dialog.
       const style = window.getComputedStyle(dialog);
-      if (style.display === 'contents') dialog = dialog.parentNode.closest('dialog[open]');
+
+      if (style.display === 'contents' && dialog.parentNode && dialog.parentNode.closest('dialog[open]'))
+        dialog = dialog.parentNode.closest('dialog[open]');
 
       // Dont allow the backdrop to be clicked when transactional
       if (modalType != 'transactional' && modalType != 'acknowledgement') {
