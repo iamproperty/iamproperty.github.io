@@ -204,6 +204,9 @@ class iamMultiselect extends HTMLElement {
       Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
         checkbox.checked = false;
 
+        const event = new Event('change');
+        activeElement.dispatchEvent(event);
+
         setItem(checkbox);
       });
 
@@ -264,6 +267,9 @@ class iamMultiselect extends HTMLElement {
           if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
             if (activeElement.checked == false) activeElement.checked = true;
             else activeElement.checked = false;
+
+            const event = new Event('change');
+            activeElement.dispatchEvent(event);
           }
 
 
@@ -271,6 +277,10 @@ class iamMultiselect extends HTMLElement {
 
             if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
               multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
+
+              const event = new Event('change');
+              // Dispatch it.
+              activeElement.dispatchEvent(event);
 
               setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
             }
@@ -287,6 +297,10 @@ class iamMultiselect extends HTMLElement {
         case 'Backspace':
           if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
             activeElement.checked = false;
+
+            const event = new Event('change');
+            activeElement.dispatchEvent(event);
+
             setItem(activeElement);
             search.focus();
           }
