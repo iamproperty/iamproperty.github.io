@@ -17,12 +17,12 @@ class iamBranchSelector extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
     <div class="wrapper">
 
-      <button id="menuButton" class="btn btn-action" popovertarget="branches" aria-haspopup="true" aria-controls="branches" style="anchor-name: --branches;">
+      <button id="menuButton" class="btn btn-action" popovertarget="dropdown" aria-haspopup="true" aria-controls="dropdown" style="anchor-name: --dropdown;">
         <i class="fa-regular fa-building-circle-check"></i>
         <span class="indicator"></span>
         <span class="selected">Branch</span>
       </button>
-      <div class="dropdown" part="dropdown" id="branches" style="position-anchor: --branches;" role="menu" popover="auto">
+      <div class="dropdown" part="dropdown" id="dropdown" style="position-anchor: --dropdown;" role="menu" popover="auto">
         <slot></slot>
       </div>
     </div>
@@ -35,6 +35,7 @@ class iamBranchSelector extends HTMLElement {
 
 
     const menuButton = this.shadowRoot?.querySelector('#menuButton');
+    const dropdown = this.shadowRoot?.querySelector('#dropdown');
 
     let selected = this.querySelector('input:checked') ? this.querySelector('input:checked') : this.querySelector('input'); // By default the first input is checked if an input hasn't been checked on load
     selected.checked = true;
@@ -87,6 +88,38 @@ class iamBranchSelector extends HTMLElement {
         this.classList.toggle('branch-selector-inline');
       }
     });
+
+    // Make the component focusable
+
+
+    this.addEventListener('keydown', (event) => {
+
+      switch (
+        event.key // change to event.key to key to use the above variable
+      ) {
+        case 'ArrowUp':
+          // Up pressed
+          event.preventDefault();
+
+          if(!dropdown?.matches(':popover-open')){
+            menuButton.click();
+            this.querySelector('input').focus();
+          }
+
+          break;
+        case 'ArrowDown':
+          // Down pressed
+          event.preventDefault();
+
+          if(!dropdown?.matches(':popover-open')){
+            menuButton.click();
+            this.querySelector('input').focus();
+          }
+
+          break;
+      }
+    });
+
   }
 }
 

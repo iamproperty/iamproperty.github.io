@@ -214,7 +214,7 @@
   /* #endregion */
 
   /* #region Needed for the component files */
-  :is(iam-tag,iam-multiselect):has(label:not([slot='checked'])) {
+  :is(iam-tag,iam-multiselect):has(label:not([slot='checked']):not([slot='notmatched'])) {
     --display-panel: block;
   }
 

@@ -34,6 +34,8 @@ const charts = ref([]);
 
 const showToast = ref(false);
 
+const cachedOutcodes = ref([]);
+
 onMounted(async() => {
 
   try {
@@ -47,6 +49,7 @@ onMounted(async() => {
     });
 
     const json = await response.json();
+    cachedOutcodes.value = json.data;
 
     checkAccount.value.connected = true;
 
@@ -94,7 +97,7 @@ const getCompetitors = async (outcodes):Promise<void> => {
       },
     });
 
-    const json = await response.json();
+    json.value = await response.json();
 
     if(json.data)
       competitors.value = json.data;
@@ -145,6 +148,7 @@ function onOutcodeChange(event): void {
 
 const searchOutcodes = async(event):void => {
 
+  console.log(event);
 
   if(!event.srcElement.shadowRoot)
     return false;
@@ -152,26 +156,16 @@ const searchOutcodes = async(event):void => {
 
   const searchTerm = event.srcElement.shadowRoot.querySelector('#search').value;
 
-  if(!searchTerm)
-    return false;
+  console.log(searchTerm);
 
+  if(!searchTerm){
+    outcodes.value = [];
+  }
+  else {
+    const filtereOutcodes = cachedOutcodes.value.filter((item) => item.title.toLowerCase().startsWith(searchTerm));
 
-  const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetDistricts', {
-    method: 'POST',
-    headers: {
-      'x-api-key': hubEnv.VITE_MI_API_KEY,
-      'Content-Type': 'application/vnd.api+json'
-    },
-  });
-
-  const json = await response.json();
-
-
-  const filtereOutcodes = json.data.filter((item) => item.title.toLowerCase().startsWith(searchTerm));
-
-  outcodes.value = new Set([...outcodes.value, ...filtereOutcodes]);
-
-  console.log(filtereOutcodes);
+    outcodes.value = new Set([...outcodes.value, ...filtereOutcodes]);
+  }
 }
 </script>
 <template>

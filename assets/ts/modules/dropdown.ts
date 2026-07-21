@@ -2,6 +2,18 @@ import Cookies from '../../../node_modules/js-cookie/dist/js.cookie.mjs';
 
 export const filterList = (component, search): void => {
 
+  // If search empty then hide the dropdown options still loaded
+  if(!search.value){
+
+    Array.from(component.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
+
+      label.setAttribute('slot', 'notmatched');
+    });
+
+    return;
+  }
+
+
   Array.from(component.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
     const checkbox = label.querySelector('input');
     const searchValue = checkbox.value;

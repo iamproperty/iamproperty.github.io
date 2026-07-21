@@ -89,7 +89,7 @@ class iamMultiselect extends HTMLElement {
     }
 
     // Set the correct attributes
-    function setItem(inputToSet): void {
+    const setItem = (inputToSet): void => {
 
       if (inputToSet.checked == false) {
         inputToSet.closest('label').removeAttribute('slot');
@@ -121,6 +121,11 @@ class iamMultiselect extends HTMLElement {
           search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
         }
       }
+
+      // filter list
+      search.value = '';
+      filterList(multiselect, search);
+
     }
 
 
@@ -151,29 +156,10 @@ class iamMultiselect extends HTMLElement {
     });
 
     search.addEventListener('blur', (event) => {
-      setTimeout(function () {
-        const activeElement = document.activeElement;
 
-        if (activeElement.getAttribute('type') != 'checkbox') {
-          if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
-            multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
+      filterList(multiselect, search);
 
-            setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
-          }
-          search.value = '';
-
-          Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
-            setItem(checkbox);
-          });
-        }
-
-        if (multiselect.hasAttribute('data-url')) {
-          Array.from(multiselect.querySelectorAll(`label:has(input[type="checkbox"]:not(:checked))`)).forEach((checkbox) => {
-
-            checkbox.remove();
-          });
-        }
-      }, 200);
+      // filter here?
 
       clearTimeout(hoverTimeout);
       hoverTimeout = setTimeout(function () {
@@ -230,7 +216,7 @@ class iamMultiselect extends HTMLElement {
 
     // Add some keyboard features to keep it accessible
     addKeyboardEvents(this, search);
-    multiselect.addEventListener('keydown', function (event) {
+    multiselect.addEventListener('keydown', (event) => {
       const activeElement = document.activeElement;
 
       switch (
@@ -280,19 +266,15 @@ class iamMultiselect extends HTMLElement {
             else activeElement.checked = false;
           }
 
-          console.log(search);
 
           if (activeElement.getAttribute('type') != 'checkbox') {
+
             if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
               multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
 
               setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
             }
-            search.value = '';
 
-            Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
-              setItem(checkbox);
-            });
           }
           else {
 
@@ -308,6 +290,19 @@ class iamMultiselect extends HTMLElement {
             setItem(activeElement);
             search.focus();
           }
+          /*
+          if (!search.value) {
+            const lastTag = checkLastTag(order);
+
+            if (lastTag) {
+              const lastTagInput = lastTag.querySelector('input');
+              lastTagInput.checked = false;
+              setItem(lastTagInput);
+            }
+
+            search.focus();
+          }
+          */
           break;
       }
     });
@@ -325,34 +320,7 @@ class iamMultiselect extends HTMLElement {
       return lastTag;
     }
 
-    search.addEventListener('keydown', function (event) {
-      switch (
-        event.key // change to event.key to key to use the above variable
-      ) {
-        case 'Enter':
-          const match = multiselect.querySelector(`input[value="${search.value}"]:not(:checked)`);
 
-          if (!match) search.value = '';
-
-          search.focus();
-
-          break;
-        case 'Backspace':
-          if (!search.value) {
-            const lastTag = checkLastTag(order);
-
-            if (lastTag) {
-              const lastTagInput = lastTag.querySelector('input');
-              lastTagInput.checked = false;
-              setItem(lastTagInput);
-            }
-
-            search.focus();
-          }
-
-          break;
-      }
-    });
 
     // Fix for the inline edit multiselect
     multiselect.addEventListener('mousedown', () => {
