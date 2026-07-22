@@ -159,6 +159,19 @@ const UpdateResults = () => {
           </Modal>
         </dialog>
 
+
+
+
+      <iframe
+        id="iframeTable2"
+        ref="iframeTable2"
+        title="Inline Frame Example"
+        src="https://iampropertypbl.cloud.looker.com/embed/looks/24?theme=iamproperty_default"
+  frameborder="0"
+  allow="fullscreen"
+  referrerpolicy="strict-origin-when-cross-origin"
+        style="width: 100%; min-height: 30vh;"
+      ></iframe>
       <iframe
         id="iframeTable"
         ref="iframeTable"

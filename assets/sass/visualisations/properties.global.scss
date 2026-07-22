@@ -1,0 +1,143 @@
+@use '../_func' as *;
+
+
+iam-vis-properties {
+  
+  /* #region reset */
+  table {
+    caption-side: bottom;
+    border-collapse: collapse;
+  }
+
+  caption {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: gray;
+    text-align: left;
+  }
+
+  /*  1. Removes font-weight bold by inheriting */
+  /*  2. Matches default `<td>` alignment by inheriting `text-align`. */
+  /*  3. Fix alignment for Safari */
+
+  th {
+    font-weight: normal; /*  1 */
+    text-align: inherit; /*  2 */
+    text-align: -webkit-match-parent; /*  3 */
+  }
+
+  thead,
+  tbody,
+  tfoot,
+  tr,
+  td,
+  th {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+  }
+  /* #endregion */
+
+  /* #region Default table */
+  table {
+    --border-width: 2px;
+    --inner-border-width: 2px;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+    margin-bottom: 2rem;
+    overflow: auto;
+  }
+
+  div:has(> table:first-child:last-child) {
+    overflow: auto;
+    margin-bottom: 2rem;
+
+    table {
+      margin-bottom: 0;
+    }
+  }
+
+  :is(td, th) {
+    padding: 0.75rem 2rem 0.75rem 0;
+
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+    border: none;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: var(--colour-body);
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    p {
+      font-size: inherit;
+      padding: 0;
+    }
+
+    &.th--sm {
+      width: 1px;
+    }
+  }
+
+  th {
+    font-weight: bold;
+    color: var(--colour-heading);
+  }
+
+  thead {
+    tr {
+      border-bottom: var(--border-width) solid currentColor;
+      border-color: var(--colour-primary);
+    }
+    th {
+      padding-top: 0;
+      vertical-align: bottom;
+    }
+  }
+
+  /*  Error messages */
+  tr td[colspan='100%']:first-child:last-child span {
+    max-width: 39rem;
+    font-weight: bold;
+    padding: 3rem;
+    text-align: center;
+    display: block;
+    color: var(--colour-heading);
+
+    @media screen and (min-width: 62em) {
+      max-width: 65.5rem;
+    }
+  }
+
+  @container (width >= 60em) {
+    thead {
+      th:not(:empty) {
+        white-space: nowrap;
+        min-width: 7.5rem;
+      }
+      th.th--mw-md {
+        min-width: 15rem; /* 240 */
+      }
+      th.th--mw-lg {
+        min-width: 22.5rem; /* 360 */ 
+      }
+    }
+  }
+
+  tbody tr {
+    border-bottom: var(--border-width) solid currentColor;
+    border-color: var(--colour-border);
+  }
+
+  .border-0 > table,
+  table.border-0 {
+    --border-width: 0px;
+    --inner-border-width: 0px;
+  }
+  /* #endregion */
+
+}
