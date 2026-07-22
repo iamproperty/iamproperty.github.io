@@ -205,7 +205,7 @@ class iamMultiselect extends HTMLElement {
         checkbox.checked = false;
 
         const event = new Event('change');
-        activeElement.dispatchEvent(event);
+        checkbox.dispatchEvent(event);
 
         setItem(checkbox);
       });
