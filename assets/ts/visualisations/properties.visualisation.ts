@@ -38,6 +38,7 @@ class iamVisProperties extends HTMLElement {
     this.map = null;
     this.resizeObserver = null;
     this.resizeFrame = null;
+  this.markers = [];
   }
 
   connectedCallback(): void {
@@ -48,23 +49,114 @@ class iamVisProperties extends HTMLElement {
       return;
     }
 
-    const longitude = Number(this.getAttribute("longitude")) || 0.558525;
-    const latitude = Number(this.getAttribute("latitude")) || 51.873238;
+    const longitude = Number(this.querySelector('tr[data-longitude]')?.dataset.longitude);
+    const latitude = Number(this.querySelector('tr[data-latitude]')?.dataset.latitude);
     const zoom = Number(this.getAttribute("zoom")) || 12;
 
     const mapContainer = this.shadowRoot.querySelector("#map");
 
     this.map = new maplibregl.Map({
       container: mapContainer,
-        style: "https://tiles.openfreemap.org/styles/liberty",
+        style: "https://tiles.openfreemap.org/styles/bright",
       center: [longitude, latitude],
-      zoom
+      zoom: 10
     });
 
     this.map.addControl(
       new maplibregl.NavigationControl(),
       "top-right"
     );
+
+    const bounds = new maplibregl.LngLatBounds();
+
+    this.querySelectorAll('tr[data-longitude][data-latitude]').forEach((row, index)=>{
+
+      const rowLongitude = Number(row?.dataset.longitude);
+      const rowLatitude = Number(row?.dataset.latitude);
+
+
+      if(index <= 15){
+
+        bounds.extend([
+          rowLongitude,
+          rowLatitude
+        ]);
+      }
+
+      const popupContent = document.createElement("div");
+
+      popupContent.innerHTML = `
+        <div class="popup-content">
+          <p class="popup-price">£250,000</p>
+          <button class="popup-action" type="button">
+            View property
+          </button>
+        </div>
+      `;
+
+      popupContent
+      .querySelector(".popup-action")
+      .addEventListener("click", () => {
+        this.dispatchEvent(
+          new CustomEvent("property-selected", {
+            bubbles: true,
+            composed: true,
+            detail: {
+              propertyId: "property-123"
+            }
+          })
+        );
+
+        console.log('hi');
+        window.location = "http://www.bbc.com";
+      });
+
+      const popup = new maplibregl.Popup({
+        offset: 28,
+        closeButton: true,
+        closeOnClick: false,
+        className: "property-popup",
+        maxWidth: "320px"
+      });
+
+      popup.setDOMContent(popupContent);
+
+      const markerElement = document.createElement("div");
+
+      markerElement.innerHTML = `
+        <svg
+          width="32"
+          height="42"
+          viewBox="0 0 32 42"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="#EA4335"
+            stroke="#ffffff"
+            stroke-width="2"
+            d="M16 1C7.7 1 1 7.7 1 16c0 11.3 15 25 15 25s15-13.7 15-25C31 7.7 24.3 1 16 1z"
+          />
+          <circle cx="16" cy="16" r="6" fill="#ffffff"/>
+        </svg>
+      `;
+
+      const marker = new maplibregl.Marker({
+        element: markerElement,
+        anchor: "bottom"
+      })
+      .setLngLat([rowLongitude, rowLatitude])
+      .setPopup(popup)
+      .addTo(this.map);
+
+      this.markers.push(marker);
+
+    });
+
+    this.map.fitBounds(bounds, {
+      padding: 60,
+      minZoom: 8,
+      maxZoom: 12
+    });
 
     this.resizeObserver = new ResizeObserver(() => {
         cancelAnimationFrame(this.resizeFrame);
@@ -75,27 +167,6 @@ class iamVisProperties extends HTMLElement {
       });
 
       this.resizeObserver.observe(this);
-/*
-    const locationCoordinates = [-1.6178, 54.9783];
-
-    let mapCreated = false;
-
-    if(!mapCreated){
-
-      this.insertAdjacentHTML('afterBegin', `<div id="map"></div>`);
-      const map = new maplibregl.Map({
-        container: "map",
-        style: 'https://demotiles.maplibre.org/globe.json',
-        center: locationCoordinates,
-        zoom: 12
-      });
-
-      mapCreated = true;
-    }
-
-    console.log('hey');
-*/
-
 
   }
 
@@ -106,8 +177,14 @@ class iamVisProperties extends HTMLElement {
 
       this.map?.remove();
       this.map = null;
+  this.markers = [];
     }
 }
 
-if (!window.customElements.get(`iam-vis-properties`))
-  window.customElements.define(`iam-vis-properties`, iamVisProperties);
+
+document.addEventListener('DOMContentLoaded', (): void => {
+
+  if (!window.customElements.get(`iam-vis-properties`))
+    window.customElements.define(`iam-vis-properties`, iamVisProperties);
+
+});

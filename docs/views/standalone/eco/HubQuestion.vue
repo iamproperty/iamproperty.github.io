@@ -161,7 +161,7 @@ const UpdateResults = () => {
 
 
 
-
+<!--
       <iframe
         id="iframeTable2"
         ref="iframeTable2"
@@ -172,6 +172,7 @@ const UpdateResults = () => {
   referrerpolicy="strict-origin-when-cross-origin"
         style="width: 100%; min-height: 30vh;"
       ></iframe>
+      -->
       <iframe
         id="iframeTable"
         ref="iframeTable"
