@@ -180,12 +180,11 @@ class iamVisProperties extends HTMLElement {
 
   connectedCallback(): void {
 
-    if (this.map || !this.querySelector('tr[data-longitude][data-latitude]')) {
+    if (this.map)
       return;
-    }
 
-    this.createMap();
-
+    if(this.querySelector('tr[data-longitude][data-latitude]'))
+      this.createMap();
 
     this.resizeObserver = new ResizeObserver(() => {
       cancelAnimationFrame(this.resizeFrame);
