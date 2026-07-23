@@ -1,4 +1,4 @@
-import iamTable from '../../js/components/table/table.component.js';
+//import iamTable from '../../js/components/table/table.component.js';
 
 class iamVisProperties extends HTMLElement {
   constructor() {
@@ -27,11 +27,20 @@ class iamVisProperties extends HTMLElement {
     <!-- MapLibre JavaScript -->
     <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
 
+    <div id="filters">
+      <button command="show-modal" commandfor="filtersDialog" class="btn btn-primary">Filter results</button>
+    </div>
+    <dialog id="filtersDialog">
+      <span class="h2">Filterby</span>
+      <div class="btn__group">
+
+        <button command="close" commandfor="filtersDialog" class="btn btn-secondary">Clear Filters</button>
+        <button command="close" commandfor="filtersDialog" class="btn btn-primary">Update results</button>
+      </div>
+    </dialog>
     <div id="map"></div>
-    <div class="wrapper">
-      <iam-table>
-        <slot></slot>
-      </iam-table>
+    <div id="wrapper">
+      <slot></slot>
     </div>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));

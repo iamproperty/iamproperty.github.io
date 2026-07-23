@@ -1,8 +1,22 @@
 @use '../_func' as *;
 
+
+@use '../foundations/root.scss' as *;
+
 @use '../elements/table.element' as *;
+@use '../elements/buttons.scss' as *;
+@use '../elements/dialog.scss' as *;
+@use '../elements/type.css' as *;
 
+dialog {
+  place-self: center;
+  width: 40rem;
+  container-type: inline-size;
+  padding: 1rem;
 
+  // Aligns buttons center on desktop
+  justify-content: center;
+}
 
 /* Remove MapLibre's default popup styling */
 .property-popup .maplibregl-popup-content {

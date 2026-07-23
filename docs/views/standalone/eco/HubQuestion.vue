@@ -159,8 +159,6 @@ const UpdateResults = () => {
           </Modal>
         </dialog>
 
-
-
 <!--
       <iframe
         id="iframeTable2"
@@ -177,7 +175,7 @@ const UpdateResults = () => {
         id="iframeTable"
         ref="iframeTable"
         title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default"
+        src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default&f[stock_switch.current_agent_name]=Wilson Estate Agents"
         style="width: 100%; min-height: 100vh;"
       ></iframe>
     </div>
