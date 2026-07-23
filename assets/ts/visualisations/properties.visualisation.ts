@@ -1,3 +1,5 @@
+import iamTable from '../../js/components/table/table.component.js';
+
 class iamVisProperties extends HTMLElement {
   constructor() {
     super();
@@ -26,7 +28,11 @@ class iamVisProperties extends HTMLElement {
     <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
 
     <div id="map"></div>
-    <div class="wrapper"><slot></slot></div>
+    <div class="wrapper">
+      <iam-table>
+        <slot></slot>
+      </iam-table>
+    </div>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
 
@@ -37,21 +43,28 @@ class iamVisProperties extends HTMLElement {
 
     this.map = null;
     this.resizeObserver = null;
+    this.resizeObserver = null;
+    this.latlngObserver = null;
     this.resizeFrame = null;
-  this.markers = [];
+    this.createMapTimeout = null;
+    this.markers = [];
   }
 
-  connectedCallback(): void {
-    console.log('hello');
+  scheduleCreateMap = (): void => {
+    clearTimeout(this.createMapTimeout);
 
+    this.createMapTimeout = setTimeout(() => {
+      this.createMapTimeout = null;
+      this.createMap();
+    }, 100);
+  }
 
-    if (this.map) {
-      return;
-    }
+  createMap = ():void => {
 
-    const longitude = Number(this.querySelector('tr[data-longitude]')?.dataset.longitude);
-    const latitude = Number(this.querySelector('tr[data-latitude]')?.dataset.latitude);
-    const zoom = Number(this.getAttribute("zoom")) || 12;
+    const longitude = Number(this.getAttribute("data-longitude")) || Number(this.querySelector('tr[data-longitude]')?.dataset.longitude) || 2.23;
+    const latitude = Number(this.getAttribute("data-latitude")) || Number(this.querySelector('tr[data-latitude]')?.dataset.latitude) || 54.31;
+    const minZoom = Number(this.getAttribute("data-min-zoom")) || 8;
+    const maxZoom = Number(this.getAttribute("data-max-zoom")) || 12;
 
     const mapContainer = this.shadowRoot.querySelector("#map");
 
@@ -59,13 +72,19 @@ class iamVisProperties extends HTMLElement {
       container: mapContainer,
         style: "https://tiles.openfreemap.org/styles/bright",
       center: [longitude, latitude],
-      zoom: 10
+      zoom: maxZoom
     });
 
     this.map.addControl(
       new maplibregl.NavigationControl(),
       "top-right"
     );
+
+    this.markers.forEach((marker) => {
+      marker.remove();
+    });
+
+    this.markers = [];
 
     const bounds = new maplibregl.LngLatBounds();
 
@@ -154,31 +173,79 @@ class iamVisProperties extends HTMLElement {
 
     this.map.fitBounds(bounds, {
       padding: 60,
-      minZoom: 8,
-      maxZoom: 12
+      minZoom: minZoom,
+      maxZoom: maxZoom
     });
-
-    this.resizeObserver = new ResizeObserver(() => {
-        cancelAnimationFrame(this.resizeFrame);
-
-        this.resizeFrame = requestAnimationFrame(() => {
-          this.map?.resize();
-        });
-      });
-
-      this.resizeObserver.observe(this);
-
   }
 
-  disconnectedCallback() {
-      cancelAnimationFrame(this.resizeFrame);
-      this.resizeObserver?.disconnect();
-      this.resizeObserver = null;
+  connectedCallback(): void {
 
-      this.map?.remove();
-      this.map = null;
-  this.markers = [];
+    if (this.map || !this.querySelector('tr[data-longitude][data-latitude]')) {
+      return;
     }
+
+    this.createMap();
+
+
+    this.resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(this.resizeFrame);
+
+      this.resizeFrame = requestAnimationFrame(() => {
+        this.map?.resize();
+      });
+    });
+
+    this.resizeObserver.observe(this);
+
+    this.latlngObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        // Existing element gained or changed a data attribute
+        if (mutation.type === 'attributes') {
+          this.scheduleCreateMap();
+        }
+
+        // New child elements were inserted
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (!(node instanceof Element)) return;
+
+            // Check the added element itself
+            if(node.hasAttribute('data-latitude') && node.hasAttribute('data-longitude')){
+              this.scheduleCreateMap();
+            }
+
+            // Check any matching descendants
+            if(node.querySelector('[data-latitude][data-longitude]')){
+              this.scheduleCreateMap();
+            }
+          });
+        }
+      }
+    });
+
+
+    this.latlngObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['data-latitude', 'data-longitude']
+    });
+  }
+
+  disconnectedCallback(): void {
+    cancelAnimationFrame(this.resizeFrame);
+    clearTimeout(this.createMapTimeout);
+    this.createMapTimeout = null;
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = null;
+
+    this.map?.remove();
+    this.map = null;
+    this.markers = [];
+
+    this.latlngObserver.disconnect();
+    this.latlngObserver = null;
+  }
 }
 
 
@@ -187,4 +254,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
   if (!window.customElements.get(`iam-vis-properties`))
     window.customElements.define(`iam-vis-properties`, iamVisProperties);
 
+  if (!window.customElements.get(`iam-table`) && iamTable)
+    window.customElements.define(`iam-table`, iamTable);
+
 });
+
