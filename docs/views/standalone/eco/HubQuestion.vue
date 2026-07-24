@@ -28,6 +28,7 @@ const hubEnv = import.meta.env as unknown as {
 const iframeTable = ref();
 const filtersModal = ref();
 const filtersForm = ref();
+const panel = ref();
 
 onMounted(() => {
 
@@ -46,6 +47,29 @@ console.log('hey')
 
     console.log(message);
     console.log(iframeTable.value.contentWindow.document.body.querySelector('.json-loader'));
+  });
+
+  window.addEventListener("message", (event) => {
+
+
+    const message = event.data;
+
+    console.log('message');
+    if (message.type == "filters-open") {
+
+      panel.value.dataset.filters = true;
+
+      console.log(panel.value)
+    }
+
+    if (message.type == "filters-closed") {
+
+
+      panel.value.dataset.filters = false;
+
+    }
+
+
   });
 
 
@@ -139,7 +163,7 @@ const UpdateResults = () => {
 
 
 
-    <div class="admin-panel">
+    <div ref="panel" class="admin-panel">
       <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
 <!--
@@ -166,7 +190,11 @@ const UpdateResults = () => {
         ref="iframeTable"
         title="Inline Frame Example"
         src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default"
+        frameborder="0"
+        allowfullscreen
       ></iframe>
+
+
       <!--
       <iframe
         id="iframeTable"
@@ -192,20 +220,28 @@ const UpdateResults = () => {
 
 .admin-panel {
   padding: 0;
+  min-height: calc(100vh - 8rem);
+  position: relative;
 }
 .admin-panel iframe {
   padding: 0;
+  width: calc(100% - 1px);
   width: 100%;
-  min-height: calc(100vh - 8rem);
-  position: relative;
+  height: 100%;
+  position: absolute;
   z-index: 2;
+  inset: 0;
+  height: calc(100% - calc(3.5rem - 10px));
+  top: calc(3.5rem - 10px);
 }
 
 .admin-panel > h2 {
   margin: 0;
+  position: relative;
+  z-index: 3;
 }
 
-.iframe-backdrop {
+[data-filters="true"] .iframe-backdrop {
   position: fixed;
 
   top: 0;
@@ -215,5 +251,25 @@ const UpdateResults = () => {
   z-index: 1;
   background: rgba(0, 0, 0, .3);
   backdrop-filter: blur(4px);
+}
+
+[data-filters="true"] iframe {
+
+  overflow: hidden;
+}
+[data-filters="true"] h2:after {
+
+  display: block;
+  position: absolute;
+  content: "";
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, .3);
+  backdrop-filter: blur(4px);
+
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
 }
 </style>

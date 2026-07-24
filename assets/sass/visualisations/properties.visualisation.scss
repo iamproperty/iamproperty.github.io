@@ -8,6 +8,12 @@
 @use '../elements/dialog.scss' as *;
 @use '../elements/type.css' as *;
 
+:host {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
 dialog {
   place-self: center;
   width: 40rem;
