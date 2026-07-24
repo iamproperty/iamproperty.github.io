@@ -272,6 +272,21 @@ class iamVisProperties extends HTMLElement {
     if (this.map)
       return;
 
+    // #region Filters
+
+    const filtersDialog = this.shadowRoot?.querySelector('#filtersDialog');
+
+    filtersDialog.addEventListener("toggle", (event) => {
+      if (event.newState === "open") {
+        this.dispatchEvent(new CustomEvent("filters-open"));
+      } else {
+        this.dispatchEvent(new CustomEvent("filters-closed"));
+      }
+    });
+
+    // #endregion
+
+
     if(this.querySelector('tr[data-longitude][data-latitude]'))
       this.createMap();
 
@@ -341,8 +356,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
   if (!window.customElements.get(`iam-vis-properties`))
     window.customElements.define(`iam-vis-properties`, iamVisProperties);
 
+  /*
   if (!window.customElements.get(`iam-table`) && iamTable)
     window.customElements.define(`iam-table`, iamTable);
-
+*/
 });
 

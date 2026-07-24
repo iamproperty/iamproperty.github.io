@@ -36,11 +36,16 @@ console.log('hey')
 
   window.addEventListener("message", (event) => {
 
-    iframeTable.value.height = "";
-    iframeTable.value.height = iframeTable.value.contentWindow.document.body.scrollHeight + "px";
+    console.log(event);
 
-    console.log(iframeTable.value.contentWindow.document.body.scrollHeight);
+    if (event.origin !== "https://iampropertypbl.cloud.looker.com") {
+      return;
+    }
 
+    const message = event.data;
+
+    console.log(message);
+    console.log(iframeTable.value.contentWindow.document.body.querySelector('.json-loader'));
   });
 
 
@@ -137,28 +142,6 @@ const UpdateResults = () => {
     <div class="admin-panel">
       <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
-        <Actionbar>
-          <button type="button" class="btn btn-primary" command="show-modal" commandfor="filters">Filter results</button>
-        </Actionbar>
-        <dialog id="filters" ref="filtersModal">
-          <Modal class="modal--lg">
-
-            <h2 class="h3">Filter by</h2>
-
-        <form ref="filtersForm">
-            <label>Agent & co
-              <input type="checkbox" name="agent[123]" value="123" />
-            </label>
-      </form>
-            <div class="btn__group">
-
-
-              <button type="button" class="btn btn-secondary" @click.prevent="clearFilters()">clear filters</button>
-              <button type="button" class="btn btn-primary" @click.prevent="UpdateResults()">Update results</button>
-            </div>
-          </Modal>
-        </dialog>
-
 <!--
       <iframe
         id="iframeTable2"
@@ -170,14 +153,30 @@ const UpdateResults = () => {
   referrerpolicy="strict-origin-when-cross-origin"
         style="width: 100%; min-height: 30vh;"
       ></iframe>
-      -->
+
+
       <iframe
         id="iframeTable"
         ref="iframeTable"
         title="Inline Frame Example"
         src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default&f[stock_switch.current_agent_name]=Wilson Estate Agents"
-        style="width: 100%; min-height: 100vh;"
+      ></iframe>-->
+      <iframe
+        id="iframeTable"
+        ref="iframeTable"
+        title="Inline Frame Example"
+        src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default"
       ></iframe>
+      <!--
+      <iframe
+        id="iframeTable"
+        ref="iframeTable"
+        title="Inline Frame Example"
+        src="/test.html"
+        style="width: 100%; min-height: 100vh;"
+      ></iframe>-->
+
+      <div class="iframe-backdrop"></div>
     </div>
 
 
@@ -189,5 +188,32 @@ const UpdateResults = () => {
 <style lang="css" scoped>
 .questions-container {
   margin-bottom: 7rem;
+}
+
+.admin-panel {
+  padding: 0;
+}
+.admin-panel iframe {
+  padding: 0;
+  width: 100%;
+  min-height: calc(100vh - 8rem);
+  position: relative;
+  z-index: 2;
+}
+
+.admin-panel > h2 {
+  margin: 0;
+}
+
+.iframe-backdrop {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, .3);
+  backdrop-filter: blur(4px);
 }
 </style>
