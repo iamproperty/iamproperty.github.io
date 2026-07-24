@@ -140,4 +140,8 @@ iam-vis-properties {
   }
   /* #endregion */
 
+  tr:not(.show){
+    display: none!important;
+  }
+
 }

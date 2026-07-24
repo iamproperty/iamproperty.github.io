@@ -285,6 +285,28 @@ class iamVisProperties extends HTMLElement {
 
     // #endregion
 
+    // #region pagination
+
+    const pagination = this.shadowRoot?.querySelector('iam-pagination');
+
+    const total = pagination.getAttribute('data-total');
+    const page = pagination.getAttribute('data-page');
+    const show = pagination.getAttribute('data-show');
+    const increment = pagination.getAttribute('data-increment');
+
+    //const table = component.querySelector('table');
+
+    const end = page * show;
+    const start = end - show;
+
+    Array.from(this.querySelectorAll('tbody tr')).forEach((row, index) => {
+      if (index >= start && index < end) {
+        row.classList.add('show');
+      } else {
+        row.classList.remove('show');
+      }
+    });
+    // #endregion
 
     if(this.querySelector('tr[data-longitude][data-latitude]'))
       this.createMap();

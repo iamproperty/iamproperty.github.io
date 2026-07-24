@@ -24,6 +24,24 @@ dialog {
   justify-content: center;
 }
 
+/* #region filters */
+#filters {
+  background: var(--colour-light);
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      border-radius: 0.25rem;
+      position: sticky;
+    top: 0;
+    z-index: 99;
+
+  > * {
+    margin: 0!important;
+  }
+}
+
+/* #endregion */
 
 /* #region map */
 
