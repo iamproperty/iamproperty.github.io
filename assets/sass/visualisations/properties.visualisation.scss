@@ -24,6 +24,18 @@ dialog {
   justify-content: center;
 }
 
+
+/* #region map */
+
+#map {
+  width: 100%;
+  height: 25rem; /* 400px */
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+/* #endregion */
+
+/* #region popup */
 /* Remove MapLibre's default popup styling */
 .property-popup .maplibregl-popup-content {
   width: 300px;
@@ -164,3 +176,23 @@ dialog {
 .property-popup .maplibregl-popup-close-button:hover {
   background: #ffffff;
 }
+/* #endregion */
+
+
+/* #region Table */
+.table__container {
+  
+  
+  
+}
+
+  .table--cta {
+    position: relative;
+  }
+
+  .table--cta .table__wrapper {
+    overflow-y: hidden;
+    margin-bottom: 0;
+  }
+
+/* #endregion */

@@ -220,8 +220,9 @@ const UpdateResults = () => {
 
 .admin-panel {
   padding: 0;
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh - 3.5rem);
   position: relative;
+  overflow: hidden;
 }
 .admin-panel iframe {
   padding: 0;

@@ -1,4 +1,4 @@
-//import iamTable from '../../js/components/table/table.component.js';
+import iamPagination from '../../js/components/pagination/pagination.component.min.js';
 
 class iamVisProperties extends HTMLElement {
   constructor() {
@@ -15,12 +15,6 @@ class iamVisProperties extends HTMLElement {
     template.innerHTML = /* HTML */`
     <style>
     ${loadCSS}
-
-    #map {
-      width: 100%;
-      height: 500px;
-      border-radius: 8px;
-    }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
 
@@ -39,8 +33,13 @@ class iamVisProperties extends HTMLElement {
       </div>
     </dialog>
     <div id="map"></div>
-    <div id="wrapper">
-      <slot></slot>
+    <div id="wrapper" class="table__container">
+      <div class="table--cta">
+        <div class="table__wrapper">
+          <slot></slot>
+        </div>
+      </div>
+      <iam-pagination data-v-c166efc8="" data-page="1" data-total="20" data-minimal="" data-show="15" data-increment="15"></iam-pagination>
     </div>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
@@ -356,9 +355,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
   if (!window.customElements.get(`iam-vis-properties`))
     window.customElements.define(`iam-vis-properties`, iamVisProperties);
 
-  /*
-  if (!window.customElements.get(`iam-table`) && iamTable)
-    window.customElements.define(`iam-table`, iamTable);
-*/
+  if (!window.customElements.get(`iam-pagination`) && iamPagination)
+    window.customElements.define(`iam-pagination`, iamPagination);
+
 });
 
