@@ -53,15 +53,16 @@ class iamVisProperties extends HTMLElement {
     this.resizeObserver = null;
     this.latlngObserver = null;
     this.resizeFrame = null;
-    this.createMapTimeout = null;
+    this.functionsTimeout = null;
   }
 
-  scheduleCreateMap = (): void => {
-    clearTimeout(this.createMapTimeout);
+  scheduleFunctions = (): void => {
+    clearTimeout(this.functionsTimeout);
 
-    this.createMapTimeout = setTimeout(() => {
-      this.createMapTimeout = null;
+    this.functionsTimeout = setTimeout(() => {
+      this.functionsTimeout = null;
       this.createMap();
+      this.paginateTable();
     }, 100);
   }
 
@@ -266,27 +267,7 @@ class iamVisProperties extends HTMLElement {
     });
   }
 
-  connectedCallback(): void {
-
-    if (this.map)
-      return;
-
-    // #region Filters
-
-    const filtersDialog = this.shadowRoot?.querySelector('#filtersDialog');
-
-    filtersDialog.addEventListener("toggle", (event) => {
-      if (event.newState === "open") {
-        this.dispatchEvent(new CustomEvent("filters-open"));
-      } else {
-        this.dispatchEvent(new CustomEvent("filters-closed"));
-      }
-    });
-
-    // #endregion
-
-    // #region pagination
-
+  paginateTable = (): void => {
     const pagination = this.shadowRoot?.querySelector('iam-pagination');
 
     const total = pagination.getAttribute('data-total');
@@ -306,10 +287,33 @@ class iamVisProperties extends HTMLElement {
         row.classList.remove('show');
       }
     });
+  }
+
+  connectedCallback(): void {
+
+    if (this.map)
+      return;
+
+    // #region Filters
+
+    const filtersDialog = this.shadowRoot?.querySelector('#filtersDialog');
+
+    filtersDialog.addEventListener("toggle", (event) => {
+      if (event.newState === "open") {
+        this.dispatchEvent(new CustomEvent("filters-open"));
+      } else {
+        this.dispatchEvent(new CustomEvent("filters-closed"));
+      }
+    });
+
     // #endregion
 
-    if(this.querySelector('tr[data-longitude][data-latitude]'))
+
+    if(this.querySelector('tr[data-longitude][data-latitude]')){
+
+      this.paginateTable();
       this.createMap();
+    }
 
     this.resizeObserver = new ResizeObserver(() => {
       cancelAnimationFrame(this.resizeFrame);
@@ -325,7 +329,7 @@ class iamVisProperties extends HTMLElement {
       for (const mutation of mutations) {
         // Existing element gained or changed a data attribute
         if (mutation.type === 'attributes') {
-          this.scheduleCreateMap();
+          this.scheduleFunctions();
         }
 
         // New child elements were inserted
@@ -335,12 +339,12 @@ class iamVisProperties extends HTMLElement {
 
             // Check the added element itself
             if(node.hasAttribute('data-latitude') && node.hasAttribute('data-longitude')){
-              this.scheduleCreateMap();
+              this.scheduleFunctions();
             }
 
             // Check any matching descendants
             if(node.querySelector('[data-latitude][data-longitude]')){
-              this.scheduleCreateMap();
+              this.scheduleFunctions();
             }
           });
         }
@@ -358,8 +362,8 @@ class iamVisProperties extends HTMLElement {
 
   disconnectedCallback(): void {
     cancelAnimationFrame(this.resizeFrame);
-    clearTimeout(this.createMapTimeout);
-    this.createMapTimeout = null;
+    clearTimeout(this.functionsTimeout);
+    this.functionsTimeout = null;
     this.resizeObserver?.disconnect();
     this.resizeObserver = null;
 
