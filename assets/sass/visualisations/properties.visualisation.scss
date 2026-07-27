@@ -27,7 +27,8 @@ dialog {
 /* #region filters */
 #filters {
   background: var(--colour-light);
-  padding: 0.5rem;
+  padding-block: 0.5rem;
+  padding-inline: 1.5rem;
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
@@ -49,9 +50,10 @@ dialog {
 /* #region map */
 
 #map {
-  width: 100%;
+  margin-inline: 1.5rem;
+  width: calc(100% - 3rem);
   height: 25rem; /* 400px */
-  border-radius: 8px;
+  border-radius: 0.25rem;
   margin-bottom: 2rem;
 }
 /* #endregion */
