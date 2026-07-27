@@ -64,7 +64,7 @@ class iamVisProperties extends HTMLElement {
       this.createMap();
       this.paginateTable();
 
-      const componentHeight = this.clientHeight();
+      const componentHeight = this.offsetHeight;
 
       this.dispatchEvent(
         new CustomEvent("component-loaded", {
@@ -295,8 +295,6 @@ class iamVisProperties extends HTMLElement {
       }
     });
 
-    console.log(rows);
-    console.log(rows.length);
     pagination?.setAttribute('data-total', rows.length);
   }
 
@@ -327,8 +325,9 @@ class iamVisProperties extends HTMLElement {
       this.paginateTable();
       this.createMap();
 
-      const componentHeight = this.clientHeight();
+      const componentHeight = this.offsetHeight;
 
+      console.log(componentHeight);
       this.dispatchEvent(
         new CustomEvent("component-loaded", {
           detail: {
