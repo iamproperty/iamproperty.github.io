@@ -342,15 +342,6 @@ class iamVisProperties extends HTMLElement {
       this.resizeFrame = requestAnimationFrame(() => {
         this.map?.resize();
 
-        const componentHeight = this.scrollHeight;
-
-        this.dispatchEvent(
-          new CustomEvent("component-loaded", {
-            detail: {
-              height: componentHeight
-            }
-          })
-        );
       });
     });
 

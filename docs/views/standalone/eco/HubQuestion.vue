@@ -230,7 +230,7 @@ const UpdateResults = () => {
 .admin-panel {
   padding: 0;
 
-  height: calc(var(--componentHeight) + 3.5rem - 10px);
+  height: calc(var(--componentHeight) + 3.5rem + 20px);
   position: relative;
   overflow: hidden;
 }
@@ -245,7 +245,7 @@ const UpdateResults = () => {
   inset: 0;
 
   top: calc(3.5rem - 10px);
-  height: calc(var(--componentHeight) + 50px);
+  height: calc(var(--componentHeight) + 60px);
 
 
 
