@@ -69,6 +69,11 @@ console.log('hey')
 
     }
 
+    if (message.type == "component-loaded") {
+
+      console.log('set height on admin panel and iframe')
+    }
+
 
   });
 

@@ -39,7 +39,7 @@ class iamVisProperties extends HTMLElement {
           <slot></slot>
         </div>
       </div>
-      <iam-pagination data-v-c166efc8="" data-page="1" data-total="20" data-minimal="" data-show="15" data-increment="15"></iam-pagination>
+      <iam-pagination data-page="1" data-total="15" data-show="15" data-minimal=""></iam-pagination>
     </div>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
@@ -63,6 +63,16 @@ class iamVisProperties extends HTMLElement {
       this.functionsTimeout = null;
       this.createMap();
       this.paginateTable();
+
+      const componentHeight = this.clientHeight();
+
+      this.dispatchEvent(
+        new CustomEvent("component-loaded", {
+          detail: {
+            height: componentHeight
+          }
+        })
+      );
     }, 100);
   }
 
@@ -270,26 +280,29 @@ class iamVisProperties extends HTMLElement {
   paginateTable = (): void => {
     const pagination = this.shadowRoot?.querySelector('iam-pagination');
 
-    const total = pagination.getAttribute('data-total');
     const page = pagination.getAttribute('data-page');
     const show = pagination.getAttribute('data-show');
-    const increment = pagination.getAttribute('data-increment');
-
-    //const table = component.querySelector('table');
-
     const end = page * show;
     const start = end - show;
 
-    Array.from(this.querySelectorAll('tbody tr')).forEach((row, index) => {
+    const rows = this.querySelectorAll('tbody tr:not(.notmatched)');
+
+    rows.forEach((row, index) => {
       if (index >= start && index < end) {
         row.classList.add('show');
       } else {
         row.classList.remove('show');
       }
     });
+
+    console.log(rows);
+    console.log(rows.length);
+    pagination?.setAttribute('data-total', rows.length);
   }
 
   connectedCallback(): void {
+
+    const pagination = this.shadowRoot?.querySelector('iam-pagination');
 
     if (this.map)
       return;
@@ -313,6 +326,16 @@ class iamVisProperties extends HTMLElement {
 
       this.paginateTable();
       this.createMap();
+
+      const componentHeight = this.clientHeight();
+
+      this.dispatchEvent(
+        new CustomEvent("component-loaded", {
+          detail: {
+            height: componentHeight
+          }
+        })
+      );
     }
 
     this.resizeObserver = new ResizeObserver(() => {
@@ -357,6 +380,11 @@ class iamVisProperties extends HTMLElement {
       subtree: true,
       attributes: true,
       attributeFilter: ['data-latitude', 'data-longitude']
+    });
+
+    pagination?.addEventListener('update-page', ()=>{
+
+      this.paginateTable();
     });
   }
 
