@@ -30,11 +30,10 @@ dialog {
   padding: 0.5rem;
   display: flex;
   gap: 0.5rem;
-      margin-bottom: 0.75rem;
-      border-radius: 0.25rem;
-      position: sticky;
-    top: 0;
-    z-index: 99;
+  margin-bottom: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 
   > * {
     margin: 0!important;
@@ -42,6 +41,10 @@ dialog {
 }
 
 /* #endregion */
+
+#wrapper {
+  padding-inline: 1.5rem;
+}
 
 /* #region map */
 
