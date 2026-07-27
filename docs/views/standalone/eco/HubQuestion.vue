@@ -29,6 +29,7 @@ const iframeTable = ref();
 const filtersModal = ref();
 const filtersForm = ref();
 const panel = ref();
+const componentHeight = ref('100vh');
 
 onMounted(() => {
 
@@ -71,7 +72,10 @@ console.log('hey')
 
     if (message.type == "component-loaded") {
 
-      console.log('set height on admin panel and iframe')
+      console.log('set height on admin panel and iframe');
+      console.log(`${message.detail.height}px`);
+
+      componentHeight.value = `${message.detail.height}px`;
     }
 
 
@@ -168,7 +172,7 @@ const UpdateResults = () => {
 
 
 
-    <div ref="panel" class="admin-panel">
+    <div ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
       <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
 <!--
@@ -225,10 +229,11 @@ const UpdateResults = () => {
 
 .admin-panel {
   padding: 0;
-  min-height: calc(100vh - 3.5rem);
+  min-height: calc(var(--componentHeight) - 3.5rem);
   position: relative;
   overflow: hidden;
 }
+
 .admin-panel iframe {
   padding: 0;
   width: calc(100% - 1px);
@@ -237,7 +242,7 @@ const UpdateResults = () => {
   position: absolute;
   z-index: 2;
   inset: 0;
-  height: calc(100% - calc(3.5rem - 10px));
+  height: calc(var(--componentHeight) - calc(3.5rem - 10px));
   top: calc(3.5rem - 10px);
 }
 

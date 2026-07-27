@@ -64,7 +64,7 @@ class iamVisProperties extends HTMLElement {
       this.createMap();
       this.paginateTable();
 
-      const componentHeight = this.offsetHeight;
+      const componentHeight = this.scrollHeight;
 
       this.dispatchEvent(
         new CustomEvent("component-loaded", {
@@ -325,7 +325,7 @@ class iamVisProperties extends HTMLElement {
       this.paginateTable();
       this.createMap();
 
-      const componentHeight = this.offsetHeight;
+      const componentHeight = this.scrollHeight;
 
       console.log(componentHeight);
       this.dispatchEvent(
