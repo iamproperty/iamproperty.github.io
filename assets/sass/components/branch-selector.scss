@@ -144,6 +144,13 @@
     pointer-events: none;
       z-index: 2;
   }
+
+  ::slotted(button:first-child:last-child[data-checked-count]:not([data-checked-count='0'])):after {
+    display: inline !important;
+    content: ' +' attr(data-checked-count);
+    color: var(--colour-body);
+    padding-left: 0.25em;
+  }
   
   /* #endregion */
 }

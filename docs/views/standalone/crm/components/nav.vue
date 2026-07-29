@@ -502,7 +502,7 @@
       <span class="h3 fa-normal pb-0 mb-0">James Lambert</span>
     </div>
     <BranchSelector data-indicator="3" slot="account">
-      <button class="btn btn-action" command="show-modal" commandfor="branches">Branch name</button>
+      <button class="btn btn-action" command="show-modal" commandfor="branches" data-checked-count="3">Branch name</button>
     </BranchSelector>
     <a
       href="javascript:void(0)"
