@@ -109,30 +109,29 @@ class iamBranchSelector extends HTMLElement {
     // Make the component focusable
 
     this.addEventListener('keydown', (event) => {
-      switch (
-        event.key // change to event.key to key to use the above variable
-      ) {
-        case 'ArrowUp':
-          // Up pressed
-          event.preventDefault();
-
-          if (!dropdown?.matches(':popover-open')) {
-            menuButton.click();
-            this.querySelector('input').focus();
-          }
-
-          break;
-        case 'ArrowDown':
-          // Down pressed
-          event.preventDefault();
-
-          if (!dropdown?.matches(':popover-open')) {
-            menuButton.click();
-            this.querySelector('input').focus();
-          }
-
-          break;
+      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+        return;
       }
+
+      const inputs = Array.from(this.querySelectorAll('input:not(:disabled)'));
+
+      if (!inputs.length) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (!dropdown?.matches(':popover-open')) {
+        menuButton?.click();
+      }
+
+      const direction = event.key === 'ArrowDown' ? 1 : -1;
+      const currentIndex = inputs.indexOf(document.activeElement);
+      const nextIndex = currentIndex === -1
+        ? direction === 1 ? 0 : inputs.length - 1
+        : (currentIndex + direction + inputs.length) % inputs.length;
+
+      inputs[nextIndex].focus();
     });
   }
 }

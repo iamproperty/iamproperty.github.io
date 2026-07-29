@@ -850,3 +850,15 @@ iam-nav .switch-account[slot='account'] {
 }
 
 /* #endregion */
+
+
+/* #region tab order fix */
+:is(iam-nav, .iam-nav) * {
+
+  reading-order: 2;
+}
+
+:is(iam-nav, .iam-nav) [slot="secondary"] {
+  reading-order: 1;
+}
+/* #endregion */
