@@ -1,17 +1,13 @@
-
 @layer components {
-  
-  iam-card:not(:defined){
+  iam-card:not(:defined) {
     border-radius: var(--card-border-radius);
     box-shadow: var(--card-box-shadow);
     background: var(--colour-canvas-2);
     padding: 0.5rem;
   }
 
-
-
   /* #region Cards */
-  iam-card:has([slot="footer"]){
+  iam-card:has([slot='footer']) {
     --card-footer-bottom-padding: 1.5rem;
   }
   .card:not(:defined) {

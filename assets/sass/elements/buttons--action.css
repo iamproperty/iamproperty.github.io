@@ -65,7 +65,6 @@
   /* #endregion */
 
   .btn-action:not(.btn-compact).fa-compact-only:before {
-
-    display: none!important;
+    display: none !important;
   }
 }

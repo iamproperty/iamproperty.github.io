@@ -6,31 +6,28 @@
   //import TrackEvents from '../TrackEvents.vue';
 </script>
 
-
 <template>
-  
   <main>
-     <DSHeader :image="headerImg" section="components">
+    <DSHeader :image="headerImg" section="components">
       <h1>Password</h1>
     </DSHeader>
 
     <p class="lead md-col-end-7">
-      Password fields hide the field value for security. The password component can be added for the user to hide and show the value of the field.</p>
+      Password fields hide the field value for security. The password component can be added for the user to hide and
+      show the value of the field.
+    </p>
 
     <div class="visualtest container">
-         
-      <label>Password
-        
-          <Password>
-            <input type="password" name="password" required="" autocomplete="on" minlength="8">
-          </Password>
+      <label
+        >Password
+
+        <Password>
+          <input type="password" name="password" required="" autocomplete="on" minlength="8" />
+        </Password>
       </label>
-
-
     </div>
-    
 
-  <Integration component="password" componentName="password">
+    <Integration component="password" componentName="password">
       <template #web-component>
         <pre><code>{{`
         <label>
@@ -81,7 +78,7 @@
         </table>
       </template>
 
-        <template #criteria>
+      <template #criteria>
         <ul>
           <li>A button should appear alongside the input field</li>
           <li>By default, the button should have the eye icon with a slash through it (or alternative icon set).</li>
@@ -89,10 +86,8 @@
           <li>Clicking the button for the first time should show the text entered into the input.</li>
           <li>Clicking the button for the first time should change the icon.</li>
           <li>Clicking the button a second time, should revert the state to default.</li>
-
         </ul>
       </template>
     </Integration>
-
   </main>
 </template>

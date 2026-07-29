@@ -1,6 +1,5 @@
 @layer utilities {
   .text-heading {
-    
     color: var(--colour-heading) !important;
   }
 
@@ -28,7 +27,7 @@
       background-color: var(--colour-#{$color}) !important;
     }
 
-    .hover-#{$color}:is(:hover,:focus,:focus-within) {
+    .hover-#{$color}:is(:hover, :focus, :focus-within) {
       --bg-colour: var(--colour-#{$color}) !important;
       background-color: var(--colour-#{$color}) !important;
     }

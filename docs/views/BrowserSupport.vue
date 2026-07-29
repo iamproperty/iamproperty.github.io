@@ -1,7 +1,4 @@
-<script setup>
-  
-  
-</script>
+<script setup></script>
 
 <template>
   <main>
@@ -37,11 +34,18 @@
           <td>Firefox</td>
           <td>150</td>
           <td>4.25%</td>
-          <td>Partial support at latest version, minimal support at older versions<br/><br/>Firefox has not kept upto date with recent web standards so some features may have been built with progressive enhancement in mind.</td> 
+          <td>
+            Partial support at latest version, minimal support at older versions<br /><br />Firefox has not kept upto
+            date with recent web standards so some features may have been built with progressive enhancement in mind.
+          </td>
         </tr>
       </tbody>
     </table>
-    <cite class="d-block pb-5 mb-5"><a href="https://gs.statcounter.com/browser-market-share/desktop/worldwide/#monthly-202511-202604-bar">StatCounter Global Stats - Browser Market Share</a></cite>
+    <cite class="d-block pb-5 mb-5"
+      ><a href="https://gs.statcounter.com/browser-market-share/desktop/worldwide/#monthly-202511-202604-bar"
+        >StatCounter Global Stats - Browser Market Share</a
+      ></cite
+    >
 
     <h2>Mobile/Tablet</h2>
     <table>
@@ -72,9 +76,10 @@
         </tr>
       </tbody>
     </table>
-    <cite class="d-block pb-5 mb-5"><a href="https://gs.statcounter.com/browser-market-share/mobile-tablet/worldwide/#monthly-202511-202604-bar">StatCounter Global Stats - Browser Market Share</a></cite>
-
-    
-    
+    <cite class="d-block pb-5 mb-5"
+      ><a href="https://gs.statcounter.com/browser-market-share/mobile-tablet/worldwide/#monthly-202511-202604-bar"
+        >StatCounter Global Stats - Browser Market Share</a
+      ></cite
+    >
   </main>
 </template>

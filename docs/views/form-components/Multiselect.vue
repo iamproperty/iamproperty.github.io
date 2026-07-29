@@ -32,7 +32,6 @@
       <label class="tag"><input type="checkbox" name="tags" value="Sarah Brown" />Sarah Brown</label>
     </Multiselect>
 
-    
     <h2 class="mt-3">Behaviour</h2>
     <ul>
       <li>Selecting the field should open the dropdown with all the items in the list.</li>
@@ -57,9 +56,17 @@
     </Multiselect>
 
     <h2 class="mt-3">Ajax</h2>
-    <p>Populating The multiselect via ajax makes the component much more useful as we can lazy load values in depending upon if they are needed.</p>
+    <p>
+      Populating The multiselect via ajax makes the component much more useful as we can lazy load values in depending
+      upon if they are needed.
+    </p>
 
-    <Multiselect data-label="Users" data-name="users" data-url="/users.json?search=" class="mb-0 visualtest"></Multiselect>
+    <Multiselect
+      data-label="Users"
+      data-name="users"
+      data-url="/users.json?search="
+      class="mb-0 visualtest"
+    ></Multiselect>
     <span class="hint-text mb-3">Enter 3 or more characters</span>
 
     <h2 class="mt-5">States</h2>

@@ -119,7 +119,11 @@ class TestClassList {
   }
 
   setFromString(value) {
-    this.items = new Set(String(value || '').split(/\s+/).filter(Boolean));
+    this.items = new Set(
+      String(value || '')
+        .split(/\s+/)
+        .filter(Boolean)
+    );
     this.sync();
   }
 

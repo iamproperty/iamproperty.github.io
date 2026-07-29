@@ -103,7 +103,6 @@ export const paginateTable = (component, table, form, pagination, callback): voi
   });
 
   pagination.addEventListener('update-page', (event) => {
-    
     if (form.querySelector('[name=page]').value != event.detail.page) {
       form.querySelector('[name=page]').value = event.detail.page;
 
@@ -131,16 +130,14 @@ export const findForm = (component, table): HTMLElement => {
     form = document.querySelector(`#${component.getAttribute('data-filterby')}`);
   } else if (component.closest('form')) {
     form = component.closest('form');
-  } 
-  else if (component.querySelector('form')){
+  } else if (component.querySelector('form')) {
     form = component.querySelector('form');
-  }else {
+  } else {
     table.parentNode.insertBefore(form, table.nextSibling);
   }
 
-
-  if(component.hasAttribute('data-ajax')){
-    form.setAttribute('data-ajax',component.getAttribute('data-ajax'))
+  if (component.hasAttribute('data-ajax')) {
+    form.setAttribute('data-ajax', component.getAttribute('data-ajax'));
   }
 
   return form;
@@ -177,13 +174,15 @@ export const setupBasicTable = (component, table, form, pagination): void => {
 
 // #region Basic table fnctions
 export const highlightRows = (component): void => {
-
   Array.from(component.querySelectorAll('tr[data-highlight]')).forEach((row) => {
-    row.insertAdjacentHTML('afterend',`<tr role="presentation" class="tr--highlight">
+    row.insertAdjacentHTML(
+      'afterend',
+      `<tr role="presentation" class="tr--highlight">
           <td colspan="100%"><i class="fa-solid fa-star"></i> ${row.getAttribute('data-highlight')}</td>
-        </tr>`);
+        </tr>`
+    );
   });
-}
+};
 
 export const transferAttributes = (component, pagination): void => {
   if (component.hasAttribute('data-total')) pagination.setAttribute('data-total', component.getAttribute('data-total'));
@@ -297,21 +296,17 @@ export const createMobileButton = (component, table): void => {
   });
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-
-
     Array.from(row.querySelectorAll('p')).forEach((p, index) => {
-
       const lineHeight = window.getComputedStyle(p, null).getPropertyValue('line-height');
       console.log(parseInt(lineHeight));
       const lines = Math.ceil(p.offsetHeight / parseInt(lineHeight));
-      p.setAttribute('data-lines',lines);
-      if(lines >= 3){
+      p.setAttribute('data-lines', lines);
+      if (lines >= 3) {
         p.classList.add('three-lines');
       }
     });
 
-
-    if(row.querySelector('p')){
+    if (row.querySelector('p')) {
       row.setAttribute('data-view', 'default');
     }
 
@@ -331,12 +326,10 @@ export const createMobileButton = (component, table): void => {
 
       button.toggleAttribute('aria-expanded');
 
-      if(button.classList.contains('fa-chevron-down')){
+      if (button.classList.contains('fa-chevron-down')) {
         button.classList.remove('fa-chevron-down');
         button.classList.add('fa-chevron-up');
-      }
-      else {
-        
+      } else {
         button.classList.remove('fa-chevron-up');
         button.classList.add('fa-chevron-down');
       }
@@ -392,7 +385,6 @@ export const setupAdvancedTable = (component, table): void => {
       : document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`);
 
     addSelectboxes(component, table, actionbar);
-
   }
 
   component.querySelectorAll('.dialog__wrapper .btn-compact').forEach((btn, index) => {
@@ -555,7 +547,7 @@ export const setupNoSubmitTable = (component, table, form, pagination, savedTabl
       sortTable(table, form, savedTableBody);
     }
   });
-/*
+  /*
   addFilterEventListeners(component, table, form, pagination, savedTableBody);
   */
 };
@@ -917,7 +909,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
   form.addEventListener('paginate', (event) => {
     formSubmit(event, true);
   });
-
 };
 
 export const filterTable = (component, table, form, pagination): void => {
@@ -1207,14 +1198,11 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
   const actionbar = component.querySelector('iam-actionbar');
 
   form.addEventListener('submit', (event) => {
-
     Array.from(form.querySelectorAll('[data-duplicate]')).forEach((loopElement) => {
-
-      const element = loopElement.tagName == "IAM-INPUT" ? loopElement.querySelector('input') : loopElement;
+      const element = loopElement.tagName == 'IAM-INPUT' ? loopElement.querySelector('input') : loopElement;
       const id = loopElement.getAttribute('data-duplicate');
 
       if (document.querySelector(`[id="${id}"], [name="${id}"]`)) {
-
         document.querySelector(`[id="${id}"], [name="${id}"]`).checked = element.checked;
       }
     });
@@ -1225,18 +1213,14 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
   });
 
   form.addEventListener('change', (event) => {
-    
-    if(!event.target.closest('iam-modal')){
-      
+    if (!event.target.closest('iam-modal')) {
       loadAjaxTable(component, table, form, pagination);
     }
   });
 
   // watch hidden fields for change events
   Array.from(form.querySelectorAll('[type="hidden"]')).forEach((input) => {
-
     input.addEventListener('change', (event) => {
-
       loadAjaxTable(component, table, form, pagination);
     });
   });
@@ -1264,7 +1248,6 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       loadAjaxTable(component, table, form, pagination);
     });
   }
-
 };
 // #region ajax tables functions
 
@@ -1299,7 +1282,7 @@ export const loadAjaxTable = async function (component, table, form, pagination)
   // Construct form data to send to api
   const formData = new FormData(form);
 
-  formData.set('page_number',formData.get('page')); // Fix for compliance dashbaord
+  formData.set('page_number', formData.get('page')); // Fix for compliance dashbaord
 
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');

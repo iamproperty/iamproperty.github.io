@@ -45,14 +45,11 @@ export const createTabsLinks = function (tabsElement: Element): void {
         button.setAttribute('aria-pressed', true);
       }
       button.innerHTML = `${summary.innerText}`;
-      
-      if(tabsElement.classList.contains('tabs--toggle-tags')){
-        
+
+      if (tabsElement.classList.contains('tabs--toggle-tags')) {
         button.classList.add('tag');
         button.classList.add('tag--toggle');
-      }
-      else
-        button.classList.add('link');
+      } else button.classList.add('link');
 
       button.setAttribute('data-index', tabindex);
       button.setAttribute('part', 'tab-link');
@@ -72,7 +69,6 @@ export const createTabsLinks = function (tabsElement: Element): void {
       button = element;
     }
 
-    
     tabLinks.appendChild(button);
 
     tabDropdown.appendChild(dropdownOpt);
@@ -171,9 +167,8 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
   });
 
   details.forEach((detailsElement, index) => {
-    detailsElement.addEventListener("toggle", function() {
-      if(detailsElement.open)
-        detailsElement.querySelector('button,input')?.focus();
+    detailsElement.addEventListener('toggle', function () {
+      if (detailsElement.open) detailsElement.querySelector('button,input')?.focus();
     });
   });
 
@@ -230,8 +225,7 @@ export const toggleTab = function (details: Array, button: Element): boolean | v
 
     if (detailsOpen) {
       detail.setAttribute('open', detailsOpen);
-    }
-    else detail.removeAttribute('open');
+    } else detail.removeAttribute('open');
   });
 };
 

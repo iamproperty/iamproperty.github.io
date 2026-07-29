@@ -11,19 +11,19 @@
   import cardModes from '../../img/cardModes.png';
 
   import cardArticleImg from '../../img/card-article-anatomy.png';
-
 </script>
 <template>
-
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Cards</h1>
     </DSHeader>
 
     <h2>Navigational Cards</h2>
-    <p class="lead">Navigational cards can be used to direct the user to another page or modal. All will apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15% as default unless specified otherwise, this should have the ability to be removed if needed.</p>
-
-    
+    <p class="lead">
+      Navigational cards can be used to direct the user to another page or modal. All will apply a drop shadow with a
+      default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15% as default unless specified
+      otherwise, this should have the ability to be removed if needed.
+    </p>
 
     <h2>Header card</h2>
 
@@ -77,15 +77,11 @@
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <a href="/client-onbaording" class="active">
-            <Card>
-              Client onboarding <span>Action Client due diligence checks and view information</span>
-            </Card>
+            <Card> Client onboarding <span>Action Client due diligence checks and view information</span> </Card>
           </a>
         </div>
       </div>
     </div>
-
-    
 
     <h3>Status card</h3>
     <p>This is a variation of the header card which includes a status colour block on the left of the card.</p>
@@ -227,7 +223,6 @@
     </div>
 -->
 
-
     <!--
 
     <h3>Header card with counter and secondary action</h3>
@@ -326,38 +321,47 @@
     </div>
 -->
 
-    
-    <h3>Feature article card </h3>
+    <h3>Feature article card</h3>
     <p>This is a card used within products to primarily used to showcase articles within the iamproperty product.</p>
 
     <div class="container visualtest">
-      
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span><span class="badge" slot="badges">New</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Default State</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span><span class="badge" slot="badges">New</span></Card
+          >
+        </a>
+      </div>
 
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+        <a href="/client-onbaording" class="hover">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span></Card
+          >
+        </a>
+      </div>
 
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Active State</span>
+        <a href="/client-onbaording" class="active">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span></Card
+          >
+        </a>
+      </div>
     </div>
 
     <h3>Anatomy</h3>
 
     <img :src="cardArticleImg" alt="Card anatomy diagram" class="mb-4 mt-2" />
-
 
     <ul class="mb-4">
       <li>Image window</li>
@@ -368,32 +372,35 @@
 
     <h3>Variant examples</h3>
 
-
     <div class="container visualtest">
-      
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Card with header text</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions</Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Card with header text</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article">Take control of your transactions</Card>
+        </a>
+      </div>
 
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Addition of read time</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Addition of read time</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions <span class="duration" slot="footer">6 mins</span></Card
+          >
+        </a>
+      </div>
 
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Addition of description</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Addition of description</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span></Card
+          >
+        </a>
+      </div>
     </div>
 
-    
     <div class="container">
       <h2>Mode examples</h2>
       <p>This is an example of how cards can be displayed across light mode, dark mode, and high contrast mode</p>
@@ -563,7 +570,6 @@
           </tbody>
         </table>
       </template>
-
     </Integration>
     <Versions pdf="/pdfs/navigational-card.pdf" jira="FEG-948">
       <table>
@@ -590,4 +596,3 @@
     </Versions>
   </main>
 </template>
-

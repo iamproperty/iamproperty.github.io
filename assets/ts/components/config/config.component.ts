@@ -22,22 +22,23 @@ class iamConfig extends HTMLElement {
       </style>
       <div id="wrapper">
         <div id="items">
-          <div id="buckets"></div>  
+          <div id="buckets"></div>
           <div id="any" data-bucket="any"></div>
         </div>
         <div class="admin-panel">
           <button class="btn btn-action fa-plus" command="add-bucket">Add bucket</button>
-          <button class="btn btn-action fa-plus" command="add-item">Add ${this.getAttribute('data-item-name')??'item'}</button> <!-- Changes to open a model if we want to validate the add form first -->
-
+          <button class="btn btn-action fa-plus" command="add-item">
+            Add ${this.getAttribute('data-item-name') ?? 'item'}
+          </button>
+          <!-- Changes to open a model if we want to validate the add form first -->
         </div>
-        <button id="save" class="btn btn-sm btn-primary fa-floppy-disk" >Save items</button>
+        <button id="save" class="btn btn-sm btn-primary fa-floppy-disk">Save items</button>
       </div>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   async importData(ajaxURL): void {
-
     // Setup controller vars if not already set
     if (!window.controller) window.controller = [];
 
@@ -62,7 +63,6 @@ class iamConfig extends HTMLElement {
       })
         .then((response) => response.json())
         .then((response) => {
-
           const returnData = response['data'] ? response['data'] : response;
 
           return returnData;
@@ -71,48 +71,37 @@ class iamConfig extends HTMLElement {
       //console.log(error);
       return 'There has been a problem. Please try again in a few moments.';
     }
-
   }
 
   getBucketsData = (data): void => {
-
-    if(!data)
-      return [];
+    if (!data) return [];
 
     const buckets = [];
     // TODO: check local storage first
-    data.forEach(bucket => {
-
-      if(typeof bucket.attributes?.criteria == "object" && Array.isArray(bucket.attributes?.criteria)){
-
+    data.forEach((bucket) => {
+      if (typeof bucket.attributes?.criteria == 'object' && Array.isArray(bucket.attributes?.criteria)) {
         buckets.push(bucket);
       }
     });
 
-    return buckets; 
-  }
+    return buckets;
+  };
 
   createBuckets = (buckets): void => {
-    
     console.log(buckets);
 
     const bucketsContainer = this.shadowRoot.querySelector('#buckets'); // TODO: rename
 
-    if(!buckets)
-      return false;
+    if (!buckets) return false;
 
     buckets.forEach((bucket) => {
-
       this.createBucket(bucket);
-
     });
 
     return true;
-  }
+  };
 
   createBucket = (bucket): void => {
-
-
     const bucketsContainer = this.shadowRoot.querySelector('#buckets'); // TODO: rename
 
     const bucketElement = document.createElement('div');
@@ -125,10 +114,9 @@ class iamConfig extends HTMLElement {
     //this.addButtonEvents(bucketElement,true);
     this.createEditBucketsEvents(bucketElement);
 
-
     const criteriaContainer = bucketElement.querySelector('.criteria--container');
 
-    if(bucket.attributes){
+    if (bucket.attributes) {
       bucket.attributes.criteria.forEach((criteria) => {
         const criteriaForm = document.createElement('form');
         criteriaForm.classList.add('criteria');
@@ -147,10 +135,9 @@ class iamConfig extends HTMLElement {
       });
       this.createForms(bucket.attributes.items, bucket.id);
     }
-    
 
     return bucketElement;
-  }
+  };
 
   addCriteriaHTML = (attributes): void => {
     return /*HTML*/ `<label>
@@ -176,10 +163,9 @@ class iamConfig extends HTMLElement {
     <button class="btn btn-compact btn-sm mt-0 btn-secondary fa-plus" type="button" data-direction="add" title="Delete">Add</button>
     <button class="btn btn-compact btn-sm mt-0 btn-secondary fa-trash" type="button" data-direction="delete" title="Delete">Delete</button>
     </div>`;
-  }
+  };
 
-  addBucketHTML = (bucket):void => {
-
+  addBucketHTML = (bucket): void => {
     return /*HTML*/ `<label>
         <span class="visually-hidden">Name</span>
         <input type="text" name="bucket" value="${bucket.attributes?.name ?? ''}"/>
@@ -189,55 +175,49 @@ class iamConfig extends HTMLElement {
       </div>
       <div data-bucket="${bucket.id ?? ''}" class="bucket">
       </div>`;
-  }
+  };
 
-  createCriteriaDropdown = (attribute):void => {
-
+  createCriteriaDropdown = (attribute): void => {
     const form = this.querySelector('form');
 
     const formData = new FormData(form);
     const formDataObj = Object.fromEntries(formData.entries());
 
     let optionsHtml = '';
-    Object.keys(formDataObj).forEach(function(key){
+    Object.keys(formDataObj).forEach(function (key) {
       optionsHtml += `<option value="${key}" ${key == attribute ? ' selected="selected"' : ''}>${key}</option>`;
     });
 
     return `<select name="attributes[criteria]" class="mt-0 select--sm">
       <option value=""></option>
       ${optionsHtml}
-    </select>`;  
-  }
+    </select>`;
+  };
 
-  createEditBucketsEvents = (bucket):Void => {
-    this.addButtonEvents(bucket,true);
+  createEditBucketsEvents = (bucket): Void => {
+    this.addButtonEvents(bucket, true);
     const expandButton = bucket?.querySelector('[data-expand]');
 
-    expandButton?.addEventListener('click',() => {
-
+    expandButton?.addEventListener('click', () => {
       bucket.classList.toggle('bucket--expanded');
     });
-  }
+  };
 
-  async importAttributeData(comonponent): void {
+  async importAttributeData(comonponent): void {}
 
-  }
-
-  createForms = (data, bucketId = "any"):void => {
-
-    data.forEach(item => {
-
-      if(typeof item.attributes?.criteria == "undefined"){
-
+  createForms = (data, bucketId = 'any'): void => {
+    data.forEach((item) => {
+      if (typeof item.attributes?.criteria == 'undefined') {
         const formElement = this.createForm(item, bucketId);
 
-        Object.keys(item.attributes).forEach(function(key){
-
-          if(formElement.querySelector(`[name="${key}"]`)){
-
+        Object.keys(item.attributes).forEach(function (key) {
+          if (formElement.querySelector(`[name="${key}"]`)) {
             const element = formElement.querySelector(`[name="${key}"]`);
 
-            if(element.matches('select[data-import]') && !element.querySelector(`option[value="${item.attributes[key]}"]`)){
+            if (
+              element.matches('select[data-import]') &&
+              !element.querySelector(`option[value="${item.attributes[key]}"]`)
+            ) {
               const optionElement = document.createElement('option');
               optionElement.value = item.attributes[key];
               optionElement.innerHTML = item.attributes[key];
@@ -248,48 +228,41 @@ class iamConfig extends HTMLElement {
         });
       }
     });
-  }
+  };
 
-  checkCriteria = (attributes, bucket):void => {
-
-    if(attributes[bucket])
-      return true;
+  checkCriteria = (attributes, bucket): void => {
+    if (attributes[bucket]) return true;
 
     return false;
-  }
+  };
 
-  checkBuckets = (attributes):any => {
-
+  checkBuckets = (attributes): any => {
     const anyContainer = this.shadowRoot.querySelector('#any'); // TODO: rename
     let container = anyContainer;
 
-    if(!this.hasAttribute('data-buckets'))
-      return container;
-
+    if (!this.hasAttribute('data-buckets')) return container;
 
     let buckets = [];
     let addedToBucket = false;
-    
+
     // If data attribute set
     buckets = this.getAttribute('data-buckets').split(',');
 
     // TODO: If importing the config from a json file
 
-    buckets.forEach((bucket)=>{
-
+    buckets.forEach((bucket) => {
       const addToBucket = !addedToBucket ? this.checkCriteria(attributes, bucket) : false;
 
-      if(addToBucket){
+      if (addToBucket) {
         addedToBucket = true;
         container = this.shadowRoot.querySelector(`[data-bucket="${bucket}"]`);
       }
     });
 
     return container;
-  }
+  };
 
-  createForm = (item, bucketId = "any"):void => {
-
+  createForm = (item, bucketId = 'any'): void => {
     const anyContainer = this.shadowRoot.querySelector(`#items [data-bucket="${bucketId}"]`); // TODO: rename
     //const bucketsContainer = this.shadowRoot.querySelector('#buckets'); // TODO: rename
     //const container = this.checkBuckets(item.attributes); TODO: re-enable
@@ -299,21 +272,18 @@ class iamConfig extends HTMLElement {
     //formTemplate.setAttribute('id', item.id);
 
     // TODO check if it matches a bucket
-    container?.insertAdjacentElement('beforeend',formElement);
+    container?.insertAdjacentElement('beforeend', formElement);
     //const formElement = container?.querySelector(`[id="${item.id}"]`);
     formElement?.addEventListener('submit', (event) => {
-
       event.preventDefault();
     });
 
     this.addButtons(formElement);
 
-
     return formElement;
-  }
+  };
 
-  getCurrentIds = ():void => {
-
+  getCurrentIds = (): void => {
     const idsArr = [];
 
     Array.from(this.shadowRoot?.querySelectorAll('#items form')).forEach((form) => {
@@ -321,86 +291,96 @@ class iamConfig extends HTMLElement {
     });
 
     return idsArr;
-  }
+  };
 
-  generateId = ():any => {
-
+  generateId = (): any => {
     return Math.max(...this.getCurrentIds()) + 1;
-  }
+  };
 
-  addButtonEvents = (element, scrollIntoView:boolean = true):void => {
-    
+  addButtonEvents = (element, scrollIntoView: boolean = true): void => {
     const upButton = element?.querySelector('[data-direction="up"]');
     const downButton = element?.querySelector('[data-direction="down"]');
     const deleteButton = element?.querySelector('[data-direction="delete"]');
 
-    upButton?.addEventListener('click',() => {
-
-      if(element?.previousElementSibling){
+    upButton?.addEventListener('click', () => {
+      if (element?.previousElementSibling) {
         element?.parentNode.insertBefore(element, element.previousElementSibling);
 
-        if(scrollIntoView)
-          element?.scrollIntoView({ behavior: "instant", block: "center" });
+        if (scrollIntoView) element?.scrollIntoView({ behavior: 'instant', block: 'center' });
       }
     });
 
-    downButton?.addEventListener('click',() => {
-
-      if(element.nextElementSibling){
+    downButton?.addEventListener('click', () => {
+      if (element.nextElementSibling) {
         element?.parentNode.insertBefore(element, element.nextElementSibling.nextElementSibling);
-      }
-      else {
-        element?.parentNode.insertAdjacentElement('beforeend',element);
+      } else {
+        element?.parentNode.insertAdjacentElement('beforeend', element);
       }
 
-      if(scrollIntoView)
-        element?.scrollIntoView({ behavior: "instant", block: "center" });
+      if (scrollIntoView) element?.scrollIntoView({ behavior: 'instant', block: 'center' });
     });
 
-    deleteButton?.addEventListener('click',() => {
-
+    deleteButton?.addEventListener('click', () => {
       element.remove();
     });
-  }
+  };
 
-  addButtons = (form):void => {
-
-    form?.insertAdjacentHTML('beforeend',`<div class="btn__group">${this.buttonHTML}</div>`);
+  addButtons = (form): void => {
+    form?.insertAdjacentHTML('beforeend', `<div class="btn__group">${this.buttonHTML}</div>`);
 
     this.addButtonEvents(form);
-  }
+  };
 
   async connectedCallback(): void {
-    this.buttonHTML = /* HTML */`
-    <button class="btn btn-compact btn-sm mt-0 btn-secondary fa-trash" type="button" data-direction="delete" title="Delete">Delete</button>
-    <button class="btn btn-compact btn-sm mt-0 btn-secondary fa-chevron-down" type="button" data-direction="down" title="Move down">Down</button>
-    <button class="btn btn-compact btn-sm mt-0 btn-secondary fa-chevron-up" type="button" data-direction="up" title="Move up">Up</button>
+    this.buttonHTML = /* HTML */ `
+      <button
+        class="btn btn-compact btn-sm mt-0 btn-secondary fa-trash"
+        type="button"
+        data-direction="delete"
+        title="Delete"
+      >
+        Delete
+      </button>
+      <button
+        class="btn btn-compact btn-sm mt-0 btn-secondary fa-chevron-down"
+        type="button"
+        data-direction="down"
+        title="Move down"
+      >
+        Down
+      </button>
+      <button
+        class="btn btn-compact btn-sm mt-0 btn-secondary fa-chevron-up"
+        type="button"
+        data-direction="up"
+        title="Move up"
+      >
+        Up
+      </button>
     `;
 
     const dataImportUrl = this.getAttribute('data-import');
     const getBucketsData = this.getBucketsData;
     const createBuckets = this.createBuckets;
-    
 
     const createForms = this.createForms;
     const createForm = this.createForm;
     const itemsContainer = this.shadowRoot.querySelector('#items'); // TODO: rename
     const anyContainer = this.shadowRoot.querySelector('#any'); // TODO: rename
     const bucketsContainer = this.shadowRoot.querySelector('#buckets'); // TODO: rename
-    
+
     const editBuckets = this.shadowRoot.querySelector('#editBuckets'); // TODO: rename
-    
+
     const saveButton = this.shadowRoot.querySelector('#save');
-    const addButton = this.shadowRoot?.querySelector('[data-add-item]')
+    const addButton = this.shadowRoot?.querySelector('[data-add-item]');
     const addForm = this.shadowRoot?.querySelector('#addForm');
-    
+
     const editBucketsDialog = this.shadowRoot?.querySelector('#editBucketsDialog');
     const editBucketsForm = this.shadowRoot?.querySelector('#editBucketsForm');
     const editBucketsFormSubmit = this.shadowRoot?.querySelector('#editBucketsForm .btn-primary');
     const addBucketButton = this?.shadowRoot.querySelector('[command="add-bucket"]');
     const addItemButton = this?.shadowRoot.querySelector('[command="add-item"]');
-    
-    
+
     const templateForm = this?.querySelector('form');
 
     let editBucketsOriginalState = '';
@@ -409,37 +389,26 @@ class iamConfig extends HTMLElement {
 
     // Prevent the template form from submitting anything
     templateForm?.addEventListener('submit', (event) => {
-
       event.preventDefault();
     });
 
-
     // TODO: add this to an on change event on the select
-    Array.from(this.querySelectorAll('select[data-import]')).forEach(async(select) =>{
-
-
+    Array.from(this.querySelectorAll('select[data-import]')).forEach(async (select) => {
       const ajaxURL = select.getAttribute('data-import');
 
-        this.importData(ajaxURL).then(
-          (data) => {
-            if(typeof data == 'string')
-              return data;
+      this.importData(ajaxURL).then((data) => {
+        if (typeof data == 'string') return data;
 
-            data.forEach(item =>{
+        data.forEach((item) => {
+          const optionElement = document.createElement('option');
+          optionElement.value = item.id;
+          optionElement.innerHTML = item.attributes.name;
+          select.appendChild(optionElement);
+        });
 
-              const optionElement = document.createElement('option');
-              optionElement.value = item.id;
-              optionElement.innerHTML = item.attributes.name;
-              select.appendChild(optionElement);
-            });
-
-            return true;
-          }
-        );
+        return true;
+      });
     });
-    
-
-    
 
     // #region import data
     // TODO load from web storage if its newer
@@ -447,31 +416,24 @@ class iamConfig extends HTMLElement {
     const storedData = localStorage.getItem(`config-${this.getAttribute('data-name')}`);
     //const buckets = this.getBucketsData(); // TODO: load from local storage
 
-    if(storedData){
-
+    if (storedData) {
       //createForms(JSON.parse(storedData), buckets);
-    }
-    else if(dataImportUrl){
+    } else if (dataImportUrl) {
+      const dataImport = await this.importData(dataImportUrl).then((data) => {
+        if (typeof data == 'string') return data;
 
-      const dataImport = await this.importData(dataImportUrl).then(
-        (data) => {
-          if(typeof data == 'string')
-            return data;
+        const buckets = getBucketsData(data);
 
-          const buckets = getBucketsData(data);
-
-          if(buckets){
-              
-            createBuckets(buckets);
-          }
-          createForms(data); // any bucket
-
-          return true;
+        if (buckets) {
+          createBuckets(buckets);
         }
-      );
+        createForms(data); // any bucket
+
+        return true;
+      });
     }
     // #endregion
-    
+
     // #region Add buckets to edit modal
     /*
       editBucketsForm?.addEventListener('submit', (event) => {
@@ -557,36 +519,29 @@ class iamConfig extends HTMLElement {
 
     */
 
-
-
     // #endregion
 
     // #region add data
 
-    addItemButton?.addEventListener("click", (event) => {
-
+    addItemButton?.addEventListener('click', (event) => {
       const form = this.createForm({});
-      form?.scrollIntoView({ behavior: "instant", block: "center" });
+      form?.scrollIntoView({ behavior: 'instant', block: 'center' });
       // TODO scroll into view
     });
 
-    addBucketButton?.addEventListener("click", (event) => {
-
+    addBucketButton?.addEventListener('click', (event) => {
       const bucket = this.createBucket({});
-      bucket?.scrollIntoView({ behavior: "instant", block: "center" });
+      bucket?.scrollIntoView({ behavior: 'instant', block: 'center' });
     });
 
     // #endregion
 
-
     // #region update values
 
     this.shadowRoot.addEventListener('change', (event) => {
-
       const container = event.target.closest('[data-bucket]');
 
-      if(!container)
-        return false;
+      if (!container) return false;
 
       const attribute = event.target.name;
       const value = event.target.value;
@@ -594,21 +549,18 @@ class iamConfig extends HTMLElement {
       attributes[attribute] = value;
       const newContainer = this.checkBuckets(attributes);
 
-      if(newContainer != container){
+      if (newContainer != container) {
         const form = event.target.closest(`form`);
         // TODO a confirmation modal
-        newContainer?.insertAdjacentElement('beforeend',form);
+        newContainer?.insertAdjacentElement('beforeend', form);
 
-        
-        form?.scrollIntoView({ behavior: "instant", block: "center" });
+        form?.scrollIntoView({ behavior: 'instant', block: 'center' });
       }
-
     });
     // #endregion
 
     // #region save data
     saveButton?.addEventListener('click', (event) => {
-
       event.preventDefault();
 
       // TODO validation
@@ -616,65 +568,67 @@ class iamConfig extends HTMLElement {
       const entries = [];
 
       // Save buckets data
-      Array.from(itemsContainer?.querySelectorAll('.bucket__wrapper')).forEach((bucketElement:HTMLElement, index):void => {
+      Array.from(itemsContainer?.querySelectorAll('.bucket__wrapper')).forEach(
+        (bucketElement: HTMLElement, index): void => {
+          const bucket = {};
+          bucket.attributes = {};
+          bucket.id = bucketElement?.querySelector('[name="bucket"]').value;
+          bucket.type = 'bucket';
+          bucket.attributes.index = index;
 
-        const bucket = {};
-        bucket.attributes = {};
-        bucket.id = bucketElement?.querySelector('[name="bucket"]').value;
-        bucket.type = 'bucket';
-        bucket.attributes.index = index;
+          const criteria = [];
+          // TODO populate criteria
+          Array.from(bucketElement?.querySelectorAll('.criteria--container form')).forEach(
+            (formElement: HTMLElement, criteriaIndex): void => {
+              const item = {};
+              //item.id = formElement.getAttribute('id');
+              item.type = 'criteria';
+              item.index = criteriaIndex;
+              const formData = new FormData(formElement);
+              const formDataObj = Object.fromEntries(formData.entries());
 
-        
-        const criteria = [];
-        // TODO populate criteria
-        Array.from(bucketElement?.querySelectorAll('.criteria--container form')).forEach((formElement:HTMLElement, criteriaIndex):void => {
+              item.attributes = formDataObj;
 
-          const item = {};
-          //item.id = formElement.getAttribute('id');
-          item.type = 'criteria';
-          item.index = criteriaIndex;
+              criteria.push(item);
+            }
+          );
+          bucket.attributes.criteria = criteria;
+
+          const items = [];
+          Array.from(bucketElement?.querySelectorAll('[data-bucket] form')).forEach(
+            (formElement: HTMLElement, itemIndex): void => {
+              const item = {};
+              //item.id = formElement.getAttribute('id');
+              item.type = 'item';
+              item.index = itemIndex;
+              const formData = new FormData(formElement);
+              const formDataObj = Object.fromEntries(formData.entries());
+
+              item.attributes = formDataObj;
+
+              items.push(item);
+            }
+          );
+          bucket.attributes.items = items;
+
+          entries.push(bucket);
+        }
+      );
+
+      Array.from(itemsContainer?.querySelectorAll('[data-bucket="any"] form')).forEach(
+        (formElement: HTMLElement, index): void => {
+          const entry = {};
+          //entry.id = formElement.getAttribute('id');
+          entry.type = 'item';
+          entry.index = index;
           const formData = new FormData(formElement);
           const formDataObj = Object.fromEntries(formData.entries());
 
-          item.attributes = formDataObj;
+          entry.attributes = formDataObj;
 
-          criteria.push(item);
-        });
-        bucket.attributes.criteria = criteria;
-
-        const items = [];
-        Array.from(bucketElement?.querySelectorAll('[data-bucket] form')).forEach((formElement:HTMLElement, itemIndex):void => {
-
-          const item = {};
-          //item.id = formElement.getAttribute('id');
-          item.type = 'item';
-          item.index = itemIndex;
-          const formData = new FormData(formElement);
-          const formDataObj = Object.fromEntries(formData.entries());
-
-          item.attributes = formDataObj;
-
-          items.push(item);
-        });
-        bucket.attributes.items = items;
-        
-        entries.push(bucket);
-      });
-
-
-      Array.from(itemsContainer?.querySelectorAll('[data-bucket="any"] form')).forEach((formElement:HTMLElement, index):void => {
-
-        const entry = {};
-        //entry.id = formElement.getAttribute('id');
-        entry.type = 'item';
-        entry.index = index;
-        const formData = new FormData(formElement);
-        const formDataObj = Object.fromEntries(formData.entries());
-
-        entry.attributes = formDataObj;
-
-        entries.push(entry);
-      });
+          entries.push(entry);
+        }
+      );
 
       const entriesJson = JSON.stringify(entries);
 
@@ -685,12 +639,9 @@ class iamConfig extends HTMLElement {
 
       //localStorage.setItem(`config-${this.getAttribute('data-name')}`, entriesJson);
 
-      
-
       //const bucketsJson = JSON.stringify(buckets);
 
       //localStorage.setItem(`config-buckets-${this.getAttribute('data-name')}`, bucketsJson);
-
     });
     // #endregion
   }

@@ -60,7 +60,9 @@
   }
 
   .border-gradient {
-    background: linear-gradient(var(--bg-colour,Canvas), var(--bg-colour,Canvas)) padding-box, linear-gradient(to right, var(--colour-primary-theme), var(--colour-info)) border-box;
+    background:
+      linear-gradient(var(--bg-colour, Canvas), var(--bg-colour, Canvas)) padding-box,
+      linear-gradient(to right, var(--colour-primary-theme), var(--colour-info)) border-box;
     border: var(--border-width) solid transparent;
   }
 }

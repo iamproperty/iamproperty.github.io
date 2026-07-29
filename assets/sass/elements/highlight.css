@@ -1,19 +1,17 @@
 @layer elements {
-
   .highlight {
-    
     border-radius: 0.5rem;
     padding: 1.5rem;
     margin-bottom: 2rem;
     overflow: hidden;
     position: relative;
-    
+
     & > *:last-child {
       margin-bottom: 0;
       padding-bottom: 0;
     }
 
-    &:has(> img){
+    &:has(> img) {
       padding-right: 13rem;
       position: relative;
       min-height: 8rem;
@@ -28,10 +26,11 @@
       bottom: 0;
       right: 0;
       margin-right: -3rem;
-      margin-bottom: -4rem!important;
+      margin-bottom: -4rem !important;
     }
 
-    p:last-child, p:has(+ img:last-child) {
+    p:last-child,
+    p:has(+ img:last-child) {
       padding-bottom: 0;
     }
 
@@ -47,27 +46,24 @@
     }
   }
 
-  .highlight:is([class*="bg-"],[class*="colour-"],[class*="colour-"]) {
+  .highlight:is([class*='bg-'], [class*='colour-'], [class*='colour-']) {
     --highlight-colour: var(--colour, var(--bg-colour,));
     --tint: 80%;
 
-    &:not(.bg-primary, .gradient-primary){
-      
+    &:not(.bg-primary, .gradient-primary) {
       --colour-heading: var(--colour-primary-theme);
       --colour-body: var(--colour-primary-theme);
       color: var(--colour-primary-theme);
-      background-color: color-mix(in oklab, var(--highlight-colour), var(--colour-mix, #FCFCFC) var(--tint)) !important;
+      background-color: color-mix(in oklab, var(--highlight-colour), var(--colour-mix, #fcfcfc) var(--tint)) !important;
 
       & > * {
         color-scheme: light;
       }
     }
 
-    &:not(.bg-primary, .gradient-primary, .highlight--raised){
-      
+    &:not(.bg-primary, .gradient-primary, .highlight--raised) {
       border: 1px solid var(--highlight-colour);
     }
-
   }
 
   .highlight--raised {

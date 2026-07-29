@@ -1,37 +1,35 @@
 <script setup>
-import routes from '../../routes.ts';
+  import routes from '../../routes.ts';
 
-const productpages = [];
+  const productpages = [];
 
-const standalonepages = routes.reduce(function (arr, route) {
-  // Find the correct group
-  if (route.path === '/standalone') {
-    arr = route.children;
+  const standalonepages = routes.reduce(function (arr, route) {
+    // Find the correct group
+    if (route.path === '/standalone') {
+      arr = route.children;
 
-    const children = route.children.reduce(function (acc, route) {
-      // Remove the index
-      if (route.path) {
-        route.link = '/standalone/' + route.path;
-        route.title = route.name;
-        route.content = '';
+      const children = route.children.reduce(function (acc, route) {
+        // Remove the index
+        if (route.path) {
+          route.link = '/standalone/' + route.path;
+          route.title = route.name;
+          route.content = '';
 
-        if(route.children){
-          productpages.push(route);
+          if (route.children) {
+            productpages.push(route);
+          } else {
+            acc.push(route);
+          }
         }
-        else {
-          acc.push(route);
-        }
-      }
-      return acc;
-    }, []);
+        return acc;
+      }, []);
 
-    arr = children;
-  }
-  return arr;
-}, {});
+      arr = children;
+    }
+    return arr;
+  }, {});
 
-console.log(productpages);
-
+  console.log(productpages);
 </script>
 
 <template>
@@ -83,11 +81,10 @@ console.log(productpages);
     <div v-for="(value, index) in productpages" :key="index" class="container pt-5">
       <h2 class="h1">{{ value.name }}</h2>
       <ul>
-        <li v-for="(child) in value.children" :key="child.name">
+        <li v-for="child in value.children" :key="child.name">
           <a :href="`/standalone/${value.path}/${child.path}`" target="_blank">{{ child.name }}</a>
         </li>
       </ul>
     </div>
-
   </main>
 </template>

@@ -38,7 +38,7 @@
         top: calc(100% + 0.5rem);
         left: auto;
         right: 0.85em;
-        width: 16.875rem; /* 270 */ 
+        width: 16.875rem; /* 270 */
         transform: translate(50%, 0);
         background: var(--colour-primary);
         color: var(--colour-white);
@@ -52,7 +52,6 @@
           color: inherit;
         }
 
-
         &::after {
           content: '';
           position: absolute;
@@ -64,13 +63,13 @@
           border-color: transparent transparent var(--colour-primary) transparent;
           margin-bottom: -1px;
         }
-        
+
         @media screen and (min-width: 36em) {
-          width: 20.9375rem; /* 335 */ 
+          width: 20.9375rem; /* 335 */
         }
 
         @media screen and (min-width: 62em) {
-          width: 22.5rem; /* 360 */ 
+          width: 22.5rem; /* 360 */
         }
       }
     }
@@ -150,11 +149,10 @@
     }
   }
 
-  
   .tooltip__content {
     position: absolute;
-    
-    max-width: 16.875rem; /* 270 */ 
+
+    max-width: 16.875rem; /* 270 */
     background: var(--colour-primary);
     color: var(--colour-white);
     padding: 1.5rem;
@@ -171,11 +169,11 @@
     }
 
     @media screen and (min-width: 36em) {
-      max-width: 20.9375rem; /* 335 */ 
+      max-width: 20.9375rem; /* 335 */
     }
 
     @media screen and (min-width: 62em) {
-      max-width: 22.5rem;  /* 360 */
+      max-width: 22.5rem; /* 360 */
     }
 
     &::after {
@@ -198,7 +196,7 @@
     translate: -50% 0;
     width: 100%;
   }
-  label:is(:hover,:focus-within) .tooltip__content {
+  label:is(:hover, :focus-within) .tooltip__content {
     display: block;
     z-index: 2;
     bottom: 100%;

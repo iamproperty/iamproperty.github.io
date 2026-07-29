@@ -1,5 +1,11 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
-import { videoHTML, loadYouTubeScripts, createYoutTubeVideo, openYoutubeVideo, openVimeoVideo } from '../../modules/videos';
+import {
+  videoHTML,
+  loadYouTubeScripts,
+  createYoutTubeVideo,
+  openYoutubeVideo,
+  openVimeoVideo,
+} from '../../modules/videos';
 
 trackComponentRegistered('iam-video-modal');
 
@@ -14,7 +20,7 @@ class iamVideo extends HTMLElement {
     const loadCSS = `@import "${assetLocation}/css/components/video.component.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = /*HTML*/`
+    template.innerHTML = /*HTML*/ `
     <style>
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     
@@ -28,9 +34,7 @@ class iamVideo extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-
   async connectedCallback(): void {
-    
     const id = this.getAttribute('id');
     const button = this.shadowRoot?.querySelector('button');
     const videoWrapper = this.shadowRoot?.querySelector('.video-wrapper');
@@ -39,29 +43,24 @@ class iamVideo extends HTMLElement {
     this.innerHTML = `<div class="embed" slot="video"></div>`;
     const embed = this.querySelector('.embed');
 
-
     videoWrapper.tabIndex = 6;
     button?.tabIndex = -1;
 
-    if(this.hasAttribute('data-youtube')){
-      
+    if (this.hasAttribute('data-youtube')) {
       const youtubeId = this.getAttribute('data-youtube');
-      img.setAttribute('src',`http://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`);
-    
-      videoWrapper.addEventListener('click', async (e) => {
+      img.setAttribute('src', `http://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`);
 
-        embed?.setAttribute('id',youtubeId);
+      videoWrapper.addEventListener('click', async (e) => {
+        embed?.setAttribute('id', youtubeId);
         openYoutubeVideo(this);
         button?.remove();
         img?.remove();
       });
-    }
-    else if(this.hasAttribute('data-vimeo')){
-
+    } else if (this.hasAttribute('data-vimeo')) {
       const vimeoId = this.getAttribute('data-vimeo');
 
-      img.setAttribute('src',`https://vumbnail.com/${vimeoId}.jpg`);
-      
+      img.setAttribute('src', `https://vumbnail.com/${vimeoId}.jpg`);
+
       videoWrapper.addEventListener('click', async (e) => {
         openVimeoVideo(this);
         button?.remove();

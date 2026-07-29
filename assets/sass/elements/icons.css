@@ -1,13 +1,12 @@
 @layer elements {
   .icon {
     font-size: 1rem;
-    font-family: "Font Awesome 7 Pro";
+    font-family: 'Font Awesome 7 Pro';
     font-weight: 400;
     font-style: normal;
 
     &:before {
-      
-        content: var(--fa);
+      content: var(--fa);
     }
   }
 
@@ -16,7 +15,7 @@
   }
 
   .icon--sm {
-    font-size: 1.125rem; /* 18/16 */;
+    font-size: 1.125rem; /* 18/16 */
   }
 
   .icon--compact {
@@ -47,9 +46,8 @@
   }
 
   .icon[class*='fa-'][class*='colour-'] {
-    color: var(--colour,inherit);
+    color: var(--colour, inherit);
   }
-
 
   /* #endregion fixes */
 
@@ -57,7 +55,6 @@
     font-size: 0.9em;
     margin-left: -0.05em;
   }
-
 
   /* #endregion icons */
 }

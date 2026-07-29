@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from 'vue';
-  import { useRoute } from 'vue-router'
+  import { useRoute } from 'vue-router';
   import pkg from '../package.json';
   import Nav from '../src/components/Nav/Nav.vue';
   import DarkMode from '../src/components/DarkMode/DarkMode.vue';
@@ -13,13 +13,10 @@
   const searchForm = ref(null);
 
   const checkSearch = (event) => {
-
-    if(event.detail.url) {
+    if (event.detail.url) {
       window.location.href = event.detail.url;
-    }
-    else
-      searchForm.value.requestSubmit();
-  }
+    } else searchForm.value.requestSubmit();
+  };
 </script>
 
 <template>
@@ -37,29 +34,33 @@
 
       <router-link to="/principles">Principles</router-link>
       <router-link to="/foundations">Foundations</router-link>
-      <router-link to="/elements" :class="`${route.matched[0] && elementSections.includes(route.matched[0].path) ? 'router-link-active' : ''}`">Elements</router-link>
+      <router-link
+        to="/elements"
+        :class="`${route.matched[0] && elementSections.includes(route.matched[0].path) ? 'router-link-active' : ''}`"
+        >Elements</router-link
+      >
       <router-link to="/components">Components</router-link>
       <router-link to="/patterns">Patterns & templates</router-link>
 
       <form novalidate method="GET" slot="search" id="searchform" action="/search" ref="searchForm">
+        <label class="mb-0"
+          ><span class="visually-hidden">Search pages</span>
+          <Search @option-selected="checkSearch" class="mt-0">
+            <input
+              type="text"
+              name="search"
+              autocomplete="off"
+              aria-autocomplete="none"
+              list="searchterms"
+              placeholder="Search pages..."
+              class="mt-0"
+            />
 
-          <label class="mb-0"><span class="visually-hidden">Search pages</span>
-            <Search @option-selected="checkSearch" class="mt-0">
-              <input
-                type="text"
-                name="search"
-                autocomplete="off"
-                aria-autocomplete="none"
-                list="searchterms"
-                placeholder="Search pages..."
-                class="mt-0"
-              />
-
-              <datalist id="searchterms" ref="list">
-                <option v-for="item in refinedResults" :data-url="item.route">{{ item.term }}</option>
-              </datalist>
-            </Search>
-          </label>
+            <datalist id="searchterms" ref="list">
+              <option v-for="item in refinedResults" :data-url="item.route">{{ item.term }}</option>
+            </datalist>
+          </Search>
+        </label>
       </form>
     </Nav>
   </nav>
@@ -69,8 +70,6 @@
   <footer class="bg-primary mb-0">
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-
-
         <li class="list-inline-item me-4 ms-0 mb-2">
           <router-link to="/launch">Launch list</router-link>
         </li>
@@ -95,8 +94,8 @@
       </ul>
     </div>
     <DarkMode class="d-block mb-4"
-        ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
-      >
+      ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
+    >
     <div class="container pt-3">
       <p>Version: {{ version }}</p>
     </div>
@@ -128,12 +127,11 @@
 
   //@media screen and (max-width: 62em) {
   iam-nav > a.router-link-active:not([slot='logo']) {
-    text-decoration: underline!important;
-    text-underline-offset: 0.3em!important;
-    text-decoration-thickness: 2px!important;
+    text-decoration: underline !important;
+    text-underline-offset: 0.3em !important;
+    text-decoration-thickness: 2px !important;
     text-decoration-color: var(--colour-info) !important;
   }
-
 
   //}
 
@@ -148,12 +146,12 @@
   footer .router-link-active {
     text-decoration: none;
   }
-@layer reset {
-  #visualtest:target ~ *:not(main),
-  #visualtest:target ~ main > *:not(.visualtest,.visualtest--container) {
-    display: none !important;
+  @layer reset {
+    #visualtest:target ~ *:not(main),
+    #visualtest:target ~ main > *:not(.visualtest, .visualtest--container) {
+      display: none !important;
+    }
   }
-}
   @layer utilities {
     #visualtest:target ~ main > .d-none.visualtest {
       display: block !important;
@@ -168,30 +166,26 @@
     overflow: auto;
   }
 
-
   .dark-theme .ds-header {
-
     > * {
       color-scheme: dark;
-      --colour-heading: var(--colour-white)!important;
-      color: var(--colour-white)!important;
+      --colour-heading: var(--colour-white) !important;
+      color: var(--colour-white) !important;
     }
   }
 
   @media (prefers-color-scheme: dark) {
     html:not(.light-theme) .ds-header {
-
       > * {
         color-scheme: dark;
-        --colour-heading: var(--colour-white)!important;
-        color: var(--colour-white)!important;
+        --colour-heading: var(--colour-white) !important;
+        color: var(--colour-white) !important;
       }
     }
   }
 
-
   span:has(.dark-var, .light-var) {
-    display: contents!important;
+    display: contents !important;
   }
   html:not(.dark-theme) .dark-var {
     display: none;
@@ -201,50 +195,38 @@
     display: none;
   }
 
-main > .breadcrumb:first-child + * {
+  main > .breadcrumb:first-child + * {
     padding-top: 2rem;
-}
+  }
 
-
-
- /* region broken down visual tests */
+  /* region broken down visual tests */
 
   body:has(.visualtest.target) nav,
   body:has(.visualtest.target) footer,
   main:has(.visualtest.target) > *:not(.target, .visualtest--container),
   main:has(.visualtest.target) > .visualtest--container > *:not(.target) {
-
-    display: none!important;
+    display: none !important;
   }
 
   main:has(.visualtest.target) > *.target .visualtest-hide {
-
-    display: none!important;
+    display: none !important;
   }
 
   main:has(.visualtest.target) > *.target {
-
     --col-start: col-1;
   }
 
-
   @layer utilities {
-
-    main:has(.visualtest.target) > *:is(.d-flex,.d-block):not(.target) {
-
-      display: none!important;
+    main:has(.visualtest.target) > *:is(.d-flex, .d-block):not(.target) {
+      display: none !important;
     }
 
-
-    main:has(.visualtest.target) > *.target .visualtest-hide:is(.d-flex,.d-block) {
-
-      display: none!important;
+    main:has(.visualtest.target) > *.target .visualtest-hide:is(.d-flex, .d-block) {
+      display: none !important;
     }
-
   }
 
   /* #endregion */
-
 </style>
 
 <script>
@@ -261,14 +243,14 @@ main > .breadcrumb:first-child + * {
   routes.forEach((route) => {
     let name = route.name ? route.name : '';
 
-    if (name != '' && name != 'Search' && name != 'Home') results.push({'term': name, 'route': route.path});
+    if (name != '' && name != 'Search' && name != 'Home') results.push({ term: name, route: route.path });
 
     if (route.searchterms) {
       const array = Array.from(route.searchterms.split(','));
 
       for (let [key, term] of Object.entries(array)) {
         term = term.trim();
-        results.push({'term': term});
+        results.push({ term: term });
       }
     }
 
@@ -276,14 +258,14 @@ main > .breadcrumb:first-child + * {
       for (const [key, value] of Object.entries(route.children)) {
         let childName = value.name ? value.name : '';
 
-        if (childName != '') results.push({'term': childName, 'route': route.path + '/' + value.path});
+        if (childName != '') results.push({ term: childName, route: route.path + '/' + value.path });
 
         if (value.searchterms) {
           const array = Array.from(value.searchterms.split(','));
 
           for (let [key, term] of Object.entries(array)) {
             term = term.trim();
-            results.push({'term': term});
+            results.push({ term: term });
           }
         }
       }

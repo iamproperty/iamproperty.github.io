@@ -9,13 +9,13 @@
 :host {
   /* all: unset; */
   inset: auto;
-  top: anchor(bottom)!important;
-  left: anchor(left)!important;
+  top: anchor(bottom) !important;
+  left: anchor(left) !important;
   position: fixed;
   position-try-fallbacks: flip-block, flip-inline;
-  width: max-content!important;
-  min-width: max-content!important;
-  max-width: max-content!important;
+  width: max-content !important;
+  min-width: max-content !important;
+  max-width: max-content !important;
 
   height: min-content;
   max-height: var(--menu-max-height, min(100vh - 6rem));
@@ -24,9 +24,9 @@
 }
 
 :host(.menu--fill) {
-  width: anchor-size(width)!important;
-  min-width: anchor-size(width)!important;
-  max-width: anchor-size(width)!important;
+  width: anchor-size(width) !important;
+  min-width: anchor-size(width) !important;
+  max-width: anchor-size(width) !important;
 }
 
 :host(:popover-open),
@@ -41,18 +41,18 @@
 
 :host(.menu--sm) {
   width: 10rem;
-  min-width: 10rem!important;
-  max-width: 10rem!important;
+  min-width: 10rem !important;
+  max-width: 10rem !important;
 }
 :host(.menu--md) {
   width: 15rem; /* 240 */
-  min-width: 15rem!important;
-  max-width: 15rem!important;
+  min-width: 15rem !important;
+  max-width: 15rem !important;
 }
 :host(.menu--lg) {
   width: 20rem; /* 320 */
-  min-width: 20rem!important;
-  max-width: 20rem!important;
+  min-width: 20rem !important;
+  max-width: 20rem !important;
 }
 
 :host(.menu--height-sm) {
@@ -161,7 +161,7 @@
 }
 
 ::slotted(iam-menu[popover]) {
-  top: anchor(top)!important;
-  left: calc(anchor(right) + 1rem)!important;
+  top: anchor(top) !important;
+  left: calc(anchor(right) + 1rem) !important;
 }
 /* #endregion */

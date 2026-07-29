@@ -7,11 +7,8 @@
   box-sizing: border-box;
 }
 
-
-
 @layer components {
-
-/* #region progress bar */
+  /* #region progress bar */
   .carousel__controls {
     display: var(--carousel-controls-display, none);
     position: absolute;
@@ -31,7 +28,7 @@
     text-align: center;
     display: none;
     padding-bottom: 0;
-    
+
     input[type='range'] {
       --track-size: 0.5rem;
       --track-colour: #a5ecfd;
@@ -135,7 +132,6 @@
     }
   }
   /* #endregion */
-  
 
   .carousel__pips {
     display: flex !important;

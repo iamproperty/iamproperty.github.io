@@ -93,9 +93,10 @@
 
     <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
-      <label :for="`input1`">Input field label
-      <input type="text" :id="`input1`" :name="`input1`" placeholder="Optional placeholder text" required />
-</label>
+      <label :for="`input1`"
+        >Input field label
+        <input type="text" :id="`input1`" :name="`input1`" placeholder="Optional placeholder text" required />
+      </label>
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
       <label :for="`input2`">Input field label</label>
       <input
@@ -356,11 +357,10 @@
       </p>
     </div>
     <div class="container visualtest">
-
-          <label class="label--sm">Title
-            <input type="text" :name="`input18`" required class="form-control-inline" />
-          </label>
-
+      <label class="label--sm"
+        >Title
+        <input type="text" :name="`input18`" required class="form-control-inline" />
+      </label>
     </div>
 
     <div class="container pb-0">
@@ -371,9 +371,10 @@
     </div>
 
     <div class="container visualtest">
-      <label class="label--sm">Title
-            <input type="text" :name="`input18`" required class="form-control-inline" />
-          </label>
+      <label class="label--sm"
+        >Title
+        <input type="text" :name="`input18`" required class="form-control-inline" />
+      </label>
 
       <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
@@ -491,7 +492,8 @@
     <div class="container pb-0">
       <h3 class="h6">Password</h3>
       <p class="pb-3">
-        Password fields hide the field value for security. Please see <RouterLink to="/components/password">password component</RouterLink> for more information.
+        Password fields hide the field value for security. Please see
+        <RouterLink to="/components/password">password component</RouterLink> for more information.
       </p>
     </div>
 
@@ -506,11 +508,8 @@
       <label for="color"
         >Input field label
         <input id="color" type="color" name="color" />
-        
       </label>
-
     </div>
-
 
     <div class="container">
       <h2>Implementation</h2>

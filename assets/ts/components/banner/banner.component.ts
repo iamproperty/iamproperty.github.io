@@ -19,7 +19,7 @@ class iamBentoGrid extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
     const loadCSS = `@import "${assetLocation}/css/components/banner.component.css";`;
-    
+
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
@@ -40,17 +40,14 @@ class iamBentoGrid extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const dismissBtn = this.shadowRoot?.querySelector('#dismiss');
     const bgImg = this.shadowRoot?.querySelector('.banner__img img');
 
-    dismissBtn?.addEventListener('click',() => {
-
+    dismissBtn?.addEventListener('click', () => {
       this.remove();
     });
 
-    if(this.hasAttribute('data-image'))
-      bgImg?.setAttribute('src',this.getAttribute('data-image'));
+    if (this.hasAttribute('data-image')) bgImg?.setAttribute('src', this.getAttribute('data-image'));
   }
 }
 

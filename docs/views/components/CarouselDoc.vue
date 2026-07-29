@@ -15,15 +15,11 @@
   import carouselAnat from '../../img/carousel-anatomy.png';
   import carouselAnat2 from '../../img/carousel-anatomy-2.png';
 
-
   import { carousel as events } from '../../events.js';
 </script>
 
 <template>
-  <TrackEvents
-    selector="iam-carousel"
-    :events="['snap-to']"
-  ></TrackEvents>
+  <TrackEvents selector="iam-carousel" :events="['snap-to']"></TrackEvents>
 
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -36,44 +32,41 @@
       galleries, content or article previews and feature highlights.
     </p>
 
-
     <h2>Carousel anatomy</h2>
     <div class="container bg-light mb-3 pb-0 visualtest">
-    <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
-
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
-    </Carousel>
-  </div>
+      <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+      </Carousel>
+    </div>
 
     <div class="container bg-light mb-3 pb-0 visualtest">
       <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
-
         <Card :data-image="cardImg"
           >Financial preparation <span>Here would be the top level description of the task</span></Card
         >
@@ -133,7 +126,6 @@
 
     <div class="md-col-end-8 container--inline-size visualtest">
       <Carousel class="visualtest" data-smcols="2" data-mdcols="2">
-
         <Card :data-image="cardImg"
           >Financial preparation <span>Here would be the top level description of the task</span></Card
         >
@@ -191,7 +183,6 @@
       </Carousel>
     </div>
 
-
     <ol class="pb-5">
       <li>Carousel content. This can contain cards, text, image and call to actions.</li>
       <li>
@@ -200,7 +191,8 @@
         then the right arrow will display but as 'disabled'.
       </li>
       <li>
-        Pips. (Optional) This is limited to 5 pips of content and gives the user context to how far along in the carousel they are and allows user to click through to navigate the content.
+        Pips. (Optional) This is limited to 5 pips of content and gives the user context to how far along in the
+        carousel they are and allows user to click through to navigate the content.
       </li>
       <li>
         Pagination slider indicator. (Optional) This shows only if content goes beyond 5 pips of content and gives the
@@ -461,7 +453,6 @@
         </ul>
       </template>
 
-
       <template #data-layer>
         <span v-html="events"></span>
       </template>
@@ -486,4 +477,3 @@
     </Versions>
   </main>
 </template>
-

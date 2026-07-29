@@ -27,24 +27,21 @@
 
     <div class="container visualtest bg-light mb-5">
       <div class="md-col-start-4 md-col-end-9">
-
-
-          <label
-            >Property address
-            <Search class="">
-              <input type="text" name="client" list="properties" />
-              <datalist id="properties">
-                <option value="45">1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
-                <option value="4">4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
-                <option value="4">4 Main Street, Newcastle upon Tyne, NE4 9JK</option>
-                <option value="6">6 Oak Ridge, Newcastle upon Tyne, NE1 1DU</option>
-                <option value="13">13 Oak Lane, Newcastle upon Tyne, NE3 6GH</option>
-                <option value="14">14 Main Road, Newcastle upon Tyne, NE1 6TU</option>
-              </datalist>
-            </Search>
-          </label>
+        <label
+          >Property address
+          <Search class="">
+            <input type="text" name="client" list="properties" />
+            <datalist id="properties">
+              <option value="45">1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
+              <option value="4">4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
+              <option value="4">4 Main Street, Newcastle upon Tyne, NE4 9JK</option>
+              <option value="6">6 Oak Ridge, Newcastle upon Tyne, NE1 1DU</option>
+              <option value="13">13 Oak Lane, Newcastle upon Tyne, NE3 6GH</option>
+              <option value="14">14 Main Road, Newcastle upon Tyne, NE1 6TU</option>
+            </datalist>
+          </Search>
+        </label>
       </div>
-
     </div>
 
     <ul class="mb-5">
@@ -58,16 +55,31 @@
     <p>The field should be able to trigger the search in one of three ways:</p>
     <ul class="mb-3">
       <li><strong>Automatically triggered:</strong> yping automatically triggers the search and updates the results</li>
-      <li><strong>After delay triggered: </strong> fter a certain amount of characters have been entered or after a specified amount of time</li>
+      <li>
+        <strong>After delay triggered: </strong> fter a certain amount of characters have been entered or after a
+        specified amount of time
+      </li>
       <li>The user should be able to clear the field via the clear field icon.</li>
       <li>Selecting an option should add that value to the field and close the dropdown.</li>
-      <li>When the user re-opens the field once a value has been selected it should show all options with the current value shown as placeholder text and with that value highlighted in the dropdown as selected. Once the user starts typing the placeholder text should disappear.</li>
-      <li>If the field is empty and an invalid value is typed and enter is pressed then the field should revert back to empty.</li>
-      <li>If the field already has a value and the user tries to edit the value with a non-valid value then after press enter, the chevron, or clicks away from the field, the value should return to the last valid value.</li>
-
+      <li>
+        When the user re-opens the field once a value has been selected it should show all options with the current
+        value shown as placeholder text and with that value highlighted in the dropdown as selected. Once the user
+        starts typing the placeholder text should disappear.
+      </li>
+      <li>
+        If the field is empty and an invalid value is typed and enter is pressed then the field should revert back to
+        empty.
+      </li>
+      <li>
+        If the field already has a value and the user tries to edit the value with a non-valid value then after press
+        enter, the chevron, or clicks away from the field, the value should return to the last valid value.
+      </li>
     </ul>
 
-    <p>There is an optional feature of searches to include a browser default popover that presents any valid or suggested values that the user can click to fill the search field.</p>
+    <p>
+      There is an optional feature of searches to include a browser default popover that presents any valid or suggested
+      values that the user can click to fill the search field.
+    </p>
 
     <!--
     <h2 class="mt-5">Ajax example</h2>
@@ -91,15 +103,22 @@
 
     <h2 class="pt-2">Stylised search</h2>
 
-    <p>The stylised search field is an element typically used in admin panels, navigation menus and as a standalone field within a page.</p>
+    <p>
+      The stylised search field is an element typically used in admin panels, navigation menus and as a standalone field
+      within a page.
+    </p>
 
     <h3>Anatomy</h3>
 
-    <p>Stylised search uses the same behaviours as the standard search but is styled in a more visually appealing way. The stylised search also comes with the option to include a drop shadow into the field.</p>
+    <p>
+      Stylised search uses the same behaviours as the standard search but is styled in a more visually appealing way.
+      The stylised search also comes with the option to include a drop shadow into the field.
+    </p>
 
     <div class="container visualtest bg-light mb-5">
       <div class="md-col-start-4 md-col-end-9">
-        <label><span class="visually-hidden">Search existing transactions</span>
+        <label
+          ><span class="visually-hidden">Search existing transactions</span>
           <Search class="search--stylised mt-0">
             <input
               type="text"
@@ -133,16 +152,22 @@
     <ul class="mb-5">
       <li><strong>Default:</strong> this has the field height of 48px (3rem)</li>
       <li><strong>Small:</strong> this has the field height of 40px (2.5rem)</li>
-      <li><strong>Compact:</strong> this follows the same height and sizing of the compact buttons with the ability to show the full field upon pressed.</li>
+      <li>
+        <strong>Compact:</strong> this follows the same height and sizing of the compact buttons with the ability to
+        show the full field upon pressed.
+      </li>
     </ul>
 
-
     <h3>Variants</h3>
-    <p>The field is available with a drop shadow - this can be used cases where the search function needs to stand out visually. It is an optional effect which can be used at the discretion of the design team.</p>
+    <p>
+      The field is available with a drop shadow - this can be used cases where the search function needs to stand out
+      visually. It is an optional effect which can be used at the discretion of the design team.
+    </p>
 
     <div class="container visualtest">
       <div class="md-col-end-5 pe-4">
-        <label><span class="visually-hidden">Search existing transactions</span>
+        <label
+          ><span class="visually-hidden">Search existing transactions</span>
           <Search class="search--stylised mt-0">
             <input
               type="text"
@@ -163,7 +188,8 @@
         </label>
       </div>
       <div class="md-col-start-6 md-col-end-10 pe-4">
-        <label><span class="visually-hidden">Search existing transactions</span>
+        <label
+          ><span class="visually-hidden">Search existing transactions</span>
           <Search class="search--stylised mt-0">
             <input
               type="text"
@@ -253,7 +279,6 @@
         </table>
       </template>
 
-
       <template #classes>
         <table>
           <thead>
@@ -297,7 +322,6 @@
           </tbody>
         </table>
       </template>
-
     </Integration>
 
     <Versions pdf="/pdfs/search.pdf">
@@ -313,7 +337,9 @@
           <tr>
             <td>V2 added</td>
             <td>16.04.2026</td>
-            <td>Inclusion of stylised search field - giving an option for displaying search in none data entry settings</td>
+            <td>
+              Inclusion of stylised search field - giving an option for displaying search in none data entry settings
+            </td>
           </tr>
           <tr>
             <td>V1 added</td>

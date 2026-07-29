@@ -32,7 +32,6 @@ class iamAdvancedSelect extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     // Make the datalist a dropdown
     this.classList.add('dropdown__wrapper');
 
@@ -47,8 +46,7 @@ class iamAdvancedSelect extends HTMLElement {
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
 
-    if(this.querySelector('label'))
-      this.classList.add('has-label');
+    if (this.querySelector('label')) this.classList.add('has-label');
 
     let datalist = this.querySelector('datalist') as HTMLDataListElement | null;
 
@@ -78,8 +76,7 @@ class iamAdvancedSelect extends HTMLElement {
     // Apply initial value passed to the component host or original input
     const initialValue = this.getAttribute('value') || inputField.value || '';
 
-    if (!initialValue)
-      return;
+    if (!initialValue) return;
 
     inputField.value = initialValue;
     inputField.setAttribute('value', initialValue);

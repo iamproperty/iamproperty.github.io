@@ -1,9 +1,5 @@
 @use '../_func' as *;
 
-
-
-
-
 @layer elements {
   /* #region reset */
   table {
@@ -125,7 +121,7 @@
         min-width: 15rem; /* 240 */
       }
       th.th--mw-lg {
-        min-width: 22.5rem; /* 360 */ 
+        min-width: 22.5rem; /* 360 */
       }
     }
   }

@@ -10,15 +10,18 @@
   import ActionTagText from '../../img/action-tag-text-list.png';
   import Integration from '../Integration.vue';
 
-    const widerColours = {};
+  const widerColours = {};
   const widerColoursHover = {};
   const widerColoursActive = {};
 
   for (let i = 1; i <= 23; i++) {
-    
     widerColours[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}`);
-    widerColoursHover[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-hover`);
-    widerColoursActive[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-active`);
+    widerColoursHover[i] = window
+      .getComputedStyle(document.querySelector('body'))
+      .getPropertyValue(`--wider-colour-${i}-hover`);
+    widerColoursActive[i] = window
+      .getComputedStyle(document.querySelector('body'))
+      .getPropertyValue(`--wider-colour-${i}-active`);
   }
 </script>
 

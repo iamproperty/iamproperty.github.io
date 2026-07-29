@@ -42,8 +42,7 @@ class iamActionbar extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    
-      if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
+    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     const loadCSS = `@import "${assetLocation}/css/components/actionbar.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/actionbar.global.css";`;
@@ -270,9 +269,7 @@ class iamActionbar extends HTMLElement {
     });
 
     searchBar.addEventListener('click', (event) => {
-
       if (event && event.target instanceof HTMLElement && event.target.closest('button.suffix')) {
-
         const submitEvent = new CustomEvent('search-submit', {
           detail: { search: searchBar.querySelector('input').value },
         });

@@ -1,7 +1,5 @@
 @use '../_func' as *;
 
-
-
 @use './table-basic.component';
 
 /* #region Table with actionbar */
@@ -18,7 +16,7 @@
   position: relative;
 
   text-align: center;
-  padding-top: 5rem!important;
+  padding-top: 5rem !important;
 
   &:after {
     content: '\f3f4';
@@ -27,11 +25,11 @@
 
     left: 50%;
     translate: -50% 0;
-    font-family: "Font Awesome 7 Pro";
+    font-family: 'Font Awesome 7 Pro';
     display: block;
     font-weight: 900;
     font-size: 1.5rem;
-    
+
     width: 1.5rem;
     padding: 0;
     height: 1.5rem;
@@ -42,10 +40,6 @@
     color: var(--colour-primary-theme);
     animation: spin 1s infinite steps(10);
   }
-
-
 }
-
-
 
 /* #endregion */

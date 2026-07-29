@@ -80,22 +80,16 @@ class iamFilerCard extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal): void {
-
-    
-
     switch (attrName) {
       case 'data-total': {
         if (oldVal != newVal) {
-           
           const cardBody = this.shadowRoot.querySelector('.card__body');
 
-          if(!cardBody?.querySelector('.card__total'))
-            cardBody.insertAdjacentHTML('beforeend',`<div class="card__total">${newVal}</div>`);
+          if (!cardBody?.querySelector('.card__total'))
+            cardBody.insertAdjacentHTML('beforeend', `<div class="card__total">${newVal}</div>`);
           else {
             cardBody?.querySelector('.card__total')?.innerHTML = newVal;
           }
-
-
         }
         break;
       }

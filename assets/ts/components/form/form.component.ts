@@ -9,7 +9,7 @@ import {
   readonlyIf,
   writeIf,
   emptyIf,
-  limitCheckboxes
+  limitCheckboxes,
 } from '../../modules/form';
 
 trackComponentRegistered('iam-form');
@@ -30,21 +30,17 @@ class iamForm extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const form = this.querySelector<HTMLFormElement>('form') ?? this;
 
-    if(!form)
-      return;
+    if (!form) return;
 
-    form.setAttribute('novalidate','true');
+    form.setAttribute('novalidate', 'true');
 
     // Form validation
     form.addEventListener('submit', (event) => {
-
       form.classList.add('was-validated');
 
       if (!isFormValid(form)) {
-
         event.preventDefault();
         form.querySelector<HTMLInputElement>('input:invalid')?.scrollIntoView();
       }
@@ -52,15 +48,13 @@ class iamForm extends HTMLElement {
 
     // conditional reveal required fields
     form.querySelectorAll<HTMLElement>('.conditional [required]').forEach((input) => {
-
-      input.setAttribute('data-conditional-required','true');
+      input.setAttribute('data-conditional-required', 'true');
       input.removeAttribute('required');
     });
 
     // conditional reveal required fields (for fields inside of components like the address lookup)
     form.querySelectorAll<HTMLElement>('.conditional [data-required]').forEach((input) => {
-
-      input.setAttribute('data-conditional-data-required','true');
+      input.setAttribute('data-conditional-data-required', 'true');
       input.removeAttribute('data-required');
     });
 
@@ -75,7 +69,6 @@ class iamForm extends HTMLElement {
     limitCheckboxes(null, this);
 
     form.addEventListener('change', (event) => {
-
       showIf(this);
       hideIf(this);
       disabledIf(this);
@@ -86,33 +79,31 @@ class iamForm extends HTMLElement {
       emptyIf(this);
       limitCheckboxes(event, form);
 
-      form.querySelectorAll<HTMLElement>('.conditional [data-conditional-required], .conditional [data-conditional-data-required]').forEach((input) => {
-
-        input.removeAttribute('required');
-        input.removeAttribute('data-required');
-      });
-
+      form
+        .querySelectorAll<HTMLElement>(
+          '.conditional [data-conditional-required], .conditional [data-conditional-data-required]'
+        )
+        .forEach((input) => {
+          input.removeAttribute('required');
+          input.removeAttribute('data-required');
+        });
 
       form.querySelectorAll<HTMLElement>('.conditional [data-conditional-required]').forEach((input) => {
-
         const conditionalElement = input.closest<HTMLElement>('.conditional');
-        if(!conditionalElement) return;
+        if (!conditionalElement) return;
 
         const conditionalStyles = window.getComputedStyle(conditionalElement);
 
-        if(conditionalStyles.getPropertyValue("display") == 'block')
-          input.setAttribute('required', 'required');
+        if (conditionalStyles.getPropertyValue('display') == 'block') input.setAttribute('required', 'required');
       });
 
       form.querySelectorAll<HTMLElement>('.conditional [data-conditional-data-required]').forEach((input) => {
-
         const conditionalElement = input.closest<HTMLElement>('.conditional');
-        if(!conditionalElement) return;
+        if (!conditionalElement) return;
 
         const conditionalStyles = window.getComputedStyle(conditionalElement);
 
-        if(conditionalStyles.getPropertyValue("display") == 'block')
-          input.setAttribute('data-required', 'true');
+        if (conditionalStyles.getPropertyValue('display') == 'block') input.setAttribute('data-required', 'true');
       });
     });
   }

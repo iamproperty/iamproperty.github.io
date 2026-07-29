@@ -55,12 +55,9 @@ export const addGlobalEvents = (body): void => {
   });
 
   Array.from(document.querySelectorAll('form')).forEach((form) => {
-    
-    if(!form?.closest('iam-form')){
+    if (!form?.closest('iam-form')) {
       form.addEventListener('submit', (event) => {
-        if (
-          form.querySelector(':invalid')
-        ) {
+        if (form.querySelector(':invalid')) {
           form.classList.add('was-validated');
           form?.querySelector('input:invalid')?.scrollIntoView();
           event.preventDefault();
@@ -68,13 +65,12 @@ export const addGlobalEvents = (body): void => {
       });
     }
   });
-  
+
   document.addEventListener('click', (event) => {
-    
     if (event && event.target instanceof HTMLElement && event.target.matches('form button:not([type=button])')) {
       const form = event.target.closest('form');
 
-      if(!form?.closest('iam-form')){
+      if (!form?.closest('iam-form')) {
         // Reset password types
         Array.from(form.querySelectorAll('[data-password-type]')).forEach((input) => {
           input.setAttribute('type', 'password');
@@ -93,7 +89,7 @@ export const addGlobalEvents = (body): void => {
         if (form.querySelector('iam-multiselect[data-is-required][data-error]')) {
           form.classList.add('was-validated');
           event.preventDefault();
-        }  
+        }
       }
     }
   });
@@ -203,10 +199,8 @@ export const uniqueID = (index = 1): number => {
   return ID;
 };
 
-
 export const isValidPostcode = (searchValue: string): boolean => {
-  
-  const regexp = /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gmi;
+  const regexp = /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gim;
 
   return regexp.test(searchValue.trim());
 };

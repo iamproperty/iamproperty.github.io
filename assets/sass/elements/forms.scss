@@ -8,14 +8,12 @@
 @use './select' as *;
 @use './textarea' as *;
 
-
 $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
 $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
 
 @layer elements {
   /* #region RESETS */
 
-  
   /*  1. Browsers set a default `min-width: min-content;` on fieldsets, */
   /*     unlike e.g. `<div>`s, which have `min-width: 0;` by default. */
   /*     So we reset that to ensure fieldsets behave more like a standard block element. */
@@ -66,11 +64,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   /* #endregion */
 
   /* #region input field */
-  
-  [disabled] label {
 
-      cursor: not-allowed;
-      pointer-events: none;
+  [disabled] label {
+    cursor: not-allowed;
+    pointer-events: none;
   }
   /* #endregion */
 
@@ -134,7 +131,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     }
   }
 
-
   *:has(> :is(.form-control-sm, .input--sm)) {
     --input-fs: 0.875rem; /* 14/16 */
     --input-lh: 1rem;
@@ -143,9 +139,9 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
   *:has(> :is(.form-control-lg, .input--lg)) {
     --input-fs: 1.5rem;
-    --input-lh: 1.8125rem; /* 29 */ 
+    --input-lh: 1.8125rem; /* 29 */
     --input-padding-block: 1.25rem;
-    --input-padding-inline: 1.375rem; /* 22 */ 
+    --input-padding-inline: 1.375rem; /* 22 */
   }
 
   *:has(> label:first-child):has(> input):has(> :is(.form-control-inline, .input--inline)) {
@@ -173,7 +169,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       font-size: var(--input-lh, 1.25rem);
       height: var(--input-lh, 1.25rem);
       width: var(--input-lh, 1.25rem);
-      top: auto!important;
+      top: auto !important;
       bottom: calc(var(--input-padding-block, 0.75rem) + 2px);
       right: calc(var(--input-padding-block, 1rem) + 2px);
       text-align: center;
@@ -183,11 +179,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   /* #endregion */
 
   /* #region prefix */
-  
-  @supports selector(:has(*)) {
-    
-    
 
+  @supports selector(:has(*)) {
     .suffix
       ~ :is(
         input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
@@ -207,15 +200,12 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       border-end-end-radius: 0 !important;
     }
 
-    :is(
-        input
-      ):has(~ iam-password-indicator) {
+    :is(input):has(~ iam-password-indicator) {
       border-start-end-radius: 0 !important;
       border-end-end-radius: 0 !important;
     }
 
     label:has(.suffix) input {
-      
       border-start-end-radius: 0 !important;
       border-end-end-radius: 0 !important;
     }
@@ -240,8 +230,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
-      var(--icon-select) right var(--input-padding-block, 0.75rem) top
-        var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+      var(--icon-select) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem) /
+        var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
       linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top /
         calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem))
         calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem))
@@ -429,10 +419,9 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       }
     }
 
-    fieldset:has(label > input:is([type="radio"],[type="checkbox"])){
-
+    fieldset:has(label > input:is([type='radio'], [type='checkbox'])) {
       label {
-        margin-bottom: 0!important;
+        margin-bottom: 0 !important;
       }
 
       margin-bottom: 1.5rem;
@@ -605,7 +594,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
   /* #endregion */
 
-  
   /* #region file upload */
   iam-fileupload {
     input {
@@ -780,7 +768,14 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   /* #endregion */
 
   /* #region Date and time fields */
-  :is(input[type='date'],input[type='datetime-local'],input[type='year'],input[type='month'],input[type='week'], input[type='time']) {
+  :is(
+    input[type='date'],
+    input[type='datetime-local'],
+    input[type='year'],
+    input[type='month'],
+    input[type='week'],
+    input[type='time']
+  ) {
     position: relative;
     margin-right: -3rem;
     padding-right: 3rem !important;
@@ -811,13 +806,12 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   /* #region Input wrapper */
 
   .input__wrapper {
-
     margin-top: 0.5rem;
     display: block;
     position: relative;
 
     input {
-      margin: 0!important;
+      margin: 0 !important;
     }
   }
   /* #endregion */

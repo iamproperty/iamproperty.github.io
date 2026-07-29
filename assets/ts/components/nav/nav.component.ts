@@ -1,4 +1,12 @@
-import { navTemplate, branchSelector, menuEvents, megaMenuTitles, megaMenusEvents, accountMenuEvents, backdropEvents } from '../../modules/nav';
+import {
+  navTemplate,
+  branchSelector,
+  menuEvents,
+  megaMenuTitles,
+  megaMenusEvents,
+  accountMenuEvents,
+  backdropEvents,
+} from '../../modules/nav';
 
 class iamNav extends HTMLElement {
   constructor() {
@@ -12,13 +20,13 @@ class iamNav extends HTMLElement {
     const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = /* HTML */`
-    <style class="styles">
-    ${navCSS}
-    </style>
+    template.innerHTML = /* HTML */ `
+      <style class="styles">
+        ${navCSS}
+      </style>
 
-    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
-    ${navTemplate}
+      <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
+      ${navTemplate}
     `;
 
     shadowRoot.appendChild(template.content.cloneNode(true));
@@ -29,7 +37,6 @@ class iamNav extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const backdrop = this.shadowRoot.querySelector('.backdrop');
 
     const menuButton = this.shadowRoot.querySelector('#btn-menu');
@@ -45,9 +52,11 @@ class iamNav extends HTMLElement {
     }
     // #endregion
 
-    accountBtnTitle.innerHTML = this.hasAttribute('data-account-btn-title') ? this.getAttribute('data-account-btn-title') : 'My account';
+    accountBtnTitle.innerHTML = this.hasAttribute('data-account-btn-title')
+      ? this.getAttribute('data-account-btn-title')
+      : 'My account';
 
-    if(!this.querySelector('[slot="account"]')){
+    if (!this.querySelector('[slot="account"]')) {
       accountMenuButton?.remove();
       accountMenu?.remove();
       accountBtnTitle?.remove();
@@ -60,11 +69,11 @@ class iamNav extends HTMLElement {
       this.classList.remove('open');
     });
 
-    menuEvents(this,menu,menuButton,accountMenu,accountMenuButton);
+    menuEvents(this, menu, menuButton, accountMenu, accountMenuButton);
     megaMenuTitles(this);
-    megaMenusEvents(this,menu,menuButton,accountMenu,accountMenuButton,backdrop);
-    accountMenuEvents(this,menu,menuButton,accountMenu,accountMenuButton,backdrop);
-    backdropEvents(this,menu,menuButton,accountMenu,accountMenuButton,backdrop);
+    megaMenusEvents(this, menu, menuButton, accountMenu, accountMenuButton, backdrop);
+    accountMenuEvents(this, menu, menuButton, accountMenu, accountMenuButton, backdrop);
+    backdropEvents(this, menu, menuButton, accountMenu, accountMenuButton, backdrop);
     branchSelector(this);
 
     // #region Search
@@ -116,9 +125,7 @@ class iamNav extends HTMLElement {
       });
     }
     // #endregion
-
   }
 }
-
 
 export default iamNav;

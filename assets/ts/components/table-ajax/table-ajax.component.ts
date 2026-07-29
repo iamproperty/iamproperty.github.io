@@ -54,7 +54,7 @@ class iamTableAjax extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
     if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
-    
+
     setupBasicTable(this, table, form, pagination);
 
     setupAdvancedTable(this, table, form, pagination);

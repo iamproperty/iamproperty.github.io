@@ -3,12 +3,11 @@
 
 @use '../_func' as *;
 
-
-@layer elements{
+@layer elements {
   :is(.prefix, .suffix) {
     display: none;
   }
-  
+
   :is(.prefix, .suffix) {
     --fa-display: flex;
     display: flex;
@@ -34,17 +33,13 @@
     text-overflow: ellipsis;
     position: relative;
 
-
     height: calc(
-      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
-        4px
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) + 4px
     );
 
     @supports (height: stretch) {
-      
       height: stretch;
     }
-
 
     flex-shrink: 0;
 
@@ -93,48 +88,44 @@
     select:focus-visible ~ span:after {
       content: '\f077';
     }
-        
-    @container style(--font-body) {
 
+    @container style(--font-body) {
       &::before {
-        content: var(--iso)!important;
+        content: var(--iso) !important;
       }
-      
     }
 
     @container style(--fa-font-regular) {
-
       &::before {
-        content: var(--fa)!important;
+        content: var(--fa) !important;
       }
     }
   }
 
   .prefix {
-      border-right: none;
+    border-right: none;
+  }
+
+  .suffix {
+    border-left: none;
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0.5rem !important;
+    border-end-end-radius: 0.5rem !important;
+    order: 2;
+  }
+
+  .prefix span {
+    display: none;
+
+    small {
+      font-size: 0.8em;
     }
+  }
 
-    .suffix {
-      border-left: none;
-      border-end-start-radius: 0;
-      border-start-start-radius: 0;
-      border-start-end-radius: 0.5rem !important;
-      border-end-end-radius: 0.5rem !important;
-      order: 2;
-    }
-
-    .prefix span {
-      display: none;
-
-      small {
-        font-size: 0.8em;
-      }
-    }
-
-    .prefix
-      ~ :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), textarea, output) {
-      border-end-start-radius: 0 !important;
-      border-start-start-radius: 0 !important;
-    }
-
+  .prefix
+    ~ :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), textarea, output) {
+    border-end-start-radius: 0 !important;
+    border-start-start-radius: 0 !important;
+  }
 }

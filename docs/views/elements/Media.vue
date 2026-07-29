@@ -6,12 +6,12 @@
   </a>
 </div>`;
 
-const aspectRatios = {
-  '1x1': '100%',
-  '4x3': 'calc(3 / 4 * 100%)',
-  '16x9': 'calc(9 / 16 * 100%)',
-  '21x9': 'calc(9 / 21 * 100%)'
-}
+  const aspectRatios = {
+    '1x1': '100%',
+    '4x3': 'calc(3 / 4 * 100%)',
+    '16x9': 'calc(9 / 16 * 100%)',
+    '21x9': 'calc(9 / 21 * 100%)',
+  };
 </script>
 
 <template>

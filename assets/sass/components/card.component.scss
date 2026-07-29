@@ -17,7 +17,6 @@
   --card-right-padding: 3.5rem;
 }
 :host(.show-icon) .card__body {
-
   &:before,
   &:after {
     content: '';
@@ -141,7 +140,6 @@ slot[name='secondary'] {
   border: none;
 }
 :host(:not(.prevent-hover)) ::slotted([slot='primary-action']:is(:hover, :focus, .hover)) {
- 
   outline: 2px solid var(--hover-outline-colour);
   outline-offset: -2px;
   border-radius: var(--card-border-radius) !important;
@@ -149,27 +147,24 @@ slot[name='secondary'] {
 /* #endregion */
 
 /* #region link */
-:host(.hasLink) slot[name="link"] {
-
+:host(.hasLink) slot[name='link'] {
   position: absolute;
   display: block;
   inset: 0;
   z-index: 1;
 }
 
-::slotted([slot="link"]) {
-
-  position: absolute!important;
-  display: block!important;
-  inset: 0!important;
-  z-index: 1!important;
-  margin: 0!important;
-  text-indent: -300%!important;
-  overflow: hidden!important;
+::slotted([slot='link']) {
+  position: absolute !important;
+  display: block !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+  text-indent: -300% !important;
+  overflow: hidden !important;
 }
-::slotted([slot="link"]):after {
-
-  display: none!important;
+::slotted([slot='link']):after {
+  display: none !important;
 }
 
 /* #endregion */
@@ -177,7 +172,6 @@ slot[name='secondary'] {
 /* #region article cards */
 
 :host(.card--article) {
-
   --card-head-height: 5rem;
   --card-fs: 1rem;
   --card-gap: 0.5rem;
@@ -190,19 +184,18 @@ slot[name='secondary'] {
   --card-body-fs: 0.6875rem;
   --card-body-lh: 1rem;
 
-  --card-footer-bottom-padding: 0.5rem!important;
+  --card-footer-bottom-padding: 0.5rem !important;
 
-  --card-badges-top-padding:0.5rem;
+  --card-badges-top-padding: 0.5rem;
   --card-badges-bottom-padding: 0;
   --card-right-padding: 0.5rem;
   --card-left-padding: 0.5rem;
 }
 
-::slotted(span:is(.duration):not([class*=pt-])) {
-  
-  font-size: var(--card-fs)!important;
-  line-height: var(--card-lh)!important;
-  padding-top: 0!important;
+::slotted(span:is(.duration):not([class*='pt-'])) {
+  font-size: var(--card-fs) !important;
+  line-height: var(--card-lh) !important;
+  padding-top: 0 !important;
 
   &:before {
     content: '\f017';

@@ -12,19 +12,14 @@
     </DSHeader>
 
     <div class="container pb-0">
-      <p class="lead">
-        ..
-      </p>
+      <p class="lead">..</p>
     </div>
 
-    
     <div class="visualtest">
-      
-        <label>
-          Add referral note
-          <textarea name="note" rows="2"></textarea>
-        </label>
-
+      <label>
+        Add referral note
+        <textarea name="note" rows="2"></textarea>
+      </label>
     </div>
 
     <Integration component="carousel" componentName="iam-carousel">
@@ -34,7 +29,7 @@
   <textarea name="note" rows="8"></textarea>
 </label>`}}</code></pre>
       </template>
-      
+
       <template #attr>
         <table>
           <thead>
@@ -57,9 +52,6 @@
           </tbody>
         </table>
       </template>
-
     </Integration>
-
-
   </main>
 </template>

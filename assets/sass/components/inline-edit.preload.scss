@@ -1,9 +1,5 @@
 @use '../_func' as *;
 
-
-
-
-
 @layer components {
   iam-inline-edit {
     .optional-text {
@@ -64,13 +60,12 @@
     position: relative;
 
     &[data-value]:hover:before {
-      
       opacity: 1;
       z-index: 1;
       position: relative;
     }
 
-    &[data-value]:before{
+    &[data-value]:before {
       content: attr(data-value);
       display: block;
       padding-inline: 1rem;
@@ -84,10 +79,9 @@
   }
 
   td:has(> iam-inline-edit) {
-
     height: 3.5rem;
   }
-  
+
   iam-inline-edit:has(iam-multiselect) {
     --search-display: none;
     --input-ms: 0;
@@ -98,7 +92,6 @@
     height: 100%;
 
     &:focus-within {
-      
       position: absolute;
     }
   }
@@ -106,7 +99,6 @@
   td iam-inline-edit:has(iam-multiselect) {
     width: calc(100% - 2rem);
   }
-
 
   iam-inline-edit:not(:focus-within) iam-multiselect:has(label[slot='checked']) {
     --display-button: none;

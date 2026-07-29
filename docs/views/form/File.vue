@@ -6,7 +6,7 @@
 
   import Input from '@/components/Input/Input.vue';
   import FileUpload from '@/components/FileUpload/FileUpload.vue';
-  
+
   const message = 'input field value';
   const htmlUsage = `...`;
 </script>

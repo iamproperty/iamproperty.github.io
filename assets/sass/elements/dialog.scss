@@ -24,7 +24,6 @@
     border-radius: var(--dropdown-border-radius);
     box-shadow: var(--dropdown-box-shadow);
 
-
     > *:last-child {
       margin-bottom: 0;
     }
@@ -41,54 +40,46 @@
 
   @media (prefers-color-scheme: light) {
     dialog[open]:has(iam-modal) {
-      
       color-scheme: light;
       --colour-body: #595959;
       --colour-heading: var(--colour-primary-theme);
-      
     }
   }
 
-/*  Size variants */
+  /*  Size variants */
   /*  small */
   @media screen and (min-width: 36em) {
-
-    *:not(.dialog__wrapper) > dialog[open]:has(.modal--sm)  {
-      
-        min-width: 20.9375rem;
-        width: 20.9375rem;
-        max-width: 20.9375rem;
+    *:not(.dialog__wrapper) > dialog[open]:has(.modal--sm) {
+      min-width: 20.9375rem;
+      width: 20.9375rem;
+      max-width: 20.9375rem;
     }
   }
 
   @media screen and (min-width: 62em) {
-
-    *:not(.dialog__wrapper) > dialog[open]:has(.modal--sm)  {
-        min-width: 28.375rem;
-        width: 28.375rem;
-        max-width: 28.375rem;
+    *:not(.dialog__wrapper) > dialog[open]:has(.modal--sm) {
+      min-width: 28.375rem;
+      width: 28.375rem;
+      max-width: 28.375rem;
     }
   }
 
   /*  large */
   @media screen and (min-width: 36em) {
-
-    *:not(.dialog__wrapper) > dialog[open]:has(.modal--lg)  {
-        min-width: 42.875rem;
-        width: 42.875rem;
-        max-width: 42.875rem;
+    *:not(.dialog__wrapper) > dialog[open]:has(.modal--lg) {
+      min-width: 42.875rem;
+      width: 42.875rem;
+      max-width: 42.875rem;
     }
   }
 
   @media screen and (min-width: 62em) {
-
-        *:not(.dialog__wrapper) > dialog[open]:has(.modal--lg)  {
-        min-width: 46rem;
-        width: 46rem;
-        max-width: 46rem;
+    *:not(.dialog__wrapper) > dialog[open]:has(.modal--lg) {
+      min-width: 46rem;
+      width: 46rem;
+      max-width: 46rem;
     }
   }
-
 
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.3);
@@ -105,7 +96,6 @@
   /*  TODO: when the old modals are depreciated this selector can be simplified */
   *:not(.dialog__wrapper) > dialog[open],
   *:not(.dialog__wrapper) > [popover]:popover-open {
-
     overflow-y: auto;
     width: 90vw;
     max-width: 20.25rem; /*  col-width*4 */
@@ -126,7 +116,6 @@
     }
   }
 
-  
   /* #endregion */
 
   details.bg-light {

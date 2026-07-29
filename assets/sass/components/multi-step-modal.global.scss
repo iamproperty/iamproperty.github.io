@@ -3,8 +3,6 @@
 /* #region Multi step modal */
 @layer components {
   iam-multi-step-modal {
-    
-
     :is(.h1, .h2, .h3, .h4, .h5, .h6) {
       padding-right: calc(var(--dialog-padding) * 3);
       padding-bottom: var(--dialog-padding);
@@ -13,7 +11,7 @@
     form {
       overflow: auto;
       padding-bottom: var(--dialog-padding);
-        padding-top: var(--dialog-padding);
+      padding-top: var(--dialog-padding);
       max-height: calc(min(90vh, 47rem) - 6rem);
     }
 
@@ -33,8 +31,6 @@
     }
 
     @media screen and (min-width: 36em) {
-
-
       .btn--wrapper {
         margin-top: auto;
         text-align: right;
@@ -48,16 +44,13 @@
     }
 
     @media screen and (min-width: 62em) {
-
       form {
         display: flex;
         flex-direction: column;
       }
 
       fieldset {
-
         &.active {
-          
           display: flex;
         }
         flex-direction: column;
@@ -89,4 +82,4 @@
     }
   }
 }
-  /* #endregion */
+/* #endregion */
