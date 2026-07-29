@@ -8,6 +8,9 @@
 @use '../elements/dialog.scss' as *;
 @use '../elements/type.css' as *;
 
+@use '../elements/input.scss' as *;
+@use '../elements/forms.scss' as *;
+
 :host {
   display: block;
   height: 100%;
@@ -24,8 +27,8 @@ dialog {
   justify-content: center;
 }
 
-/* #region filters */
-#filters {
+/* #region filters and actions */
+#bar {
   background: var(--colour-light);
   padding-block: 0.5rem;
   padding-inline: 1.5rem;
@@ -36,11 +39,34 @@ dialog {
   top: 0;
   z-index: 99;
 
+  :is(#filters,#actions) > *,
   > * {
     margin: 0!important;
   }
+
+  :is(#filters,#actions) {
+    
+    margin-left: auto!important;
+    display: flex;    
+    align-items: center;
+  }
 }
 
+#bar:not(:has([name="selectall"]:checked)) #actions {
+
+  display: none;
+}
+
+#bar:has([name="selectall"]:checked) #filters {
+
+  display: none;
+}
+
+.h4:has(.count){
+  
+  padding-inline: 1.5rem;
+  padding-bottom: 1rem;
+}
 /* #endregion */
 
 #wrapper {

@@ -1,4 +1,4 @@
-import iamPagination from '../../js/components/pagination/pagination.component.min.js';
+//import iamPagination from '../../js/components/pagination/pagination.component.min.js';
 
 class iamVisProperties extends HTMLElement {
   constructor() {
@@ -21,8 +21,21 @@ class iamVisProperties extends HTMLElement {
     <!-- MapLibre JavaScript -->
     <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
 
-    <div id="filters">
-      <button command="show-modal" commandfor="filtersDialog" class="btn btn-primary">Filter results</button>
+
+    <div id="bar">
+
+      <label>
+        <input type="checkbox" name="selectall" />
+        <span>Select all table items</span>
+      </label>
+
+      <div id="actions">
+        <button id="createCampaign" class="btn btn-action">Create print campaign</button>
+      </div>
+      <div id="filters">
+        <button command="show-modal" commandfor="filtersDialog" class="btn btn-primary">Filter results</button>
+      </div>
+
     </div>
     <dialog id="filtersDialog">
       <span class="h2">Filterby</span>
@@ -32,6 +45,9 @@ class iamVisProperties extends HTMLElement {
         <button command="close" commandfor="filtersDialog" class="btn btn-primary">Update results</button>
       </div>
     </dialog>
+
+    <span class="h4"><span class="count"></span>Properties most likely to switch</span>
+
     <div id="map"></div>
     <div id="wrapper" class="table__container">
       <div class="table--cta">
@@ -121,7 +137,7 @@ class iamVisProperties extends HTMLElement {
 
     this.map.addControl(
       new maplibregl.NavigationControl(),
-      "top-right"
+      "top-left"
     );
 
     this.map.on("load", () => {
@@ -279,6 +295,7 @@ class iamVisProperties extends HTMLElement {
 
   paginateTable = (): void => {
     const pagination = this.shadowRoot?.querySelector('iam-pagination');
+    const count = this.shadowRoot?.querySelector('.count');
 
     const page = pagination.getAttribute('data-page');
     const show = pagination.getAttribute('data-show');
@@ -296,15 +313,85 @@ class iamVisProperties extends HTMLElement {
     });
 
     pagination?.setAttribute('data-total', rows.length);
+    count?.textContent = `${rows.length} `;
+  }
+
+  addCheckboxes = (): void => {
+
+    const headingRow = this.querySelector('table thead tr');
+
+    headingRow?.insertAdjacentHTML('afterbegin','<th></th>');
+
+    const rows = this.querySelectorAll('tbody tr');
+
+    rows.forEach((row, index) => {
+      row?.insertAdjacentHTML('afterbegin',`<td><label><input type="checkbox" name="row${index}" /></label></td>`);
+    });
+
+  }
+
+  setSelectAllInput = (): void => {
+
+    const selectAll = this.shadowRoot?.querySelector('[name="selectall"]');
+
+    /*
+    if(selectAll.checked == true){
+      this.setSelectAllInput();
+    }
+*/
+
+    this.setSelectAllText();
+  }
+
+
+  setSelectAllText = (): void => {
+    const selectAllText = this.shadowRoot?.querySelector('[name="selectall"] + span');
+    const selectedInputs = this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked');
+
+    selectAllText?.textContent = selectedInputs.length == 0 ? `Select all table items` :`${selectedInputs.length} item${selectedInputs.length > 1 ? 's': ''} selected`;
+  }
+
+  getSelectedCheckboxes = (): void => {
+
+    const selected = [];
+
+    this.querySelectorAll('[type="checkbox"]:checked').forEach((input) => {
+      selected.push(input.getAttribute('name'));
+    });
+
+    return selected;
+  }
+
+  createCampaign = (): void => {
+
+    const selected = this.getSelectedCheckboxes();
+
+    console.log(selected);
   }
 
   connectedCallback(): void {
 
     const pagination = this.shadowRoot?.querySelector('iam-pagination');
+    const createCampaignBtn = this.shadowRoot?.querySelector('#createCampaign');
+    const selectAll = this.shadowRoot?.querySelector('[name="selectall"]');
 
     if (this.map)
       return;
 
+    selectAll?.addEventListener('change', (event) => {
+
+      this.setSelectAllInput();
+
+    });
+
+    this?.addEventListener('change', (event) => {
+
+      if(this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length == 0)
+        selectAll.indeterminate = this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length != 0;
+
+      console.log(this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length != 0);
+      this.setSelectAllText();
+    });
     // #region Filters
 
     const filtersDialog = this.shadowRoot?.querySelector('#filtersDialog');
@@ -320,10 +407,20 @@ class iamVisProperties extends HTMLElement {
     // #endregion
 
 
+    // #region actions
+
+    createCampaignBtn?.addEventListener('click', (event) => {
+
+      this.createCampaign();
+    });
+
+    // #endregion
+
     if(this.querySelector('tr[data-longitude][data-latitude]')){
 
       this.paginateTable();
       this.createMap();
+      this.addCheckboxes();
 
       const componentHeight = this.scrollHeight;
 

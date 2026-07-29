@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+@use '../elements/input.scss' as *;
+@use '../elements/forms.scss' as *;
+
 
 iam-vis-properties {
   
@@ -140,7 +143,7 @@ iam-vis-properties {
   }
   /* #endregion */
 
-  tr:not(.show){
+  tbody tr:not(.show){
     display: none!important;
   }
 
