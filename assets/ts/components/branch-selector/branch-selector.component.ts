@@ -43,6 +43,21 @@ class iamBranchSelector extends HTMLElement {
   }
 
   connectedCallback(): void {
+
+
+    const wrapper = this.shadowRoot?.querySelector('.wrapper');
+
+    if(this.querySelector('button:first-child:last-child')){
+
+      wrapper.innerHTML = '<i class="fa-regular fa-building-circle-check"></i><span class="indicator"></span><slot></slot>';
+
+      if (this.hasAttribute('data-indicator'))
+        wrapper?.querySelector('span.indicator').setAttribute('data-indicator', this.getAttribute('data-indicator'));
+
+      return false;
+    }
+
+
     const menuButton = this.shadowRoot?.querySelector('#menuButton');
     const dropdown = this.shadowRoot?.querySelector('#dropdown');
 

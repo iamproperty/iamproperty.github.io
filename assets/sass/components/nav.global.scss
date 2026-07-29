@@ -619,18 +619,15 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky {
       }
     }
 
-    details > summary {
-      padding-right: 0;
-      background: transparent;
-
-      &:after {
-        display: none;
-      }
-    }
-
     details:not(:first-child) > summary {
       margin-left: 2rem;
     }
+  }
+
+  :is(iam-nav, .iam-nav) > details[open] > div:has(details) {
+    background: #eee!important;
+    display: flex!important;
+    align-items: center!important;
   }
 
   :is(iam-nav, .iam-nav) a:not([slot='logo']):not(.btn):not(:has(iam-card)) {

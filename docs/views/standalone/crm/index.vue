@@ -2,9 +2,9 @@
   import CRMNav from './components/nav.vue';
 </script>
 <template>
-  <nav>
-    <CRMNav></CRMNav>
-  </nav>
+
+  <CRMNav></CRMNav>
+
 
   <router-view> </router-view>
 </template>

@@ -37,6 +37,11 @@ class iamNav extends HTMLElement {
   }
 
   connectedCallback(): void {
+
+    // Load external CSS if needed
+    if(this.hasAttribute('data-css'))
+      this.shadowRoot.querySelector('.styles').insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
+
     const backdrop = this.shadowRoot.querySelector('.backdrop');
 
     const menuButton = this.shadowRoot.querySelector('#btn-menu');

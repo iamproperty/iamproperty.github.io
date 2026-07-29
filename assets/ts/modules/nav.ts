@@ -260,10 +260,12 @@ export const accountMenuEvents = (component, menu, menuButton, accountMenu, acco
       component.classList.add('open');
       accountMenuButton?.querySelector('.btn-primary').classList.add('active');
       accountMenuButton?.setAttribute('aria-expanded', true);
+      backdrop.classList.add('show');
     } else {
       component.classList.remove('open');
       accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
       accountMenuButton?.removeAttribute('aria-expanded');
+      backdrop.classList.remove('show');
     }
 
     component.querySelector(':scope > details[open]')?.removeAttribute('open');

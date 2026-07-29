@@ -44,27 +44,27 @@
       text-overflow: ellipsis;
       font-weight: bold;
     }
+  }
 
-    span[data-indicator] {
-      position: relative;
-    }
-    span[data-indicator]:before {
-      content: attr(data-indicator);
+  span[data-indicator] {
+    position: relative;
+  }
+  span[data-indicator]:before {
+    content: attr(data-indicator);
 
-      display: block;
-      position: absolute;
-      top: 0;
-      left: -1.5em;
-      background-color: var(--colour-warning);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -1.5em;
+    background-color: var(--colour-warning);
 
-      border-radius: 50%;
+    border-radius: 50%;
 
-      font-size: 0.5rem;
-      line-height: 1.75em;
-      height: 1.75em;
-      width: 1.75em;
-      text-align: center;
-    }
+    font-size: 0.5rem;
+    line-height: 1.75em;
+    height: 1.75em;
+    width: 1.75em;
+    text-align: center;
   }
 
   ::slotted(label) {
@@ -101,4 +101,49 @@
     margin: 0;
     width: auto;
   }
+
+  /* #region single button */
+  ::slotted(button:first-child:last-child) {
+    font-size: 0.75rem !important;
+    line-height: 2rem !important;
+    padding-block: 0 !important;
+    border: none !important;
+    position: relative !important;
+    display: flex !important;
+    font-weight: bold !important;
+    margin: 0 !important;
+    padding-left: 2rem!important;
+  }
+
+  ::slotted(button:first-child:last-child:not(:hover, :focus)) {
+
+    background-color: transparent !important;
+    outline: none !important;
+  }
+
+  .wrapper:has(>i){
+    
+    display: flex;
+    position: relative;
+  }
+
+  .wrapper > i {
+    position: absolute;
+    
+    left: 0.25rem;
+    font-size: 1rem !important;
+      line-height: 2rem !important;
+      display: inline-block;
+      pointer-events: none;
+      z-index: 2;
+  }
+
+  .wrapper > span[data-indicator] {
+    position: absolute;
+    left: 1.75rem;
+    pointer-events: none;
+      z-index: 2;
+  }
+  
+  /* #endregion */
 }
