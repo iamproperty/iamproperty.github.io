@@ -123,9 +123,7 @@
     </ul>
 
     <div class="container visualtest">
-      <button class="btn btn-primary" popovertarget="actions" style="anchor-name: --actions">
-        Actions
-      </button>
+      <button class="btn btn-primary" popovertarget="actions" style="anchor-name: --actions">Actions</button>
       <Menu id="actions" popover style="position-anchor: --actions">
         <button><i class="fa-solid fa-edit"></i> Edit</button>
         <button><i class="fa-solid fa-clone"></i> Duplicate</button>
@@ -133,9 +131,7 @@
         <button><i class="fa-solid fa-trash"></i> Delete</button>
       </Menu>
 
-      <button class="btn btn-primary" popovertarget="actions2" style="anchor-name: --actions">
-        Actions
-      </button>
+      <button class="btn btn-primary" popovertarget="actions2" style="anchor-name: --actions">Actions</button>
       <Menu id="actions2" class="menu--fill" popover style="position-anchor: --actions">
         <button><i class="fa-solid fa-edit"></i> Edit</button>
         <button><i class="fa-solid fa-clone"></i> Duplicate</button>

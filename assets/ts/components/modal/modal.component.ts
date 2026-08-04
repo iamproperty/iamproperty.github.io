@@ -40,7 +40,6 @@ class iamModal extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const hasDialogParent = this.closest('dialog[id]');
     const originalDialog = this.querySelector('dialog');
 
@@ -48,12 +47,12 @@ class iamModal extends HTMLElement {
     let dialog = this.closest('dialog') ? this.closest('dialog') : this.shadowRoot?.querySelector('dialog');
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
     const cancelButton = this.shadowRoot?.querySelector('[data-cancel]');
-    const agreedButton = this.querySelector('button[slot="agreed-button"]') ? this.querySelector('button[slot="agreed-button"]') : this.shadowRoot?.querySelector('[data-agreed]');
+    const agreedButton = this.querySelector('button[slot="agreed-button"]')
+      ? this.querySelector('button[slot="agreed-button"]')
+      : this.shadowRoot?.querySelector('[data-agreed]');
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
 
-
-    if(hasDialogParent)
-      this.classList.add('has-parent-dialog');
+    if (hasDialogParent) this.classList.add('has-parent-dialog');
 
     const agreed = (close = true) => {
       const agreedEvent = new CustomEvent('agreed', {
@@ -62,55 +61,47 @@ class iamModal extends HTMLElement {
 
       this.dispatchEvent(agreedEvent);
 
-      if(!this.querySelector(':invalid') && close)
-        closeModal(this);
-    }
+      if (!this.querySelector(':invalid') && close) closeModal(this);
+    };
 
     document.addEventListener('click', (e) => {
-
-      if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
+      if (e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)) {
         openModal(this);
       }
     });
 
     document.addEventListener('click', (e) => {
-
-      if(e.target.matches(`[command="close"][commandfor="${id}"]`)){
+      if (e.target.matches(`[command="close"][commandfor="${id}"]`)) {
         closeModal(this);
       }
     });
 
     // Disable the original event
     originalDialog?.addEventListener('command', (e) => {
-
-      if (event.command == "show-modal") {
+      if (event.command == 'show-modal') {
         e.preventDefault();
       }
     });
 
     originalDialog?.addEventListener('command', (e) => {
-
       e.preventDefault();
 
-      if (event.command == "close") {
+      if (event.command == 'close') {
         closeModal(id, this);
       }
     });
 
     originalDialog?.addEventListener('close', (e) => {
-
       e.preventDefault();
 
       closeModal(this);
     });
 
     // Move the submit button so that the slot functionality works
-    if(originalDialog) {
-      if(originalDialog.hasAttribute('open'))
-        dialog?.showModal();
+    if (originalDialog) {
+      if (originalDialog.hasAttribute('open')) dialog?.showModal();
 
       Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
-
         if (typeof this.moveBefore === 'function') {
           // Supported: Chrome, Firefox
           this.moveBefore(element, originalDialog);
@@ -130,45 +121,38 @@ class iamModal extends HTMLElement {
     });
 
     agreedButton?.addEventListener('click', () => {
-
       agreed();
     });
-
 
     this.addEventListener('close-modal', () => {
       closeModal(this);
     });
 
     // Hijack the default form submission
-    if(!hasDialogParent){
+    if (!hasDialogParent) {
       originalDialog?.addEventListener('submit', (e) => {
-
-        if(e.submitter && e.submitter.hasAttribute('formmethod') && e.submitter.getAttribute('formmethod') =="dialog"){
-
+        if (
+          e.submitter &&
+          e.submitter.hasAttribute('formmethod') &&
+          e.submitter.getAttribute('formmethod') == 'dialog'
+        ) {
           closeModal(this);
-        }
-        else {
+        } else {
           agreed(false);
         }
       });
     }
 
-
-    Array.from(this.querySelectorAll('button[type="submit"]')).forEach((button)=> {
-
+    Array.from(this.querySelectorAll('button[type="submit"]')).forEach((button) => {
       button.addEventListener('click', (e) => {
-
-        if(!button.closest('form') && !button.hasAttribute('formmethod')){
-
+        if (!button.closest('form') && !button.hasAttribute('formmethod')) {
           agreed();
         }
       });
     });
 
-
     // Add click event on backdrop
     this.addEventListener('click', (event) => {
-
       // Small fix to make sure the dialog isn't a dialog inside of a dialog.
       const style = window.getComputedStyle(dialog);
 
@@ -185,21 +169,19 @@ class iamModal extends HTMLElement {
           event.clientY < dialogDimensions.top ||
           event.clientY > dialogDimensions.bottom
         ) {
-          if (!event.target.closest('dialog *'))
-            closeModal(this); // Weird bug when interacting with radio input fields within dialogs cuases it to close
+          if (!event.target.closest('dialog *')) closeModal(this); // Weird bug when interacting with radio input fields within dialogs cuases it to close
         }
       }
     });
 
-
-    if (modalType == 'transactional' || modalType == 'acknowledgement' ){
-      this.shadowRoot?.querySelector('.scroll')?.insertAdjacentHTML('afterbegin',
+    if (modalType == 'transactional' || modalType == 'acknowledgement') {
+      this.shadowRoot?.querySelector('.scroll')?.insertAdjacentHTML(
+        'afterbegin',
         `<i class="fa-light fa-circle" aria-hidden="true">
           <i class="fa-regular fa-${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'info'}" aria-hidden="true"></i>
         </i>`
       );
     }
-
   }
 }
 

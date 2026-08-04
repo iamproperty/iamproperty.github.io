@@ -1,8 +1,7 @@
 @layer elements {
-
   /* #region Headings */
-  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4) {
-    margin-top: 0; 
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .display-1, .display-2, .display-3, .display-4) {
+    margin-top: 0;
     margin-bottom: 0;
     font-family: var(--font-heading);
     font-style: normal;
@@ -73,7 +72,6 @@
     max-width: var(--content-max-width);
   }
 
-
   /* #endregion */
 
   p {
@@ -94,7 +92,7 @@
     display: none;
   }
 
-  p:has(a:first-child:last-child){
+  p:has(a:first-child:last-child) {
     /* display: contents; */
   }
   /* #endregion */
@@ -102,7 +100,7 @@
   :is(.lead, .strapline) {
     font-size: 1.125rem; /* 18/16 */
     line-height: 1.75rem; /* 28/16 */
-   padding-bottom: 3rem;
+    padding-bottom: 3rem;
     max-width: var(--content-max-width);
     font-weight: 700;
   }
@@ -115,7 +113,7 @@
     max-width: var(--content-max-width);
     font-weight: normal;
   }
-  
+
   .x-small {
     font-size: 0.625rem; /* 10/16 */
     line-height: 1.5rem;

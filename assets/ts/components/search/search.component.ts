@@ -28,18 +28,18 @@ class iamSearch extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */ `
-    <style>
-    ${loadCSS}
-    </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
-    <span class="wrapper">
-      <span class="input__wrapper">
-        <slot></slot>
-        <button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>
+      <style>
+        ${loadCSS}
+      </style>
+      <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
+      <span class="wrapper">
+        <span class="input__wrapper">
+          <slot></slot>
+          <button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>
+        </span>
+        <button class="suffix fa-regular fa-search"></button>
       </span>
-      <button class="suffix fa-regular fa-search"></button>
-    </span>
-    <slot name="datalist"></slot>
+      <slot name="datalist"></slot>
     `;
     shadowRoot.appendChild(template.content.cloneNode(true));
   }
@@ -56,24 +56,22 @@ class iamSearch extends HTMLElement {
 
     let minLength = this.hasAttribute('data-min-length') ? getIntegerAttribute(this, 'data-min-length', 1) : 1;
 
-
-    suffixElement?.setAttribute('class',`suffix ${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'fa-regular fa-search'}`);
-
+    suffixElement?.setAttribute(
+      'class',
+      `suffix ${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'fa-regular fa-search'}`
+    );
 
     if (this.hasAttribute('data-url') && !this.hasAttribute('data-min-length')) {
-
       minLength = 3;
     }
 
-    if(!inputElement || !suffixElement) return;
+    if (!inputElement || !suffixElement) return;
 
     // #region maintain the original placeholder value in a data attribute to allow for it to be reset when the field is emptied
     const originalPlaceholder = inputElement.getAttribute('placeholder');
 
-    if(originalPlaceholder !== null)
-      this.setAttribute('data-original-placeholder', originalPlaceholder);
+    if (originalPlaceholder !== null) this.setAttribute('data-original-placeholder', originalPlaceholder);
     // #endregion
-
 
     // #region transform datalist into dropdown
 
@@ -81,8 +79,7 @@ class iamSearch extends HTMLElement {
     inputElement.setAttribute('autocomplete', 'off');
     inputElement.setAttribute('aria-autocomplete', 'none');
 
-    if(inputElement && inputElement.hasAttribute('list')){
-
+    if (inputElement && inputElement.hasAttribute('list')) {
       inputElement.setAttribute('data-list', inputElement.getAttribute('list') || '');
       inputElement.setAttribute('list', '');
     }
@@ -97,20 +94,17 @@ class iamSearch extends HTMLElement {
     datalistElement.setAttribute('slot', 'datalist');
 
     datalistElement.querySelectorAll<HTMLOptionElement>('option').forEach((option) => {
-
       option.setAttribute('tabindex', '0');
 
-      if(option.textContent == '' && option.hasAttribute('value')){
+      if (option.textContent == '' && option.hasAttribute('value')) {
         option.textContent = option.getAttribute('value');
       }
-
     });
 
     datalistElement.addEventListener('click', (event) => {
       const optionElement = getOptionFromEvent(event);
 
       if (optionElement) {
-
         event.stopPropagation();
         event.preventDefault();
 
@@ -123,41 +117,33 @@ class iamSearch extends HTMLElement {
 
     // #region control input field
     inputElement.addEventListener('input', () => {
-
-      if(inputElement.value.length >= 1){
+      if (inputElement.value.length >= 1) {
         this.classList.add('has-value');
-      }
-      else{
+      } else {
         this.classList.remove('has-value');
       }
 
-      if(inputElement.value.length >= minLength){
+      if (inputElement.value.length >= minLength) {
         //inputElement.removeAttribute('data-value');
         this.classList.add('js-show-datalist');
 
-
-        if(this.hasAttribute('data-url')){
-          void search(this, datalistElement, inputElement.value)
-        }
-        else {
+        if (this.hasAttribute('data-url')) {
+          void search(this, datalistElement, inputElement.value);
+        } else {
           filterDatalist(datalistElement, inputElement.value);
         }
-      }
-      else {
+      } else {
         this.classList.remove('js-show-datalist');
       }
-
     });
     inputElement.addEventListener('focus', () => {
-
-      if(inputElement.value == inputElement.getAttribute('data-value')){
+      if (inputElement.value == inputElement.getAttribute('data-value')) {
         const selectedValue = inputElement.getAttribute('data-value') || '';
 
         inputElement.value = '';
         inputElement.setAttribute('placeholder', selectedValue);
         this.classList.remove('js-show-datalist');
-      }
-      else if(inputElement.value.length >= minLength){
+      } else if (inputElement.value.length >= minLength) {
         this.classList.add('js-show-datalist');
       }
     });
@@ -165,8 +151,7 @@ class iamSearch extends HTMLElement {
     inputElement.addEventListener('blur', () => {
       const selectedValue = inputElement.getAttribute('data-value');
 
-      if(!inputElement.value && selectedValue){
-
+      if (!inputElement.value && selectedValue) {
         inputElement.value = selectedValue;
         //inputElement.setAttribute('placeholder', inputElement.getAttribute('data-value'));
         //this.classList.remove('js-show-datalist');
@@ -180,8 +165,7 @@ class iamSearch extends HTMLElement {
 
       const placeholder = inputElement.getAttribute('data-placeholder');
 
-      if(placeholder)
-        inputElement.setAttribute('placeholder', placeholder);
+      if (placeholder) inputElement.setAttribute('placeholder', placeholder);
     });
 
     // #endregion
@@ -190,11 +174,9 @@ class iamSearch extends HTMLElement {
     suffixElement.addEventListener('click', () => {
       const form = this.closest<HTMLFormElement>('form');
 
-      if(form && !this.hasAttribute('data-prevent-submit')){
-
+      if (form && !this.hasAttribute('data-prevent-submit')) {
         form.requestSubmit();
-      }
-      else {
+      } else {
         inputElement.focus();
         this.classList.add('js-force-show-datalist');
       }
@@ -204,20 +186,16 @@ class iamSearch extends HTMLElement {
     // #region keyboard navigation
 
     this.addEventListener('keydown', (event) => {
-
-
       switch (event.key) {
-
         case 'ArrowDown':
           //event.stopPropagation();
           //event.preventDefault();
 
-          if(event && event.target instanceof HTMLElement && event.target == inputElement){
+          if (event && event.target instanceof HTMLElement && event.target == inputElement) {
             this.querySelector<HTMLOptionElement>('datalist option:not(.js-hide)')?.focus();
           }
 
           break;
-
       }
 
       /*
@@ -308,7 +286,6 @@ class iamSearch extends HTMLElement {
 
     // #region empty button
     clearBtn?.addEventListener('click', () => {
-
       this.classList.remove('js-show-datalist');
       inputElement.value = '';
       inputElement.removeAttribute('data-value');
@@ -323,11 +300,9 @@ class iamSearch extends HTMLElement {
       alternateInput?.remove();
 
       datalistElement.querySelectorAll<HTMLOptionElement>('option').forEach((option) => {
-
         option.classList.remove('active');
       });
     });
-
   }
 }
 

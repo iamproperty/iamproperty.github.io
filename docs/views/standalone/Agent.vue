@@ -54,8 +54,7 @@
           </div>
           <hr class="mt-3" />
 
-          <a href="/">Notifications</a
-          ><!-- Need notification number? -->
+          <a href="/">Notifications</a><!-- Need notification number? -->
 
           <a href="/">Agency settings</a>
           <!-- Edit Agent Landing Page -->

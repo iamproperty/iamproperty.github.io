@@ -32,7 +32,6 @@ class iamTag extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const search = this.shadowRoot.querySelector('input');
 
     const input = this.querySelector(':checked');
@@ -45,19 +44,14 @@ class iamTag extends HTMLElement {
       label.classList.add('dropdown__option');
     });
 
-    
-    this.addEventListener('click',()=>{
+    this.addEventListener('click', () => {
       if (event && event.target instanceof HTMLElement && event.target.closest('label:has(:checked)')) {
-        
         search.focus();
       }
-      
     });
 
     search.addEventListener('input', () => {
-
       if (this.hasAttribute('data-url')) {
-      
         if (search.value.length == 3) {
           searchAjax(this, search, filterList);
         }
@@ -67,10 +61,13 @@ class iamTag extends HTMLElement {
     });
 
     this.addEventListener('change', (event) => {
-      if (event && event.target instanceof HTMLElement && event.target.closest('input[type="radio"],input[type="checkbox"]')) {
+      if (
+        event &&
+        event.target instanceof HTMLElement &&
+        event.target.closest('input[type="radio"],input[type="checkbox"]')
+      ) {
         const checkbox = event.target.closest('input[type="radio"],input[type="checkbox"]');
 
-        
         tag.checked = false;
         tag.removeAttribute('slot');
 
@@ -82,14 +79,13 @@ class iamTag extends HTMLElement {
         search?.value = '';
         filterList(this, search);
 
-        
         // dispatch event
 
-        const changeEvent = new CustomEvent('tag-changed', { 
+        const changeEvent = new CustomEvent('tag-changed', {
           detail: {
             value: tag?.querySelector(':checked').value,
-            title: tag?.textContent
-          } 
+            title: tag?.textContent,
+          },
         });
 
         this?.dispatchEvent(changeEvent);

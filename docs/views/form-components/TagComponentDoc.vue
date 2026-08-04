@@ -3,7 +3,6 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Tag from '@/components/Tag/Tag.vue';
-
 </script>
 
 <template>
@@ -18,17 +17,22 @@
       characters used and the total character limit.
     </p>
     <div class="visualtest">
-      
       <Tag data-url="/users.json">
-        <label class="tag checked" data-email="email@email.co.uk"><input type="radio" name="tags" value="Amanda Knight" checked>Amanda Knight</label>
-        <label class="tag" data-email="email@email.co.uk"><input type="radio" name="tags" value="James Lambert">James Lambert</label>
-        <label class="tag" data-email="email@email.co.uk"><input type="radio" name="tags" value="Bob Harry">Bob Harry</label>
+        <label class="tag checked" data-email="email@email.co.uk"
+          ><input type="radio" name="tags" value="Amanda Knight" checked />Amanda Knight</label
+        >
+        <label class="tag" data-email="email@email.co.uk"
+          ><input type="radio" name="tags" value="James Lambert" />James Lambert</label
+        >
+        <label class="tag" data-email="email@email.co.uk"
+          ><input type="radio" name="tags" value="Bob Harry" />Bob Harry</label
+        >
       </Tag>
       <Tag data-url="/users.json">
-        <label class="tag checked"><input type="radio" name="tags2" value="Amanda Knight" checked readonly>Amanda Knight</label>
+        <label class="tag checked"
+          ><input type="radio" name="tags2" value="Amanda Knight" checked readonly />Amanda Knight</label
+        >
       </Tag>
-
     </div>
-
   </main>
 </template>

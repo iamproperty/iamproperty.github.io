@@ -89,8 +89,7 @@ class iamMultiselect extends HTMLElement {
     }
 
     // Set the correct attributes
-    function setItem(inputToSet): void {
-
+    const setItem = (inputToSet): void => {
       if (inputToSet.checked == false) {
         inputToSet.closest('label').removeAttribute('slot');
         inputToSet.closest('label').removeAttribute('style');
@@ -102,8 +101,8 @@ class iamMultiselect extends HTMLElement {
         inputToSet.closest('label').setAttribute('style', `--order:${order};`);
         inputToSet.closest('label').setAttribute('data-order', order);
 
-        if(inputToSet.closest('[data-value]')){
-          inputToSet.closest('[data-value]').setAttribute('data-value',  inputToSet.closest('label').textContent)
+        if (inputToSet.closest('[data-value]')) {
+          inputToSet.closest('[data-value]').setAttribute('data-value', inputToSet.closest('label').textContent);
         }
       }
 
@@ -121,8 +120,11 @@ class iamMultiselect extends HTMLElement {
           search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
         }
       }
-    }
 
+      // filter list
+      search.value = '';
+      filterList(multiselect, search);
+    };
 
     // Set on load
     Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox) => {
@@ -130,15 +132,11 @@ class iamMultiselect extends HTMLElement {
     });
 
     search.addEventListener('input', () => {
-
-      if(multiselect.hasAttribute('data-url') && search.value.length == 0){
-
+      if (multiselect.hasAttribute('data-url') && search.value.length == 0) {
         search.innerHTML = '';
       } else if (multiselect.hasAttribute('data-url') && search.value.length == minLength) {
-
         searchAjax(multiselect, search, filterList);
       } else {
-
         filterList(multiselect, search);
       }
     });
@@ -151,29 +149,9 @@ class iamMultiselect extends HTMLElement {
     });
 
     search.addEventListener('blur', (event) => {
-      setTimeout(function () {
-        const activeElement = document.activeElement;
+      filterList(multiselect, search);
 
-        if (activeElement.getAttribute('type') != 'checkbox') {
-          if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
-            multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
-
-            setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
-          }
-          search.value = '';
-
-          Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
-            setItem(checkbox);
-          });
-        }
-
-        if (multiselect.hasAttribute('data-url')) {
-          Array.from(multiselect.querySelectorAll(`label:has(input[type="checkbox"]:not(:checked))`)).forEach((checkbox) => {
-
-            checkbox.remove();
-          });
-        }
-      }, 200);
+      // filter here?
 
       clearTimeout(hoverTimeout);
       hoverTimeout = setTimeout(function () {
@@ -186,7 +164,7 @@ class iamMultiselect extends HTMLElement {
       if (event && event.target instanceof HTMLElement && event.target.closest('input[type="checkbox"]')) {
         const checkbox = event.target.closest('input[type="checkbox"]');
 
-        if(multiselect.hasAttribute('data-single')){
+        if (multiselect.hasAttribute('data-single')) {
           Array.from(multiselect.querySelectorAll(`label[slot="checked"] input`)).forEach((inputToCancel) => {
             inputToCancel.checked = false;
             inputToCancel.closest('label').removeAttribute('slot');
@@ -198,16 +176,14 @@ class iamMultiselect extends HTMLElement {
         setItem(checkbox);
 
         search.value = '';
-        if(!multiselect.hasAttribute('data-single')){
+        if (!multiselect.hasAttribute('data-single')) {
           search.focus();
           clearTimeout(hoverTimeout);
           multiselect.classList.add('hover');
           hoverTimeout = setTimeout(function () {
             multiselect.classList.remove('hover');
           }, 5000);
-        }
-        else{
-
+        } else {
           //multiselect.classList.remove('hover');
         }
       }
@@ -217,6 +193,9 @@ class iamMultiselect extends HTMLElement {
     clearButton.addEventListener('click', () => {
       Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
         checkbox.checked = false;
+
+        const event = new Event('change');
+        checkbox.dispatchEvent(event);
 
         setItem(checkbox);
       });
@@ -230,7 +209,7 @@ class iamMultiselect extends HTMLElement {
 
     // Add some keyboard features to keep it accessible
     addKeyboardEvents(this, search);
-    multiselect.addEventListener('keydown', function (event) {
+    multiselect.addEventListener('keydown', (event) => {
       const activeElement = document.activeElement;
 
       switch (
@@ -278,24 +257,22 @@ class iamMultiselect extends HTMLElement {
           if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
             if (activeElement.checked == false) activeElement.checked = true;
             else activeElement.checked = false;
-          }
 
-          console.log(search);
+            const event = new Event('change');
+            activeElement.dispatchEvent(event);
+          }
 
           if (activeElement.getAttribute('type') != 'checkbox') {
             if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
               multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
 
+              const event = new Event('change');
+              // Dispatch it.
+              activeElement.dispatchEvent(event);
+
               setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
             }
-            search.value = '';
-
-            Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
-              setItem(checkbox);
-            });
-          }
-          else {
-
+          } else {
             setItem(activeElement);
           }
 
@@ -305,13 +282,29 @@ class iamMultiselect extends HTMLElement {
         case 'Backspace':
           if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
             activeElement.checked = false;
+
+            const event = new Event('change');
+            activeElement.dispatchEvent(event);
+
             setItem(activeElement);
             search.focus();
           }
+          /*
+          if (!search.value) {
+            const lastTag = checkLastTag(order);
+
+            if (lastTag) {
+              const lastTagInput = lastTag.querySelector('input');
+              lastTagInput.checked = false;
+              setItem(lastTagInput);
+            }
+
+            search.focus();
+          }
+          */
           break;
       }
     });
-
 
     function checkLastTag(): Element | null {
       if (order == 0) return false;
@@ -325,35 +318,6 @@ class iamMultiselect extends HTMLElement {
       return lastTag;
     }
 
-    search.addEventListener('keydown', function (event) {
-      switch (
-        event.key // change to event.key to key to use the above variable
-      ) {
-        case 'Enter':
-          const match = multiselect.querySelector(`input[value="${search.value}"]:not(:checked)`);
-
-          if (!match) search.value = '';
-
-          search.focus();
-
-          break;
-        case 'Backspace':
-          if (!search.value) {
-            const lastTag = checkLastTag(order);
-
-            if (lastTag) {
-              const lastTagInput = lastTag.querySelector('input');
-              lastTagInput.checked = false;
-              setItem(lastTagInput);
-            }
-
-            search.focus();
-          }
-
-          break;
-      }
-    });
-
     // Fix for the inline edit multiselect
     multiselect.addEventListener('mousedown', () => {
       wrapper.setAttribute('data-mousedown', 'true');
@@ -362,7 +326,6 @@ class iamMultiselect extends HTMLElement {
     multiselect.addEventListener('mouseup', () => {
       wrapper.removeAttribute('data-mousedown');
     });
-
   }
 }
 

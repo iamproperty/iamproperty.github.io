@@ -3,18 +3,17 @@
   import routes from '../../routes.ts';
   import Key from '../key.vue';
 
-import DSHeader from '../DSHeader.vue';
-import { useRoute } from 'vue-router'
+  import DSHeader from '../DSHeader.vue';
+  import { useRoute } from 'vue-router';
 
-const route = useRoute();
+  const route = useRoute();
 
-  import {generateList} from '../../utils/indexPage.ts';
+  import { generateList } from '../../utils/indexPage.ts';
 
   const foundations = generateList(routes, '/foundations');
 </script>
 
 <template>
-  
   <main>
     <DSHeader :route="route"></DSHeader>
 
@@ -27,4 +26,3 @@ const route = useRoute();
     <Key></Key>
   </main>
 </template>
-

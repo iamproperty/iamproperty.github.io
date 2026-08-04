@@ -14,9 +14,9 @@ class iamSkeleton extends HTMLElement {
     const loadCSS = `@import "${assetLocation}/css/components/skeleton.component.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = /* HTML */`
+    template.innerHTML = /* HTML */ `
       <style>
-      ${loadCSS}
+        ${loadCSS}
       </style>
       <slot></slot>
     `;
@@ -24,22 +24,15 @@ class iamSkeleton extends HTMLElement {
   }
 
   connectedCallback(): void {
-    
-    
-    if(this.querySelector('.card'))
-      this.classList.add('hasCard');
+    if (this.querySelector('.card')) this.classList.add('hasCard');
 
-    if(this.querySelector('.btn'))
-      this.classList.add('hasBtn');
+    if (this.querySelector('.btn')) this.classList.add('hasBtn');
 
-    if(this.querySelector('.tag'))
-      this.classList.add('hasTag');
+    if (this.querySelector('.tag')) this.classList.add('hasTag');
 
-    if(this.querySelector('.badge'))
-      this.classList.add('hasBadge');
+    if (this.querySelector('.badge')) this.classList.add('hasBadge');
 
-    if(this.querySelector('.spinner'))
-      this.classList.add('hasSpinner');
+    if (this.querySelector('.spinner')) this.classList.add('hasSpinner');
   }
 }
 

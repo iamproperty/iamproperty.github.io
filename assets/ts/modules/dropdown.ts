@@ -1,6 +1,14 @@
 import Cookies from '../../../node_modules/js-cookie/dist/js.cookie.mjs';
 
 export const filterList = (component, search): void => {
+  // If search empty then hide the dropdown options still loaded
+  if (!search.value) {
+    Array.from(component.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
+      label.setAttribute('slot', 'notmatched');
+    });
+
+    return;
+  }
 
   Array.from(component.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
     const checkbox = label.querySelector('input');
@@ -16,20 +24,17 @@ export const filterList = (component, search): void => {
       label.setAttribute('slot', 'notmatched');
     }
   });
-
-}
+};
 
 export const searchAjax = async (component, search, callback): any => {
-
-  const searchterm = search.value
+  const searchterm = search.value;
   const ajaxURL = component.getAttribute('data-url');
   const firstInput = component.querySelector('input');
 
   const inputType = firstInput && firstInput.hasAttribute('type') ? firstInput.getAttribute('type') : 'checkbox';
   let inputName = firstInput && firstInput.hasAttribute('name') ? firstInput.getAttribute('name') : 'tags';
 
-  if(component.hasAttribute('data-name'))
-    inputName = component.hasAttribute('data-name');
+  if (component.hasAttribute('data-name')) inputName = component.hasAttribute('data-name');
 
   const searchAjaxURL = `${ajaxURL}?search_query=${encodeURI(searchterm)}`;
 
@@ -57,14 +62,12 @@ export const searchAjax = async (component, search, callback): any => {
     })
       .then((response) => response.json())
       .then((response) => {
-
         let items = '';
         component.innerHTML = '';
 
         for (let i = 0; i < response['data'].length; i++) {
-
-          if(!component.querySelector(`[value="${response['data'][i].value}"]`))
-            items += `<label class="tag dropdown__option"><input type="${inputType}" name="${component.hasAttribute('data-name') ? component.getAttribute('data-name') : inputName}" value="${ response['data'][i].value }"/>${ response['data'][i].title }</label>`;
+          if (!component.querySelector(`[value="${response['data'][i].value}"]`))
+            items += `<label class="tag dropdown__option"><input type="${inputType}" name="${component.hasAttribute('data-name') ? component.getAttribute('data-name') : inputName}" value="${response['data'][i].value}"/>${response['data'][i].title}</label>`;
         }
 
         component.insertAdjacentHTML('beforeend', `${items}`);
@@ -77,8 +80,7 @@ export const searchAjax = async (component, search, callback): any => {
   }
 };
 
-export const setTag = (tag):void => {
-
+export const setTag = (tag): void => {
   const input = tag.querySelector(':checked');
   const inputName = input?.getAttribute('name');
 
@@ -87,31 +89,23 @@ export const setTag = (tag):void => {
 
   let tags = [];
 
-  if(localStorage.getItem('tags-'+inputName) != null)
-    tags = JSON.parse(localStorage.getItem('tags-'+inputName));
+  if (localStorage.getItem('tags-' + inputName) != null) tags = JSON.parse(localStorage.getItem('tags-' + inputName));
 
-
-  if(!tags.includes(tag.textContent)){
-
+  if (!tags.includes(tag.textContent)) {
     tags.push(tag.textContent);
 
-    localStorage.setItem('tags-'+inputName,JSON.stringify(tags));
+    localStorage.setItem('tags-' + inputName, JSON.stringify(tags));
   }
 
   let tagIndex = tags.indexOf(tag.textContent) + 1;
-  if(tagIndex > 23)
-    tagIndex = 1;
+  if (tagIndex > 23) tagIndex = 1;
 
   tag?.classList.add(`wider-colour-${tagIndex + 1}`);
-}
+};
 
-export const addKeyboardEvents = (dropdown, search):void => {
-
-
-
+export const addKeyboardEvents = (dropdown, search): void => {
   search.addEventListener('keydown', (e) => {
-
-    switch ( e.keyCode ) {
+    switch (e.keyCode) {
       case 40: // down
         e.stopPropagation();
         e.preventDefault();
@@ -123,13 +117,18 @@ export const addKeyboardEvents = (dropdown, search):void => {
   });
 
   dropdown.addEventListener('keydown', (event) => {
-
-    const topLevelmenuItems = dropdown.querySelectorAll(':scope > a, :scope > button, :scope > details > summary, :scope > label:not([slot="checked"]) > input');
+    const topLevelmenuItems = dropdown.querySelectorAll(
+      ':scope > a, :scope > button, :scope > details > summary, :scope > label:not([slot="checked"]) > input'
+    );
     const menuItems = dropdown.querySelectorAll('a, button, input, label:not([slot="checked"]) > input');
 
     const activeElement = document.activeElement;
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary, label:not([slot="checked"]) > input')) {
+    if (
+      event &&
+      event.target instanceof HTMLElement &&
+      event.target.closest('a, button, summary, label:not([slot="checked"]) > input')
+    ) {
       const activeItem = document.activeElement;
       const prevIndex = Array.from(topLevelmenuItems).indexOf(activeItem) - 1;
       const nextIndex = Array.from(topLevelmenuItems).indexOf(activeItem) + 1;
@@ -151,7 +150,6 @@ export const addKeyboardEvents = (dropdown, search):void => {
           break;
         case 32: // Space
         case 13: // Enter
-
           break;
         case 35: // end
           event.stopPropagation();
@@ -176,13 +174,10 @@ export const addKeyboardEvents = (dropdown, search):void => {
           event.preventDefault();
 
           if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
-            if (Array.from(topLevelmenuItems)[prevIndex] != undefined)
-              Array.from(topLevelmenuItems)[prevIndex].focus();
+            if (Array.from(topLevelmenuItems)[prevIndex] != undefined) Array.from(topLevelmenuItems)[prevIndex].focus();
             else Array.from(topLevelmenuItems)[topLevelmenuItems.length - 1].focus();
           } else if (activeItem.closest('details')) {
-            const subMenuItems = activeItem
-              .closest('details')
-              .querySelectorAll('a, button, :scope details > summary');
+            const subMenuItems = activeItem.closest('details').querySelectorAll('a, button, :scope details > summary');
             subPrevIndex = Array.from(subMenuItems).indexOf(activeItem) - 1;
 
             if (Array.from(subMenuItems)[subPrevIndex] != undefined) Array.from(subMenuItems)[subPrevIndex].focus();
@@ -195,8 +190,7 @@ export const addKeyboardEvents = (dropdown, search):void => {
           event.preventDefault();
 
           if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
-            if (Array.from(topLevelmenuItems)[nextIndex] != undefined)
-              Array.from(topLevelmenuItems)[nextIndex].focus();
+            if (Array.from(topLevelmenuItems)[nextIndex] != undefined) Array.from(topLevelmenuItems)[nextIndex].focus();
             else Array.from(topLevelmenuItems)[0].focus();
           } else if (activeItem.closest('details')) {
             const subMenuItems = activeItem.closest('details')?.querySelectorAll('a, button, :scope details > summary');
@@ -210,6 +204,4 @@ export const addKeyboardEvents = (dropdown, search):void => {
       }
     }
   });
-
-
-}
+};

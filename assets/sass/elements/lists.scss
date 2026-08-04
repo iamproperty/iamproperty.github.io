@@ -1,6 +1,5 @@
 @use '../_func' as *;
 
-
 @layer elements {
   :is(ol, ul) {
     padding-left: 2rem;
@@ -25,7 +24,7 @@
 
   dd {
     margin-bottom: 0.5rem;
-    margin-left: 0; 
+    margin-left: 0;
   }
 
   /* #region basic list modifiers */
@@ -44,7 +43,7 @@
       margin-right: 0.5rem;
     }
   }
-  
+
   .orderable-list {
     margin-left: 3.5rem;
     counter-reset: countItem;
@@ -95,5 +94,4 @@
     }
   }
   /* #endregion */
-
 }

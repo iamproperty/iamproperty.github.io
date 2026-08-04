@@ -3,9 +3,7 @@
 
 @use '../_func' as *;
 
-
 @layer elements {
-
   input {
     margin: 0; /*  1 */
     font-family: inherit;
@@ -125,14 +123,8 @@
     -webkit-appearance: button; /*  2 */
   }
 
-
-  
-
   /* #region input field */
-  :is(
-    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
-    output
-  ) {
+  :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), output) {
     display: block;
     width: 100%;
     display: block;
@@ -148,12 +140,10 @@
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     min-height: calc(
-      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
-        4px
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) + 4px
     );
     max-height: calc(
-      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
-        4px
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) + 4px
     );
 
     /*  Customize the `:focus` state to imitate native WebKit styles. */
@@ -175,26 +165,25 @@
   }
 
   input[type='color'] {
-
-    padding: 0!important;
-    max-width: 3rem!important;
+    padding: 0 !important;
+    max-width: 3rem !important;
   }
-  
-  [disabled] :is(
-    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
-    output,
-    select:not(.select--minimal, .btn)
-  ) {
-      background-color: #ccd6d8;
-      opacity: 0.4;
-      cursor: not-allowed;
-      pointer-events: none;
+
+  [disabled]
+    :is(
+      input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
+      output,
+      select:not(.select--minimal, .btn)
+    ) {
+    background-color: #ccd6d8;
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   [disabled] label {
-
-      cursor: not-allowed;
-      pointer-events: none;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range'])) {
@@ -202,5 +191,4 @@
   }
 
   /* #endregion */
-
 }

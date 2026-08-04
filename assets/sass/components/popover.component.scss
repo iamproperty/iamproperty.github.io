@@ -7,18 +7,19 @@
 }
 
 @layer components {
-
   :host {
-    
     padding: 0.5rem;
     max-width: calc(anchor-size(width) * 2) !important;
 
     max-height: min(100vh - 6rem);
     position: absolute;
     position-area: bottom span-x-end;
-    margin:  0.25rem;
+    margin: 0.25rem;
     max-width: calc(anchor-size(width) * 2) !important;
-    position-try-fallbacks: top span-x-end, bottom span-x-start, top span-x-start;
+    position-try-fallbacks:
+      top span-x-end,
+      bottom span-x-start,
+      top span-x-start;
 
     &::backdrop {
       display: none;
@@ -30,34 +31,33 @@
     @media screen and (min-width: 62em) {
       width: 22.5rem; /* (360); */
     }
-  } 
+  }
 
   :host(.popover--sm) {
     width: 10rem;
-    min-width: 10rem!important;
-    max-width: 10rem!important;
+    min-width: 10rem !important;
+    max-width: 10rem !important;
   }
   :host(.popover--md) {
     width: 15rem; /* 240 */
-    min-width: 15rem!important;
-    max-width: 15rem!important;
+    min-width: 15rem !important;
+    max-width: 15rem !important;
   }
   :host(.popover--lg) {
     width: 20rem; /* 320 */
-    min-width: 20rem!important;
-    max-width: 20rem!important;
+    min-width: 20rem !important;
+    max-width: 20rem !important;
   }
   :host(.popover--fill) {
-    max-width: anchor-size(width)!important;
-    min-width: anchor-size(width)!important;
-    width: anchor-size(width)!important;
+    max-width: anchor-size(width) !important;
+    min-width: anchor-size(width) !important;
+    width: anchor-size(width) !important;
   }
-    
+
   :host(.popover--height-sm) {
     max-height: 12.5rem; /* 200 */
   }
   :host(.popover--height-lg) {
     max-height: 25rem; /* 400 */
   }
-
 }

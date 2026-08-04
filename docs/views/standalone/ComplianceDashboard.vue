@@ -36,9 +36,8 @@
     </nav>
 
     <main class="main--marketplace">
-
       <form>
-      <div class="container pt-3">
+        <div class="container pt-3">
           <div class="row">
             <div class="col">
               <h1 class="h2">Welcome to your Compliance Dashboard, Amy Reading!</h1>
@@ -57,25 +56,24 @@
                 <dialog>
                   <AppliedFilters class="applied-filters--compact">
                     <input
-                        type="checkbox"
-                        name="pipeline[]"
-                        id="pipeline1"
-                        class="form-check-input d-none"
-                        value="Alice Knowles"
-                        data-filter-text="$value"
-                        data-filter="Locked to"
-                      />
-                      <input
-                        type="checkbox"
-                        name="pipeline[]"
-                        id="pipeline2"
-                        class="form-check-input d-none"
-                        value="Amy Reading"
-                        data-filter-text="$value"
-                        data-filter="Locked to"
-                      />
+                      type="checkbox"
+                      name="pipeline[]"
+                      id="pipeline1"
+                      class="form-check-input d-none"
+                      value="Alice Knowles"
+                      data-filter-text="$value"
+                      data-filter="Locked to"
+                    />
+                    <input
+                      type="checkbox"
+                      name="pipeline[]"
+                      id="pipeline2"
+                      class="form-check-input d-none"
+                      value="Amy Reading"
+                      data-filter-text="$value"
+                      data-filter="Locked to"
+                    />
                     <Filterlist data-max-height="small">
-                      
                       <ul class="list-unstyled mb-0">
                         <li>
                           <div class="form-check ps-0">
@@ -95,7 +93,7 @@
             </div>
           </div>
         </div>
-</form>
+      </form>
       <form id="tableFilters">
         <Input data-duplicate="pipeline[]"><input name="staff" type="hidden" /></Input>
         <div class="container">
@@ -112,12 +110,7 @@
 
         <div class="container">
           <div class="row tab-focus">
-            
-            
-            
-
             <div class="col-sm-4 col-md-3">
-              
               <label for="due_diligience_incomplete">
                 <input
                   type="checkbox"
@@ -127,15 +120,16 @@
                   id="due_diligience_incomplete"
                   class="d-none"
                 />
-                <FilterCard class="card--filter colour-danger card--flag" data-total="" data-query="SLA progress == Overdue"
+                <FilterCard
+                  class="card--filter colour-danger card--flag"
+                  data-total=""
+                  data-query="SLA progress == Overdue"
                   >Due/Overdue</FilterCard
                 ></label
               >
             </div>
             <div class="col-sm-4 col-md-3">
-              
-              <label for="due_diligience_requires_approval"
-                >
+              <label for="due_diligience_requires_approval">
                 <input
                   type="checkbox"
                   name="[sla_progress][]"
@@ -153,18 +147,16 @@
               >
             </div>
             <div class="col-sm-4 col-md-3">
-              
-              <label for="due_diligience_verified"
-                >
+              <label for="due_diligience_verified">
                 <input
-              type="checkbox"
-              name="[sla_progress][]"
-              data-filter="SLA progress"
-              value="On track"
-              id="due_diligience_verified"
-              class="d-none"
-            />
-                
+                  type="checkbox"
+                  name="[sla_progress][]"
+                  data-filter="SLA progress"
+                  value="On track"
+                  id="due_diligience_verified"
+                  class="d-none"
+                />
+
                 <FilterCard
                   class="card--filter colour-success card--flag"
                   data-total="12"
@@ -179,7 +171,12 @@
         <div class="container">
           <div class="row align-items-end">
             <div class="col-12 ms-md-auto mw-sm-fit-content">
-              <button class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1" type="button" command="show-modal" commandfor="filters">
+              <button
+                class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1"
+                type="button"
+                command="show-modal"
+                commandfor="filters"
+              >
                 Filter by <span data-filter-count=""></span>
               </button>
             </div>
@@ -233,94 +230,99 @@
         </div>
 
         <Modal class="modal--sm">
-        <dialog id="filters">
-          <AppliedFilters class="applied-filters--compact" data-nosubmit>
-            <span class="h3 pb-2">Filter by</span>
+          <dialog id="filters">
+            <AppliedFilters class="applied-filters--compact" data-nosubmit>
+              <span class="h3 pb-2">Filter by</span>
 
-            <span class="h4 pb-1">Risk Level</span>
-            <div>
-              <input
-                type="checkbox"
-                name="risk-level-high"
-                id="risk-level-high"
-                data-filter-text="Risk Level - High"
-                data-filter="Risk level"
-                value="High"
-              />
-              <label for="risk-level-high" class="form-label form-check-label">High</label>
-              <hr />
-              <input
-                type="checkbox"
-                name="risk-level-medium"
-                id="risk-level-medium"
-                data-filter-text="Risk Level - Medium"
-                data-filter="Risk level"
-                value="Medium"
-              />
-              <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
-              <hr />
-
-              <input
-                type="checkbox"
-                name="risk-level-low"
-                id="risk-level-low"
-                data-filter-text="Risk Level - Low"
-                data-filter="Risk level"
-                value="Low"
-              />
-              <label for="risk-level-low" class="form-label form-check-label">Low</label>
-              <hr />
-            </div>
-
-            <span class="h4 pb-1">SLA Progress</span>
-            <div>
-
-              <Input data-duplicate="due_diligience_incomplete">
-                <label for="sla_progress_due"><input
+              <span class="h4 pb-1">Risk Level</span>
+              <div>
+                <input
                   type="checkbox"
-                  name="[sla_progress][]"
-                  id="sla_progress_due"
-                  data-filter-text="SLA progress - Due"
-                  value="Due"
+                  name="risk-level-high"
+                  id="risk-level-high"
+                  data-filter-text="Risk Level - High"
+                  data-filter="Risk level"
+                  value="High"
+                />
+                <label for="risk-level-high" class="form-label form-check-label">High</label>
+                <hr />
+                <input
+                  type="checkbox"
+                  name="risk-level-medium"
+                  id="risk-level-medium"
+                  data-filter-text="Risk Level - Medium"
+                  data-filter="Risk level"
+                  value="Medium"
+                />
+                <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
+                <hr />
 
-                />Due</label>
-              </Input>
+                <input
+                  type="checkbox"
+                  name="risk-level-low"
+                  id="risk-level-low"
+                  data-filter-text="Risk Level - Low"
+                  data-filter="Risk level"
+                  value="Low"
+                />
+                <label for="risk-level-low" class="form-label form-check-label">Low</label>
+                <hr />
+              </div>
 
-              
-              <hr />
-              <Input data-duplicate="due_diligience_requires_approval">
-              
-              <label for="sla_progress_upcoming"><input
-                type="checkbox"
-                name="[sla_progress][]"
-                id="sla_progress_upcoming"
-                data-filter-text="SLA progress - Upcoming"
-                value="Upcoming"
-              />Upcoming</label>
-            </Input>
-              <hr />
-              <Input data-duplicate="due_diligience_verified">
-              
-              <label for="sla_progress_track"><input
-                type="checkbox"
-                name="[sla_progress][]"
-                id="sla_progress_track"
-                data-filter-text="SLA progress - On track"
-                value="track"
-              />On track</label>
-            </Input>
-              <hr />
-            </div>
-          <button class="btn btn-primary d-block mx-auto">Update results</button>
-          </AppliedFilters>
-          <hr />
-        </dialog>
+              <span class="h4 pb-1">SLA Progress</span>
+              <div>
+                <Input data-duplicate="due_diligience_incomplete">
+                  <label for="sla_progress_due"
+                    ><input
+                      type="checkbox"
+                      name="[sla_progress][]"
+                      id="sla_progress_due"
+                      data-filter-text="SLA progress - Due"
+                      value="Due"
+                    />Due</label
+                  >
+                </Input>
+
+                <hr />
+                <Input data-duplicate="due_diligience_requires_approval">
+                  <label for="sla_progress_upcoming"
+                    ><input
+                      type="checkbox"
+                      name="[sla_progress][]"
+                      id="sla_progress_upcoming"
+                      data-filter-text="SLA progress - Upcoming"
+                      value="Upcoming"
+                    />Upcoming</label
+                  >
+                </Input>
+                <hr />
+                <Input data-duplicate="due_diligience_verified">
+                  <label for="sla_progress_track"
+                    ><input
+                      type="checkbox"
+                      name="[sla_progress][]"
+                      id="sla_progress_track"
+                      data-filter-text="SLA progress - On track"
+                      value="track"
+                    />On track</label
+                  >
+                </Input>
+                <hr />
+              </div>
+              <button class="btn btn-primary d-block mx-auto">Update results</button>
+            </AppliedFilters>
+            <hr />
+          </dialog>
         </Modal>
       </form>
 
       <div class="container">
-        <Table class="table--cta table--minify" data-ajax="/data/compliance-dashboard.json" data-schema="data.buyerTasks" data-filterby="tableFilters">
-
+        <Table
+          class="table--cta table--minify"
+          data-ajax="/data/compliance-dashboard.json"
+          data-schema="data.buyerTasks"
+          data-filterby="tableFilters"
+        >
           <table>
             <thead>
               <tr>

@@ -43,7 +43,8 @@ describe('Form module', () => {
     const form = createElement('form');
     const originalQuerySelector = form.querySelector.bind(form);
 
-    form.querySelector = (selector) => (selector === ':invalid' ? createElement('input') : originalQuerySelector(selector));
+    form.querySelector = (selector) =>
+      selector === ':invalid' ? createElement('input') : originalQuerySelector(selector);
 
     expect(!isFormValid(form));
 

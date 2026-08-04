@@ -167,8 +167,6 @@ export const datalistSelectOption = (
 
   // Make sure the value of the option is passed when in a form
   if (optionElement.value && optionElement.value !== optionText) {
-
-
     const alternateInput = component.querySelector<HTMLInputElement>(`input[name="${alternateInputName}"]`);
 
     if (!alternateInput)
@@ -178,7 +176,6 @@ export const datalistSelectOption = (
       );
     else alternateInput.value = optionElement.value;
   } else {
-
     const alternateInput = component.querySelector<HTMLInputElement>(`input[name="${alternateInputName}"]`);
 
     if (alternateInput) alternateInput.remove();
@@ -190,7 +187,6 @@ export const datalistSelectOption = (
     if (optionLoopElement === optionElement) optionLoopElement.classList.add('active');
     else optionLoopElement.classList.remove('active');
   }
-
 
   const customEvent = new CustomEvent<OptionSelectedDetail>('option-selected', {
     detail: {

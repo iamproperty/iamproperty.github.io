@@ -430,7 +430,7 @@
       </div>
     </div>
     <template v-for="(name, index) in arrColours" :key="name">
-      <div class="row row-cols-3 row-cols-sm-4" >
+      <div class="row row-cols-3 row-cols-sm-4">
         <div class="col-12 col-sm pb-2">
           <span>Chart colour {{ index + 1 }}</span>
         </div>

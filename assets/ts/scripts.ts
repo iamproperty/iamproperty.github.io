@@ -43,17 +43,17 @@ const components = [
   'milestone-group',
   'milestone',
   'darkmode',
-  'password-indicator'
-
+  'password-indicator',
 ];
 
-const testDomains = ["localhost"];
+const testDomains = ['localhost'];
 
 if (testDomains.includes(window.location.hostname)) {
-
   import(`../js/modules/integration-tests.js`)
     .then((module) => {
-      window.iamTest = ():void => { integrationTests() };
+      window.iamTest = (): void => {
+        integrationTests();
+      };
     })
     .catch((err) => {
       console.log(err.message);
@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', async (): void => {
   helpers.addGlobalEvents(document.body);
 
   //extendDialogs(document.body);
-  
 
   //videoSupport(document.body);
 

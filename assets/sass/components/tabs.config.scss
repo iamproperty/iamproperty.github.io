@@ -1,9 +1,5 @@
 @use '../_func' as *;
 
-
-
-
-
 *:not(main):has(> iam-tabs) {
   //container-type: inline-size;
 }
@@ -54,7 +50,7 @@ iam-tabs::part(next-button) {
 iam-tabs.tabs--guided::part(next-button) {
   @container (width > 62em) {
     position: absolute;
-    top: 9.375rem; /* 150*/ 
+    top: 9.375rem; /* 150*/
     right: 0;
     display: block;
   }
@@ -257,23 +253,21 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   }
 }
 
-
 /* #region tabs - toggle tags */
 
 .tabs--toggle-tags {
   .tabs__links {
-
     flex-wrap: wrap;
     margin: 0;
     padding: 1px;
 
-    -webkit-mask-image: unset!important;
-    mask-image: unset!important;
+    -webkit-mask-image: unset !important;
+    mask-image: unset !important;
   }
 }
 
 .tabs--toggle-tags .tabs__links__wrapper:after {
-  display: none!important;
+  display: none !important;
 }
 
 /* #endregion */

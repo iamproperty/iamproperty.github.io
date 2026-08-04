@@ -40,11 +40,11 @@
 
     <div class="container visualtest bg-light mb-5">
       <div class="md-col-start-4 md-col-end-9">
-
-        <label>Property address
+        <label
+          >Property address
           <AdvancedSelect class="">
             <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-            
+
             <datalist id="properties">
               <option>1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
               <option>4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
@@ -55,11 +55,8 @@
             </datalist>
           </AdvancedSelect>
         </label>
-
       </div>
     </div>
-
-    
 
     <ul class="mb-5">
       <li>Input field (with suffix)</li>
@@ -93,15 +90,16 @@
       </li>
     </ul>
 
-    <p class="note mb-5"><strong>NOTE:</strong> If the selected fields value attribute is different to the displayed text, the value attribute will be used for form submission.</p>
+    <p class="note mb-5">
+      <strong>NOTE:</strong> If the selected fields value attribute is different to the displayed text, the value
+      attribute will be used for form submission.
+    </p>
 
     <h2>State</h2>
 
     <div class="container visualtest">
       <div class="md-col-end-5 mb-4">
         <span class="d-block pb-2">DEFAULT</span>
-        
-        
       </div>
     </div>
 
@@ -112,7 +110,14 @@
           <label
             >Property address
             <span>
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" value="3"/>
+              <input
+                type="text"
+                name="client"
+                autocomplete="off"
+                aria-autocomplete="none"
+                list="properties"
+                value="3"
+              />
               <span class="suffix fa-regular fa-chevron-down"></span>
             </span>
           </label>

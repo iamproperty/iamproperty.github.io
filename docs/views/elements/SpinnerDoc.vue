@@ -11,6 +11,5 @@
     </DSHeader>
 
     <span class="spinner"></span>
-
   </main>
 </template>

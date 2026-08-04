@@ -3,23 +3,19 @@
 
 @use '../elements/dropdown';
 
-
 @layer components {
-
   .btn-action {
     font-size: 0.75rem;
     line-height: 2rem;
-    padding-block: 0!important;
+    padding-block: 0 !important;
     border: none;
     position: relative;
     display: flex;
-    font-weight: bold!important;
-    margin: 0!important;
-    outline: none;
-    
+    font-weight: bold !important;
+    margin: 0 !important;
+
     > * {
-      
-      line-height: 2rem!important;
+      line-height: 2rem !important;
       display: inline-block;
     }
 
@@ -28,13 +24,14 @@
       font-size: 1.33em;
     }
 
-    &:not(:hover,:focus) {
+    &:not(:hover, :focus) {
       background-color: transparent;
+      outline: none;
     }
 
-    &[data-checked-count]:not([data-checked-count="0"]):after {
-      display: inline!important;
-      content: ' +'attr(data-checked-count);
+    &[data-checked-count]:not([data-checked-count='0']):after {
+      display: inline !important;
+      content: ' +' attr(data-checked-count);
       color: var(--colour-body);
       padding-left: 0.25em;
     }
@@ -47,58 +44,54 @@
       text-overflow: ellipsis;
       font-weight: bold;
     }
-
-    span[data-indicator] {
-      position: relative;
-    }
-    span[data-indicator]:before{
-      content: attr(data-indicator);
-
-      display: block;
-      position: absolute;
-      top: 0;
-      left: -1.5em;
-      background-color: var(--colour-warning);
-
-      border-radius: 50%;
-
-      font-size: 0.5rem;
-      line-height: 1.75em;      
-      height: 1.75em;
-      width: 1.75em;
-      text-align: center;
-
-    }
   }
 
+  span[data-indicator] {
+    position: relative;
+  }
+  span[data-indicator]:before {
+    content: attr(data-indicator);
+
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -1.5em;
+    background-color: var(--colour-warning);
+
+    border-radius: 50%;
+
+    font-size: 0.5rem;
+    line-height: 1.75em;
+    height: 1.75em;
+    width: 1.75em;
+    text-align: center;
+  }
 
   ::slotted(label) {
-    margin-right: 0!important;
+    margin-right: 0 !important;
   }
   ::slotted(label)::before,
-  ::slotted(label)::after{
-    display: none!important;
+  ::slotted(label)::after {
+    display: none !important;
   }
-
 
   .dropdown {
     width: fit-content;
-    margin-inline: 0!important;
+    margin-inline: 0 !important;
   }
 
-  :host([slot="account"]) {
+  :host([slot='account']) {
     margin-left: -0.5rem;
   }
-  
-  :host([slot="account"]) .btn-action {
+
+  :host([slot='account']) .btn-action {
     max-width: 100%;
     width: 100%;
   }
 
-  :host([slot="account"].branch-selector-inline) .dropdown {
-  
+  :host([slot='account'].branch-selector-inline) .dropdown {
     background: transparent !important;
-    
+
     display: block !important;
     position: static !important;
     inset: 0 !important;
@@ -108,5 +101,56 @@
     margin: 0;
     width: auto;
   }
+
+  /* #region single button */
+  ::slotted(button:first-child:last-child) {
+    font-size: 0.75rem !important;
+    line-height: 2rem !important;
+    padding-block: 0 !important;
+    border: none !important;
+    position: relative !important;
+    display: flex !important;
+    font-weight: bold !important;
+    margin: 0 !important;
+    padding-left: 2rem!important;
+  }
+
+  ::slotted(button:first-child:last-child:not(:hover, :focus)) {
+
+    background-color: transparent !important;
+    outline: none !important;
+  }
+
+  .wrapper:has(>i){
+    
+    display: flex;
+    position: relative;
+  }
+
+  .wrapper > i {
+    position: absolute;
+    
+    left: 0.25rem;
+    font-size: 1rem !important;
+      line-height: 2rem !important;
+      display: inline-block;
+      pointer-events: none;
+      z-index: 2;
+  }
+
+  .wrapper > span[data-indicator] {
+    position: absolute;
+    left: 1.75rem;
+    pointer-events: none;
+      z-index: 2;
+  }
+
+  ::slotted(button:first-child:last-child[data-checked-count]:not([data-checked-count='0'])):after {
+    display: inline !important;
+    content: ' +' attr(data-checked-count);
+    color: var(--colour-body);
+    padding-left: 0.25em;
+  }
   
+  /* #endregion */
 }

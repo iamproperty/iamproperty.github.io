@@ -39,7 +39,6 @@
     }
 
     button {
-      
       pointer-events: none;
       position: absolute;
       top: 50%;
@@ -48,9 +47,9 @@
       transform: translate(-50%, -50%);
     }
 
-    &:is(:hover,:focus):not(:active) button {
-      --colour-btn-bg: var(--colour-white)!important;
-      --colour-btn-border: var(--colour-white)!important;
+    &:is(:hover, :focus):not(:active) button {
+      --colour-btn-bg: var(--colour-white) !important;
+      --colour-btn-border: var(--colour-white) !important;
     }
     &:is(:active) button {
       filter: brightness(85%);
@@ -63,7 +62,6 @@
 }
 
 ::slotted(.embed) {
-  
   position: absolute;
   inset: 0;
   z-index: 4;

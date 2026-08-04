@@ -193,9 +193,12 @@
       </p>
 
       <h2>Layout</h2>
-      <p>Our grid system is based upon bootstraps gird system. When designing page layouts in Adobe XD or Figma, pleaserefer to the grid template supplied to match the design at the ‘100%’ size for each breakpoint (375px, 768px, 1280px).</p>
+      <p>
+        Our grid system is based upon bootstraps gird system. When designing page layouts in Adobe XD or Figma,
+        pleaserefer to the grid template supplied to match the design at the ‘100%’ size for each breakpoint (375px,
+        768px, 1280px).
+      </p>
 
-        
       <Tabs class="mb-5">
         <Tab title="Mobile">
           <div class="row row-example row--mobile">
@@ -315,7 +318,6 @@
           </div>
         </Tab>
       </Tabs>
-
     </div>
 
     <div class="bg-light version-control mb-0 mt-5">

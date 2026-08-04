@@ -1,7 +1,5 @@
 @layer elements {
-  
   .feature {
-
     --padding: 1rem;
     background-color: var(--colour-canvas-2);
     border: 1px solid var(--colour-muted);
@@ -36,16 +34,15 @@
     }
   }
 
-  .feature[class*="fa-"] {
-
+  .feature[class*='fa-'] {
     padding-left: calc(var(--padding) + 3rem);
     position: relative;
-    
+
     &:before {
       position: absolute;
       inset: var(--padding);
       content: var(--fa);
-      font-family: "Font Awesome 7 Pro";
+      font-family: 'Font Awesome 7 Pro';
       display: block;
 
       background-color: var(--colour, var(--colour-success));
@@ -59,13 +56,20 @@
     }
   }
 
-  :is(.feature--danger, .feature--warning, .feature--success, .feature--complete, .feature--loading, .feature--missing) {
+  :is(
+    .feature--danger,
+    .feature--warning,
+    .feature--success,
+    .feature--complete,
+    .feature--loading,
+    .feature--missing
+  ) {
     padding-left: calc(5.5rem + 1rem);
     position: relative;
     overflow: hidden;
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
       display: block;
@@ -85,11 +89,11 @@
       top: calc(50% - 0.75rem);
 
       left: calc(2.4rem - 0.75rem);
-      font-family: "Font Awesome 7 Pro";
+      font-family: 'Font Awesome 7 Pro';
       display: block;
       font-weight: 900;
       font-size: 1.5rem;
-      
+
       width: 1.5rem;
       padding: 0;
       height: 1.5rem;
@@ -100,7 +104,6 @@
     }
   }
   .feature--danger {
-    
     &:before {
       background: var(--colour, var(--colour-danger));
     }
@@ -109,7 +112,6 @@
     }
   }
   .feature--warning {
-    
     &:before {
       background: var(--colour, var(--colour-warning));
     }
@@ -117,8 +119,7 @@
       content: '\f071';
     }
   }
-  :is(.feature--success,.feature--success) {
-    
+  :is(.feature--success, .feature--success) {
     &:before {
       background: var(--colour, var(--colour-complete));
     }
@@ -128,7 +129,6 @@
   }
 
   .feature--loading {
-    
     &:before {
       background: var(--colour, var(--colour-border));
     }
@@ -139,7 +139,6 @@
     }
   }
   .feature--missing {
-    
     &:before {
       background: var(--colour, var(--colour-border));
     }
@@ -149,26 +148,25 @@
     }
   }
   .feature--error {
-    
-      background: var(--colour, var(--colour-danger));
-    
-      border: none;
-      color-scheme: light;
-      --colour-heading: var(--colour-white);
-      --colour-body: var(--colour-white);
-      --colour-underline: var(--colour-white);
-      --colour-link: var(--colour-white);
-      color: var(--colour-white);
+    background: var(--colour, var(--colour-danger));
 
-      padding-right: 6.5rem;
-      position: relative;
+    border: none;
+    color-scheme: light;
+    --colour-heading: var(--colour-white);
+    --colour-body: var(--colour-white);
+    --colour-underline: var(--colour-white);
+    --colour-link: var(--colour-white);
+    color: var(--colour-white);
 
-      button {
-        position: absolute!important;
-        top: 50%;
-        right: 0;
-        left: auto;
-        translate: 0 -50%;
-      }
+    padding-right: 6.5rem;
+    position: relative;
+
+    button {
+      position: absolute !important;
+      top: 50%;
+      right: 0;
+      left: auto;
+      translate: 0 -50%;
+    }
   }
 }

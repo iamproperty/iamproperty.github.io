@@ -2,7 +2,6 @@
 @use './video.component';
 
 @layer components {
-  
   dialog {
     width: calc(100% - 6rem) !important;
     max-width: 50rem !important;
@@ -11,12 +10,10 @@
     overflow: hidden;
 
     &[open]::before {
-      
       display: none;
     }
-    
-    &[open]::after {
 
+    &[open]::after {
       display: none;
     }
 

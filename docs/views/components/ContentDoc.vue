@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
   import DSHeader from '../DSHeader.vue';
   import Content from '@/components/Content/Content.vue';
@@ -6,33 +5,38 @@
   import Versions from '../Versions.vue';
 
   const envVars = import.meta.env as unknown as {
-    VITE_CONTENT_DEMO_URL: string
+    VITE_CONTENT_DEMO_URL: string;
   };
 </script>
 
 <template>
   <main>
-
     <DSHeader section="components">
       <h1>Content</h1>
     </DSHeader>
 
-    <p>This component loads content from the wordpress rest API using a difined URL passed through the `data-url` attribute.</p>
+    <p>
+      This component loads content from the wordpress rest API using a difined URL passed through the `data-url`
+      attribute.
+    </p>
 
     <div class="container bg-light mb-4">
-
-
-        <Content :data-url="envVars.VITE_CONTENT_DEMO_URL" data-title-tag="h2" data-title-class="bg-primary" data-transform="div" class="admin-panel">
-          <h2 class="bg-primary">Fallback title</h2>
-          <p>If you are seeing this then the content component has not loaded the content correctly.</p>
-        </Content>
-
-
+      <Content
+        :data-url="envVars.VITE_CONTENT_DEMO_URL"
+        data-title-tag="h2"
+        data-title-class="bg-primary"
+        data-transform="div"
+        class="admin-panel"
+      >
+        <h2 class="bg-primary">Fallback title</h2>
+        <p>If you are seeing this then the content component has not loaded the content correctly.</p>
+      </Content>
     </div>
 
-    <p class="note"><strong>Note:</strong> The above content should be updated from the iamcontent wordpress, the fallback text will be overwritten. So if any fallback text is still present then the component is not working correctly.</p>
-
-
+    <p class="note">
+      <strong>Note:</strong> The above content should be updated from the iamcontent wordpress, the fallback text will
+      be overwritten. So if any fallback text is still present then the component is not working correctly.
+    </p>
 
     <Integration component="search" componentName="search">
       <template #web-component>
@@ -85,7 +89,6 @@
         </table>
       </template>
 
-
       <template #dispatched-events>
         <table>
           <thead>
@@ -104,10 +107,9 @@
           </tbody>
         </table>
       </template>
-
     </Integration>
 
-    <Versions >
+    <Versions>
       <table>
         <thead>
           <tr>

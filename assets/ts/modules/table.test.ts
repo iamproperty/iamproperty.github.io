@@ -16,8 +16,16 @@ const makeTable = () => {
   append(thead, append(headRow, createElement('th', {}, 'Name'), createElement('th', {}, 'Score')));
   append(
     tbody,
-    append(createElement('tr'), createElement('td', { dataLabel: 'Name' }, 'Bravo'), createElement('td', { dataLabel: 'Score' }, '2')),
-    append(createElement('tr'), createElement('td', { dataLabel: 'Name' }, 'Alpha'), createElement('td', { dataLabel: 'Score' }, '10'))
+    append(
+      createElement('tr'),
+      createElement('td', { dataLabel: 'Name' }, 'Bravo'),
+      createElement('td', { dataLabel: 'Score' }, '2')
+    ),
+    append(
+      createElement('tr'),
+      createElement('td', { dataLabel: 'Name' }, 'Alpha'),
+      createElement('td', { dataLabel: 'Score' }, '10')
+    )
   );
   append(table, thead, tbody);
 

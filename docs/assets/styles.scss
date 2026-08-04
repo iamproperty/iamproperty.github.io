@@ -3,18 +3,14 @@
 @use '../../assets/sass/_functions/mixins' as *;
 @use '../../assets/sass/_functions/utility-mixins' as *;
 
-
-
 // Load the SCSS framework
 $fontPath: '/fonts/';
-
 
 @use '../../assets/sass/_fonts' with (
   $fontPath: $fontPath
 );
 
 @use '../../assets/sass/_corefiles';
-
 
 @use '../../assets/sass/_functions/mixins' as *;
 //@use '../../assets/sass/_bs_utilities' as *;

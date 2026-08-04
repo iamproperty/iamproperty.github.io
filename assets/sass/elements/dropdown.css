@@ -1,5 +1,4 @@
 @layer elements {
-  
   /* #region dropdown wrapper - used for components */
   .dropdown__wrapper {
     position: relative;
@@ -19,7 +18,7 @@
       top: 100%;
     }
 
-    label[for="use"]:after {
+    label[for='use']:after {
       top: var(--checkbox-inner-top, 0.5rem);
     }
   }
@@ -37,14 +36,11 @@
     }
   }
 
-
   .dark-theme .dropdown__wrapper datalist {
-
     color-scheme: dark;
   }
 
-  .dropdown__wrapper:is(:focus-within,:has(*:active),:active) datalist {
-
+  .dropdown__wrapper:is(:focus-within, :has(*:active), :active) datalist {
     display: block;
 
     &:empty {
@@ -56,8 +52,7 @@
 
   /* #region Dropdown */
   :is(.dropdown, datalist, [popover]),
-  select::picker(select)  {
-
+  select::picker(select) {
     border-top: none;
     border: none !important;
 
@@ -68,14 +63,12 @@
     border-radius: var(--dropdown-border-radius);
     box-shadow: var(--dropdown-box-shadow);
   }
-  
+
   :is(.dropdown, datalist):empty {
-    
     display: none !important;
   }
 
-  :is(.dropdown, datalist){
-    
+  :is(.dropdown, datalist) {
     overflow-y: auto;
     width: 100%;
     max-width: var(--input-max-width, 50rem);
@@ -89,14 +82,13 @@
   }
 
   datalist {
-    
     position: absolute;
     top: 100%;
     left: 0;
 
     &:has(> .js-hide):not(:has(> *:not(.js-hide))):before,
     &:empty:before {
-      content: "No results found"; /* TODO Allow for text to be overwritten */
+      content: 'No results found'; /* TODO Allow for text to be overwritten */
       background-color: white;
       padding: 1rem 0.5rem;
       color: var(--colour-primary) !important;
@@ -122,7 +114,6 @@
   /* #region Dropdown Option */
   :is(.dropdown, datalist, select) option,
   .dropdown__option:not([slot='checked']) {
-    
     background: var(--dropdown-bg);
     cursor: pointer;
     background: unset !important;
@@ -138,7 +129,7 @@
     max-width: 100% !important;
     text-align: left !important;
 
-    border-radius: var(--option-border-radius)!important;
+    border-radius: var(--option-border-radius) !important;
 
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -148,32 +139,32 @@
     overflow: clip;
     outline: none;
 
-    &:not(:last-child){
+    &:not(:last-child) {
       margin: 0 0 0.25rem 0 !important;
     }
 
     &:is(:hover, :focus) {
-      background: var(--option-bg-hover)!important;
+      background: var(--option-bg-hover) !important;
       color: var(--option-color-hover) !important;
     }
 
     &:has(:is(:hover, :focus)) {
-      background: var(--option-bg-hover)!important;
+      background: var(--option-bg-hover) !important;
       color: var(--option-color-hover) !important;
     }
 
-    &:is(:active,.active,:checked) {
+    &:is(:active, .active, :checked) {
       border-left: var(--option-border-left-active) !important;
       padding-left: calc(var(--option-padding) - 4px) !important;
       background: var(--option-bg-active) !important;
     }
-    &:has(:is(:active,.active,:checked)) {
+    &:has(:is(:active, .active, :checked)) {
       border-left: var(--option-border-left-active) !important;
       padding-left: calc(var(--option-padding) - 4px) !important;
       background: var(--option-bg-active) !important;
     }
 
-    &:has(:is(:active,.active,:checked)) {
+    &:has(:is(:active, .active, :checked)) {
       border-left: var(--option-border-left-active) !important;
       background: var(--option-bg-active) !important;
     }
@@ -181,15 +172,13 @@
       content: attr(data-after);
     }
   }
-  
-
 
   :is(.dropdown, datalist, select, [popover]) hr {
-      height: 1px !important;
-      background-color: var(--menu-hr-border-color, var(--border-color, grey)) !important;
-      width: 100%;
-      margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
-      padding: 0 !important;
+    height: 1px !important;
+    background-color: var(--menu-hr-border-color, var(--border-color, grey)) !important;
+    width: 100%;
+    margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
+    padding: 0 !important;
   }
 
   :is(.dropdown, datalist, select, [popover]) *:last-child {
@@ -204,7 +193,7 @@
 
   /* #region Dropdown headings */
 
-  :is(.dropdown, datalist, [popover]) :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
+  :is(.dropdown, datalist, [popover]) :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
     font-size: 1rem !important;
     line-height: 1.1875rem !important;
     padding-bottom: 0.5rem;
@@ -214,17 +203,17 @@
   /* #endregion */
 
   /* #region Needed for the component files */
-  :is(iam-tag,iam-multiselect):has(label:not([slot='checked'])) {
+  :is(iam-tag, iam-multiselect):has(label:not([slot='checked']):not([slot='notmatched'])) {
     --display-panel: block;
   }
 
-  :is(iam-tag,iam-multiselect):has(label[slot='checked']) {
+  :is(iam-tag, iam-multiselect):has(label[slot='checked']) {
     --display-button: block;
   }
 
-  :is(iam-tag,iam-multiselect)[data-single] .tag[slot='checked'],
-  :is(iam-tag,iam-multiselect)[data-single] .tag[slot='checked'] * {
-    pointer-events: none!important;
+  :is(iam-tag, iam-multiselect)[data-single] .tag[slot='checked'],
+  :is(iam-tag, iam-multiselect)[data-single] .tag[slot='checked'] * {
+    pointer-events: none !important;
   }
 
   @container style(--theme: dark) {

@@ -11,7 +11,11 @@ describe('File upload module', () => {
     const input = createElement('input', { type: 'file' });
     const wrapper = createElement('div');
     append(wrapper, createElement('div', { class: 'files' }), createElement('div', { class: 'drop-area' }));
-    append(wrapper, createElement('div', { class: 'invalid-feedback size' }), createElement('div', { class: 'invalid-feedback ext' }));
+    append(
+      wrapper,
+      createElement('div', { class: 'invalid-feedback size' }),
+      createElement('div', { class: 'invalid-feedback ext' })
+    );
     append(component, input);
 
     fileupload(component, wrapper);

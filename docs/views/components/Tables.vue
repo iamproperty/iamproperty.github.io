@@ -1604,10 +1604,10 @@
       <h2>Max height table</h2>
       <p>
         To control how much real estate the table takes up on a page we can set a max height from a pre-defined list.
-        Using the class of <b>.mh-sm</b> will set the max height to 12.5rem (200px). <b>.mh-md</b> will set it to 25rem (400px) and
-        <b>.mh-lg</b> will set it to 37.5rem (600px). Commonly when
-        using one of these classes we don't want to convert the table into a stackable view on mobile, this is
-        achievable by adding the <b>.table--fullwidth</b> class.
+        Using the class of <b>.mh-sm</b> will set the max height to 12.5rem (200px). <b>.mh-md</b> will set it to 25rem
+        (400px) and <b>.mh-lg</b> will set it to 37.5rem (600px). Commonly when using one of these classes we don't want
+        to convert the table into a stackable view on mobile, this is achievable by adding the
+        <b>.table--fullwidth</b> class.
       </p>
     </div>
 

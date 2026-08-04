@@ -1,14 +1,13 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-
 /* #region Create the correct padding top of the page */
-nav:has(:is(iam-nav,.iam-nav)) {
+nav:has(:is(iam-nav, .iam-nav)) {
   min-height: 6rem; /* 96 */
   display: block;
   position: relative;
 
-  :is(iam-nav,.iam-nav) {
+  :is(iam-nav, .iam-nav) {
     position: absolute;
     top: 0;
     left: 0;
@@ -18,7 +17,7 @@ nav:has(:is(iam-nav,.iam-nav)) {
 }
 
 @media screen and (min-width: 62em) {
-  nav:has(:is(iam-nav,.iam-nav) [slot='secondary']) {
+  nav:has(:is(iam-nav, .iam-nav) [slot='secondary']) {
     min-height: 8.5rem; /* 96 + 40 */
   }
 }
@@ -40,13 +39,13 @@ nav:has(.nav--sticky) {
 }
 
 @media screen and (max-width: 36em) {
-  body:has(:is(iam-nav,.iam-nav).open:not(.nav--xs-sticky,.demo-open)) {
+  body:has(:is(iam-nav, .iam-nav).open:not(.nav--xs-sticky, .demo-open)) {
     max-height: 100vh;
     overflow: hidden;
     margin-top: 0rem;
   }
 
-  nav:has(:is(iam-nav,.iam-nav).nav--xs-sticky) {
+  nav:has(:is(iam-nav, .iam-nav).nav--xs-sticky) {
     position: sticky;
     top: 0;
     left: 0;
@@ -54,33 +53,31 @@ nav:has(.nav--sticky) {
     z-index: 9999;
     transition: margin 1s;
 
-    :is(iam-nav,.iam-nav) {
+    :is(iam-nav, .iam-nav) {
       position: fixed;
     }
   }
 
   body[data-direction='down'].past100 nav:has(.nav--xs-sticky) {
-    
     transform: translate(0, -100%);
   }
 }
 
 @media screen and (min-width: 36em) {
-  body:has(:is(iam-nav,.iam-nav).open:not(.nav--sticky)) {
+  body:has(:is(iam-nav, .iam-nav).open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
   }
 }
 
-body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
+body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky {
   transform: translate(0, -100%);
 }
 
 /* #endregion */
 
 /* #region General styles */
-:is(iam-nav,.iam-nav) {
-
+:is(iam-nav, .iam-nav) {
   a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
     text-decoration: none;
 
@@ -107,11 +104,11 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       text-decoration-color: var(--colour-info) !important;
     }
 
-    &[data-product][data-feature]:not([data-is-enabled="true"]) {
-      padding-left: 2rem!important;
+    &[data-product][data-feature]:not([data-is-enabled='true']) {
+      padding-left: 2rem !important;
       &:before {
-        content: "\f135";
-        font-family: var(--fa-family, var(--fa-style-family, "Font Awesome 7 Pro"));
+        content: '\f135';
+        font-family: var(--fa-family, var(--fa-style-family, 'Font Awesome 7 Pro'));
         padding-right: 0.5em;
         position: absolute;
         left: 0;
@@ -122,38 +119,32 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
   /* #region standard nav sections */
   .section [data-title].section-title {
-
     display: block;
   }
   .section [data-product].section-desc {
-
     display: none;
   }
 
-  .section:not(:has([data-product][data-feature][data-is-enabled="true"])):has([data-product].section-desc) {
-
+  .section:not(:has([data-product][data-feature][data-is-enabled='true'])):has([data-product].section-desc) {
     [data-product].section-title {
-
       display: none;
     }
     [data-product].section-desc {
-
       display: block;
     }
   }
 
-  .section:has([href="null"]):not(:has(a:not([href="null"]))){
-
-    display: none!important;
+  .section:has([href='null']):not(:has(a:not([href='null']))) {
+    display: none !important;
   }
 
-  .section [href="null"]{
-    display: none!important;
+  .section [href='null'] {
+    display: none !important;
   }
   /* #endregion */
 }
 
-:is(iam-nav,.iam-nav) details {
+:is(iam-nav, .iam-nav) details {
   padding-bottom: 0;
 
   > summary {
@@ -189,7 +180,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 /* #region mobile and tablet mega menu */
 
-@mixin mobileMenu(){
+@mixin mobileMenu() {
   background-color: #eeeeee;
   margin-left: -1.5rem;
   margin-right: -1.5rem;
@@ -237,7 +228,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     border: none;
     color: var(--colour-link);
     margin: 0;
-    margin-left: 3rem!important;
+    margin-left: 3rem !important;
     padding: 1.5rem 0 1.5rem 0;
     font-size: 1rem;
     line-height: 1.5rem;
@@ -266,15 +257,12 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 }
 
 @media screen and (max-width: 62em) {
-
-  :is(iam-nav,.iam-nav) details {
-
+  :is(iam-nav, .iam-nav) details {
     @include mobileMenu();
   }
 
   /* secondary menus */
-  :is(iam-nav,.iam-nav) > details[slot="secondary"] {
-    
+  :is(iam-nav, .iam-nav) > details[slot='secondary'] {
     background-color: transparent;
 
     summary {
@@ -283,12 +271,10 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
   }
 
   /* sub menus */
-  :is(iam-nav,.iam-nav) {
+  :is(iam-nav, .iam-nav) {
     --mobDetails: 'true';
 
-    
     details .section [data-title].section-title {
-
       color: var(--colour-body) !important;
       font-size: 1rem;
       font-weight: normal;
@@ -296,8 +282,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     }
 
     details > div .lead {
-
-      padding: 1rem 0 0 3rem!important;
+      padding: 1rem 0 0 3rem !important;
     }
 
     details > div a:last-child {
@@ -358,8 +343,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 /* #endregion */
 
 /* #region tablet mega menu tweaks */
-:is(iam-nav,.iam-nav) details {
-
+:is(iam-nav, .iam-nav) details {
   @media screen and (max-width: 62em) and (min-width: 36em) {
     padding-right: 2.5rem;
     margin-right: -2.5rem;
@@ -382,9 +366,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 /* #endregion */
 
 /* maintain the mobile mega menu for the account menu on desktop */
-:is(iam-nav,.iam-nav) > details[slot="account"] {
-
-  
+:is(iam-nav, .iam-nav) > details[slot='account'] {
   @include mobileMenu();
 
   @media screen and (min-width: 36em) {
@@ -406,10 +388,9 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
   }
 }
 
-
 /* #region Desktop mega menu */
 @media screen and (min-width: 62em) {
-  :is(iam-nav,.iam-nav) details:not([slot="secondary"]):not([slot="account"]) {
+  :is(iam-nav, .iam-nav) details:not([slot='secondary']):not([slot='account']) {
     width: auto;
 
     > summary {
@@ -466,10 +447,8 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       translate: -50% 0;
 
       .lead {
-
-        padding: 1rem 0 0 0!important;
+        padding: 1rem 0 0 0 !important;
       }
-
     }
 
     &[open] > div:has(details) {
@@ -509,7 +488,6 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     &[open] > div:not(:has(details)) {
       background: var(--colour-canvas);
 
-
       padding-top: 8rem; /* (40 + 88); */
       padding-bottom: 4rem; /* 64 */
       columns: 3;
@@ -524,7 +502,6 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
           min-height: 6rem;
         }
       }
-
 
       a:has(iam-card) {
         display: inline-block;
@@ -574,9 +551,8 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     }
 
     &[open] > div:has(span.section) {
-
       display: flex;
-        
+
       > span.section {
         display: block;
         flex-grow: 1;
@@ -584,10 +560,9 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
         .lead {
           column-span: all;
         }
-      } 
+      }
 
       > span.section.section--double {
-
         display: block;
         width: calc(66.66% - 6.875rem);
         columns: 2;
@@ -644,31 +619,25 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       }
     }
 
-    details > summary {
-      padding-right: 0;
-      background: transparent;
-
-      &:after {
-        display: none;
-      }
-    }
-
     details:not(:first-child) > summary {
       margin-left: 2rem;
     }
   }
 
-  :is(iam-nav,.iam-nav) a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
+  :is(iam-nav, .iam-nav) > details[open] > div:has(details) {
+    background: #eee!important;
+    display: flex!important;
+    align-items: center!important;
+  }
 
-
-    &[data-product][data-feature]:not([data-is-enabled="true"]) {
-      
+  :is(iam-nav, .iam-nav) a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
+    &[data-product][data-feature]:not([data-is-enabled='true']) {
       &:before {
         left: 0.5rem;
       }
     }
   }
-  nav:has(:is(iam-nav,.iam-nav).open) {
+  nav:has(:is(iam-nav, .iam-nav).open) {
     min-height: 100vh !important;
     max-height: 100vh;
     overflow: visible;
@@ -676,12 +645,12 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     margin-bottom: calc((100vh - var(--nav-height)) * -1);
   }
 
-  html:has(:is(iam-nav,.iam-nav).open:not(.demo-open)) {
+  html:has(:is(iam-nav, .iam-nav).open:not(.demo-open)) {
     overflow: hidden;
   }
 
   // Updated secondary nav
-  :is(iam-nav,.iam-nav) > details[slot="secondary"]{
+  :is(iam-nav, .iam-nav) > details[slot='secondary'] {
     display: inline-block;
     position: relative;
     width: auto;
@@ -689,10 +658,9 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     summary {
       display: inline-block;
       margin-left: 1.5rem;
-      margin-bottom: 0!important;
+      margin-bottom: 0 !important;
       font-size: 0.75rem;
       font-weight: bold;
-
 
       &:after {
         display: none;
@@ -710,7 +678,6 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
         line-height: 1.5rem !important;
         margin: 0;
         padding: var(--option-padding) !important;
-
       }
 
       .lead {
@@ -725,21 +692,20 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
         width: 0;
       }
 
-      .section:has(a:not([href=null])) + .section {
+      .section:has(a:not([href='null'])) + .section {
         border-top: 1px solid var(--colour-border);
         display: block;
         padding-top: 0.5rem;
         margin-top: 0.5rem;
       }
     }
-    
   }
 
-  :is(iam-nav,.iam-nav) > details[slot="secondary"]::details-content {
+  :is(iam-nav, .iam-nav) > details[slot='secondary']::details-content {
     display: none;
   }
 
-  :is(iam-nav,.iam-nav) > details[slot="secondary"][open]::details-content {
+  :is(iam-nav, .iam-nav) > details[slot='secondary'][open]::details-content {
     display: block;
     background: var(--dropdown-bg);
     margin-block: var(--dropdown-margin-block);
@@ -752,18 +718,16 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     left: 1.5rem;
   }
 
-  :is(iam-nav,.iam-nav) > details[slot="secondary"][open]:has([data-title="Learning and support"])::details-content {
-    
+  :is(iam-nav, .iam-nav) > details[slot='secondary'][open]:has([data-title='Learning and support'])::details-content {
     left: auto;
     right: 0;
   }
-    
 }
 
 /*  4 columns on large screens */
 @media screen and (min-width: 80em) {
   /*  1280 */
-  :is(iam-nav,.iam-nav).nav--large *:not(.nav--menu) > details {
+  :is(iam-nav, .iam-nav).nav--large *:not(.nav--menu) > details {
     &[open] > div:not(:has(details)) {
       columns: 4;
       column-gap: 6.875rem;
@@ -775,7 +739,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 /* #region Search */
 @media screen and (min-width: 62em) {
-  :is(iam-nav,.iam-nav) {
+  :is(iam-nav, .iam-nav) {
     &.search-open {
       > *:not([slot='logo']):not([slot='secondary']):not([slot='search']) {
         display: none !important;
@@ -787,7 +751,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 /* #region Dual navbar in desktop */
 @media screen and (min-width: 62em) {
-  :is(iam-nav,.iam-nav):has([slot='dual']) {
+  :is(iam-nav, .iam-nav):has([slot='dual']) {
     .brand:has(~ [slot='dual']) {
       margin-right: 1.5rem !important;
     }
@@ -808,7 +772,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 /* #endregion */
 
 /* #region compact menus on mobile */
-:is(iam-nav,.iam-nav) > .dialog__wrapper {
+:is(iam-nav, .iam-nav) > .dialog__wrapper {
   .dialog--list {
     a {
       font-size: 1rem;
@@ -817,7 +781,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 }
 
 @media screen and (max-width: 62em) {
-  :is(iam-nav,.iam-nav) > .dialog__wrapper:not(.dialog--xs) {
+  :is(iam-nav, .iam-nav) > .dialog__wrapper:not(.dialog--xs) {
     width: 100%;
 
     .btn-compact {
@@ -832,8 +796,8 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     }
   }
 
-  :is(iam-nav,.iam-nav) > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
-  :is(iam-nav,.iam-nav) .btn-compact {
+  :is(iam-nav, .iam-nav) > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
+  :is(iam-nav, .iam-nav) .btn-compact {
     --compact-size: 2rem;
     all: unset;
     display: block !important;
@@ -873,16 +837,28 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 /* #region navbar additional menus */
 
-iam-nav .title[slot="account"] {
+iam-nav .title[slot='account'] {
   display: block;
 }
 
-iam-nav .title[slot="account"]:has(+ .switch-account[slot="account"]) {
-  padding-bottom: 0.5rem!important;
+iam-nav .title[slot='account']:has(+ .switch-account[slot='account']) {
+  padding-bottom: 0.5rem !important;
 }
 
-iam-nav .switch-account[slot="account"] {
+iam-nav .switch-account[slot='account'] {
   margin-bottom: 3rem;
 }
 
+/* #endregion */
+
+
+/* #region tab order fix */
+:is(iam-nav, .iam-nav) * {
+
+  reading-order: 2;
+}
+
+:is(iam-nav, .iam-nav) [slot="secondary"] {
+  reading-order: 1;
+}
 /* #endregion */
