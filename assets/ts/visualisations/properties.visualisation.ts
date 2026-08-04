@@ -1,4 +1,5 @@
-//import iamPagination from '../../js/components/pagination/pagination.component.min.js';
+import iamPagination from '../../js/components/pagination/pagination.component.min.js';
+import iamMenu from '../../js/components/menu/menu.component.min.js';
 
 class iamVisProperties extends HTMLElement {
   constructor() {
@@ -37,6 +38,8 @@ class iamVisProperties extends HTMLElement {
         <button id="exportData" class="btn btn-action" disabled>Export table data</button>
       </div>
       <div id="filters">
+
+        <button class="btn btn-action " popovertarget="actions2" >Sort by</button>
         <button command="show-modal" commandfor="filtersDialog" class="btn btn-primary">Filter results</button>
       </div>
 
@@ -49,6 +52,13 @@ class iamVisProperties extends HTMLElement {
         <button command="close" commandfor="filtersDialog" class="btn btn-primary">Update results</button>
       </div>
     </dialog>
+    <iam-menu id="actions2" class="menu--fill dropdown" popover="auto" role="menu">
+
+      <button data-v-828268fc="" role="menuitem" tabindex="0" autofocus="true"><i data-v-828268fc="" class="fa-solid fa-edit"></i> Edit</button>
+      <button data-v-828268fc="" role="menuitem" tabindex="0"><i data-v-828268fc="" class="fa-solid fa-clone"></i> Duplicate</button>
+      <hr data-v-828268fc="">
+      <button data-v-828268fc="" role="menuitem" tabindex="0"><i data-v-828268fc="" class="fa-solid fa-trash"></i> Delete</button>
+    </iam-menu>
 
     <div id="bulkDisabled"></div>
 
@@ -433,7 +443,6 @@ class iamVisProperties extends HTMLElement {
       createCampaignBtn?.removeAttribute('disabled');
     }
 
-
   }
 
   connectedCallback(): void {
@@ -601,8 +610,11 @@ document.addEventListener('DOMContentLoaded', (): void => {
   if (!window.customElements.get(`iam-vis-properties`))
     window.customElements.define(`iam-vis-properties`, iamVisProperties);
 
-  //if (!window.customElements.get(`iam-pagination`) && iamPagination)
-  //  window.customElements.define(`iam-pagination`, iamPagination);
+  if (!window.customElements.get(`iam-pagination`) && iamPagination)
+    window.customElements.define(`iam-pagination`, iamPagination);
+
+  if (!window.customElements.get(`iam-menu`) && iamMenu)
+    window.customElements.define(`iam-menu`, iamMenu);
 
 });
 

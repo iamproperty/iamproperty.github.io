@@ -2,6 +2,11 @@
   import Card from '@/components/Card/Card.vue';
   import routes from '../../routes.ts';
 
+  import DSHeader from '../DSHeader.vue';
+  import { useRoute } from 'vue-router';
+
+  const route = useRoute();
+
   const templates = routes.reduce(function (arr, route) {
     // Find the correct group
     if (route.path === '/templates') {
@@ -28,6 +33,8 @@
 
 <template>
   <main>
+    <DSHeader :route="route"></DSHeader>
+
     <div class="container">
       <div class="row row-cols-1 row-cols-md-3">
         <div v-for="item in pages">

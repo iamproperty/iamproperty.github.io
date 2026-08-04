@@ -1166,7 +1166,7 @@ const routes = [
   },
   {
     /* Templates */ path: '/templates',
-    name: 'Templates',
+    name: 'Templates Folder',
     meta: {
       title: 'Templates | iamkey',
     },
@@ -1176,7 +1176,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "templates" */ './views/Templates.vue'),
     children: [
       {
-        name: 'templates-index',
+        name: 'Templates',
         path: '',
         component: () => import('./views/templates/Index.vue'),
       },
@@ -1263,6 +1263,32 @@ const routes = [
           status: 'beta',
         },
         component: () => import('./views/patterns/SwitchingAccountDoc.vue'),
+      },
+    ],
+  },
+  {
+    /* Apps */ path: '/apps',
+    name: 'Apps folder',
+    meta: {
+      title: 'Apps | iamkey',
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "apps" */ './views/Apps.vue'),
+    children: [
+      {
+        name: 'Apps',
+        path: '',
+        component: () => import('./views/apps/Index.vue'),
+      },
+      {
+        path: 'properties',
+        name: 'Properties Visualisation',
+        meta: {
+          title: 'Properties Visualisation | Components | iamkey',
+        },
+        component: () => import('./views/apps/Properties.vue'),
       },
     ],
   },
