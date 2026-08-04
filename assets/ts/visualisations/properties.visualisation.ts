@@ -18,6 +18,8 @@ class iamVisProperties extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
 
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
+
     <!-- MapLibre JavaScript -->
     <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
 
@@ -30,7 +32,9 @@ class iamVisProperties extends HTMLElement {
       </label>
 
       <div id="actions">
-        <button id="createCampaign" class="btn btn-action">Create print campaign</button>
+        <button id="addTaskForLater" class="btn btn-action" disabled>Add task to contact later</button>
+        <button id="createCampaign" class="btn btn-action" disabled>Create print campaign</button>
+        <button id="exportData" class="btn btn-action" disabled>Export table data</button>
       </div>
       <div id="filters">
         <button command="show-modal" commandfor="filtersDialog" class="btn btn-primary">Filter results</button>
@@ -45,6 +49,8 @@ class iamVisProperties extends HTMLElement {
         <button command="close" commandfor="filtersDialog" class="btn btn-primary">Update results</button>
       </div>
     </dialog>
+
+    <div id="bulkDisabled"></div>
 
     <span class="h4"><span class="count"></span>Properties most likely to switch</span>
 
@@ -64,12 +70,13 @@ class iamVisProperties extends HTMLElement {
     if (!document.getElementById('VisPropertiesGlobal'))
       document.head.insertAdjacentHTML('beforeend', `<style id="VisPropertiesGlobal">${loadExtraCSS}</style>`);
 
-
     this.map = null;
     this.resizeObserver = null;
     this.latlngObserver = null;
     this.resizeFrame = null;
     this.functionsTimeout = null;
+    this.selectAllCheckbox = this.shadowRoot?.querySelector('[name="selectall"]');
+
   }
 
   scheduleFunctions = (): void => {
@@ -330,17 +337,15 @@ class iamVisProperties extends HTMLElement {
 
   }
 
-  setSelectAllInput = (): void => {
+  selectAllInputs = (): void => {
 
-    const selectAll = this.shadowRoot?.querySelector('[name="selectall"]');
+    this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]').forEach(input => input.checked = true);
+    this.selectAllCheckbox.setAttribute('data-checked','all');
+  }
 
-    /*
-    if(selectAll.checked == true){
-      this.setSelectAllInput();
-    }
-*/
-
-    this.setSelectAllText();
+  unselectAllInputs = (): void => {
+    this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]').forEach(input => input.checked = false);
+    this.selectAllCheckbox.removeAttribute('data-checked');
   }
 
 
@@ -369,53 +374,79 @@ class iamVisProperties extends HTMLElement {
     console.log(selected);
   }
 
+  addTaskForLater = (): void => {
+
+    const selected = this.getSelectedCheckboxes();
+
+    console.log(selected);
+  }
+
+  exportData = (): void => {
+
+    const selected = this.getSelectedCheckboxes();
+
+    console.log(selected);
+  }
+
+  checkSelectedCheckboxes = (): void => {
+
+    const bulkDisabledNotification = this.shadowRoot?.querySelector('#bulkDisabled');
+    const addTaskForLaterBtn = this.shadowRoot?.querySelector('#addTaskForLater');
+    const createCampaignBtn = this.shadowRoot?.querySelector('#createCampaign');
+    const exportDataBtn = this.shadowRoot?.querySelector('#exportData');
+
+
+    const selectedInputs = this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked');
+
+    const selectedBranches = Array.from(
+      this.querySelectorAll('tr:not(.notmatched):has([type="checkbox"]:checked)')
+    ).reduce((branches, row) => {
+      const branch = row.querySelector('[data-field="stock_switch.branch"]')?.textContent?.trim();
+
+      if (branch) {
+        branches.add(branch);
+      }
+
+      return branches;
+    }, new Set<string>()).size;
+
+    console.log(selectedBranches);
+
+    if(selectedInputs.length == 0){
+      exportDataBtn?.setAttribute('disabled',true);
+      addTaskForLaterBtn?.setAttribute('disabled',true);
+      createCampaignBtn?.setAttribute('disabled',true);
+      bulkDisabledNotification?.innerHTML = ``;
+    }
+    else if(selectedInputs.length != 0 && selectedBranches > 1){
+
+      bulkDisabledNotification?.innerHTML = `<p>Some bulk actions are disabled</p>`;
+      exportDataBtn?.removeAttribute('disabled');
+      addTaskForLaterBtn?.setAttribute('disabled',true);
+      createCampaignBtn?.setAttribute('disabled',true);
+    }
+    else {
+
+      bulkDisabledNotification?.innerHTML = ``;
+      exportDataBtn?.removeAttribute('disabled');
+      addTaskForLaterBtn?.removeAttribute('disabled');
+      createCampaignBtn?.removeAttribute('disabled');
+    }
+
+
+  }
+
   connectedCallback(): void {
 
     const pagination = this.shadowRoot?.querySelector('iam-pagination');
+    const addTaskForLaterBtn = this.shadowRoot?.querySelector('#addTaskForLater');
     const createCampaignBtn = this.shadowRoot?.querySelector('#createCampaign');
-    const selectAll = this.shadowRoot?.querySelector('[name="selectall"]');
+    const exportDataBtn = this.shadowRoot?.querySelector('#exportData');
 
     if (this.map)
       return;
 
-    selectAll?.addEventListener('change', (event) => {
-
-      this.setSelectAllInput();
-
-    });
-
-    this?.addEventListener('change', (event) => {
-
-      if(this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length == 0)
-        selectAll.indeterminate = this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length != 0;
-
-      console.log(this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length != 0);
-      this.setSelectAllText();
-    });
-    // #region Filters
-
-    const filtersDialog = this.shadowRoot?.querySelector('#filtersDialog');
-
-    filtersDialog.addEventListener("toggle", (event) => {
-      if (event.newState === "open") {
-        this.dispatchEvent(new CustomEvent("filters-open"));
-      } else {
-        this.dispatchEvent(new CustomEvent("filters-closed"));
-      }
-    });
-
-    // #endregion
-
-
-    // #region actions
-
-    createCampaignBtn?.addEventListener('click', (event) => {
-
-      this.createCampaign();
-    });
-
-    // #endregion
-
+    // #region init - check that lat and long values exist then create the map and setup the table
     if(this.querySelector('tr[data-longitude][data-latitude]')){
 
       this.paginateTable();
@@ -432,7 +463,67 @@ class iamVisProperties extends HTMLElement {
         })
       );
     }
+    // #endregion
 
+    // #region checkboxes
+    this.selectAllCheckbox?.addEventListener('change', () => {
+
+      if(this.selectAllCheckbox.hasAttribute('data-checked') && this.selectAllCheckbox.getAttribute('data-checked') != "all" && this.selectAllCheckbox.getAttribute('data-checked') != 0){
+
+        this.selectAllCheckbox.checked = false;
+        this.unselectAllInputs();
+      }
+      else if(this.selectAllCheckbox.checked)
+        this.selectAllInputs();
+      else
+        this.unselectAllInputs();
+
+      this.setSelectAllText();
+    });
+
+    this?.addEventListener('change', (event) => {
+
+
+      this.selectAllCheckbox.indeterminate = this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length != 0;
+      this.selectAllCheckbox?.setAttribute('data-checked',this.querySelectorAll('tr:not(.notmatched) [type="checkbox"]:checked').length);
+
+      this.setSelectAllText();
+
+      this.checkSelectedCheckboxes();
+
+    });
+    // #endregion
+
+    // #region actions
+    addTaskForLaterBtn?.addEventListener('click', (event) => {
+
+      this.addTaskForLater();
+    });
+    createCampaignBtn?.addEventListener('click', (event) => {
+
+      this.createCampaign();
+    });
+    exportDataBtn?.addEventListener('click', (event) => {
+
+      this.exportData();
+    });
+
+    // #endregion
+
+    // #region Filters
+    const filtersDialog = this.shadowRoot?.querySelector('#filtersDialog');
+
+    filtersDialog.addEventListener("toggle", (event) => {
+      if (event.newState === "open") {
+        this.dispatchEvent(new CustomEvent("filters-open"));
+      } else {
+        this.dispatchEvent(new CustomEvent("filters-closed"));
+      }
+    });
+    // #endregion
+
+
+    // #region resize observer
     this.resizeObserver = new ResizeObserver(() => {
       cancelAnimationFrame(this.resizeFrame);
 
@@ -443,7 +534,9 @@ class iamVisProperties extends HTMLElement {
     });
 
     this.resizeObserver.observe(this);
+    // #endregion
 
+    // #region lng and lat
     this.latlngObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         // Existing element gained or changed a data attribute
@@ -477,11 +570,14 @@ class iamVisProperties extends HTMLElement {
       attributes: true,
       attributeFilter: ['data-latitude', 'data-longitude']
     });
+    // #endregion
 
+    // #region pagination
     pagination?.addEventListener('update-page', ()=>{
 
       this.paginateTable();
     });
+    // #endregion
   }
 
   disconnectedCallback(): void {
@@ -505,8 +601,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
   if (!window.customElements.get(`iam-vis-properties`))
     window.customElements.define(`iam-vis-properties`, iamVisProperties);
 
-  if (!window.customElements.get(`iam-pagination`) && iamPagination)
-    window.customElements.define(`iam-pagination`, iamPagination);
+  //if (!window.customElements.get(`iam-pagination`) && iamPagination)
+  //  window.customElements.define(`iam-pagination`, iamPagination);
 
 });
 

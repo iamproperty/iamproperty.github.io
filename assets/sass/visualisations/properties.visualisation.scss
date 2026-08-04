@@ -17,6 +17,10 @@
   overflow: auto;
 }
 
+  [class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
+    font-weight: 400;
+  }
+
 dialog {
   place-self: center;
   width: 40rem;
@@ -52,12 +56,12 @@ dialog {
   }
 }
 
-#bar:not(:has([name="selectall"]:checked)) #actions {
+#bar:not(:has([name="selectall"]:checked),:has([name="selectall"]:indeterminate)) #actions {
 
   display: none;
 }
 
-#bar:has([name="selectall"]:checked) #filters {
+#bar:is(:has([name="selectall"]:checked),:has([name="selectall"]:indeterminate)) #filters {
 
   display: none;
 }
