@@ -1106,7 +1106,7 @@ const routes = [
         meta: {
           title: 'AJAX table | Components | iamkey',
         },
-        component: () => import('./views/tables/AJAXTableDoc.vue'),
+        component: () => import('./views/tables/AjaxTableDoc.vue'),
       },
     ],
   },
