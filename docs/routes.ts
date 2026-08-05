@@ -730,15 +730,6 @@ const routes = [
         component: () => import('./views/components/StepperDoc.vue'),
       },
       {
-        path: 'tables',
-        name: 'Tables',
-        meta: {
-          title: 'Tables | Components | iamkey',
-        },
-        component: () => import('./views/components/Tables.vue'),
-        searchterms: 'expandable, scrollable, rows, columns',
-      },
-      {
         path: 'tabs',
         name: 'Tabs',
         meta: {
@@ -1077,6 +1068,45 @@ const routes = [
           title: 'Video card | Components | iamkey',
         },
         component: () => import('./views/cards/VideoCardDoc.vue'),
+      },
+    ],
+  },
+  {
+    /* Tables */ path: '/tables',
+    name: 'Tables',
+    meta: {
+      title: 'Tables | iamkey',
+    },
+    component: () => import('./views/Components.vue'),
+    children: [
+      {
+        name: 'tables-index',
+        path: '',
+        component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'basic',
+        name: 'Basic table',
+        meta: {
+          title: 'Basic table | Components | iamkey',
+        },
+        component: () => import('./views/tables/BasicTableDoc.vue'),
+      },
+      {
+        path: 'expanded',
+        name: 'Expanded table',
+        meta: {
+          title: 'Expanded table | Components | iamkey',
+        },
+        component: () => import('./views/tables/ExpandedTableDoc.vue'),
+      },
+      {
+        path: 'ajax',
+        name: 'AJAX table',
+        meta: {
+          title: 'AJAX table | Components | iamkey',
+        },
+        component: () => import('./views/tables/AJAXTableDoc.vue'),
       },
     ],
   },
