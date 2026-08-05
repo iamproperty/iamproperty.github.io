@@ -522,7 +522,7 @@ const routes = [
         name: 'Standardised one platform menu',
         meta: {
           title: 'Standardised one platform menu | Components | iamkey',
-          status: 'beta',
+          status: 'stable',
           jira: 'FEG-939',
         },
         component: () => import('./views/standardised/NavDoc.vue'),
@@ -999,7 +999,7 @@ const routes = [
         meta: {
           title: 'Branch selector | Components | iamkey',
           jira: 'FEG-987',
-          status: 'beta',
+          status: 'stable',
         },
         component: () => import('./views/nav/BranchSelectorDoc.vue'),
         searchterms: 'switch,branch',
