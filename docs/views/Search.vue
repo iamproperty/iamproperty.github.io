@@ -4,7 +4,7 @@
 
   var urlParams = new URLSearchParams(window.location.search);
   let results = [];
-  let searchTerm = urlParams.get('searchAlt');
+  let searchTerm = urlParams.get('search');
   searchTerm = searchTerm ? searchTerm.toLowerCase().trim() : '';
 
   routes.forEach((route) => {
@@ -34,8 +34,6 @@
       }
     }
   });
-
-  console.log(results);
 </script>
 
 <template>

@@ -1,3 +1,6 @@
+import { verify } from 'node:crypto';
+import { stat } from 'node:fs';
+
 // @ts-nocheck
 const routes = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
@@ -28,9 +31,10 @@ const routes = [
       },
       {
         path: 'accessibility',
-        name: 'Accessibility (Beta)',
+        name: 'Accessibility',
         meta: {
           title: 'Accessibility | Foundations | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/foundations/Accessibility.vue'),
         searchterms: 'wave, lighthouse',
@@ -40,6 +44,8 @@ const routes = [
         name: 'Colours',
         meta: {
           title: 'Colours | Foundations | iamkey',
+          status: 'stable',
+          ver: '7.8.0',
         },
         component: () => import('./views/foundations/Colours.vue'),
         searchterms: 'light mode, dark mode, background, palette, slate, gradient, high contrast',
@@ -49,28 +55,10 @@ const routes = [
         name: 'Spacing and Layout',
         meta: {
           title: 'Spacing and Layout | Foundations | iamkey',
+          status: 'stable',
+          ver: '7.8.0',
         },
         component: () => import('./views/foundations/Spacing.vue'),
-        searchterms:
-          'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
-      },
-      {
-        path: 'grid',
-        name: 'Grid',
-        meta: {
-          title: 'Grid | Foundations | iamkey',
-        },
-        component: () => import('./views/foundations/Grid.vue'),
-        searchterms:
-          'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
-      },
-      {
-        path: 'greakpoints',
-        name: 'Breakpoints',
-        meta: {
-          title: 'Breakpoints and scaling | Foundations | iamkey',
-        },
-        component: () => import('./views/foundations/Breakpoints.vue'),
         searchterms:
           'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
       },
@@ -79,21 +67,13 @@ const routes = [
         name: 'Utility Classes',
         meta: {
           title: 'Utility Classes | Foundations | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/foundations/Utilities.vue'),
       },
       {
-        path: 'z-index',
-        name: 'Z-index (Beta)',
-        meta: {
-          title: 'Z-index | Foundations | iamkey',
-        },
-        component: () => import('./views/foundations/Zindex.vue'),
-        searchterms: 'below, base, focus, above, floating, menu, overlay',
-      },
-      {
         path: 'animation',
-        name: 'Animation (Beta)',
+        name: 'Animation',
         meta: {
           title: 'Animation | Foundations | iamkey',
         },
@@ -101,9 +81,10 @@ const routes = [
       },
       {
         path: 'dynamic-events',
-        name: 'Dynamic Events (Beta)',
+        name: 'Dynamic Events (alpha)',
         meta: {
           title: 'Dynamic Events | Foundations | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/foundations/DynamicEvents.vue'),
       },
@@ -123,9 +104,10 @@ const routes = [
       },
       {
         path: 'logos',
-        name: 'Logos (Beta)',
+        name: 'Logos (alpha)',
         meta: {
           title: 'Logos | Elements | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/elements/Logos.vue'),
         searchterms: 'brand, identity',
@@ -141,7 +123,7 @@ const routes = [
       },
       {
         path: 'media',
-        name: 'Media (Beta)',
+        name: 'Media (alpha)',
         meta: {
           title: 'Media | Elements | iamkey',
         },
@@ -162,13 +144,14 @@ const routes = [
         name: 'Typography',
         meta: {
           title: 'Typography | Elements | iamkey',
+          status: 'qa',
         },
         component: () => import('./views/elements/Type.vue'),
         searchterms: 'headings, body, lead, small, blockquote, stat',
       },
       {
         path: 'lists',
-        name: 'Lists (Beta)',
+        name: 'Lists',
         meta: {
           title: 'Lists | Elements | iamkey',
         },
@@ -185,9 +168,9 @@ const routes = [
       },
       {
         path: 'badges',
-        name: 'Badges (Beta)',
+        name: 'Badges (alpha)',
         meta: {
-          title: 'Badges (Beta) | Elements | iamkey',
+          title: 'Badges (alpha) | Elements | iamkey',
         },
         component: () => import('./views/elements/BadgesDoc.vue'),
       },
@@ -201,7 +184,7 @@ const routes = [
       },
       {
         path: 'progress',
-        name: 'Progress (BETA)',
+        name: 'Progress (alpha)',
         meta: {
           title: 'Progress | Elements | iamkey',
         },
@@ -210,7 +193,7 @@ const routes = [
       },
       {
         path: 'container',
-        name: 'Container (Beta)',
+        name: 'Container (alpha)',
         meta: {
           title: 'Container | Elemenets | iamkey',
         },
@@ -255,7 +238,7 @@ const routes = [
       },
       {
         path: 'details',
-        name: 'Details (BETA)',
+        name: 'Details (alpha)',
         meta: {
           title: 'Details | Elements | iamkey',
         },
@@ -314,13 +297,14 @@ const routes = [
         name: 'Buttons',
         meta: {
           title: 'Buttons | Elements | iamkey',
+          jira: 'FEG-982',
         },
         component: () => import('./views/links/Buttons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
       },
       {
         path: 'button-group',
-        name: 'Button group (beta)',
+        name: 'Button group (alpha)',
         meta: {
           title: 'Button group | Elements | iamkey',
         },
@@ -332,6 +316,7 @@ const routes = [
         name: 'Action buttons',
         meta: {
           title: 'Action buttons | Elements | iamkey',
+          jira: 'FEG-982',
         },
         component: () => import('./views/links/ActionButtons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
@@ -341,6 +326,7 @@ const routes = [
         name: 'Compact buttons',
         meta: {
           title: 'Compact buttons | Elements | iamkey',
+          jira: 'FEG-982',
         },
         component: () => import('./views/links/CompactButtons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
@@ -412,7 +398,7 @@ const routes = [
       },
       {
         path: 'toggle',
-        name: 'Form Toggle buttons (Beta)',
+        name: 'Form Toggle buttons (alpha)',
         meta: {
           title: 'Toggle buttons | Elements | iamkey',
         },
@@ -420,7 +406,7 @@ const routes = [
       },
       {
         path: 'file',
-        name: 'Form file upload fields (BETA)',
+        name: 'Form file upload fields (alpha)',
         meta: {
           title: 'Form file upload field | Elements | iamkey',
         },
@@ -484,6 +470,7 @@ const routes = [
         name: 'Dialog (Popover)',
         meta: {
           title: 'Dialog (Popover) | Dialogs | iamkey',
+          jira: 'FEG-981',
         },
         component: () => import('./views/dialogs/PopoverDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
@@ -504,11 +491,11 @@ const routes = [
           title: 'Video modal | Dialogs | iamkey',
         },
         component: () => import('./views/dialogs/VideoModalDoc.vue'),
-      }
+      },
     ],
   },
   {
-    /* standardised */path: '/standardised',
+    /* standardised */ path: '/standardised',
     name: 'Standardised',
     meta: {
       title: 'Components | iamkey',
@@ -525,28 +512,39 @@ const routes = [
         name: 'iamproperty address lookup',
         meta: {
           title: 'Address Lookup | Components | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/standardised/AddressLookupDoc.vue'),
         searchterms: 'postcode',
       },
-    ]
+      {
+        path: 'nav',
+        name: 'Standardised one platform menu',
+        meta: {
+          title: 'Standardised one platform menu | Components | iamkey',
+          status: 'stable',
+          jira: 'FEG-939',
+        },
+        component: () => import('./views/standardised/NavDoc.vue'),
+        searchterms: 'branch, switcher',
+      },
+    ],
   },
   {
     /* Components */ path: '/components',
-    name: 'Components',
     meta: {
       title: 'Components | iamkey',
     },
     component: () => import('./views/Components.vue'),
     children: [
       {
-        name: 'components-index',
+        name: 'Components',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
       {
         path: 'accordion',
-        name: 'Accordion (Beta)',
+        name: 'Accordion (alpha)',
         meta: {
           title: 'Accordion | Components | iamkey',
         },
@@ -564,7 +562,7 @@ const routes = [
       },
       {
         path: 'applied-filters',
-        name: 'Applied Filters (Beta)',
+        name: 'Applied Filters (alpha)',
         meta: {
           title: 'Applied Filters | Components | iamkey',
         },
@@ -575,6 +573,7 @@ const routes = [
         name: 'Banner',
         meta: {
           title: 'Banner | Components | iamkey',
+          jira: 'FEG-915',
         },
         component: () => import('./views/components/BannerDoc.vue'),
       },
@@ -599,13 +598,15 @@ const routes = [
         name: 'Carousel',
         meta: {
           title: 'Carousel | Components | iamkey',
+          jira: 'FEG-954',
+          status: 'qa',
         },
         component: () => import('./views/components/CarouselDoc.vue'),
         searchterms: 'slideshow',
       },
       {
         path: 'calendar',
-        name: 'Calendar (Beta)',
+        name: 'Calendar (alpha)',
         meta: {
           title: 'Calendar | Components | iamkey',
         },
@@ -614,23 +615,28 @@ const routes = [
       },
       {
         path: 'charts',
-        name: 'Charts (Depreciated)',
+        name: 'Charts',
         meta: {
           title: 'Charts | Components | iamkey',
+          status: 'deprecated',
         },
         component: () => import('./views/components/ChartsDoc.vue'),
       },
       {
         path: 'content',
-        name: 'Content (Beta)',
+        name: 'Content',
         meta: {
           title: 'Content | Components | iamkey',
+          jira: 'FEG-977',
+          status: 'dev',
+          desc: 'This component is used to load in content from the wordpress rest API.',
         },
         component: () => import('./views/components/ContentDoc.vue'),
+        searchterms: 'wordpress',
       },
       {
         path: 'dark-mode-switch',
-        name: 'Dark Mode Switch (BETA)',
+        name: 'Dark Mode Switch (alpha)',
         meta: {
           title: 'Dark Mode Switch | Components | iamkey',
         },
@@ -639,7 +645,7 @@ const routes = [
       },
       {
         path: 'filterlist',
-        name: 'Filter list (Beta)',
+        name: 'Filter list (alpha)',
         meta: {
           title: 'Filter list | Components | iamkey',
         },
@@ -648,7 +654,7 @@ const routes = [
       },
       {
         path: 'header',
-        name: 'Header (Beta)',
+        name: 'Header (alpha)',
         meta: {
           title: 'Header | Components | iamkey',
         },
@@ -660,7 +666,7 @@ const routes = [
         name: 'Menu',
         meta: {
           title: 'Menu | Components | iamkey',
-          beta: true,
+          alpha: true,
           standalone: true,
         },
         component: () => import('./views/components/MenuDoc.vue'),
@@ -675,7 +681,7 @@ const routes = [
       },
       {
         path: 'notefeed',
-        name: 'Note feed (Beta)',
+        name: 'Note feed (alpha)',
         meta: {
           title: 'Note feed | Components | iamkey',
         },
@@ -724,26 +730,18 @@ const routes = [
         component: () => import('./views/components/StepperDoc.vue'),
       },
       {
-        path: 'tables',
-        name: 'Tables',
-        meta: {
-          title: 'Tables | Components | iamkey',
-        },
-        component: () => import('./views/components/Tables.vue'),
-        searchterms: 'expandable, scrollable, rows, columns',
-      },
-      {
         path: 'tabs',
         name: 'Tabs',
         meta: {
           title: 'Tabs | Components | iamkey',
+          jira: 'FEG-980',
         },
         component: () => import('./views/components/TabsDoc.vue'),
         searchterms: 'admin panel, ',
       },
       {
         path: 'testimonial',
-        name: 'Testimonial (Beta)',
+        name: 'Testimonial (alpha)',
         meta: {
           title: 'Testimonial | Components | iamkey',
         },
@@ -767,7 +765,7 @@ const routes = [
       },
       {
         path: 'config',
-        name: 'Config (Beta)',
+        name: 'Config (alpha)',
         meta: {
           title: 'Config | Components | iamkey',
         },
@@ -775,7 +773,7 @@ const routes = [
       },
       {
         path: 'video',
-        name: 'Video (Beta)',
+        name: 'Video (alpha)',
         meta: {
           title: 'Video | Components | iamkey',
         },
@@ -783,12 +781,12 @@ const routes = [
       },
       {
         path: 'skeleton',
-        name: 'Skeleton (Beta)',
+        name: 'Skeleton (alpha)',
         meta: {
           title: 'Skeleton | Components | iamkey',
         },
         component: () => import('./views/components/SkeletonDoc.vue'),
-      }
+      },
     ],
   },
   {
@@ -806,9 +804,11 @@ const routes = [
       },
       {
         path: 'form',
-        name: 'Form component (beta)',
+        name: 'Form component',
         meta: {
           title: 'Form component | Components | iamkey',
+          jira: 'FEG-986',
+          status: 'dev',
         },
         component: () => import('./views/form-components/FormDoc.vue'),
         searchterms: '',
@@ -870,6 +870,7 @@ const routes = [
         name: 'Multiselect',
         meta: {
           title: 'Multiselect | Components | iamkey',
+          jira: 'FEG-976',
         },
         component: () => import('./views/form-components/Multiselect.vue'),
       },
@@ -878,6 +879,8 @@ const routes = [
         name: 'Search component',
         meta: {
           title: 'Search | Components | iamkey',
+          jira: 'FEG-960',
+          status: 'qa',
         },
         component: () => import('./views/form-components/SearchDoc.vue'),
       },
@@ -920,8 +923,8 @@ const routes = [
           title: 'Tag | Components | iamkey',
         },
         component: () => import('./views/form-components/TagComponentDoc.vue'),
-      }
-    ]
+      },
+    ],
   },
   {
     /* Nav */ path: '/nav',
@@ -941,6 +944,7 @@ const routes = [
         name: 'Navbar',
         meta: {
           title: 'Navbar | Components | iamkey',
+          jira: 'FEG-934',
         },
         component: () => import('./views/nav/NavDoc.vue'),
       },
@@ -949,6 +953,7 @@ const routes = [
         name: 'Navbar-secondary',
         meta: {
           title: 'Navbar-secondary | Components | iamkey',
+          jira: 'FEG-934',
         },
         component: () => import('./views/nav/NavSecondaryDoc.vue'),
       },
@@ -957,6 +962,7 @@ const routes = [
         name: 'Navbar-mega menu',
         meta: {
           title: 'Navbar-mega menu | Components | iamkey',
+          jira: 'FEG-934',
         },
         component: () => import('./views/nav/NavMegaDoc.vue'),
       },
@@ -965,6 +971,7 @@ const routes = [
         name: 'Navbar-dual',
         meta: {
           title: 'Navbar-dual menu | Components | iamkey',
+          jira: 'FEG-934',
         },
         component: () => import('./views/nav/NavDualDoc.vue'),
       },
@@ -973,6 +980,7 @@ const routes = [
         name: 'Navbar-menu',
         meta: {
           title: 'Navbar-menu menu | Components | iamkey',
+          jira: 'FEG-934',
         },
         component: () => import('./views/nav/NavMenuDoc.vue'),
       },
@@ -984,6 +992,17 @@ const routes = [
         },
         component: () => import('./views/nav/CollapsibleSideMenu.vue'),
         searchterms: 'nav,hidden,expand,menu,admin,settings,sub',
+      },
+      {
+        path: 'branch-selector',
+        name: 'Branch selector',
+        meta: {
+          title: 'Branch selector | Components | iamkey',
+          jira: 'FEG-987',
+          status: 'stable',
+        },
+        component: () => import('./views/nav/BranchSelectorDoc.vue'),
+        searchterms: 'switch,branch',
       },
     ],
   },
@@ -1004,9 +1023,27 @@ const routes = [
         path: 'card',
         name: 'Navigational Card',
         meta: {
+          jira: 'FEG-948',
           title: 'Navigational Card | Components | iamkey',
+          status: 'qa',
         },
         component: () => import('./views/cards/CardDoc.vue'),
+      },
+      {
+        path: 'checkbox-card',
+        name: 'Checkbox card',
+        meta: {
+          title: 'Checkbox Card | Components | iamkey',
+        },
+        component: () => import('./views/cards/CheckboxCardDoc.vue'),
+      },
+      {
+        path: 'multiaction-card',
+        name: 'Multi-action card',
+        meta: {
+          title: 'Multi-action Card | Components | iamkey',
+        },
+        component: () => import('./views/cards/MultiActionCardDoc.vue'),
       },
       {
         path: 'filter-card',
@@ -1031,6 +1068,45 @@ const routes = [
           title: 'Video card | Components | iamkey',
         },
         component: () => import('./views/cards/VideoCardDoc.vue'),
+      },
+    ],
+  },
+  {
+    /* Tables */ path: '/tables',
+    name: 'Tables',
+    meta: {
+      title: 'Tables | iamkey',
+    },
+    component: () => import('./views/Components.vue'),
+    children: [
+      {
+        name: 'tables-index',
+        path: '',
+        component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'basic',
+        name: 'Basic table',
+        meta: {
+          title: 'Basic table | Components | iamkey',
+        },
+        component: () => import('./views/tables/BasicTableDoc.vue'),
+      },
+      {
+        path: 'expanded',
+        name: 'Expanded table',
+        meta: {
+          title: 'Expanded table | Components | iamkey',
+        },
+        component: () => import('./views/tables/ExpandedTableDoc.vue'),
+      },
+      {
+        path: 'ajax',
+        name: 'AJAX table',
+        meta: {
+          title: 'AJAX table | Components | iamkey',
+        },
+        component: () => import('./views/tables/AjaxTableDoc.vue'),
       },
     ],
   },
@@ -1060,6 +1136,7 @@ const routes = [
         name: 'Doughnut chart',
         meta: {
           title: 'Doughnut chart | Components | iamkey',
+          jira: 'FEG-966',
         },
         component: () => import('./views/charts/DoughnutChart.vue'),
       },
@@ -1119,7 +1196,7 @@ const routes = [
   },
   {
     /* Templates */ path: '/templates',
-    name: 'Templates',
+    name: 'Templates Folder',
     meta: {
       title: 'Templates | iamkey',
     },
@@ -1129,13 +1206,13 @@ const routes = [
     component: () => import(/* webpackChunkName: "templates" */ './views/Templates.vue'),
     children: [
       {
-        name: 'templates-index',
+        name: 'Templates',
         path: '',
         component: () => import('./views/templates/Index.vue'),
       },
       {
         path: 'form',
-        name: 'Form page Template (Beta)',
+        name: 'Form page Template (alpha)',
         meta: {
           title: 'Email Template | Components | iamkey',
         },
@@ -1143,7 +1220,7 @@ const routes = [
       },
       {
         path: 'auth',
-        name: 'Auth page Template (Beta)',
+        name: 'Auth page Template (alpha)',
         meta: {
           title: 'Auth Template | Components | iamkey',
         },
@@ -1187,13 +1264,13 @@ const routes = [
     component: () => import(/* webpackChunkName: "patterns" */ './views/Patterns.vue'),
     children: [
       {
-        name: 'patterns-index',
+        name: 'Patterns & templates',
         path: '',
         component: () => import('./views/patterns/Index.vue'),
       },
       {
         path: 'input-fields',
-        name: 'Input fields (Beta)',
+        name: 'Input fields',
         meta: {
           title: 'Input fields | Components | iamkey',
         },
@@ -1201,11 +1278,47 @@ const routes = [
       },
       {
         path: 'loading-states',
-        name: 'Loading states (Beta)',
+        name: 'Loading states',
         meta: {
           title: 'Loading states| Components | iamkey',
         },
         component: () => import('./views/patterns/LoadingDoc.vue'),
+      },
+      {
+        path: 'switching-account',
+        name: 'Switching account',
+        meta: {
+          title: 'Switching account | Components | iamkey',
+          jira: 'FEG-991',
+          status: 'beta',
+        },
+        component: () => import('./views/patterns/SwitchingAccountDoc.vue'),
+      },
+    ],
+  },
+  {
+    /* Apps */ path: '/apps',
+    name: 'Apps folder',
+    meta: {
+      title: 'Apps | iamkey',
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "apps" */ './views/Apps.vue'),
+    children: [
+      {
+        name: 'Apps',
+        path: '',
+        component: () => import('./views/apps/Index.vue'),
+      },
+      {
+        path: 'properties',
+        name: 'Properties Visualisation',
+        meta: {
+          title: 'Properties Visualisation | Components | iamkey',
+        },
+        component: () => import('./views/apps/Properties.vue'),
       },
     ],
   },
@@ -1241,6 +1354,10 @@ const routes = [
         name: 'examples-index',
         path: '',
         component: () => import('./views/examples/Index.vue'),
+      },
+      {
+        path: 'carousel-admin-panel',
+        component: () => import('./views/examples/CarouselAdminPanel.vue'),
       },
       {
         path: 'basic-table',
@@ -1324,6 +1441,14 @@ const routes = [
           title: 'iamproperty hub | iamkey',
         },
         component: () => import('./views/standalone/eco/Hub.vue'),
+      },
+      {
+        path: 'hub-question',
+        name: 'iamproperty hub question',
+        meta: {
+          title: 'iamproperty hub | iamkey',
+        },
+        component: () => import('./views/standalone/eco/HubQuestion.vue'),
       },
       {
         path: 'eco-product',
@@ -1700,6 +1825,22 @@ const routes = [
         component: () => import('./views/standalone/pc/add-onward.vue'),
       },
       {
+        path: 'switch-account',
+        name: 'Switch account',
+        meta: {
+          title: 'Switch account | iamkey',
+        },
+        component: () => import('./views/standalone/SwitchAccount.vue'),
+      },
+      {
+        path: 'account-switched',
+        name: 'Account switched',
+        meta: {
+          title: 'Account switched | iamkey',
+        },
+        component: () => import('./views/standalone/AccountSwitched.vue'),
+      },
+      {
         path: 'movebutler',
         name: 'movebutler',
         meta: {
@@ -1751,7 +1892,28 @@ const routes = [
             component: () => import('./views/standalone/movebutler/transaction-overview.vue'),
           },
         ],
-      }
+      },
+      {
+        path: 'crm',
+        name: 'CRM',
+        meta: {
+          title: 'CRM | iamkey',
+        },
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "examples" */ './views/standalone/crm/index.vue'),
+        children: [
+          {
+            path: '',
+            name: 'My day (CRM homepage)',
+            meta: {
+              title: 'My Day | iamkey',
+            },
+            component: () => import(/* webpackChunkName: "examples" */ './views/standalone/crm/myday.vue'),
+          },
+        ],
+      },
     ],
   },
   {
@@ -1762,6 +1924,15 @@ const routes = [
       title: 'Data Layer | iamkey',
     },
     searchterms: 'Analytics, tracking',
+  },
+  {
+    path: '/browser-support',
+    component: () => import('./views/BrowserSupport.vue'),
+    name: 'Browser support',
+    meta: {
+      title: 'Browser Support | iamkey',
+    },
+    searchterms: 'browser support, compatibility, testing',
   },
   {
     path: '/:pathMatch(.*)*',

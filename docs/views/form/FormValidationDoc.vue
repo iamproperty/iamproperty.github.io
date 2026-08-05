@@ -1,7 +1,7 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
-  
+
   const message = 'input field value';
   const htmlUsage = `...`;
   const i = 0;

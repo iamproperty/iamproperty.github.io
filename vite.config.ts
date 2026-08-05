@@ -28,8 +28,10 @@ export default ({ mode }) => {
             vue: 'Vue',
           },
         },
-      },
-    } : {},
+      }
+    } : {
+      cssMinify: false
+    },
     resolve:{
       alias:{
         '@/' : `${resolve(__dirname, 'src')}/`,

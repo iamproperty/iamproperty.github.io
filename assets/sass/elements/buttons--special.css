@@ -1,7 +1,6 @@
 @layer elements {
   /* #region btn compact */
   .btn[popovertarget] {
-  
     position: relative;
     anchor-name: --button2;
 
@@ -48,10 +47,9 @@
     width: fit-content;
 
     select {
-      
       all: unset !important;
       padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
-      padding-right: calc(var(--btn-padding-inline) + 2rem)!important;
+      padding-right: calc(var(--btn-padding-inline) + 2rem) !important;
       border-radius: 1.5rem !important;
       appearance: none !important;
       background: none !important;
@@ -59,14 +57,14 @@
       color: currentColor !important;
       display: block;
       outline: none;
-      font-weight: inherit!important;
-      font-size: var(--btn-font-size)!important;
+      font-weight: inherit !important;
+      font-size: var(--btn-font-size) !important;
       line-height: var(--btn-line-height) !important;
-      field-sizing: content!important;
+      field-sizing: content !important;
 
-      appearance: base-select!important;
+      appearance: base-select !important;
     }
-    
+
     &:after {
       position: absolute;
       top: 0.625rem; /* 10 */
@@ -97,12 +95,12 @@
     padding-block: 0;
     padding-right: 2rem;
     font-size: 1em;
-  
+
     select {
       margin: 0rem 0rem !important;
-      padding-right: 2rem!important;
+      padding-right: 2rem !important;
       margin-right: -2rem !important;
-      font-size: 1rem!important;
+      font-size: 1rem !important;
     }
 
     &:after {

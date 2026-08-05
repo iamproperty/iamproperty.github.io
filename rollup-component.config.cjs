@@ -39,6 +39,7 @@ const components = [process.env.COMPONENT];
 components.forEach((component) => {
 
   let css = '';
+  let navcss = '';
   let menucss = '';
   let extraCSS = '';
   let rankcss = '';
@@ -53,10 +54,6 @@ components.forEach((component) => {
   
   if (componentFileName == "std-address-lookup"){
     componentFileName = "address-lookup";
-  }
-  
-  if (componentFileName == "std-nav"){
-    componentFileName = "nav";
   }
   
   try {
@@ -77,6 +74,12 @@ components.forEach((component) => {
   }
 
   try {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/nav.component.css`))) {
+      
+      navcss = fs.readFileSync(path.resolve(__dirname, `assets/css/components/nav.component.css`), 'utf8');
+      navcss = navcss.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      navcss = navcss.replace("\uFEFF","");
+    }
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/menu.component.css`))) {
       
       menucss = fs.readFileSync(path.resolve(__dirname, `assets/css/components/menu.component.css`), 'utf8');
@@ -120,6 +123,7 @@ components.forEach((component) => {
         'process.env.NODE_ENV': '"production"',
         preventAssignment: true,
         'loadCSS': JSON.stringify(`${css}`),
+        'navCSS': JSON.stringify(`${navcss}`),
         'menuCSS': JSON.stringify(`${menucss}`),
         'rankCSS': JSON.stringify(`${rankcss}`),
         'loadExtraCSS': JSON.stringify(`${extraCSS}`)

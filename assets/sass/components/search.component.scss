@@ -1,15 +1,15 @@
-
-@use 'advanced-select.component';
+@use '../_func' as *;
+@use '../elements/forms';
+@use '../elements/dropdown';
+@use '../elements/prefix';
 
 @layer components {
-
   @media (prefers-color-scheme: light) {
     :host {
       color-scheme: light;
     }
 
     ::slotted(*) {
-
       --colour-heading: var(--colour-primary-theme);
       --colour-body: var(--colour-primary-theme);
       color: var(--colour-primary-theme);
@@ -18,47 +18,118 @@
     }
   }
 
+  :host {
+    display: block;
+    margin-top: 0.5rem;
+  }
 
+  .wrapper {
+    display: flex;
+    width: 100%;
+    position: relative;
+
+    .input__wrapper {
+      flex-grow: 1;
+      position: relative;
+      margin-top: 0 !important;
+    }
+
+    .suffix {
+      flex-grow: 0;
+    }
+  }
+
+  ::slotted(input) {
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  ::slotted(label) {
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  ::slotted(button) {
+    margin-top: 0 !important;
+  }
+
+  /* #region Clear seach button */
+
+  .clear-search {
+    display: var(--error-hide, block);
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 0.5rem;
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    display: none;
+
+    &:not(:hover, :focus) {
+      outline-color: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+
+  :host(.has-value) .clear-search {
+    display: block !important;
+  }
+
+  /* #endregion */
+
+  /* #region datalist */
+
+  slot[name='datalist'] {
+    display: block;
+    position: relative;
+  }
+
+  :host(:is(.js-show-datalist, .js-force-show-datalist)) ::slotted(datalist) {
+    display: block;
+  }
+
+  ::slotted(datalist:focus-within) {
+    display: block;
+  }
+  /* #endregion */
+
+  /* #region Stylised search */
   :host(.search--stylised) ::slotted(input) {
-    
-    outline: 1px solid var(--colour-border)!important;
-  
-    border: none!important;
-    border-radius: 1.5rem!important; /* 24px */
-    padding-left: 3rem!important; /* Magic number */
+    outline: 1px solid var(--colour-border) !important;
+
+    border: none !important;
+    border-radius: 1.5rem !important; /* 24px */
+    padding-left: 3rem !important; /* Magic number */
     background-color: var(--colour-canvas);
   }
   :host(.search--stylised) ::slotted(input.input--sm) {
-    
-    padding-left: 2.5rem!important; /* Magic number */
+    padding-left: 2.5rem !important; /* Magic number */
   }
 
   :host(.search--stylised) ::slotted(input:is(:focus)) {
-    
-    outline: 1px solid var(--colour-info)!important;
+    outline: 1px solid var(--colour-info) !important;
   }
 
-  :host(.search--stylised) ::slotted(button) {
-    
-
-    background: transparent!important;
-    border-color: transparent!important;
-    color: var(--colour-heading)!important;
-    position: absolute!important;
+  :host(.search--stylised) .suffix {
+    cursor: pointer;
+    background: transparent !important;
+    border-color: transparent !important;
+    color: var(--colour-primary-theme) !important;
+    position: absolute !important;
     top: 0;
     left: 0;
   }
 
-  :host(.hasInputSm) ::slotted(button) {
-
-    min-width: 2.5rem!important;
+  :host(.hasInputSm) .suffix {
+    min-width: 2.5rem !important;
   }
 
   :host(.search--stylised) .clear-search {
-
     border-radius: 50% !important;
     outline: none !important;
     border: none !important;
   }
-
+  /* #endregion */
 }

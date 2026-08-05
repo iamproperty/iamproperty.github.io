@@ -4,7 +4,8 @@
 @layer legacy, reset, elements, components, templates, overrides, utilities, debug;
 
 @layer reset {
-  :root {
+  :is(:root,:host) {
+
 
     color-scheme: light dark;
 
@@ -13,11 +14,11 @@
 
     /* #region Theme colours */
     --colour-primary-theme: #00313c;
-    --colour-primary: light-dark(#00313c,#b3c1c5);
+    --colour-primary: light-dark(#00313c, #b3c1c5);
 
     --colour-secondary-theme: #b4e6a5;
     --colour-secondary: #b4e6a5;
-    
+
     --colour-success-theme: #b4e6a5;
     --colour-success: #b4e6a5;
 
@@ -25,50 +26,50 @@
     --colour-complete-theme: #0f9d58;
 
     --colour-info-theme: #1ebee6;
-    --colour-info: light-dark(#1ebee6,#35c5e9);
+    --colour-info: light-dark(#1ebee6, #35c5e9);
 
     --colour-warning-theme: #ffa500;
-    --colour-warning: light-dark(#ffa500,#ffb733);
+    --colour-warning: light-dark(#ffa500, #ffb733);
 
     --colour-danger-theme: #dc3545;
-    --colour-danger: light-dark(#dc3545,#e7727d);
+    --colour-danger: light-dark(#dc3545, #e7727d);
 
     --colour-light-theme: #eeeeee;
     --colour-light: #eeeeee;
 
     --colour-dark-theme: #46003c;
-    --colour-dark: light-dark(#46003c,#b599b1);
+    --colour-dark: light-dark(#46003c, #b599b1);
     /* #endregion */
     /* #region functional colours */
     --colour-muted: #9d9d9d;
 
-    --colour-canvas: light-dark(#fcfcfc,#262626);
-    --colour-canvas-2: light-dark(#ffffff,#313131);
-    --colour-body-default: light-dark(#595959,#bfbfbf);
-    --colour-body: light-dark(#595959,#bfbfbf);
-    --colour-heading: light-dark(#00313c,#b3c1c5);
-    --colour-link: light-dark(#00313c,#fcfcfc);
-    --colour-hover: light-dark(#00313c,#fcfcfc);
-    --colour-focus: light-dark(#00313c,#fcfcfc);
-    --colour-active: light-dark(#00313c,#fcfcfc);
-    --colour-border: light-dark(#d8d8d8,#fcfcfc);
-    --colour-brand: light-dark(#00313c,#fcfcfc);
+    --colour-canvas: light-dark(#fcfcfc, #262626);
+    --colour-canvas-2: light-dark(#ffffff, #313131);
+    --colour-body-default: light-dark(#595959, #bfbfbf);
+    --colour-body: light-dark(#595959, #bfbfbf);
+    --colour-heading: light-dark(#00313c, #b3c1c5);
+    --colour-link: light-dark(#00313c, #fcfcfc);
+    --colour-hover: light-dark(#00313c, #fcfcfc);
+    --colour-focus: light-dark(#00313c, #fcfcfc);
+    --colour-active: light-dark(#00313c, #fcfcfc);
+    --colour-border: light-dark(#d8d8d8, #fcfcfc);
+    --colour-brand: light-dark(#00313c, #fcfcfc);
 
     --colour-btn: var(--colour-primary-theme);
-    --colour-btn-bg: light-dark(#ffa500,#fcfcfc);
-    --colour-btn-border: light-dark(#ffa500,#fcfcfc);
+    --colour-btn-bg: light-dark(#ffa500, #fcfcfc);
+    --colour-btn-border: light-dark(#ffa500, #fcfcfc);
     --colour-btn-bg-hover: transparent;
-    --colour-btn-hover: light-dark(#00313c,#fcfcfc);
+    --colour-btn-hover: light-dark(#00313c, #fcfcfc);
 
-    --colour-btn-secondary: light-dark(#00313c,#fcfcfc);
-    --colour-btn-secondary-border: light-dark(#00313c,#fcfcfc);
+    --colour-btn-secondary: light-dark(#00313c, #fcfcfc);
+    --colour-btn-secondary-border: light-dark(#00313c, #fcfcfc);
     --colour-btn-secondary-bg: transparent;
-    --colour-btn-secondary-bg-hover: light-dark(#00313c,#fcfcfc);
-    --colour-btn-secondary-hover: light-dark(#fcfcfc,#00313c);
-    --colour-btn-action-hover-bg: light-dark(#eeeeee,#313131);
+    --colour-btn-secondary-bg-hover: light-dark(#00313c, #fcfcfc);
+    --colour-btn-secondary-hover: light-dark(#fcfcfc, #00313c);
+    --colour-btn-action-hover-bg: light-dark(#eeeeee, #313131);
 
-    --colour-activeLink: light-dark(#e8f9fd,#173c45);
-    --colour-activeLinkBorder: light-dark(#1dbde6,#1dbde6);
+    --colour-activeLink: light-dark(#e8f9fd, #173c45);
+    --colour-activeLinkBorder: light-dark(#1dbde6, #1dbde6);
 
     --colour-underline: light-dark(#b4e6a5, #fcfcfc);
     --colour-selected: var(--colour-info-theme);
@@ -77,29 +78,29 @@
 
     /* #endregion */
     /* #region Wider colours */
-    --wider-colour-1: #EEEEEE;
-    --wider-colour-2: #EBD7F6;
-    --wider-colour-3: #BEE8F8;
-    --wider-colour-4: #A6DCC7;
-    --wider-colour-5: #FAD0DA;
-    --wider-colour-6: #AFCCF2;
-    --wider-colour-7: #FFD2B4;
-    --wider-colour-8: #CDF0F2;
-    --wider-colour-9: #FFABC2;
-    --wider-colour-10: #DCEAF2;
-    --wider-colour-11: #EEBCB3;
-    --wider-colour-12: #F0BDFF;
-    --wider-colour-13: #FFF8CF;
-    --wider-colour-14: #92E3DF;
-    --wider-colour-15: #FEEAE8;
-    --wider-colour-16: #8BC3A6;
-    --wider-colour-17: #FEF0A6;
-    --wider-colour-18: #FFBDA0;
-    --wider-colour-19: #CBEFE1;
-    --wider-colour-20: #FFDD90;
-    --wider-colour-21: #97DBF2;
-    --wider-colour-22: #FFAF91;
-    --wider-colour-23: #C2DCD9;
+    --wider-colour-1: #eeeeee;
+    --wider-colour-2: #ebd7f6;
+    --wider-colour-3: #bee8f8;
+    --wider-colour-4: #a6dcc7;
+    --wider-colour-5: #fad0da;
+    --wider-colour-6: #afccf2;
+    --wider-colour-7: #ffd2b4;
+    --wider-colour-8: #cdf0f2;
+    --wider-colour-9: #ffabc2;
+    --wider-colour-10: #dceaf2;
+    --wider-colour-11: #eebcb3;
+    --wider-colour-12: #f0bdff;
+    --wider-colour-13: #fff8cf;
+    --wider-colour-14: #92e3df;
+    --wider-colour-15: #feeae8;
+    --wider-colour-16: #8bc3a6;
+    --wider-colour-17: #fef0a6;
+    --wider-colour-18: #ffbda0;
+    --wider-colour-19: #cbefe1;
+    --wider-colour-20: #ffdd90;
+    --wider-colour-21: #97dbf2;
+    --wider-colour-22: #ffaf91;
+    --wider-colour-23: #c2dcd9;
     /* #endregion */
 
     /* #region chart colours */
@@ -173,7 +174,6 @@
     --card-head-bottom-padding: 2rem;
     --card-body-top-padding: 2rem;
     --card-body-bottom-padding: 2rem;
-    --card-footer-bottom-padding: 1.5rem;
     --card-head-height: 6rem;
     --card-top-padding: 2rem;
     --card-bottom-padding: 2rem;
@@ -181,7 +181,6 @@
     --card-left-padding: 1rem;
     --card-border-radius: 0.5rem;
     --card-box-shadow: 2px 0.1875rem 0.375rem rgba(0, 0, 0, 0.2);
-
 
     /* #endregion */
     --nav-height: 6rem; /* 96 */
@@ -191,8 +190,7 @@
     --border-style: solid;
     --border-color: var(--colour-border);
     /* #endregion */
-    
- 
+
     /* #region layout */
     --gap: 1rem;
     --gutter: 1.5rem;
@@ -206,7 +204,8 @@
     --container-padding-bottom: 1rem;
     --padding-inline: 1.5rem;
     --container-padding-x: 1.5rem;
-    --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
+    --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom)
+      var(--container-padding-x);
     /* #endregion */
 
     /* #region icons */
@@ -222,7 +221,7 @@
     $icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M174.6 472.6c4.5 4.7 10.8 7.4 17.4 7.4s12.8-2.7 17.4-7.4l168-176c9.2-9.6 8.8-24.8-.8-33.9s-24.8-8.8-33.9 .8L216 396.1 216 56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 340.1L41.4 263.4c-9.2-9.6-24.3-9.9-33.9-.8s-9.9 24.3-.8 33.9l168 176z'/></svg>");
     $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
     $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
-        
+
     --icon-arrow: #{escape-svg($icon-arrow)};
     --icon-close: #{escape-svg($icon-close)};
     --icon-new-tab: #{escape-svg($icon-new-tab)};
@@ -252,7 +251,6 @@
     --max-height-md: 25rem; /* 400px */
     --max-height-lg: 37.5rem; /* 600px */
 
-
     /* #region Dropdown */
     --dropdown-bg: var(--colour-canvas-2);
     --dropdown-margin-block: 0.25rem;
@@ -279,9 +277,8 @@
       --gutter: 2.5rem;
       --scale: 1.25;
     }
-    
-    @media screen and (min-width: 62em) {
 
+    @media screen and (min-width: 62em) {
       --container-padding-x: 5.25rem;
       --padding-inline: 5.25rem;
       --gutter: 5.25rem;
@@ -292,15 +289,19 @@
         --max-width: 120rem !important;
         --padding-inline: 3.5rem !important;
         --container-padding-x: 3.5rem !important;
-        --container-padding: var(--container-padding-top) var(--container-padding-x)
-          var(--container-padding-bottom) var(--container-padding-x);
+        --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom)
+          var(--container-padding-x);
         --gutter: 3.5rem;
+      }
+
+      &:has(iam-nav [slot='secondary']) {
+        --nav-height: 8.5rem; /* 96 + 40 */
       }
     }
 
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;
     }
+
   }
 }
-

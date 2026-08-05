@@ -1,4 +1,3 @@
-
 @layer elements {
   /* #region global */
   a {
@@ -15,6 +14,14 @@
 
     &:is(:active, .active) {
       color: var(--colour-active);
+    }
+
+    &:is(:active, .active, .selected, [aria-current='page']) {
+      --colour-underline: var(--colour-info);
+      text-decoration-color: var(--colour-info) !important;
+    }
+    &:is(.selected, [aria-current='page']) {
+      pointer-events: none;
     }
   }
 
@@ -68,7 +75,7 @@
       margin-left: 0;
       margin-right: 0.5rem;
     }
-    
+
     &[class*='fa-']:not(:first-child) {
       margin-left: 0.5rem;
       margin-right: 0;
@@ -126,8 +133,6 @@
 
   /* #region Support card component */
   :is(a, button, label):has(.card, iam-card) {
-
-
     border: none;
     background: none;
     padding: 0;
@@ -136,28 +141,72 @@
     text-decoration: none;
     border-radius: var(--card-border-radius) !important;
 
-    &:not(:hover, :focus, .hover, :active, .active) {
+    $theme-colors: (
+      'primary': var(--colour-primary),
+      'secondary': var(--colour-secondary),
+      'info': var(--colour-info),
+      'warning': var(--colour-warning),
+      'success': var(--colour-success),
+      'complete': var(--colour-complete),
+      'danger': var(--colour-danger),
+      'dark': var(--colour-dark),
+      'light': var(--colour-light),
+    );
 
+    @each $color, $value in $theme-colors {
+      &:has(.colour-#{$color}) {
+        --hover-outline-colour: var(--colour-#{$color}) !important;
+        --card-icon-bg: var(--colour-warning) !important;
+        --card-icon-colour: var(--colour-primary-theme) !important;
+      }
+    }
+
+    &:not(:hover, :focus, .hover, :active, .active):not(:has(input)) {
       outline: none !important;
     }
 
     &:is(:focus) {
-      
+      --card-icon-bg: var(--colour-primary-theme);
+      --card-icon-colour: #ffffff;
+      outline: 2px solid var(--hover-outline-colour);
+    }
+
+    &:is(:focus) {
       --card-icon-bg: var(--colour-primary-theme);
       --card-icon-colour: #ffffff;
       outline: 2px solid var(--hover-outline-colour);
     }
 
     &:is(:hover, :focus, .hover) {
-      
       --card-icon-bg: var(--colour-primary-theme);
       --card-icon-colour: #ffffff;
+
+      outline: 2px solid var(--hover-outline-colour);
     }
 
+    &:has(.card--article):is(:hover, :focus, .hover) {
+      outline: none !important;
+    }
 
-    &:is(:active, .active){
+    &:is(:active, .active) {
+      //--card-icon-bg: var(--colour-primary-theme);
+      //--card-icon-colour: #ffffff;
+      --card-icon-right: var(--card-icon-right-overide, 0.5rem);
+    }
+
+    &:has(input) {
+      cursor: pointer;
+      outline: 1px solid var(--colour-border, red);
+    }
+
+    &:has(input):is(:hover, :focus) {
+      --card-bg: var(--colour-light);
+    }
+
+    &:has(:checked) {
       --card-icon-bg: var(--colour-primary-theme);
       --card-icon-colour: #ffffff;
+      outline: 2px solid var(--hover-outline-colour, red);
     }
 
     &:before {
@@ -174,16 +223,16 @@
 
     iam-card {
       width: 100%;
+      height: stretch;
     }
   }
 
-  iam-carousel.carousel--article-cards :is(a, button, label):is(:hover,.hover,:focus) iam-card,
-  :is(a, button, label):is(:hover,.hover,:focus) iam-card.card--article,
-  iam-card.article-card:has([slot="link"]:hover),
-  iam-carousel.carousel--article-cards iam-card:has([slot="link"]:hover){
-    --card-head-overlay: linear-gradient(357.98deg, #1EBEE6 1.36%, rgba(17, 106, 128, 0) 97.97%);
+  iam-carousel.carousel--article-cards :is(a, button, label):is(:hover, .hover, :focus) iam-card,
+  :is(a, button, label):is(:hover, .hover, :focus) iam-card.card--article,
+  iam-card.article-card:has([slot='link']:hover),
+  iam-carousel.carousel--article-cards iam-card:has([slot='link']:hover) {
+    --card-head-overlay: linear-gradient(357.98deg, #1ebee6 1.36%, rgba(17, 106, 128, 0) 97.97%);
   }
-
 
   /* #endregion */
 }

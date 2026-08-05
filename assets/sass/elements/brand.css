@@ -44,7 +44,7 @@
     --svg-width: 1.753846153846154em; /* 228/130 */
   }
 
-  :is(.brand--compliance,.brand--movebutler) {
+  :is(.brand--compliance, .brand--movebutler) {
     --svg-width: 5.692307692307692em; /* 740/130 */
   }
 
@@ -60,6 +60,10 @@
     --svg-width: 2.808988764044944em; /* 250/89 */
   }
 
+  .brand--one {
+    --svg-width: 1.576923076923077em; /* 205/89 */
+  }
+
   a.brand:not(:hover, :focus, :active) {
     color: var(--colour-brand);
   }
@@ -69,12 +73,10 @@
   }
 
   :is(a.brand:hover, a.brand:focus, a.brand:active) {
-    
     color: currentColor !important;
   }
-  
+
   :is(a:hover, a:focus, a:active) .brand {
     color: currentColor !important;
   }
 }
-

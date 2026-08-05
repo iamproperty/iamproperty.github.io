@@ -1,10 +1,6 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-
-
-
-
 @layer components {
   iam-barchart {
     --chart-bar-alignment: left;
@@ -50,9 +46,9 @@
     color: var(--colour-heading);
   }
 
-  iam-barchart::part(key):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active),
-  iam-barchart::part(key-checked):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active),
-  iam-barchart::part(key-unchecked):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+  iam-barchart::part(key):is(:hover, :focus, .hover, :focus-within):not(:active),
+  iam-barchart::part(key-checked):is(:hover, :focus, .hover, :focus-within):not(:active),
+  iam-barchart::part(key-unchecked):is(:hover, :focus, .hover, :focus-within):not(:active) {
     background: var(--colour-btn-action-hover-bg);
   }
   iam-barchart::part(key):is(:hover, :focus, .hover, :focus-within),

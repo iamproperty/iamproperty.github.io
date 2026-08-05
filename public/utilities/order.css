@@ -1,5 +1,4 @@
 @layer utilities {
-  
   .order-first {
     order: -1 !important;
   }
@@ -33,7 +32,6 @@
   }
 
   @media screen and (min-width: 36em) {
-
     .order-sm-first {
       order: -1 !important;
     }
@@ -68,7 +66,6 @@
   }
 
   @media screen and (min-width: 62em) {
-
     .order-md-first {
       order: -1 !important;
     }

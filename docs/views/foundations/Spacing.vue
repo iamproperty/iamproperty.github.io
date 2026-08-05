@@ -1,6 +1,8 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/spacing-header.png';
+  import Tabs from '../../../src/components/Tabs/Tabs.vue';
+  import Tab from '../../../src/components/Tabs/Tab.vue';
 </script>
 
 <template>
@@ -190,13 +192,135 @@
         in sass that can be used.
       </p>
 
-      <h3>Sass</h3>
-      <pre><code lang="scss">margin-top: spacing(1);</code></pre>
-      <h3>CSS custom property</h3>
-      <pre><code lang="css">margin-top: var(--spacing-2);</code></pre>
+      <h2>Layout</h2>
+      <p>
+        Our grid system is based upon bootstraps gird system. When designing page layouts in Adobe XD or Figma,
+        pleaserefer to the grid template supplied to match the design at the ‘100%’ size for each breakpoint (375px,
+        768px, 1280px).
+      </p>
+
+      <Tabs class="mb-5">
+        <Tab title="Mobile">
+          <div class="row row-example row--mobile">
+            <div class="col-12">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-6">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-6">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+          </div>
+        </Tab>
+        <Tab title="Tablet">
+          <div class="row row-example row--tablet">
+            <div class="col-12">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-6">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-6">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-4">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-4">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-4">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+          </div>
+        </Tab>
+        <Tab title="Desktop">
+          <div class="row row-example row--desktop">
+            <div class="col-12">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-6">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-6">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-4">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-4">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-4">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-3">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+            <div class="col-2">
+              <span class="grid-example"></span>
+            </div>
+          </div>
+        </Tab>
+      </Tabs>
     </div>
 
-    <div class="bg-light version-control mb-0">
+    <div class="bg-light version-control mb-0 mt-5">
       <div class="container">
         <table>
           <thead>

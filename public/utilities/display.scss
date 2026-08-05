@@ -43,9 +43,8 @@
     display: none !important;
   }
 
-  @each $breakpoint,$width in $breakpoints {
+  @each $breakpoint, $width in $breakpoints {
     @media screen and (min-width: $width) {
-
       .d-#{$breakpoint}-inline {
         display: inline !important;
       }

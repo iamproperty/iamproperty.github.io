@@ -53,7 +53,7 @@
 
   const handleAgreed = (e) => {
     console.log(e);
-  }
+  };
 </script>
 
 <template>
@@ -139,74 +139,73 @@
 
     <Modal>
       <dialog id="modal-passive">
-      
-      <span>Optional label</span>
-      <span class="h3">Passive modal title</span>
+        <span>Optional label</span>
+        <span class="h3">Passive modal title</span>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+        </p>
       </dialog>
     </Modal>
     <!-- #endregion -->
@@ -254,7 +253,7 @@
       <h4>Preview</h4>
       <button command="show-modal" commandfor="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
-    
+
     <Modal data-type="transactional" data-icon="trash-can">
       <dialog id="modal-transactional">
         <span class="h3">Delete property file</span>
@@ -262,12 +261,7 @@
           Continually will permanently delete this property. Are <br class="d-none d-sm-block" />you sure you’d like to
           continue?
         </p>
-        <a href="/delete"
-            slot="agreed-button"
-            class="btn btn-primary"
-        >
-            Add client
-      </a>
+        <a href="/delete" slot="agreed-button" class="btn btn-primary"> Add client </a>
       </dialog>
     </Modal>
 
@@ -312,7 +306,6 @@
       <button command="show-modal" commandfor="modal-ack" class="btn btn-secondary">Open Modal</button>
     </div>
 
-    
     <Modal data-type="acknowledgement" class="modal--sm">
       <dialog id="modal-ack">
         <span class="h3">Acknowledgment modal title</span>
@@ -338,27 +331,34 @@
     <!-- #region Adding buttons -->
 
     <div class="bg-light container">
-      
-    <h2>Adding buttons</h2>
-    <p>To ensure that the modal component can be integrated flexibly there are numerous ways to add buttons. The transactional and acknowledgement type modals will have buttons created by default with text that can be updated via the two attributes; <code>[data-cancel-text]</code> and <code>[data-agree-text]</code>. Alternatively you can use the 'agreed-button' slot to add a primary button to override the default one; useful to add extra functionality to the submit function.</p>
+      <h2>Adding buttons</h2>
+      <p>
+        To ensure that the modal component can be integrated flexibly there are numerous ways to add buttons. The
+        transactional and acknowledgement type modals will have buttons created by default with text that can be updated
+        via the two attributes; <code>[data-cancel-text]</code> and <code>[data-agree-text]</code>. Alternatively you
+        can use the 'agreed-button' slot to add a primary button to override the default one; useful to add extra
+        functionality to the submit function.
+      </p>
 
-    <p>Buttons can be added to the default modal types by adding the correct elements to the component. A close button can be added by adding the <code>command</code> and <code>commandfor</code> attributes. While also adding a form with buttons inside will also work. Use the <code>formmethod</code> attribute with the value of 'dialog' on a button if you want it to serve as a close button only. </p>
+      <p>
+        Buttons can be added to the default modal types by adding the correct elements to the component. A close button
+        can be added by adding the <code>command</code> and <code>commandfor</code> attributes. While also adding a form
+        with buttons inside will also work. Use the <code>formmethod</code> attribute with the value of 'dialog' on a
+        button if you want it to serve as a close button only.
+      </p>
 
-    <h3 class="pb-2">Command and commandfor attributes</h3>
-<pre class="mb-5"><code>{{ `<div class="btn__group text-end">
+      <h3 class="pb-2">Command and commandfor attributes</h3>
+      <pre class="mb-5"><code>{{ `<div class="btn__group text-end">
   <button class="btn btn-secondary" command="close" commandfor="modal-passive2">Cancel</button>
   <button class="btn btn-primary" type="submit">Close case</button>
 </div>` }}</code></pre>
 
-    <h3 class="pb-2">Form inside</h3>
-<pre><code>{{ `<form><div class="btn__group text-end">
+      <h3 class="pb-2">Form inside</h3>
+      <pre><code>{{ `<form><div class="btn__group text-end">
   <button class="btn btn-secondary" formmethod="dialog">Cancel</button>
   <button class="btn btn-primary" type="submit">Close case</button>
 </div></form>` }}</code></pre>
-    
     </div>
-    
-
 
     <Integration component="Modal" componentName="iam-modal">
       <template #web-component>
@@ -368,7 +368,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Modal from '@/components/Modal/Modal.vue</script>
-        
+
 <Modal>
   <p>...</p>
 </Modal>
@@ -419,7 +419,6 @@
         </table>
       </template>
 
-
       <template #class>
         <table>
           <thead>
@@ -441,7 +440,6 @@
         </table>
       </template>
 
-
       <template #dispatched-events>
         <table>
           <thead>
@@ -452,36 +450,33 @@
             </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>openModal</td>
-            <td>
-              Element with the <code>data-modal</code> attribute is clicked,<br />
-              Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is closed
-            </td>
-            <td>The modal ID</td>
-          </tr>
-          <tr>
-            <td>closeModal</td>
-            <td>
-              Button with the class of <code>dialog__close</code> is clicked,<br />
-              Button with the <code>formmethod</code> attribute of <code>dialog</code> is clicked,<br />
-              While a <code>dialog</code> is open and the backdrop is clicked,<br />
-              Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is open
-            </td>
-            <td>The modal ID</td>
-          </tr>
-          <tr>
-            <td>agreed</td>
-            <td>
-              The primary button is pressed on the transactional and acknowledgement modals
-            </td>
-            <td>The modal ID</td>
-          </tr>
+            <tr>
+              <td>openModal</td>
+              <td>
+                Element with the <code>data-modal</code> attribute is clicked,<br />
+                Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is closed
+              </td>
+              <td>The modal ID</td>
+            </tr>
+            <tr>
+              <td>closeModal</td>
+              <td>
+                Button with the class of <code>dialog__close</code> is clicked,<br />
+                Button with the <code>formmethod</code> attribute of <code>dialog</code> is clicked,<br />
+                While a <code>dialog</code> is open and the backdrop is clicked,<br />
+                Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is open
+              </td>
+              <td>The modal ID</td>
+            </tr>
+            <tr>
+              <td>agreed</td>
+              <td>The primary button is pressed on the transactional and acknowledgement modals</td>
+              <td>The modal ID</td>
+            </tr>
           </tbody>
         </table>
       </template>
 
-      
       <template #slots>
         <table>
           <thead>
@@ -502,11 +497,7 @@
           </tbody>
         </table>
       </template>
-
-      
     </Integration>
-
-
 
     <div class="bg-light version-control">
       <div class="container">

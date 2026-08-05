@@ -1,8 +1,6 @@
 @use '../_func' as *;
 
-
 @layer elements {
-  
   /* region tick list*/
   .tick-list {
     padding-left: 0;
@@ -14,8 +12,8 @@
       padding-bottom: 1rem;
       padding-left: 1.5em;
 
-      &:before  {
-        content: var(--fa,'\f058');
+      &:before {
+        content: var(--fa, '\f058');
         position: absolute;
         top: 0;
         left: 0;
@@ -23,13 +21,13 @@
         height: 1em;
         font-size: 1em;
         /* color: var(--tick-colour, var(--colour-complete)); */
-        font-family: var(--fa-family,'Font Awesome 7 Pro');
+        font-family: var(--fa-family, 'Font Awesome 7 Pro');
         font-weight: var(--icon-weight, 900);
         color: var(--colour-white);
       }
 
       &:after {
-        content: var(--fa,'\f058');
+        content: var(--fa, '\f058');
         position: absolute;
         top: 0;
         left: 0;
@@ -37,9 +35,9 @@
         height: 1em;
         font-size: 1em;
         color: var(--tick-colour, var(--colour-success));
-        font-family: var(--fa-family,'Font Awesome 7 Pro');
+        font-family: var(--fa-family, 'Font Awesome 7 Pro');
         font-weight: var(--icon-weight, 900);
-        font-feature-settings: "ss01";
+        font-feature-settings: 'ss01';
       }
     }
 
@@ -47,23 +45,20 @@
       --fa: '\f071';
       --tick-colour: var(--colour-warning);
     }
-    
+
     .tick--danger {
       --fa: '\f06a';
       --tick-colour: var(--colour-danger);
     }
+    .tick--question {
+      --fa: '\f059';
+      --tick-colour: var(--colour-info);
+    }
 
-    .tick--incomplete:before {
-      font-family: var(--fa-family-classic);
-      background: var(--colour-admin);
-      mask-image: none;
-      -webkit-mask-image: none;
-      border-radius: 50%;
-      transform: scale(0.8);
+    .tick--incomplete {
+      --tick-colour: var(--colour-border);
     }
-    .tick--incomplete:after {
-      display: none;
-    }
+
     .tick--loading:before {
       font-family: var(--fa-family-classic);
       content: '\f3f4';
@@ -83,7 +78,7 @@
       border-radius: 0.5rem;
       z-index: 0;
 
-      &:is(:before,:after) {
+      &:is(:before, :after) {
         top: 50%;
         left: 1rem;
         width: 2rem;
@@ -104,9 +99,7 @@
   }
 
   .bg-primary .tick-list {
-    
     --icon-weight: 900;
   }
   /* #endregion */
-
 }

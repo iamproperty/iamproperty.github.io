@@ -30,14 +30,13 @@ class iamMultiStepModal extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const originalDialog = this.querySelector('dialog');
 
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const MultiStepComponent = this;
     const id = this.hasAttribute('id') ? this.getAttribute('id') : originalDialog?.getAttribute('id');
     const dialog = this.shadowRoot?.querySelector('dialog');
-    
+
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
     const button = document.querySelector(`[data-modal="${id}"]`);
 
@@ -61,19 +60,17 @@ class iamMultiStepModal extends HTMLElement {
         event: 'openModal',
         id: id,
       });
-    }
+    };
 
-    // Disable the original event 
+    // Disable the original event
     originalDialog?.addEventListener('command', (e) => {
-
-      if (event.command == "show-modal") {
+      if (event.command == 'show-modal') {
         e.preventDefault();
       }
     });
 
     document.addEventListener('click', (e) => {
-
-      if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
+      if (e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)) {
         openModal();
       }
     });
@@ -99,7 +96,7 @@ class iamMultiStepModal extends HTMLElement {
 
     const closeModal = (): void => {
       dialog?.close();
-      
+
       const closeEvent = new CustomEvent('modal-closed', {
         bubbles: true,
         cancelable: true,
@@ -113,7 +110,7 @@ class iamMultiStepModal extends HTMLElement {
         event: 'closeModal',
         id: id,
       });
-    }
+    };
 
     closeButton?.addEventListener('click', () => {
       closeModal();

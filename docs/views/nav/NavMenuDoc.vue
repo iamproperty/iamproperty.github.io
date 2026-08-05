@@ -4,6 +4,7 @@
   import headerImg from '../../img/type-header.png';
 
   import Nav from '@/components/Nav/Nav.vue';
+  import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
@@ -33,8 +34,8 @@
       </p>
     </div>
 
-    <div class="demo visualtest">
-      <Nav class="nav--sticky bg-primary demo-open" style="--modifier:2rem;">
+    <div class="demo visualtest pe-none">
+      <Nav class="nav-open" style="--modifier:2rem;">
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>
@@ -42,227 +43,18 @@
           </svg>
         </a>
 
-        <a href="/">Dashboard</a>
+        <a href="/">Lorem ipsum</a>
+        <a href="/">Lorem ipsum</a>
+        <a href="/">Lorem ipsum</a>
+        <a href="/">Lorem ipsum</a>
 
-        <details>
-          <summary>Client onboarding</summary>
-          <div>
-            <details>
-              <summary>Our solutions</summary>
-              <div data-title="Our solutions">
-                <a href="/">Win more instructions</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By job role</summary>
-              <div>
-                <a href="/">Win more instructions1</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By objective</summary>
-              <div>
-                <a href="/">Win more instructions2</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By product</summary>
-              <div>
-                <a href="/">Win more instructions3</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
+        <span class="h3 title" slot="account">John Jones</span>
 
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
+        <a href="/" slot="account">Agency settings</a>
+        <a href="/" slot="account">Control panel</a>
+        <a href="/" class="mb-4" slot="account">Contact us</a>
 
-                <a href="/"
-                  ><Card :data-image="cardImg"
-                    >Financial preparation <span>Here would be the top level description of the task</span></Card
-                  ></a
-                >
-              </div>
-            </details>
-          </div>
-        </details>
 
-        <details>
-          <summary>Propertyaudit</summary>
-          <div>
-            <details>
-              <summary>Our solutions</summary>
-              <div data-title="Our solutions">
-                <a href="/">Win more instructions</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By job role</summary>
-              <div>
-                <a href="/">Win more instructions1</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By objective</summary>
-              <div>
-                <a href="/">Win more instructions2</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By product</summary>
-              <div>
-                <a href="/">Win more instructions3</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-
-                <a href="/"
-                  ><Card :data-image="cardImg"
-                    >Financial preparation <span>Here would be the top level description of the task</span></Card
-                  ></a
-                >
-              </div>
-            </details>
-          </div>
-        </details>
-
-        <details>
-          <summary>Compliance</summary>
-          <div>
-            <details>
-              <summary>Our solutions</summary>
-              <div data-title="Our solutions">
-                <a href="/">Win more instructions</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By job role</summary>
-              <div>
-                <a href="/">Win more instructions1</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By objective</summary>
-              <div>
-                <a href="/">Win more instructions2</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-              </div>
-            </details>
-            <details>
-              <summary>By product</summary>
-              <div>
-                <a href="/">Win more instructions3</a>
-                <a href="/">Secure sales pipeline</a>
-                <a href="/">Increase revenue</a>
-                <a href="/">Material information</a>
-                <a href="/">Smoother client onboarding</a>
-
-                <a href="/">Enhance my proposition</a>
-                <a href="/">AML compliance management</a>
-                <a href="/">Learn more about auction</a>
-
-                <a href="/"
-                  ><Card :data-image="cardImg"
-                    >Financial preparation <span>Here would be the top level description of the task</span></Card
-                  ></a
-                >
-              </div>
-            </details>
-          </div>
-        </details>
-
-        <a href="/">Conveyancing</a>
-
-        <div class="nav--menu open" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid">
-          <div>
-            <label for="test1">Active branch</label>
-            <select class="form-select" name="test1" id="test1">
-              <option value="1" selected>Newcastle</option>
-              <option value="2">Two</option>
-              <option value="2">Three</option>
-              <option value="2">Four</option>
-            </select>
-          </div>
-
-          <hr class="mt-3" />
-
-          <a href="/">Agency settings</a>
-          <a href="/">Control panel</a>
-          <a href="/" class="mb-4">Contact us</a>
-        </div>
-
-        <a href="/" slot="secondary">iamproperty</a>
-        <a href="/" slot="secondary">openview</a>
-        <a href="/" slot="secondary">movebutler</a>
-        <a href="/" slot="secondary">iamsold</a>
       </Nav>
     </div>
 
@@ -305,7 +97,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Nav from '@/components/nav/nav.vue</script>
-        
+
 <Nac>
   <a href="/" class="brand brand--property" slot="logo">
     <svg>
@@ -386,7 +178,7 @@
           </tbody>
         </table>
       </template>
-      
+
     </Integration>
     <Versions pdf="/pdfs/navbar-duel.pdf">
       <table>
@@ -409,37 +201,91 @@
 
   </main>
 </template>
-
 <style lang="scss">
-  //@media screen and (max-width: 62em) {
+
+  @media screen and (max-width: 36em) {
+    body:has(:is(iam-nav,.iam-nav).nav-open) {
+        max-height: unset!important;
+        overflow: unset!important;
+    }
+  }
+
+  @media screen and (min-width: 36em) {
+    body:has(:is(iam-nav,.iam-nav).nav-open) {
+      max-height: unset!important;
+      overflow: unset!important;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    html:has(:is(iam-nav,.iam-nav).nav-open) {
+      overflow: unset!important;
+    }
+
+    nav:has(:is(iam-nav,.iam-nav).nav-open) {
+      min-height: 100vh !important;
+      max-height: 100vh!important;
+      overflow: visible!important;
+
+      margin-bottom: calc((100vh - var(--nav-height)) * -1)!important;
+    }
+
+  }
+</style>
+
+<style lang="scss" scoped>
+
+
+
   .demo {
     background-color: #f2f2f2;
     overflow: hidden;
-    padding: 1rem 1rem 0 1rem;
-    height: 100vh;
+    padding: 2rem;
+    height: calc(100vh + 4rem);
+    grid-column: container;
+    margin-inline: -2rem;
+    overflow-x: clip;
 
     iam-nav {
       position: relative;
       z-index: 1;
+      overflow-x: clip;
     }
+  }
 
-    iam-nav:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      height: calc(100vh - 6rem);
-      width: 100%;
-      z-index: -1;
-      background: rgba(0, 0, 0, 0.2);
+  main {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  @media screen and (max-width: 62em) {
+    .demo iam-nav::part(menu__outer) {
+      background: rgba(0, 0, 0, .2);
       backdrop-filter: blur(2px);
     }
+
+    .demo iam-nav::part(nav--menu) {
+      width: calc(23.4375rem - var(--modifier, 0px));
+      left: calc(100% - (23.4375rem - var(--modifier, 0px)));
+      -webkit-box-shadow: 0 12px 12px 0px rgba(0, 0, 0, .2);
+      box-shadow: 0 12px 12px 0px rgba(0, 0, 0, .2);
+      pointer-events: all;
+    }
   }
 
-  #visualtest:target ~ main > .demo {
-    padding: 0 !important;
-  }
 
-  //}
+  @media screen and (min-width: 62em) {
+    :is(iam-nav,.iam-nav) details:not([slot=secondary])[open] > div {
+      max-width: 80rem;
+    }
+
+    .demo iam-nav::part(nav--menu) {
+      width: calc(23.4375rem - var(--modifier, 0px));
+      left: calc(100% - (23.4375rem - var(--modifier, 0px)));
+      -webkit-box-shadow: 0 12px 12px 0px rgba(0, 0, 0, .2);
+      box-shadow: 0 12px 12px 0px rgba(0, 0, 0, .2);
+      pointer-events: all;
+    }
+
+  }
 </style>

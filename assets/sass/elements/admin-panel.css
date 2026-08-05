@@ -12,10 +12,8 @@
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-    
-    &:has(
-      :is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])
-    ) {
+
+    &:has(:is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])) {
       display: grid;
 
       > * {
@@ -62,7 +60,7 @@
     }
 
     > :is(.admin-panel__heading):first-child {
-      display: flex!important;
+      display: flex !important;
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
@@ -102,7 +100,7 @@
       background: none;
     }
 
-    & > *:not([class*="mb-"]):not(.btn__group):last-child {
+    & > *:not([class*='mb-']):not(.btn__group):last-child {
       margin-bottom: 0 !important;
     }
 
@@ -123,13 +121,15 @@
       }
     }
 
-    & > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child
+    &
+      > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child
       + :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
       padding-top: var(--padding-top);
       margin-top: calc(var(--padding-top) * -1);
     }
 
-    & > :is(
+    &
+      > :is(
         .mh-sm,
         .mh-md,
         .mh-lg,
@@ -144,7 +144,7 @@
       padding-bottom: var(--padding-bottom);
       margin-bottom: calc(var(--padding-bottom) * -1) !important;
 
-      & > *:not([class*="mb-"]):last-child {
+      & > *:not([class*='mb-']):last-child {
         margin-bottom: 0 !important;
       }
 
@@ -253,7 +253,7 @@
     }
   }
   /* #endregion */
-  
+
   .admin-panel__footer:last-child {
     background-color: var(--wider-colour);
     padding-top: var(--padding-top);
@@ -269,9 +269,8 @@
     }
   }
 
-  .admin-panel__footer:not([class*="mb-"]):last-child {
-
-    margin-bottom: calc(var(--padding-bottom) * -1)!important;
+  .admin-panel__footer:not([class*='mb-']):last-child {
+    margin-bottom: calc(var(--padding-bottom) * -1) !important;
   }
 
   /* #region */
@@ -285,7 +284,6 @@
     display: block;
 
     & > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
-
       font-size: 1rem;
       line-height: 1;
       margin-bottom: 0;

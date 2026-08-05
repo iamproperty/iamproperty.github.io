@@ -6,64 +6,84 @@
     "schemaVersion": "2026-04-16",
     "generatedAt": "2026-04-16T10:15:00Z"
   },
-  "data": {
-    "type": "navigation-access-context",
-    "id": "current-user",
-    "attributes": {
-      "competitors": [
-        {
-          "name": "Agent & co",
-          "location": "location",
-          "selected": true
-        },
-        {
-          "name": "Purplebricks",
-          "location": "location",
-          "selected": true
-        },
-        {
-          "name": "Your Move",
-          "location": "location",
-          "selected": true
-        },
-        {
-          "name": "Reeds Rains",
-          "location": "location",
-          "selected": true
-        },
-        {
-          "name": "Rightmove",
-          "location": "location",
-          "selected": false
-        },
-        {
-          "name": "Other",
-          "location": "location",
-          "selected": true
-        }
-      ],
-      "charts": [
-        {
-          "name":"Listed", 
-          "data": [{"name":"Agent & co","value":100},{"name":"Purplebricks","value":150},{"name":"Your Move","value":200},{"name":"Reeds Rains","value":250},{"name":"Other","value":"300"}]
-        },
-        {
-          "name":"Reductions", 
-          "data": [{"name":"Agent & co","value":100},{"name":"Purplebricks","value":150},{"name":"Your Move","value":200},{"name":"Reeds Rains","value":250},{"name":"Other","value":"300"}]
-        },
-        {
-          "name":"Cancelled", 
-          "data": [{"name":"Agent & co","value":100},{"name":"Purplebricks","value":150},{"name":"Your Move","value":200},{"name":"Reeds Rains","value":250},{"name":"Other","value":"300"}]
-        },
-        {
-          "name":"Withdrawal", 
-          "data": [{"name":"Agent & co","value":100},{"name":"Purplebricks","value":150},{"name":"Your Move","value":200},{"name":"Reeds Rains","value":250},{"name":"Other","value":"300"}]
-        },
-        {
-          "name":"SSTC", 
-          "data": [{"name":"Agent & co","value":100},{"name":"Purplebricks","value":150},{"name":"Your Move","value":200},{"name":"Reeds Rains","value":250},{"name":"Other","value":"300"}]
-        }
-      ]
+  "data": [
+    {
+      "name": "Agent & co",
+      "attributes": {
+        "location": "location",
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
+      }
+    },
+    {
+      "name": "Purplebricks",
+      "attributes": {
+        "location": "location",
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
+      }
+    },
+    {
+      "name": "Your Move",
+      "attributes": {
+        "location": "location",
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
+      }
+    },
+    {
+      "name": "Reeds Rains",
+      "attributes": {
+        "location": "location",
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
+      }
+    },
+    {
+      "name": "Rightmove",
+      "attributes": {
+        "location": "location",
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
+      }
+    },
+    {
+      "name": "Other",
+      "attributes": {
+        "location": "location",
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
+      }
     }
-  }
+  ]
 }

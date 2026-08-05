@@ -2,8 +2,10 @@
 @use 'charts.module' as *;
 @use '../elements/buttons' as *;
 
-*, *:before, *:after {
-    box-sizing: border-box;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 @for $i from 1 through 10 {
@@ -25,16 +27,17 @@
   .btn-action {
     font-size: 0.75rem;
     margin-right: -0.375rem !important; /* -6 */
-    border-color: transparent !important;
+    outline-color: transparent !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .btn-action:not(:hover):not(:focus) {
-    border-color: transparent !important;
+    outline-color: transparent !important;
     background: transparent !important;
   }
 }
 /* #endregion */
-
 
 /* #region Horizontal */
 :host(.chart--horizontal) {
@@ -44,7 +47,7 @@
     .chart__key {
       flex-direction: column;
       justify-content: center;
-      overflow: visible;
+      overflow: hidden;
 
       .btn-action {
         margin-right: 0 !important;
@@ -90,7 +93,7 @@
 }
 
 :host(.chart--sm) {
-  --doughnut-size: 11.875rem; /* 190 */;
+  --doughnut-size: 11.875rem; /* 190 */
 }
 
 .chart__outer {
@@ -116,7 +119,7 @@
   .doughnut {
     position: relative;
     aspect-ratio: 1 / 1;
-    min-width: 11.875rem; /* 190 */;
+    min-width: 11.875rem; /* 190 */
     flex: 1 1 auto;
     display: inline-block;
     max-width: var(--doughnut-size);

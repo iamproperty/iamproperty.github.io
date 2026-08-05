@@ -15,11 +15,9 @@
     <div class="admin-panel">
       <h2 class="bg-light">Fee bands</h2>
       <Config data-import="/fee.json" data-name="fee" data-item-name="pricing band">
-
-      
         <form>
           <label class="col-span-4">
-            From 
+            From
             <Input data-currency><input name="amount" type="number" /></Input>
           </label>
           <label class="col-span-4 col-start-auto">
@@ -33,7 +31,7 @@
         </form>
       </Config>
     </div>
-<!--
+    <!--
     <h2 class="pt-5">Fees example</h2>
     <Config data-import="/config2.json" data-name="config" data-buckets="type,partner,assigned" data-validate-add data-order>
 
@@ -62,6 +60,5 @@
       </form>
     </Config>
 
-  -->
-  </main>
+  --></main>
 </template>

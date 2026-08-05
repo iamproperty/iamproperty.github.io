@@ -1,5 +1,4 @@
 @layer elements {
-
   /* #region reset */
   button {
     border-radius: 0;
@@ -10,11 +9,7 @@
     line-height: inherit;
   }
 
-  button:focus:not(:focus-visible) {
-    outline: 0;
-  }
-
-  :is(button,[type="button"],[type="reset"],[type="submit"],[role='button']) {
+  :is(button, [type='button'], [type='reset'], [type='submit'], [role='button']) {
     -webkit-appearance: button;
 
     &:not(:disabled) {
@@ -22,7 +17,6 @@
     }
   }
   /* #endregion */
-
 
   /* #region button primary */
   .btn {
@@ -55,9 +49,12 @@
       background 0.5s,
       color 0.5s;
     height: auto;
-    max-width: fit-content;
+    width: fit-content;
+    max-width: 100%;
     appearance: none;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     @media screen and (min-width: 36em) {
       --btn-margin: 1.5rem;
@@ -74,7 +71,9 @@
 
     &:not(.border-0) {
       background: var(--colour-btn-bg);
-      border: var(--btn-border-width) solid var(--colour-btn-border);
+      border: none !important;
+      outline: var(--btn-border-width) solid var(--colour-btn-border);
+      outline-offset: -2px;
     }
 
     &:not(:last-child) {
@@ -84,7 +83,6 @@
 
   a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) .btn,
   .btn:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-    outline: 0;
     text-decoration: none;
 
     background: var(--colour-btn-bg-hover);
@@ -210,7 +208,7 @@
       margin-left: 1rem;
     }
   }
-    
+
   a:is(:hover, :focus, .hover):not([disabled], :active, .active) .btn.btn--prompt,
   .btn.btn--prompt:is(:hover, :focus, .hover):not([disabled], :active, .active) {
     &:after {

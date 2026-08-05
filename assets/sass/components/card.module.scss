@@ -1,21 +1,14 @@
 @use '../_func' as *;
 
 :host {
-  
-
-  
   position: relative;
 
   border-radius: var(--card-border-radius);
   margin-bottom: 2rem;
   display: block;
-
-  outline: var(--card-outline);
-  outline-offset: -2px;
 }
 
 .wrapper {
-
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-box-shadow);
   position: relative;
@@ -30,7 +23,7 @@
   flex-direction: column;
   overflow: hidden;
   z-index: 0;
-  background: var(--colour-canvas-2);
+  background: var(--card-bg, var(--colour-canvas-2));
   outline: 2px solid var(--outline-colour, --colour-canvas-2);
   outline-offset: -2px;
 
@@ -38,6 +31,11 @@
     width: 100%;
     box-sizing: border-box;
   }
+}
+
+:host([class*='colour-']) .wrapper {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 :host-context(:is(a, label, button)) {
@@ -68,7 +66,7 @@
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -87,7 +85,8 @@
 
 .card__footer {
   margin-top: auto;
-  padding: var(--card-footer-top-padding,0) var(--card-right-padding) var(--card-footer-bottom-padding,0) var(--card-left-padding);
+  padding: var(--card-footer-top-padding, 0) var(--card-right-padding) var(--card-footer-bottom-padding, 0)
+    var(--card-left-padding);
 }
 
 ::slotted(i) {
@@ -102,11 +101,13 @@
 ::slotted(.badge) {
   margin-bottom: 0.375rem !important;
 }
-::slotted(span:not(.badge,.title)) {
+::slotted(span:not(.badge, .title)) {
   display: block !important;
   font-weight: normal !important;
   font-size: var(--card-body-fs, 1rem) !important;
   line-height: var(--card-body-lh, inherit) !important;
+  overflow-x: clip;
+  text-overflow: ellipsis;
 }
 ::slotted(small) {
   padding-top: var(--card-gap, 1rem) !important;
@@ -115,12 +116,12 @@
   padding-bottom: 0 !important;
   color: var(--colour-body);
 }
-::slotted(span:not(.badge,.title):not([class*='pt-'])) {
+::slotted(span:not(.badge, .title):not([class*='pt-'])) {
   padding-top: var(--card-gap, 1.5rem) !important;
 }
 
-::slotted(:is(a, button)[slot='footer']) {
-  margin-bottom: var(--card-footer-bottom-padding) !important;
+::slotted(:is(a, button)[slot='footer']:not([class*='mb-'])) {
+  margin-bottom: var(--card-footer-bottom-padding, 1.5rem) !important;
 }
 
 /* #region Show total number */
@@ -164,10 +165,20 @@
 }
 
 .card__badges:not(.empty) {
-  padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) var(--card-badges-bottom-padding, 0) var(--card-left-padding);
+  padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) var(--card-badges-bottom-padding, 0)
+    var(--card-left-padding);
   margin-bottom: -1.5rem;
 }
 .card__head:not(:has(img)) ~ .card__badges {
   text-align: end;
+}
+/* #endregion */
+
+/* #region Plain card */
+
+:host(.card--plain) {
+  --card-right-arrow-display: none;
+  --card-body-top-padding: 1rem;
+  --card-body-bottom-padding: 1rem;
 }
 /* #endregion */

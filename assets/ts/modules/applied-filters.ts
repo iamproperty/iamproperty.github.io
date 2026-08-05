@@ -1,5 +1,4 @@
 function createAppliedFilters(container, filters): void {
-
   const dialog = container.closest('dialog');
 
   const addFilterButton = (filters, input, setFilter = false): void | boolean => {
@@ -95,10 +94,11 @@ function createAppliedFilters(container, filters): void {
   };
 
   const checkForChecked = (setFilter = false): void => {
-
     filters.innerHTML = '';
     Array.from(
-      container.querySelectorAll('input:is([type="checkbox"],[type="radio"]):checked, input:not([type="checkbox"], [type="radio"])')
+      container.querySelectorAll(
+        'input:is([type="checkbox"],[type="radio"]):checked, input:not([type="checkbox"], [type="radio"])'
+      )
     ).forEach((input) => {
       addFilterButton(filters, input, setFilter);
     });
@@ -109,27 +109,21 @@ function createAppliedFilters(container, filters): void {
   // Create the main event listener for the component watching for inputs to change
 
   Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input) => {
-    
-    input.addEventListener('change', function (event) { 
-      
+    input.addEventListener('change', function (event) {
       const setFilter = container.closest('dialog') ? false : true;
 
-      if (!container.hasAttribute('data-keep-same') && !container.querySelector('dialog')) 
+      if (!container.hasAttribute('data-keep-same') && !container.querySelector('dialog'))
         addFilterButton(filters, input, setFilter);
 
-      if(setFilter){
-        
+      if (setFilter) {
         const event = new CustomEvent('update');
         container.parentElement.closest('iam-applied-filters')?.dispatchEvent(event);
       }
     });
   });
 
-
   const filterClicked = (filter): void => {
-
-    if(!filter?.hasAttribute('data-name'))
-      return false;
+    if (!filter?.hasAttribute('data-name')) return false;
 
     const names = filter.getAttribute('data-name').split(',');
 
@@ -163,10 +157,6 @@ function createAppliedFilters(container, filters): void {
     checkForChecked();
   };
 
-
-
-
-
   filters.addEventListener(
     'click',
     function (event) {
@@ -176,12 +166,12 @@ function createAppliedFilters(container, filters): void {
 
         filterClicked(filter);
 
-        const clickedEvent = new CustomEvent('filter-clicked',{'detail':filterName });
+        const clickedEvent = new CustomEvent('filter-clicked', { detail: filterName });
         container.dispatchEvent(clickedEvent);
 
         // If you clicked on the filter on the parent component we want to tell the child component which filter to copy
-        if(container.querySelector('dialog iam-applied-filters')) {
-          const event = new CustomEvent('filter',{'detail':filterName });
+        if (container.querySelector('dialog iam-applied-filters')) {
+          const event = new CustomEvent('filter', { detail: filterName });
           container.querySelector('dialog iam-applied-filters').dispatchEvent(event);
         }
       }
@@ -189,48 +179,47 @@ function createAppliedFilters(container, filters): void {
     false
   );
 
-  // Listen for 
+  // Listen for
   container.addEventListener('filter', (e) => {
-
     const filter = container.shadowRoot.querySelector(`[data-name="${e.detail}"]`);
 
     filterClicked(filter);
   });
 
   container.addEventListener('set-filters', (e) => {
-
     checkForChecked(true);
   });
 
-  if(dialog){
-    const primaryButton = container.querySelector('.btn-primary') ? container.querySelector('.btn-primary') : container.shadowRoot.querySelector('.btn-primary');
+  if (dialog) {
+    const primaryButton = container.querySelector('.btn-primary')
+      ? container.querySelector('.btn-primary')
+      : container.shadowRoot.querySelector('.btn-primary');
     // Force the filters inside of the dialog to effect the filters above
     primaryButton?.addEventListener('click', (e) => {
-
       const event = new CustomEvent('update');
       const submitEvent = new CustomEvent('submit');
 
       container.dispatchEvent(submitEvent);
-      
-      if(container.parentElement.closest('iam-applied-filters'))
+
+      if (container.parentElement.closest('iam-applied-filters'))
         container.parentElement.closest('iam-applied-filters').dispatchEvent(event);
 
-      if(container.parentElement && container.parentElement.closest('iam-applied-filters') && !container.parentElement.closest('iam-applied-filters').closest('dialog')){
-
+      if (
+        container.parentElement &&
+        container.parentElement.closest('iam-applied-filters') &&
+        !container.parentElement.closest('iam-applied-filters').closest('dialog')
+      ) {
         const event = new CustomEvent('set-filters');
         container.parentElement.closest('iam-applied-filters').dispatchEvent(event);
       }
 
-
       checkForChecked(true);
 
-      if(!container.querySelector('.btn-primary').hasAttribute('command')){
-        
+      if (!container.querySelector('.btn-primary').hasAttribute('command')) {
         dialog.close();
         const event = new Event('close');
         dialog.dispatchEvent(event);
       }
-
     });
   }
 }

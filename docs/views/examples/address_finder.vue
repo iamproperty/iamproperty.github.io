@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-
-
   import STDAddressLookup from '@/components/STDAddressLookup/STDAddressLookup.vue';
 </script>
 

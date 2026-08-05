@@ -1,37 +1,6 @@
 @use '../_func' as *;
 
-
 @layer components {
-  iam-carousel:defined {
-    > div > *:last-child {
-      margin-bottom: 0 !important;
-      padding-bottom: 0 !important;
-    }
-  }
-
-  /*  Preload */
-  iam-carousel:not(:defined) {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: auto;
-    margin-block-end: 2rem;
-    overflow: auto;
-
-    & > * {
-      width: 100%;
-      display: block;
-      flex: 0 0 100%;
-      padding-inline-end: 1rem;
-    }
-  }
-
-}
-
-
-
-@layer components {
-
- 
   iam-carousel {
     --button-height: 3rem;
     --marker-height: 1.25rem;
@@ -54,34 +23,31 @@
     scroll-marker-group: before;
     scroll-behavior: smooth;
     grid-auto-flow: column;
-    grid-auto-columns: calc((100% / var(--count,1)) - ((var(--gap) * (var(--count,1) - 1)) / var(--count,1)));
+    grid-auto-columns: calc((100% / var(--count, 1)) - ((var(--gap) * (var(--count, 1) - 1)) / var(--count, 1)));
   }
 
   /* #region items */
 
   iam-carousel > * {
-
     container-type: scroll-state;
-    grid-column: auto!important;
+    grid-column: auto !important;
     min-height: 100%;
     margin: 0;
-    scroll-snap-align: start!important;
+    scroll-snap-align: start;
   }
   /* #endregion */
 
   /* #region left and right buttons */
   iam-carousel {
-    
     &::scroll-button(*) {
-
       cursor: pointer;
       position-anchor: --carousel;
       background: none;
       border: none;
-    
+
       font-size: 1rem !important;
       padding: 0 !important;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
       text-align: center;
       width: var(--button-height);
       height: var(--button-height);
@@ -89,36 +55,33 @@
       line-height: 1 !important;
       overflow: hidden;
       font-size: 1rem;
-      font-family: "Font Awesome 7 Pro" !important;
+      font-family: 'Font Awesome 7 Pro' !important;
       display: none;
       position: absolute;
       position-area: block-end center;
       border-radius: 50%;
       margin-top: calc((var(--button-height) + var(--marker-height) + var(--marker-mb)) * -1);
-
     }
 
     &::scroll-button(left) {
-
       display: inline-block;
       //left: anchor(left);
-      content: "\f053" / "Scroll left"!important;
+      content: '\f053' / 'Scroll left' !important;
       margin-left: calc(var(--button-height) * -1) !important;
     }
 
     &::scroll-button(right) {
-
       display: inline-block;
       //right: anchor(right);
-      content: "\f054" / "Scroll right"!important;
+      content: '\f054' / 'Scroll right' !important;
       margin-right: calc(var(--button-height) * -1) !important;
     }
-    
+
     &::scroll-button(*):disabled {
       pointer-events: none;
     }
 
-    &::scroll-button(*):is(:hover,:focus-visible) {
+    &::scroll-button(*):is(:hover, :focus-visible) {
       outline-offset: 5px;
       background-color: var(--colour-light);
       border-color: var(--colour);
@@ -127,10 +90,9 @@
   /* #endregion */
 
   /* #region left and right buttons on desktop */
-  main > iam-carousel {
-    
+  main > iam-carousel,
+  main > .container > iam-carousel {
     @container (min-width: 62em) {
-      
       --button-height: 0rem;
 
       &::scroll-button(*) {
@@ -150,19 +112,16 @@
 
   @container style(--hide-carousel-btns) {
     iam-carousel {
-    
       --button-height: 0rem;
     }
     iam-carousel::scroll-button(*) {
-    
-      display: none!important;
+      display: none !important;
     }
   }
 
   /* #region markers */
   iam-carousel {
     &::scroll-marker-group {
-
       position: absolute;
       position-anchor: --carousel;
       container: marker-group / inline-size;
@@ -179,7 +138,7 @@
       overscroll-behavior-x: contain;
       grid-auto-columns: var(--marker-height); /* Magic number */
       grid-auto-rows: var(--marker-height); /* Magic number */
-      
+
       overflow-x: auto;
       top: auto;
       bottom: anchor(bottom);
@@ -192,15 +151,14 @@
       transform: translate(-50%, 0);
     }
 
-    
     > *::scroll-marker {
-      content: "";
+      content: '';
       scroll-snap-align: start;
       cursor: pointer;
       text-decoration: none;
       interactivity: auto;
       //display: none;
-      width: .5rem;
+      width: 0.5rem;
       aspect-ratio: 1;
       border-radius: 50%;
       overflow: hidden;
@@ -210,51 +168,46 @@
     }
 
     > *::scroll-marker:target-current {
-
       border-color: var(--colour-info);
       background: var(--colour-info);
       width: 1rem;
       height: 1rem;
       min-height: 1rem;
-      margin-inline: .125rem; /* Magic number */
+      margin-inline: 0.125rem; /* Magic number */
     }
-    
   }
   /* #endregion */
 
   /* #region count the number of items and set variables to hide the controls/markers */
-  iam-carousel:has(> *:not(.carousel__controls):first-child + .carousel__controls) {
-    
-    --hide-buttons: 1;
+
+  iam-carousel:has(> *:first-child:last-child) {
+    //--hide-buttons: 1;
     --hide-markers: 1;
   }
-  
-  iam-carousel {
-    
-    @container (min-width: 30em) { /* TODO work out this number - shoule be 6 columns */
-      &[data-smcols='2']:not(:has(> *:not(.carousel__controls):nth-child(3))) {
 
-        --hide-buttons: 1;
+  iam-carousel {
+    @container (min-width: 30em) and (max-width: 63em) {
+      /* TODO work out this number - shoule be 6 columns */
+      &[data-smcols='2']:not(:has(> *:nth-child(3))) {
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        --button-height: 0rem;
+        //--button-height: 0rem;
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
-      &[data-smcols='3']:not(:has(> *:not(.carousel__controls):nth-child(4))) {
-
-        --hide-buttons: 1;
+      &[data-smcols='3']:not(:has(> *:nth-child(4))) {
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        --button-height: 0rem;
+        //--button-height: 0rem;
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
     }
 
     @container (min-width: 62em) {
-      &[data-mdcols='2']:not(:has(> *:not(.carousel__controls):nth-child(3))) {
-
+      &[data-mdcols='2']:not(:has(> *:nth-child(3))) {
         --hide-buttons: 1;
         --hide-markers: 1;
 
@@ -262,8 +215,7 @@
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
-      &[data-mdcols='3']:not(:has(> *:not(.carousel__controls):nth-child(4))) {
-
+      &[data-mdcols='3']:not(:has(> *:nth-child(4))) {
         --hide-buttons: 1;
         --hide-markers: 1;
 
@@ -277,35 +229,31 @@
 
   /* #region change the item count via queries */
   iam-carousel {
-    
     &[data-xscols='2'] {
-
       --count: 2;
     }
     &[data-xscols='3'] {
-
       --count: 3;
     }
 
-    @container (min-width: 30em) {
+    @container (min-width: 30em) and (max-width: 62em) {
       &[data-smcols='2'] {
-
         --count: 2;
       }
       &[data-smcols='3'] {
-
         --count: 3;
       }
     }
 
-    @container (min-width: 64em) {
+    @container (min-width: 62em) {
       &[data-mdcols='2'] {
-
         --count: 2;
       }
       &[data-mdcols='3'] {
-
         --count: 3;
+      }
+      &[data-mdcols='4'] {
+        --count: 4;
       }
     }
   }
@@ -313,68 +261,63 @@
 
   /* #region carousel responsive to the count number variable */
   iam-carousel {
-
     > * {
-
       @container style(--count) {
-
         scroll-snap-align: unset;
-        
-        &::scroll-marker{
+        scroll-snap-stop: unset;
 
+        &::scroll-marker {
           display: none;
         }
       }
 
-      @container not scroll-state(snapped: x) {
-        
-        //--opacity: 0;
-      }
-      
       @container style(--count: 2) {
-
-        &:not(.carousel__controls):nth-child(2n - 1) {
+        &:nth-child(2n + 1) {
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
 
-        &:not(.carousel__controls):nth-child(2n - 1)::scroll-marker{
-
+        &:nth-child(2n + 1)::scroll-marker {
           display: block;
         }
       }
 
       @container style(--count: 3) {
-
-        &:not(.carousel__controls):nth-child(3n - 2) {
+        &:nth-child(3n + 1) {
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
 
-        &:not(.carousel__controls):nth-child(3n - 2)::scroll-marker{
-
+        &:nth-child(3n + 1)::scroll-marker {
           display: block;
         }
       }
-    } 
+      @container style(--count: 4) {
+        &:nth-child(4n + 1) {
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+        }
+
+        &:nth-child(4n + 1)::scroll-marker {
+          display: block;
+        }
+      }
+    }
   }
 
   /* #endregion */
 
   /* #region hide controls/markers */
   iam-carousel {
-    
     @container style(--hide-buttons) {
-
       --button-height: 0rem;
-      
+
       &::scroll-button(*) {
         display: none;
       }
     }
 
     @container style(--hide-markers) {
-
       --marker-height: 0rem;
       --marker-mb: 0rem;
 
@@ -387,16 +330,13 @@
 
   /* #region carousel inside of admin panel */
   .admin-panel {
-    
     --hide-buttons: 1;
 
-    &:has(iam-carousel){
-      
+    &:has(iam-carousel) {
       container-type: inline-size;
     }
 
     iam-carousel {
-        
       --button-height: 0rem;
       --marker-mb: 0rem;
       margin-bottom: 0;
@@ -404,311 +344,134 @@
   }
   /* #endregion */
 
-
-  /* #region progress bar */
-  .carousel__controls {
-    display: none;
-    position: absolute;
+  iam-carousel::part(carousel__controls) {
     position-anchor: --carousel;
 
     top: auto;
     left: anchor(left);
     right: anchor(right);
-    min-height: 0;
-    width: auto;
     bottom: anchor(bottom);
-    z-index: 99;
   }
 
-  .carousel__progress {
-    margin-inline: auto;
-    text-align: center;
-    display: none;
-    padding-bottom: 0;
-    
-    input[type='range'] {
-      --track-size: 0.5rem;
-      --track-colour: #a5ecfd;
-      --thumb-colour: var(--colour-info);
-      --thumb-size: 1rem;
-      --thumb-size-outline: 0;
-      width: 90%;
-      max-width: 10.75rem; /* 172 */
-
-      background: transparent;
-      cursor: pointer;
-      margin: 0;
-      height: 1rem;
-      border-radius: 50%;
-      accent-color: var(--thumb-colour);
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    /*  Track Styles */
-    input[type='range']::-webkit-slider-runnable-track {
-      background: var(--track-colour);
-      height: var(--track-size);
-      border-radius: 0.5625rem; /* 9 */
-    }
-
-    input[type='range']::-moz-range-track {
-      background: var(--track-colour);
-      height: var(--track-size);
-      border-radius: 0.5625rem; /* 9 */
-    }
-
-    /*  Extended track functionality */
-    input[type='range']::-webkit-slider-runnable-track {
-      background: linear-gradient(
-        to right,
-        var(--track-colour),
-        var(--track-colour) var(--start-percent, 0%),
-        var(--thumb-colour) var(--start-percent, 0%),
-        var(--thumb-colour) calc(var(--percent, 0%)),
-        var(--track-colour) calc(var(--percent, 0%))
-      );
-    }
-
-    input[type='range']::-moz-range-track {
-      background: linear-gradient(
-        to right,
-        var(--track-colour),
-        var(--track-colour) var(--start-percent, 0%),
-        var(--thumb-colour) var(--start-percent, 0%),
-        var(--thumb-colour) calc(var(--percent, 0%)),
-        var(--track-colour) calc(var(--percent, 0%))
-      );
-    }
-
-    /*  Thumb Styles */
-    input[type='range']::-webkit-slider-thumb {
-      -webkit-appearance: none; /* Override default look */
-      appearance: none;
-      margin-top: -0.25rem; /* Centers thumb on the track */
-      background-color: var(--thumb-colour);
-      height: var(--thumb-size);
-      width: var(--thumb-size);
-      border-radius: 50%;
-      position: relative;
-      z-index: 99;
-      pointer-events: all;
-    }
-
-    input[type='range']::-moz-range-thumb {
-      border: none; /*Removes extra border that FF applies*/
-      background-color: var(--thumb-colour); /*Removes default border-radius that FF applies*/
-      height: var(--thumb-size);
-      width: var(--thumb-size);
-      border-radius: 50%;
-      position: relative;
-      z-index: 99;
-      pointer-events: all;
-    }
-
-    /*  Focus Styles */
-    input[type='range']:focus {
-      outline: none;
-    }
-
-    input[type='range']:hover::-webkit-slider-thumb,
-    input[type='range']:focus::-webkit-slider-thumb {
-      outline: var(--thumb-size-outline) solid var(--thumb-colour);
-    }
-
-    input[type='range']:active::-webkit-slider-thumb {
-      outline: var(--thumb-size-outline) solid var(--thumb-colour);
-    }
-
-    input[type='range']:hover::-moz-range-thumb,
-    input[type='range']:focus::-moz-range-thumb {
-      outline: var(--thumb-size-outline) solid var(--thumb-colour);
-    }
-    input[type='range']:focus::-moz-range-thumb {
-      outline: var(--thumb-size-outline) solid var(--thumb-colour);
-    }
-  }
-  /* #endregion */
   @supports not selector(::scroll-marker-group) {
-    
     iam-carousel {
       --button-height: 0rem;
       --marker-height: 0rem;
       --marker-mb: 0rem;
+      --carousel-controls-display: block;
     }
 
-    .carousel__controls {
+    iam-carousel::part(carousel__progress-xs) {
       display: block;
     }
 
-    .carousel__progress-xs {
-      display: block;
-    }
-
-    @container (min-width: 30em) {
-
-      .carousel__progress-xs {
+    @container (min-width: 30em) and (max-width: 63em) {
+      iam-carousel::part(carousel__progress-xs) {
         display: none;
       }
-      .carousel__progress-sm {
+      iam-carousel::part(carousel__progress-sm) {
         display: block;
       }
     }
 
     @container (min-width: 62em) {
-
-      .carousel__progress-sm {
+      iam-carousel::part(carousel__progress-sm) {
         display: none;
       }
-      .carousel__progress-md {
+      iam-carousel::part(carousel__progress-md) {
         display: block;
       }
     }
-
   }
 
   @supports selector(::scroll-marker-group) {
-    
-
     @container (max-width: 30em) {
-      iam-carousel:has(> *:nth-child(5)){
-        
+      iam-carousel:has(> *:nth-child(6)) {
         --button-height: 0rem;
-        
-        --hide-buttons: 1;
+
+        //--hide-buttons: 1;
         --hide-markers: 1;
-        
-        .carousel__controls {
-          display: block;
-        }
+
+        --carousel-controls-display: block;
       }
-      iam-carousel:has(> *:nth-child(5)) + .carousel__progress {
+      iam-carousel:has(> *:nth-child(6))::part(carousel__progress-xs) {
         display: block;
       }
     }
 
-    @container (min-width: 30em) {
-
-      .carousel__progress {
-        display: none;
+    @container (min-width: 30em) and (max-width: 63em) {
+      iam-carousel::part(carousel__progress-xs) {
+        display: none !important;
       }
 
-      iam-carousel[data-smcols="2"]:has(> *:nth-child(10)){
-        
-        --button-height: 0rem;
-        
-        --hide-buttons: 1;
+      iam-carousel[data-smcols='2']:has(> *:nth-child(10)) {
+        //--button-height: 0rem;
+
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        .carousel__controls {
-          display: block;
-        }
+        --carousel-controls-display: block;
       }
-      iam-carousel[data-smcols="2"]:has(> *:nth-child(10)) .carousel__progress-sm {
+      iam-carousel[data-smcols='2']:has(> *:nth-child(10))::part(carousel__progress-sm) {
         display: block;
       }
 
-      iam-carousel[data-smcols="3"]:has(> *:nth-child(15)){
-        
+      iam-carousel[data-smcols='3']:has(> *:nth-child(15)) {
         --button-height: 0rem;
-        
-        --hide-buttons: 1;
+
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        .carousel__controls {
-          display: block;
-        }
+        --carousel-controls-display: block;
       }
-      
-      iam-carousel[data-smcols="3"]:has(> *:nth-child(15)) .carousel__progress-sm {
+
+      iam-carousel[data-smcols='3']:has(> *:nth-child(15))::part(carousel__progress-sm) {
         display: block;
       }
     }
 
     @container (min-width: 62em) {
-
-      .carousel__progress-sm {
-        display: none;
+      iam-carousel::part(carousel__progress-xs),
+      iam-carousel::part(carousel__progress-sm) {
+        display: none !important;
       }
 
-      iam-carousel[data-mdcols="2"]:has(> *:nth-child(10)){
-        
+      iam-carousel[data-mdcols='2']:has(> *:nth-child(10)) {
         --button-height: 0rem;
-        
-        --hide-buttons: 1;
+
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        .carousel__controls {
-          display: block;
-        }
+        --carousel-controls-display: block;
       }
-      
-      iam-carousel[data-mdcols="2"]:has(> *:nth-child(10)) .carousel__progress-md {
+
+      iam-carousel[data-mdcols='2']:has(> *:nth-child(10))::part(carousel__progress-md) {
         display: block;
       }
 
-      iam-carousel[data-mdcols="3"]:has(> *:nth-child(15)){
-        
+      iam-carousel[data-mdcols='3']:has(> *:nth-child(15)) {
         --button-height: 0rem;
-        
-        --hide-buttons: 1;
+
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        .carousel__controls {
-          display: block;
-        }
+        --carousel-controls-display: block;
       }
-      
-      iam-carousel[data-mdcols="3"]:has(> *:nth-child(15)) .carousel__progress-md {
+
+      iam-carousel[data-mdcols='3']:has(> *:nth-child(15))::part(carousel__progress-md) {
         display: block;
       }
     }
-
   }
-
 
   /* #region thumbnails */
   iam-carousel.thumbnails {
-    
     --hide-buttons: 1;
-    --hide-markers: 1;        
-    
-    .carousel__controls {
-      display: block;
-    }
-  }
-  .carousel__pips {
-    display: flex !important;
-    flex-wrap: nowrap;
-    max-width: 100%;
-    overflow: hidden;
-    height: 5rem;
-    overflow-x: auto;
+    --hide-markers: 1;
+    --carousel-controls-display: block;
 
-    button {
-      padding: 0;
-      margin: 0 0.2rem 0.4rem;
-
-      width: 6rem;
-      height: 4rem;
-      aspect-ratio: 3 / 2;
-
-      border-radius: 0;
-      position: relative;
-      border-radius: 0.25rem;
-
-      img {
-        position: absolute;
-        inset: 0;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        margin: 0;
-      }
-
-      &[aria-current] {
-        outline: 2px solid var(--colour-info);
-      }
+    &::part(carousel__pips) {
+      height: 5rem;
     }
   }
 
@@ -717,7 +480,6 @@
   /* #region article cards */
 
   iam-carousel.carousel--article-cards {
-
     --card-head-height: 5rem;
     --card-fs: 1rem;
     --card-gap: 0.5rem;
@@ -729,15 +491,16 @@
     --card-body-fs: 0.6875rem;
     --card-body-lh: 1rem;
 
-    
     --card-footer-bottom-padding: 0.5rem;
 
-    
-    --card-badges-top-padding:0.5rem;
+    --card-badges-top-padding: 0.5rem;
     --card-badges-bottom-padding: 0;
     --card-right-padding: 0.5rem;
     --card-left-padding: 0.5rem;
+
+    iam-card {
+      --card-footer-bottom-padding: 0.5rem;
+    }
   }
   /* #endregon */
 }
-

@@ -1,27 +1,25 @@
 import hibpCheck from '../vendor/hibp.js';
 
 export const changeType = function (element: Element): void {
-    const buttonEle = element.querySelector('button')
-    const associatedInput = element?.parentNode?.querySelector('input');
+  const buttonEle = element.querySelector('button');
+  const associatedInput = element?.parentNode?.querySelector('input');
 
-    element.addEventListener('click', (event) => {
-      const currentType = associatedInput.type;
+  element.addEventListener('click', (event) => {
+    const currentType = associatedInput.type;
 
-      const newType = currentType === 'password' ? 'text' : 'password';
-      const isPasswordType = currentType === 'password';
+    const newType = currentType === 'password' ? 'text' : 'password';
+    const isPasswordType = currentType === 'password';
 
-      associatedInput.setAttribute('type', newType);
-      associatedInput.setAttribute('data-password-type', isPasswordType);
+    associatedInput.setAttribute('type', newType);
+    associatedInput.setAttribute('data-password-type', isPasswordType);
 
-      if (element.hasAttribute('data-alt-class')) {
-        const newClass = element.getAttribute('data-alt-class');
-        element.setAttribute('data-alt-class', buttonEle.getAttribute('class'));
-        buttonEle.setAttribute('class', newClass);
-      }
-    
-    });
-}
-
+    if (element.hasAttribute('data-alt-class')) {
+      const newClass = element.getAttribute('data-alt-class');
+      element.setAttribute('data-alt-class', buttonEle.getAttribute('class'));
+      buttonEle.setAttribute('class', newClass);
+    }
+  });
+};
 
 export const checkPWDStrength = (input, check = 'no'): void => {
   const pwdChecker = document.getElementById(input.getAttribute('data-strength-checker'));
@@ -79,4 +77,3 @@ export const checkPWDStrength = (input, check = 'no'): void => {
     pwdChecker.innerHTML = `Password strength: ${strengthName[strength - 1]} ${extraMsg}`;
   }
 };
-

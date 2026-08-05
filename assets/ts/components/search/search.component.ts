@@ -1,10 +1,18 @@
-import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
-import { safeID, resolvePath, isTraversable } from '../../modules/helpers';
-import advancedSelect from '../../modules/advanced-select';
+import search, { filterDatalist, datalistSelectOption } from '../../modules/search';
+
+const getIntegerAttribute = (element: HTMLElement, attributeName: string, fallback: number): number => {
+  const value = Number.parseInt(element.getAttribute(attributeName) || '', 10);
+
+  return Number.isNaN(value) ? fallback : value;
+};
+
+const getOptionFromEvent = (event: Event): HTMLOptionElement | null =>
+  event.target instanceof HTMLElement ? event.target.closest<HTMLOptionElement>('option') : null;
 
 // Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
+const searchWindow = window as WindowWithDataLayer;
+searchWindow.dataLayer = searchWindow.dataLayer || [];
+searchWindow.dataLayer.push({
   event: 'customElementRegistered',
   element: 'Search',
 });
@@ -12,246 +20,289 @@ window.dataLayer.push({
 class iamSearch extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    const shadowRoot = this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location')
-      ? document.body.getAttribute('data-assets-location')
-      : '/assets';
+    const assetLocation = document.body.getAttribute('data-assets-location') || '/assets';
 
     const loadCSS = `@import "${assetLocation}/css/components/search.component.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = `
-    <style>
-    ${loadCSS}
-    </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
-    <span class="wrapper"><span class="input__wrapper"><slot></slot></span><span class="suffix fa-regular fa-search"></span></span>
-    <slot name="datalist"></slot>
+    template.innerHTML = /* HTML */ `
+      <style>
+        ${loadCSS}
+      </style>
+      <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
+      <span class="wrapper">
+        <span class="input__wrapper">
+          <slot></slot>
+          <button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>
+        </span>
+        <button class="suffix fa-regular fa-search"></button>
+      </span>
+      <slot name="datalist"></slot>
     `;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback(): void {
+  connectedCallback(): void {
+    const shadowRoot = this.shadowRoot;
 
-    // Make the datalist a dropdown
-    this.classList.add('dropdown__wrapper');
+    if (!shadowRoot) return;
 
-    if(this.querySelector('input.input--sm'))
-      this.classList.add('hasInputSm');
+    let datalistElement = this.querySelector<HTMLDataListElement>('datalist');
+    const inputElement = this.querySelector<HTMLInputElement>('input');
+    const suffixElement = shadowRoot.querySelector<HTMLButtonElement>('.suffix');
+    const clearBtn = shadowRoot.querySelector<HTMLButtonElement>('.clear-search');
 
-    
-    if(this.querySelector('label'))
-      this.classList.add('has-label');
+    let minLength = this.hasAttribute('data-min-length') ? getIntegerAttribute(this, 'data-min-length', 1) : 1;
 
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const searchWrapper = this;
-    const inputField = this.querySelector('input');
-    const valueSchema = this.hasAttribute('data-value-schema') ? this.getAttribute('data-value-schema') : 'value';
-    const displaySchema = this.hasAttribute('data-display-schema') ? this.getAttribute('data-display-schema') : 'label';
-    const loopSchema = this.hasAttribute('data-schema') ? this.getAttribute('data-schema') : '';
-    let datalist = this.querySelector('datalist');
-    let minLength = 0;
+    suffixElement?.setAttribute(
+      'class',
+      `suffix ${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'fa-regular fa-search'}`
+    );
 
-    if (searchWrapper.hasAttribute('data-url')) {
-
+    if (this.hasAttribute('data-url') && !this.hasAttribute('data-min-length')) {
       minLength = 3;
     }
 
-    // Clone original input field, re-name and use for display purposes
-    const displayInputField = inputField.cloneNode();
-    displayInputField.setAttribute('name', `${inputField.getAttribute('name')}Alt`);
-    inputField.removeAttribute('data-change-events');
-    displayInputField.removeAttribute('id');
+    if (!inputElement || !suffixElement) return;
 
-    inputField.after(displayInputField);
+    // #region maintain the original placeholder value in a data attribute to allow for it to be reset when the field is emptied
+    const originalPlaceholder = inputElement.getAttribute('placeholder');
 
-    // Hide original input field
-    inputField.setAttribute('type', 'hidden');
+    if (originalPlaceholder !== null) this.setAttribute('data-original-placeholder', originalPlaceholder);
+    // #endregion
 
-    // if data list does not exist then create one and append
-    if (!datalist) {
-      datalist = document.createElement('datalist');
-      const listID = safeID('list');
-      datalist.setAttribute('id', listID);
-      searchWrapper.appendChild(datalist);
+    // #region transform datalist into dropdown
 
-      displayInputField.setAttribute('list', listID);
+    // Turn off the browser's default datalist functionality to allow for a custom implementation
+    inputElement.setAttribute('autocomplete', 'off');
+    inputElement.setAttribute('aria-autocomplete', 'none');
+
+    if (inputElement && inputElement.hasAttribute('list')) {
+      inputElement.setAttribute('data-list', inputElement.getAttribute('list') || '');
+      inputElement.setAttribute('list', '');
     }
 
-    displayInputField.addEventListener('change', function (e) {
-      inputField.value = displayInputField.value;
+    if (!datalistElement) {
+      datalistElement = document.createElement('datalist');
+      const listID = `${inputElement?.getAttribute('name')}-list`;
+      datalistElement.setAttribute('id', listID);
+      inputElement?.setAttribute('data-list', listID);
+      this.appendChild(datalistElement);
+    }
+    datalistElement.setAttribute('slot', 'datalist');
+
+    datalistElement.querySelectorAll<HTMLOptionElement>('option').forEach((option) => {
+      option.setAttribute('tabindex', '0');
+
+      if (option.textContent == '' && option.hasAttribute('value')) {
+        option.textContent = option.getAttribute('value');
+      }
     });
 
-    advancedSelect(this, displayInputField, datalist, false);
+    datalistElement.addEventListener('click', (event) => {
+      const optionElement = getOptionFromEvent(event);
 
+      if (optionElement) {
+        event.stopPropagation();
+        event.preventDefault();
 
-    const checkMatch = (): void => {
-      const match = datalist.querySelector(`option[value="${displayInputField.value}" i]`);
-      const subMatch = datalist.querySelector(`option[value*="${displayInputField.value}" i]`);
-
-      if (match) {
-        inputField.value = match.getAttribute('data-actual-value');
-        displayInputField.value = match.getAttribute('data-actual-value');
-
-        displayInputField.classList.remove('is-invalid');
-        displayInputField.closest('label').removeAttribute('data-error');
-      } 
-      else if (displayInputField.value.length >= minLength && !subMatch) {
-        displayInputField.classList.add('is-invalid');
-        displayInputField.closest('label').setAttribute('data-error', 'No results returned');
-
-        if(searchWrapper.hasAttribute('data-url'))
-          datalist.innerHTML = '';
-      } 
-      else {
-        displayInputField.classList.remove('is-invalid');
-        displayInputField.closest('label').removeAttribute('data-error');
+        if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+        this.classList.remove('js-show-datalist');
+        datalistSelectOption(this, inputElement, optionElement);
       }
-    }
+    });
+    // #endregion
 
-    
-    const search = async (searchterm): any => {
-      
-      if(!this.getAttribute('data-url'))
-        return false;
+    // #region control input field
+    inputElement.addEventListener('input', () => {
+      if (inputElement.value.length >= 1) {
+        this.classList.add('has-value');
+      } else {
+        this.classList.remove('has-value');
+      }
 
-      let ajaxURL = this.getAttribute('data-url');
-      ajaxURL += `${encodeURI(searchterm)}`;
+      if (inputElement.value.length >= minLength) {
+        //inputElement.removeAttribute('data-value');
+        this.classList.add('js-show-datalist');
 
-      // Setup controller vars if not already set
-      if (!window.controller) window.controller = [];
+        if (this.hasAttribute('data-url')) {
+          void search(this, datalistElement, inputElement.value);
+        } else {
+          filterDatalist(datalistElement, inputElement.value);
+        }
+      } else {
+        this.classList.remove('js-show-datalist');
+      }
+    });
+    inputElement.addEventListener('focus', () => {
+      if (inputElement.value == inputElement.getAttribute('data-value')) {
+        const selectedValue = inputElement.getAttribute('data-value') || '';
 
-      // Abort if controller already present for this url
-      if (window.controller[ajaxURL]) window.controller[ajaxURL].abort();
+        inputElement.value = '';
+        inputElement.setAttribute('placeholder', selectedValue);
+        this.classList.remove('js-show-datalist');
+      } else if (inputElement.value.length >= minLength) {
+        this.classList.add('js-show-datalist');
+      }
+    });
 
-      // Create a new controller so it can be aborted if new fetch made
-      window.controller[ajaxURL] = new AbortController();
-      const { signal } = controller[ajaxURL];
+    inputElement.addEventListener('blur', () => {
+      const selectedValue = inputElement.getAttribute('data-value');
 
-      try {
-        await fetch(ajaxURL, {
-          signal: signal,
-          method: 'get',
-          credentials: 'same-origin',
-          mode: 'no-cors',
-          headers: new Headers({
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
-          }),
-        })
-          .then((response) => response.json())
-          .then((response) => {
-            // populate datalist
-            let listString = '';
-            const loopValues = resolvePath(response, loopSchema, '');
+      if (!inputElement.value && selectedValue) {
+        inputElement.value = selectedValue;
+        //inputElement.setAttribute('placeholder', inputElement.getAttribute('data-value'));
+        //this.classList.remove('js-show-datalist');
+      }
+      // Set timeout to allow click event to fire on options before hiding the list again
 
-            if (isTraversable(loopValues) && typeof loopValues.forEach == 'function') {
-              loopValues.forEach((item) => {
-                const actualValue = resolvePath(item, valueSchema, '');
-                const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
+      setTimeout(() => {
+        this.classList.remove('js-force-show-datalist');
+        this.classList.remove('js-show-datalist');
+      }, 200);
 
-                if (!datalist.querySelector(`option[data-actual-value="${actualValue}"]`))
-                  listString += `<option value="${displayValue}" data-actual-value="${actualValue}">${displayValue}</option>`;
-              });
-            } else if (typeof loopValues == 'object') {
-              for (const [key, value] of Object.entries(loopValues)) {
-                if (isTraversable(value) && typeof value.forEach == 'function') {
-                  value.forEach((item) => {
-                    const actualValue = resolvePath(item, valueSchema, '');
-                    const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
+      const placeholder = inputElement.getAttribute('data-placeholder');
 
-                    if (!datalist.querySelector(`option[data-actual-value="${actualValue}"]`))
-                      listString += `<option value="${key}: ${displayValue}" data-actual-value='${actualValue}'>${key}: ${displayValue}</option>`;
-                  });
-                }
-              }
+      if (placeholder) inputElement.setAttribute('placeholder', placeholder);
+    });
+
+    // #endregion
+
+    // #region control suffix button
+    suffixElement.addEventListener('click', () => {
+      const form = this.closest<HTMLFormElement>('form');
+
+      if (form && !this.hasAttribute('data-prevent-submit')) {
+        form.requestSubmit();
+      } else {
+        inputElement.focus();
+        this.classList.add('js-force-show-datalist');
+      }
+    });
+    // #endregion
+
+    // #region keyboard navigation
+
+    this.addEventListener('keydown', (event) => {
+      switch (event.key) {
+        case 'ArrowDown':
+          //event.stopPropagation();
+          //event.preventDefault();
+
+          if (event && event.target instanceof HTMLElement && event.target == inputElement) {
+            this.querySelector<HTMLOptionElement>('datalist option:not(.js-hide)')?.focus();
+          }
+
+          break;
+      }
+
+      /*
+      if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary')) {
+        const activeItem = document.activeElement;
+        const prevIndex = Array.from(topLevelmenuItems).indexOf(activeItem) - 1;
+        const nextIndex = Array.from(topLevelmenuItems).indexOf(activeItem) + 1;
+
+        switch (
+          event.keyCode // change to event.key to key to use the above variable
+        ) {
+          case 27: // Esc
+            if (activeItem.closest('details')) {
+              event.stopPropagation();
+              event.preventDefault();
+              activeItem.closest('details').removeAttribute('open');
+              activeItem.closest('details').querySelector(':scope summary').focus();
+            } else {
+              event.stopPropagation();
+              menuButton.focus();
             }
 
-            datalist.innerHTML += listString;
+            break;
+          case 32: // Space
+          case 13: // Enter
+            break;
+          case 35: // end
+            event.stopPropagation();
+            event.preventDefault();
 
-            // filter the list on the client side just in case
-            const text = searchterm.toUpperCase();
-            for (const option of datalist.options) {
-              if (option.value.toUpperCase().indexOf(text) > -1) {
-                option.style.display = 'block';
-                option.classList.remove('hide');
-              } else {
-                option.style.display = 'none';
-                option.classList.add('hide');
-              }
+            this.querySelector('details[open]').removeAttribute('open');
+            Array.from(menuItems)[menuItems.length - 1].focus();
+
+            break;
+          case 36: // home
+            event.stopPropagation();
+            event.preventDefault();
+
+            this.querySelector('details[open]').removeAttribute('open');
+            Array.from(menuItems)[0].focus();
+
+            break;
+          case 38: // up
+            event.stopPropagation();
+            event.preventDefault();
+
+            if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
+              if (Array.from(topLevelmenuItems)[prevIndex] != undefined)
+                Array.from(topLevelmenuItems)[prevIndex].focus();
+              else Array.from(topLevelmenuItems)[topLevelmenuItems.length - 1].focus();
+            } else if (activeItem.closest('details')) {
+              const subMenuItems = activeItem
+                .closest('details')
+                .querySelectorAll('a, button, :scope details > summary');
+              subPrevIndex = Array.from(subMenuItems).indexOf(activeItem) - 1;
+
+              if (Array.from(subMenuItems)[subPrevIndex] != undefined) Array.from(subMenuItems)[subPrevIndex].focus();
+              else Array.from(subMenuItems)[subMenuItems.length - 1].focus();
             }
 
-            searchWrapper.classList.add('was-validated');
-            checkMatch();
+            break;
+          case 40: // down
+            event.stopPropagation();
+            event.preventDefault();
 
-            return response;
-          });
-      } catch (error) {
-        console.log(error);
+            if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
+              if (Array.from(topLevelmenuItems)[nextIndex] != undefined)
+                Array.from(topLevelmenuItems)[nextIndex].focus();
+              else Array.from(topLevelmenuItems)[0].focus();
+            } else if (activeItem.closest('details')) {
+              const subMenuItems = activeItem
+                .closest('details')
+                .querySelectorAll('a, button, :scope details > summary');
+              subNextIndex = Array.from(subMenuItems).indexOf(activeItem) + 1;
+
+              if (Array.from(subMenuItems)[subNextIndex] != undefined) Array.from(subMenuItems)[subNextIndex].focus();
+              else Array.from(subMenuItems)[0].focus();
+            }
+
+            break;
+        }
       }
-    };
 
-
-    datalist.addEventListener('click', function (event) {
-
-      if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
-        
-        const option = event.target.closest('option');
-        const value = option?.hasAttribute('data-actual-value') ? option?.getAttribute('data-actual-value') : option?.getAttribute('data-value');
-        inputField.value = value;
-
-        const changeEvent = new CustomEvent('value-change', {
-          detail: { value: value },
-        });
-        searchWrapper.dispatchEvent(changeEvent);
-      }
+      */
     });
 
-    this.addEventListener('close-button-pressed', function (event) {
+    // #endregion
 
-      if(searchWrapper.hasAttribute('data-url')) {
-        datalist.innerHTML = '';
-      }
-      inputField?.value = '';
+    // #region empty button
+    clearBtn?.addEventListener('click', () => {
+      this.classList.remove('js-show-datalist');
+      inputElement.value = '';
+      inputElement.removeAttribute('data-value');
+      inputElement.focus();
+      this.classList.remove('has-value');
 
-      searchWrapper.classList.remove('was-validated');
-      
-      displayInputField.classList.remove('is-invalid');
-      displayInputField.closest('label').removeAttribute('data-error');
+      inputElement.setAttribute('placeholder', this.getAttribute('data-original-placeholder') || '');
+
+      const inputName = inputElement.getAttribute('name');
+      const alternateInput = inputName ? this.querySelector<HTMLInputElement>(`[name="${inputName}Alt"]`) : null;
+
+      alternateInput?.remove();
+
+      datalistElement.querySelectorAll<HTMLOptionElement>('option').forEach((option) => {
+        option.classList.remove('active');
+      });
     });
-
-
-    // Search the endpoint when 3 characters has been added
-    if (searchWrapper.hasAttribute('data-url')) {
-
-      displayInputField.addEventListener('input', () => {
-
-        if(displayInputField.value.length < minLength){
-          datalist.innerHTML = '';
-        }
-
-        if (displayInputField.value.length == minLength) {
-          search(displayInputField.value);
-        }
-      });
-    }
-    else {
-            // on change update oringinal field with the actual value and use displayed input for the nice display text
-      displayInputField.addEventListener('input', () => {
-        checkMatch();
-      });
-    }
-
-    if (searchWrapper.hasAttribute('data-prevent-submit')) {
-      const form = searchWrapper.closest('form');
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-      });
-    }
   }
 }
 

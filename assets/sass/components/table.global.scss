@@ -1,8 +1,5 @@
 @use '../_func' as *;
 
-
-
-
 @use './table-basic.global';
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
@@ -17,7 +14,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 }
-
 
 :is(#{$selector}) iam-actionbar {
   margin: 0 1.5rem 1rem 1.5rem;
@@ -140,7 +136,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 @container (width < 23.4375em) {
   :is(#{$selector}) {
     iam-actionbar {
-
     }
     .actionbar__sticky + * {
       margin-top: 0 !important;
@@ -180,7 +175,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     display: table-cell;
   }
 
-  
   &.table--fullwidth {
     --expand: 'true';
   }
@@ -190,7 +184,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
   }
 
   @container style(--expand) {
-
     [data-expand-button] {
       margin: 0.25rem 0 0 0;
 
@@ -213,11 +206,11 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
 
     tr:not(:has(p.three-lines)) [data-expand-button] {
-      display: none!important;
+      display: none !important;
     }
 
     tr td p:last-child {
-      padding-bottom: 0!important;
+      padding-bottom: 0 !important;
     }
 
     tr:not([data-view='full']):has(p.three-lines) td p {
@@ -327,7 +320,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 /* #region sort by column header */
 
 :is(#{$selector}) {
-
   &.table--fullwidth {
     --sort: 'true';
   }
@@ -361,7 +353,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       background-image: var(--icon-sort-desc);
     }
   }
-
 }
 
 /* #endregion */

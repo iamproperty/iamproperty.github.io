@@ -56,7 +56,7 @@ class iamAddressLookup extends HTMLElement {
 
           <div class="datalist__wrapper dropdown ${this.hasAttribute('data-list-class') ? this.getAttribute('data-list-class') : ''}" tabindex="0" part="list-wrapper">
             <slot name="beforeList"></slot>
-            
+
             <datalist id="address-lookup__addressess" class=""></datalist>
             <div id="paginationWrapper"></div>
             <slot name="afterList"></slot>
@@ -91,7 +91,6 @@ class iamAddressLookup extends HTMLElement {
   }
 
   async connectedCallback(): void {
-
     // Make the datalist a dropdown
     this.classList.add('dropdown__wrapper');
 
@@ -125,13 +124,11 @@ class iamAddressLookup extends HTMLElement {
       titleElement.innerHTML = title;
     });
 
-
     // preload datalis
 
-    if(this.querySelector('datalist')){
+    if (this.querySelector('datalist')) {
       list.innerHTML = this.querySelector('datalist').innerHTML;
     }
-
 
     // #region functions
     function checkFilled(component): void {
@@ -335,13 +332,11 @@ class iamAddressLookup extends HTMLElement {
                   address.attributes = Object.assign(address.attributes, address.relationships);
 
                 Object.keys(address.attributes).forEach((key) => {
-
                   const attribute = address.attributes[key];
 
-                  if(typeof attribute == 'object'){
+                  if (typeof attribute == 'object') {
                     attributes[key] = attribute?.id;
-                  }
-                  else {
+                  } else {
                     attributes[key] = attribute;
                   }
                 });
@@ -517,11 +512,10 @@ class iamAddressLookup extends HTMLElement {
         input.value = '';
       });
 
-      lookup.value = "";
+      lookup.value = '';
 
       // uncheck box
-      if (this.shadowRoot.querySelector('[name="use"]'))
-          this.shadowRoot.querySelector('[name="use"]').checked = false;
+      if (this.shadowRoot.querySelector('[name="use"]')) this.shadowRoot.querySelector('[name="use"]').checked = false;
 
       const updateEvent = new CustomEvent('switch-to-lookup');
       this.dispatchEvent(updateEvent);
@@ -656,8 +650,7 @@ class iamAddressLookup extends HTMLElement {
 
     advancedSelect(this, lookup, list, true);
 
-    if (this.hasAttribute('data-disabled'))
-      lookup?.setAttribute('disabled','disabled');
+    if (this.hasAttribute('data-disabled')) lookup?.setAttribute('disabled', 'disabled');
   }
 
   static get observedAttributes(): any {
@@ -670,9 +663,8 @@ class iamAddressLookup extends HTMLElement {
     switch (attrName) {
       case 'data-disabled': {
         if (oldVal != newVal && newVal == 'disabled') {
-          lookup?.setAttribute('disabled','disabled');
-        }
-        else if (oldVal != newVal) {
+          lookup?.setAttribute('disabled', 'disabled');
+        } else if (oldVal != newVal) {
           lookup?.removeAttribute('disabled');
         }
         break;

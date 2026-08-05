@@ -1,6 +1,10 @@
 @use '../_func' as *;
 
 .container.notification__holder {
+  position-anchor: --nav;
+
+  top: anchor(bottom);
+
   position: fixed;
   top: var(--nav-height);
   left: 50%;

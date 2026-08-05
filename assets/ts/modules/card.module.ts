@@ -16,33 +16,41 @@ export const cardHTML = `<div class="wrapper">
   </div>
 </div>`;
 
-export const setupCard = (cardComponent: any): void => {
+const getCardPart = <T extends Element>(cardComponent: HTMLElement, selector: string): T | null =>
+  cardComponent.shadowRoot?.querySelector<T>(selector) || null;
+
+export const setupCard = (cardComponent: HTMLElement): void => {
   cardComponent.classList.add('card');
-  const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
-  const cardBody = cardComponent.shadowRoot.querySelector('.card__body');
+  const cardHead = getCardPart<HTMLDivElement>(cardComponent, '.card__head');
+  const cardBody = getCardPart<HTMLDivElement>(cardComponent, '.card__body');
+  const cardBadges = getCardPart<HTMLDivElement>(cardComponent, '.card__badges');
 
   if (cardComponent.hasAttribute('data-image')) {
-    cardHead.innerHTML += `<img src="${cardComponent.getAttribute('data-image')}" alt="" loading="lazy" part="image" />`;
+    cardHead?.insertAdjacentHTML(
+      'beforeend',
+      `<img src="${cardComponent.getAttribute('data-image') || ''}" alt="" loading="lazy" part="image" />`
+    );
   }
 
   // Inset the HTML for the data total or icon fallback
   if (cardComponent.hasAttribute('data-total')) {
+    const cardTotal = cardBody?.querySelector<HTMLDivElement>('.card__total');
 
-    if(!cardBody?.querySelector('.card__total'))
+    if (!cardTotal)
       cardBody.insertAdjacentHTML(
         'beforeend',
-        `<div class="card__total">${cardComponent.getAttribute('data-total')}</div>`
+        `<div class="card__total">${cardComponent.getAttribute('data-total') || ''}</div>`
       );
     else {
-      cardBody?.querySelector('.card__total')?.innerHTML = cardComponent.getAttribute('data-total');
+      cardTotal.innerHTML = cardComponent.getAttribute('data-total') || '';
     }
   } else if (cardComponent.querySelector('[slot="total-icon"]')) {
-    cardBody.insertAdjacentHTML('beforeend', `<div class="card__total"><slot name="total-icon"></slot></div>`);
+    cardBody?.insertAdjacentHTML('beforeend', `<div class="card__total"><slot name="total-icon"></slot></div>`);
   }
 
   if (!cardComponent.querySelector('[slot="badges"]')) {
-    cardComponent.shadowRoot.querySelector('.card__badges').classList.add('empty');
+    cardBadges?.classList.add('empty');
   } else {
-    cardComponent.shadowRoot.querySelector('.card__badges').classList.remove('empty');
+    cardBadges?.classList.remove('empty');
   }
 };

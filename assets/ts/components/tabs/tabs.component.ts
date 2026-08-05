@@ -51,13 +51,12 @@ class iamTabs extends HTMLElement {
       const detailsID = details.getAttribute('id');
 
       Array.from(document.querySelectorAll(`[command="show-tab"][commandfor="${detailsID}"]`)).forEach((radioField) => {
-
         radioField.closest('label').addEventListener('click', (e) => {
-        
-          details.setAttribute('open','open');
+          details.setAttribute('open', 'open');
 
-          Array.from(document.querySelectorAll(`input[type="radio"][command="show-tab"][commandfor="${detailsID}"]`)).forEach((input) => {
-
+          Array.from(
+            document.querySelectorAll(`input[type="radio"][command="show-tab"][commandfor="${detailsID}"]`)
+          ).forEach((input) => {
             input.checked = true;
           });
         });

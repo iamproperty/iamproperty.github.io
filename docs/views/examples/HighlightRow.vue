@@ -3,10 +3,8 @@
 </script>
 
 <template>
-
   <main>
     <h1>Highlighted row</h1>
-
   </main>
   <Table>
     <table>
@@ -24,20 +22,26 @@
       <tbody>
         <tr>
           <td>
-            <label for="row1647601537697"><input type="checkbox" name="row" id="row1647601537697"><span class="visually-hidden">Select row</span></label>
+            <label for="row1647601537697"
+              ><input type="checkbox" name="row" id="row1647601537697" /><span class="visually-hidden"
+                >Select row</span
+              ></label
+            >
           </td>
           <td>Tom Smith</td>
           <td>10.05.23</td>
-          <td>
-            Lorem Ipsum 
-          </td>
+          <td>Lorem Ipsum</td>
           <td>Lorum ipsum</td>
           <td>Lorum ipsum</td>
           <td><a href="/manage">Manage</a></td>
         </tr>
         <tr data-highlight="Recommended based on sale quote selection">
           <td>
-            <label for="row1647601537697"><input type="checkbox" name="row" id="row164760153769"><span class="visually-hidden">Select row</span></label>
+            <label for="row1647601537697"
+              ><input type="checkbox" name="row" id="row164760153769" /><span class="visually-hidden"
+                >Select row</span
+              ></label
+            >
           </td>
           <td>Tom Smith <span></span></td>
           <td>10.05.23</td>
@@ -46,9 +50,15 @@
           <td>Lorum ipsum</td>
           <td><a href="/manage">Manage</a></td>
         </tr>
-        <tr data-highlight="Recommended based on sale quote selection. Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection">
+        <tr
+          data-highlight="Recommended based on sale quote selection. Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection Recommended based on sale quote selection"
+        >
           <td>
-            <label for="row1647601537697"><input type="checkbox" name="row" id="row16476015376"><span class="visually-hidden">Select row</span></label>
+            <label for="row1647601537697"
+              ><input type="checkbox" name="row" id="row16476015376" /><span class="visually-hidden"
+                >Select row</span
+              ></label
+            >
           </td>
           <td>Tom Smith <span></span></td>
           <td>10.05.23</td>
@@ -59,7 +69,9 @@
         </tr>
         <tr>
           <td>
-            <label for="row1647601537697"><input type="checkbox" name="row" id="row16476"><span class="visually-hidden">Select row</span></label>
+            <label for="row1647601537697"
+              ><input type="checkbox" name="row" id="row16476" /><span class="visually-hidden">Select row</span></label
+            >
           </td>
           <td>Tom Smith</td>
           <td>10.05.23</td>

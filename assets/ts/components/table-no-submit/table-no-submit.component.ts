@@ -5,7 +5,7 @@ import {
   setupNoSubmitTable,
   paginateRows,
   paginateTable,
-  updateAttributes
+  updateAttributes,
 } from '../../modules/table';
 import iamMenu from '../menu/menu.component';
 
@@ -63,7 +63,6 @@ class iamTableNoSubmit extends HTMLElement {
     setupAdvancedTable(this, table);
     setupNoSubmitTable(this, table, form, pagination, savedTableBody);
 
-
     pagination.addEventListener('update-show', (event) => {
       const show = event.detail.show;
 
@@ -82,15 +81,12 @@ class iamTableNoSubmit extends HTMLElement {
       updateAttributes(this, pagination);
     });
 
-
     // For when the table contents is updated with an ajax call
     this.addEventListener('update-table', (event) => {
-      
       setupBasicTable(this, table, form, pagination);
       setupAdvancedTable(this, table);
       setupNoSubmitTable(this, table, form, pagination, savedTableBody);
     });
-
   }
   /*
   static get observedAttributes(): any {

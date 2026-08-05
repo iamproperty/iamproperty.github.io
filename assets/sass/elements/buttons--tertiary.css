@@ -2,7 +2,7 @@
   /* #region Tertiary Button */
   .btn.btn-tertiary {
     background-color: transparent;
-    border: none;
+    outline: none;
     color: var(--colour-link);
     margin: 0 var(--btn-margin) var(--btn-margin) 0;
     padding: 0;
@@ -11,6 +11,8 @@
     line-height: 1.5rem;
     min-height: 1.5rem;
     position: relative;
+    border-radius: 0;
+    overflow: visible;
 
     &:after {
       position: absolute;
@@ -32,7 +34,7 @@
       margin-left: 0;
       margin-right: 0.5rem;
     }
-    
+
     &[class*='fa-']:not(:first-child) {
       margin-left: 0.5rem;
       margin-right: 0;

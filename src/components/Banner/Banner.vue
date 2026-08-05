@@ -4,8 +4,7 @@
   onMounted(() => {
     import(`../../../assets/js/components/banner/banner.component.min.js`)
       .then((module) => {
-        if (!window.customElements.get(`iam-banner`))
-          window.customElements.define(`iam-banner`, module.default);
+        if (!window.customElements.get(`iam-banner`)) window.customElements.define(`iam-banner`, module.default);
       })
       .catch((err) => {
         console.log(err.message);

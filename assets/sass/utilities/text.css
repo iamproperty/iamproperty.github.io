@@ -83,7 +83,6 @@
     text-align: center !important;
 
     > * {
-        
       margin-inline: auto;
     }
   }
@@ -138,7 +137,6 @@
       text-align: center !important;
 
       > * {
-          
         margin-inline: auto;
       }
     }
@@ -170,7 +168,6 @@
       text-align: center !important;
 
       > * {
-          
         margin-inline: auto;
       }
     }

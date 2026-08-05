@@ -16,10 +16,7 @@ class iamBone extends HTMLElement {
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback(): void {
-    console.log('bone');
-  }
+  connectedCallback(): void {}
 }
-
 
 export default iamBone;

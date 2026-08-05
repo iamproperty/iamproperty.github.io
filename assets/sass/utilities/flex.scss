@@ -1,5 +1,4 @@
 @layer utilities {
-
   .flex-fill {
     flex: 1 1 auto !important;
   }
@@ -140,14 +139,12 @@
     align-self: stretch !important;
   }
 
-
   $breakpoints: (
     sm: 36em,
     md: 62em,
   );
-  @each $breakpoint,$width in $breakpoints {
+  @each $breakpoint, $width in $breakpoints {
     @media screen and (min-width: $width) {
-
       .flex-#{$breakpoint}-fill {
         flex: 1 1 auto !important;
       }

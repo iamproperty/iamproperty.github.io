@@ -142,7 +142,6 @@ export const createYoutTubeVideo = async (target, video_id): void | boolean => {
   }
 
   console.log('hi2');
-  
 
   // This function creates an <iframe> (and YouTube player) after the API code downloads.
   //function onYouTubeIframeAPIReady() {
@@ -184,39 +183,34 @@ export const createYoutTubeVideo = async (target, video_id): void | boolean => {
   }
 };
 
-export const openYoutubeVideo = async (component):void => {
+export const openYoutubeVideo = async (component): void => {
+  const embed = component.shadowRoot.querySelector('.embed');
+  const youtubeId = component.getAttribute('data-youtube');
 
-    const embed = component.shadowRoot.querySelector('.embed');
-    const youtubeId = component.getAttribute('data-youtube');
+  let loaded;
+  if (!document.body.classList.contains('youtubeLoaded')) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    loaded = await loadYouTubeScripts();
+  }
 
-    let loaded;
-    if (!document.body.classList.contains('youtubeLoaded')) {
-      
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      loaded = await loadYouTubeScripts();
+  const customEvent = new CustomEvent('play-video', {
+    detail: { 'Video Type': 'YoutTube', ID: youtubeId },
+  });
+  component.dispatchEvent(customEvent);
+
+  const interval = setInterval((): void => {
+    if (typeof YT != 'undefined') {
+      clearInterval(interval);
+      createYoutTubeVideo(embed, youtubeId);
     }
+  }, 200);
+  // Limit the number of calls
+  setTimeout(function () {
+    clearInterval(interval);
+  }, 2000);
+};
 
-    const customEvent = new CustomEvent('play-video', {
-      detail: { 'Video Type': 'YoutTube', ID: youtubeId },
-    });
-    component.dispatchEvent(customEvent);
-
-    const interval = setInterval(():void => {
-
-      if(typeof YT != "undefined"){
-        clearInterval(interval);
-        createYoutTubeVideo(embed, youtubeId);
-      }
-    }, 200);
-    // Limit the number of calls
-    setTimeout(function() {
-      clearInterval(interval)
-    }, 2000);
-
-  } 
-
-export const openVimeoVideo = async (component):void => {
-
+export const openVimeoVideo = async (component): void => {
   const embed = component.querySelector('.embed');
   const vimeoId = component.getAttribute('data-vimeo');
 
@@ -228,6 +222,6 @@ export const openVimeoVideo = async (component):void => {
 
   if (!embed.querySelector('iframe'))
     embed.innerHTML = `<iframe src="https://player.vimeo.com/video/${vimeoId}?autoplay=1" width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
-} 
+};
 
 export default videoSupport;

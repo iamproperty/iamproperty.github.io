@@ -5,7 +5,6 @@
         <li><a href="/foundations">Templates</a></li>
       </ul>
       <h1>Loading states</h1>
-      
     </div>
   </main>
 </template>

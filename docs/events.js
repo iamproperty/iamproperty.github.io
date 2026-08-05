@@ -79,26 +79,9 @@ export const carousel = `<table>
   </thead>
   <tbody>
     <tr>
-      <th>pip-clicked</th>
-      <td>When a user clicks on a pip</td>
-      <td>{ "event": "pip-clicked", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}</td>
-    </tr>
-    <tr>
-      <th>next-clicked</th>
-      <td>When a user clicks on the next button</td>
-      <td>{ "event": "next-clicked", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}</td>
-    </tr>
-    <tr>
-      <th>prev-clicked</th>
-      <td>When a user clicks on the previous button</td>
-      <td>{ "event": "prev-clicked", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}</td>
-    </tr>
-    <tr>
-      <th>slider-changed</th>
-      <td>The slider element is used to update the carousel</td>
-      <td>
-        { "event": "slider-changed", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}
-      </td>
+      <th>snap-to</th>
+      <td>When a user clicks interacts with the carousel and an item is scrolled into view</td>
+      <td>{ "event": "snap-to", "item": "{i}"}</td>
     </tr>
   </tbody>
 </table>`;

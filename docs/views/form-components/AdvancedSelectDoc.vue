@@ -38,7 +38,25 @@
       When a value has been selected from the dropdown it will show in the field and set the fields state to default.
     </p>
 
-    <img :src="selectAnatomy" class="mb-5" />
+    <div class="container visualtest bg-light mb-5">
+      <div class="md-col-start-4 md-col-end-9">
+        <label
+          >Property address
+          <AdvancedSelect class="">
+            <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
+
+            <datalist id="properties">
+              <option>1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
+              <option>4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
+              <option>4 Main Street, Newcastle upon Tyne, NE4 9JK</option>
+              <option>6 Oak Ridge, Newcastle upon Tyne, NE1 1DU</option>
+              <option>13 Oak Lane, Newcastle upon Tyne, NE3 6GH</option>
+              <option>14 Main Road, Newcastle upon Tyne, NE1 6TU</option>
+            </datalist>
+          </AdvancedSelect>
+        </label>
+      </div>
+    </div>
 
     <ul class="mb-5">
       <li>Input field (with suffix)</li>
@@ -72,28 +90,16 @@
       </li>
     </ul>
 
+    <p class="note mb-5">
+      <strong>NOTE:</strong> If the selected fields value attribute is different to the displayed text, the value
+      attribute will be used for form submission.
+    </p>
+
     <h2>State</h2>
 
     <div class="container visualtest">
       <div class="md-col-end-5 mb-4">
         <span class="d-block pb-2">DEFAULT</span>
-        
-          <label
-            >Property address
-            <AdvancedSelect class="">
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              
-              <datalist id="properties">
-                <option value="1">1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
-                <option value="2">4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
-                <option value="3">4 Main Street, Newcastle upon Tyne, NE4 9JK</option>
-                <option value="4">6 Oak Ridge, Newcastle upon Tyne, NE1 1DU</option>
-                <option value="5">13 Oak Lane, Newcastle upon Tyne, NE3 6GH</option>
-                <option value="6">14 Main Road, Newcastle upon Tyne, NE1 6TU</option>
-              </datalist>
-            </AdvancedSelect>
-
-          </label>
       </div>
     </div>
 
@@ -104,7 +110,14 @@
           <label
             >Property address
             <span>
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" value="3"/>
+              <input
+                type="text"
+                name="client"
+                autocomplete="off"
+                aria-autocomplete="none"
+                list="properties"
+                value="3"
+              />
               <span class="suffix fa-regular fa-chevron-down"></span>
             </span>
           </label>

@@ -11,36 +11,21 @@
   import cardModes from '../../img/cardModes.png';
 
   import cardArticleImg from '../../img/card-article-anatomy.png';
-
-  import { card as events } from '../../events.js';
 </script>
 <template>
-  <TrackEvents
-    selector="iam-card"
-    :events="['select-card', 'unselect-card', 'secondary-button-clicked', 'action-button-clicked']"
-  ></TrackEvents>
-
   <main>
     <DSHeader :image="headerImg" section="components">
-      <h1>Navigational Cards</h1>
+      <h1>Cards</h1>
     </DSHeader>
 
-    <h2>Introduction</h2>
-    <p>Navigational cards can be used to direct the user to another page or modal.</p>
-    <p>They can also have secondary actions such as being selectable or having a secondary action.</p>
-    <p>
-      All will apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15%
-      as default unless specified otherwise, this should have the ability to be removed if needed.
+    <h2>Navigational Cards</h2>
+    <p class="lead">
+      Navigational cards can be used to direct the user to another page or modal. All will apply a drop shadow with a
+      default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15% as default unless specified
+      otherwise, this should have the ability to be removed if needed.
     </p>
 
-    <h2>Types</h2>
-
-    <h3>Header card</h3>
-
-    <p>
-      The header card is primarily used in or near the header of the page and is used to direct the user to another page
-      or modal.
-    </p>
+    <h2>Header card</h2>
 
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
@@ -67,6 +52,141 @@
       </div>
     </div>
 
+    <h3>Header card with description</h3>
+    <p>This is a variation of the Header card which includes the addition body copy description.</p>
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card>
+              Client onboarding
+              <span>Action Client due diligence checks and view information</span>
+            </Card>
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording" class="hover">
+            <Card>Client onboarding <span>Action Client due diligence checks and view information</span></Card>
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording" class="active">
+            <Card> Client onboarding <span>Action Client due diligence checks and view information</span> </Card>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Status card</h3>
+    <p>This is a variation of the header card which includes a status colour block on the left of the card.</p>
+    <p>
+      The status card is used to signify task/items which are not started, in progress, incomplete or complete and the
+      colour block to the left will reflect the relevant task status (please see colours style guide for status
+      colours).
+    </p>
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card class="colour-danger"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
+            >
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording" class="hover">
+            <Card class="colour-danger"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
+            >
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording" class="active">
+            <Card class="colour-danger"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
+            >
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Feature card with description</h3>
+    <p>
+      The feature card is a variation of the header card which includes the ability to added an image or SVG to the top
+      of the card. This is a useful card for pointing users to features, articles or any larger item which would benefit
+      From a greater visual prominance.
+    </p>
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card :data-image="cardImg"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
+            >
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording" class="hover">
+            <Card :data-image="cardImg"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
+            >
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording" class="active">
+            <Card :data-image="cardImg"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
+            >
+          </a>
+        </div>
+      </div>
+    </div>
+    <h3>Text card with SVG</h3>
+    <p>This is a variation of the Header card which includes the addition of an SVG illustration.</p>
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording" class="hover">
+            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording" class="active">
+            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--
     <h3>Header card with icon</h3>
     <p>This is a variation of the Header card which includes the addition of an icon.</p>
 
@@ -101,67 +221,9 @@
         </div>
       </div>
     </div>
+-->
 
-    <h3>Header card with SVG</h3>
-    <p>This is a variation of the Header card which includes the addition of an SVG illustration.</p>
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <h3>Header card with description</h3>
-    <p>This is a variation of the Header card which includes the addition body copy description.</p>
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card>
-              Client onboarding
-              <span>Action Client due diligence checks and view information</span>
-            </Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card>Client onboarding <span>Action Client due diligence checks and view information</span></Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card>
-              Client onboarding <span>Action Client due diligence checks and view information</span>
-            </Card>
-          </a>
-        </div>
-      </div>
-    </div>
+    <!--
 
     <h3>Header card with counter and secondary action</h3>
     <p>This is a variation of the Header card which includes the addition of a counter and a secondary action.</p>
@@ -257,118 +319,49 @@
         </div>
       </div>
     </div>
+-->
 
-    <h3>Status card</h3>
-    <p>This is a variation of the header card which includes a status colour block on the left of the card.</p>
-    <p>
-      The status card is used to signify task/items which are not started, in progress, incomplete or complete and the
-      colour block to the left will reflect the relevant task status (please see colours style guide for status
-      colours).
-    </p>
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card class="colour-danger"
-              >Financial preparation <span>Here would be the top level description of the task</span></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card class="colour-danger"
-              >Financial preparation <span>Here would be the top level description of the task</span></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card class="colour-danger"
-              >Financial preparation <span>Here would be the top level description of the task</span></Card
-            >
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <h3>Feature card with description</h3>
-    <p>
-      The feature card is a variation of the header card which includes the ability to added an image or SVG to the top
-      of the card. This is a useful card for pointing users to features, articles or any larger item which would benefit
-      From a greater visual prominance.
-    </p>
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg"
-              >Financial preparation <span>Here would be the top level description of the task</span></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card :data-image="cardImg"
-              >Financial preparation <span>Here would be the top level description of the task</span></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card :data-image="cardImg"
-              >Financial preparation <span>Here would be the top level description of the task</span></Card
-            >
-          </a>
-        </div>
-      </div>
-    </div>
-
-    
-
-    
-    <h3>Feature article card </h3>
+    <h3>Feature article card</h3>
     <p>This is a card used within products to primarily used to showcase articles within the iamproperty product.</p>
 
     <div class="container visualtest">
-      
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span><span class="badge" slot="badges">New</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Default State</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span><span class="badge" slot="badges">New</span></Card
+          >
+        </a>
+      </div>
 
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+        <a href="/client-onbaording" class="hover">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span></Card
+          >
+        </a>
+      </div>
 
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Active State</span>
+        <a href="/client-onbaording" class="active">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span></Card
+          >
+        </a>
+      </div>
     </div>
 
     <h3>Anatomy</h3>
 
     <img :src="cardArticleImg" alt="Card anatomy diagram" class="mb-4 mt-2" />
-
 
     <ul class="mb-4">
       <li>Image window</li>
@@ -379,339 +372,32 @@
 
     <h3>Variant examples</h3>
 
-
     <div class="container visualtest">
-      
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Card with header text</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions</Card>
-          </a>
-        </div>
-
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Addition of read time</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
-
-        <div class="col-start-auto col-span-2">
-          <span class="pb-3 d-block text-uppercase">Addition of description</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
-          </a>
-        </div>
-    </div>
-
-
-    <h3>Checkbox card</h3>
-    <p>The checkbox card is variation of the header card that has two actions.</p>
-    <p>
-      The primary action can be triggered by clicking the card area (except for the checkbox). The type of action that
-      will occur from the primary action is indicated by the icon on the bottom right of the card.
-    </p>
-    <p>
-      The secondary action can be triggered by clicking the checkbox on the card. This puts the card in a selected state
-      to allow users to make bulk changes to the cards using action buttons in an action bar.
-    </p>
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card
-              >Living room <span>1 check</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card2" id="card2" /><label for="card2" class="m-0">Select card</label>
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card
-              >Living room <span>1 check</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card3" id="card3" /><label for="card3" class="m-0">Select card</label>
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card
-              >Living room <span>1 check</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card4" id="card4" /><label for="card4" class="m-0">Select card</label>
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Checkbox hover</span>
-          <a href="/client-onbaording">
-            <Card
-              >Living room <span>1 check</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="checked-hover" id="checked-hover" /><label
-                  for="checked-hover"
-                  class="m-0 hover"
-                  >Select card</label
-                >
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Checked</span>
-          <a href="/client-onbaording">
-            <Card
-              >Living room <span>1 check</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="checked" id="checked" checked /><label for="checked" class="m-0"
-                  >Select card</label
-                >
-              </div></Card
-            >
-          </a>
-        </div>
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Card with header text</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article">Take control of your transactions</Card>
+        </a>
       </div>
-    </div>
 
-    <h3>Checkbox card with label</h3>
-    <p>This is a variation of the checkbox card which includes the addition of a label to show status.</p>
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card
-              >Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card5" id="card5" /><label for="card5" class="m-0">Select card</label>
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card
-              >Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card5" id="card5" /><label for="card5" class="m-0">Select card</label>
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card
-              >Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card5" id="card5" /><label for="card5" class="m-0">Select card</label>
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card
-              >Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card6" id="card6" /><label for="card6" class="m-0 hover"
-                  >Select card</label
-                >
-              </div></Card
-            >
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card
-              >Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card6" id="card6" checked /><label for="card6" class="m-0"
-                  >Select card</label
-                >
-              </div></Card
-            >
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <h3>Checkbox card with label and progress bar</h3>
-    <p>
-      This is a variation of the checkbox card which includes the addition of a label to show status and a progress bar
-      to keep track of progress.
-    </p>
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/client-onbaording">
-            <Card>
-              Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card10" id="card10" /><label for="card10" class="m-0">Select card</label>
-              </div>
-              <label class="hide-text mb-1 mt-2">
-                <span class="visually-hidden">Percentage completed</span>
-                <progress max="100" class="progress--inline" value="50">50%</progress>
-              </label>
-            </Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording" class="hover">
-            <Card>
-              Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card11" id="card11" /><label for="card11" class="m-0">Select card</label>
-              </div>
-              <label class="hide-text mb-1 mt-2">
-                <span class="visually-hidden">Percentage completed</span>
-                <progress max="100" class="progress--inline" value="50">50%</progress>
-              </label>
-            </Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording" class="active">
-            <Card>
-              Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card12" id="card12" /><label for="card12" class="m-0">Select card</label>
-              </div>
-              <label class="hide-text mb-1 mt-2">
-                <span class="visually-hidden">Percentage completed</span>
-                <progress max="100" class="progress--inline" value="50">50%</progress>
-              </label>
-            </Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Checkbox hover</span>
-          <a href="/client-onbaording">
-            <Card>
-              Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card13" id="card13" /><label for="card13" class="m-0 hover"
-                  >Select card</label
-                >
-              </div>
-              <label class="hide-text mb-1 mt-2">
-                <span class="visually-hidden">Percentage completed</span>
-                <progress max="100" class="progress--inline" value="50">50%</progress>
-              </label>
-            </Card>
-          </a>
-        </div>
-
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Checked</span>
-          <a href="/client-onbaording">
-            <Card>
-              Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
-              <div slot="checkbox">
-                <input type="checkbox" name="card14" id="card14" checked /><label for="card14" class="m-0"
-                  >Select card</label
-                >
-              </div>
-              <label class="hide-text mb-1 mt-2">
-                <span class="visually-hidden">Percentage completed</span>
-                <progress max="100" class="progress--inline" value="50">50%</progress>
-              </label>
-            </Card>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <h3>Multi-action card</h3>
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
-        <div class="col video-col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-
-          <Card :data-image="cardImg" data-menu-title="Template Actions">
-            Name of template Here
-            <span>Updated by: John smith</span>
-            <span class="pt-1">Updated on: 03/01/2024</span>
-            <a href="/test" slot="primary-action" title="Edit template">Edit</a>
-            <button slot="btns">Duplicate</button>
-            <a href="/cards/card" slot="btns">Duplicate</a>
-            <button slot="btns" class="btn btn-action">Delete</button>
-          </Card>
-        </div>
-        <div class="col video-col">
-          <span class="pb-3 d-block text-uppercase">Hover State</span>
-
-          <Card :data-image="cardImg" data-menu-title="Template Actions">
-            Name of template Here
-            <span>Updated by: John smith</span>
-            <span class="pt-1">Updated on: 03/01/2024</span>
-            <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-            <button slot="btns">Duplicate</button>
-            <a href="/cards/card" slot="btns">Duplicate</a>
-            <button slot="btns">Delete</button>
-          </Card>
-        </div>
-
-        <div class="col video-col">
-          <span class="pb-3 d-block text-uppercase">Ellipsis Hover State</span>
-
-          <Card :data-image="cardImg" data-menu-title="Template Actions" style="--ellipsis-bg: var(--colour-light)">
-            Name of template Here
-            <span>Updated by: John smith</span>
-            <span class="pt-1">Updated on: 03/01/2024</span>
-            <a href="/test" slot="primary-action" title="Edit template">Edit</a>
-            <button slot="btns">Duplicate</button>
-            <a href="/cards/card" slot="btns">Duplicate</a>
-            <button slot="btns">Delete</button>
-          </Card>
-        </div>
-
-        <div class="col video-col">
-          <span class="pb-3 d-block text-uppercase">Ellipsis Menu Open</span>
-
-          <Card
-            :data-image="cardImg"
-            data-menu-title="Template Actions"
-            style="--menu-display: block; --ellipsis-bg: var(--colour-light)"
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Addition of read time</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions <span class="duration" slot="footer">6 mins</span></Card
           >
-            Name of template Here
-            <span>Updated by: John smith</span>
-            <span class="pt-1">Updated on: 03/01/2024</span>
-            <a href="/test" slot="primary-action" title="Edit template">Edit</a>
-            <button slot="btns">Duplicate</button>
-            <a href="/cards/card" slot="btns">Duplicate</a>
-            <button slot="btns">Delete</button>
-          </Card>
-        </div>
+        </a>
+      </div>
+
+      <div class="col-start-auto col-span-2">
+        <span class="pb-3 d-block text-uppercase">Addition of description</span>
+        <a href="/client-onbaording">
+          <Card :data-image="cardImg" class="card--article"
+            >Take control of your transactions
+            <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span
+            ><span class="duration" slot="footer">6 mins</span></Card
+          >
+        </a>
       </div>
     </div>
 
@@ -884,20 +570,8 @@
           </tbody>
         </table>
       </template>
-
-      <template #criteria>
-        <ul>
-          <li>
-            When hovering over a secondary,action or checkbox the main hover state on the card should not be shown
-          </li>
-          <li>All secodnary type buttons or inputs should be tabbable</li>
-        </ul>
-      </template>
-      <template #data-layer>
-        <span v-html="events"></span>
-      </template>
     </Integration>
-    <Versions pdf="/pdfs/navigational-card.pdf">
+    <Versions pdf="/pdfs/navigational-card.pdf" jira="FEG-948">
       <table>
         <thead>
           <tr>
@@ -922,15 +596,3 @@
     </Versions>
   </main>
 </template>
-
-<style>
-  .video-col {
-    position: relative;
-    margin-top: 3rem;
-  }
-  .video-col > span {
-    position: absolute;
-    bottom: 100%;
-    left: 0.5rem;
-  }
-</style>

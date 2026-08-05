@@ -47,12 +47,11 @@ router.afterEach((to, from) => {
   }, 1000);
 });
 
-
 // Global vars
 export const shared = {
   audit: audit,
   benchmark: benchmark,
-  nfrs: nfrs
+  nfrs: nfrs,
 };
 
 let template =
@@ -64,8 +63,6 @@ let template =
 let app = createApp(template);
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app');
-
-
 
 /*
 const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;

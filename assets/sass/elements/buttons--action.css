@@ -17,7 +17,7 @@
 
     &:not(.btn-primary):not(.border-0) {
       background-color: var(--colour-canvas-2);
-      border: var(--btn-border-width) solid var(--colour-muted);
+      outline: var(--btn-border-width) solid var(--colour-muted);
     }
 
     &.btn[class*='fa-']:before {
@@ -65,7 +65,6 @@
   /* #endregion */
 
   .btn-action:not(.btn-compact).fa-compact-only:before {
-
-    display: none!important;
+    display: none !important;
   }
 }

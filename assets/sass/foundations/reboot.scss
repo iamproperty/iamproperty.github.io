@@ -2,7 +2,6 @@
 @use '../_func' as *;
 
 @layer reset {
-
   *,
   *::before,
   *::after {
@@ -30,41 +29,39 @@
       --root-fs-px: 1280;
     }
 
-    
-      @media (min-width: #{em(1280)}) {
-        /* font-size: 100%; */
-        --root-fs-px: 1280;
+    @media (min-width: #{em(1280)}) {
+      /* font-size: 100%; */
+      --root-fs-px: 1280;
 
-        &:has(.nav--large) {
-          font-size: 100%;
-        }
+      &:has(.nav--large) {
+        font-size: 100%;
       }
+    }
 
-      @media (min-width: #{em(1440)}) {
-        font-size: 112.5%;
+    @media (min-width: #{em(1440)}) {
+      font-size: 112.5%;
 
-        &:has(.nav--large) {
-          font-size: 100%;
-        }
+      &:has(.nav--large) {
+        font-size: 100%;
       }
+    }
 
-      @media (min-width: #{em(1680)}) {
-        /* font-size: 131.25%; */
+    @media (min-width: #{em(1680)}) {
+      /* font-size: 131.25%; */
+    }
+
+    @media print {
+      font-size: 16px;
+    }
+
+    @media screen and (min-width: 120em) {
+      /*  1920 */
+
+      &:has(.nav--large) {
+        --root-fs-px: 1920;
+        font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
       }
-
-      @media print {
-        font-size: 16px;
-      }
-
-      @media screen and (min-width: 120em) {
-        /*  1920 */
-
-        &:has(.nav--large) {
-          --root-fs-px: 1920;
-          font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
-        }
-      }
-    
+    }
   }
 
   body {
@@ -121,8 +118,6 @@
     outline: 2px auto -webkit-focus-ring-color;
   }
 
-
-
   [hidden] {
     display: none !important;
   }
@@ -162,15 +157,17 @@
   details {
     width: 100%;
   }
-  
-$columns: 12;
+
+  $columns: 12;
   /* #region Main grid setup */
   body {
     --excess-space: calc((100% - var(--max-width)) / 2);
     --col-size: calc(
       (
-          100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter) - var(--gutter) - (var(--gap) * (#{$columns - 1}))
-        ) / #{$columns}
+          100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter) - var(--gutter) -
+            (var(--gap) * (#{$columns - 1}))
+        ) /
+        #{$columns}
     );
     column-gap: var(--gap);
     display: grid;
@@ -226,12 +223,16 @@ $columns: 12;
     grid-template-columns: subgrid;
   }
 
+  nav {
+    anchor-name: --nav;
+  }
+
   *:not(.row) > main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
     padding-bottom: 1rem;
   }
 
   main > :is(.full-width, [class*='bg-']:has(.container), iam-header, iam-collapsible-side, iam-notification) {
-    grid-column: full-width!important;
+    grid-column: full-width !important;
   }
 
   [class*='bg-']:not([class*='col-']):has(.container) {
@@ -242,19 +243,17 @@ $columns: 12;
   /* #endregion */
 }
 
-
 #app {
   display: contents;
 }
 
-
 /* #region Nav tweaks for standalone pages */
 
 nav:has(iam-std-nav-standalone) {
-  min-height: 8rem!important;
+  min-height: 8rem !important;
 }
-nav:has(iam-std-nav-standalone) iam-nav{
-  top: 2rem!important;
+nav:has(iam-std-nav-standalone) iam-nav {
+  top: 2rem !important;
 }
 
 /* #endregion */

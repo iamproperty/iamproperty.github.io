@@ -5,7 +5,6 @@
         <li><a href="/foundations">Templates</a></li>
       </ul>
       <h1>Input fields</h1>
-      
     </div>
   </main>
 </template>

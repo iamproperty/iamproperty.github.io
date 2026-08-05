@@ -1,7 +1,7 @@
 <script setup>
   import Skeleton from '@/components/Skeleton/Skeleton.vue';
   import Bone from '@/components/Skeleton/Bone.vue';
-  
+
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Integration from '../Integration.vue';
@@ -33,7 +33,7 @@
       <Bone class="w-25 me-auto"></Bone>
       <Bone class="badge"></Bone>
     </Skeleton>
-    
+
     <h2 class="pt-5">Tags</h2>
     <Skeleton>
       <Bone class="tag"></Bone>
@@ -42,27 +42,23 @@
       <Bone class="tag"></Bone>
     </Skeleton>
 
-    
     <h2 class="pt-5">Buttons</h2>
     <Skeleton>
       <Bone class="btn"></Bone>
       <Bone class="btn d-none d-md-block"></Bone>
     </Skeleton>
 
-    
     <h2 class="pt-5">Link</h2>
     <Skeleton>
       <Bone class="link"></Bone>
     </Skeleton>
 
-    
     <h2 class="pt-5">Spinner</h2>
     <Skeleton>
       <Bone class="spinner"></Bone>
       <Bone></Bone>
     </Skeleton>
 
-    
     <h2 class="pt-5">Paragraph</h2>
     <Skeleton>
       <Bone class="h1 w-75"></Bone>
@@ -72,9 +68,6 @@
       <Bone class="w-75"></Bone>
     </Skeleton>
 
-    <Integration component="skeleton" componentName="iam-skeleton">
-      
-      
-    </Integration>
+    <Integration component="skeleton" componentName="iam-skeleton"> </Integration>
   </main>
 </template>

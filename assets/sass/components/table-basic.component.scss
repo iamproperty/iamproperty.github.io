@@ -2,8 +2,6 @@
 
 @use '../utilities/max-height' as *;
 
-
-
 /* #region Table container - Add via JS if needed, provides a safe space to scroll */
 :host {
   container-type: inline-size;
@@ -11,7 +9,6 @@
 }
 
 .table__container {
-  
   --wrapper-padding: 2rem;
   --bg-colour: #ffffff;
   display: block;
