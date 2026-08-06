@@ -194,7 +194,7 @@ const UpdateResults = () => {
         title="Inline Frame Example"
         src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default&f[stock_switch.current_agent_name]=Wilson Estate Agents"
       ></iframe>-->
-      <iframe
+<!--      <iframe
         id="iframeTable"
         ref="iframeTable"
         title="Inline Frame Example"
@@ -202,8 +202,8 @@ const UpdateResults = () => {
         frameborder="0"
         allowfullscreen
       ></iframe>
+-->
 
-<!--
       <iframe
         id="iframeTable"
         ref="iframeTable"
@@ -212,7 +212,7 @@ const UpdateResults = () => {
         frameborder="0"
         allowfullscreen
       ></iframe>
--->
+
 
 
 
@@ -261,6 +261,8 @@ const UpdateResults = () => {
 
 
 
+  margin-inline: -3.5rem;
+  width: calc(100% + 8rem);
 
 }
 
