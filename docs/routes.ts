@@ -1101,7 +1101,6 @@ const routes = [
         component: () => import('./views/tables/ExpandedTableDoc.vue'),
       },
       {
-<<<<<<< HEAD
         path: 'advanced',
         name: 'Advanced table',
         meta: {
@@ -1110,8 +1109,6 @@ const routes = [
         component: () => import('./views/tables/AdvancedTableDoc.vue'),
       },
       {
-=======
->>>>>>> develop
         path: 'ajax',
         name: 'AJAX table',
         meta: {
