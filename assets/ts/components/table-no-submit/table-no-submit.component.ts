@@ -1,7 +1,7 @@
 import {
   setupBasicTable,
   findForm,
-  setupAdvancedTable,
+  setupExpandedTable,
   setupNoSubmitTable,
   paginateRows,
   paginateTable,
@@ -60,7 +60,7 @@ class iamTableNoSubmit extends HTMLElement {
     if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     setupBasicTable(this, table, form, pagination);
-    setupAdvancedTable(this, table);
+    setupExpandedTable(this, table);
     setupNoSubmitTable(this, table, form, pagination, savedTableBody);
 
     pagination.addEventListener('update-show', (event) => {
@@ -84,7 +84,7 @@ class iamTableNoSubmit extends HTMLElement {
     // For when the table contents is updated with an ajax call
     this.addEventListener('update-table', (event) => {
       setupBasicTable(this, table, form, pagination);
-      setupAdvancedTable(this, table);
+      setupExpandedTable(this, table);
       setupNoSubmitTable(this, table, form, pagination, savedTableBody);
     });
   }

@@ -203,6 +203,18 @@ const UpdateResults = () => {
         allowfullscreen
       ></iframe>
 
+<!--
+      <iframe
+        id="iframeTable"
+        ref="iframeTable"
+        title="Inline Frame Example"
+        src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?theme=hub_embed"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+-->
+
+
 
       <!--
       <iframe

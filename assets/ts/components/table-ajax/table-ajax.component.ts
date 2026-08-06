@@ -1,7 +1,7 @@
 import {
   setupBasicTable,
   findForm,
-  setupAdvancedTable,
+  setupExpandedTable,
   setupAjaxTable,
   paginateTable,
   loadAjaxTable,
@@ -57,7 +57,7 @@ class iamTableAjax extends HTMLElement {
 
     setupBasicTable(this, table, form, pagination);
 
-    setupAdvancedTable(this, table, form, pagination);
+    setupExpandedTable(this, table, form, pagination);
 
     setupAjaxTable(this, table, form, pagination);
 

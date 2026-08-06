@@ -25,6 +25,9 @@ class iamVisProperties extends HTMLElement {
     <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
 
 
+    <span class="h4"><span class="count"></span>Properties most likely to switch</span>
+
+    <div id="map"></div>
     <div id="bar">
 
       <label>
@@ -62,9 +65,6 @@ class iamVisProperties extends HTMLElement {
 
     <div id="bulkDisabled"></div>
 
-    <span class="h4"><span class="count"></span>Properties most likely to switch</span>
-
-    <div id="map"></div>
     <div id="wrapper" class="table__container">
       <div class="table--cta">
         <div class="table__wrapper">

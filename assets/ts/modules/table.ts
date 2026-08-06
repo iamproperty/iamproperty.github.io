@@ -375,7 +375,7 @@ export const getRowHeight = (component, table): void => {
 };
 // #endregion
 
-export const setupAdvancedTable = (component, table): void => {
+export const setupExpandedTable = (component, table): void => {
   if (
     component.querySelector('iam-actionbar[data-selectall]') ||
     document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`)
@@ -415,7 +415,7 @@ export const setupAdvancedTable = (component, table): void => {
     table.querySelector(`thead tr th:nth-child(${cellIndex + 1})`).classList.add('th--fixed');
   });
 };
-// #region Advanced table functions
+// #region Expanded table functions
 export const addSelectboxes = (component, table, actionbar): void => {
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
     if (row.querySelector('.expand-button-heading'))
@@ -1192,6 +1192,19 @@ export const setupSubmitTable = (component, table, form, pagination): void => {
 
 // #endregion
 
+
+export const setupAdvancedTable = (component, table): void => {
+
+
+  console.log('setupAdvancedTable', component, table);
+};
+// #region Advanced table functions
+
+
+
+// #endregion
+
+
 export const setupAjaxTable = (component, table, form, pagination): void => {
   loadAjaxTable(component, table, form, pagination);
 
@@ -1447,7 +1460,7 @@ export const loadAjaxTable = async function (component, table, form, pagination)
           });
 
           setupBasicTable(component, table, form, pagination);
-          setupAdvancedTable(component, table, form, pagination);
+          setupExpandedTable(component, table, form, pagination);
         } else {
           tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
         }
@@ -1461,43 +1474,3 @@ export const loadAjaxTable = async function (component, table, form, pagination)
   }
 };
 // #endregion
-
-/*
-// Pagination - still needed?
-export const addPaginationEventListeners = function (component, table, form, pagination): void | boolean {
-
-  
-  pagination.addEventListener('update-page', (event) => {
-    const paginationInput = form.querySelector('[data-pagination]');
-    const newPage = event.detail.page;
-
-    // Set the filter value
-    paginationInput.value = newPage;
-    form.dispatchEvent(new Event('paginate'));
-
-    // Reset the data attribute
-    component.setAttribute('data-page', newPage);
-
-    if (table.hasAttribute('data-show-history')) {
-      const url = new URL(location);
-      url.searchParams.set('page', newPage);
-      history.pushState({ type: 'pagination', form: form.getAttribute('id'), page: newPage }, '', url);
-    }
-
-    // scroll back to the top of the table
-    if (!component.hasAttribute('data-no-scroll')) {
-      const yOffset = -250;
-      const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  });
-
-  pagination.addEventListener('update-show', (event) => {
-    const showInput = form.querySelector('[data-show]');
-    const showRows = event.detail.show;
-    showInput.value = showRows;
-    component.setAttribute('data-show', showRows);
-    form.dispatchEvent(new Event('submit'));
-  });
-};
-*/

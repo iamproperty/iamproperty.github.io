@@ -1081,6 +1081,53 @@ const routes = [
     ],
   },
   {
+    /* Tables */ path: '/tables',
+    name: 'Tables',
+    meta: {
+      title: 'Tables | iamkey',
+    },
+    component: () => import('./views/Components.vue'),
+    children: [
+      {
+        name: 'tables-index',
+        path: '',
+        component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'basic',
+        name: 'Basic table',
+        meta: {
+          title: 'Basic table | Components | iamkey',
+        },
+        component: () => import('./views/tables/BasicTableDoc.vue'),
+      },
+      {
+        path: 'expanded',
+        name: 'Expanded table',
+        meta: {
+          title: 'Expanded table | Components | iamkey',
+        },
+        component: () => import('./views/tables/ExpandedTableDoc.vue'),
+      },
+      {
+        path: 'advanced',
+        name: 'Advanced table',
+        meta: {
+          title: 'Advanced table | Components | iamkey',
+        },
+        component: () => import('./views/tables/AdvancedTableDoc.vue'),
+      },
+      {
+        path: 'ajax',
+        name: 'AJAX table',
+        meta: {
+          title: 'AJAX table | Components | iamkey',
+        },
+        component: () => import('./views/tables/AjaxTableDoc.vue'),
+      },
+    ],
+  },
+  {
     /* Charts */ path: '/charts',
     name: 'Charts',
     meta: {
