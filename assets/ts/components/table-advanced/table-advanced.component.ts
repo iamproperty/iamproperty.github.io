@@ -1,5 +1,8 @@
 import {
   setupBasicTable,
+  paginateRows,
+  findForm,
+  paginateTable,
   setupExpandedTable,
   setupAdvancedTable,
 } from '../../modules/table';
@@ -41,7 +44,15 @@ class iamTableAdvanced extends HTMLElement {
   }
 
   connectedCallback(): void {
+    const pagination = this.shadowRoot.querySelector('iam-pagination');
+    const table = this.querySelector('table');
+    const form = findForm(this, table);
 
+    setupBasicTable(this, table, form, pagination);
+
+    paginateTable(this, table, form, pagination, () => {
+      paginateRows(this);
+    });
   }
 }
 

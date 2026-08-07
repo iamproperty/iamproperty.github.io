@@ -1188,9 +1188,7 @@ export const setupSubmitTable = (component, table, form, pagination): void => {
   }
 };
 
-// #region submit tables functions
 
-// #endregion
 
 
 export const setupAdvancedTable = (component, table): void => {
