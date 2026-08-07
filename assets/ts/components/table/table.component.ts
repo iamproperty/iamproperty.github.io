@@ -5,7 +5,6 @@ import {
   setupExpandedTable,
   paginateRows,
   setupNoSubmitTable,
-  setupSubmitTable,
   setupAjaxTable,
   loadAjaxTable,
   paginateTable,
@@ -49,6 +48,8 @@ class iamTableBasic extends HTMLElement {
   }
 
   connectedCallback(): void {
+    const params = new URLSearchParams(window.location.search);
+
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
 
@@ -56,28 +57,33 @@ class iamTableBasic extends HTMLElement {
 
     const savedTableBody = table.querySelector('tbody').cloneNode(true);
 
-    const assetLocation = document.body.hasAttribute('data-assets-location')
-      ? document.body.getAttribute('data-assets-location')
-      : '/assets';
+    if (params.has('page')) this.setAttribute('data-page', params.get('page'));
+    if (params.has('show')) this.setAttribute('data-show', params.get('show'));
 
-    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
+    if (params.has('page')) pagination.setAttribute('data-page', params.get('page'));
+    if (params.has('show')) pagination.setAttribute('data-show', params.get('show'));
 
     moveAttributesToComponents(this);
 
     setupBasicTable(this, table, form, pagination);
-    setupExpandedTable(this, table, form, pagination);
+    setupExpandedTable(this, table, form, pagination, savedTableBody);
 
-    if (this.hasAttribute('data-submit')) {
-      setupSubmitTable(this, table, form, pagination);
+    if (this.hasAttribute('data-submit') && form) {
+
+      form.setAttribute('method', 'get');
+
+      if (actionbar) {
+        actionbar.addEventListener('change', (event) => {
+          form.submit();
+        });
+      }
+
       paginateTable(this, table, form, pagination, () => {
         form.submit();
       });
-    } else if (this.hasAttribute('data-no-submit') || this.hasAttribute('data-nosubmit')) {
-      setupNoSubmitTable(this, table, form, pagination, savedTableBody);
-      paginateTable(this, table, form, pagination, () => {
-        paginateRows(this);
-      });
-    } else if (this.hasAttribute('data-ajax')) {
+    }
+
+    if (this.hasAttribute('data-ajax')) {
       setupAjaxTable(this, table, form, pagination);
       paginateTable(this, table, form, pagination, () => {
         loadAjaxTable(this, table, form, pagination);
@@ -88,6 +94,31 @@ class iamTableBasic extends HTMLElement {
         paginateRows(this);
       });
     }
+
+
+    pagination.addEventListener('update-show', (event) => {
+      const show = event.detail.show;
+
+      const updateEvent = new CustomEvent('update-show', { detail: { show: show } });
+      this.dispatchEvent(updateEvent);
+
+      updateAttributes(this, pagination);
+    });
+
+    pagination.addEventListener('update-page', (event) => {
+      const page = event.detail.page;
+
+      const updateEvent = new CustomEvent('update-page', { detail: { page: page } });
+      this.dispatchEvent(updateEvent);
+
+      updateAttributes(this, pagination);
+    });
+
+    // For when the table contents is updated with an ajax call
+    this.addEventListener('update-table', (event) => {
+      setupBasicTable(this, table, form, pagination);
+      setupExpandedTable(this, table, form, pagination, savedTableBody);
+    });
   }
 }
 

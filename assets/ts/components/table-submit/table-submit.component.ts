@@ -43,6 +43,7 @@ class iamTableSubmit extends HTMLElement {
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
     const form = findForm(this, table);
+    const actionbar = this.querySelector('iam-actionbar');
 
     if (params.has('page')) this.setAttribute('data-page', params.get('page'));
     if (params.has('show')) this.setAttribute('data-show', params.get('show'));
@@ -60,7 +61,13 @@ class iamTableSubmit extends HTMLElement {
 
     setupExpandedTable(this, table, form, pagination);
 
-    setupSubmitTable(this, table, form, pagination);
+    form.setAttribute('method', 'get');
+
+    if (actionbar) {
+      actionbar.addEventListener('change', (event) => {
+        form.submit();
+      });
+    }
 
     paginateTable(this, table, form, pagination, () => {
       form.submit();

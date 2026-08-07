@@ -15,8 +15,12 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
     table thead tr th {
       position: relative;
-      padding-right: 2rem !important;
-      padding-left: 0rem !important;
+      //padding-right: 2rem !important;
+      //padding-left: 0rem !important;
+
+      &:not(:last-child) {
+        padding-right: 2rem !important;
+      }
     }
 
     td {

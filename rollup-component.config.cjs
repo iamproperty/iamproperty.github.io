@@ -48,7 +48,7 @@ components.forEach((component) => {
   let componentFileName = component;
 
   
-  if (componentFileName == "table-no-submit" || componentFileName == "table-submit" || componentFileName == "table-ajax" || componentFileName == "table-advanced"){
+  if (componentFileName == "table-no-submit" || componentFileName == "table-submit" || componentFileName == "table-ajax"){
     componentFileName = "table";
   }
   

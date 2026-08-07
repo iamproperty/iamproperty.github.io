@@ -238,67 +238,35 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 @layer components {
   :is(#{$selector}) {
     @container (width > 23.4375em) {
-      .th--fixed {
-        /*
-        &:after {
-          top: auto;
-          left: 0;
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: calc(var(--row-height) - 2px);
-          background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
-        }
-          */
-      }
 
       .th--fixed,
       .td--fixed {
-        position: absolute;
-        left: auto;
-        top: auto;
+        position: sticky;
+        left: var(--left-offset, 0px);
         z-index: 3;
-        padding: 0 0 0 0;
         min-width: 3.375rem;
-        height: calc(var(--row-height) - 2px);
         text-align: left;
-        background: var(--row-bg);
+        background: linear-gradient(270deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
 
         &:has([open]) {
           z-index: 4;
         }
       }
 
-      .th--fixed:has(+ th:not(.th--fixed)),
-      .td--fixed:has(+ td:not(.td--fixed)) {
-        background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
+
+      :is(.th--fixed, .td--fixed):last-child {
+        left: auto;
+        right: 0;
+        background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
+        padding-left: 1.5rem !important;
       }
 
-      .th--fixed + th:not(.th--fixed),
-      .td--fixed + td:not(.td--fixed) {
-        padding-left: 3.375rem !important;
+      :is(td,td):has(+ :is(.th--fixed, .td--fixed):last-child) {
+
+        padding-right: 0.5rem !important;
       }
 
-      .th--fixed + .th--fixed,
-      .td--fixed + .td--fixed {
-        left: 3rem;
-      }
-
-      .th--fixed + .th--fixed + th:not(.th--fixed),
-      .td--fixed + .td--fixed + td:not(.td--fixed) {
-        padding-left: 6.375rem !important; /* 48 + 48 + 6 */
-      }
-
-      .th--fixed + .th--fixed + .th--fixed,
-      .td--fixed + .td--fixed + .td--fixed {
-        left: 6rem; /* 48 + 48 */
-      }
-
-      .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
-      .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
-        padding-left: 9.375rem !important; /* 48 + 48 + 48 + 6 */
-      }
-
+      
       .dialog__wrapper {
         z-index: 10;
       }
@@ -318,7 +286,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 /* #endregion */
 
 /* #region sort by column header */
-
+/*
 :is(#{$selector}) {
   &.table--fullwidth {
     --sort: 'true';
@@ -354,7 +322,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 }
-
+*/
 /* #endregion */
 
 /* #region hide columns */
@@ -392,3 +360,5 @@ iam-table-basic:is(.mh-lg, .mh-md, .mh-sm) {
 }
 
 /* #endregion */
+
+

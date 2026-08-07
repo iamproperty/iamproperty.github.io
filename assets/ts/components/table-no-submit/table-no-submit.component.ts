@@ -60,67 +60,9 @@ class iamTableNoSubmit extends HTMLElement {
     if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     setupBasicTable(this, table, form, pagination);
-    setupExpandedTable(this, table);
-    setupNoSubmitTable(this, table, form, pagination, savedTableBody);
+    setupExpandedTable(this, table, form, pagination, savedTableBody);
 
-    pagination.addEventListener('update-show', (event) => {
-      const show = event.detail.show;
-
-      const updateEvent = new CustomEvent('update-show', { detail: { show: show } });
-      this.dispatchEvent(updateEvent);
-
-      updateAttributes(this, pagination);
-    });
-
-    pagination.addEventListener('update-page', (event) => {
-      const page = event.detail.page;
-
-      const updateEvent = new CustomEvent('update-page', { detail: { page: page } });
-      this.dispatchEvent(updateEvent);
-
-      updateAttributes(this, pagination);
-    });
-
-    // For when the table contents is updated with an ajax call
-    this.addEventListener('update-table', (event) => {
-      setupBasicTable(this, table, form, pagination);
-      setupExpandedTable(this, table);
-      setupNoSubmitTable(this, table, form, pagination, savedTableBody);
-    });
   }
-  /*
-  static get observedAttributes(): any {
-    return ['data-total', 'data-page', 'data-show'];
-  }
-
-  attributeChangedCallback(attrName, oldVal, newVal): void {
-    const pagination = this.shadowRoot.querySelector('iam-pagination');
-
-    switch (attrName) {
-      case 'data-total': {
-        if (oldVal != newVal) {
-          pagination.setAttribute('data-total', newVal);
-          paginateRows(this);
-        }
-        break;
-      }
-      case 'data-show': {
-        if (oldVal != newVal) {
-          pagination.setAttribute('data-show', newVal);
-          paginateRows(this);
-        }
-        break;
-      }
-      case 'data-page': {
-        if (oldVal != newVal) {
-          pagination.setAttribute('data-page', newVal);
-          paginateRows(this);
-        }
-        break;
-      }
-    }
-  }
-    */
 }
 
 export default iamTableNoSubmit;

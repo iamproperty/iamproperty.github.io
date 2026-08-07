@@ -144,6 +144,7 @@ export const findForm = (component, table): HTMLElement => {
 };
 // #endregion
 
+// #region Basic table fnctions
 export const setupBasicTable = (component, table, form, pagination): void => {
   const tableWrapper = component.shadowRoot.querySelector('.table__wrapper');
 
@@ -172,7 +173,6 @@ export const setupBasicTable = (component, table, form, pagination): void => {
   highlightRows(component);
 };
 
-// #region Basic table fnctions
 export const highlightRows = (component): void => {
   Array.from(component.querySelectorAll('tr[data-highlight]')).forEach((row) => {
     row.insertAdjacentHTML(
@@ -375,7 +375,12 @@ export const getRowHeight = (component, table): void => {
 };
 // #endregion
 
-export const setupExpandedTable = (component, table): void => {
+// #region Expanded table functions
+export const setupExpandedTable = (component, table, form, pagination, savedTableBody): void => {
+
+
+  createSearchDataList(component, table);
+
   if (
     component.querySelector('iam-actionbar[data-selectall]') ||
     document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`)
@@ -414,8 +419,43 @@ export const setupExpandedTable = (component, table): void => {
     td.classList.add('td--fixed');
     table.querySelector(`thead tr th:nth-child(${cellIndex + 1})`).classList.add('th--fixed');
   });
+
+
+
+
+  setFixedCellsViaHeaders(table);
 };
-// #region Expanded table functions
+
+export const setFixedCellsViaHeaders = (table): void => {
+  const updateLeftOffsets = (): void => {
+    table.querySelectorAll('th, td').forEach((cell) => {
+
+      const previousColWidths =
+        cell.previousElementSibling && cell.previousElementSibling.dataset.previousColWidths
+          ? parseInt(cell.previousElementSibling.dataset.previousColWidths) + (cell.previousElementSibling.classList.contains('th--fixed') || cell.previousElementSibling.classList.contains('td--fixed') ? cell.previousElementSibling.offsetWidth : 0)
+          : 0;
+
+      cell.dataset.previousColWidths = previousColWidths;
+      cell.style.setProperty('--left-offset', `${previousColWidths}px`);
+    });
+  };
+
+  updateLeftOffsets();
+  new ResizeObserver(updateLeftOffsets).observe(table);
+
+  table.querySelectorAll('thead th.th--fixed').forEach((th) => {
+
+    const thIndex = Array.prototype.slice.call(th.parentNode.children).indexOf(th) + 1;
+
+    table.querySelectorAll(`tbody tr td:nth-child(${thIndex})`).forEach((td) => {
+      td.classList.add('td--fixed');
+    });
+
+
+    // --previous-col-widths
+  });
+};
+
 export const addSelectboxes = (component, table, actionbar): void => {
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
     if (row.querySelector('.expand-button-heading'))
@@ -478,122 +518,6 @@ export const addSelectboxes = (component, table, actionbar): void => {
 
       const dispatchedEvent = new CustomEvent('all-rows-selected');
       component.dispatchEvent(dispatchedEvent);
-    }
-  });
-};
-
-// Export CSV Data
-export const addExportEventListeners = (button, table): void | boolean => {
-  if (!button) {
-    return false;
-  }
-
-  button.addEventListener('click', () => {
-    exportAsCSV(table);
-  });
-};
-
-export const exportAsCSV = function (table): void {
-  let csvData = [];
-  // Get each row data
-  const rows = table.getElementsByTagName('tr');
-  for (let i = 0; i < rows.length; i++) {
-    // Get each column data
-    const cols = rows[i].querySelectorAll('td,th');
-
-    // Stores each csv row data
-    const csvRow = [];
-    for (let j = 0; j < cols.length; j++) {
-      // Get the text data of each cell of a row and push it to csvrow
-      csvRow.push(`"${cols[j].textContent}"`);
-    }
-
-    // Combine each column value with comma
-    csvData.push(csvRow.join(','));
-  }
-
-  // Combine each row data with new line character
-  csvData = csvData.join('\n');
-
-  // Create CSV file object and feed our csvData into it
-  const CSVFile = new Blob([csvData], {
-    type: 'text/csv',
-  });
-
-  // Create to temporary link to initiate download process
-  const tempLink = document.createElement('a');
-  tempLink.download = 'export.csv';
-  const url = window.URL.createObjectURL(CSVFile);
-  tempLink.href = url;
-
-  // This link should not be displayed
-  tempLink.style.display = 'none';
-  document.body.appendChild(tempLink);
-
-  // Automatically click the link to trigger download
-  tempLink.click();
-  document.body.removeChild(tempLink);
-};
-
-// #endregion
-
-export const setupNoSubmitTable = (component, table, form, pagination, savedTableBody): void => {
-  sortViaHeaders(component, table);
-
-  createSearchDataList(component, table);
-
-  form.addEventListener('change', (event) => {
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
-      sortTable(table, form, savedTableBody);
-    }
-  });
-  /*
-  addFilterEventListeners(component, table, form, pagination, savedTableBody);
-  */
-};
-
-// #region No submit table functions
-export const sortViaHeaders = (component, table): void => {
-  table.addEventListener('click', (event) => {
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
-      const heading = event.target.closest('[data-sort]');
-      heading.setAttribute('data-sort', 'true');
-
-      // Turn other headings off
-      Array.from(table.querySelectorAll('th[data-sort]')).forEach((element) => {
-        if (element != heading) {
-          element.setAttribute('data-sort', '');
-          element.removeAttribute('data-order-by');
-          heading.setAttribute('title', 'Click to sort ascending');
-        }
-      });
-
-      if (heading.hasAttribute('data-order-by') && heading.getAttribute('data-order-by') == 'asc') {
-        heading.setAttribute('data-order-by', 'desc');
-        heading.setAttribute('title', 'Click to sort ascending');
-      } else {
-        heading.setAttribute('data-order-by', 'asc');
-        heading.setAttribute('title', 'Click to sort descending');
-      }
-
-      // dispath event
-      const dispatchedEvent = new CustomEvent('sort-by-heading', {
-        detail: {
-          heading: heading.textContent,
-          sortBy: heading.getAttribute('data-order-by'),
-          ref: heading.getAttribute('data-ref'),
-        },
-      });
-
-      component.dispatchEvent(dispatchedEvent);
-
-      const sortBy = heading.textContent.trim();
-      const order = heading.getAttribute('data-order-by');
-
-      if (!component.hasAttribute('data-submit')) {
-        // TODO
-        sortTableByValues(table, sortBy, order);
-      }
     }
   });
 };
@@ -1176,33 +1100,135 @@ export const populateDataQueries = (component, table, form): void | boolean => {
 };
 // #endregion
 
-export const setupSubmitTable = (component, table, form, pagination): void => {
-  form.setAttribute('method', 'get');
-
-  const actionbar = component.querySelector('iam-actionbar');
-
-  if (actionbar) {
-    actionbar.addEventListener('change', (event) => {
-      form.submit();
-    });
-  }
-};
-
-
-
-
+// #region Advanced table functions
+// Init
 export const setupAdvancedTable = (component, table): void => {
 
-
   console.log('setupAdvancedTable', component, table);
+
+  sortViaHeaders(component, table);
+
+  /*
+  form.addEventListener('change', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
+      sortTable(table, form, savedTableBody);
+    }
+  });
+*/
+
+  table.querySelectorAll('thead tr th[data-sort]').forEach((heading) => {
+    heading.setAttribute('title', 'Click to sort ascending');
+
+
+  });
+
 };
-// #region Advanced table functions
 
+//  #region - Sorting & filters
+export const sortViaHeaders = (component, table): void => {
+  table.addEventListener('click', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
+      const heading = event.target.closest('th[data-sort]');
+      heading.setAttribute('data-sort', 'true');
 
+      // Turn other headings off
+      Array.from(table.querySelectorAll('th[data-sort]')).forEach((element) => {
+        if (element != heading) {
+          element.setAttribute('data-sort', '');
+          element.removeAttribute('data-order-by');
+          heading.setAttribute('title', 'Click to sort ascending');
+        }
+      });
 
+      if (heading.hasAttribute('data-order-by') && heading.getAttribute('data-order-by') == 'asc') {
+        heading.setAttribute('data-order-by', 'desc');
+        heading.setAttribute('title', 'Click to sort ascending');
+      } else {
+        heading.setAttribute('data-order-by', 'asc');
+        heading.setAttribute('title', 'Click to sort descending');
+      }
+
+      // dispath event
+      const dispatchedEvent = new CustomEvent('sort-by-heading', {
+        detail: {
+          heading: heading.textContent,
+          sortBy: heading.getAttribute('data-order-by'),
+          ref: heading.getAttribute('data-ref'),
+        },
+      });
+
+      component.dispatchEvent(dispatchedEvent);
+
+      const sortBy = heading.textContent.trim();
+      const order = heading.getAttribute('data-order-by');
+
+      if (!component.hasAttribute('data-submit')) {
+        // TODO
+        sortTableByValues(table, sortBy, order);
+      }
+    }
+  });
+};
 // #endregion
 
 
+// #region - Export CSV Data
+export const addExportEventListeners = (button, table): void | boolean => {
+  if (!button) {
+    return false;
+  }
+
+  button.addEventListener('click', () => {
+    exportAsCSV(table);
+  });
+};
+
+export const exportAsCSV = function (table): void {
+  let csvData = [];
+  // Get each row data
+  const rows = table.getElementsByTagName('tr');
+  for (let i = 0; i < rows.length; i++) {
+    // Get each column data
+    const cols = rows[i].querySelectorAll('td,th');
+
+    // Stores each csv row data
+    const csvRow = [];
+    for (let j = 0; j < cols.length; j++) {
+      // Get the text data of each cell of a row and push it to csvrow
+      csvRow.push(`"${cols[j].textContent}"`);
+    }
+
+    // Combine each column value with comma
+    csvData.push(csvRow.join(','));
+  }
+
+  // Combine each row data with new line character
+  csvData = csvData.join('\n');
+
+  // Create CSV file object and feed our csvData into it
+  const CSVFile = new Blob([csvData], {
+    type: 'text/csv',
+  });
+
+  // Create to temporary link to initiate download process
+  const tempLink = document.createElement('a');
+  tempLink.download = 'export.csv';
+  const url = window.URL.createObjectURL(CSVFile);
+  tempLink.href = url;
+
+  // This link should not be displayed
+  tempLink.style.display = 'none';
+  document.body.appendChild(tempLink);
+
+  // Automatically click the link to trigger download
+  tempLink.click();
+  document.body.removeChild(tempLink);
+};
+// #endregion
+
+// #endregion
+
+// #region ajax tables functions
 export const setupAjaxTable = (component, table, form, pagination): void => {
   loadAjaxTable(component, table, form, pagination);
 
@@ -1260,8 +1286,6 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
     });
   }
 };
-// #region ajax tables functions
-
 export const loadAjaxTable = async function (component, table, form, pagination): void {
   // Add actionbar inputs into form
   if (component.querySelector('iam-actionbar') && !component.querySelector('iam-actionbar').closest('form')) {

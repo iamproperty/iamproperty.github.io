@@ -1,0 +1,21 @@
+@use '../_func' as *;
+@use './table.global';
+
+$selector: 'iam-table-ajax, iam-table-advanced';
+
+
+
+/* #region column buttons */
+
+:is(#{$selector}) {
+  background-color: red;
+
+  @container (width < 23.4375em) {
+    tbody tr td:last-child {
+      display: block !important;
+    }
+  }
+}
+
+
+/* #endregion */

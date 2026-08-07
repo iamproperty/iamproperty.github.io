@@ -20,6 +20,7 @@
     'Filtering via column headers',
     'Show/hide columns',
     'Column reordering (In coming)',
+    'Export to CSV',
   ];
 
   const ajaxTableFeatures = [...advancedTableFeatures,

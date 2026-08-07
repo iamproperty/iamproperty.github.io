@@ -40,7 +40,7 @@
     </p>
 
     <div class="container visualtest mb-5 bg-light">
-      <TableAdvanced class="table--cta table--fullwidth">
+      <TableAdvanced class="table--fullwidth">
         <Actionbar data-search="" slot="before">
           <button class="btn btn-action fa-box-archive">Archive</button
           ><button class="btn btn-action fa-trash-can">Export to .csv</button>
@@ -49,12 +49,15 @@
           <thead>
             <tr>
               <th>Negotiator</th>
-              <th>Property address</th>
+              <th class="th--fixed">Property address</th>
               <th data-sort>Vendor</th>
               <th data-sort>Appointment date</th>
-              <th data-sort>Valuation price</th>
+              <th class="th--fixed" data-sort>Valuation price</th>
               <th>Fee amount (£)</th>
-              <th></th>
+              <th>Fee amount (£)</th>
+              <th>Fee amount (£)</th>
+              <th>Fee amount (£)</th>
+              <th class="th--fixed"></th>
             </tr>
           </thead>
           <tbody>
@@ -63,6 +66,9 @@
               <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
               <td>a Kevin Milne</td>
               <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
               <td>£0.00</td>
               <td>£0.00</td>
               <td><a href="/">View</a></td>
@@ -74,6 +80,9 @@
               <td>29/12/2024<br />12:30</td>
               <td>£0.00</td>
               <td>£0.00</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
               <td><a href="/">View</a></td>
             </tr>
             <tr>
@@ -83,13 +92,19 @@
               <td>29/12/2024<br />12:30</td>
               <td>£0.00</td>
               <td>£0.00</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
               <td><a href="/">View</a></td>
             </tr>
             <tr>
               <td>Tom Smith</td>
-              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
-              <td>d Kevin Milne</td>
-              <td>29/12/2024<br />12:30</td>
+              <td class="text-nowrap">10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td class="text-nowrap">d Kevin Milne</td>
+              <td >29/12/2024 12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
               <td>£0.00</td>
               <td>£0.00</td>
               <td><a href="/">View</a></td>
