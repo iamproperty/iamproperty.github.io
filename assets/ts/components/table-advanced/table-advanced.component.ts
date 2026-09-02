@@ -44,7 +44,7 @@ class iamTableAdvanced extends HTMLElement {
     const actionbar = findActionbar(this, form);
     const savedTableBody = table.querySelector('tbody').cloneNode(true); // Used for the sort functionality to reset the table to its original state
 
-    actionbar.setAttribute('slot', 'before');
+    actionbar?.setAttribute('slot', 'before');
     setupBasicTable(this, table, pagination, form);
     setupExpandedTable(this, table, form, actionbar);
     setupAdvancedTable(this, table, pagination, form, savedTableBody); /* pagination and sorting is handled by the basic and expanded table setup functions */

@@ -53,9 +53,9 @@ class iamTableAjax extends HTMLElement {
     if (params.has('page')) pagination.setAttribute('data-page', params.get('page'));
     if (params.has('show')) pagination.setAttribute('data-show', params.get('show'));
 
-    actionbar.setAttribute('slot', 'before');
+    actionbar?.setAttribute('slot', 'before');
     setupBasicTable(this, table, pagination, form);
-    setupExpandedTable(this, table, form);
+    setupExpandedTable(this, table, form, actionbar);
     setupAdvancedTable(this, table, pagination, form, savedTableBody); /* pagination and sorting is handled by the basic and expanded table setup functions */
 
     setupAjaxTable(this, table, pagination, form);

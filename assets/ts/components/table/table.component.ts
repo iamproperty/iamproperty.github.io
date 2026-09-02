@@ -42,14 +42,14 @@ class iamTableBasic extends HTMLElement {
     const form = findForm(this, table);
     const actionbar = findActionbar(this, form);
 
-    actionbar.setAttribute('slot', 'before');
+    actionbar?.setAttribute('slot', 'before');
     setupBasicTable(this, table, pagination, form);
     setupExpandedTable(this, table, form, actionbar);
 
     // For when the table contents is updated with an ajax call
     this.addEventListener('update-table', (event) => {
       setupBasicTable(this, table, pagination, form);
-      setupExpandedTable(this, table, form);
+      setupExpandedTable(this, table, form, actionbar);
     });
   }
 }

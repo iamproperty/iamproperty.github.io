@@ -156,7 +156,7 @@ export const fixTablebody = (component, table): void => {
   addMenuButtons(component, table);
   setFixedCellsViaHeaders(table);
   highlightRows(component); // Is this still needed?
-  paginateRows(component, table, component.querySelector('iam-pagination'));
+  paginateRows(component, table, component.shadowRoot.querySelector('iam-pagination'));
 };
 
 export const setFixedCellsViaHeaders = (table): void => {
@@ -233,8 +233,6 @@ export const setupPagination = (component, table, pagination, form): void => {
 
   pagination.addEventListener('update-show', (event) => {
 
-    if(component.querySelector('table').classList.contains('table--filtered')) return; // TODO: remove?
-
     if (form.querySelector('[name=show]').value != event.detail.show) {
       form.querySelector('[name=show]').value = event.detail.show;
 
@@ -246,8 +244,6 @@ export const setupPagination = (component, table, pagination, form): void => {
   });
 
   pagination.addEventListener('update-page', (event) => {
-
-    if(component.querySelector('table').classList.contains('table--filtered')) return; // TODO: remove?
 
     if (form.querySelector('[name=page]').value != event.detail.page) {
       form.querySelector('[name=page]').value = event.detail.page;
@@ -270,8 +266,8 @@ export const paginationUpdatedEvent = (component, table, pagination, form): void
     return;
   }
 
-  paginateRows(component, table, pagination);
   updateAttributes(component, pagination);
+  paginateRows(component, table, pagination);
 
   // scroll back to the top of the table
   if (!component.hasAttribute('data-no-scroll')) {
@@ -469,6 +465,11 @@ export const addMenuButtons = (component, table): void => {
 // #region Expanded table functions
 export const setupExpandedTable = (component, table, form, actionbar): void => {
 
+
+  if(actionbar && actionbar.hasAttribute('data-selectall')) {
+    component.setAttribute('data-selectall', actionbar.getAttribute('data-selectall'));
+  }
+
   createSearchDataList(component, table);
 
   addSelectboxes(component, table, actionbar);
@@ -487,10 +488,10 @@ export const setupExpandedTable = (component, table, form, actionbar): void => {
   }
 };
 
-export const addSelectboxes = (component, table, actionbar): void => {
+export const addSelectboxes = (component, table): void => {
 
-  if(!actionbar.hasAttribute('data-selectall'))
-    return false;
+  if(!component.hasAttribute('data-selectall'))
+    return;
 
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
     if (row.querySelector('.expand-button-heading') && !row.querySelector('.selectrow-heading'))
@@ -531,7 +532,7 @@ export const addSelectboxesEvents = (component, table, actionbar): void => {
       const count = table.querySelectorAll('.selectrow input[type="checkbox"]').length;
       const countChecked = table.querySelectorAll('.selectrow input[type="checkbox"]:checked').length;
 
-      actionbar.setAttribute('data-selected', count == countChecked ? 'all' : countChecked);
+      actionbar?.setAttribute('data-selected', count == countChecked ? 'all' : countChecked);
 
       const dispatchedEvent = new CustomEvent('row-selected', {
         detail: {
@@ -543,7 +544,7 @@ export const addSelectboxesEvents = (component, table, actionbar): void => {
     }
   });
 
-  actionbar.addEventListener('selected', (event) => {
+  actionbar?.addEventListener('selected', (event) => {
     if (event.detail.selected == '0') {
       Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
         input.checked = false;
@@ -1238,7 +1239,7 @@ export const sortViaHeader = (component, table, heading, savedTableBody): void =
 
     fixTablebody(component, table);
     filterAdvancedTable(component, table);
-    paginateRows(component, table, component.querySelector('iam-pagination'));
+    paginateRows(component, table, component.shadowRoot.querySelector('iam-pagination'));
 
     // Dispatch event
     const dispatchedEvent = new CustomEvent('sort-by-heading', {
@@ -1600,7 +1601,7 @@ export const filterAdvancedTable = (component, table): void => {
 
   setFilterIndicator(component, table, appliedFilters);
   createAppliedFilters(component, table, appliedFilters);
-  paginateRows(component, table, component.querySelector('iam-pagination'));
+  paginateRows(component, table, component.shadowRoot.querySelector('iam-pagination'));
 };
 
 export const setFilterIndicator = (component, table, appliedFilters): void => {
