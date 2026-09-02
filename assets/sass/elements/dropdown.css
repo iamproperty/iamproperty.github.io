@@ -181,11 +181,11 @@
     padding: 0 !important;
   }
 
-  :is(.dropdown, datalist, select, [popover]) *:last-child {
+  :is(.dropdown, datalist, select, [popover]) > *:last-child {
     margin-bottom: 0;
   }
 
-  :is(.dropdown, datalist, select, [popover]) :is(p):last-child {
+  :is(.dropdown, datalist, select, [popover]) > :is(p):last-child {
     padding-bottom: 0;
   }
 

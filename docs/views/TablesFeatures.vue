@@ -6,12 +6,12 @@
   ];
   const basicTableFeatures = [...elementTableFeatures,
     'Vertical overflow',
-    'CTA fixed column',
     'Responsive Mobile view',
     'Expandable rows',
     'Pagination'
   ];
   const expandedTableFeatures = [...basicTableFeatures,
+    'CTA fixed column',
     'Action bar',
     'Selectable rows',
   ];

@@ -16,6 +16,7 @@ import Modal from '@/components/Modal/Modal.vue';
 
 
 import Questions from './Questions.vue';
+import Properties from './Properties.vue';
 
 const hubEnv = import.meta.env as unknown as {
   VITE_HUB_CONTENT_BANNER_URL: string,
@@ -175,57 +176,16 @@ const UpdateResults = () => {
     <div ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
       <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
-<!--
-      <iframe
-        id="iframeTable2"
-        ref="iframeTable2"
-        title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/looks/24?theme=iamproperty_default"
-  frameborder="0"
-  allow="fullscreen"
-  referrerpolicy="strict-origin-when-cross-origin"
-        style="width: 100%; min-height: 30vh;"
-      ></iframe>
-
-
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default&f[stock_switch.current_agent_name]=Wilson Estate Agents"
-      ></iframe>-->
-
-
-<!--
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
--->
-      <iframe
+      <Properties></Properties>
+      <!--<iframe
         id="iframeTable"
         ref="iframeTable"
         title="Inline Frame Example"
         src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?theme=hub_embed"
         frameborder="0"
         allowfullscreen
-      ></iframe>
-
-
-
-
-      <!--
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="/test.html"
-        style="width: 100%; min-height: 100vh;"
       ></iframe>-->
+
 
       <div class="iframe-backdrop"></div>
     </div>
@@ -306,7 +266,7 @@ const UpdateResults = () => {
   background: rgba(0, 0, 0, .3);
   backdrop-filter: blur(4px);
 
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 </style>

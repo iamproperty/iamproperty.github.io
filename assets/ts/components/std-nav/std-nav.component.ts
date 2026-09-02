@@ -44,7 +44,7 @@ class iamSTDNav extends HTMLElement {
 
     // Update the logo
     nav.querySelector('.brand')?.className = 'brand brand--one';
-    nav.querySelector('.brand svg')?.outerHTML = /* HTML */ `<style>
+    nav.querySelector('.brand svg')?.outerHTML = `<style>
         iam-nav .brand--one {
           --svg-width: 1.576923076923077em;
         }

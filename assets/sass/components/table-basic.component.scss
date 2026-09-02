@@ -9,9 +9,9 @@
 }
 
 .table__container {
-  --wrapper-padding: 2rem;
+  --wrapper-padding: 2rem 1.5rem;
   --bg-colour: #ffffff;
-  display: block;
+  display: var(--table__container-display, block);
   background: var(--colour-canvas-2);
   padding: var(--wrapper-padding);
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
@@ -31,10 +31,6 @@
     --wrapper-padding: 0;
     background: var(--colour-canvas-2);
   }
-}
-
-:host-context(.admin-panel) .table__container {
-  display: contents;
 }
 
 :host(.mh-sm) {
@@ -75,12 +71,12 @@
     }
 
     ::slotted(*) {
-      margin-inline: 1.5rem;
+      margin-inline: 1.5rem !important;
     }
+
     ::slotted(table) {
       overflow: visible !important;
       margin-inline: 1.5rem;
-      margin-bottom: 1.5rem !important;
       width: var(--table-width, calc(100% - 3rem)) !important;
       display: block;
     }
@@ -93,27 +89,6 @@
         display: none !important;
       }
     }
-  }
-}
-/* #endregion */
-
-/* #region CTA column */
-@container (width > 23.4375em) {
-  :host {
-    --cta-width: 8rem;
-  }
-
-  :host(.table--loading) {
-    --cta-width: 1.5rem !important;
-  }
-
-  .table--cta {
-    position: relative;
-  }
-
-  .table--cta .table__wrapper {
-    overflow-y: hidden;
-    margin-bottom: 0;
   }
 }
 /* #endregion */

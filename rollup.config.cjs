@@ -69,10 +69,6 @@ Array.from(components).forEach((component) => {
 
   let componentFileName = component;
 
-  if (componentFileName == "table-no-submit" || componentFileName == "table-submit" || componentFileName == "table-ajax"){
-    componentFileName = "table";
-  }
-  
   if (componentFileName == "std-address-lookup"){
     componentFileName = "address-lookup";
   }

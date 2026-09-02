@@ -60,17 +60,15 @@ fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
 
         if(component == "table"){
 
-          exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-no-submit compiled`);
+          exec(`rollup --environment COMPONENT:table-basic --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-basic compiled`);
 
-          exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-submit compiled`);
+          exec(`rollup --environment COMPONENT:table-advanced --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-advanced compiled`);
 
           exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
           console.log(`table-ajax compiled`);
         }
-
-
 
         prevComp = component;
         clearTimeout(compTimeout);
@@ -102,24 +100,11 @@ fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
 
       let component = filename.split('.')[0];
 
-      if (stat.isFile() && component !== prevComp && !filename.endsWith('.preload.scss') && !filename.endsWith('.global.scss')) {
+      if (stat.isFile() && component !== prevComp) {
         
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
         console.log(`${filename} changed`);
-
-
-        if(component == "table"){
-
-          exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-no-submit compiled`);
-
-          exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-submit compiled`);
-
-          exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-ajax compiled`);
-        }
 
         prevComp = component;
         clearTimeout(sassCompTimeout);

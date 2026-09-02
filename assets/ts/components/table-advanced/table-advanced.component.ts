@@ -1,19 +1,13 @@
 import {
-  moveAttributesToComponents,
+  tableHTML,
   findForm,
+  findActionbar,
   setupBasicTable,
   setupExpandedTable,
   setupAdvancedTable,
-  paginateRows,
-  setupAjaxTable,
-  loadAjaxTable,
-  paginateTable,
 } from '../../modules/table';
 
-
-
-
-class iamTableBasic extends HTMLElement {
+class iamTableAdvanced extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -25,104 +19,36 @@ class iamTableBasic extends HTMLElement {
     const loadExtraCSS = `@import "${assetLocation}/css/components/table-advanced.global.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = `
+    template.innerHTML = /* HTML */`
     <style>
     ${loadCSS}
 
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="table__container">
-      <slot name="before"></slot>
-      <div class="table--cta">
-        <div class="table__wrapper">
-          <slot></slot>
-        </div>
-      </div>
-      <iam-pagination part="pagination" class="pagination--table" ></iam-pagination>
-    </div>
+    ${tableHTML}
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if (!document.getElementById('tableExtras')) {
-      document.head.insertAdjacentHTML('beforeend', `<style id="tableExtras">${loadExtraCSS}</style>`);
+    if (!document.getElementById('tableAdvancedExtras')) {
+      document.querySelectorAll('#tableBasicExtras, #tableExtras').forEach((el) => el.remove());
+      document.head.insertAdjacentHTML('beforeend', `<style id="tableAdvancedExtras">${loadExtraCSS}</style>`);
     }
   }
 
   connectedCallback(): void {
-    const params = new URLSearchParams(window.location.search);
 
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
-
     const form = findForm(this, table);
+    const actionbar = findActionbar(this, form);
+    const savedTableBody = table.querySelector('tbody').cloneNode(true); // Used for the sort functionality to reset the table to its original state
 
-    const savedTableBody = table.querySelector('tbody').cloneNode(true);
-
-    if (params.has('page')) this.setAttribute('data-page', params.get('page'));
-    if (params.has('show')) this.setAttribute('data-show', params.get('show'));
-
-    if (params.has('page')) pagination.setAttribute('data-page', params.get('page'));
-    if (params.has('show')) pagination.setAttribute('data-show', params.get('show'));
-
-    moveAttributesToComponents(this);
-
-    setupBasicTable(this, table, form, pagination);
-    setupExpandedTable(this, table, form, pagination, savedTableBody);
-    setupAdvancedTable(this, table, form, pagination);
-
-    if (this.hasAttribute('data-submit') && form) {
-
-      form.setAttribute('method', 'get');
-
-      if (actionbar) {
-        actionbar.addEventListener('change', (event) => {
-          form.submit();
-        });
-      }
-
-      paginateTable(this, table, form, pagination, () => {
-        form.submit();
-      });
-    }
-
-    if (this.hasAttribute('data-ajax')) {
-      setupAjaxTable(this, table, form, pagination);
-      paginateTable(this, table, form, pagination, () => {
-        loadAjaxTable(this, table, form, pagination);
-      });
-    } else {
-      paginateRows(this);
-      paginateTable(this, table, form, pagination, () => {
-        paginateRows(this);
-      });
-    }
-
-
-    pagination.addEventListener('update-show', (event) => {
-      const show = event.detail.show;
-
-      const updateEvent = new CustomEvent('update-show', { detail: { show: show } });
-      this.dispatchEvent(updateEvent);
-
-      updateAttributes(this, pagination);
-    });
-
-    pagination.addEventListener('update-page', (event) => {
-      const page = event.detail.page;
-
-      const updateEvent = new CustomEvent('update-page', { detail: { page: page } });
-      this.dispatchEvent(updateEvent);
-
-      updateAttributes(this, pagination);
-    });
-
-    // For when the table contents is updated with an ajax call
-    this.addEventListener('update-table', (event) => {
-      setupBasicTable(this, table, form, pagination);
-      setupExpandedTable(this, table, form, pagination, savedTableBody);
-    });
+    actionbar.setAttribute('slot', 'before');
+    setupBasicTable(this, table, pagination, form);
+    setupExpandedTable(this, table, form, actionbar);
+    setupAdvancedTable(this, table, pagination, form, savedTableBody); /* pagination and sorting is handled by the basic and expanded table setup functions */
   }
 }
 
-export default iamTableBasic;
+export default iamTableAdvanced;

@@ -4,18 +4,177 @@
 $selector: 'iam-table-ajax, iam-table-advanced';
 
 
+@layer components {
 
-/* #region column buttons */
+// #region Advanced table actionbar overrides
+:is(#{$selector}) {
+
+  & > iam-actionbar {
+    --border-radius: 0.5rem!important;
+    margin: 0 0 0 0!important;
+    border: 1px solid var(--colour-light)!important;
+
+    border-top-left-radius: var(--border-radius)!important;
+    border-top-right-radius: var(--border-radius)!important;
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+  }
+}
+// #endregion
+
+/* #region table headers with a sort button or a filter button */
+:is(#{$selector}):has(th[data-sort], th[data-filters]) {
+  
+  thead tr {
+    
+    --row-bg: var(--colour-light);
+
+    th {
+      padding-block: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    :is(th[data-sort], th[data-filters]) {
+      
+      white-space: nowrap;
+
+      .th__content {
+        display: contents;
+      }
+
+      .btn {
+        font-size: 0.8em;
+        line-height: 1.2em;
+        margin-block: -.5em !important;
+        margin-left: 0.1em !important;
+      }
+
+      .btn:not(:hover,:focus-within) {
+        background: transparent!important;
+        border: none!important;
+        outline: none!important;
+      }
+
+      &:has(.fa-filter) {
+        padding-right: 4rem!important;
+      }
+      .btn:has(.fa-filter) {
+        
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 2rem;
+        margin: 0 !important;
+      }
+    }
+  }
+}
+/* #endregion */
+
+/* #region sort by column header */
 
 :is(#{$selector}) {
-  background-color: red;
+  
+  th[data-sort] .btn {
 
-  @container (width < 23.4375em) {
-    tbody tr td:last-child {
-      display: block !important;
+    --fa-primary-opacity: 1;
+    --fa-secondary-opacity: 1;
+  }
+
+  th[data-sort]:not([data-order-by]) .btn:is(:hover,:focus-within) {
+    --fa-primary-opacity: 1;
+    --fa-secondary-opacity: 0.5;
+  }
+
+  th[data-order-by="asc"] .btn {
+    --fa-primary-opacity: 1;
+    --fa-secondary-opacity: 0.1;
+  }
+  
+  th[data-order-by="desc"] .btn {
+    --fa-primary-opacity: 0.1;
+    --fa-secondary-opacity: 1;
+  }
+  
+  th[data-sort][data-order-by="asc"] .btn:is(:hover,:focus-within) {
+    --fa-primary-opacity: 0.5;
+    --fa-secondary-opacity: 1;
+  }
+  th[data-sort][data-order-by="desc"] .btn:is(:hover,:focus-within) {
+    --fa-primary-opacity: 0.5;
+    --fa-secondary-opacity: 0.5;
+  }
+}
+
+/* #endregion */
+
+/* #region hide columns */
+@for $i from 1 through 30 {
+  :is(#{$selector}) [data-hide-col#{$i}] + table :is(thead, tbody) :is(th, td):nth-child(#{$i}) {
+    display: none;
+  }
+}
+/* #endregion */
+
+/* #region Filter indicator */
+:is(#{$selector}) [data-filtered] {
+
+  [data-filter-btn]{
+    position: relative;
+    overflow: visible;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0!important;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: var(--colour-info);
     }
   }
 }
 
-
 /* #endregion */
+
+/* #region headiner divider */
+.th__divider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  display: inline-block;
+  width: 1px;
+  height: 1.5rem;
+  background-color: var(--colour-muted);
+}
+
+:is(#{$selector}) :is(th,td):has(+:is(.th--fixed,.td--fixed):last-child) {
+  .th__divider {
+    display: none;
+  }
+}
+/* #endregion */
+
+/* #region Filter dialogs */
+:is(#{$selector}) .dialog--inline-filter {
+
+  min-height: auto;
+
+  inset: auto;
+  top: anchor(bottom) !important;
+  right: anchor(right) !important;
+  min-width: 10rem;
+  width: calc(anchor-size(width) + 2rem)!important;
+  max-width: 20rem;
+  position: fixed;
+}
+
+:is(#{$selector}) .dialog--inline-filter::backdrop {
+  background: transparent!important;
+  backdrop-filter: none!important;
+}
+/* #endregion */
+}

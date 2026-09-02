@@ -1,12 +1,12 @@
 import {
+  tableHTML,
   setupBasicTable,
   findForm,
+  findActionbar,
   setupExpandedTable,
+  setupAdvancedTable,
   setupAjaxTable,
-  paginateTable,
-  loadAjaxTable,
 } from '../../modules/table';
-import iamMenu from '../menu/menu.component';
 
 class iamTableAjax extends HTMLElement {
   constructor() {
@@ -16,8 +16,8 @@ class iamTableAjax extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    const loadCSS = `@import "${assetLocation}/css/components/table.component.css";`;
-    const loadExtraCSS = `@import "${assetLocation}/css/components/table.global.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/table-ajax.component.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/table-ajax.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -26,45 +26,41 @@ class iamTableAjax extends HTMLElement {
 
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="table__container">
-      <slot name="before"></slot>
-      <div class="table--cta">
-        <div class="table__wrapper">
-          <slot></slot>
-        </div>
-      </div>
-      <iam-pagination part="pagination" class="pagination--table" ${this.hasAttribute('data-page') ? `data-page="${this.getAttribute('data-page')}"` : ''} ></iam-pagination>
-    </div>
+    ${tableHTML}
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if (!document.getElementById('tableSingleExtras') && !document.getElementById('tableExtras')) {
-      document.head.insertAdjacentHTML('beforeend', `<style id="tableSingleExtras">${loadExtraCSS}</style>`);
+    if (!document.getElementById('tableAdvancedExtras')) {
+      document.querySelectorAll('#tableBasicExtras, #tableExtras').forEach((el) => el.remove());
+      document.head.insertAdjacentHTML('beforeend', `<style id="tableAdvancedExtras">${loadExtraCSS}</style>`);
     }
   }
 
   connectedCallback(): void {
+    const params = new URLSearchParams(window.location.search);
+
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
-
     const form = findForm(this, table);
+    const actionbar = findActionbar(this, form);
 
-    const assetLocation = document.body.hasAttribute('data-assets-location')
-      ? document.body.getAttribute('data-assets-location')
-      : '/assets';
-    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
+    const savedTableBody = table.querySelector('tbody').cloneNode(true); // Used for the sort functionality to reset the table to its original state
 
-    setupBasicTable(this, table, form, pagination);
+    if (params.has('page')) this.setAttribute('data-page', params.get('page'));
+    if (params.has('show')) this.setAttribute('data-show', params.get('show'));
 
-    setupExpandedTable(this, table, form, pagination);
+    if (params.has('page')) pagination.setAttribute('data-page', params.get('page'));
+    if (params.has('show')) pagination.setAttribute('data-show', params.get('show'));
 
-    setupAjaxTable(this, table, form, pagination);
+    actionbar.setAttribute('slot', 'before');
+    setupBasicTable(this, table, pagination, form);
+    setupExpandedTable(this, table, form);
+    setupAdvancedTable(this, table, pagination, form, savedTableBody); /* pagination and sorting is handled by the basic and expanded table setup functions */
 
-    paginateTable(this, table, form, pagination, () => {
-      loadAjaxTable(this, table, form, pagination);
-    });
+    setupAjaxTable(this, table, pagination, form);
   }
 }
+
 
 export default iamTableAjax;

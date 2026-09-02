@@ -83,7 +83,7 @@
     <h2>Table components</h2>
 
 
-    <div class="sub-grid mb-2">
+    <div class="sub-grid mb-5">
       <a
         :href="item.link"
         :title="`View the documentation for the ${item.title} component`"
@@ -93,12 +93,6 @@
         <IndexCard :item="item" />
       </a>
     </div>
-    <details open class="mb-5">
-      <summary>View the differences between table components</summary>
-
-      <TableFeatures></TableFeatures>
-    </details>
-
 
     <h2>Chart components</h2>
 
