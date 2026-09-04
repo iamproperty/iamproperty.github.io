@@ -18,25 +18,39 @@ class iamSTDNav extends HTMLElement {
       this.getAttribute('data-sso-subject') == null
     ) {
       if (this.hasAttribute('slot') && this.getAttribute('slot') == 'secondary') {
-        this.outerHTML = `<a href="https://my.iamproperty.com" slot="secondary">iamproperty</a>
-<a href="https://crm.iamproperty.com/MyDay" slot="secondary">CRM</a>
-<a href="https://my.iamproperty.com/ic/dashboard" slot="secondary">movebutler</a>
-<a href="https://my.iamproperty.com/auction" slot="secondary">iamsold</a>`;
+        const env = this.hasAttribute('data-env') ? this.getAttribute('data-env') : 'production';
+        const envMap = {
+          production: {
+            iap: 'https://my.iamproperty.com',
+            crm: 'https://crm.iamproperty.com',
+            mtk: 'frontend.informationworks.co.uk'
+          },
+          test: {
+            iap: 'https://my.eco.iamproperty.group',
+            crm: 'https://dev.vtopenview.com',
+            mtk: 'frontend-test.informationworks.co.uk'
+          }
+        };
+
+        this.outerHTML = `<a href="${envMap[env].iap}" slot="secondary">iamproperty</a>
+                          <a href="${envMap[env].crm}/MyDay" slot="secondary">CRM</a>
+                          <a href="${envMap[env].iap}/ic/dashboard" slot="secondary">movebutler</a>
+                          <a href="${envMap[env].iap}/auction" slot="secondary">iamsold</a>`;
 
         nav.querySelector(`a[href*='${window.location.hostname}'][slot="secondary"]`)?.classList.add('selected');
 
         /* For local environments */
         if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'movebutler')
           nav
-            .querySelector(`a[href='https://my.iamproperty.com/ic/dashboard'][slot="secondary"]`)
+            .querySelector(`a[href='${envMap[env].iap}/ic/dashboard'][slot="secondary"]`)
             ?.classList.add('selected');
 
         if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'crm')
-          nav.querySelector(`a[href='https://crm.iamproperty.com/MyDay'][slot="secondary"]`)?.classList.add('selected');
+          nav.querySelector(`a[href='${envMap[env].crm}/MyDay'][slot="secondary"]`)?.classList.add('selected');
 
         if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'iamsold')
           nav
-            .querySelector(`a[href='https://my.iamproperty.com/auction'][slot="secondary"]`)
+            .querySelector(`a[href='${envMap[env].iap}/auction'][slot="secondary"]`)
             ?.classList.add('selected');
       }
       return;
