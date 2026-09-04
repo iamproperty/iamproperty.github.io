@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import Table from '@/components/Table/TableNoSubmit.vue';
+  import Table from '@/components/Table/Table.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Menu from '@/components/Menu/Menu.vue';
   import Modal from '@/components/Modal/Modal.vue';
