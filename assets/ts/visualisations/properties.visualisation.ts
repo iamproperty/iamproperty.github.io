@@ -45,19 +45,50 @@ class iamVisProperties extends HTMLElement {
 
     countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
 
-    table?.setAttribute('id','properties-table');
+    if (table){
 
-    if (tableWrapper && table)
+      table.setAttribute('id','properties-table');
       tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}</iam-table-advanced>`;
-
-    if(mapWrapper)
       mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
+    }
 
-    const tableAdvanced = this.shadowRoot?.querySelector('iam-table-advanced');
-    const map = this.shadowRoot?.querySelector('iam-map');
+
+    //const tableAdvanced = this.shadowRoot?.querySelector('iam-table-advanced');
+    //const map = this.shadowRoot?.querySelector('iam-map');
+
+        // HTML Observer
+    const htmlUpdated = (mutationList: any, observer: any): void => {
+      observer.disconnect();
+
+      console.log(mutationList);
+
+      for (const mutation of mutationList) {
+        if (
+          mutation.type == 'characterData' ||
+          (mutation.type == 'childList' && mutation.addedNodes.length) ||
+          mutation.type === 'attributes'
+        ) {
+
+
+          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
+
+            const table = this.querySelector('table');
+            table.setAttribute('id','properties-table');
+            tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}</iam-table-advanced>`;
+            mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
+          }
+
+        }
+      }
+
+
+      observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
+    };
+
+    const observer = new MutationObserver(htmlUpdated);
+    observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
   }
 }
-
 
 document.addEventListener('DOMContentLoaded', (): void => {
 
