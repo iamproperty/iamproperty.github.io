@@ -31,6 +31,10 @@
       }
     }
 
+    .bg-primary {
+      color: light-dark(var(--colour-white), #00313c);
+    }
+
     &:empty {
       display: none;
     }
