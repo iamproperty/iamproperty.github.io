@@ -55,7 +55,7 @@ export const findForm = (component, table): HTMLElement => {
   } else if (component.querySelector('form')) {
     form = component.querySelector('form');
   } else {
-    table.parentNode.insertBefore(form, table.nextSibling);
+    table?.parentNode?.insertBefore(form, table.nextSibling);
   }
 
   if (component.hasAttribute('data-ajax')) {
@@ -81,6 +81,8 @@ export const findActionbar = (component, form): HTMLElement => {
 
 // #region Basic table fnctions
 export const setupBasicTable = (component, table, pagination, form): void => {
+
+  component.classList.add('table--component');
 
   const params = new URLSearchParams(window.location.search);
   const tableWrapper = component.shadowRoot.querySelector('.table__wrapper');

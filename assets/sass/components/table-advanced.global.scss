@@ -1,7 +1,7 @@
 @use '../_func' as *;
 @use './table.global';
 
-$selector: 'iam-table-ajax, iam-table-advanced';
+$selector: '.table--component';
 
 @layer components {
 

@@ -1,6 +1,6 @@
 @use '../_func' as *;
 
-$selector: 'iam-table, iam-table-basic, iam-table-ajax, iam-table-advanced';
+$selector: '.table--component';
 
 @layer components {
 /* #region Basic table stuff */
