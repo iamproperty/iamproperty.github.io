@@ -11,17 +11,10 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
 
-
-
   import desktopImg from '../../img/table/tables-desktop.png';
   import tabletImg from '../../img/table/tables-tablet.png';
   import mobileImg from '../../img/table/tables-mobile.png';
   import cardsImg from '../../img/table/tables-cards.png';
-
-  import vertical from '../../img/table/tables-vertical.png';
-  import cta from '../../img/table/tables-cta.png';
-  import buttons from '../../img/table/tables-button.png';
-
 
 </script>
 

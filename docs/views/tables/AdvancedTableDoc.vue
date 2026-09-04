@@ -16,27 +16,12 @@
   import desktopImg from '../../img/table/tables-desktop.png';
   import tabletImg from '../../img/table/tables-tablet.png';
   import mobileImg from '../../img/table/tables-mobile.png';
-
+  import TableEvents from './components/TableEvents.vue';
   import TableIntegration from './components/TableIntegration.vue';
 </script>
 
 <template>
-  <TrackEvents
-    selector="iam-table,iam-table-basic,iam-table-no-submit,iam-table-submit,iam-ajax"
-    :events="[
-      'update-show',
-      'update-page',
-      'row-expanded',
-      'row-selected',
-      'all-rows-selected',
-      'all-rows-unselected',
-      'sort-by-heading',
-      'search-submit',
-      'update-show',
-      'update-page',
-      'row-expmded',
-    ]"
-  ></TrackEvents>
+  <TableEvents></TableEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Advanced table</h1>
@@ -60,8 +45,8 @@
           <thead>
             <tr>
               <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
-              <th data-sort data-filters data-format="date">Date listed</th>
-              <th data-sort data-filters>Current list price</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
+              <th data-sort data-filters data-format="price">Current list price</th>
               <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
               <th data-sort>Weeks on market</th>
               <th class="th--fixed"></th>
@@ -70,15 +55,15 @@
           <tbody>
             <tr>
               <td>59 The Glen, NE68 3LS</td>
-              <td>27/06/26</td>
-              <td>£300,000</td>
+              <td>23-04-26</td>
+              <td>600000</td>
               <td>Heaton</td>
-              <td>13 weeks</td>
+              <td>11 weeks</td>
               <td><a href="/">View property</a></td>
             </tr>
             <tr>
               <td>59 Oak Street, NE68 3LS</td>
-              <td>27/06/26</td>
+              <td>27/04/2026</td>
               <td>£300,000</td>
               <td>Heaton</td>
               <td>13 weeks</td>
@@ -86,18 +71,18 @@
             </tr>
             <tr>
               <td>59 The South Gate Wood, NE68 3LS</td>
-              <td>27/06/26</td>
-              <td>£300,000</td>
-              <td>Heaton</td>
-              <td>13 weeks</td>
+              <td>28/04/2026</td>
+              <td>£500,000</td>
+              <td>Cramlington</td>
+              <td>213 weeks</td>
               <td><a href="/">View property</a></td>
             </tr>
             <tr>
               <td>59 Oak Street, NE68 3LS</td>
-              <td>27/06/26</td>
-              <td>£300,000</td>
-              <td>Heaton</td>
-              <td>13 weeks</td>
+              <td>27/06/2026</td>
+              <td>£1,300,000</td>
+              <td>Gosforth</td>
+              <td>21 days 3 weeks</td>
               <td><a href="/">View property</a></td>
             </tr>
           </tbody>
@@ -157,7 +142,7 @@
           <tbody>
             <tr>
               <td>59 The Glen, NE68 3LS</td>
-              <td>27/06/26</td>
+              <td>27/06/2026</td>
               <td>£300,000</td>
               <td>Heaton</td>
               <td>13 weeks</td>
@@ -165,7 +150,7 @@
             </tr>
             <tr>
               <td>59 Oak Street, NE68 3LS</td>
-              <td>27/06/26</td>
+              <td>27/06/2026</td>
               <td>£300,000</td>
               <td>Gosforth</td>
               <td>13 weeks</td>
@@ -173,7 +158,7 @@
             </tr>
             <tr>
               <td>59 The South Gate Wood, NE68 3LS</td>
-              <td>27/06/26</td>
+              <td>27/06/2026</td>
               <td>£300,000</td>
               <td>Heaton</td>
               <td>13 weeks</td>
@@ -181,7 +166,7 @@
             </tr>
             <tr>
               <td>59 Oak Street, NE68 3LS</td>
-              <td>27/06/26</td>
+              <td>27/06/2026</td>
               <td>£300,000</td>
               <td>Heaton</td>
               <td>13 weeks</td>

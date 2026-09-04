@@ -3,7 +3,6 @@
 
 $selector: 'iam-table-ajax, iam-table-advanced';
 
-
 @layer components {
 
 // #region Advanced table actionbar overrides
@@ -175,6 +174,11 @@ $selector: 'iam-table-ajax, iam-table-advanced';
 :is(#{$selector}) .dialog--inline-filter::backdrop {
   background: transparent!important;
   backdrop-filter: none!important;
+}
+
+
+:is(#{$selector}) .dialog--inline-filter:not(:has([data-operator] option[value="between"]:checked)) [data-filter-label] + [data-filter-label] {
+  display: none!important;
 }
 /* #endregion */
 }

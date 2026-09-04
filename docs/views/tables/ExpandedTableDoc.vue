@@ -4,7 +4,7 @@
   import Table from '@/components/Table/Table.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
 
-  import TrackEvents from '../TrackEvents.vue';
+  import TableEvents from './components/TableEvents.vue';
 
   import TableIntegration from './components/TableIntegration.vue';
   import Versions from '../Versions.vue';
@@ -14,22 +14,7 @@
 </script>
 
 <template>
-  <TrackEvents
-    selector="iam-table,iam-table-basic,iam-table-no-submit,iam-table-submit,iam-ajax"
-    :events="[
-      'update-show',
-      'update-page',
-      'row-expanded',
-      'row-selected',
-      'all-rows-selected',
-      'all-rows-unselected',
-      'sort-by-heading',
-      'search-submit',
-      'update-show',
-      'update-page',
-      'row-expmded',
-    ]"
-  ></TrackEvents>
+  <TableEvents></TableEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Table</h1>

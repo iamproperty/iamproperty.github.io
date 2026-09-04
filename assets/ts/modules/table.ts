@@ -1,6 +1,7 @@
-import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath } from './helpers.js';
+import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData } from './helpers.js';
 
 export const tableHTML = `<div class="table__container" part="container">
+  <div class="table-filters" part="filters"></div>
   <slot name="before"></slot>
   <div class="table--cta">
     <div class="table__wrapper" part="wrapper">
@@ -11,33 +12,6 @@ export const tableHTML = `<div class="table__container" part="container">
 </div>`;
 
 // #region Helpers
-export const formatCell = (format, cellOutput): any => {
-  switch (format) {
-    case 'datetime':
-      return (
-        new Date(cellOutput).toLocaleDateString('en-gb', {
-          weekday: 'short',
-          year: '2-digit',
-          month: 'long',
-          day: 'numeric',
-        }) +
-        ' ' +
-        new Date(cellOutput).toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' })
-      );
-    case 'date':
-
-      cellOutput = cellOutput.replaceAll('/', '-');
-
-      return new Date(cellOutput).toLocaleDateString('en-gb', {
-        day: 'numeric',
-        month: 'long',
-        year: '2-digit',
-      });
-    case 'capitalise':
-      return (cellOutput = ucfirst(cellOutput));
-  }
-};
-
 const filterFilters = function (form): object {
   const filters = new Object();
 
@@ -151,8 +125,8 @@ export const setupBasicTable = (component, table, pagination, form): void => {
 
 export const fixTablebody = (component, table): void => {
 
-  fixTableCells(table);
   createExpandButton(component, table);
+  fixTableCells(table);
   addMenuButtons(component, table);
   setFixedCellsViaHeaders(table);
   highlightRows(component); // Is this still needed?
@@ -294,9 +268,6 @@ export const paginateRows = (component, table, pagination): void => {
 
   const query = table.classList.contains('table--filtered') ? 'tbody tr.filtered--matched' : 'tbody tr';
 
-  console.log(table);
-  console.log(query);
-
   Array.from(table.querySelectorAll(query)).forEach((row, index) => {
 
     matched++;
@@ -366,7 +337,7 @@ export const fixTableCells = (table): void => {
 
         if (heading.hasAttribute('data-format')) {
           cell.setAttribute('data-format', heading.getAttribute('data-format'));
-          cell.innerHTML = formatCell(heading.getAttribute('data-format'), cell.textContent.trim()); //Make sure date format is consistent
+          cell.innerHTML = formatData(heading.getAttribute('data-format'), cell.textContent.trim()); //Make sure date format is consistent
         }
 
         if (statuses.includes(cell.textContent.trim().toLowerCase())) {
@@ -590,7 +561,7 @@ export const createSearchDataList = (component, table): void => {
     .join('')}`;
 };
 
-export const sortTable = (table, form, savedTableBody): void | boolean => {
+export const sortTable = (component, table, form, savedTableBody): void | boolean => {
   if (form.getAttribute('data-ajax')) {
     return false;
   }
@@ -610,14 +581,14 @@ export const sortTable = (table, form, savedTableBody): void | boolean => {
 
   if (!sortBy) {
     tbody.innerHTML = savedTableBody.innerHTML;
-    fixTableCells(table);
+    fixTablebody(component, table);
     return false;
   }
 
-  sortTableByValues(table, sortBy, order, format);
+  sortTableByValues(component, table, sortBy, order, format);
 };
 
-export const sortTableByValues = (table, sortBy, order, format = ''): void => {
+export const sortTableByValues = (component, table, sortBy, order, format = ''): void => {
   const tbody = table.querySelector('tbody');
 
   let orderArray = [];
@@ -641,13 +612,17 @@ export const sortTableByValues = (table, sortBy, order, format = ''): void => {
       rowIndex = orderArray.indexOf(rowIndex);
     }
 
-    if (isNumeric(rowIndex)) {
-      rowIndex = zeroPad(rowIndex, 10);
-    }
 
     // If the sort format is date then lets transform the index to a sortable date (this is never displayed)
     if (format && format == 'date') {
-      rowIndex = new Date(rowIndex);
+      rowIndex = new Date(prepareData('date', rowIndex));
+    }
+    else if (format && format == 'price') {
+      rowIndex = prepareData('price', rowIndex);
+    }
+
+    if (!isNaN(parseFloat(rowIndex))) { // Check if the rowIndex is numeric or can be converted to a number i.e. starts with a number like "13 weeks" or "5 days"
+      rowIndex = zeroPad(parseFloat(rowIndex), 10);
     }
 
     const dataRow = {
@@ -657,8 +632,11 @@ export const sortTableByValues = (table, sortBy, order, format = ''): void => {
     tableArr.push(dataRow);
   });
 
-  // Sort array alphabetically
-  tableArr.sort((a, b) => (a.index > b.index ? 1 : -1));
+  if (format && format == 'date')
+    tableArr.sort((a, b) => a.index.getTime() - b.index.getTime());
+  else
+    tableArr.sort((a, b) => (a.index > b.index ? 1 : -1)); // Sort array alphabetically
+
 
   // Reverse if descending
   if (order == 'descending' || order == 'desc') {
@@ -840,7 +818,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
       form.classList.remove('processing');
 
       if (!form.hasAttribute('data-submit')) {
-        sortTable(table, form, savedTableBody);
+        sortTable(component, table, form, savedTableBody);
       }
 
       formSubmit(event);
@@ -961,11 +939,11 @@ export const filterTable = (component, table, form, pagination): void => {
 
         // Dynamic values
         if (filter && filter == '$today') {
-          filter = formatCell('date', new Date());
+          filter = formatData('date', new Date());
         } else if (filter && filter == '$yesterday') {
           const yesterday = new Date();
           yesterday.setDate(yesterday.getDate() - 1);
-          filter = formatCell('date', yesterday);
+          filter = formatData('date', yesterday);
         } else if (filter && (filter == '$thisWeek' || filter == '$lastWeek')) {
           const today = new Date();
           const mondayThisWeek = new Date(today.setDate(today.getDate() - (today.getDay() - 1)));
@@ -1144,6 +1122,7 @@ export const setupAdvancedTable = (component, table, pagination, form, savedTabl
   table.querySelectorAll('thead tr th[data-sort] [data-sort-btn]').forEach((btn) => {
 
     btn.addEventListener('click', (event) => {
+      event.stopPropagation();
 
       const heading = event.target.closest('th[data-sort]');
       sortViaHeader(component, table, heading, savedTableBody);
@@ -1267,7 +1246,7 @@ export const sortViaHeader = (component, table, heading, savedTableBody): void =
     const order = heading.getAttribute('data-order-by');
     const format = heading.getAttribute('data-format') ?? '';
 
-    sortTableByValues(table, sortBy, order, format);
+    sortTableByValues(component, table, sortBy, order, format);
   }
 };
 
@@ -1328,7 +1307,12 @@ export const updateHeadingFilters = (heading, dialog): void => {
   filters.forEach((filter, index) => {
 
     filters[index].operator = dialog.querySelector(`[name="filter-${index}-operator"]`) ? dialog.querySelector(`[name="filter-${index}-operator"]`).value : null;
+
     filters[index].value = dialog.querySelector(`[name="filter-${index}"]`) ? dialog.querySelector(`[name="filter-${index}"]`).value : null;
+
+    if(filters[index].operator?.toLowerCase() == 'between'){
+      filters[index].value = `${dialog.querySelector(`[name="filter-${index}"]`).value},${dialog.querySelector(`[name="filter-${index}-2"]`).value}`;
+    }
   });
 
   heading.dataset.filters = JSON.stringify(filters);
@@ -1377,32 +1361,39 @@ export const createFilterPopover = (component, table, heading): void => {
 
   filters.forEach((filter, index) => {
 
+
     const filterType = filter.type ?? 'text';
-    const filterOperator = filter.operator ?? 'Contains';
+    let filterOperator = filter.operator ?? 'Contains';
     const filterFieldset = document.createElement("fieldset");
-    const filterOptions = filter.options && Array.isArray(filter.options) ? filter.options : null;
+    const filterOptions = filter.options && Array.isArray(filter.options) && filterType != 'date' ? filter.options : null;
 
     // #region Create the operators select
     let filterOperators = filter.operators ?? ['Contains','Does not contain', 'Equals', 'Does not equal', 'Begins with', 'Ends with'];
 
-    if(filterType == 'date' && !filter.operators)
+    if(filterType == 'date' && !filter.operators){
       filterOperators = ['Equals', 'Does not equal','Before','After','Between'];
+      filterOperator = filter.operator ?? 'Equals';
+    }
 
     if(filterType == 'select' && !filter.operators)
-      filterOperators = null;
+      filterOperators = ['Equals'];
 
-    if(filterOperators && Array.isArray(filterOperators)){
+    if(filterOperators && Array.isArray(filterOperators) && filterOperators.length == 1 && filterOperators[0].toLowerCase() == 'equals'){
+      filterFieldset.insertAdjacentHTML('beforeend',
+      /* HTML */`<input type="hidden" name="filter-${index}-operator" data-operator value="${filterOperators[0].toLowerCase()}">`);
+    }
+    else if(filterOperators && Array.isArray(filterOperators)){
 
       let operatorsOptions = '';
 
       filterOperators.forEach(operator => {
-        operatorsOptions += `<option ${ operator == filterOperator ? 'selected="selected"' : ''}>${operator}</option>`;
+        operatorsOptions += `<option ${ operator.toLowerCase() == filterOperator.toLowerCase() ? 'selected="selected"' : ''} value="${operator.toLowerCase()}">${operator}</option>`;
       });
 
       filterFieldset.insertAdjacentHTML('beforeend',
-      /* HTML */`<label>
+      /* HTML */`<label class="mb-0 text-heading w-100">
         <span class="visually-hidden">Operator</span>
-        <select name="filter-${index}-operator" data-operator>
+        <select name="filter-${index}-operator" class="mt-0 select--minimal" data-operator>
           ${operatorsOptions}
         </select>
       </label>`);
@@ -1412,11 +1403,26 @@ export const createFilterPopover = (component, table, heading): void => {
     // #region Create the filter input
     if(filterType != 'select' ){
 
+      const icon = filterType == 'date' ? 'fa-regular fa-calendar-days' : 'fa-solid fa-magnifying-glass';
       filterFieldset.insertAdjacentHTML('beforeend',
         /* HTML */`
-        <label>
+        <label class="mb-0" data-filter-label>
           <span class="visually-hidden">Filter</span>
-          <input type="${filter.type}" name="filter-${index}" value="${filter.value}" ${filterOptions ? `list="filter-${index}-options"` : ''} />
+          <span>
+          <input type="${filterType}" name="filter-${index}" value="${filter.value ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          <span class="suffix ${icon}"></span>
+          </span>
+        </label>`);
+
+      // This second input is only used when the operator is "between" and the filter type is not a select box
+      filterFieldset.insertAdjacentHTML('beforeend',
+        /* HTML */`
+        <label class="mb-0" data-filter-label>
+          <span class="visually-hidden">Filter</span>
+          <span>
+          <input type="${filterType}" name="filter-${index}-2" value="${filter.value ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          <span class="suffix ${icon}"></span>
+          </span>
         </label>`);
     }
     // #endregion
@@ -1427,15 +1433,18 @@ export const createFilterPopover = (component, table, heading): void => {
       let filterOptionsHTML = '';
 
       filterOptions.forEach(option => {
-
         filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${option.trim()}</option>`;
       });
-
 
       if(filterType != 'select')
         filterFieldset.insertAdjacentHTML('beforeend',`<datalist id="filter-${index}-options">${filterOptionsHTML}</datalist>`);
       else
-        filterFieldset.insertAdjacentHTML('beforeend',`<label><span class="visually-hidden">Filter</span><select name="filter-${index}">${filterOptionsHTML}</select></label>`);
+        filterFieldset.insertAdjacentHTML('beforeend',/* HTML */`<label class="mb-0">
+          <span class="visually-hidden">Filter</span>
+          <select name="filter-${index}" class="mt-0">
+            ${filterOptionsHTML}
+          </select>
+        </label>`);
     }
     // #endregion
 
@@ -1446,14 +1455,19 @@ export const createFilterPopover = (component, table, heading): void => {
   // #region Create buttons
   const filterButtonGroup = document.createElement("div");
   filterButtonGroup.classList.add('btn-group');
+  filterButtonGroup.classList.add('pt-1');
 
   const filterButton = document.createElement("button");
   filterButton.setAttribute('type','button');
   filterButton.classList.add('btn');
   filterButton.classList.add('btn-action');
+  filterButton.classList.add('mb-0');
   filterButton.textContent = 'Update';
 
   filterButton.addEventListener('click', (event) => {
+
+
+    // TODO: Validate the inputs before updating the filters
 
     updateHeadingFilters(heading, filtersPopover);
     filterAdvancedTable(component, table);
@@ -1470,6 +1484,7 @@ export const createFilterPopover = (component, table, heading): void => {
   filterResetButton.setAttribute('type','button');
   filterResetButton.classList.add('btn');
   filterResetButton.classList.add('btn-action');
+  filterResetButton.classList.add('mb-0');
   filterResetButton.textContent = 'Reset';
 
   filterResetButton.addEventListener('click', (event) => {
@@ -1539,6 +1554,8 @@ export const filterAdvancedTable = (component, table): void => {
       table.querySelectorAll(`tbody tr td:nth-child(${columnIndex + 1})`).forEach((cell) => {
 
         const cellValue = cell.textContent ?? '';
+
+        // TODO format the cell value based on the column type (e.g., date, number) if needed
         let matched = false;
 
         switch (filterOperator) {

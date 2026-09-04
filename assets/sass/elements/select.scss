@@ -85,8 +85,9 @@
     font-weight: normal !important;
     margin: -0.4em 0 !important;
     border-radius: 0.25em;
-
-    color: var(--colour-body);
+    width: 100%;
+    box-sizing: border-box;
+    color: inherit;
 
     height: auto;
     cursor: pointer;
@@ -114,7 +115,11 @@
   *:has(> .select--minimal) {
     position: relative;
     display: inline-block !important;
-    width: auto !important;
+
+    &:not(.w-100) {
+      width: auto !important;
+    }
+    
     font-size: inherit !important;
     line-height: 1 !important;
 
@@ -134,7 +139,7 @@
       right: calc(0.8ch);
       pointer-events: none;
 
-      color: var(--colour-body);
+      color: inherit;
     }
   }
   /* #endregion */

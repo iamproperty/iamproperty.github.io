@@ -7,6 +7,9 @@ $selector: 'iam-table-basic, iam-table, iam-table-advanced, iam-table-ajax';
 
 @use '../utilities/display' as *;
 
+:is(#{$selector}) {
+  anchor-scope: all;
+}
 
 /* #region Actionbar inside a table on mobile */
 :is(#{$selector}):not(.table--fullwidth) iam-actionbar {
@@ -116,4 +119,3 @@ $selector: 'iam-table-basic, iam-table, iam-table-advanced, iam-table-ajax';
   /* display: none; */
 }
 /* #endregion */
-
