@@ -143,6 +143,15 @@
                 'secondary' should be used to have the nav created as a secondary bar.
               </td>
             </tr>
+            <tr>
+              <th class="text-nowrap">data-env</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>The data-env attribute can be added in order to make the links in the fallback secondary nav (shown when there is not a valid SSO subject) point to the testing environment instead of production. 
+                This is not required and the environment is set to production by default. 
+              </td>
+            </tr>
           </tbody>
         </table>
       </template>
