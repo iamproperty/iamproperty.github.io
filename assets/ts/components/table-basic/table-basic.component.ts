@@ -1,4 +1,4 @@
-import { setupBasicTable, paginateRows, findForm, paginateTable } from '../../modules/table';
+import { tableHTML, setupBasicTable, findForm, } from '../../modules/table';
 
 class iamTableBasic extends HTMLElement {
   constructor() {
@@ -15,27 +15,14 @@ class iamTableBasic extends HTMLElement {
     template.innerHTML = `
     <style>
     ${loadCSS}
-
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="table__container" part="container">
-      <slot name="before"></slot>
-      <div class="table--cta">
-        <div class="table__wrapper" part="wrapper">
-          <slot></slot>
-        </div>
-      </div>
-      <iam-pagination part="pagination" class="pagination--table" ${this.hasAttribute('data-page') ? `data-page="${this.getAttribute('data-page')}"` : ''} ></iam-pagination>
-    </div>
+    ${tableHTML}
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if (
-      !document.getElementById('tableBasicExtras') &&
-      !document.getElementById('tableSingleExtras') &&
-      !document.getElementById('tableExtras')
-    ) {
+    if (!document.getElementById('tableBasicExtras') && !document.getElementById('tableExtras') && !document.getElementById('tableAdvancedExtras')) {
       document.head.insertAdjacentHTML('beforeend', `<style id="tableBasicExtras">${loadExtraCSS}</style>`);
     }
   }
@@ -45,11 +32,7 @@ class iamTableBasic extends HTMLElement {
     const table = this.querySelector('table');
     const form = findForm(this, table);
 
-    setupBasicTable(this, table, form, pagination);
-
-    paginateTable(this, table, form, pagination, () => {
-      paginateRows(this);
-    });
+    setupBasicTable(this, table, pagination, form);
   }
 }
 

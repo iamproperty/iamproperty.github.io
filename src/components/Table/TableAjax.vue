@@ -6,8 +6,6 @@
 </template>
 
 <script>
-  import { ucfirst, unsnake } from '../../helpers/strings';
-
   export default {
     created() {
       this.$nextTick(function () {

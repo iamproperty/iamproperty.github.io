@@ -2,6 +2,7 @@
 
 
 @use '../foundations/root.scss' as *;
+@use '../foundations/reboot.scss' as *;
 
 @use '../elements/table.element' as *;
 @use '../elements/buttons.scss' as *;
@@ -11,242 +12,20 @@
 @use '../elements/input.scss' as *;
 @use '../elements/forms.scss' as *;
 
+
+@use '../components/table-advanced.global.scss' as *;
+
+
+@use '../utilities/margins';
+@use '../utilities/visually-hidden';
+
+
 :host {
   display: block;
   height: 100%;
   overflow: auto;
 }
 
-[class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
-  font-weight: 400;
+iam-table-advanced {
+  --table__container-display: contents;
 }
-
-dialog {
-  place-self: center;
-  width: 40rem;
-  container-type: inline-size;
-  padding: 1rem;
-
-  // Aligns buttons center on desktop
-  justify-content: center;
-}
-
-/* #region filters and actions */
-#bar {
-  background: var(--colour-light);
-  padding-block: 0.5rem;
-  padding-inline: 0.5rem;
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  position: sticky;
-  top: 0;
-  z-index: 99;
-
-  :is(#filters,#actions) > *,
-  > * {
-    margin: 0!important;
-  }
-
-  :is(#filters,#actions) {
-    
-    margin-left: auto!important;
-    display: flex;    
-    align-items: center;
-    gap: 0.5rem;
-  }
-}
-
-#bar:not(:has([name="selectall"]:checked),:has([name="selectall"]:indeterminate)) #actions {
-
-  display: none;
-}
-
-#bar:is(:has([name="selectall"]:checked),:has([name="selectall"]:indeterminate)) #filters {
-
-  display: none;
-}
-
-.h4:has(.count){
-  
-  //padding-inline: 1.5rem;
-  padding-bottom: 1rem;
-}
-/* #endregion */
-
-#wrapper {
-  padding-inline: 1.5rem;
-}
-
-/* #region map */
-
-#map {
-  //margin-inline: 1.5rem;
-  width: calc(100% - 3rem);
-  height: 25rem; /* 400px */
-  border-radius: 0.25rem;
-  margin-bottom: 2rem;
-}
-/* #endregion */
-
-/* #region popup */
-/* Remove MapLibre's default popup styling */
-.property-popup .maplibregl-popup-content {
-  width: 300px;
-  padding: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #ffffff;
-  color: #172033;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  box-shadow:
-    0 12px 28px rgb(15 23 42 / 20%),
-    0 2px 6px rgb(15 23 42 / 10%);
-}
-
-/* Match the popup arrow to its background */
-.property-popup.maplibregl-popup-anchor-bottom
-  .maplibregl-popup-tip {
-  border-top-color: #ffffff;
-}
-
-.property-popup.maplibregl-popup-anchor-top
-  .maplibregl-popup-tip {
-  border-bottom-color: #ffffff;
-}
-
-.property-popup.maplibregl-popup-anchor-left
-  .maplibregl-popup-tip {
-  border-right-color: #ffffff;
-}
-
-.property-popup.maplibregl-popup-anchor-right
-  .maplibregl-popup-tip {
-  border-left-color: #ffffff;
-}
-
-.popup-card {
-  overflow: hidden;
-}
-
-.popup-image {
-  position: relative;
-  height: 140px;
-  background: #e5e7eb;
-}
-
-.popup-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.popup-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: #2563eb;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.popup-content {
-  padding: 16px;
-}
-
-.popup-price {
-  margin: 0 0 5px;
-  color: #111827;
-  font-size: 21px;
-  font-weight: 750;
-}
-
-.popup-title {
-  margin: 0 0 5px;
-  color: #1f2937;
-  font-size: 15px;
-  line-height: 1.4;
-}
-
-.popup-address {
-  margin: 0;
-  color: #6b7280;
-  font-size: 13px;
-}
-
-.popup-details {
-  display: flex;
-  gap: 12px;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
-  color: #4b5563;
-  font-size: 12px;
-}
-
-.popup-action {
-  width: 100%;
-  margin-top: 15px;
-  padding: 10px 14px;
-  border: 0;
-  border-radius: 7px;
-  background: #2563eb;
-  color: #ffffff;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.popup-action:hover {
-  background: #1d4ed8;
-}
-
-/* Style MapLibre's close button */
-.property-popup .maplibregl-popup-close-button {
-  top: 8px;
-  right: 8px;
-  z-index: 2;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 90%);
-  color: #111827;
-  font-size: 20px;
-  line-height: 28px;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
-}
-
-.property-popup .maplibregl-popup-close-button:hover {
-  background: #ffffff;
-}
-/* #endregion */
-
-
-/* #region Table */
-.table__container {
-  
-  
-  
-}
-
-  .table--cta {
-    position: relative;
-  }
-
-  .table--cta .table__wrapper {
-    overflow-y: hidden;
-    margin-bottom: 0;
-  }
-
-/* #endregion */

@@ -1,0 +1,62 @@
+/*!
+ * Font Awesome Pro 7.3.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license (Commercial License)
+ * Copyright 2026 Fonticons, Inc.
+ */
+@use "sass:string";
+@use 'variables' as v;
+@use 'mixins' as m;
+
+@font-face {
+  font-family: 'Font Awesome Kit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: v.$font-display;
+  src: url('#{v.$font-path}/custom-icons.woff2');
+}
+
+.fak, .#{v.$css-prefix}-kit {
+  --#{v.$css-prefix}-family: 'Font Awesome Kit';
+  --#{v.$css-prefix}-style: 400;
+
+  @include m.fa-icon('Font Awesome Kit');
+}
+
+:is(.fak,.#{v.$css-prefix}-kit,.fakd,.#{v.$css-prefix}-kit-duotone)::before {
+  content: var(#{v.$icon-property})/"";
+}
+
+@supports not (content: ''/'') {
+  :is(.fak,.#{v.$css-prefix}-kit,.fakd,.#{v.$css-prefix}-kit-duotone)::before {
+    content: var(#{v.$icon-property});
+  }
+}
+
+:is(.fak,.#{v.$css-prefix}-kit,.fakd,.#{v.$css-prefix}-kit-duotone)::after {
+  content: var(#{v.$icon-property})/"";
+  font-feature-settings: "ss01";
+}
+
+@supports not (content: ''/'') {
+  :is(.fak,.#{v.$css-prefix}-kit,.fakd,.#{v.$css-prefix}-kit-duotone)::after {
+    content: var(#{v.$icon-property});
+  }
+}
+
+@each $name, $icon in v.$custom-icons {
+  .fak.#{v.$css-prefix}-#{$name}::before,
+  .#{v.$css-prefix}-kit.#{v.$css-prefix}-#{$name}::before {
+    #{v.$icon-property}: string.unquote("\"#{ $icon }\"");
+  }
+}
+
+// convenience mixin for declaring pseudo-elements by CSS variable,
+// including all style-specific font properties and ::before elements.
+@mixin icon($var) {
+  @include m.fa-icon('Font Awesome Kit');
+  @extend .#{v.$css-prefix}-kit;
+
+  &::before {
+    content: string.unquote("\"#{ $var }\"");
+  }
+}

@@ -97,13 +97,6 @@
       }
     }
 
-    :is(iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax, .iam-table) {
-      margin: 0 0 2rem 0;
-      padding: 0;
-      box-shadow: none;
-      background: none;
-    }
-
     & > *:not([class*='mb-']):not(.btn__group):last-child {
       margin-bottom: 0 !important;
     }
@@ -188,12 +181,13 @@
   }
 
   /* #region Has actionbar */
-  .admin-panel:has(iam-actionbar) {
+  .admin-panel:has(> iam-actionbar) {
+
     & > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child {
       margin-bottom: 0;
     }
 
-    iam-actionbar {
+    > iam-actionbar {
       background: var(--colour-canvas);
       margin-inline: calc(var(--padding-x) * -1);
       margin-bottom: var(--padding-top);
@@ -203,20 +197,6 @@
       }
       &:not(:first-child) {
         border-radius: 0;
-      }
-    }
-
-    & > :is(iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax) {
-      overflow: visible;
-
-      &:first-child {
-        margin-top: calc(var(--padding-top) * -1);
-      }
-
-      iam-actionbar {
-        margin-top: 0 !important;
-        border-radius: 0;
-        box-shadow: none;
       }
     }
   }

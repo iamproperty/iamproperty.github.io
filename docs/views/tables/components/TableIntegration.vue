@@ -1,34 +1,118 @@
 <script lang="ts" setup>
   import Integration from '../../Integration.vue';
-  import Versions from '../../Versions.vue';
 
   import { table as events } from '../../../events.js';
+
+  defineProps({
+    componentType: String,
+  });
+
+  const elementTableFeatures = [
+    'Basic styling'
+  ];
+  const basicTableFeatures = [...elementTableFeatures,
+    'Vertical overflow',
+    'CTA fixed column',
+    'Responsive Mobile view',
+    'Expandable rows',
+    'Pagination'
+  ];
+  const expandedTableFeatures = [...basicTableFeatures,
+    'Action bar',
+    'Selectable rows',
+    'Filtering via attached form or actionbar'
+  ];
+  const advancedTableFeatures = [...expandedTableFeatures,
+    'Sorting via column headers',
+    'Filtering via column headers',
+    'Show/hide columns (Coming soon)',
+    'Column reordering (Coming soon)',
+    'Export to CSV',
+  ];
+
+
+  const ajaxTableFeatures = [...advancedTableFeatures,
+    'Ajax data loading',
+  ];
+
+  advancedTableFeatures.splice(advancedTableFeatures.indexOf('Responsive Mobile view'), 1);
+
+  const tableFeatures = [...new Set([...elementTableFeatures,...basicTableFeatures, ...expandedTableFeatures, ...advancedTableFeatures, ...ajaxTableFeatures])];
+
 </script>
 <template>
 
-  <Integration component="carousel" componentName="iam-carousel">
-    <template #web-component>
-      <pre><code>{{`<iam-table>
-<table>
-  <thead>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</iam-table>`}}</code></pre>
-    </template>
-    <template #vue-component>
-      <pre><code>{{`<script setup>import Table from '@/components/Table/Table.vue</script>
+  <Integration :component="componentType" :componentName="'iam-' + componentType" >
+    <template #details>
+      <h4>Component Overview</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Use case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-nowrap"><a href="/elements/tables" class="mb-1">Table element</a></th>
+            <td>A basic table without pagination.</td>
+          </tr>
+          <tr>
+            <th class="text-nowrap"><a href="/tables/basic" class="mb-1">Basic table</a></th>
+            <td>A basic table with pagination and some additional features.</td>
+          </tr>
+          <tr>
+            <th class="text-nowrap"><a href="/tables/default" class="mb-1">Table (Default)</a></th>
+            <td>A table which can use an actionbar or can have an attached form to do filtering.</td>
+          </tr>
+          <tr>
+            <th class="text-nowrap"><a href="/tables/advanced" class="mb-1">Advanced Table</a></th>
+            <td>A table with inline column filtering and sorting.</td>
+          </tr>
+          <tr>
+            <th class="text-nowrap"><a href="/tables/ajax" class="mb-1">Ajax Table</a></th>
+            <td>A table with ajax data loading.</td>
+          </tr>
+        </tbody>
+      </table>
 
-<Table>
+      <p class="note mb-5"><strong>Note:</strong> Each component is an evolution of the previous ones. Features are cumulative, so the advanced table has all the features of the basic and expanded tables. </p>
+
+      <h4>Features comparison</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Table element</th>
+            <th>Basic Table</th>
+            <th>Expanded Table</th>
+            <th>Advanced Table</th>
+            <th>Ajax Table</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="feature in tableFeatures" :key="feature">
+            <th>{{ feature }}{{ feature == 'Responsive Mobile view' ? ' [1]' : '' }}</th>
+            <td><i v-if="elementTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
+            <td><i v-if="basicTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
+            <td><i v-if="expandedTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
+            <td><i v-if="advancedTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
+            <td><i v-if="ajaxTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>[1] Responsive Mobile view is not supported in the Advanced Table or the ajax table that uses the filtering and sorting via the column headers.</p>
+    </template>
+    <template #web-component>
+      <pre><code>{{`<iam-${componentType}>
 <table>
   <thead>
   </thead>
   <tbody>
   </tbody>
 </table>
-</Table>
-`}}</code></pre>
+</iam-${componentType}>`}}</code></pre>
     </template>
 
     <template #attr>
@@ -75,16 +159,14 @@
             </td>
           </tr>
           <tr>
-            <th>data-expand (on each row)</th>
+            <th>data-submit</th>
             <td></td>
             <td>Flag</td>
             <td>No</td>
-            <td>
-              This attribute when added creates a button on desktop for the row to be expanded to show more content.
-            </td>
+            <td>When set will submit the attached or generated form of the table. Causing the page to reload with the form data.</td>
           </tr>
           <tr>
-            <th>data-selectall (on ationbar)</th>
+            <th>data-selectall</th>
             <td></td>
             <td>Flag</td>
             <td>No</td>
@@ -172,36 +254,4 @@
       <span v-html="events"></span>
     </template>
   </Integration>
-  <Versions pdf="/pdfs/tables.pdf">
-    <table>
-      <thead>
-        <tr>
-          <th>Version Control</th>
-          <th>Date</th>
-          <th>Notable updates</th>
-        </tr>
-      </thead>
-      <tbody class="text-body">
-        <tr>
-          <td>V1.2 added</td>
-          <td>07.03.2025</td>
-          <td>Added new variant that allows users to sort the table data via clicking the column headers.</td>
-        </tr>
-        <tr>
-          <td>V1.1 added</td>
-          <td>5.09.2023</td>
-          <td>
-            Added multiple variants to the tables: Default, Expansion, Selection, Overflow, Expansion + Selection,
-            Expansion + Overflow. Added various mobile card states. Added in some rules around behaviours, formatting
-            and dimension.
-          </td>
-        </tr>
-        <tr>
-          <td>V1 added</td>
-          <td>15.05.2023</td>
-          <td>N/A</td>
-        </tr>
-      </tbody>
-    </table>
-  </Versions>
 </template>

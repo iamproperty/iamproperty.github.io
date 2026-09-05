@@ -4,6 +4,7 @@
 @use '../elements/prefix';
 
 @layer components {
+
   @media (prefers-color-scheme: light) {
     :host {
       color-scheme: light;
@@ -17,6 +18,7 @@
       color-scheme: light;
     }
   }
+
 
   :host {
     display: block;
@@ -43,6 +45,7 @@
     border-start-end-radius: 0 !important;
     border-end-end-radius: 0 !important;
     margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   ::slotted(label) {

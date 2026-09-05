@@ -1,565 +1,419 @@
 @use '../_func' as *;
 
-$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax, iam-table-advanced';
-
-/* #region Basic table stuff */
+$selector: '.table--component';
 
 @layer components {
-  :is(#{$selector}) {
-    --hover-background: var(--colour-light);
-    --row-bg: var(--colour-canvas-2);
+/* #region Basic table stuff */
+:is(#{$selector}) {
+  --row-bg: var(--colour-canvas-2);
 
-    table {
-      margin-bottom: 0;
-    }
+  table {
+    margin-bottom: 0;
+  }
 
-    table thead tr th {
-      position: relative;
+
+  table thead tr {
+    background: var(--row-bg, transparent);
+  }
+  
+  table thead tr th {
+    position: relative;
+    color: var(--colour-heading);
+
+    &:not(:last-child) {
       padding-right: 2rem !important;
-      padding-left: 0rem !important;
+    }
+  }
+
+  tbody tr {
+    background: var(--row-bg);
+
+    &:not(.no-hover):is(:hover, :focus-within, .hover) {
+      --row-bg: var(--colour-light);
+    }
+  }
+
+  td {
+    background-color: var(--row-bg);
+    anchor-scope: all;
+  }
+
+  tr td p {
+    min-width: 10rem;
+  }
+
+  :is(td, th) {
+    color: var(--colour-body-default);
+  }
+}
+/* #endregion */
+
+/* #region Tables are only stacked on mobile */
+:is(#{$selector}):not(.table--fullwidth) {
+  td:has([data-expand-button]),
+  .expand-button-heading {
+    display: none;
+  }
+
+  @container (width < 23.4375em) {
+
+    thead {
+      display: none;
     }
 
-    td {
-      background-color: var(--row-bg);
+    tbody {
+      --status-pt: 2.5rem;
+
+      display: block;
+      overflow: visible;
+
+      tr td:first-child {
+        padding-top: 0;
+      }
     }
 
-    tr td p {
-      min-width: 10rem;
-    }
-
-    tbody tr {
+    tr {
+      display: block;
+      position: relative;
+      border: none;
       background: var(--row-bg);
+      padding: var(--wrapper-padding);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+      border-radius: 0.5rem;
+      height: auto;
 
-      &:not(.no-hover):is(:hover, :focus-within, .hover) {
-        --bg-colour-rgb: 238, 238, 238;
-        --row-bg: var(--hover-background);
-        background: var(--row-bg);
+      & + tr {
+        margin-top: 2rem;
+      }
+
+      &:not(.no-hover):is(:hover, :focus, .hover) {
+        --row-bg: var(--colour-canvas-2);
+      }
+    }
+
+    tr:not([data-view='full']) {
+      td:nth-child(4) ~ td:not(.td--fixed) { /* is nth child 4 as the first td contains the expand button */
+        display: none !important;  
       }
     }
 
     :is(td, th) {
-      color: var(--colour-body-default);
-    }
-    /*
-  &[data-expandable] [data-expand-button][aria-expanded] {
-    background-color: transparent;
-  }
-    */
-  }
-  /* #endregion */
+      display: block;
+      border-color: var(--colour-border);
 
-  /* #region Pagination */
-  :is(#{$selector}) table:has(tr.show) tbody tr:not(.show) {
-    display: none !important;
-  }
-  /* #endregion */
+      padding-right: 0;
 
-  /* #region Tables are only stacked on mobile */
-  :is(#{$selector}):not(.table--fullwidth) {
-    td:has([data-expand-button]),
-    .expand-button-heading {
-      display: none;
-    }
-
-    @container (width < 23.4375em) {
-      &:not(.table--fullwidth) {
-        td:has([data-expand-button]) {
-          height: 0;
-          padding: 0;
-          position: relative;
-          display: block !important;
-        }
-        td:has([data-expand-button]) + td {
-          border-top: none !important;
-          padding-top: 0 !important;
-          padding-right: 3rem;
-        }
-        td:has([data-expand-button]) + .td--fixed + td {
-          border-top: none !important;
-        }
-
-        [data-expand-button] {
-          top: 0;
-          right: 0;
-          background: transparent !important;
-          border: none;
-          position: absolute;
-          overflow: hidden;
-          --compact-size: 2rem;
-
-          &:before {
-            --fa: '\f055' !important;
-            font-family: var(--fa-family-classic);
-            display: block !important;
-
-            font-weight: 300 !important;
-            font-size: 1.75rem; /* 28 */
-            line-height: var(--compact-size) !important;
-          }
-
-          &[aria-expanded] {
-            --fa: '\f056' !important;
-          }
-          &[aria-expanded] {
-            &:before {
-              --fa: '\f056' !important;
-              font-weight: 900 !important;
-            }
-          }
-        }
-      }
-    }
-
-    @container (width < 23.4375em) {
-      thead {
-        display: none;
+      &:nth-child(1) {
+        border-top: none;
       }
 
-      tbody {
-        --status-pt: 2.5rem;
-
+      &[data-label]:not([data-label='']):before {
+        content: attr(data-label);
+        color: var(--colour-heading);
+        padding: 0 0 0.375rem 0;
+        margin-bottom: 0;
         display: block;
-        overflow: visible;
-
-        tr td:first-child {
-          padding-top: 0;
-        }
-      }
-
-      tr {
-        display: block;
-        position: relative;
-        border: none;
-        background: var(--row-bg);
-        padding: var(--wrapper-padding);
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-        border-radius: 0.5rem;
-        height: auto;
-
-        & + tr {
-          margin-top: 2rem;
-        }
-
-        &:is(:hover, :focus, .hover) {
-          --row-bg: var(--colour-canvas-2);
-        }
-      }
-
-      td:has([data-expand-button]) {
-        display: block;
-      }
-
-      :is(td, th) {
-        display: block;
-        border-color: var(--colour-border);
-
-        padding-right: 0;
-
-        &:nth-child(1) {
-          border-top: none;
-        }
-
-        &[data-label]:not([data-label='']):before {
-          content: attr(data-label);
-          color: var(--colour-heading);
-          padding: 0 0 0.375rem 0;
-          margin-bottom: 0;
-          display: block;
-          font-weight: bold;
-        }
-      }
-
-      td:first-child::after {
-        top: 1.75rem !important;
-      }
-
-      td::after {
-        top: 2.5rem;
-      }
-
-      .td--fixed {
-        padding-right: 50%;
-      }
-
-      tbody tr td:not(:first-child) {
-        border-top: var(--border-width) solid currentColor;
-        border-color: var(--colour-border) !important;
-      }
-
-      tr:not([data-view='full']):has(p.three-lines) td p {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-      }
-
-      tbody tr:not([data-view='full']) td:not(.td--fixed) + td:not(.td--fixed) + td + td {
-        display: none;
+        font-weight: bold;
       }
     }
-  }
-  /* #endregion */
 
-  /* #region CTA column */
-
-  :is(#{$selector}):not(.table--fullwidth).table--cta {
-    @container (width < 23.4375em) {
-      tbody tr td:last-child {
-        display: block !important;
-      }
-    }
-  }
-
-  :is(#{$selector}).table--cta {
-    @container (width > 23.4375em) {
-      padding-right: calc(var(--wrapper-padding) + 1.5rem) !important;
-
-      tr > th:nth-last-child(2),
-      tr > td:nth-last-child(2) {
-        padding-right: var(--cta-width) !important;
-      }
-
-      tr > *:not(:first-child):last-child {
-        position: absolute;
-        left: calc(100% - var(--cta-width) + 1px);
-        top: auto;
-        background: transparent;
-        width: var(--cta-width);
-        min-height: calc(var(--row-height) - 2px);
-        text-align: right;
-        background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
-        cursor: default;
-        padding-bottom: 0;
-
-        a {
-          white-space: nowrap;
-          padding-right: 0.2rem;
-          padding-bottom: 0;
-          margin: 0;
-        }
-      }
-
-      tbody tr:hover > *:not(:first-child):last-child {
-        background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
-      }
-    }
-  }
-  /* #endregion */
-
-  /* #region Statuses */
-  table {
-    .hide-status:after {
-      display: none;
-    }
-
-    :not(.hide-status):is(
-      [data-content='low'],
-      [data-content='medium'],
-      [data-content='high'],
-      [data-content='unknown'],
-      [data-content='due'],
-      [data-content='overdue'],
-      [data-content='incomplete'],
-      [data-content='requires approval'],
-      [data-content='upcoming'],
-      [data-content='approval required'],
-      [data-content='warning'],
-      [data-content='verified'],
-      [data-content='not started'],
-      [data-content='to do'],
-      [data-content='on track'],
-      [data-content='completed'],
-      [data-content='complete'],
-      [data-content='successful'],
-      [data-content='failed'],
-      .alert-status:not([data-content='0']):not([data-content='']):not(:empty)
-    ) {
+    td:has([data-expand-button]) {
+      height: 0;
+      padding: 0;
       position: relative;
-      padding-left: 1.5rem;
-
-      &::before {
-        margin-left: -1.5rem !important;
-      }
-
-      &:after {
-        font-family: var(--fa-family-classic);
-        position: absolute;
-        top: var(--status-pt, 1rem);
-        left: 0;
-        font-size: 1rem;
-        line-height: 1;
-        height: 1rem;
-        width: 1rem;
-        display: inline-block;
-      }
+      display: block !important;
     }
 
-    [data-content='high']:after {
-      content: '\f325';
-      font-weight: normal;
-      color: var(--colour-danger);
+    tr:not(:has(td:nth-child(5))) td:has([data-expand-button]){
+      display: none !important;   
     }
 
-    [data-content='medium']:after {
-      content: '\f7a4';
-      font-weight: normal;
-      color: var(--colour-warning);
+    td:has([data-expand-button]) + td {
+      border-top: none !important;
+      padding-top: 0 !important;
+      padding-right: 3rem;
     }
 
-    [data-content='low']:after {
-      content: '\e404';
-      font-weight: normal;
-      color: var(--colour-complete);
-    }
-
-    [data-content='unknown']:after {
-      content: '\e404';
-      font-weight: normal;
-      color: var(--colour-muted);
-    }
-
-    :is([data-content='overdue'], [data-content='due'], [data-content='incomplete']):after {
-      content: '\f024';
-      color: var(--colour-danger);
-    }
-
-    :is([data-content='not started'], [data-content='to do'], [data-content='on track']):after {
-      content: '\f024';
-      color: var(--colour-muted);
-    }
-
-    :is(
-      [data-content='requires approval'],
-      [data-content='approval required'],
-      [data-content='action required'],
-      [data-content='upcoming']
-    ):after {
-      content: '\f024';
-      color: var(--colour-warning);
-    }
-
-    :is([data-content='warning']):after {
-      content: '\f071';
-      color: var(--colour-warning);
-    }
-
-    :is(
-      [data-content='manually verified'],
-      [data-content='verified'],
-      [data-content='completed'],
-      [data-content='complete'],
-      [data-content='successful']
-    ):after {
-      content: '\f00c';
-      font-weight: normal;
-      color: var(--colour-complete);
-    }
-
-    :is([data-content='failed']):after {
-      content: '\f00d';
-      font-weight: normal;
-      color: var(--colour-danger);
-    }
-
-    .alert-status:not([data-content='0']):not([data-content='']):not(:empty):after {
-      content: '\f0f3';
-      color: var(--colour-primary);
-    }
-  }
-  /* #endregion */
-
-  /* #region Tables are only stacked on mobile */
-  :is(#{$selector}):not(.table--fullwidth).table--cta {
-    @container (width < 23.4375em) {
-      tbody tr td:last-child {
-        display: block !important;
-      }
-    }
-  }
-
-  /* #endregion */
-
-  /* #region As part of the iam-table component */
-
-  :is(#{$selector}) iam-actionbar {
-    margin: 0 1.5rem 1rem 1.5rem;
-
-    @container (width < 23.4375em) {
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-      border-radius: 0.5rem;
-    }
-  }
-  :is(#{$selector}).table--fullwidth:has(iam-actionbar) {
-    padding-top: 0;
-  }
-  :is(#{$selector}).table--fullwidth iam-actionbar {
-    margin: -2rem -1.5rem 2rem -1.5rem;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  :is(#{$selector}).table--fullwidth iam-actionbar:has(+ table input:checked) {
-    margin: -2rem -1.5rem 2rem -1.5rem;
-    box-shadow: none;
-    border-radius: 0;
-    background-color: #e6eaec;
-  }
-
-  /*  Actionbar */
-  .actionbar__sticky-wrapper {
-    container-type: inline-size;
-
-    @media screen and (min-width: 36em) {
-      padding: 0 !important;
-    }
-  }
-
-  @container (width < 23.4375em) {
-    :is(#{$selector}):is(.actionbar__sticky-wrapper) > .actionbar__sticky {
-      display: block;
-      position: sticky;
-      left: 0;
-      top: calc(var(--sticky-padding) + 1rem);
-      z-index: var(--index-menu);
-      pointer-events: none;
-
-      &:after {
-        content: '';
-        display: block;
-        width: 100%;
-        height: calc(100vh - 6.75rem); /* 68 + 24 + 16 */
-        pointer-events: none;
-      }
-
-      & + * {
-        margin-top: calc(-100vh - -6.75rem);
-      }
-    }
-
-    :is(#{$selector}):is(.actionbar__sticky) > iam-actionbar {
-      pointer-events: all !important;
-      display: block;
+    [data-expand-button] {
+      top: 0;
+      right: 0;
+      background: transparent !important;
       border: none;
-      background: var(--colour-canvas-2);
-      /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11); */
-      border-radius: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  @container (width > 36em) {
-    :is(#{$selector}).table--fullwidth iam-actionbar {
-      margin-left: -1.5rem;
-      margin-right: -1.5rem;
-      margin-top: -2rem;
-      margin-bottom: 2rem;
-    }
-  }
-  /* #endregion */
-
-  /* #region Table with actionbar */
-
-  :is(#{$selector}) {
-    input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
-      padding-left: 0 !important;
-      margin: 0 !important;
-
-      &:before,
-      &:after {
-        top: 0.75rem !important;
-        left: 0.25rem !important;
-        --border-radius: 0.25rem;
-      }
-    }
-
-    td:not(.selectrow) input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
-      &:before,
-      &:after {
-        top: 0 !important;
-        left: 0.25rem !important;
-        --border-radius: 0.25rem;
-      }
-    }
-
-    td:not(.selectrow):has(label:not(.radio--tick) input:is([type='radio'], [type='checkbox'])) + td {
-      border-top: 0;
-    }
-    td:not(.selectrow) label:not(.radio--tick):has(input:is([type='radio'], [type='checkbox'])) {
-      padding-inline: 0;
-      margin-right: 0;
-
-      &:before,
-      &:after {
-        top: 0 !important;
-        left: 0.25rem !important;
-        --border-radius: 0.25rem;
-      }
-    }
-
-    &:has([type='checkbox']:checked) table {
+      position: absolute;
       overflow: hidden;
-    }
-    &:has([type='checkbox']:checked) tr:has([type='checkbox']):not(:has(.tag)) {
-      [type='checkbox'] {
-        width: 100vw;
-        height: 100%;
-        max-height: var(--row-height);
-        max-width: 100vw;
-        cursor: pointer;
-        pointer-events: all;
-        top: 0;
-        margin: 0;
-        margin-top: 0rem;
-        position: absolute;
+      --compact-size: 2rem;
+
+      &:before {
+        --fa: '\f055' !important;
+        font-family: var(--fa-family-classic);
+        display: block !important;
+
+        font-weight: 300 !important;
+        font-size: 1.75rem; /* 28 */
+        line-height: var(--compact-size) !important;
       }
-    }
 
-    tr:has([type='checkbox']:hover, [type='checkbox']:focus):not(:has(.tag)) {
-      --row-bg: #eeeeee;
-    }
-    tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked):not(
-        :has(.tag)
-      ) {
-      --row-bg: #e0e0e0;
-    }
-  }
+      &[aria-expanded] {
+        
+        --fa: '\f056' !important;
 
-  @container (width < 23.4375em) {
-    :is(#{$selector}) {
-      iam-actionbar {
-        background-color: #e6eaec;
-      }
-      .actionbar__sticky + * {
-        margin-top: 0 !important;
-      }
-    }
-
-    :is(#{$selector}) {
-      input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
-        padding-left: 0 !important;
-        margin: 0 !important;
-        min-height: 2rem;
-
-        &:before,
-        &:after {
-          top: 0.25rem !important;
-          left: 0 !important;
+        &:before {
+          --fa: '\f056' !important;
+          font-weight: 900 !important;
         }
       }
+    }
 
-      &:has([type='checkbox']:checked) tr:has([type='checkbox']) {
-        [type='checkbox'] {
-          width: 100%;
-          height: 100%;
-          max-height: 100%;
-          max-width: 100%;
-          margin-top: -2rem;
-        }
-      }
+    td:first-child::after {
+      top: 1.75rem !important;
+    }
+
+    td::after {
+      top: 2.5rem;
+    }
+
+    tbody tr td:not(:first-child) {
+      border-top: var(--border-width) solid currentColor;
+      border-color: var(--colour-border) !important;
+    }
+
+    tr:not([data-view='full']) td p {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
   }
 }
 /* #endregion */
+
+/* #region Expandable rows on tablet and desktop */
+@mixin expandableRow {
+  // Hide the expand button column completely if not needed
+  &:not(:has(td p.three-lines)) td:has([data-expand-button]),
+  &:not(:has(td p.three-lines)) .expand-button-heading {
+    display: none;
+  }
+
+  tr:not(:has(td p.three-lines)) [data-expand-button] {
+    display: none;
+  }
+
+  td:has([data-expand-button]) {
+    padding-right: 0.5rem;
+  }
+
+  tr:not([data-view='full']) td p.three-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+};
+
+:is(#{$selector}).table--fullwidth {
+
+  @include expandableRow;
+}
+
+:is(#{$selector}):not(.table--fullwidth) {
+  @container (width > 23.4375em) {
+    @include expandableRow;
+  }
+}
+/* #endregion */
+
+/* #region fixed columns on tablet and desktop */
+:is(#{$selector}) {
+  @container (width > 23.4375em) {
+
+    :is(.th--fixed, .td--fixed) {
+      position: sticky;
+      left: var(--left-offset, 0px);
+      z-index: 3;
+      min-width: 3.375rem;
+      text-align: left;
+      background: var(--row-bg, var(--colour-canvas-2));
+      background: linear-gradient(270deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
+
+      &:has([open]) {
+        z-index: 4;
+      }
+    }
+
+    :is(.th--fixed, .td--fixed):has(+ :is(.th--fixed, .td--fixed)) {
+      background: var(--row-bg, var(--colour-canvas-2));
+    }
+
+    :is(.th--fixed, .td--fixed) ~ :is(.th--fixed, .td--fixed):not(:last-child) {
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: -1.5rem;
+        width: 1.5rem;
+        height: 100%;
+        background: var(--row-bg, var(--colour-canvas-2));
+      } 
+    }
+
+    // If the fixed columns are right next to each other, don't show the gradient on the left of the second column
+    :is(.th--fixed, .td--fixed) + :is(.th--fixed, .td--fixed):not(:last-child) {
+
+      &::before {
+        display: none;
+      } 
+    }
+
+    :is(.th--fixed, .td--fixed):last-child {
+      left: auto;
+      right: 0;
+      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
+      padding-left: 1.5rem !important;
+    }
+
+    :is(th,td):has(+ :is(.th--fixed, .td--fixed):last-child) {
+
+      padding-right: 0.5rem !important;
+    }
+
+    
+    .dialog__wrapper {
+      z-index: 10;
+    }
+    .dialog__wrapper:has([open]) {
+      z-index: 20;
+    }
+  }
+}
+
+/* #endregion */
+
+/* #region Statuses */
+table {
+  .hide-status:after {
+    display: none;
+  }
+
+  :not(.hide-status):is(
+    [data-content='low'],
+    [data-content='medium'],
+    [data-content='high'],
+    [data-content='unknown'],
+    [data-content='due'],
+    [data-content='overdue'],
+    [data-content='incomplete'],
+    [data-content='requires approval'],
+    [data-content='upcoming'],
+    [data-content='approval required'],
+    [data-content='warning'],
+    [data-content='verified'],
+    [data-content='not started'],
+    [data-content='to do'],
+    [data-content='on track'],
+    [data-content='completed'],
+    [data-content='complete'],
+    [data-content='successful'],
+    [data-content='failed'],
+    .alert-status:not([data-content='0']):not([data-content='']):not(:empty)
+  ) {
+    position: relative;
+    padding-left: 1.5rem;
+
+    &::before {
+      margin-left: -1.5rem !important;
+    }
+
+    &:after {
+      font-family: var(--fa-family-classic);
+      position: absolute;
+      top: var(--status-pt, 1rem);
+      left: 0;
+      font-size: 1rem;
+      line-height: 1;
+      height: 1rem;
+      width: 1rem;
+      display: inline-block;
+    }
+  }
+
+  [data-content='high']:after {
+    content: '\f325';
+    font-weight: normal;
+    color: var(--colour-danger);
+  }
+
+  [data-content='medium']:after {
+    content: '\f7a4';
+    font-weight: normal;
+    color: var(--colour-warning);
+  }
+
+  [data-content='low']:after {
+    content: '\e404';
+    font-weight: normal;
+    color: var(--colour-complete);
+  }
+
+  [data-content='unknown']:after {
+    content: '\e404';
+    font-weight: normal;
+    color: var(--colour-muted);
+  }
+
+  :is([data-content='overdue'], [data-content='due'], [data-content='incomplete']):after {
+    content: '\f024';
+    color: var(--colour-danger);
+  }
+
+  :is([data-content='not started'], [data-content='to do'], [data-content='on track']):after {
+    content: '\f024';
+    color: var(--colour-muted);
+  }
+
+  :is(
+    [data-content='requires approval'],
+    [data-content='approval required'],
+    [data-content='action required'],
+    [data-content='upcoming']
+  ):after {
+    content: '\f024';
+    color: var(--colour-warning);
+  }
+
+  :is([data-content='warning']):after {
+    content: '\f071';
+    color: var(--colour-warning);
+  }
+
+  :is(
+    [data-content='manually verified'],
+    [data-content='verified'],
+    [data-content='completed'],
+    [data-content='complete'],
+    [data-content='successful']
+  ):after {
+    content: '\f00c';
+    font-weight: normal;
+    color: var(--colour-complete);
+  }
+
+  :is([data-content='failed']):after {
+    content: '\f00d';
+    font-weight: normal;
+    color: var(--colour-danger);
+  }
+
+  .alert-status:not([data-content='0']):not([data-content='']):not(:empty):after {
+    content: '\f0f3';
+    color: var(--colour-primary);
+  }
+}
+/* #endregion */
+
+
 
 /* #region Highlighted row */
 :is(#{$selector}):not(.table--fullwidth) {
@@ -642,19 +496,23 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 }
 /* #endregion */
 
-/* #region Mobile view when in admin panel */
-.admin-panel :is(#{$selector}):not(.table--fullwidth) {
-  @container (width < 23.4375em) {
-    table {
-      --table-width: 100%;
-      margin: 0;
-      width: 100% !important;
 
-      tr {
-        box-shadow: none;
-        padding: 0;
-      }
-    }
-  }
+/* #region Pagination */
+:is(#{$selector}) table:has(tr.show) tbody tr:not(.show) {
+  display: none !important;
 }
 /* #endregion */
+
+/* #region Table inside an admin panel */
+.admin-panel :is(#{$selector}) {
+
+  --table__container-display: contents;
+  margin: 0 0 2rem 0;
+  padding: 0;
+  box-shadow: none;
+  background: none;
+  overflow: visible;
+}
+
+/* #endregion */
+}

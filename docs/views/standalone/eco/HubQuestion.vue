@@ -1,35 +1,22 @@
 <script lang="ts" setup>
 import { createApp, ref, onMounted } from 'vue';
 
-import SearchLearningArticles from './search-learning-articles.vue';
-
-import SearchProductArticles from './search-product-articles.vue';
-import SearchContacts from './search-contacts.vue';
-
-import SalesInsights from './sales-insights.vue';
 
 import STDNav from '@/components/STDNav/STDNav.vue';
 import Nav from '@/components/Nav/Nav.vue';
 
-import Actionbar from '@/components/Actionbar/Actionbar.vue';
-import Modal from '@/components/Modal/Modal.vue';
-
 
 import Questions from './Questions.vue';
-
-const hubEnv = import.meta.env as unknown as {
-  VITE_HUB_CONTENT_BANNER_URL: string,
-  VITE_HUB_LEARNING_URL: string,
-  VITE_HUB_MARKETING_URL: string,
-  VITE_HUB_SUPPORT_URL: string,
-  VITE_MI_API_KEY: string
-};
+import Properties from './Properties.vue';
 
 const iframeTable = ref();
 const filtersModal = ref();
 const filtersForm = ref();
 const panel = ref();
 const componentHeight = ref('100vh');
+
+
+const question = ref('');
 
 onMounted(() => {
 
@@ -81,6 +68,34 @@ console.log('hey')
 
   });
 
+
+  const urlParams = new URLSearchParams(window.location.search);
+  console.log(urlParams.has('question')); // true
+
+  if (urlParams.has('question')) {
+    question.value = urlParams.get('question');
+  }
+
+  window.navigation.addEventListener('navigate', (event) => {
+
+
+    const urlParams = new URLSearchParams(new URL(event.destination.url).search);
+
+
+    console.log(urlParams);
+    console.log(event.destination.url);
+
+
+    if (urlParams.has('question')) {
+      question.value = urlParams.get('question');
+
+      console.log('hi');
+    }
+
+
+    console.log('hub question updated');
+
+  });
 
 /*
 
@@ -154,7 +169,7 @@ const UpdateResults = () => {
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm"></STDNav>
+      <STDNav data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
 
     </Nav>
   </nav>
@@ -167,65 +182,23 @@ const UpdateResults = () => {
 
       </div>
 
-      <Questions></Questions>
+      <Questions :question="question"></Questions>
     </div>
 
 
+    <div v-if="question" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
+      <h2 class="bg-primary gradient-info">{{ question }}</h2>
 
-    <div ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
-      <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
-
-<!--
-      <iframe
-        id="iframeTable2"
-        ref="iframeTable2"
-        title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/looks/24?theme=iamproperty_default"
-  frameborder="0"
-  allow="fullscreen"
-  referrerpolicy="strict-origin-when-cross-origin"
-        style="width: 100%; min-height: 30vh;"
-      ></iframe>
-
-
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default&f[stock_switch.current_agent_name]=Wilson Estate Agents"
-      ></iframe>-->
-
-
-<!--
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
--->
-      <iframe
+      <Properties></Properties>
+      <!--<iframe
         id="iframeTable"
         ref="iframeTable"
         title="Inline Frame Example"
         src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?theme=hub_embed"
         frameborder="0"
         allowfullscreen
-      ></iframe>
-
-
-
-
-      <!--
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="/test.html"
-        style="width: 100%; min-height: 100vh;"
       ></iframe>-->
+
 
       <div class="iframe-backdrop"></div>
     </div>
@@ -240,6 +213,9 @@ const UpdateResults = () => {
 .questions-container {
   margin-bottom: 7rem;
 }
+
+/*
+
 
 .admin-panel {
   padding: 0;
@@ -306,7 +282,8 @@ const UpdateResults = () => {
   background: rgba(0, 0, 0, .3);
   backdrop-filter: blur(4px);
 
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
+*/
 </style>
