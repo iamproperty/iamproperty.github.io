@@ -31,12 +31,11 @@ $selector: '.table--component';
     th {
       padding-block: 0.75rem;
       font-size: 0.875rem;
+      white-space: nowrap;
     }
 
     :is(th[data-sort], th[data-filters]) {
       
-      white-space: nowrap;
-
       .th__content {
         display: contents;
       }

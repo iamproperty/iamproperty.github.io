@@ -10,8 +10,7 @@ class iamVisProperties extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const loadCSS = `@import "${assetLocation}/css/visualisations/properties.visualisation.css";`;
-    const loadExtraCSS = `@import "${assetLocation}/css/visualisations/properties.global.css";`;
+    const loadCSS = `@import "${assetLocation}/css/apps/properties.app.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */`
@@ -19,17 +18,12 @@ class iamVisProperties extends HTMLElement {
     ${loadCSS}
     </style>
 
-    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
-    <link rel="preload" href="https://iamproperty.github.io/assets/fonts/qanelas-medium-webfont.woff2" as="font" type="font/woff2" />
-    <link rel="preload" href="https://iamproperty.github.io/assets/fonts/qanelas-bold-webfont.woff2" as="font" type="font/woff2" />
-
     <span class="h4"><span id="count"></span> Properties most likely to switch</span>
 
     <div id="map-wrapper">Map here</div>
 
-    <div id="table-wrapper">Table here</div>
+    <div id="table-wrapper">Table here</div>`;
 
-    `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
@@ -48,7 +42,7 @@ class iamVisProperties extends HTMLElement {
     if (table){
 
       table.setAttribute('id','properties-table');
-      tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}</iam-table-advanced>`;
+      tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}<iam-pagination slot="pagination"></iam-pagination></iam-table-advanced>`;
       mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
     }
 
@@ -74,7 +68,7 @@ class iamVisProperties extends HTMLElement {
 
             const table = this.querySelector('table');
             table.setAttribute('id','properties-table');
-            tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}</iam-table-advanced>`;
+            tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}<iam-pagination slot="pagination"></iam-pagination></iam-table-advanced>`;
             mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
           }
 
@@ -105,4 +99,6 @@ document.addEventListener('DOMContentLoaded', (): void => {
     window.customElements.define(`iam-map`, iamMap);
 
 });
+
+
 

@@ -8,7 +8,7 @@ export const tableHTML = `<div class="table__container" part="container">
       <slot></slot>
     </div>
   </div>
-  <iam-pagination part="pagination" class="pagination--table"></iam-pagination>
+  <slot name="pagination"><iam-pagination part="pagination" class="pagination--table"></iam-pagination></slot>
 </div>`;
 
 // #region Helpers
@@ -497,6 +497,8 @@ export const addSelectboxes = (component, table): void => {
 
 export const addSelectboxesEvents = (component, table, actionbar): void => {
 
+  const selectrowcheckboxselector = table.classList.contains('tabled--filtered') ? '.filtered--matched .selectrow input[type="checkbox"]' : '.selectrow input[type="checkbox"]';
+
   table.addEventListener('change', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('.selectrow input')) {
       const input = event.target.closest('.selectrow input');
@@ -526,7 +528,7 @@ export const addSelectboxesEvents = (component, table, actionbar): void => {
       const dispatchedEvent = new CustomEvent('all-rows-unselected');
       component.dispatchEvent(dispatchedEvent);
     } else if (event.detail.selected == 'all') {
-      Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
+      Array.from(table.querySelectorAll(selectrowcheckboxselector)).forEach((input) => {
         input.checked = true;
       });
 

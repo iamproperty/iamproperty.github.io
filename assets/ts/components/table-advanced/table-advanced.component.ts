@@ -38,7 +38,7 @@ class iamTableAdvanced extends HTMLElement {
 
   connectedCallback(): void {
 
-    const pagination = this.shadowRoot.querySelector('iam-pagination');
+    const pagination = this.querySelector('iam-pagination') || this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
     const form = findForm(this, table);
     const actionbar = findActionbar(this, form);
