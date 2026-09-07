@@ -189,15 +189,15 @@ const UpdateResults = () => {
     <div v-if="question" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
       <h2 class="bg-primary gradient-info">{{ question }}</h2>
 
-      <Properties></Properties>
-      <!--<iframe
+      <!--<Properties></Properties>-->
+      <iframe
         id="iframeTable"
         ref="iframeTable"
         title="Inline Frame Example"
-        src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?theme=hub_embed"
+        src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed"
         frameborder="0"
         allowfullscreen
-      ></iframe>-->
+      ></iframe>
 
 
       <div class="iframe-backdrop"></div>
@@ -214,14 +214,13 @@ const UpdateResults = () => {
   margin-bottom: 7rem;
 }
 
-/*
+
 
 
 .admin-panel {
-  padding: 0;
+  //padding: 0;
 
-  height: calc(var(--componentHeight) + 3.5rem + 20px);
-
+  //height: calc(var(--componentHeight) + 3.5rem + 20px);
   height: 100vh;
   position: relative;
   overflow: hidden;
@@ -229,61 +228,10 @@ const UpdateResults = () => {
 
 .admin-panel iframe {
   padding: 0;
-  width: calc(100% - 1px);
-  width: 100%;
+  margin-inline: -1.5rem;
+  width: calc(100% + 3rem);
   height: 100%;
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-
-  top: 3.5rem;
-  //height: calc(var(--componentHeight) - (3.5rem + 20px));
-
-
-  height: 100%;
-  //overflow: hidden;
-
-  //margin-inline: -2rem;
-  //width: calc(100% + 4rem);
-
 }
 
-.admin-panel > h2 {
-  margin: 0;
-  position: relative;
-  z-index: 3;
-}
 
-[data-filters="true"] .iframe-backdrop {
-  position: fixed;
-
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  background: rgba(0, 0, 0, .3);
-  backdrop-filter: blur(4px);
-}
-
-[data-filters="true"] iframe {
-
-  overflow: hidden;
-}
-[data-filters="true"] h2:after {
-
-  display: block;
-  position: absolute;
-  content: "";
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  background: rgba(0, 0, 0, .3);
-  backdrop-filter: blur(4px);
-
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-}
-*/
 </style>
