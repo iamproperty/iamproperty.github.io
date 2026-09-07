@@ -221,9 +221,13 @@ const UpdateResults = () => {
   //padding: 0;
 
   //height: calc(var(--componentHeight) + 3.5rem + 20px);
-  height: 100vh;
+  height: var(--componentHeight, calc(100vh - 4rem));
   position: relative;
   overflow: hidden;
+}
+
+.admin-panel h2{
+  margin-bottom: 0;
 }
 
 .admin-panel iframe {

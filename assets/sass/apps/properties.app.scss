@@ -17,11 +17,18 @@
 
 :host {
   display: block;
-  height: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1.5rem;
-  padding-inline: 1.5rem;
+  //height: 100%;
+  padding-top: calc(1rem - 10px);
+  padding-bottom: calc(1.5rem - 10px);
+  padding-inline: calc(1.5rem - 10px);
   overflow: auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  > *{
+    
+  box-sizing: border-box;
+  }
 }
 
 @layer utilities {
