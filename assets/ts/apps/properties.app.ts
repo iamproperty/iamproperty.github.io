@@ -44,6 +44,13 @@ class iamVisProperties extends HTMLElement {
       table.setAttribute('id','properties-table');
       tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}<iam-pagination slot="pagination"></iam-pagination></iam-table-advanced>`;
       mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
+
+      const dispatchedEvent = new CustomEvent('component-loaded', {
+        detail: {
+          height: this.offsetHeight
+        },
+      });
+      this.dispatchEvent(dispatchedEvent);
     }
 
 
@@ -70,6 +77,13 @@ class iamVisProperties extends HTMLElement {
             table.setAttribute('id','properties-table');
             tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}<iam-pagination slot="pagination"></iam-pagination></iam-table-advanced>`;
             mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
+
+            const dispatchedEvent = new CustomEvent('component-loaded', {
+              detail: {
+                height: this.offsetHeight
+              },
+            });
+            this.dispatchEvent(dispatchedEvent);
           }
 
         }
