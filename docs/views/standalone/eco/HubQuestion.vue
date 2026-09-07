@@ -15,8 +15,9 @@ const filtersForm = ref();
 const panel = ref();
 const componentHeight = ref('100vh');
 
-
 const question = ref('');
+
+const questionTitle = ref();
 
 onMounted(() => {
 
@@ -62,7 +63,10 @@ console.log('hey')
       console.log('set height on admin panel and iframe');
       console.log(`${message.detail.height}px`);
 
-      componentHeight.value = `${message.detail.height}px`;
+
+      const panelHeight = questionTitle.value.offsetHeight + message.detail.height + 20 + 30;
+
+      componentHeight.value = `${panelHeight}px`;
     }
 
 
@@ -177,9 +181,7 @@ const UpdateResults = () => {
   <main>
     <div class="bg-primary full-width questions-container">
       <div class="container">
-
         <h1 class="pb-2 md-col-end-7 h2">AI Insights</h1>
-
       </div>
 
       <Questions :question="question"></Questions>
@@ -187,7 +189,7 @@ const UpdateResults = () => {
 
 
     <div v-if="question" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
-      <h2 class="bg-primary gradient-info">{{ question }}</h2>
+      <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ question }}</h2>
 
       <!--<Properties></Properties>-->
       <iframe
