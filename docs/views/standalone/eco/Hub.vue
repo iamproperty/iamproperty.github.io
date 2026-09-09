@@ -74,7 +74,7 @@
 
         <div class="md-col-start-9"><SearchContacts></SearchContacts></div>
       </div>
-      <Questions></Questions>
+      <Questions data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
     </div>
 
     <hr />
@@ -154,5 +154,7 @@
 <style lang="css" scoped>
 .questions-container {
   margin-bottom: 7rem;
+  display: grid;
+  grid-template-columns: subgrid;
 }
 </style>

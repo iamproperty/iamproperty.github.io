@@ -33,9 +33,9 @@ class iamSearch extends HTMLElement {
       </style>
       <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
       <span class="wrapper">
-        <span class="input__wrapper">
+        <span class="input__wrapper" part="input-wrapper">
           <slot></slot>
-          <button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>
+          <button class="clear-search btn btn-action" type="button" part="clear-search"><i class="fa-light fa-times me-0"></i></button>
         </span>
         <button class="suffix fa-regular fa-search"></button>
       </span>

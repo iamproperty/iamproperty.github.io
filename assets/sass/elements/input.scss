@@ -123,6 +123,10 @@
     -webkit-appearance: button; /*  2 */
   }
 
+  ::placeholder {
+    color: inherit;
+    opacity: 0.75;
+  }
   /* #region input field */
   :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), output) {
     display: block;

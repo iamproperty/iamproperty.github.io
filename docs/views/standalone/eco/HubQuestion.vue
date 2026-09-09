@@ -181,10 +181,10 @@ const UpdateResults = () => {
   <main>
     <div class="bg-primary full-width questions-container">
       <div class="container">
-        <h1 class="pb-2 md-col-end-7 h2">AI Insights</h1>
+
       </div>
 
-      <Questions :question="question"></Questions>
+        <Questions :question="question" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
     </div>
 
 
@@ -214,11 +214,9 @@ const UpdateResults = () => {
 <style lang="scss" scoped>
 .questions-container {
   margin-bottom: 7rem;
+  display: grid;
+  grid-template-columns: subgrid;
 }
-
-
-
-
 .admin-panel {
   //padding: 0;
 

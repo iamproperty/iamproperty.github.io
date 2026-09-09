@@ -64,6 +64,10 @@
     --svg-width: 1.576923076923077em; /* 205/89 */
   }
 
+  .brand-insights {
+    --svg-width: 6.741573033707865em; /* 600/89 */
+  }
+
   a.brand:not(:hover, :focus, :active) {
     color: var(--colour-brand);
   }
@@ -78,5 +82,29 @@
 
   :is(a:hover, a:focus, a:active) .brand {
     color: currentColor !important;
+  }
+
+  .one-gradient {
+    
+    --colour-info: rgb(84 255 255);
+    background-image: 
+      radial-gradient(
+        circle 40px at 30px 30px,
+        var(--colour-info) 20%,
+        transparent 100%
+      ), 
+      radial-gradient(
+        circle 40px at 60px 85px,
+        var(--colour-info) 20%,
+        transparent 100%
+      ),
+      linear-gradient(currentColor, currentColor);
+
+
+
+    width: 100%;
+    height: 100%;
+    
+    
   }
 }

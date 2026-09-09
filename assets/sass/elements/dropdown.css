@@ -191,6 +191,31 @@
 
   /* #endregion */
 
+  /* #region Dropdown Option group */  
+
+  :is(.dropdown, datalist, select, [popover]) .optgroup{
+    display: none;
+    padding: 0;
+    border-bottom: 1px solid var(--border-color, grey) !important;
+    margin-bottom: 0.25rem !important;
+  }
+  :is(.dropdown, datalist, select, [popover]) .optgroup:before {
+    content: attr(value);
+    display: block;
+    text-align: left;
+    padding: var(--option-padding);
+    color: var(--colour-body-default) !important;
+    font-size: 0.875rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+  
+  :is(.dropdown, datalist, select, [popover]) .optgroup:has(option:not(.js-hide)) {
+    display: block;
+  }
+  
+  /* #endregion */
+
   /* #region Dropdown headings */
 
   :is(.dropdown, datalist, [popover]) :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {

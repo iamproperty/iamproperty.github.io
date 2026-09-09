@@ -119,7 +119,7 @@
     cursor: pointer;
     background: transparent !important;
     border-color: transparent !important;
-    color: var(--colour-primary-theme) !important;
+    color: var(--search-suffix-color, var(--colour-primary-theme)) !important;
     position: absolute !important;
     top: 0;
     left: 0;
