@@ -3,8 +3,6 @@
   "header",
   "banner",
   "table-basic",
-  "table-no-submit",
-  "table-submit",
   "table-ajax",
   "table-advanced",
   "table",
@@ -62,5 +60,6 @@
   "button",
   "std-nav",
   "skeleton",
-  "bone"
+  "bone",
+  "map"
 ]

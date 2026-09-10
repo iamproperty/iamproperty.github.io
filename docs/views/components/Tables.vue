@@ -2,7 +2,7 @@
   import TrackEvents from '../TrackEvents.vue';
 
   import TableBasic from '@/components/Table/TableBasic.vue';
-  import TableNoSubmit from '@/components/Table/TableNoSubmit.vue';
+  import Table from '@/components/Table/Table.vue';
 
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
@@ -355,7 +355,7 @@
     </div>
 
     <div class="container visualtest bg-light">
-      <TableNoSubmit class="table--cta table--fullwidth" data-expandable>
+      <Table class="table--cta table--fullwidth" data-expandable>
         <table>
           <thead>
             <tr>
@@ -427,7 +427,7 @@
             </tr>
           </tbody>
         </table>
-      </TableNoSubmit>
+      </Table>
     </div>
 
     <div class="container pb-0 pt-5">
@@ -440,7 +440,7 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col-sm-6 col-md-4 ms-auto">
-          <TableNoSubmit class="table--cta" data-expandable>
+          <Table class="table--cta" data-expandable>
             <table>
               <thead>
                 <tr>
@@ -468,10 +468,10 @@
                 </tr>
               </tbody>
             </table>
-          </TableNoSubmit>
+          </Table>
         </div>
         <div class="col-sm-6 col-md-4 me-auto">
-          <TableNoSubmit class="table--cta" data-expandable>
+          <Table class="table--cta" data-expandable>
             <table>
               <thead>
                 <tr>
@@ -499,7 +499,7 @@
                 </tr>
               </tbody>
             </table>
-          </TableNoSubmit>
+          </Table>
         </div>
       </div>
     </div>
@@ -517,7 +517,7 @@
     </div>
 
     <div class="container visualtest bg-light">
-      <TableNoSubmit class="table--cta table--fullwidth">
+      <Table class="table--cta table--fullwidth">
         <Actionbar data-selectall="" data-search="" slot="before">
           <div class="dialog__wrapper show">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -619,7 +619,7 @@
             </tr>
           </tbody>
         </table>
-      </TableNoSubmit>
+      </Table>
     </div>
 
     <div class="container pt-5 pb-0">
@@ -635,7 +635,7 @@
       <div class="demo">
         <div class="row">
           <div class="col-sm-6 col-md-4 ms-auto">
-            <TableNoSubmit>
+            <Table>
               <Actionbar data-selectall="" data-search="" slot="before" class="">
                 <div class="dialog__wrapper show">
                   <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -711,10 +711,10 @@
                   </tr>
                 </tbody>
               </table>
-            </TableNoSubmit>
+            </Table>
           </div>
           <div class="col-sm-6 col-md-4 me-auto">
-            <TableNoSubmit>
+            <Table>
               <Actionbar data-selectall="" data-search="" slot="before" class="">
                 <div class="dialog__wrapper show">
                   <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -789,7 +789,7 @@
                   </tr>
                 </tbody>
               </table>
-            </TableNoSubmit>
+            </Table>
           </div>
         </div>
       </div>
@@ -806,7 +806,7 @@
 
     <div class="container visualtest">
       <div class="demo">
-        <TableNoSubmit class="table--cta table--fullwidth">
+        <Table class="table--cta table--fullwidth">
           <table>
             <thead>
               <tr>
@@ -919,7 +919,7 @@
               </tr>
             </tbody>
           </table>
-        </TableNoSubmit>
+        </Table>
       </div>
     </div>
 
@@ -934,7 +934,7 @@
       <div class="demo">
         <div class="row">
           <div class="col-sm-6 col-md-4 ms-auto">
-            <TableNoSubmit>
+            <Table>
               <table>
                 <thead>
                   <tr>
@@ -973,10 +973,10 @@
                   </tr>
                 </tbody>
               </table>
-            </TableNoSubmit>
+            </Table>
           </div>
           <div class="col-sm-6 col-md-4 me-auto">
-            <TableNoSubmit>
+            <Table>
               <table>
                 <thead>
                   <tr>
@@ -1015,7 +1015,7 @@
                   </tr>
                 </tbody>
               </table>
-            </TableNoSubmit>
+            </Table>
           </div>
         </div>
       </div>
@@ -1030,7 +1030,7 @@
     </div>
 
     <div class="container visualtest bg-light">
-      <TableNoSubmit class="table--cta table--fullwidth" data-expandable>
+      <Table class="table--cta table--fullwidth" data-expandable>
         <Actionbar data-selectall="" data-search="" slot="before">
           <div class="dialog__wrapper show">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -1143,7 +1143,7 @@
             </tr>
           </tbody>
         </table>
-      </TableNoSubmit>
+      </Table>
     </div>
 
     <div class="container pt-4 pb-0">
@@ -1156,7 +1156,7 @@
     <div class="container visualtest bg-light">
       <div class="row">
         <div class="col-sm-6 col-md-4 ms-auto">
-          <TableNoSubmit class="table--cta">
+          <Table class="table--cta">
             <Actionbar data-selectall="" data-search="" slot="before">
               <div class="dialog__wrapper show">
                 <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -1227,10 +1227,10 @@
                 </tr>
               </tbody>
             </table>
-          </TableNoSubmit>
+          </Table>
         </div>
         <div class="col-sm-6 col-md-4 me-auto">
-          <TableNoSubmit class="table--cta">
+          <Table class="table--cta">
             <Actionbar data-selectall="" data-search="" slot="before">
               <div class="dialog__wrapper show">
                 <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -1301,7 +1301,7 @@
                 </tr>
               </tbody>
             </table>
-          </TableNoSubmit>
+          </Table>
         </div>
       </div>
     </div>
@@ -1315,7 +1315,7 @@
     </div>
 
     <div class="container visualtest bg-light">
-      <TableNoSubmit class="table--cta table--fullwidth" data-expandable>
+      <Table class="table--cta table--fullwidth" data-expandable>
         <table>
           <thead>
             <tr>
@@ -1428,7 +1428,7 @@
             </tr>
           </tbody>
         </table>
-      </TableNoSubmit>
+      </Table>
     </div>
 
     <div class="container pt-4 pb-0">
@@ -1441,7 +1441,7 @@
     <div class="container visualtest mb-5 bg-light">
       <div class="row">
         <div class="col-sm-6 col-md-4 ms-auto">
-          <TableNoSubmit>
+          <Table>
             <table>
               <thead>
                 <tr>
@@ -1480,10 +1480,10 @@
                 </tr>
               </tbody>
             </table>
-          </TableNoSubmit>
+          </Table>
         </div>
         <div class="col-sm-6 col-md-4 me-auto">
-          <TableNoSubmit>
+          <Table>
             <table>
               <thead>
                 <tr>
@@ -1522,7 +1522,7 @@
                 </tr>
               </tbody>
             </table>
-          </TableNoSubmit>
+          </Table>
         </div>
       </div>
     </div>
@@ -1535,7 +1535,7 @@
     </p>
 
     <div class="container visualtest mb-5 bg-light">
-      <TableNoSubmit class="table--cta table--fullwidth">
+      <Table class="table--cta table--fullwidth">
         <Actionbar data-search="" slot="before">
           <button class="btn btn-action fa-box-archive">Archive</button
           ><button class="btn btn-action fa-trash-can">Export to .csv</button>
@@ -1591,7 +1591,7 @@
             </tr>
           </tbody>
         </table>
-      </TableNoSubmit>
+      </Table>
     </div>
 
     <h3>Mobile behaviour</h3>
@@ -1996,7 +1996,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Table from '@/components/Table/Table.vue</script>
-        
+
 <Table>
   <table>
     <thead>

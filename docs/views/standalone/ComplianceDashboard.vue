@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import Nav from '@/components/Nav/Nav.vue';
-  import Table from '@/components/Table/Table.vue';
+  import Table from '@/components/Table/TableAjax.vue';
   import Card from '@/components/Card/Card.vue';
   import Input from '@/components/Input/Input.vue';
   import FilterCard from '@/components/FilterCard/FilterCard.vue';

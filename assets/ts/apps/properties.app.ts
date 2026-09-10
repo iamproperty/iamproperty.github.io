@@ -1,0 +1,118 @@
+import iamTableAdvanced from '../../js/components/table-advanced/table-advanced.component.min.js';
+import iamPagination from '../../js/components/pagination/pagination.component.min.js';
+import iamMap from '../../js/components/map/map.component.min.js';
+
+class iamVisProperties extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+    const loadCSS = `@import "${assetLocation}/css/apps/properties.app.css";`;
+
+    const template = document.createElement('template');
+    template.innerHTML = /* HTML */`
+    <style>
+    ${loadCSS}
+    </style>
+
+    <span class="h4"><span id="count"></span> Properties most likely to switch</span>
+
+    <div id="map-wrapper">Map here</div>
+
+    <div id="table-wrapper">Table here</div>`;
+
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
+  }
+
+  connectedCallback(): void {
+
+    document.head.insertAdjacentHTML('beforeend', `<style id="tableAdvancedExtras">/* Empty */</style>`);
+
+
+    const table = this.querySelector('table');
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const countElement = this.shadowRoot?.querySelector('#count');
+
+    countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
+
+    if (table){
+
+      table.setAttribute('id','properties-table');
+      tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}<iam-pagination slot="pagination"></iam-pagination></iam-table-advanced>`;
+      mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
+
+      const dispatchedEvent = new CustomEvent('component-loaded', {
+        detail: {
+          height: this.offsetHeight
+        },
+      });
+      this.dispatchEvent(dispatchedEvent);
+    }
+
+
+    //const tableAdvanced = this.shadowRoot?.querySelector('iam-table-advanced');
+    //const map = this.shadowRoot?.querySelector('iam-map');
+
+        // HTML Observer
+    const htmlUpdated = (mutationList: any, observer: any): void => {
+      observer.disconnect();
+
+      console.log(mutationList);
+
+      for (const mutation of mutationList) {
+        if (
+          mutation.type == 'characterData' ||
+          (mutation.type == 'childList' && mutation.addedNodes.length) ||
+          mutation.type === 'attributes'
+        ) {
+
+
+          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
+
+            const table = this.querySelector('table');
+            table.setAttribute('id','properties-table');
+            tableWrapper.innerHTML = `<iam-table-advanced>${table.outerHTML}<iam-pagination slot="pagination"></iam-pagination></iam-table-advanced>`;
+            mapWrapper.innerHTML = `<iam-map data-for="properties-table"></iam-map>`;
+
+            const dispatchedEvent = new CustomEvent('component-loaded', {
+              detail: {
+                height: this.offsetHeight
+              },
+            });
+            this.dispatchEvent(dispatchedEvent);
+          }
+
+        }
+      }
+
+
+      observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
+    };
+
+    const observer = new MutationObserver(htmlUpdated);
+    observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', (): void => {
+
+  if (!window.customElements.get(`iam-vis-properties`))
+    window.customElements.define(`iam-vis-properties`, iamVisProperties);
+
+  if (!window.customElements.get(`iam-pagination`) && iamPagination)
+    window.customElements.define(`iam-pagination`, iamPagination);
+
+  if (!window.customElements.get(`iam-table-advanced`) && iamTableAdvanced)
+    window.customElements.define(`iam-table-advanced`, iamTableAdvanced);
+
+  if (!window.customElements.get(`iam-map`) && iamMap)
+    window.customElements.define(`iam-map`, iamMap);
+
+});
+
+
+

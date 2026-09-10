@@ -15,6 +15,8 @@
   import Skeleton from '@/components/Skeleton/Skeleton.vue';
   import Bone from '@/components/Skeleton/Bone.vue';
 
+  import Questions from './Questions.vue';
+
   const hubEnv = import.meta.env as unknown as {
     VITE_HUB_CONTENT_BANNER_URL: string;
     VITE_HUB_LEARNING_URL: string;
@@ -61,7 +63,7 @@
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm"></STDNav>
+      <STDNav data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
     </Nav>
   </nav>
 
@@ -72,7 +74,7 @@
 
         <div class="md-col-start-9"><SearchContacts></SearchContacts></div>
       </div>
-      <Questions></Questions>
+      <Questions data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
     </div>
 
     <hr />
@@ -152,5 +154,7 @@
 <style lang="css" scoped>
 .questions-container {
   margin-bottom: 7rem;
+  display: grid;
+  grid-template-columns: subgrid;
 }
 </style>

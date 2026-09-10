@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TableNoSubmit from '@/components/Table/TableNoSubmit.vue';
+  import Table from '@/components/Table/Table.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
 </script>
 
@@ -7,7 +7,7 @@
   <main>
     <h1>Submit table</h1>
 
-    <TableNoSubmit data-expandable>
+    <Table data-expandable>
       <Actionbar data-selectall="" data-search="" slot="before" data-selected="0">
         <div class="dialog__wrapper" slot="overflow">
           <button data-v-c1cc5ae7="" class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -776,9 +776,9 @@
           </tr>
         </tbody>
       </table>
-    </TableNoSubmit>
+    </Table>
 
-    <TableNoSubmit data-expandable>
+    <Table data-expandable>
       <Actionbar data-selectall="" data-search="" slot="before" data-selected="0">
         <div class="dialog__wrapper" slot="overflow">
           <button data-v-c1cc5ae7="" class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -886,9 +886,9 @@
           </tr>
         </tbody>
       </table>
-    </TableNoSubmit>
+    </Table>
 
-    <TableNoSubmit data-expandable class="table--cta">
+    <Table data-expandable class="table--cta">
       <table>
         <thead>
           <tr>
@@ -933,6 +933,6 @@
           </tr>
         </tbody>
       </table>
-    </TableNoSubmit>
+    </Table>
   </main>
 </template>

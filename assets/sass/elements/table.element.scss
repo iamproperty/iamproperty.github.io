@@ -67,8 +67,12 @@
     line-height: 1.25rem;
     color: var(--colour-body);
 
+    &:first-child {
+      padding-left: 0.25rem;
+    }
+
     &:last-child {
-      padding-right: 0;
+      padding-right: 0.25rem;
     }
 
     p {
@@ -126,7 +130,7 @@
     }
   }
 
-  tbody tr {
+  tbody tr:not(:last-child) {
     border-bottom: var(--border-width) solid currentColor;
     border-color: var(--colour-border);
   }

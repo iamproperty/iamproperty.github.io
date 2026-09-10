@@ -42,6 +42,12 @@
         <li><a href="/examples/carousel-admin-panel">Carousel in an admin panel</a></li>
       </ul>
       <h2 id="tables">Tables</h2>
+
+      <ul>
+        <li><a href="/examples/tables-actionbars">Tables with actionbars</a></li>
+        <li><a href="/examples/tables-fixed-columns">Tables with Fixed columns</a></li>
+      </ul>
+      <p class="pb-2 pt-5">old:</p>
       <ul class="mb-5">
         <li><a href="/examples/basic-table">Tables</a></li>
         <li><a href="/examples/no-submit-table">No Submit Tables</a></li>

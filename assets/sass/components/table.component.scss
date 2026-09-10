@@ -2,10 +2,50 @@
 
 @use './table-basic.component';
 
-/* #region Table with actionbar */
-@container (width < 23.4375em) {
-  .table__wrapper.has-actionbar {
-    margin-top: calc(-100vh - -6.75rem) !important;
+
+/* #region applied filters */
+
+.table-filters:not(:empty) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 1rem 0.5rem 0;
+
+  * {
+    margin: 0!important;
+  }
+
+  .tag {
+    cursor: pointer;
+  }
+}
+
+.table-filters {
+
+  button {
+    padding-right: 2.25rem;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: auto;
+      right: 0.75rem;
+      translate: 0 -50%;
+      font-family: 'Font Awesome 7 Pro';
+      display: block;
+      font-weight: 300;
+      font-size: 1rem;
+
+      width: 1rem;
+      padding: 0;
+      height: 1rem;
+      line-height: 1;
+      text-align: center;
+      z-index: 2;
+
+      color: inherit;
+    }
   }
 }
 /* #endregion */
@@ -14,15 +54,14 @@
 :host(.table--loading) {
   pointer-events: none;
   position: relative;
-
   text-align: center;
   padding-top: 5rem !important;
 
+  
   &:after {
     content: '\f3f4';
     position: absolute;
     top: 2rem;
-
     left: 50%;
     translate: -50% 0;
     font-family: 'Font Awesome 7 Pro';
@@ -43,3 +82,5 @@
 }
 
 /* #endregion */
+
+

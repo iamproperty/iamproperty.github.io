@@ -205,7 +205,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       border-end-end-radius: 0 !important;
     }
 
-    label:has(.suffix) input {
+    label:has(.suffix) input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not([type='time']) {
       border-start-end-radius: 0 !important;
       border-end-end-radius: 0 !important;
     }
