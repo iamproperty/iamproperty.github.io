@@ -2,7 +2,7 @@ import {
   moveAttributesToComponents,
   findForm,
   setupBasicTable,
-  setupAdvancedTable,
+  setupExpandedTable,
   paginateRows,
   setupNoSubmitTable,
   setupSubmitTable,
@@ -65,7 +65,7 @@ class iamTableBasic extends HTMLElement {
     moveAttributesToComponents(this);
 
     setupBasicTable(this, table, form, pagination);
-    setupAdvancedTable(this, table, form, pagination);
+    setupExpandedTable(this, table, form, pagination);
 
     if (this.hasAttribute('data-submit')) {
       setupSubmitTable(this, table, form, pagination);

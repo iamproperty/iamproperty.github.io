@@ -194,6 +194,9 @@ const UpdateResults = () => {
         title="Inline Frame Example"
         src="https://iampropertypbl.cloud.looker.com/embed/looks/23?theme=iamproperty_default&f[stock_switch.current_agent_name]=Wilson Estate Agents"
       ></iframe>-->
+
+
+<!--
       <iframe
         id="iframeTable"
         ref="iframeTable"
@@ -202,6 +205,17 @@ const UpdateResults = () => {
         frameborder="0"
         allowfullscreen
       ></iframe>
+-->
+      <iframe
+        id="iframeTable"
+        ref="iframeTable"
+        title="Inline Frame Example"
+        src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?theme=hub_embed"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+
+
 
 
       <!--
@@ -222,7 +236,7 @@ const UpdateResults = () => {
 
 
 </template>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .questions-container {
   margin-bottom: 7rem;
 }
@@ -231,6 +245,8 @@ const UpdateResults = () => {
   padding: 0;
 
   height: calc(var(--componentHeight) + 3.5rem + 20px);
+
+  height: 100vh;
   position: relative;
   overflow: hidden;
 }
@@ -244,11 +260,15 @@ const UpdateResults = () => {
   z-index: 2;
   inset: 0;
 
-  top: calc(3.5rem - 10px);
-  height: calc(var(--componentHeight) + 60px);
+  top: 3.5rem;
+  //height: calc(var(--componentHeight) - (3.5rem + 20px));
 
 
+  height: 100%;
+  //overflow: hidden;
 
+  //margin-inline: -2rem;
+  //width: calc(100% + 4rem);
 
 }
 

@@ -17,9 +17,9 @@
   overflow: auto;
 }
 
-  [class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
-    font-weight: 400;
-  }
+[class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
+  font-weight: 400;
+}
 
 dialog {
   place-self: center;
@@ -35,7 +35,7 @@ dialog {
 #bar {
   background: var(--colour-light);
   padding-block: 0.5rem;
-  padding-inline: 1.5rem;
+  padding-inline: 0.5rem;
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
@@ -69,7 +69,7 @@ dialog {
 
 .h4:has(.count){
   
-  padding-inline: 1.5rem;
+  //padding-inline: 1.5rem;
   padding-bottom: 1rem;
 }
 /* #endregion */
@@ -81,7 +81,7 @@ dialog {
 /* #region map */
 
 #map {
-  margin-inline: 1.5rem;
+  //margin-inline: 1.5rem;
   width: calc(100% - 3rem);
   height: 25rem; /* 400px */
   border-radius: 0.25rem;

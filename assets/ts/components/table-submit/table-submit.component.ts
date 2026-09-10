@@ -1,4 +1,4 @@
-import { setupBasicTable, findForm, setupAdvancedTable, setupSubmitTable, paginateTable } from '../../modules/table';
+import { setupBasicTable, findForm, setupExpandedTable, setupSubmitTable, paginateTable } from '../../modules/table';
 import iamMenu from '../menu/menu.component';
 
 class iamTableSubmit extends HTMLElement {
@@ -58,7 +58,7 @@ class iamTableSubmit extends HTMLElement {
 
     setupBasicTable(this, table, form, pagination);
 
-    setupAdvancedTable(this, table, form, pagination);
+    setupExpandedTable(this, table, form, pagination);
 
     setupSubmitTable(this, table, form, pagination);
 

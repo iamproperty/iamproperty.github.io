@@ -416,13 +416,17 @@
   }
 
   :host(.has-secondary) .menu__secondary {
-    background-color: var(--colour-canvas-2);
+    background-color: var(--colour-light);
     display: block;
     position: absolute;
     top: 0;
     left: 50%;
     width: 100svw;
     translate: -50svw 0;
+
+     @media screen and (prefers-color-scheme: dark) {
+      background: var(--colour-canvas-2);
+    }
 
     .container {
       margin-left: auto;

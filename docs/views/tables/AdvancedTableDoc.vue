@@ -1,8 +1,7 @@
 <script setup>
   import TrackEvents from '../TrackEvents.vue';
 
-  import TableBasic from '@/components/Table/TableBasic.vue';
-  import TableNoSubmit from '@/components/Table/TableNoSubmit.vue';
+  import TableAdvanced from '@/components/Table/TableAdvanced.vue';
 
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
@@ -29,10 +28,84 @@
   ></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
-      <h1>Ajax table</h1>
+      <h1>Advanced table</h1>
     </DSHeader>
 
-    <p>Ajax stuff</p>
+
+    <h2>Sorting using column headers</h2>
+    <p>
+      Data tables can be configured to allow the user to sort columns of data ascending or descending by clicking them.
+      When the user opens the table it should be clear which column determines the order of the data and whether it is
+      ascending or descending. This is shown by an arrow adjacent to the column header name.
+    </p>
+
+    <div class="container visualtest mb-5 bg-light">
+      <TableAdvanced class="table--cta table--fullwidth">
+        <Actionbar data-search="" slot="before">
+          <button class="btn btn-action fa-box-archive">Archive</button
+          ><button class="btn btn-action fa-trash-can">Export to .csv</button>
+        </Actionbar>
+        <table>
+          <thead>
+            <tr>
+              <th>Negotiator</th>
+              <th>Property address</th>
+              <th data-sort>Vendor</th>
+              <th data-sort>Appointment date</th>
+              <th data-sort>Valuation price</th>
+              <th>Fee amount (£)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>a Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>b Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>c Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>d Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableAdvanced>
+    </div>
+
+    <h3>Mobile behaviour</h3>
+    <p>
+      On mobile, sorting should be handled via the action bar only. We should specify the most popular sorting options.
+      This can be presented in a popover dialog.
+    </p>
+
+
 
     <Integration component="carousel" componentName="iam-carousel">
       <template #web-component>

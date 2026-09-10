@@ -26,7 +26,7 @@ export const navTemplate = /* HTML */ `<div class="container">
 
         <slot name="actions"></slot>
 
-        <div class="menu__secondary bg-light">
+        <div class="menu__secondary">
           <div class="container">
             <slot name="secondary"></slot>
           </div>

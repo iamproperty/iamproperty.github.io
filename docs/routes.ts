@@ -1101,6 +1101,14 @@ const routes = [
         component: () => import('./views/tables/ExpandedTableDoc.vue'),
       },
       {
+        path: 'advanced',
+        name: 'Advanced table',
+        meta: {
+          title: 'Advanced table | Components | iamkey',
+        },
+        component: () => import('./views/tables/AdvancedTableDoc.vue'),
+      },
+      {
         path: 'ajax',
         name: 'AJAX table',
         meta: {

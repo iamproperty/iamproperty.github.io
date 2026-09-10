@@ -1,14 +1,13 @@
 import {
   setupBasicTable,
+  paginateRows,
   findForm,
-  setupExpandedTable,
-  setupAjaxTable,
   paginateTable,
-  loadAjaxTable,
+  setupExpandedTable,
+  setupAdvancedTable,
 } from '../../modules/table';
-import iamMenu from '../menu/menu.component';
 
-class iamTableAjax extends HTMLElement {
+class iamTableAdvanced extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -27,44 +26,34 @@ class iamTableAjax extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="table__container">
-      <slot name="before"></slot>
+      <slot name="before"></slot><!-- For the actionbar -->
       <div class="table--cta">
         <div class="table__wrapper">
           <slot></slot>
         </div>
       </div>
-      <iam-pagination part="pagination" class="pagination--table" ${this.hasAttribute('data-page') ? `data-page="${this.getAttribute('data-page')}"` : ''} ></iam-pagination>
+      <iam-pagination part="pagination" class="pagination--table"></iam-pagination>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if (!document.getElementById('tableSingleExtras') && !document.getElementById('tableExtras')) {
-      document.head.insertAdjacentHTML('beforeend', `<style id="tableSingleExtras">${loadExtraCSS}</style>`);
+    if (!document.getElementById('tableExtras')) {
+      document.head.insertAdjacentHTML('beforeend', `<style id="tableExtras">${loadExtraCSS}</style>`);
     }
   }
 
   connectedCallback(): void {
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
-
     const form = findForm(this, table);
-
-    const assetLocation = document.body.hasAttribute('data-assets-location')
-      ? document.body.getAttribute('data-assets-location')
-      : '/assets';
-    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     setupBasicTable(this, table, form, pagination);
 
-    setupExpandedTable(this, table, form, pagination);
-
-    setupAjaxTable(this, table, form, pagination);
-
     paginateTable(this, table, form, pagination, () => {
-      loadAjaxTable(this, table, form, pagination);
+      paginateRows(this);
     });
   }
 }
 
-export default iamTableAjax;
+export default iamTableAdvanced;
