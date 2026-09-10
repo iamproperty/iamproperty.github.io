@@ -7,7 +7,7 @@
   <main>
     <h1>Submit table</h1>
 
-    <Table data-expandable>
+    <Table data-submit data-expandable>
       <Actionbar data-selectall="" data-search="" slot="before" data-selected="0">
         <div class="dialog__wrapper" slot="overflow">
           <button data-v-c1cc5ae7="" class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -778,7 +778,7 @@
       </table>
     </Table>
 
-    <Table data-expandable>
+    <Table data-submit data-expandable>
       <Actionbar data-selectall="" data-search="" slot="before" data-selected="0">
         <div class="dialog__wrapper" slot="overflow">
           <button data-v-c1cc5ae7="" class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -888,7 +888,7 @@
       </table>
     </Table>
 
-    <Table data-expandable class="table--cta">
+    <Table data-submit data-expandable class="table--cta">
       <table>
         <thead>
           <tr>

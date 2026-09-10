@@ -113,7 +113,7 @@ export const setupBasicTable = (component, table, pagination, form): void => {
   }
 
   setupPagination(component, table, pagination, form);
-  fixTablebody(component, table);
+  fixTablebody(component, table, pagination);
 
   // Max height
   if (component.classList.contains('mh-sm')) tableWrapper.classList.add('mh-sm');
@@ -125,14 +125,14 @@ export const setupBasicTable = (component, table, pagination, form): void => {
   component.classList.remove('mh-lg');
 };
 
-export const fixTablebody = (component, table): void => {
+export const fixTablebody = (component, table, pagination): void => {
 
   createExpandButton(component, table);
   fixTableCells(table);
   addMenuButtons(component, table);
   setFixedCellsViaHeaders(table);
   highlightRows(component); // Is this still needed?
-  paginateRows(component, table, component.shadowRoot.querySelector('iam-pagination'));
+  paginateRows(component, table, pagination);
 };
 
 export const setFixedCellsViaHeaders = (table): void => {
@@ -585,7 +585,7 @@ export const sortTable = (component, table, form, savedTableBody): void | boolea
 
   if (!sortBy) {
     tbody.innerHTML = savedTableBody.innerHTML;
-    fixTablebody(component, table);
+    fixTablebody(component, table, pagination);
     return false;
   }
 
@@ -1120,7 +1120,7 @@ export const setupAdvancedTable = (component, table, pagination, form, savedTabl
 
   populateFilterOptions(component, table);
   createInlineHeaderButtons(component, table);
-  filterAdvancedTable(component, table);
+  filterAdvancedTable(component, table, pagination);
   paginateRows(component, table, pagination);
 
   table.querySelectorAll('thead tr th[data-sort] [data-sort-btn]').forEach((btn) => {
@@ -1129,7 +1129,7 @@ export const setupAdvancedTable = (component, table, pagination, form, savedTabl
       event.stopPropagation();
 
       const heading = event.target.closest('th[data-sort]');
-      sortViaHeader(component, table, heading, savedTableBody);
+      sortViaHeader(component, table, pagination, heading, savedTableBody);
 
       btn.closest('th[data-sort]')?.focus();
     });
@@ -1177,7 +1177,7 @@ export const createInlineHeaderButtons = (component, table): void => {
   });
 };
 
-export const sortViaHeader = (component, table, heading, savedTableBody): void => {
+export const sortViaHeader = (component, table, pagination, heading, savedTableBody): void => {
 
   const btn = heading.querySelector('[data-sort-btn]');
   const headingText = heading?.querySelector('.th__content')?.textContent.trim();
@@ -1220,9 +1220,9 @@ export const sortViaHeader = (component, table, heading, savedTableBody): void =
       addSelectboxes(component, table, actionbar);
     }
 
-    fixTablebody(component, table);
-    filterAdvancedTable(component, table);
-    paginateRows(component, table, component.shadowRoot.querySelector('iam-pagination'));
+    fixTablebody(component, table, pagination);
+    filterAdvancedTable(component, table, pagination);
+    paginateRows(component, table, pagination);
 
     // Dispatch event
     const dispatchedEvent = new CustomEvent('sort-by-heading', {
@@ -1251,6 +1251,8 @@ export const sortViaHeader = (component, table, heading, savedTableBody): void =
     const format = heading.getAttribute('data-format') ?? '';
 
     sortTableByValues(component, table, sortBy, order, format);
+
+    paginateRows(component, table, pagination);
   }
 };
 
@@ -1474,7 +1476,7 @@ export const createFilterPopover = (component, table, heading): void => {
     // TODO: Validate the inputs before updating the filters
 
     updateHeadingFilters(heading, filtersPopover);
-    filterAdvancedTable(component, table);
+    filterAdvancedTable(component, table, pagination);
     filtersPopover.hidePopover();
 
     const submitEvent = new CustomEvent('filters-updated', {
@@ -1494,7 +1496,7 @@ export const createFilterPopover = (component, table, heading): void => {
   filterResetButton.addEventListener('click', (event) => {
 
     resetHeadingFilters(heading);
-    filterAdvancedTable(component, table);
+    filterAdvancedTable(component, table, pagination);
     filtersPopover.hidePopover();
 
     const submitEvent = new CustomEvent('filters-updated', {
@@ -1520,7 +1522,7 @@ export const createFilterPopover = (component, table, heading): void => {
   });
 };
 
-export const filterAdvancedTable = (component, table): void => {
+export const filterAdvancedTable = (component, table, pagination): void => {
 
   const columns = getInlineFilters(component, table);
   const appliedFilters = [];
@@ -1621,8 +1623,8 @@ export const filterAdvancedTable = (component, table): void => {
   });
 
   setFilterIndicator(component, table, appliedFilters);
-  createAppliedFilters(component, table, appliedFilters);
-  paginateRows(component, table, component.shadowRoot.querySelector('iam-pagination'));
+  createAppliedFilters(component, table, pagination, appliedFilters);
+  paginateRows(component, table, pagination);
 };
 
 export const setFilterIndicator = (component, table, appliedFilters): void => {
@@ -1641,7 +1643,7 @@ export const setFilterIndicator = (component, table, appliedFilters): void => {
   });
 };
 
-export const createAppliedFilters = (component, table, appliedFilters): void => {
+export const createAppliedFilters = (component, table, pagination, appliedFilters): void => {
 
   const appliedFiltersContainer = component.shadowRoot.querySelector('.table-filters');
 
@@ -1660,12 +1662,12 @@ export const createAppliedFilters = (component, table, appliedFilters): void => 
     filterElement.addEventListener('click', (event) => {
 
       filterElement.remove();
-      removeAppliedFilter(component, table, filter);
+      removeAppliedFilter(component, table, pagination, filter);
     });
   });
 };
 
-export const removeAppliedFilter = (component, table, filter): void => {
+export const removeAppliedFilter = (component, table, pagination, filter): void => {
 
   const heading = table.querySelector(`th[data-label="${filter}"]`);
 
@@ -1683,7 +1685,7 @@ export const removeAppliedFilter = (component, table, filter): void => {
     heading.dataset.filters = JSON.stringify(newFilters);
   }
 
-  filterAdvancedTable(component, table);
+  filterAdvancedTable(component, table, pagination);
 };
 
 export const addExportEventListeners = (button, table): void | boolean => {
