@@ -26,7 +26,7 @@ export const navTemplate = /* HTML */ `<div class="container">
 
         <slot name="actions"></slot>
 
-        <div class="menu__secondary bg-light">
+        <div class="menu__secondary">
           <div class="container">
             <slot name="secondary"></slot>
           </div>
@@ -60,7 +60,7 @@ export const populateSections = (data): void => {
   data.forEach((section) => {
     html += `<span class="section section--${section.layout}">
       ${section.title ? `<span class="lead section-title" data-product="${section.id}" data-title>${section.title}:</span>` : ''}
-      ${section.description ? `<span class="lead section-desc text-body" data-product="${section.id}"><i class="fa-solid fa-rocket colour-warning"></i> ${section.description}</span>` : ''}
+      ${section.description ? `<span class="lead section-desc text-body" data-product="${section.id}"><i class="fa-solid fa-lock colour-warning"></i> ${section.description}</span>` : ''}
       ${populateLinks(section.links)}
     </span>`;
   });

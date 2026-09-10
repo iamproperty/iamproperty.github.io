@@ -6,6 +6,10 @@
 @layer templates {
   body:has(.template--form) {
     background-color: #e9f9fd;
+
+    @media screen and (prefers-color-scheme: dark) {
+      background-colour: var(--colour-canvas);
+    }
   }
 
   .template--form {
