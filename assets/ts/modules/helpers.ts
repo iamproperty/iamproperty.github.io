@@ -207,12 +207,12 @@ export const isValidPostcode = (searchValue: string): boolean => {
 
 export const prepareData = (format, data): any => {
   switch (format) {
-    case 'date':
-      data = data.replaceAll('-', '/');
-      const dateArr = data.split('/');
-      const year = dateArr[2].length == 2 ? '20' + dateArr[2] : dateArr[2];
-
-      return `${+year}-${+dateArr[1] - 1}-${+dateArr[0]}`;
+    case 'date': {
+      const normalised = String(data).replaceAll('-', '/').trim();
+      const [day, month, yy] = normalised.split('/');
+      const year = yy?.length === 2 ? `20${yy}` : yy;
+      return `${year}-${zeroPad(parseInt(month, 10), 2)}-${zeroPad(parseInt(day, 10), 2)}`;
+    }
     case 'price':
       data = data.replaceAll('£', '').replaceAll(',', '').trim();
       data = parseFloat(data);
