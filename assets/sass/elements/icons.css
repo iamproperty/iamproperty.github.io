@@ -49,6 +49,9 @@
     color: var(--colour, inherit);
   }
 
+  [class*='fa-duotone'] {
+    --fa-family: var(--fa-family-duotone);
+  }
   /* #endregion fixes */
 
   .icon.fa-star:before {

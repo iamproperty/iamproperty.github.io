@@ -1,8 +1,8 @@
 <template>
-  <iam-table-no-submit>
+  <iam-table-advanced>
     <slot name="before"></slot>
     <slot></slot>
-  </iam-table-no-submit>
+  </iam-table-advanced>
 </template>
 
 <script>
@@ -11,10 +11,10 @@
   export default {
     created() {
       this.$nextTick(function () {
-        import(`../../../assets/js/components/table-no-submit/table-no-submit.component.min.js`)
+        import(`../../../assets/js/components/table-advanced/table-advanced.component.min.js`)
           .then((module) => {
-            if (!window.customElements.get(`iam-table-no-submit`))
-              window.customElements.define(`iam-table-no-submit`, module.default);
+            if (!window.customElements.get(`iam-table-advanced`))
+              window.customElements.define(`iam-table-advanced`, module.default);
           })
           .catch((err) => {
             console.log(err.message);

@@ -121,7 +121,7 @@
 }
 
 ::slotted(:is(a, button)[slot='footer']:not([class*='mb-'])) {
-  margin-bottom: var(--card-footer-bottom-padding) !important;
+  margin-bottom: var(--card-footer-bottom-padding, 1.5rem) !important;
 }
 
 /* #region Show total number */

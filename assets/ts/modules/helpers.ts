@@ -204,3 +204,55 @@ export const isValidPostcode = (searchValue: string): boolean => {
 
   return regexp.test(searchValue.trim());
 };
+
+export const prepareData = (format, data): any => {
+  switch (format) {
+    case 'date': {
+      const normalised = String(data).replaceAll('-', '/').trim();
+      const [day, month, yy] = normalised.split('/');
+      const year = yy?.length === 2 ? `20${yy}` : yy;
+      return `${year}-${zeroPad(parseInt(month, 10), 2)}-${zeroPad(parseInt(day, 10), 2)}`;
+    }
+    case 'price':
+      data = data.replaceAll('£', '').replaceAll(',', '').trim();
+      data = parseFloat(data);
+      return data;
+    default:
+      return data;
+  }
+};
+
+
+export const formatData = (format, data): any => {
+  switch (format) {
+    case 'datetime':
+      return (
+        new Date(data).toLocaleDateString('en-gb', {
+          weekday: 'short',
+          year: '2-digit',
+          month: 'long',
+          day: 'numeric',
+        }) +
+        ' ' +
+        new Date(data).toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' })
+      );
+    case 'date':
+      return new Date(prepareData('date', data)).toLocaleDateString('en-gb', {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+      });
+    case 'capitalise':
+      return (data = ucfirst(data));
+    case 'price':
+      return (new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        trailingZeroDisplay: 'stripIfInteger'
+      }).format(prepareData('price', data)));
+    default:
+      return data;
+  }
+};

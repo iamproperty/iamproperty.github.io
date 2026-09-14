@@ -4,6 +4,7 @@
   import Key from '../key.vue';
 
   import DSHeader from '../DSHeader.vue';
+  import TableFeatures from '../TablesFeatures.vue';
   import { useRoute } from 'vue-router';
 
   const route = useRoute();
@@ -17,6 +18,7 @@
   const navComponents = generateList(routes, '/nav');
   const notificationsComponents = generateList(routes, '/notifications');
   const dialogComponents = generateList(routes, '/dialogs');
+  const tableComponents = generateList(routes, '/tables');
 </script>
 
 <template>
@@ -72,6 +74,20 @@
         :href="item.link"
         :title="`View the documentation for the ${item.title} component`"
         v-for="item in cardComponents"
+        class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto"
+      >
+        <IndexCard :item="item" />
+      </a>
+    </div>
+
+    <h2>Table components</h2>
+
+
+    <div class="sub-grid mb-5">
+      <a
+        :href="item.link"
+        :title="`View the documentation for the ${item.title} component`"
+        v-for="item in tableComponents"
         class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto"
       >
         <IndexCard :item="item" />

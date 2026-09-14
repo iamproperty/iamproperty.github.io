@@ -65,6 +65,7 @@
 ::slotted(*:is(button, a, label, span, iam-button)) {
   /* all: unset !important; */
   background: unset !important;
+  border: unset !important;
   outline: unset !important;
   color: var(--colour-primary) !important;
   font-weight: inherit !important;

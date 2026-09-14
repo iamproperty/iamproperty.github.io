@@ -71,6 +71,14 @@ slot[name='selectall'] {
   }
 }
 
+.selectall span {
+  display: none;
+
+  @container (width > 23.4375em) {
+    display: contents;
+  }
+}
+
 .actionbar [data-search] {
   display: none;
 }
@@ -124,6 +132,30 @@ slot[name='selectall'] {
   pointer-events: none;
   background-color: #e6eaec;
 }
+
+/* #region Clear seach button */
+
+.clear-search {
+  display: var(--error-hide, block);
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 0.5rem;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  display: none;
+
+  &:not(:hover, :focus) {
+    outline-color: transparent !important;
+    background-color: transparent !important;
+  }
+}
+
+.has-value .clear-search {
+  display: block !important;
+}
+
+/* #endregion */
 
 /*  Show selected bar */
 .actionbar {
@@ -194,7 +226,7 @@ slot[name='selectall'] {
 ::slotted(hr) {
   height: 2rem;
   color: #9d9d9d !important;
-  width: 1px;
+  width: 1px!important;
   display: none;
   margin-left: 1rem !important;
 

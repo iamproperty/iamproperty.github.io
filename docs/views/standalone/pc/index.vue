@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { ref, onMounted, defineComponent } from 'vue';
   import PCNav from './components/PCNav.vue';
-  import Table from '@/components/Table/TableNoSubmit.vue';
+  import Table from '@/components/Table/Table.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Rankings from '@/components/Rankings/Rankings.vue';
   import Search from '@/components/Search/Search.vue';

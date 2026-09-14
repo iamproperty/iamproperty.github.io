@@ -60,17 +60,15 @@ fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
 
         if(component == "table"){
 
-          exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-no-submit compiled`);
+          exec(`rollup --environment COMPONENT:table-basic --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-basic compiled`);
 
-          exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-submit compiled`);
+          exec(`rollup --environment COMPONENT:table-advanced --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-advanced compiled`);
 
           exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
           console.log(`table-ajax compiled`);
         }
-
-
 
         prevComp = component;
         clearTimeout(compTimeout);
@@ -81,7 +79,6 @@ fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
     })
   }
 });
-
 
 let prevSassComp;
 let sassCompTimeout;
@@ -102,24 +99,11 @@ fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
 
       let component = filename.split('.')[0];
 
-      if (stat.isFile() && component !== prevComp && !filename.endsWith('.preload.scss') && !filename.endsWith('.global.scss')) {
+      if (stat.isFile() && component !== prevComp) {
         
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
         console.log(`${filename} changed`);
-
-
-        if(component == "table"){
-
-          exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-no-submit compiled`);
-
-          exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-submit compiled`);
-
-          exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
-          console.log(`table-ajax compiled`);
-        }
 
         prevComp = component;
         clearTimeout(sassCompTimeout);
@@ -131,3 +115,76 @@ fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
     })
   }
 });
+
+// #region Applications
+
+let prevAppComp;
+let compAppTimeout;
+
+const watchAppFolder = __dirname.replace('local_modules','\assets\\ts\\apps');
+console.log(`Watching for file changes on ${watchAppFolder}`);
+
+fs.watch(watchAppFolder, { recursive: true }, (event, filename) => {
+
+  let correctfilename = __dirname.replace('local_modules','\assets\\ts\\apps\\')+filename;
+
+  if (event === 'change') {
+    fs.stat (correctfilename, function (err, stat) {
+
+      if(err) return console.error(err)
+      const modTime = stat.mtimeMs
+      const size = stat.size
+
+      let component = filename.split('.')[0];
+
+      if (stat.isFile() && component !== prevAppComp) {
+        
+        exec(`rollup --environment COMPONENT:${component} --config rollup-app.config.cjs --sourcemap`);
+        console.log(`${filename} changed`);
+        console.log(`${component} compiled`);
+
+        prevAppComp = component;
+        clearTimeout(compAppTimeout);
+        compAppTimeout = setTimeout(function(){
+          prevAppComp = "";
+        }, 100);
+      }
+    })
+  }
+});
+
+
+let AppSassCompTimeout;
+
+const watchSassAppFolder = __dirname.replace('local_modules','\\assets\\sass\\apps');
+console.log(`Watching for file changes on ${watchSassAppFolder}`);
+
+fs.watch(watchSassAppFolder, { recursive: true }, (event, filename) => {
+
+  let correctfilename = __dirname.replace('local_modules','\\assets\\sass\\apps\\')+filename;
+  if (event === 'change') {
+    fs.stat (correctfilename, function (err, stat) {
+
+      if(err) return console.error(err)
+      const modTime = stat.mtimeMs
+      const size = stat.size
+
+      let component = filename.split('.')[0];
+
+      if (stat.isFile() && component !== prevSassComp) {
+        
+        exec(`rollup --environment COMPONENT:${component} --config rollup-app.config.cjs --sourcemap`);
+        console.log(`${component} compiled`);
+        console.log(`${filename} changed`);
+
+        prevSassComp = component;
+        clearTimeout(AppSassCompTimeout);
+        AppSassCompTimeout = setTimeout(function(){
+          prevSassComp = "";
+        }, 100);
+      }
+
+    })
+  }
+});
+// #endregion
