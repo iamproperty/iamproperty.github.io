@@ -156,13 +156,12 @@ fs.watch(watchAppFolder, { recursive: true }, (event, filename) => {
 
 let AppSassCompTimeout;
 
-const watchSassAppFolder = __dirname.replace('local_modules','\assets\\sass\\apps');
+const watchSassAppFolder = __dirname.replace('local_modules','\\assets\\sass\\apps');
 console.log(`Watching for file changes on ${watchSassAppFolder}`);
 
 fs.watch(watchSassAppFolder, { recursive: true }, (event, filename) => {
 
-  let correctfilename = __dirname.replace('local_modules','\assets\\sass\\apps\\')+filename;
-
+  let correctfilename = __dirname.replace('local_modules','\\assets\\sass\\apps\\')+filename;
   if (event === 'change') {
     fs.stat (correctfilename, function (err, stat) {
 

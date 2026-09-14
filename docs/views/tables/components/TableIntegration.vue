@@ -3,9 +3,11 @@
 
   import { table as events } from '../../../events.js';
 
-  defineProps({
-    componentType: String,
+  const props = withDefaults(defineProps<{ componentType?: string }>(), {
+    componentType: 'table',
   });
+
+  const componentType = props.componentType;
 
   const elementTableFeatures = [
     'Basic styling'

@@ -14,8 +14,37 @@
 @use '../utilities/margins';
 @use '../utilities/visually-hidden';
 
+@font-face {
+  font-family: 'Qanelas - Hosted';
+  src:
+    url('https://iamproperty.github.io/assets/fonts/qanelas-medium-webfont.woff2') format('woff2'),
+    url('https://iamproperty.github.io/assets/fonts/qanelas-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Qanelas - Hosted';
+  src:
+    url('https://iamproperty.github.io/assets/fonts/qanelas-semibold-webfont.woff2') format('woff2'),
+    url('https://iamproperty.github.io/assets/fonts/qanelas-semibold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Qanelas - Hosted';
+  src:
+    url('https://iamproperty.github.io/assets/fonts/qanelas-bold-webfont.woff2') format('woff2'),
+    url('https://iamproperty.github.io/assets/fonts/qanelas-bold-webfont.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
 
 :host {
+  --font-body: 'Qanelas - Hosted', sans-serif;
+  --font-heading: 'Qanelas - Hosted', sans-serif;
   display: block;
   //height: 100%;
   padding-top: calc(1rem - 10px);
@@ -25,9 +54,11 @@
   width: 100%;
   box-sizing: border-box;
 
+  font-family: var(--font-body);
+
   > *{
-    
-  box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: var(--font-body);
   }
 }
 

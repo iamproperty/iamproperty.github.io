@@ -15,8 +15,8 @@ class iamMap extends HTMLElement {
     ${loadCSS}
     </style>
 
-    <div class="wrapper" parts="wrapper">
-      <div class="map" id="map" parts="map"></div>
+    <div class="wrapper" part="wrapper">
+      <div class="map" id="map" part="map"></div>
       <slot></slot>
     </div>
     `;
