@@ -29,9 +29,6 @@ class iamVisProperties extends HTMLElement {
 
   connectedCallback(): void {
 
-    document.head.insertAdjacentHTML('beforeend', `<style id="tableAdvancedExtras">/* Empty */</style>`);
-
-
     const table = this.querySelector('table');
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
