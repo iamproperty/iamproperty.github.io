@@ -55,7 +55,7 @@ export const shared = {
 };
 
 let template =
-  window.location.pathname.startsWith('/standalone') || window.location.pathname.startsWith('/prototype')
+  window.location.pathname.startsWith('/standalone') || (window.location.pathname.startsWith('/prototypes') && window.location.pathname !== '/prototypes' && window.location.pathname !== '/prototypes/')
     ? Standalone
     : App;
 
