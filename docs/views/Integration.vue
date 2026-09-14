@@ -20,6 +20,10 @@
 <template>
   <h2 class="pb-0 pt-5">Integration</h2>
   <Tabs class="container">
+    <details v-if="slots['details']">
+      <summary><h3>Details</h3></summary>
+      <slot name="details"></slot>
+    </details>
     <details v-if="showInstall">
       <summary><h3>Install</h3></summary>
 
@@ -136,6 +140,7 @@
       <h4 v-if="slots['keyboard']">Keyboard commands</h4>
       <slot name="keyboard"></slot>
     </details>
+    <!--
     <details v-if="showTrack">
       <summary><h3>Track</h3></summary>
 
@@ -171,6 +176,7 @@
         usually a 3rd party like Google Analytics.</small
       >
     </details>
+    -->
     <details v-if="slots['examples']">
       <summary>Examples</summary>
       <h3>Examples</h3>

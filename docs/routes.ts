@@ -63,6 +63,15 @@ const routes = [
           'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
       },
       {
+        path: 'content',
+        name: 'Content style guide',
+        meta: {
+          title: 'Content | Foundations | iamkey',
+          status: 'alpha',
+        },
+        component: () => import('./views/foundations/ContentFormats.vue'),
+      },
+      {
         path: 'utilities',
         name: 'Utility Classes',
         meta: {
@@ -1089,14 +1098,16 @@ const routes = [
         name: 'Basic table',
         meta: {
           title: 'Basic table | Components | iamkey',
+          desc: 'Slightly enhanced table with more features than a basic HTML table; including expandable rows, responsive view and pagination.',
         },
         component: () => import('./views/tables/BasicTableDoc.vue'),
       },
       {
-        path: 'expanded',
-        name: 'Expanded table',
+        path: 'default',
+        name: 'Table component',
         meta: {
-          title: 'Expanded table | Components | iamkey',
+          title: 'Table component | Components | iamkey',
+          desc: 'A more enhanced table component with all the same features as the basic table, but with support for the actionbar component and more advanced features such as selectable rows and filtering.',
         },
         component: () => import('./views/tables/ExpandedTableDoc.vue'),
       },
@@ -1105,6 +1116,7 @@ const routes = [
         name: 'Advanced table',
         meta: {
           title: 'Advanced table | Components | iamkey',
+          desc: 'Advanced table component with all the same features as the default table and basic table, but with support for inline sorting and filtering.',
         },
         component: () => import('./views/tables/AdvancedTableDoc.vue'),
       },
@@ -1113,6 +1125,7 @@ const routes = [
         name: 'AJAX table',
         meta: {
           title: 'AJAX table | Components | iamkey',
+          desc: 'AJAX table component with all the same features as the advanced table, but with support for loading data from an API endpoint.',
         },
         component: () => import('./views/tables/AjaxTableDoc.vue'),
       },
@@ -1367,6 +1380,15 @@ const routes = [
         path: 'carousel-admin-panel',
         component: () => import('./views/examples/CarouselAdminPanel.vue'),
       },
+      /* Tables */
+      {
+        path: 'actionbar-table',
+        component: () => import('./views/examples/tables/TableActionbars.vue'),
+      },
+      {
+        path: 'tables-fixed-columns',
+        component: () => import('./views/examples/tables/TableFixedColumns.vue'),
+      },
       {
         path: 'basic-table',
         component: () => import('./views/examples/BasicTable.vue'),
@@ -1387,9 +1409,10 @@ const routes = [
         path: 'table-highlight',
         component: () => import('./views/examples/HighlightRow.vue'),
       },
+      /* Actionbars */
       {
-        path: 'actionbar-table',
-        component: () => import('./views/examples/ActionbarTable.vue'),
+        path: 'tables-actionbars',
+        component: () => import('./views/examples/tables/TableActionbars.vue'),
       },
       {
         path: 'actionbar-panel',

@@ -6,12 +6,12 @@
   ];
   const basicTableFeatures = [...elementTableFeatures,
     'Vertical overflow',
-    'CTA fixed column',
     'Responsive Mobile view',
     'Expandable rows',
     'Pagination'
   ];
   const expandedTableFeatures = [...basicTableFeatures,
+    'CTA fixed column',
     'Action bar',
     'Selectable rows',
   ];
@@ -20,6 +20,7 @@
     'Filtering via column headers',
     'Show/hide columns',
     'Column reordering (In coming)',
+    'Export to CSV',
   ];
 
   const ajaxTableFeatures = [...advancedTableFeatures,
