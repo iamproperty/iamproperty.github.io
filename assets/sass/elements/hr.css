@@ -1,5 +1,4 @@
 @layer elements {
-  
   hr {
     --border-style: solid;
     --border-color: var(--colour-border);
@@ -18,13 +17,12 @@
     }
   }
 
-  hr[class*="border-"] {
+  hr[class*='border-'] {
     border: none;
-    border-bottom:  var(--border-width) var(--border-style) var(--border-color);
+    border-bottom: var(--border-width) var(--border-style) var(--border-color);
   }
 
   .hr--vertical {
-
     height: calc(100% + 0.5rem);
     margin-left: 0.5rem;
     margin-right: 1rem;

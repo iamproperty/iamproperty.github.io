@@ -14,7 +14,6 @@ class iamPassword extends HTMLElement {
 
     const loadCSS = `@import "${assetLocation}/css/components/password.component.css";`;
 
-
     const template = document.createElement('template');
     template.innerHTML = `
       <style>
@@ -31,12 +30,10 @@ class iamPassword extends HTMLElement {
   }
 
   connectedCallback(): void {
-
-  
     const input = this.querySelector('input');
 
-    const buttonEle = this.shadowRoot.querySelector('button')
-    const pwdChecker = this.shadowRoot?.querySelector('.pwd-checker')
+    const buttonEle = this.shadowRoot.querySelector('button');
+    const pwdChecker = this.shadowRoot?.querySelector('.pwd-checker');
 
     // Switch icon and input type
     buttonEle.addEventListener('click', (event) => {
@@ -55,11 +52,7 @@ class iamPassword extends HTMLElement {
       }
     });
 
-
-    
     input.addEventListener('input', (event) => {
-    
-
       const password = input.value;
       const minChars = input.hasAttribute('minlength') ? input.getAttribute('minlength') : 12;
 
@@ -96,22 +89,20 @@ class iamPassword extends HTMLElement {
             // found
             strength = 3;
             extraMsg = `(this password is very common)`;
-            
+
             pwdChecker.innerHTML = `Password strength: ${strengthName[strength - 1]} ${extraMsg}`;
-          } 
+          }
 
           input.removeEventListener('hibpCheck', checkhibpCheck); // Succeeds
-        } 
+        }
       }
-      
+
       if (strength <= 3) pwdChecker.classList.add('invalid-feedback');
       else pwdChecker.classList.remove('invalid-feedback');
 
       pwdChecker.setAttribute('data-strength', strength);
       pwdChecker.innerHTML = `Password strength: ${strengthName[strength - 1]} ${extraMsg}`;
-      
     });
-    
   }
 }
 

@@ -63,7 +63,7 @@
       pointer-events: none;
     }
     &:has([readonly]):after {
-      display: none!important;
+      display: none !important;
     }
   }
 
@@ -83,7 +83,7 @@
     }
 
     &:has(:hover, :focus) {
-      background: #eeeeee!important;
+      background: #eeeeee !important;
     }
 
     &:is(:active) {
@@ -93,8 +93,8 @@
     &:has(input:checked),
     &.selected,
     &[aria-pressed='true'] {
-      background: #e9f9fd!important;
-      outline: 1px solid #1ebee6!important;
+      background: #e9f9fd !important;
+      outline: 1px solid #1ebee6 !important;
     }
   }
   /* Quick fix for badges in buttons */

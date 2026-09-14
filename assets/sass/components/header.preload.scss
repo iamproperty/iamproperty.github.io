@@ -6,7 +6,6 @@ iam-header {
 }
 
 iam-header:not(:defined) {
-  
   --colour-heading: var(--colour-white);
   --colour-body: var(--colour-white);
   --colour-underline: var(--colour-white);
@@ -20,7 +19,7 @@ iam-header:not(:defined) {
   max-width: var(--max-width);
   background-color: var(--colour-primary-theme);
 
-  hr[slot="toolbox"] {
-    display: none!important;
+  hr[slot='toolbox'] {
+    display: none !important;
   }
 }

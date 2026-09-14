@@ -54,8 +54,7 @@ class iamInlineEdit extends HTMLElement {
 
     // cancel
     cancelButton.addEventListener('click', () => {
-      if(input){
-          
+      if (input) {
         input.value = originalValue;
         input.blur();
       }
@@ -89,7 +88,7 @@ class iamInlineEdit extends HTMLElement {
       inlineEdit.blur();
       statusSaving.classList.remove('d-none');
 
-      if(input){
+      if (input) {
         input.disabled = true;
 
         input.blur();
@@ -100,7 +99,7 @@ class iamInlineEdit extends HTMLElement {
       }
     });
 
-    if(input){
+    if (input) {
       // Save
       if (input.tagName === 'INPUT') {
         input.addEventListener('keydown', (event) => {

@@ -20,16 +20,17 @@
       <a href="/">Lorem ipsum</a>
       <a href="/">Lorem ipsum</a>
 
-
       <span class="title" slot="account">John Jones</span>
-      <a href="/standalone/switch-account" class="btn btn-tertiary switch-account" slot="account"><i class="fa-regular fa-arrow-up-arrow-down me-1"></i>Switch account</a>
+      <a href="/standalone/switch-account" class="btn btn-tertiary switch-account" slot="account"
+        ><i class="fa-regular fa-arrow-up-arrow-down me-1"></i>Switch account</a
+      >
       <a href="/" slot="account">Lorem ipsum</a>
-
-
     </Nav>
   </nav>
   <main>
-    <Notification data-status="success" data-timeout="6000" data-type="toast" dismissable><strong>Account switched</strong><br/>You are using {{ accountName }}</Notification>
+    <Notification data-status="success" data-timeout="6000" data-type="toast" dismissable
+      ><strong>Account switched</strong><br />You are using {{ accountName }}</Notification
+    >
 
     <h1>Client onboarding</h1>
 

@@ -389,7 +389,8 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
   order: 10;
   display: none;
 }
-/* #endregion */ Second table
+/* #endregion */
+Second table
 
 /* #region Default column chart (Also applies to line chart) */
 .chart__wrapper {
@@ -1256,8 +1257,7 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
 /*  Line chart */
 #{'.chart--animate.animating '+$line-chart}
 /* #{'.chart--animate '+proportional-chart}, */
-/* #{'.chart--animate '+combo-chart} */
-{
+/* #{'.chart--animate '+combo-chart} */ {
   .line path {
     transition: 2s ease-out;
   }
@@ -1265,8 +1265,7 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
 
 #{'.chart--animate:not(.inview) '+$line-chart}
 /* #{'.chart--animate:not(.inview) '+proportional-chart}, */
-/* #{'.chart--animate:not(.inview) '+combo-chart} */
-{
+/* #{'.chart--animate:not(.inview) '+combo-chart} */ {
   .line path {
     d: var(--path);
   }

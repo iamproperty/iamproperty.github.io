@@ -4,7 +4,6 @@
 
   import Nav from '@/components/Nav/Nav.vue';
 
-
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
@@ -13,11 +12,7 @@
 </script>
 
 <template>
-
-  <TrackEvents
-    selector="iam-nav"
-    :events="[]"
-  ></TrackEvents>
+  <TrackEvents selector="iam-nav" :events="[]"></TrackEvents>
 
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -84,7 +79,6 @@
       <p>This navbar can be stick or not depending on ruling - it will be none-sticky by default.</p>
     </div>
 
-
     <NavIntegration></NavIntegration>
     <Versions pdf="/pdfs/navbar.pdf">
       <table>
@@ -97,15 +91,12 @@
         </thead>
         <tbody class="text-body">
           <tr>
-              <td>V0.1</td>
-              <td>25.08.2023</td>
-              <td>N/A</td>
-            </tr>
+            <td>V0.1</td>
+            <td>25.08.2023</td>
+            <td>N/A</td>
+          </tr>
         </tbody>
       </table>
     </Versions>
-
   </main>
 </template>
-
-

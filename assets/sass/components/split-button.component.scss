@@ -5,6 +5,10 @@
 
 @use '../components/menu.global';
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /*  Main button */
 ::slotted(button:not([slot])) {
   float: left;
@@ -13,6 +17,16 @@
   border-bottom-right-radius: 0 !important;
   border-right: none !important;
   padding-right: 1rem !important;
+  outline: none !important;
+  padding-block: calc(var(--btn-padding-block) - 2px)!important;
+}
+::slotted(button:not([slot]).btn-secondary) {
+  border: 2px solid var(--colour-btn-secondary-border)!important;
+  border-right: none !important;
+}
+::slotted(button:not([slot]).btn-primary) {
+  border: 2px solid var(--colour-btn-border)!important;
+  border-right: none !important;
 }
 
 /*  Secondary buttons */
@@ -32,12 +46,13 @@
     display: inline-block;
 
     button {
+      outline: none !important;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-left: 1px solid rgba(0, 0, 0, 0.2);
       padding-right: 0;
       padding-left: 0.75rem;
       margin-bottom: 0;
+      padding-block: calc(var(--btn-padding-block) - 2px);
 
       .fa-light {
         &::before {
@@ -54,6 +69,37 @@
 
       &::after {
         display: none;
+      }
+    }
+
+    button:not(.border-0) {
+
+      border: 2px solid var(--colour-btn-border)!important;
+      border-left: 1px solid rgba(0, 0, 0, 0.2)!important;
+    }
+
+    .btn-secondary:not(.border-0) {
+
+      border: 2px solid var(--colour-btn-secondary-border)!important;
+      border-left: 1px solid rgba(0, 0, 0, 0.2)!important;
+    }
+  }
+}
+
+@layer elements {
+  .split-button {
+    .menu__wrapper {
+
+      button:not(.border-0) {
+
+        border: 2px solid var(--colour-btn-border)!important;
+        border-left: 1px solid rgba(0, 0, 0, 0.2)!important;
+      }
+
+      .btn-secondary:not(.border-0) {
+
+        border: 2px solid var(--colour-btn-secondary-border)!important;
+        border-left: 1px solid rgba(0, 0, 0, 0.2)!important;
       }
     }
   }

@@ -1,6 +1,5 @@
 @use '../_func' as *;
 
-
 :host {
   margin-bottom: 1.5rem;
   display: block;
@@ -20,10 +19,10 @@
 }
 
 ::slotted(*) {
-  flex-grow: 1!important;
-  flex-shrink: 1!important;
-  flex-basis: 50%!important;
-  margin-bottom: 0!important;
+  flex-grow: 1 !important;
+  flex-shrink: 1 !important;
+  flex-basis: 50% !important;
+  margin-bottom: 0 !important;
 }
 
 ::slotted(:first-child) {
@@ -34,9 +33,8 @@
   order: 3;
 }
 @media screen and (min-width: 36em) {
-
   .wrapper:before {
-    content: "";
+    content: '';
     order: 2;
     width: calc(var(--gap, 1rem) * 1.5);
     height: 2px;

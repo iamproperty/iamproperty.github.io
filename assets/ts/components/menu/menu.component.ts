@@ -21,10 +21,8 @@ class iamMenu extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     this.classList.add('dropdown');
 
-    
     const menuID = this.hasAttribute('id') ? this.getAttribute('id') : false;
     const menuButton = document.querySelector(`[popovertarget="${menuID}"]`);
 

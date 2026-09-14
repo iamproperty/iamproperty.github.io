@@ -1,5 +1,5 @@
-<script setup lang="ts"> 
-  import {ref,onMounted } from 'vue';
+<script setup lang="ts">
+  import { ref, onMounted } from 'vue';
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tooltip from '@/components/Tooltip/Tooltip.vue';
   import DSHeader from '../DSHeader.vue';
@@ -58,17 +58,15 @@
   ];
 
   const handleChange = (event) => {
-
     selected.value = `${event.target.value}`;
-  }
+  };
 
   const tooltipEl = ref<HTMLInputElement | undefined>();
 
   const handleChange2 = (event) => {
-
     const updateEvent = new CustomEvent('update');
     tooltipEl.value.dispatchEvent(updateEvent);
-  }
+  };
 </script>
 
 <template>
@@ -79,9 +77,9 @@
 
     <div class="container">
       <p>
-        The tooltip is visually attention-grabbing, with a pointer tip that visually indicates the association
-        between the popover and its trigger. The trigger button is small and discreet, so as not to disrupt the content
-        of the page.
+        The tooltip is visually attention-grabbing, with a pointer tip that visually indicates the association between
+        the popover and its trigger. The trigger button is small and discreet, so as not to disrupt the content of the
+        page.
       </p>
 
       <img :src="popoverPointer" alt="" loading="lazy" class="mb-5" />
@@ -186,28 +184,53 @@
 -->
 
     <h3>The component</h3>
-    <label class="sm-col-span-6">Position
+    <label class="sm-col-span-6"
+      >Position
 
-    <select  v-model="selected2" @change="(event) => {handleChange2(event)}">
-      <option v-for="option in options2" :value="option.id">
-        {{ option.name }}
-      </option>
-    </select></label>
-  
+      <select
+        v-model="selected2"
+        @change="
+          (event) => {
+            handleChange2(event);
+          }
+        "
+      >
+        <option v-for="option in options2" :value="option.id">
+          {{ option.name }}
+        </option>
+      </select></label
+    >
 
     <div :class="` visualtest tooltip-demo mb-5`" ref="tooltipEl">
-      
-      <Tooltip :class="` ${selected2} show-popover`" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title"></Tooltip>
+      <Tooltip
+        :class="` ${selected2} show-popover`"
+        title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua."
+        data-heading="Popover title"
+      ></Tooltip>
     </div>
 
-
     <h4>Inline example</h4>
-    <p><Tooltip title="Lorem ipsum dolor sit amet,"><i class="fa-solid fa-circle-info" slot="icon"></i></Tooltip> ipsum dolor sit amet, consectetur adipiscing elit, <Tooltip title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title">sed do incididunt</Tooltip> ut labore et dolore magna aliqua.</p>
-    
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <Tooltip data-type="info" title="Ipsum has been the industry's standard dummy text ever since the 1500s,">Lorum Ipsum has been the industry's standard dummy text ever since the 1500s,</Tooltip> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    
-    
-    
+    <p>
+      <Tooltip title="Lorem ipsum dolor sit amet,"><i class="fa-solid fa-circle-info" slot="icon"></i></Tooltip> ipsum
+      dolor sit amet, consectetur adipiscing elit,
+      <Tooltip
+        title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua."
+        data-heading="Popover title"
+        >sed do incididunt</Tooltip
+      >
+      ut labore et dolore magna aliqua.
+    </p>
+
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      <Tooltip data-type="info" title="Ipsum has been the industry's standard dummy text ever since the 1500s,"
+        >Lorum Ipsum has been the industry's standard dummy text ever since the 1500s,</Tooltip
+      >
+      when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not
+      only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
+      popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </p>
 
     <Integration component="tooltip" componentName="iam-tooltip">
       <template #web-component>
@@ -248,7 +271,6 @@
           </tbody>
         </table>
       </template>
-
     </Integration>
 
     <div class="bg-light version-control">
@@ -293,7 +315,6 @@
     }
 
     iam-tooltip {
-      
       position: absolute;
       top: 50%;
       left: 50%;
@@ -320,7 +341,6 @@
       width: 12rem;
     }
 
-
     .position-top-left {
       top: 0;
       left: 0;
@@ -338,18 +358,15 @@
     }
 
     .position-center-left {
-
       left: 0;
       transform: none;
     }
     .position-center-right {
-
       left: auto;
       right: 0;
       transform: none;
     }
 
-    
     .position-bottom-left {
       top: auto;
       bottom: 1rem;

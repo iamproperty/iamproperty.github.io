@@ -1,56 +1,63 @@
 <template>
+  <main class="template--auth">
+    <div class="pb-0 pe-2 mb-0 brand brand--property">
+      <svg>
+        <title>iam property</title>
+        <use xlink:href="/svg/logo.svg#logo-property"></use>
+      </svg>
+    </div>
 
-      <main class="template--auth">
-        <div class="pb-0 pe-2 mb-0 brand brand--property">
-          <svg>
-            <title>iam property</title>
-            <use xlink:href="/svg/logo.svg#logo-property"></use>
-          </svg>
-        </div>
+    <h1 class="h3 mt-5">Sign in</h1>
+    <form method="POST" action="http://my.iamproperty.test/login">
+      <label>Username <input type="text" name="username" autocomplete="username" required="" autofocus="" /></label>
 
-        <h1 class="h3 mt-5">Sign in</h1>
-        <form method="POST" action="http://my.iamproperty.test/login">
-          <label>Username <input type="text" name="username" autocomplete="username" required="" autofocus="" /></label>
+      <label
+        >Password
 
-          <label>Password
+        <span>
+          <input type="password" id="password" name="password" required="" autocomplete="on" />
 
-            <span>
-              <input type="password" id="password" name="password" required="" autocomplete="on" />
+          <button
+            type="button"
+            class="suffix fa-solid fa-eye-slash"
+            data-alt-class="suffix fa-solid fa-eye"
+            data-change-type="text"
+            data-input="password"
+            aria-hidden="true"
+          >
+            <span class="visually-hidden">Show password</span>
+          </button>
+        </span>
+      </label>
 
-              <button
-                type="button"
-                class="suffix fa-solid fa-eye-slash"
-                data-alt-class="suffix fa-solid fa-eye"
-                data-change-type="text"
-                data-input="password"
-                aria-hidden="true"
-              >
-                <span class="visually-hidden">Show password</span>
-              </button>
-            </span>
-          </label>
+      <label><input type="checkbox" name="remember" id="remember" />Remember me</label>
+      <hr />
+      <a href="http://my.iamproperty.test/password/reset" class="text-nowrap mb-5 mw-fit-content"
+        >Forgot your password?</a
+      >
+      <hr />
+      <button class="btn btn-primary px-5" type="submit" value="submit" data-cy="login-submit">Sign In</button>
+      <hr />
+      <p>
+        By signing in, I agree to the iamproperty
+        <a href="https://iamproperty.com/privacy-and-cookies/">Privacy Policy</a>.
+      </p>
+    </form>
+  </main>
+  <aside class="bg-primary">
+    <figure><img src="/img/signin-bg.png" alt="" /></figure>
 
-          <label><input type="checkbox" name="remember" id="remember" />Remember me</label>
-          <hr />
-          <a href="http://my.iamproperty.test/password/reset" class="text-nowrap mb-5 mw-fit-content">Forgot your password?</a>
-          <hr />
-          <button class="btn btn-primary px-5" type="submit" value="submit" data-cy="login-submit">Sign In</button>
-          <hr />
-          <p>By signing in, I agree to the iamproperty <a href="https://iamproperty.com/privacy-and-cookies/">Privacy Policy</a>.</p>
-        </form>
-      </main>
-      <aside class="bg-primary">
-        <figure><img src="/img/signin-bg.png" alt="" /></figure>
+    <span class="h4">Your partner for today and tomorrow</span>
+    <p>
+      At iamproperty we’re developing everything you need to run your agency under one roof, one supplier relationship.
+      With a ecosystem of solutions that will continue to grow and evolve with your agency, and that put you in control,
+      freeing you up to do what you do best.
+    </p>
 
-        <span class="h4">Your partner for today and tomorrow</span>
-        <p>
-          At iamproperty we’re developing everything you need to run your agency under one roof, one supplier
-          relationship. With a ecosystem of solutions that will continue to grow and evolve with your agency, and that
-          put you in control, freeing you up to do what you do best.
-        </p>
-
-        <a href="https://iamproperty.com/" class="btn btn-secondary"><i class="fa-regular fa-arrow-up-right-from-square"></i>Find out more</a>
-      </aside>
+    <a href="https://iamproperty.com/" class="btn btn-secondary"
+      ><i class="fa-regular fa-arrow-up-right-from-square"></i>Find out more</a
+    >
+  </aside>
 </template>
 <style lang="scss"></style>
 

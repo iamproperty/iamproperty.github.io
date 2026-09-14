@@ -7,15 +7,15 @@
 @use '../utilities/display' as *;
 
 hr {
-    --border-style: solid;
-    --border-color: var(--colour-border);
-    border: 0;
-    color: rgba(0, 0, 0, 0);
-    margin: 0;
-    border-bottom: none;
-    background-color: currentColor;
-    opacity: 1;
-    clear: both;
+  --border-style: solid;
+  --border-color: var(--colour-border);
+  border: 0;
+  color: rgba(0, 0, 0, 0);
+  margin: 0;
+  border-bottom: none;
+  background-color: currentColor;
+  opacity: 1;
+  clear: both;
 }
 
 /* #region file upload field */
@@ -52,9 +52,8 @@ hr {
   }
 }
 
-:host(.fileupload--hide-title) .file-upload .file-upload__title{
-
-  display: none!important;
+:host(.fileupload--hide-title) .file-upload .file-upload__title {
+  display: none !important;
 }
 
 .files {
@@ -71,7 +70,7 @@ hr {
     color: var(--colour-primary);
     border-color: #d8d8d8;
     background: #d8d8d8;
-    max-width: 25rem!important; /*(400) */
+    max-width: 25rem !important; /*(400) */
     position: relative;
 
     @media (forced-colors: active) {

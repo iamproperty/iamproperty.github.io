@@ -55,7 +55,12 @@ class iamCard extends HTMLElement {
     }
 
     // Add class that shows the right arrow icon
-    if (!this.querySelector('[slot="btns"]') && !this.querySelector('[slot="secondary"]') && !this.classList.contains('card--article') && !this.closest('.carousel--article-cards')) {
+    if (
+      !this.querySelector('[slot="btns"]') &&
+      !this.querySelector('[slot="secondary"]') &&
+      !this.classList.contains('card--article') &&
+      !this.closest('.carousel--article-cards')
+    ) {
       this.classList.add('show-icon');
     }
 
@@ -166,9 +171,7 @@ class iamCard extends HTMLElement {
       });
     });
 
-
-    if(this.querySelector('[slot="link"]'))
-      this.classList.add('hasLink');
+    if (this.querySelector('[slot="link"]')) this.classList.add('hasLink');
 
     trackComponent(this, 'iam-card', [
       'select-card',

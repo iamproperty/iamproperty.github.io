@@ -1,7 +1,5 @@
 @layer components {
-  
   iam-banner {
-    
     padding: 1.5rem;
     border-radius: 0.5rem;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
@@ -10,17 +8,16 @@
     overflow: hidden;
   }
 
-  iam-banner:not([class*="bg-"]) {
-
+  iam-banner:not([class*='bg-']) {
     --colour-heading: var(--colour-primary-theme);
     --colour-body: var(--colour-primary-theme);
     color: var(--colour-primary-theme);
-    color-scheme: light!important;
-    background-color: var(--colour-canvas-2)!important;
-    color: var(--colour-primary-theme)!important;
+    color-scheme: light !important;
+    background-color: var(--colour-canvas-2) !important;
+    color: var(--colour-primary-theme) !important;
   }
 
-  iam-banner [slot="buttons"]{
-    margin: 0!important;
+  iam-banner [slot='buttons'] {
+    margin: 0 !important;
   }
 }

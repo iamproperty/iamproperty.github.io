@@ -2,8 +2,10 @@
 @use 'charts.module' as *;
 @use '../elements/buttons' as *;
 
-*, *:before, *:after {
-    box-sizing: border-box;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 @for $i from 1 through 10 {
@@ -36,7 +38,6 @@
   }
 }
 /* #endregion */
-
 
 /* #region Horizontal */
 :host(.chart--horizontal) {
@@ -92,7 +93,7 @@
 }
 
 :host(.chart--sm) {
-  --doughnut-size: 11.875rem; /* 190 */;
+  --doughnut-size: 11.875rem; /* 190 */
 }
 
 .chart__outer {
@@ -118,7 +119,7 @@
   .doughnut {
     position: relative;
     aspect-ratio: 1 / 1;
-    min-width: 11.875rem; /* 190 */;
+    min-width: 11.875rem; /* 190 */
     flex: 1 1 auto;
     display: inline-block;
     max-width: var(--doughnut-size);

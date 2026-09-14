@@ -12,9 +12,6 @@
 
   import footerImg from '../../img/address_popover_footer.png';
   import stackedImg from '../../img/address_popover_footer_stacked.png';
-
-  
-
 </script>
 
 <template>
@@ -24,23 +21,28 @@
     </DSHeader>
 
     <div class="mb-5">
-      <Notification data-status="warning" >
-        <strong>Use the correct component:</strong> This is the UI component and does not come with any pre-defined values and options. It is preferred that a standardised component is used with agreed upon content and with the correct options already set.
-        <br/><a href="/standardised/addresslookup" class="">Standardised component </a>
+      <Notification data-status="warning">
+        <strong>Use the correct component:</strong> This is the UI component and does not come with any pre-defined
+        values and options. It is preferred that a standardised component is used with agreed upon content and with the
+        correct options already set. <br /><a href="/standardised/addresslookup" class="">Standardised component </a>
       </Notification>
     </div>
 
-    <p class="lead">Use the address finder when users need to quickly find and enter an address as part of a form or workflow. This component reduces manual typing, speeds up completion, and helps ensure accurate, standardised address data.</p>
-    
-    
+    <p class="lead">
+      Use the address finder when users need to quickly find and enter an address as part of a form or workflow. This
+      component reduces manual typing, speeds up completion, and helps ensure accurate, standardised address data.
+    </p>
+
     <h2>UI component</h2>
 
-    <p>The address finder component is used to lookup an address using a postcode. In the event an address cannot be found a manual entry link is available to the user.</p>
-
+    <p>
+      The address finder component is used to lookup an address using a postcode. In the event an address cannot be
+      found a manual entry link is available to the user.
+    </p>
 
     <h3>Anatomy</h3>
 
-    <div class="container p-0 mb-3"><img :src="anatomyImg" class="w-100"/></div>
+    <div class="container p-0 mb-3"><img :src="anatomyImg" class="w-100" /></div>
 
     <ol class="mb-5">
       <li>Use existing address checkbox (optional)</li>
@@ -52,17 +54,19 @@
     <h3>Behaviour</h3>
 
     <ul class="mb-5">
-      <li>Checking the use existing address checkbox (1) uses an address previously chosen in the workflow. </li>
+      <li>Checking the use existing address checkbox (1) uses an address previously chosen in the workflow.</li>
       <li>Performing a postcode search (2) returns results in a scrollable popover list (4).</li>
       <li>Tertiary buttons are shown inline and wrap when wider than the available space.</li>
     </ul>
 
     <h2>Search states</h2>
 
-    <p>The postcode search uses default form input field states for default, active and error states. Searching and search results states use the popover component.</p>
-    
-    <h3>Address finder search field</h3>
+    <p>
+      The postcode search uses default form input field states for default, active and error states. Searching and
+      search results states use the popover component.
+    </p>
 
+    <h3>Address finder search field</h3>
 
     <div class="container visualtest">
       <span class="d-block pb-2">Default</span>
@@ -110,71 +114,72 @@
             <option value="Wales">Wales</option>
           </select>
         </label>
-
       </AddressLookup>
-
 
       <span class="d-block pb-2">Error state</span>
 
       <form class="was-validated">
-      <AddressLookup data-url="/addressess2.json?search=">
-        <label
-          >Address line one
-          <input
-            type="text"
-            name="address-line-1"
-            data-name="address_1"
-            data-name-alt="address_number_name"
-            data-name-2="address_1"
-            value="142"
-            required
-        /></label>
+        <AddressLookup data-url="/addressess2.json?search=">
+          <label
+            >Address line one
+            <input
+              type="text"
+              name="address-line-1"
+              data-name="address_1"
+              data-name-alt="address_number_name"
+              data-name-2="address_1"
+              value="142"
+              required
+          /></label>
 
-        <label>Address line two (Optional) <input type="text" name="address-line-2" data-name="address_2" required /></label>
+          <label
+            >Address line two (Optional) <input type="text" name="address-line-2" data-name="address_2" required
+          /></label>
 
-        <label
-          >Address line three (Optional)
-          <input type="text" name="address-line-3" data-name="address_3" id="address-line-3"
-        /></label>
+          <label
+            >Address line three (Optional)
+            <input type="text" name="address-line-3" data-name="address_3" id="address-line-3"
+          /></label>
 
-        <label>City <input type="text" name="city" data-name="city" id="city" dat-required /></label>
+          <label>City <input type="text" name="city" data-name="city" id="city" dat-required /></label>
 
-        <label
-          >County
-          <select name="county" id="county" data-required>
-            <option value=""></option>
-            <option value="Tyne and Wear">Tyne and Wear</option>
-            <option value="Cleveland">Cleveland</option>
-          </select>
-        </label>
+          <label
+            >County
+            <select name="county" id="county" data-required>
+              <option value=""></option>
+              <option value="Tyne and Wear">Tyne and Wear</option>
+              <option value="Cleveland">Cleveland</option>
+            </select>
+          </label>
 
-        <div class="row">
-          <label class="col-sm-4">Postcode <input type="text" name="postcode" data-name="address_1" data-required /></label>
-        </div>
+          <div class="row">
+            <label class="col-sm-4"
+              >Postcode <input type="text" name="postcode" data-name="address_1" data-required
+            /></label>
+          </div>
 
-        <label
-          >Country
-          <select name="country" id="country" data-required>
-            <option value=""></option>
-            <option value="England">England</option>
-            <option value="Scotland">Scotland</option>
-            <option value="Wales">Wales</option>
-          </select>
-        </label>
-
-      </AddressLookup>
+          <label
+            >Country
+            <select name="country" id="country" data-required>
+              <option value=""></option>
+              <option value="England">England</option>
+              <option value="Scotland">Scotland</option>
+              <option value="Wales">Wales</option>
+            </select>
+          </label>
+        </AddressLookup>
       </form>
     </div>
 
-
     <h2>Search results popover</h2>
 
-    <p>The search results popover shows the results of the search and can also contain a header and footer allowing the user to take further action. This is particularly useful when providing contextual guidance, and when other UI elements such as tertiary buttons are hidden by the popover.</p>
+    <p>
+      The search results popover shows the results of the search and can also contain a header and footer allowing the
+      user to take further action. This is particularly useful when providing contextual guidance, and when other UI
+      elements such as tertiary buttons are hidden by the popover.
+    </p>
 
-
-
-    <div class="container p-0 mb-3"><img :src="resultsImg" class="w-100"/></div>
-
+    <div class="container p-0 mb-3"><img :src="resultsImg" class="w-100" /></div>
 
     <ol class="mb-5">
       <li>Popover action bar</li>
@@ -183,34 +188,44 @@
       <li>Search results</li>
     </ol>
 
-
     <h3>Behaviour</h3>
 
     <ul>
-      <li>The popover action bar header always shows at the top of the search results list and scrolls with content.</li>
-      <li>The popover action bar footer always shows at the bottom of the search results list and scrolls with content.</li>
+      <li>
+        The popover action bar header always shows at the top of the search results list and scrolls with content.
+      </li>
+      <li>
+        The popover action bar footer always shows at the bottom of the search results list and scrolls with content.
+      </li>
       <li>The use of an action button (3) is optional.</li>
       <li>Content in the action bar can be stacked.</li>
     </ul>
 
     <h3>Keyboard options</h3>
 
-    <p>When navigating with the keyboard the tab key shifts between elements inside the popover, with the search results list treated as a single element. While search results are in focus the the up/down arrow keys are used to move between results.</p>
+    <p>
+      When navigating with the keyboard the tab key shifts between elements inside the popover, with the search results
+      list treated as a single element. While search results are in focus the the up/down arrow keys are used to move
+      between results.
+    </p>
     <div class="mb-5">
       <div class="md-col-span-6 md-col-start-auto pb-4 text-center">
-        <img :src="footerImg" class="w-100 mb-1"/>
+        <img :src="footerImg" class="w-100 mb-1" />
         <strong>Example of a popover action bar footer with an action button</strong>
       </div>
       <div class="md-col-span-6 md-col-start-auto pb-4 text-center">
-        <img :src="stackedImg" class="w-100 mb-1"/>
+        <img :src="stackedImg" class="w-100 mb-1" />
         <strong>Example of a stacked action bar footer</strong>
       </div>
     </div>
-    
+
     <h2>Compact address label</h2>
 
-    <p>The completed address is shown as a single, compact line of text. This avoids the the use of multiple input fields and makes it clear that the address can’t be edited directly.</p>
-    
+    <p>
+      The completed address is shown as a single, compact line of text. This avoids the the use of multiple input fields
+      and makes it clear that the address can’t be edited directly.
+    </p>
+
     <h3>Anatomy</h3>
     <div class="container visualtest">
       <AddressLookup data-url="/addressess.json?search=">
@@ -274,7 +289,6 @@
       <li>Actions use the text link with icon component.</li>
       <li>Multiple actions can be shown.</li>
     </ul>
-    
 
     <Integration component="address-lookup" componentName="iam-address-lookup">
       <template #web-component>
@@ -422,7 +436,7 @@
               <td></td>
               <td>Update the button text of the button which fills the address input fields</td>
             </tr>
-            
+
             <tr>
               <th>data-manual</th>
               <td></td>
@@ -444,11 +458,9 @@
               <td></td>
               <td>Makes the search input check for a valid postcode before making an ajax call</td>
             </tr>
-            
           </tbody>
         </table>
       </template>
-
 
       <template #parts>
         <table>
@@ -486,7 +498,6 @@
           </tbody>
         </table>
       </template>
-
     </Integration>
     <Versions pdf="/pdfs/address_finder.pdf">
       <table>
@@ -506,6 +517,5 @@
         </tbody>
       </table>
     </Versions>
-
   </main>
 </template>

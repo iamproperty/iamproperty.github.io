@@ -13,8 +13,7 @@ $utilities: map.merge(
         class: align,
         values: baseline top middle bottom text-bottom text-top,
       ),
-    /*  scss-docs-end utils-vertical-align */
-    /*  scss-docs-start utils-float */
+    /*  scss-docs-end utils-vertical-align */ /*  scss-docs-start utils-float */
     'float': (
         responsive: true,
         property: float,
@@ -24,9 +23,7 @@ $utilities: map.merge(
           none: none,
         ),
       ),
-    /*  scss-docs-end utils-float */
-    /*  Opacity utilities */
-    /*  scss-docs-start utils-opacity */
+    /*  scss-docs-end utils-float */ /*  Opacity utilities */ /*  scss-docs-start utils-opacity */
     'opacity': (
         property: opacity,
         values: (
@@ -37,14 +34,12 @@ $utilities: map.merge(
           100: 1,
         ),
       ),
-    /*  scss-docs-end utils-opacity */
-    /*  scss-docs-start utils-overflow */
+    /*  scss-docs-end utils-opacity */ /*  scss-docs-start utils-overflow */
     'overflow': (
         property: overflow,
         values: auto hidden visible scroll,
       ),
-    /*  scss-docs-end utils-overflow */
-    /*  scss-docs-start utils-display */
+    /*  scss-docs-end utils-overflow */ /*  scss-docs-start utils-display */
     'display': (
         responsive: true,
         print: true,
@@ -52,8 +47,7 @@ $utilities: map.merge(
         class: d,
         values: inline inline-block block grid table table-row table-cell flex inline-flex none,
       ),
-    /*  scss-docs-end utils-display */
-    /*  scss-docs-start utils-shadow */
+    /*  scss-docs-end utils-display */ /*  scss-docs-start utils-shadow */
     'shadow': (
         property: box-shadow,
         class: shadow,
@@ -64,8 +58,7 @@ $utilities: map.merge(
           none: none,
         ),
       ),
-    /*  scss-docs-end utils-shadow */
-    /*  scss-docs-start utils-position */
+    /*  scss-docs-end utils-shadow */ /*  scss-docs-start utils-position */
     'position': (
         property: position,
         values: static relative absolute fixed sticky,
@@ -97,8 +90,7 @@ $utilities: map.merge(
         y: translateY(-50%),
       ),
     ),
-    /*  scss-docs-end utils-position */
-    /*  scss-docs-start utils-borders */
+    /*  scss-docs-end utils-position */ /*  scss-docs-start utils-borders */
     'border': (
         property: border,
         values: (
@@ -161,9 +153,7 @@ $utilities: map.merge(
         100: 1,
       ),
     ),
-    /*  scss-docs-end utils-borders */
-    /*  Sizing utilities */
-    /*  scss-docs-start utils-sizing */
+    /*  scss-docs-end utils-borders */ /*  Sizing utilities */ /*  scss-docs-start utils-sizing */
     'width': (
         property: width,
         class: w,
@@ -228,9 +218,7 @@ $utilities: map.merge(
         100: 100vh,
       ),
     ),
-    /*  scss-docs-end utils-sizing */
-    /*  Flex utilities */
-    /*  scss-docs-start utils-flex */
+    /*  scss-docs-end utils-sizing */ /*  Flex utilities */ /*  scss-docs-start utils-flex */
     'flex': (
         responsive: true,
         property: flex,
@@ -329,9 +317,7 @@ $utilities: map.merge(
         last: 6,
       ),
     ),
-    /*  scss-docs-end utils-flex */
-    /*  Margin utilities */
-    /*  scss-docs-start utils-spacing */
+    /*  scss-docs-end utils-flex */ /*  Margin utilities */ /*  scss-docs-start utils-spacing */
     'margin': (
         responsive: true,
         property: margin,
@@ -502,9 +488,7 @@ $utilities: map.merge(
         class: gap,
         values: $spacers,
       ),
-    /*  scss-docs-end utils-spacing */
-    /*  Text */
-    /*  scss-docs-start utils-text */
+    /*  scss-docs-end utils-spacing */ /*  Text */ /*  scss-docs-start utils-text */
     'font-family': (
         property: font-family,
         class: font,
@@ -580,8 +564,7 @@ $utilities: map.merge(
       ),
       rtl: false,
     ),
-    /*  scss-docs-end utils-text */
-    /*  scss-docs-start utils-color */
+    /*  scss-docs-end utils-text */ /*  scss-docs-start utils-color */
     'color': (
         property: color,
         class: text,
@@ -593,10 +576,8 @@ $utilities: map.merge(
             (
               'muted': $text-muted,
               'black-50': rgba($black, 0.5),
-              /*  deprecated */
-              'white-50': rgba($white, 0.5),
-              /*  deprecated */
-              'reset': inherit,
+              /*  deprecated */ 'white-50': rgba($white, 0.5),
+              /*  deprecated */ 'reset': inherit,
             )
           ),
       ),
@@ -610,8 +591,7 @@ $utilities: map.merge(
         100: 1,
       ),
     ),
-    /*  scss-docs-end utils-color */
-    /*  scss-docs-start utils-bg-color */
+    /*  scss-docs-end utils-color */ /*  scss-docs-start utils-bg-color */
     'background-color': (
         property: background-color,
         class: bg,
@@ -654,8 +634,7 @@ $utilities: map.merge(
       class: pe,
       values: none auto,
     ),
-    /*  scss-docs-end utils-interaction */
-    /*  scss-docs-start utils-border-radius */
+    /*  scss-docs-end utils-interaction */ /*  scss-docs-start utils-border-radius */
     'rounded': (
         property: border-radius,
         class: rounded,
@@ -699,8 +678,7 @@ $utilities: map.merge(
         null: var(--border-radius),
       ),
     ),
-    /*  scss-docs-end utils-border-radius */
-    /*  scss-docs-start utils-visibility */
+    /*  scss-docs-end utils-border-radius */ /*  scss-docs-start utils-visibility */
     'visibility': (
         property: visibility,
         class: null,
@@ -708,7 +686,8 @@ $utilities: map.merge(
           visible: visible,
           invisible: hidden,
         ),
-      ) /*  scss-docs-end utils-visibility */
+      )
+      /*  scss-docs-end utils-visibility */
   ),
   $utilities
 );

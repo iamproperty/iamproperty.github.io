@@ -1,7 +1,6 @@
 <script setup>
   import Header from '@/components/Header/Header.vue';
   import Video from '@/components/Video/Video.vue';
-
 </script>
 
 <template>

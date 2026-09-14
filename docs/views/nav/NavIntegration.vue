@@ -2,11 +2,8 @@
   import Integration from '../Integration.vue';
 </script>
 <template>
-
   <Integration component="nav" componentName="iam-nav">
-
     <template #web-component>
-
       <pre><code>{{`<nav>
 <iam-nav>
 <a href="/" class="brand brand--property" slot="logo">
@@ -72,15 +69,43 @@
     <template #slots>
       <table>
         <thead>
-          <tr><th>Option</th><th>Default Value</th><th>Description</th></tr>
+          <tr>
+            <th>Option</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td>default</td><td>-</td><td>Populates the main nav area</td></tr>
-          <tr><td>logo</td><td>-</td><td>A place to add the logo to the site</td></tr>
-          <tr><td>secondary</td><td>-</td><td>Moves the link upto the top of the navbar on desktop</td></tr>
-          <tr><td>actions</td><td>-</td><td>A place to add buttons</td></tr>
-          <tr><td>dual</td><td>-</td><td>Plave the link or list to the right of the nav, forcing the default slot to the left.</td></tr>
-          <tr><td>search</td><td>-</td><td>A place to include a form with search functionality</td></tr>
+          <tr>
+            <td>default</td>
+            <td>-</td>
+            <td>Populates the main nav area</td>
+          </tr>
+          <tr>
+            <td>logo</td>
+            <td>-</td>
+            <td>A place to add the logo to the site</td>
+          </tr>
+          <tr>
+            <td>secondary</td>
+            <td>-</td>
+            <td>Moves the link upto the top of the navbar on desktop</td>
+          </tr>
+          <tr>
+            <td>actions</td>
+            <td>-</td>
+            <td>A place to add buttons</td>
+          </tr>
+          <tr>
+            <td>dual</td>
+            <td>-</td>
+            <td>Plave the link or list to the right of the nav, forcing the default slot to the left.</td>
+          </tr>
+          <tr>
+            <td>search</td>
+            <td>-</td>
+            <td>A place to include a form with search functionality</td>
+          </tr>
         </tbody>
       </table>
     </template>
@@ -108,7 +133,5 @@
         </tbody>
       </table>
     </template>
-
   </Integration>
-
 </template>

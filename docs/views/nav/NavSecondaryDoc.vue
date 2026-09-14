@@ -1,4 +1,3 @@
-
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tab from '@/components/Tabs/Tab.vue';
@@ -31,7 +30,7 @@
     </div>
 
     <div class="full-width visualtest pe-none position-relative">
-      <Nav >
+      <Nav>
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>
@@ -53,28 +52,27 @@
 
     <NavIntegration></NavIntegration>
     <Versions pdf="/pdfs/navbar-duel.pdf">
-    <table>
-      <thead>
-        <tr>
-          <th>Version Control</th>
-          <th>Date</th>
-          <th>Notable updates</th>
-        </tr>
-      </thead>
-      <tbody class="text-body">
-        <tr>
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
             <td>V1</td>
             <td>29.06.2026</td>
-            <td>Updates to the text sizing on desktop form 16px to 12px.  </td>
+            <td>Updates to the text sizing on desktop form 16px to 12px.</td>
           </tr>
-        <tr>
+          <tr>
             <td>V0.1</td>
             <td>25.08.2023</td>
             <td>N/A</td>
           </tr>
-      </tbody>
-    </table>
-  </Versions>
-
+        </tbody>
+      </table>
+    </Versions>
   </main>
 </template>

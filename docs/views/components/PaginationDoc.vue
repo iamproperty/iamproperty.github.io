@@ -883,7 +883,7 @@
     margin-left: -1.5rem;
     margin-right: -1.5rem;
 
-    @container (min-width: 36em) { 
+    @container (min-width: 36em) {
       margin-left: 0rem;
       margin-right: 0rem;
     }
@@ -897,12 +897,10 @@
     margin-left: -1.5rem;
     margin-right: -1.5rem;
 
-    @container (min-width: 36em) { 
+    @container (min-width: 36em) {
       margin-left: 0rem;
       margin-right: 0rem;
     }
-
-    
   }
 
   .demo-bottom {

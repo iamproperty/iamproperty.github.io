@@ -16,7 +16,7 @@
   .input__wrapper {
     flex-grow: 1;
     position: relative;
-    margin-top: 0!important;
+    margin-top: 0 !important;
   }
 
   .suffix {
@@ -24,36 +24,33 @@
   }
 }
 
-:host(.has-label){
-
+:host(.has-label) {
   .wrapper {
-    display: contents!important;
+    display: contents !important;
   }
   .suffix {
     display: none;
   }
 }
 
-:host(.has-empty-input){
+:host(.has-empty-input) {
   .clear-search {
-    display: none!important;
+    display: none !important;
   }
 }
 
-::slotted(input){
-  
+::slotted(input) {
   border-start-end-radius: 0 !important;
   border-end-end-radius: 0 !important;
-  margin-top: 0!important;
+  margin-top: 0 !important;
 }
 
-::slotted(label){
-  
+::slotted(label) {
   border-start-end-radius: 0 !important;
   border-end-end-radius: 0 !important;
-  margin-top: 0!important;
+  margin-top: 0 !important;
 }
 
-::slotted(button){
-  margin-top: 0!important;
+::slotted(button) {
+  margin-top: 0 !important;
 }

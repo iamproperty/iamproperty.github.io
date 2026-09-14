@@ -5,10 +5,7 @@
   import TrackEvents from '../TrackEvents.vue';
 </script>
 <template>
-  <TrackEvents
-    selector="iam-form"
-    :events="['checkbox-limit-reached']"
-  ></TrackEvents>
+  <TrackEvents selector="iam-form" :events="['checkbox-limit-reached']"></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Form component</h1>
@@ -17,14 +14,17 @@
     <p class="lead">This component is a place to house interactive features and functionality.</p>
 
     <h2 class="pt-5">Limit the number of checkboxes</h2>
-    <p>Below we have a series of checkboxes which we want to limit to only having 2 selected; so once the user has checked 2 values the other checkboxes become disabled.</p>
+    <p>
+      Below we have a series of checkboxes which we want to limit to only having 2 selected; so once the user has
+      checked 2 values the other checkboxes become disabled.
+    </p>
     <Form id="checkboxes">
       <form>
         <fieldset data-checkbox-limit="2">
-          <label><input type="checkbox" name="test" value="1"/> Value 1</label>
-          <label><input type="checkbox" name="test" value="2"/> Value 2</label>
-          <label><input type="checkbox" name="test" value="3"/> Value 3</label>
-          <label><input type="checkbox" name="test" value="4"/> Value 4</label>
+          <label><input type="checkbox" name="test" value="1" /> Value 1</label>
+          <label><input type="checkbox" name="test" value="2" /> Value 2</label>
+          <label><input type="checkbox" name="test" value="3" /> Value 3</label>
+          <label><input type="checkbox" name="test" value="4" /> Value 4</label>
         </fieldset>
       </form>
     </Form>
@@ -56,7 +56,6 @@
           </tbody>
         </table>
       </template>
-
 
       <template #dispatched-events>
         <table>

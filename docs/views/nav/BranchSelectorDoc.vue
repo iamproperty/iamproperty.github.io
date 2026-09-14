@@ -1,4 +1,3 @@
-
 <script setup>
   import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
   import Tab from '@/components/Tabs/Tab.vue';
@@ -14,7 +13,6 @@
 
   import branchSelectorDesktopImg from '../../img/branch-selector-desktop.png';
   import branchSelectorMobileImg from '../../img/branch-selector-mobile.png';
-
 </script>
 
 <template>
@@ -23,51 +21,52 @@
       <h1>Branch selector</h1>
     </DSHeader>
 
-    <p>The branch selector allow users to select the branch they want to use within our iamproperty products. This component is accompanied by the dialog popover menu if 9 or less branches are available or the dialog popover with search is 10 or more branches and appears upon the user clicking the branch select ‘Active’ state. </p>
+    <p>
+      The branch selector allow users to select the branch they want to use within our iamproperty products. This
+      component is accompanied by the dialog popover menu if 9 or less branches are available or the dialog popover with
+      search is 10 or more branches and appears upon the user clicking the branch select ‘Active’ state.
+    </p>
 
-
-    <p>It will be situated within the secondary menu navigation on desktop and in the ‘my account’ side menu of the mobile and tablet views. All branch selector variants will truncate after 32 characters at default view, they will show ‘...’ after 32 characters, upon hover it will reveal the full branch name in a browser default tooltip. The full branch name will be shown in the dialog popover menu.</p>
-
+    <p>
+      It will be situated within the secondary menu navigation on desktop and in the ‘my account’ side menu of the
+      mobile and tablet views. All branch selector variants will truncate after 32 characters at default view, they will
+      show ‘...’ after 32 characters, upon hover it will reveal the full branch name in a browser default tooltip. The
+      full branch name will be shown in the dialog popover menu.
+    </p>
 
     <h2>Default</h2>
 
-
     <div class="container visualtest mb-5">
-
       <div class="col-end-6 md-col-end-3">
-
         <span class="small d-block pb-3 mb-0">DEFAULT</span>
         <BranchSelector>
-
           <label>
             <input type="radio" name="branch" value="gosforth" />
             Gosforth Agent & Co
           </label>
           <label>
-            <input type="radio" name="branch" value="heaton"/>
+            <input type="radio" name="branch" value="heaton" />
             Heaton Agent & Co
           </label>
           <label>
-            <input type="radio" name="branch" value="newcastle"/>
+            <input type="radio" name="branch" value="newcastle" />
             Newcastle Agent & Co
           </label>
         </BranchSelector>
       </div>
       <div class="col-start-7 md-col-start-4">
-
         <span class="small d-block pb-3 mb-0">DISABLED</span>
         <BranchSelector>
-
           <label>
-            <input type="radio" name="branch2" value="gosforth" disabled/>
+            <input type="radio" name="branch2" value="gosforth" disabled />
             Gosforth Agent & Co
           </label>
           <label>
-            <input type="radio" name="branch2" value="heaton" disabled/>
+            <input type="radio" name="branch2" value="heaton" disabled />
             Heaton Agent & Co
           </label>
           <label>
-            <input type="radio" name="branch2" value="newcastle" disabled/>
+            <input type="radio" name="branch2" value="newcastle" disabled />
             Newcastle Agent & Co
           </label>
         </BranchSelector>
@@ -75,44 +74,45 @@
     </div>
 
     <h2>Counter included</h2>
-    <p>The counter is an optional addition to the branch selector component and is used to highlight the amount of branches available to the user without having to click into the active state to reveal the number of branches.</p>
-
+    <p>
+      The counter is an optional addition to the branch selector component and is used to highlight the amount of
+      branches available to the user without having to click into the active state to reveal the number of branches.
+    </p>
 
     <div class="container visualtest mb-5">
-
       <BranchSelector data-indicator="3">
-
         <label>
           <input type="radio" name="branch3" value="gosforth" />
           Gosforth Agent & Co
         </label>
         <label>
-          <input type="radio" name="branch3" value="heaton"/>
+          <input type="radio" name="branch3" value="heaton" />
           Heaton Agent & Co
         </label>
         <label>
-          <input type="radio" name="branch3" value="newcastle"/>
+          <input type="radio" name="branch3" value="newcastle" />
           Newcastle Agent & Co
         </label>
       </BranchSelector>
     </div>
 
     <h2>Multi branches active at once</h2>
-    <p>This option is only available to the products which allow for two or more branches to be active at once. The ‘+ number’ only shows if the user has selected two or more branches. </p>
+    <p>
+      This option is only available to the products which allow for two or more branches to be active at once. The ‘+
+      number’ only shows if the user has selected two or more branches.
+    </p>
     <div class="container visualtest mb-5">
-
       <BranchSelector>
-
         <label>
-          <input type="checkbox" name="branch4" value="gosforth" checked/>
+          <input type="checkbox" name="branch4" value="gosforth" checked />
           Gosforth Agent & Co
         </label>
         <label>
-          <input type="checkbox" name="branch4" value="heaton" checked/>
+          <input type="checkbox" name="branch4" value="heaton" checked />
           Heaton Agent & Co
         </label>
         <label>
-          <input type="checkbox" name="branch4" value="newcastle"/>
+          <input type="checkbox" name="branch4" value="newcastle" />
           Newcastle Agent & Co
         </label>
       </BranchSelector>
@@ -142,7 +142,10 @@
   </label>
 </iam-branch-selector>`}}</code></pre>
 
-        <p class="pb-3">To have the branch selector as part of the nav, the element needs to be a child of the `iam-nav` component with the slot of account. This slot is already setup to be updated to the secondary slot when on desktop.</p>
+        <p class="pb-3">
+          To have the branch selector as part of the nav, the element needs to be a child of the `iam-nav` component
+          with the slot of account. This slot is already setup to be updated to the secondary slot when on desktop.
+        </p>
         <pre><code>{{`<iam-nav>
   <iam-branch-selector slot="account">
     <label>
@@ -159,11 +162,7 @@
     </label>
   </iam-branch-selector>
 </iam-nav>`}}</code></pre>
-
-
-
       </template>
-
 
       <template #attr>
         <table>
@@ -189,13 +188,10 @@
       </template>
 
       <template #examples>
-
         <ul>
           <li><a href="/standalone/eco-product" target="_blank">Eco hub product view</a></li>
         </ul>
       </template>
-
-
     </Integration>
     <Versions pdf="/pdfs/branch-selector.pdf">
       <table>
@@ -208,14 +204,13 @@
         </thead>
         <tbody class="text-body">
           <tr>
-              <td>V1</td>
-              <td>22.06.2026</td>
-              <td>N/A</td>
-            </tr>
+            <td>V1</td>
+            <td>22.06.2026</td>
+            <td>N/A</td>
+          </tr>
         </tbody>
       </table>
     </Versions>
-
   </main>
 </template>
 

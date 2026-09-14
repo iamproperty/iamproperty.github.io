@@ -1,5 +1,4 @@
 @layer utilities {
-
   .position-static {
     position: static !important;
   }
@@ -21,7 +20,6 @@
   }
 
   @media screen and (min-width: 36em) {
-
     .position-sm-static {
       position: static !important;
     }
@@ -44,7 +42,6 @@
   }
 
   @media screen and (min-width: 62em) {
-
     .position-md-static {
       position: static !important;
     }

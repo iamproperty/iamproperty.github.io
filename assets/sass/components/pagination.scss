@@ -9,8 +9,12 @@
   display: block;
 }
 
-:host(.d-none){
+:host(.d-none) {
   display: none;
+}
+
+.d-none {
+  display: none!important;
 }
 
 .pagination {

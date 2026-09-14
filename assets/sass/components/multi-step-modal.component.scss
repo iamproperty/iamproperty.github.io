@@ -3,8 +3,6 @@
 
 @use '../elements/buttons' as *;
 
-
-
 *,
 *:before,
 *:after {
@@ -31,113 +29,96 @@ dialog[open] {
   }
 }
 
-
 ::slotted(dialog) {
-  display: contents!important;
+  display: contents !important;
 }
 
 ::slotted(button) {
-  margin: 0!important;
+  margin: 0 !important;
 }
-
-
 
 /* #region Multi step modal */
 
-  dialog[open] {
-    padding: 6rem 1.5rem 0 1.5rem;
+dialog[open] {
+  padding: 6rem 1.5rem 0 1.5rem;
 
-    @media screen and (min-width: 36em) {
-      min-width: 28.25rem;
-      width: 28.25rem;
-      max-width: 28.25rem;
+  @media screen and (min-width: 36em) {
+    min-width: 28.25rem;
+    width: 28.25rem;
+    max-width: 28.25rem;
+  }
+
+  @media screen and (min-width: 62em) {
+    min-width: 57.75rem;
+    width: 57.75rem;
+    max-width: 57.75rem;
+    padding: 0;
+
+    @media (min-height: 31.25rem) {
+      height: 29.875rem;
+      max-height: 29.875rem;
+    }
+  }
+
+  > button:first-child {
+    position: absolute;
+    top: 5rem;
+    right: 6px;
+    z-index: var(--index-floating);
+    margin: 0;
+
+    &:not(:hover, :focus, :active) {
+      background-color: Canvas;
     }
 
     @media screen and (min-width: 62em) {
-      min-width: 57.75rem;
-      width: 57.75rem;
-      max-width: 57.75rem;
-    padding: 0;
-
-      @media (min-height: 31.25rem) {
-        height: 29.875rem;
-        max-height: 29.875rem;
-      }
-    }
-
-    > button:first-child {
-
-      position: absolute;
-      top: 5rem;
-      right: 6px;
-      z-index: var(--index-floating);
-      margin: 0;
-
-      &:not(:hover,:focus,:active){
-        background-color: Canvas;
-      }
-
-      @media screen and (min-width: 62em) {
-
-        top: calc(var(--dialog-padding) - 0.75rem);
-        right: calc(var(--dialog-padding) - 0.75rem);
-      }
-      
-    }
-  
-  }
-
-  /* #endregion */
-
-  /* #region mobile fullwidth view For multi step modal */
-  @media screen and (max-width: 36em) {
-    dialog[open] {
-      min-width: 100%;
-      min-height: 100%;
-      border-radius: 0;
-      overflow-y: auto;
-
-      iam-multi-step {
-        padding-inline: 0 !important;
-      }
-
-      form {
-        height: calc(100vh - 6rem);
-        padding-inline: var(--dialog-padding) !important;
-      }
-
-      .btn--wrapper {
-        padding-top: 4rem; /* 64 */
-      }
-    }
-
-    dialog[open] {
-      .mh-lg {
-        max-height: none !important;
-        overflow: visible;
-      }
-
-      &:before,
-      *:first-child {
-        margin-top: auto !important;
-      }
-
-      *:last-child {
-        margin-bottom: auto !important;
-      }
+      top: calc(var(--dialog-padding) - 0.75rem);
+      right: calc(var(--dialog-padding) - 0.75rem);
     }
   }
-  /* #endregion */
+}
 
+/* #endregion */
 
+/* #region mobile fullwidth view For multi step modal */
+@media screen and (max-width: 36em) {
+  dialog[open] {
+    min-width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
 
+    iam-multi-step {
+      padding-inline: 0 !important;
+    }
 
+    form {
+      height: calc(100vh - 6rem);
+      padding-inline: var(--dialog-padding) !important;
+    }
 
+    .btn--wrapper {
+      padding-top: 4rem; /* 64 */
+    }
+  }
 
+  dialog[open] {
+    .mh-lg {
+      max-height: none !important;
+      overflow: visible;
+    }
 
+    &:before,
+    *:first-child {
+      margin-top: auto !important;
+    }
 
-
-
+    *:last-child {
+      margin-bottom: auto !important;
+    }
+  }
+}
+/* #endregion */
 
 /* #region steps */
 .steps {

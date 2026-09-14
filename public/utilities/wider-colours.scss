@@ -1,8 +1,8 @@
 @layer utilities {
   @for $i from 1 through 23 {
     .wider-colour-#{$i} {
-      --colour: var(--wider-colour-#{$i} );
-      --wider-colour: var(--wider-colour-#{$i} );
+      --colour: var(--wider-colour-#{$i});
+      --wider-colour: var(--wider-colour-#{$i});
       color: #262626 !important;
     }
   }

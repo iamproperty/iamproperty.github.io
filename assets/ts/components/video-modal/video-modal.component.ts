@@ -1,6 +1,12 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
-import { videoHTML, loadYouTubeScripts, createYoutTubeVideo,openYoutubeVideo,openVimeoVideo } from '../../modules/videos';
-import { openModal,closeModal,closeButtonHtml } from '../../modules/modal';
+import {
+  videoHTML,
+  loadYouTubeScripts,
+  createYoutTubeVideo,
+  openYoutubeVideo,
+  openVimeoVideo,
+} from '../../modules/videos';
+import { openModal, closeModal, closeButtonHtml } from '../../modules/modal';
 
 trackComponentRegistered('iam-video-modal');
 
@@ -34,45 +40,38 @@ class iamVideoCard extends HTMLElement {
   }
 
   async connectedCallback(): void {
-    
     const id = this.getAttribute('id');
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
-    
+
     this.innerHTML = `<div class="embed" slot="video"></div>`;
     const embed = this.querySelector('.embed');
 
     document.addEventListener('click', (e) => {
-
-      if(e.target.closest(`[command="show-modal"][commandfor="${id}"]`)){
-
+      if (e.target.closest(`[command="show-modal"][commandfor="${id}"]`)) {
         e.preventDefault();
 
-        if(this.hasAttribute('data-youtube')){
+        if (this.hasAttribute('data-youtube')) {
           const youtubeId = this.getAttribute('data-youtube');
-          embed?.setAttribute('id',youtubeId);
+          embed?.setAttribute('id', youtubeId);
           openYoutubeVideo(this);
           openModal(this);
-        }
-        else if(this.hasAttribute('data-vimeo')) {
+        } else if (this.hasAttribute('data-vimeo')) {
           openVimeoVideo(this);
           openModal(this);
         }
       }
     });
 
-    
     closeButton?.addEventListener('click', () => {
       closeModal(this);
 
-      if(this.hasAttribute('data-youtube')){
+      if (this.hasAttribute('data-youtube')) {
         const youtubeId = this.getAttribute('data-youtube');
 
         if (window.player[youtubeId] && typeof window.player[youtubeId].pauseVideo == 'function') {
           window.player[youtubeId].pauseVideo();
         }
-      }
-      else if(this.hasAttribute('data-vimeo')) {
-        
+      } else if (this.hasAttribute('data-vimeo')) {
         embed.innerHTML = ``; // Remove the video since we cant pause it
 
         const customEvent = new CustomEvent('close-video', {

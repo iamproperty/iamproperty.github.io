@@ -75,5 +75,4 @@ class iamRankings extends HTMLElement {
   }
 }
 
-
 export default iamRankings;

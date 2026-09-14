@@ -1,6 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
 
-
 trackComponentRegistered('iam-popover');
 
 class iamPopover extends HTMLElement {
@@ -27,21 +26,16 @@ class iamPopover extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const id = this.getAttribute('id');
     const button = document.querySelector(`[popovertarget="${id}"]`);
-    
-    this.setAttribute('popover','auto');
 
+    this.setAttribute('popover', 'auto');
 
-    button?.addEventListener('click',() => {
-
-      if(this.matches(':popover-open')){
+    button?.addEventListener('click', () => {
+      if (this.matches(':popover-open')) {
         button.removeAttribute('aria-pressed');
-      }
-      else {
-        
-        button.setAttribute('aria-pressed','true');
+      } else {
+        button.setAttribute('aria-pressed', 'true');
       }
     });
   }

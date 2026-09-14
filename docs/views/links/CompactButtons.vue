@@ -3,8 +3,11 @@
   import headerImg from '../../img/type-header.png';
 
   let urlParams = new URLSearchParams(window.location.search);
-  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
-
+  const target = urlParams.has('Target')
+    ? urlParams.get('Target')
+    : urlParams.has('target')
+      ? urlParams.get('target')
+      : '';
 
   const iso = [
     'fa-left',
@@ -17,9 +20,8 @@
     'fa-chevron-down',
     'fa-plus',
     'fa-bars',
-    'fa-edit'
+    'fa-edit',
   ];
-
 </script>
 
 <template>
@@ -41,11 +43,13 @@
       be applied to the default states for the active state.
     </p>
 
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest1' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest1' ? 'target' : ''}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Default state</p>
-          <a href="/components/buttons" class="btn btn-primary btn-compact fa-chevron-right">compact button with an arrow</a>
+          <a href="/components/buttons" class="btn btn-primary btn-compact fa-chevron-right"
+            >compact button with an arrow</a
+          >
         </div>
         <div class="col-7 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Hover/Focus state</p>
@@ -53,7 +57,9 @@
         </div>
         <div class="col-7 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Active state</p>
-          <a href="/components/buttons" class="btn btn-primary active btn-compact fa-chevron-right">Home<span class="visually-hidden">page</span></a>
+          <a href="/components/buttons" class="btn btn-primary active btn-compact fa-chevron-right"
+            >Home<span class="visually-hidden">page</span></a
+          >
         </div>
         <div class="col-7 col-sm-3 pb-3">
           <p class="lead pb-2">Disabled state</p>
@@ -104,7 +110,7 @@
     <p>
       Use a small primary compact button when there isn’t enough space for a default compact primary compact button.
     </p>
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest2' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest2' ? 'target' : ''}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -189,7 +195,7 @@
       overlay of 85% brightness will be applied to the default states for the active state.
     </p>
 
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest3' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest3' ? 'target' : ''}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-2 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -272,7 +278,7 @@
       Use a small secondary compact button when there isn’t enough space for a default compact secondary compact button.
     </p>
 
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest4' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest4' ? 'target' : ''}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-2 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -372,7 +378,7 @@
       active state.
     </p>
 
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest5' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest5' ? 'target' : ''}`">
       <div class="row">
         <div class="col-sm-6 col-md-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -400,7 +406,7 @@
       for the active state.
     </p>
 
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest6' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest6' ? 'target' : ''}`">
       <div class="row">
         <div class="col-sm-6 col-md-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -428,7 +434,7 @@
       for the active state.
     </p>
 
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest7' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest7' ? 'target' : ''}`">
       <div class="row">
         <div class="col-sm-6 col-md-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -458,18 +464,18 @@
     </ul>
 
     <h2>Fallback icons</h2>
-    
+
     <template v-for="value in iso" :key="value">
-    <div class="col-span-6 sm-col-span-4 md-col-span-3 mb-2" >
-      <p class="lead pb-1">.{{value}}</p>
-      <a href="/components/buttons" :class="`btn btn-primary btn-compact ${value}`">compact button with icon</a>
-    </div>
-    <div class="col-span-6 sm-col-span-4 md-col-span-3 col-start-auto mb-2 compact-button-fallback">
-      <p class="lead pb-1">ISO fallback</p>
-      <a href="/components/buttons" :class="`btn btn-primary btn-compact ${value}`">compact button with icon</a>
-    </div>
+      <div class="col-span-6 sm-col-span-4 md-col-span-3 mb-2">
+        <p class="lead pb-1">.{{ value }}</p>
+        <a href="/components/buttons" :class="`btn btn-primary btn-compact ${value}`">compact button with icon</a>
+      </div>
+      <div class="col-span-6 sm-col-span-4 md-col-span-3 col-start-auto mb-2 compact-button-fallback">
+        <p class="lead pb-1">ISO fallback</p>
+        <a href="/components/buttons" :class="`btn btn-primary btn-compact ${value}`">compact button with icon</a>
+      </div>
     </template>
-      
+
     <hr class="mb-3" />
 
     <div class="bg-light version-control">
@@ -503,24 +509,18 @@
 </template>
 
 <style lang="scss">
-
-@layer elements {
-
-
-  .compact-button-fallback {
-
-    .btn-compact {
-        
+  @layer elements {
+    .compact-button-fallback {
+      .btn-compact {
         @container style(--fa-font-regular) {
-          font-size: 1.5rem!important;
+          font-size: 1.5rem !important;
 
           &:before {
-            font-family: monospace!important;
-            content: var(--iso)!important;
+            font-family: monospace !important;
+            content: var(--iso) !important;
           }
         }
+      }
     }
-
   }
-}
 </style>

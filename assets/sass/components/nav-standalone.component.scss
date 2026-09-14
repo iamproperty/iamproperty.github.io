@@ -21,17 +21,16 @@
 @use '../utilities/sizes' as *;
 @use '../utilities/display' as *;
 
-
-
 @use '../components/nav.preload.scss' as *;
 @use '../components/nav.global.scss' as *;
 
 @layer legacy, reset, elements, components, templates, overrides, utilities, debug;
 
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-
 
 :host {
   display: grid;

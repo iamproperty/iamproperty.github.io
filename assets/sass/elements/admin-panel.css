@@ -12,10 +12,8 @@
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-    
-    &:has(
-      :is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])
-    ) {
+
+    &:has(:is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])) {
       display: grid;
 
       > * {
@@ -31,6 +29,10 @@
         background-color: transparent !important;
         color: var(--white) !important;
       }
+    }
+
+    .bg-primary {
+      color: light-dark(var(--colour-white), #00313c);
     }
 
     &:empty {
@@ -62,7 +64,7 @@
     }
 
     > :is(.admin-panel__heading):first-child {
-      display: flex!important;
+      display: flex !important;
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
@@ -95,14 +97,7 @@
       }
     }
 
-    :is(iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax, .iam-table) {
-      margin: 0 0 2rem 0;
-      padding: 0;
-      box-shadow: none;
-      background: none;
-    }
-
-    & > *:not([class*="mb-"]):not(.btn__group):last-child {
+    & > *:not([class*='mb-']):not(.btn__group):last-child {
       margin-bottom: 0 !important;
     }
 
@@ -123,13 +118,15 @@
       }
     }
 
-    & > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child
+    &
+      > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child
       + :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
       padding-top: var(--padding-top);
       margin-top: calc(var(--padding-top) * -1);
     }
 
-    & > :is(
+    &
+      > :is(
         .mh-sm,
         .mh-md,
         .mh-lg,
@@ -144,7 +141,7 @@
       padding-bottom: var(--padding-bottom);
       margin-bottom: calc(var(--padding-bottom) * -1) !important;
 
-      & > *:not([class*="mb-"]):last-child {
+      & > *:not([class*='mb-']):last-child {
         margin-bottom: 0 !important;
       }
 
@@ -184,12 +181,13 @@
   }
 
   /* #region Has actionbar */
-  .admin-panel:has(iam-actionbar) {
+  .admin-panel:has(> iam-actionbar) {
+
     & > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child {
       margin-bottom: 0;
     }
 
-    iam-actionbar {
+    > iam-actionbar {
       background: var(--colour-canvas);
       margin-inline: calc(var(--padding-x) * -1);
       margin-bottom: var(--padding-top);
@@ -199,20 +197,6 @@
       }
       &:not(:first-child) {
         border-radius: 0;
-      }
-    }
-
-    & > :is(iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax) {
-      overflow: visible;
-
-      &:first-child {
-        margin-top: calc(var(--padding-top) * -1);
-      }
-
-      iam-actionbar {
-        margin-top: 0 !important;
-        border-radius: 0;
-        box-shadow: none;
       }
     }
   }
@@ -253,7 +237,7 @@
     }
   }
   /* #endregion */
-  
+
   .admin-panel__footer:last-child {
     background-color: var(--wider-colour);
     padding-top: var(--padding-top);
@@ -269,9 +253,8 @@
     }
   }
 
-  .admin-panel__footer:not([class*="mb-"]):last-child {
-
-    margin-bottom: calc(var(--padding-bottom) * -1)!important;
+  .admin-panel__footer:not([class*='mb-']):last-child {
+    margin-bottom: calc(var(--padding-bottom) * -1) !important;
   }
 
   /* #region */
@@ -285,7 +268,6 @@
     display: block;
 
     & > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
-
       font-size: 1rem;
       line-height: 1;
       margin-bottom: 0;

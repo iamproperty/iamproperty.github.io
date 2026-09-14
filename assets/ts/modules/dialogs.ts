@@ -23,9 +23,9 @@ const extendDialogs = (body): void => {
         : button.getAttribute('data-filter');
       const dialog = document.querySelector(`dialog#${modalID}`);
 
-      if(document.querySelector(`iam-modal#${modalID}`)) return false;
+      if (document.querySelector(`iam-modal#${modalID}`)) return false;
 
-      if(document.querySelector(`iam-multi-step-modal#${modalID}`)) return false;
+      if (document.querySelector(`iam-multi-step-modal#${modalID}`)) return false;
 
       createDialog(dialog);
 

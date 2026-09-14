@@ -21,41 +21,39 @@
 }
 
 :host {
-  display: block!important;
+  display: block !important;
 }
 
 /* #region enable icons */
 .fa-chevron-up {
-  --fa: "\f077";
+  --fa: '\f077';
 }
 
 .fa-chevron-down {
-  --fa: "\f078";
+  --fa: '\f078';
 }
 
 .fa-trash {
-  --fa: "\f1f8";
+  --fa: '\f1f8';
 }
 
 .fa-plus {
-  --fa: "\2b";
+  --fa: '\2b';
 }
 
 .fa-pen-to-square {
-  --fa: "\f044";
+  --fa: '\f044';
 }
 
 .fa-floppy-disk {
-  
-  --fa: "\f0c7";
+  --fa: '\f0c7';
 }
 
-[class*="fa-"]{
-
+[class*='fa-'] {
   &:before {
     content: var(--fa);
     font-weight: 600;
-    font-family: "Font Awesome 7 Pro";
+    font-family: 'Font Awesome 7 Pro';
   }
 }
 /* #endregion */
@@ -82,15 +80,14 @@
 
   #items {
     order: 2;
-    display: block!important;
+    display: block !important;
   }
 }
 /* #endregion */
 
 /* #region buckets */
 #buckets {
-  
-  display: block!important;
+  display: block !important;
 }
 
 .bucket {
@@ -110,7 +107,6 @@
 }
 
 .bucket__wrapper {
-
   padding-right: 10.25rem;
   position: relative;
   border-bottom: 1px solid var(--colour-border);
@@ -129,7 +125,6 @@
 
 /* #region item */
 #items [data-bucket] {
-  
   display: block;
 
   form {
@@ -137,7 +132,15 @@
     --col-size: calc((100% - (var(--gap) * 11)) / 12);
     column-gap: var(--gap);
     grid-column: var(--col-start, col-1-start) / var(--col-end, col-12-end);
-    grid-template-columns: [content-start col-1-start] var(--col-size) [col-1-end col-2-start] var(--col-size) [col-2-end col-3-start] var(--col-size) [col-3-end col-4-start] var(--col-size) [col-4-end col-5-start] var(--col-size) [col-5-end col-6-start] var(--col-size) [col-6-end col-7-start] var(--col-size) [col-7-end col-8-start] var(--col-size) [col-8-end col-9-start] var(--col-size) [col-9-end col-10-start] var(--col-size) [col-10-end col-11-start] var(--col-size) [col-11-end col-12-start] var(--col-size) [col-12-end content-end];
+    grid-template-columns: [content-start col-1-start] var(--col-size) [col-1-end col-2-start] var(
+        --col-size
+      ) [col-2-end col-3-start] var(--col-size) [col-3-end col-4-start] var(--col-size) [col-4-end col-5-start] var(
+        --col-size
+      ) [col-5-end col-6-start] var(--col-size) [col-6-end col-7-start] var(--col-size) [col-7-end col-8-start] var(
+        --col-size
+      ) [col-8-end col-9-start] var(--col-size) [col-9-end col-10-start] var(--col-size) [col-10-end col-11-start] var(
+        --col-size
+      ) [col-11-end col-12-start] var(--col-size) [col-12-end content-end];
 
     padding-right: calc(var(--btns-width) + 0.5rem);
     position: relative;
@@ -151,12 +154,12 @@
       padding-top: 1.75rem;
       margin: 0;
 
-      .btn:not(.fa-trash){
+      .btn:not(.fa-trash) {
         display: none;
       }
     }
 
-    &:not(:where(main)):has(>[class*=col-]) {
+    &:not(:where(main)):has(> [class*='col-']) {
       .btn__group {
         left: 100%;
         margin-left: 0.5rem;
@@ -167,7 +170,6 @@
 }
 
 :host([data-order]) #items [data-bucket] form {
-
   --btns-width: 10rem;
 
   .btn:not(.fa-trash) {
@@ -202,32 +204,31 @@
 
 /* #region expand criteria */
 .bucket__wrapper:not(.bucket--expanded) {
-  > label > span { /*  TODO add a selector if the input matches the only criteria item */
+  > label > span {
+    /*  TODO add a selector if the input matches the only criteria item */
     display: none;
   }
   .criteria {
     display: none;
   }
-  .criteria label:nth-child(3):has(:disabled){
+  .criteria label:nth-child(3):has(:disabled) {
     display: none;
   }
 }
 
 .bucket__wrapper.bucket--expanded {
-
   .btn__group .fa-pen-to-square {
-    --fa: "\e0a6";
+    --fa: '\e0a6';
   }
 }
 /* #endregion */
 
 /* #region Disable top and bottom buttons */
 
-#buckets .bucket__wrapper:first-child .btn__group [data-direction="up"],
-#buckets .bucket__wrapper:last-child .btn__group [data-direction="down"],
-[data-bucket] form:first-child .btn__group [data-direction="up"],
-[data-bucket] form:last-child .btn__group [data-direction="down"] {
-
+#buckets .bucket__wrapper:first-child .btn__group [data-direction='up'],
+#buckets .bucket__wrapper:last-child .btn__group [data-direction='down'],
+[data-bucket] form:first-child .btn__group [data-direction='up'],
+[data-bucket] form:last-child .btn__group [data-direction='down'] {
   opacity: 0.6;
   pointer-events: none;
 }

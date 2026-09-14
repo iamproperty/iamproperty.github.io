@@ -1,13 +1,8 @@
-<script lang="ts" setup>
-
-
-</script>
+<script lang="ts" setup></script>
 <template>
-  
-  <div class="admin-panel ">
-      <h2 class="bg-light">Milestones</h2>
-      <div class="mh-md">
-        
+  <div class="admin-panel">
+    <h2 class="bg-light">Milestones</h2>
+    <div class="mh-md">
       <table>
         <thead>
           <tr>
@@ -21,7 +16,11 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="d-block p-0 me-1"><i class="fa-regular fa-check rounded-circle bg-success p-1 text-center"></i></span></td>
+            <td>
+              <span class="d-block p-0 me-1"
+                ><i class="fa-regular fa-check rounded-circle bg-success p-1 text-center"></i
+              ></span>
+            </td>
             <td>Carry out welcome call</td>
             <td>21.09.25</td>
             <td>Complete</td>
@@ -29,7 +28,11 @@
             <td><a href="/">1 note</a></td>
           </tr>
           <tr>
-            <td><span class="d-block p-0 me-1"><i class="fa-regular fa-check rounded-circle bg-success p-1 text-center"></i></span></td>
+            <td>
+              <span class="d-block p-0 me-1"
+                ><i class="fa-regular fa-check rounded-circle bg-success p-1 text-center"></i
+              ></span>
+            </td>
             <td>Carry out welcome call</td>
             <td>21.09.25</td>
             <td>Complete</td>
@@ -37,7 +40,9 @@
             <td><a href="/">1 note</a></td>
           </tr>
           <tr>
-            <td><span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span></td>
+            <td>
+              <span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span>
+            </td>
             <td>Carry out welcome call</td>
             <td>21.09.25</td>
             <td>Complete</td>
@@ -45,7 +50,9 @@
             <td><a href="/">1 note</a></td>
           </tr>
           <tr>
-            <td><span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span></td>
+            <td>
+              <span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span>
+            </td>
             <td>Carry out welcome call</td>
             <td>21.09.25</td>
             <td>Complete</td>
@@ -53,7 +60,9 @@
             <td><a href="/">1 note</a></td>
           </tr>
           <tr>
-            <td><span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span></td>
+            <td>
+              <span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span>
+            </td>
             <td>Carry out welcome call</td>
             <td>21.09.25</td>
             <td>Complete</td>
@@ -61,7 +70,9 @@
             <td><a href="/">1 note</a></td>
           </tr>
           <tr>
-            <td><span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span></td>
+            <td>
+              <span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span>
+            </td>
             <td>Carry out welcome call</td>
             <td>21.09.25</td>
             <td>Complete</td>
@@ -69,7 +80,9 @@
             <td><a href="/">1 note</a></td>
           </tr>
           <tr>
-            <td><span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span></td>
+            <td>
+              <span class="d-block p-0 me-1"><i class="fa-regular fa-dash p-1 text-center"></i></span>
+            </td>
             <td>Carry out welcome call</td>
             <td>21.09.25</td>
             <td>Complete</td>
@@ -78,6 +91,6 @@
           </tr>
         </tbody>
       </table>
-      </div>
-    </div> 
+    </div>
+  </div>
 </template>

@@ -17,7 +17,7 @@ class iamHeader extends HTMLElement {
     const loadCSS = `@import "${assetLocation}/css/components/header.component.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = /*HTML*/`
+    template.innerHTML = /*HTML*/ `
     <style>
     ${loadCSS}
     </style>
@@ -83,14 +83,11 @@ class iamHeader extends HTMLElement {
     if (this.hasAttribute('image')) source.setAttribute('src', this.getAttribute('image'));
     else picture.remove();
 
-    if(this.querySelector('[slot="panel"]'))
-      this.classList.add('has-panel');
+    if (this.querySelector('[slot="panel"]')) this.classList.add('has-panel');
 
-    if(this.querySelector('[slot="toolbox"]'))
-      this.classList.add('has-toolbox');
+    if (this.querySelector('[slot="toolbox"]')) this.classList.add('has-toolbox');
 
-    if(this.querySelector('.breadcrumbs:first-child'))
-      this.classList.add('has-breadcrumbs');
+    if (this.querySelector('.breadcrumbs:first-child')) this.classList.add('has-breadcrumbs');
   }
 }
 

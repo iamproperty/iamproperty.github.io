@@ -33,20 +33,19 @@ class iamButton extends HTMLElement {
   }
 
   connectedCallback(): void {
-    
     const button = this.querySelector('button');
     let originalHTML = '';
-    
-    if(!button)
-      return false;
+
+    if (!button) return false;
 
     button?.addEventListener('click', (event) => {
-
-      if(this.hasAttribute('data-copy-text')){
+      if (this.hasAttribute('data-copy-text')) {
         navigator.clipboard.writeText(this.getAttribute('data-copy-text'));
 
         originalHTML = button.innerHTML;
-        button.innerHTML = originalHTML.toLowerCase().includes('copy') ? originalHTML.replace('Copy','Copied').replace('copy','copied') : 'Copied';
+        button.innerHTML = originalHTML.toLowerCase().includes('copy')
+          ? originalHTML.replace('Copy', 'Copied').replace('copy', 'copied')
+          : 'Copied';
         button.classList.add('pressed');
         button.classList.add('active');
         button.blur();
@@ -59,7 +58,6 @@ class iamButton extends HTMLElement {
         }, 1500);
       }
     });
-    
   }
 }
 

@@ -34,10 +34,9 @@ export const setupCard = (cardComponent: HTMLElement): void => {
 
   // Inset the HTML for the data total or icon fallback
   if (cardComponent.hasAttribute('data-total')) {
-
     const cardTotal = cardBody?.querySelector<HTMLDivElement>('.card__total');
 
-    if(!cardTotal)
+    if (!cardTotal)
       cardBody.insertAdjacentHTML(
         'beforeend',
         `<div class="card__total">${cardComponent.getAttribute('data-total') || ''}</div>`

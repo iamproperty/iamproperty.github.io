@@ -20,6 +20,10 @@
 <template>
   <h2 class="pb-0 pt-5">Integration</h2>
   <Tabs class="container">
+    <details v-if="slots['details']">
+      <summary><h3>Details</h3></summary>
+      <slot name="details"></slot>
+    </details>
     <details v-if="showInstall">
       <summary><h3>Install</h3></summary>
 
@@ -124,16 +128,19 @@
       <ul class="mb-4">
         <li>The component should work as detailed on this page.</li>
         <li>The component should meet the relevant NFRs detailed in the <a href="/launch">launch list page</a>.</li>
-        <li>The component should work as described on all browsers and devices which we support at the full level. See the <a href="/browser-support">browser support page</a> for details.</li>
+        <li>
+          The component should work as described on all browsers and devices which we support at the full level. See the
+          <a href="/browser-support">browser support page</a> for details.
+        </li>
       </ul>
 
       <h5 v-if="slots['criteria']" class="lead pb-2">Component Acceptance criteria</h5>
       <slot name="criteria"></slot>
 
-
       <h4 v-if="slots['keyboard']">Keyboard commands</h4>
       <slot name="keyboard"></slot>
     </details>
+    <!--
     <details v-if="showTrack">
       <summary><h3>Track</h3></summary>
 
@@ -169,6 +176,7 @@
         usually a 3rd party like Google Analytics.</small
       >
     </details>
+    -->
     <details v-if="slots['examples']">
       <summary>Examples</summary>
       <h3>Examples</h3>

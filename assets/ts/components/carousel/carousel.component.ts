@@ -69,10 +69,9 @@ class iamCarousel extends HTMLElement {
     return pips;
   };
 
-  progressPercent = (value, total):string => {
-
-    return ((value) / (total)) * 100 + '%'
-  }
+  progressPercent = (value, total): string => {
+    return (value / total) * 100 + '%';
+  };
 
   connectedCallback(): void {
     /*
@@ -91,7 +90,7 @@ class iamCarousel extends HTMLElement {
       </div>
     `)
     */
- 
+
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const carouselElement = this;
     const carouselProgress = this.shadowRoot.querySelector('.carousel__progress-xs [type="range"]');
@@ -100,17 +99,16 @@ class iamCarousel extends HTMLElement {
     const itemCount = this.querySelectorAll(':scope > *:not(.carousel__controls)').length;
     const progressPercent = this.progressPercent;
 
-    this.querySelectorAll(':scope > *').forEach((item,index) => {
-      item.setAttribute('data-child',index+1);
-    })
-    this.setAttribute('data-current',1);
-    
-    this.addEventListener("scrollsnapchange", (event) => {
-      
-      const snapTargetInlineElement = event.snapTargetInline;
-      const child = Array.from(snapTargetInlineElement.parentElement.children).indexOf(snapTargetInlineElement)+1;
+    this.querySelectorAll(':scope > *').forEach((item, index) => {
+      item.setAttribute('data-child', index + 1);
+    });
+    this.setAttribute('data-current', 1);
 
-      if(child != this.getAttribute('data-current')){
+    this.addEventListener('scrollsnapchange', (event) => {
+      const snapTargetInlineElement = event.snapTargetInline;
+      const child = Array.from(snapTargetInlineElement.parentElement.children).indexOf(snapTargetInlineElement) + 1;
+
+      if (child != this.getAttribute('data-current')) {
         const customEvent = new CustomEvent(`snap-to`, {
           detail: {
             item: child,
@@ -118,19 +116,23 @@ class iamCarousel extends HTMLElement {
         });
 
         this.dispatchEvent(customEvent);
-        this.setAttribute('data-current',child);
+        this.setAttribute('data-current', child);
       }
 
       console.log(child);
       carouselProgress.value = child;
       carouselProgress.style.setProperty('--percent', progressPercent(child, itemCount));
       carouselProgressSM.value = child;
-      carouselProgressSM.style.setProperty('--percent', progressPercent(child, carouselProgressSM?.getAttribute('max')));
+      carouselProgressSM.style.setProperty(
+        '--percent',
+        progressPercent(child, carouselProgressSM?.getAttribute('max'))
+      );
       carouselProgressMD.value = child;
-      carouselProgressMD.style.setProperty('--percent', progressPercent(child, carouselProgressMD?.getAttribute('max')));
-      
+      carouselProgressMD.style.setProperty(
+        '--percent',
+        progressPercent(child, carouselProgressMD?.getAttribute('max'))
+      );
     });
-    
 
     let stepperInterval,
       stepperEvent = 'mouseup',
@@ -141,14 +143,12 @@ class iamCarousel extends HTMLElement {
       stepperStart = 'touchstart';
     }
 
-
     carouselProgress.setAttribute('max', itemCount);
     carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
-   
+
     carouselProgress.addEventListener(stepperStart, () => {
       clearInterval(stepperInterval);
       stepperInterval = setInterval(function () {
-          
         carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
       }, 10);
     });
@@ -158,10 +158,9 @@ class iamCarousel extends HTMLElement {
     });
 
     carouselProgress.addEventListener('change', () => {
-
       clearInterval(stepperInterval);
       carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
-      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * (carouselProgress.value-1));
+      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * (carouselProgress.value - 1));
 
       carouselElement.scrollTo({
         top: 0,
@@ -169,22 +168,27 @@ class iamCarousel extends HTMLElement {
         behavior: 'smooth',
       });
     });
-    
-  
+
     // SM Progress bar
     const smStep = this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : 1;
     //const smItemCount = Math.floor(itemCount / smStep) * smStep;
-    const SMMax = ((Math.floor(itemCount / smStep)-1) * smStep)+1;
+    const SMMax = (Math.floor(itemCount / smStep) - 1) * smStep + 1;
 
     carouselProgressSM.setAttribute('max', SMMax);
     carouselProgressSM.setAttribute('step', smStep);
 
-    carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max')));
-    
+    carouselProgressSM.style.setProperty(
+      '--percent',
+      progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max'))
+    );
+
     carouselProgressSM.addEventListener(stepperStart, () => {
       clearInterval(stepperInterval);
       stepperInterval = setInterval(function () {
-        carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max')));
+        carouselProgressSM.style.setProperty(
+          '--percent',
+          progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max'))
+        );
       });
     });
 
@@ -193,10 +197,12 @@ class iamCarousel extends HTMLElement {
     });
 
     carouselProgressSM.addEventListener('change', () => {
-
       clearInterval(stepperInterval);
 
-      carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max')));
+      carouselProgressSM.style.setProperty(
+        '--percent',
+        progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max'))
+      );
       const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * carouselProgressSM.value);
 
       carouselElement.scrollTo({
@@ -209,17 +215,23 @@ class iamCarousel extends HTMLElement {
     // MD Progress bar
 
     const mdStep = this.getAttribute('data-mdcols') ? this.getAttribute('data-mdcols') : 1;
-    const mdMax = ((Math.floor(itemCount / mdStep)-1) * mdStep)+1;
+    const mdMax = (Math.floor(itemCount / mdStep) - 1) * mdStep + 1;
 
     carouselProgressMD.setAttribute('max', mdMax);
     carouselProgressMD.setAttribute('step', mdStep);
 
-    carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max')));
+    carouselProgressMD.style.setProperty(
+      '--percent',
+      progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max'))
+    );
 
     carouselProgressMD.addEventListener(stepperStart, () => {
       clearInterval(stepperInterval);
       stepperInterval = setInterval(function () {
-        carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max')));
+        carouselProgressMD.style.setProperty(
+          '--percent',
+          progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max'))
+        );
       });
     });
 
@@ -228,10 +240,12 @@ class iamCarousel extends HTMLElement {
     });
 
     carouselProgressMD.addEventListener('change', () => {
-
       clearInterval(stepperInterval);
 
-      carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max')));
+      carouselProgressMD.style.setProperty(
+        '--percent',
+        progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max'))
+      );
       const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * carouselProgressMD.value);
 
       console.log(carouselProgressMD.value);
@@ -243,7 +257,6 @@ class iamCarousel extends HTMLElement {
       });
     });
 
-
     // Thumbnails
     const carouselPips = this.shadowRoot.querySelector('.carousel__pips');
 
@@ -254,14 +267,14 @@ class iamCarousel extends HTMLElement {
     }
 
     carouselPips.addEventListener('click', (event) => {
-
       carouselPips?.querySelector('[aria-current]')?.removeAttribute('aria-current');
-      if(event.target.closest('button[data-slide]')){
+      if (event.target.closest('button[data-slide]')) {
+        event.target.closest('button[data-slide]').setAttribute('aria-current', 'true');
 
-
-        event.target.closest('button[data-slide]').setAttribute('aria-current','true');
-
-        const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * event.target.closest('button[data-slide]').getAttribute('data-slide'));
+        const scrollTo = Math.floor(
+          (carouselElement.scrollWidth / itemCount) *
+            event.target.closest('button[data-slide]').getAttribute('data-slide')
+        );
 
         carouselElement.scrollTo({
           top: 0,
@@ -269,9 +282,7 @@ class iamCarousel extends HTMLElement {
           behavior: 'smooth',
         });
       }
-
     });
-
   }
 }
 

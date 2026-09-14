@@ -1,5 +1,4 @@
-export const generateList = (routes:any, path:string) => {
-
+export const generateList = (routes: any, path: string) => {
   return routes.reduce(function (arr, route) {
     // Find the correct group
     if (route.path === path) {
@@ -24,4 +23,4 @@ export const generateList = (routes:any, path:string) => {
     }
     return arr;
   }, {});
-}
+};

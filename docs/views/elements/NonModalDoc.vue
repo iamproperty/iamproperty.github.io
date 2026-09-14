@@ -150,9 +150,8 @@
       </p>
     </div>
 
-    
     <DialogComponents></DialogComponents>
-    
+
     <div class="bg-light version-control">
       <div class="container">
         <table>

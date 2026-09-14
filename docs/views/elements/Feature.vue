@@ -1,8 +1,6 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
-
-
 </script>
 
 <template>
@@ -14,22 +12,22 @@
 
     <div class="visualtest">
       <span class="feature fa-rocket-launch">
-        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by
+        <strong>19 days</strong> by ordering searches up front.
       </span>
     </div>
-      
+
     <div class="visualtest">
       <div class="admin-panel">
-        
         <span class="feature fa-rocket-launch">
-          <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+          <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by
+          <strong>19 days</strong> by ordering searches up front.
         </span>
       </div>
     </div>
 
     <div class="visualtest">
       <div class="admin-panel">
-        
         <span class="feature fa-location-dot d-flex align-items-center">
           <strong>Average search times:</strong>
           <strong class="ms-auto">21 days</strong>
@@ -44,25 +42,27 @@
           <strong>Average search times:</strong>
           <strong class="ms-auto">21 days</strong>
         </span>
-
       </div>
     </div>
 
     <div class="visualtest">
       <span class="feature fa-rocket-launch">
-        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by
+        <strong>19 days</strong> by ordering searches up front.
       </span>
     </div>
     <div class="visualtest">
-        
       <span class="feature feature--danger">
-        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by
+        <strong>19 days</strong> by ordering searches up front.
       </span>
       <span class="feature feature--warning">
-        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by
+        <strong>19 days</strong> by ordering searches up front.
       </span>
       <span class="feature feature--success">
-        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by
+        <strong>19 days</strong> by ordering searches up front.
       </span>
     </div>
   </main>

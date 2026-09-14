@@ -4,7 +4,6 @@
   import headerImg from '../../img/type-header.png';
   import Integration from '../Integration.vue';
   import WordCount from '@/components/WordCount/WordCount.vue';
-
 </script>
 
 <template>
@@ -44,13 +43,13 @@
       counting full words.
     </p>
 
-<div class="visualtest">
-    <WordCount data-max="10" data-character="" class="mb-5">
-      <label for="input17">Input field label</label>
-      <input type="text" id="input18" name="input18" placeholder="Optional placeholder text" required="" />
-      <span data-count="0">Optional helper text</span>
-    </WordCount>
-</div>
+    <div class="visualtest">
+      <WordCount data-max="10" data-character="" class="mb-5">
+        <label for="input17">Input field label</label>
+        <input type="text" id="input18" name="input18" placeholder="Optional placeholder text" required="" />
+        <span data-count="0">Optional helper text</span>
+      </WordCount>
+    </div>
     <Integration component="word-count" componentName="word-count">
       <template #web-component>
         <pre><code>{{`<iam-word-count data-v-7348d146="" data-max="10" class="mb-5" style="--maxlength: 10;">

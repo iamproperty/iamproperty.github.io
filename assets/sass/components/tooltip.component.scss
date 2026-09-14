@@ -7,7 +7,6 @@
 }
 
 @layer components {
-
   :host {
     max-width: max-content;
     display: inline-block;
@@ -15,9 +14,8 @@
     overflow-anchor: none;
     cursor: pointer;
   }
-  
+
   :host(:hover) {
-    
     text-decoration: underline;
     text-underline-offset: 0.3em;
     text-decoration-style: dashed;
@@ -29,8 +27,8 @@
     display: inline-block;
   }
 
-  ::slotted([slot="icon"]){
-    display: inline!important;
+  ::slotted([slot='icon']) {
+    display: inline !important;
     color: var(--icon-colour, var(--colour-info));
     font-size: 1em;
     width: 1em;
@@ -41,10 +39,13 @@
     position: fixed;
     position-anchor: --anchor;
     position-area: center end;
-    position-try-fallbacks: bottom span-all, top span-all, start;
+    position-try-fallbacks:
+      bottom span-all,
+      top span-all,
+      start;
 
     container-type: anchored;
-    max-width: 16.875rem; /* 270 */ 
+    max-width: 16.875rem; /* 270 */
     background: var(--colour-primary);
     color: var(--colour-white);
     padding: 1.5rem;
@@ -61,11 +62,11 @@
     }
 
     @media screen and (min-width: 36em) {
-      max-width: 20.9375rem; /* 335 */ 
+      max-width: 20.9375rem; /* 335 */
     }
 
     @media screen and (min-width: 62em) {
-      max-width: 22.5rem;  /* 360 */
+      max-width: 22.5rem; /* 360 */
     }
 
     &::after {

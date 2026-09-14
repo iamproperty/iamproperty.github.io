@@ -1,5 +1,4 @@
 @layer elements {
-
   *:has(> .list--steps) {
     container-type: inline-size;
   }
@@ -51,8 +50,8 @@
       color: var(--colour-white);
     }
     li.step--complete:before {
-      background-color: light-dark(var(--colour-success),var(--colour-complete));
-      border-color: light-dark(var(--colour-success),var(--colour-complete));
+      background-color: light-dark(var(--colour-success), var(--colour-complete));
+      border-color: light-dark(var(--colour-success), var(--colour-complete));
     }
 
     &::after {
@@ -107,7 +106,6 @@
   }
 
   .list--steps-vertical {
-
     flex-direction: column;
     align-items: flex-start;
     padding: 0 0 0 2rem;
@@ -136,7 +134,7 @@
 
       &:not(:last-child):after {
         left: 0.6875rem; /* 11/16 */
-        top: 2.25rem;/* 36/16 */
+        top: 2.25rem; /* 36/16 */
         width: 2px;
         height: calc(100% + 1rem);
       }
@@ -152,7 +150,7 @@
 
         &:not(:last-child):after {
           left: 0.75rem;
-          top: 2.25rem;/* 36/16 */
+          top: 2.25rem; /* 36/16 */
           width: 2px;
           height: calc(100% + 1rem);
         }

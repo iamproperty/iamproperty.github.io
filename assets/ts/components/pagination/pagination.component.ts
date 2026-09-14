@@ -5,27 +5,27 @@ class iamPagination extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-      
+
     const loadCSS = `@import "${assetLocation}/css/components/pagination.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
     ${loadCSS}
-    
+
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
     <div class="pagination d-none">
-  
+
       <div class="minimal" part="minimal">
         <div class="page-jump">
           <div><select class="select--minimal"></select></div>
           <span class="total-pages"></span>
         </div>
-        
-        <button class="prev" disabled>Prev</button>
-        <button class="next" disabled>Next</button>
+
+        <button class="prev" part="prev" disabled>Prev</button>
+        <button class="next" part="next" disabled>Next</button>
       </div>
 
       <div class="item-count" part="item-count"></div>
@@ -42,7 +42,7 @@ class iamPagination extends HTMLElement {
       </div>
       <div class="mobile-controls m-auto text-center">
         <i class="fa-solid fa-spinner fa-spin"></i>
-        <button class="load-more btn btn-primary m-auto">Load more</a>
+        <button class="load-more btn btn-primary m-auto" part="load-more">Load more</button>
       </div>
     </div>
     `;
@@ -79,14 +79,12 @@ class iamPagination extends HTMLElement {
 
     // Next and previous buttons will simply trigger and on change on the select which in turn will dispatch an event
     next.addEventListener('click', () => {
-
-      console.log(parseInt(this.getAttribute('data-page')))
+      console.log(parseInt(this.getAttribute('data-page')));
 
       this.setAttribute('data-page', parseInt(this.getAttribute('data-page')) + 1);
     });
 
     prev.addEventListener('click', () => {
-      
       this.setAttribute('data-page', parseInt(this.getAttribute('data-page')) - 1);
     });
 

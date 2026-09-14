@@ -10,7 +10,6 @@ class iamAccordion extends HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = /* HTML */ `
       <style>
-
         :host {
           margin-bottom: 2.5rem;
           display: block;

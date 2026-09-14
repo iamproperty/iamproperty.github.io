@@ -4,8 +4,7 @@
   onMounted(() => {
     import(`../../../assets/js/components/button/button.component.min.js`)
       .then((module) => {
-        if (!window.customElements.get(`iam-button`))
-          window.customElements.define(`iam-button`, module.default);
+        if (!window.customElements.get(`iam-button`)) window.customElements.define(`iam-button`, module.default);
       })
       .catch((err) => {
         console.log(err.message);

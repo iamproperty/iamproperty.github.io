@@ -1,5 +1,4 @@
 @layer elements {
-
   /* #region reset */
   button {
     border-radius: 0;
@@ -10,7 +9,7 @@
     line-height: inherit;
   }
 
-  :is(button,[type="button"],[type="reset"],[type="submit"],[role='button']) {
+  :is(button, [type='button'], [type='reset'], [type='submit'], [role='button']) {
     -webkit-appearance: button;
 
     &:not(:disabled) {
@@ -18,7 +17,6 @@
     }
   }
   /* #endregion */
-
 
   /* #region button primary */
   .btn {
@@ -73,7 +71,7 @@
 
     &:not(.border-0) {
       background: var(--colour-btn-bg);
-      border: none!important;
+      border: none !important;
       outline: var(--btn-border-width) solid var(--colour-btn-border);
       outline-offset: -2px;
     }
@@ -210,7 +208,7 @@
       margin-left: 1rem;
     }
   }
-    
+
   a:is(:hover, :focus, .hover):not([disabled], :active, .active) .btn.btn--prompt,
   .btn.btn--prompt:is(:hover, :focus, .hover):not([disabled], :active, .active) {
     &:after {

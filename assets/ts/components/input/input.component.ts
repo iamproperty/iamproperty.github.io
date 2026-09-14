@@ -28,244 +28,213 @@ class iamInput extends HTMLElement {
   }
 
   connectedCallback(): void {
-    
     const component = this;
     const input = this.querySelector('input');
     const inputType = input?.hasAttribute('type') ? input?.getAttribute('type') : 'text';
     const prefixIcon = this.shadowRoot?.querySelector('[part="prefix"]');
     const suffixIcon = this.shadowRoot?.querySelector('[part="suffix"]');
 
-    
-    if(this.closest('label'))
-      this.classList.add('mb-0');
-
+    if (this.closest('label')) this.classList.add('mb-0');
 
     const setIcon = (inputType): void => {
-        
       // Pre set the icons
       switch (inputType) {
-        case "date":
-        case "datetime-local":
-        case "year":
-        case "month":
-        case "week":
-          this.setAttribute('data-suffix-icon','calendar') ;
-          suffixIcon?.setAttribute('role','button');
+        case 'date':
+        case 'datetime-local':
+        case 'year':
+        case 'month':
+        case 'week':
+          this.setAttribute('data-suffix-icon', 'calendar');
+          suffixIcon?.setAttribute('role', 'button');
           break;
-        case "time":
-          this.setAttribute('data-suffix-icon','clock') ;
-          suffixIcon?.setAttribute('role','button');
+        case 'time':
+          this.setAttribute('data-suffix-icon', 'clock');
+          suffixIcon?.setAttribute('role', 'button');
           break;
         default:
-          this.removeAttribute('data-suffix-icon') ;
+          this.removeAttribute('data-suffix-icon');
           suffixIcon?.removeAttribute('role');
           break;
       }
-    }
+    };
     setIcon(inputType);
 
-
     const setCurrencyRules = (): void => {
-      let originalValue = input.value.replace(',','');
+      let originalValue = input.value.replace(',', '');
 
-      input?.setAttribute('data-value',originalValue);
-      input.setAttribute('type','text');
-      originalValue = new Intl.NumberFormat("en-GB", { 
-        style: "currency", 
-        currency: "GBP",
+      input?.setAttribute('data-value', originalValue);
+      input.setAttribute('type', 'text');
+      originalValue = new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP',
         minimumFractionDigits: Number.isInteger(originalValue) ? 0 : 2,
         maximumFractionDigits: Number.isInteger(originalValue) ? 0 : 2,
-        trailingZeroDisplay: 'stripIfInteger' // Strip zeros if it's an integer
-      }).format(originalValue).replace("£", "");
+        trailingZeroDisplay: 'stripIfInteger', // Strip zeros if it's an integer
+      })
+        .format(originalValue)
+        .replace('£', '');
       input.value = originalValue;
-    }
-
+    };
 
     // Currency type
-    if(component?.hasAttribute('data-currency')) {
-
+    if (component?.hasAttribute('data-currency')) {
       // Pre set the icons
       switch (component?.hasAttribute('data-currency')) {
-        case "dollar":
-          component.setAttribute('data-prefix-icon','dollar-sign') ;
+        case 'dollar':
+          component.setAttribute('data-prefix-icon', 'dollar-sign');
           break;
-        case "euro":
-          component.setAttribute('data-prefix-icon','euro-sign') ;
+        case 'euro':
+          component.setAttribute('data-prefix-icon', 'euro-sign');
           break;
         default:
-          component.setAttribute('data-prefix-icon','sterling-sign') ;
+          component.setAttribute('data-prefix-icon', 'sterling-sign');
           break;
       }
 
       setCurrencyRules();
 
-
-      input?.addEventListener('focus',(event) => {
-
-        input.setAttribute('type', 'number')
+      input?.addEventListener('focus', (event) => {
+        input.setAttribute('type', 'number');
 
         input.value = input.getAttribute('data-value');
         input.setAttribute('value', input.getAttribute('data-value'));
       });
 
-      input?.addEventListener('input',(event) => {
-
-        input?.setAttribute('data-value',input.value);
+      input?.addEventListener('input', (event) => {
+        input?.setAttribute('data-value', input.value);
       });
 
-      input?.addEventListener('blur',(event) => {
-
+      input?.addEventListener('blur', (event) => {
         setCurrencyRules();
       });
     }
 
-
-
     // Colour input field
-    if(input?.matches('[type="color"]')){
+    if (input?.matches('[type="color"]')) {
       this.insertAdjacentHTML('beforeend', `<output></output>`);
 
       input.addEventListener('input', () => {
-
         input.nextElementSibling.value = input.value;
       });
     }
 
-
-    if(this.hasAttribute('data-prefix-icon')){
+    if (this.hasAttribute('data-prefix-icon')) {
       prefixIcon?.className = `prefix fa-${this.hasAttribute('data-prefix-weight') ? this.getAttribute('data-prefix-weight') : 'regular'} fa-${this.getAttribute('data-prefix-icon')}`;
       this.querySelector('input')?.classList.add('has-prefix');
     }
-    if(this.hasAttribute('data-suffix-icon')){
+    if (this.hasAttribute('data-suffix-icon')) {
       suffixIcon?.className = `suffix fa-${this.hasAttribute('data-suffix-weight') ? this.getAttribute('data-suffix-weight') : 'regular'} fa-${this.getAttribute('data-suffix-icon')}`;
       this.querySelector('input')?.classList.add('has-suffix');
     }
 
-    if(this.shadowRoot.querySelector('[name="prefix"]')?.assignedElements().length){
+    if (this.shadowRoot.querySelector('[name="prefix"]')?.assignedElements().length) {
       this.shadowRoot.querySelector('[name="prefix"]')?.classList.add('prefix');
       this.querySelector('input')?.classList.add('has-prefix');
     }
 
-    if(this.shadowRoot.querySelector('[name="suffix"]')?.assignedElements().length){
+    if (this.shadowRoot.querySelector('[name="suffix"]')?.assignedElements().length) {
       this.shadowRoot.querySelector('[name="suffix"]')?.classList.add('suffix');
       this.querySelector('input')?.classList.add('has-suffix');
     }
 
-
     // Change type
 
-    if(this.querySelector('[data-change-type]')){
+    if (this.querySelector('[data-change-type]')) {
       const select = this.querySelector('[data-change-type]');
 
       select.addEventListener('change', () => {
-        
         input.setAttribute('type', select.value);
 
         setIcon(select.value);
-        if(this.getAttribute('data-suffix-icon')){
-            
+        if (this.getAttribute('data-suffix-icon')) {
           suffixIcon?.className = `suffix fa-${this.hasAttribute('data-suffix-weight') ? this.getAttribute('data-suffix-weight') : 'regular'} fa-${this.getAttribute('data-suffix-icon')}`;
           input?.classList.add('has-suffix');
-        }
-        else {
+        } else {
           suffixIcon?.removeAttribute('class');
           input?.classList.remove('has-suffix');
         }
       });
     }
-    
 
-    
     // #region Date restrictions
-      const today = new Date();
+    const today = new Date();
 
-      function formatDate(date, type = "date"): string {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
+    function formatDate(date, type = 'date'): string {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
 
-        if(type == "datetime-local")
-          return `${year}-${month}-${day}T00:00:00`;
+      if (type == 'datetime-local') return `${year}-${month}-${day}T00:00:00`;
 
-        return `${year}-${month}-${day}`;
-      }
+      return `${year}-${month}-${day}`;
+    }
 
-      const checkDayAllowed = (input,allowedDays): void => {
+    const checkDayAllowed = (input, allowedDays): void => {
+      const day = new Date(input.value).getUTCDay();
 
-        const day = new Date(input.value).getUTCDay();
+      if (allowedDays.includes(day)) input.setCustomValidity('');
+      else input.setCustomValidity('That day of the week is not allowed');
+    };
 
-        if (allowedDays.includes(day)) input.setCustomValidity('');
-        else input.setCustomValidity('That day of the week is not allowed');
-      }
+    if (input?.matches('[type="date"], [type="datetime-local"]') && this.hasAttribute('data-allowed-days')) {
+      const allowedDays = JSON.parse(`[${this.getAttribute('data-allowed-days')}]`);
 
-      if(input?.matches('[type="date"], [type="datetime-local"]') && this.hasAttribute('data-allowed-days')){
-        const allowedDays = JSON.parse(`[${this.getAttribute('data-allowed-days')}]`);
-        
-        checkDayAllowed(input,allowedDays);
-        input.addEventListener('input', () => { checkDayAllowed(input,allowedDays); });
-      }
+      checkDayAllowed(input, allowedDays);
+      input.addEventListener('input', () => {
+        checkDayAllowed(input, allowedDays);
+      });
+    }
     // #endregion
 
     suffixIcon.addEventListener('click', function () {
-      
-      if(!component?.querySelector('select[data-change-type][slot="suffix"]'))
-        input.showPicker();
+      if (!component?.querySelector('select[data-change-type][slot="suffix"]')) input.showPicker();
     });
-    
-    prefixIcon.addEventListener('click', function () {
-      
-      if(!component?.querySelector('select[data-change-type][slot="prefix"]'))
-        input.showPicker();
-    });
-    
-    // Duplicate input watches
-    if(component.hasAttribute('data-duplicate')){
 
+    prefixIcon.addEventListener('click', function () {
+      if (!component?.querySelector('select[data-change-type][slot="prefix"]')) input.showPicker();
+    });
+
+    // Duplicate input watches
+    if (component.hasAttribute('data-duplicate')) {
       const id = component.getAttribute('data-duplicate');
       const watchedInputs = document.querySelectorAll(`[name="${id}"], [id="${id}"]`);
 
       input.addEventListener('change', (event) => {
-        
-        if(input.closest('iam-modal'))
-          return false;
+        if (input.closest('iam-modal')) return false;
 
-        if(input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')){
+        if (input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')) {
           watchedInput.checked = event.target.checked;
 
-          if(!event.detail && !event.detail?.triggered){
-            const changeEvent = new CustomEvent('change', { detail: {triggered: true} });
+          if (!event.detail && !event.detail?.triggered) {
+            const changeEvent = new CustomEvent('change', { detail: { triggered: true } });
             watchedInput?.dispatchEvent(changeEvent);
           }
         }
       });
 
       Array.from(watchedInputs).forEach((watchedInput) => {
-
         watchedInput?.addEventListener('change', (event) => {
-
           // If both the duplicate input and the watched input are checkboxes
-          if(input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')){
+          if (input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')) {
             input.checked = event.target.checked;
 
-            if(!event.detail && !event.detail?.triggered){
-              const changeEvent = new CustomEvent('change', { detail: {triggered: true} });
+            if (!event.detail && !event.detail?.triggered) {
+              const changeEvent = new CustomEvent('change', { detail: { triggered: true } });
               input?.dispatchEvent(changeEvent);
             }
           }
 
           // if input is not a checkbox BUT the watched input is
           // Then we need to create the input's value
-          if(!input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')){
-            
+          if (!input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')) {
             let computedValue = '';
             Array.from(document.querySelectorAll(`[name="${id}"]:checked`)).forEach((loopInput) => {
-
               computedValue += (computedValue == '' ? '' : ',') + loopInput.value;
             });
             input.value = computedValue;
 
-            if(!event.detail && !event.detail?.triggered){
-              const changeEvent = new CustomEvent('change', { detail: {triggered: true} });
+            if (!event.detail && !event.detail?.triggered) {
+              const changeEvent = new CustomEvent('change', { detail: { triggered: true } });
               input?.dispatchEvent(changeEvent);
             }
           }

@@ -1,4 +1,10 @@
-import {createTitle,replaceShortcode,transformElement,transformButtons, loadComponents} from '../../modules/content';
+import {
+  createTitle,
+  replaceShortcode,
+  transformElement,
+  transformButtons,
+  loadComponents,
+} from '../../modules/content';
 
 class iamContent extends HTMLElement {
   constructor() {
@@ -35,8 +41,7 @@ class iamContent extends HTMLElement {
         if (this.status === 200) {
           let response = JSON.parse(this.responseText);
 
-          if(Array.isArray(response))
-            response = response[0];
+          if (Array.isArray(response)) response = response[0];
 
           // Create the rendered content block and maintain any shortcodes
           const renderedContent = replaceShortcode(response.content.rendered);
@@ -46,18 +51,15 @@ class iamContent extends HTMLElement {
           const renderedTitle = createTitle(component, response.title.rendered);
 
           // Transform the component if required
-          if(component.hasAttribute('data-transform')){
-
-            component.innerHTML = transformElement(component,renderedTitle,renderedContent);
+          if (component.hasAttribute('data-transform')) {
+            component.innerHTML = transformElement(component, renderedTitle, renderedContent);
             component.removeAttribute('class');
 
             component.querySelectorAll(`${component.getAttribute('data-transform')} > *:empty`).forEach((element) => {
               element.remove();
             });
-          }
-          else {
-
-            component.insertAdjacentHTML('beforebegin',renderedTitle);
+          } else {
+            component.insertAdjacentHTML('beforebegin', renderedTitle);
 
             component.innerHTML = `${renderedContent}`;
             component.querySelectorAll(`:scope > *:empty`).forEach((element) => {
@@ -70,26 +72,30 @@ class iamContent extends HTMLElement {
 
           // Transform the buttons
           Array.from(document.querySelectorAll('.wp-block-buttons')).forEach((buttons) => {
-
             const fragment = transformButtons(buttons);
             buttons.parentNode.replaceChild(fragment, buttons);
           });
 
           // This allows for content added dynamically via the standardised nav to be added after the content is loaded
           Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
-
-            if(document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`))
-              element.innerHTML = document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`)?.getAttribute('data-variable-value');
+            if (
+              document.querySelector(
+                `[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`
+              )
+            )
+              element.innerHTML = document
+                .querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`)
+                ?.getAttribute('data-variable-value');
           });
 
           // Dispatch the loaded event for external JS and save to the data layer
-          const eventDetails = {url: url};
+          const eventDetails = { url: url };
           const changeEvent = new CustomEvent('content-loaded', { detail: eventDetails });
 
           component?.dispatchEvent(changeEvent);
 
           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({'event': 'content-loaded', ...eventDetails});
+          window.dataLayer.push({ event: 'content-loaded', ...eventDetails });
         }
       };
 

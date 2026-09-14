@@ -54,8 +54,6 @@
         <span class="h5 mb-0 pb-0">Content of the next div</span>
       </div>
     </div>
-    
-    
   </main>
 </template>
 
@@ -63,7 +61,6 @@
   @use '../../../assets/sass/_func.scss' as *;
 
   .container-example {
-
     aspect-ratio: 3 / 1;
     background: rgba(0, 0, 0, 0.2);
     //display: flex;
@@ -80,5 +77,4 @@
       background-color: white;
     }
   }
-
 </style>

@@ -1,8 +1,6 @@
 @use '../_func' as *;
 
-
 @layer components {
-  
   iam-tag:has(label:not([slot='checked']):not([slot='notmatched'])) {
     --display-panel: block;
   }
@@ -16,5 +14,4 @@
       color: var(--colour-heading);
     }
   }
-
 }

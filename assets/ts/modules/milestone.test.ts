@@ -14,10 +14,7 @@ describe('Milestone module', () => {
           name: 'Checks',
           description: 'Run checks',
           date_completed: '2026-01-01',
-          actions: [
-            { action: 'One', date_completed: '2026-01-01' },
-            { action: 'Two' },
-          ],
+          actions: [{ action: 'One', date_completed: '2026-01-01' }, { action: 'Two' }],
         },
       ]),
     });

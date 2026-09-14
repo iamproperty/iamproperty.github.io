@@ -1,9 +1,6 @@
 @use 'sass:math';
 @use '_func' as *;
 
-
-
-
 @use 'components/nav.preload';
 @use 'components/banner.preload';
 @use 'components/card.preload';
@@ -19,7 +16,6 @@
 
 @use 'components/address-lookup.preload';
 
-
 @use 'components/milestone';
 @use 'components/calendar.config';
 @use 'components/skeleton.global';
@@ -33,8 +29,6 @@
       padding-top: 2rem;
     }
   }
-
-
 
   /*  Search */
   iam-search .optional-text {

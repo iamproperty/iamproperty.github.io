@@ -42,8 +42,7 @@ class iamActionbar extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    
-      if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
+    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     const loadCSS = `@import "${assetLocation}/css/components/actionbar.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/actionbar.global.css";`;
@@ -56,7 +55,7 @@ class iamActionbar extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
     <div class="actionbar__wrapper">
-    
+
       <div class="actionbar" part="actionbar">
         <slot name="selectall"></slot>
         <slot name="filters"></slot>
@@ -76,7 +75,7 @@ class iamActionbar extends HTMLElement {
               <button class="btn btn-secondary btn-compact btn-sm mb-0 me-0 fa-regular fa-table-columns" title="Select colums" popovertarget="filter" style="anchor-name: --anchor-filter;">Filter</button>
               <iam-menu class="dialog--list" id="filter" style="position-anchor: --anchor-filter;" popover>
                 <div class="pb-0 mb-0 checklists">
-                  
+
                 </div>
                 <div class="text-right checklist-btns"><button id="cancelColumns" class="btn btn-action">Cancel</button><button id="saveColumns" class="btn btn-action btn-secondary">Save</button></div>
               </iam-menu>
@@ -154,7 +153,7 @@ class iamActionbar extends HTMLElement {
     if (this.hasAttribute('data-selectall')) {
       actionbarWrapper?.insertAdjacentHTML(
         'afterbegin',
-        `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall"><label for="selectall" class="m-0">Select all</label></div>`
+        `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall"><label for="selectall" class="m-0"><span>Select all</span></label></div>`
       );
       const selectAll = this.shadowRoot?.querySelector('.selectall');
 
@@ -236,6 +235,8 @@ class iamActionbar extends HTMLElement {
 
     // #region search
     const searchBar = this.shadowRoot?.querySelector('.actionbar--search');
+    const searchInput = this.shadowRoot?.querySelector('#search');
+
     if (this.hasAttribute('data-search-value')) {
       (this.shadowRoot?.querySelector('#search') as HTMLInputElement).value = String(
         this.getAttribute('data-search-value')
@@ -270,9 +271,7 @@ class iamActionbar extends HTMLElement {
     });
 
     searchBar.addEventListener('click', (event) => {
-
       if (event && event.target instanceof HTMLElement && event.target.closest('button.suffix')) {
-
         const submitEvent = new CustomEvent('search-submit', {
           detail: { search: searchBar.querySelector('input').value },
         });
@@ -284,12 +283,20 @@ class iamActionbar extends HTMLElement {
       }
     });
 
+    searchInput.addEventListener('input', () => {
+      if (searchInput.value.length >= 1) {
+        searchInput.classList.add('has-value');
+      } else {
+        searchInput.classList.remove('has-value');
+      }
+    });
+
     const clearBtn = searchBar.querySelector('.clear-search');
-    const searchInput = searchBar.querySelector('#search');
 
     clearBtn.addEventListener('click', function (e) {
       searchInput.removeAttribute('placeholder');
       searchInput.removeAttribute('data-value');
+      searchInput.classList.remove('has-value');
       searchInput.value = '';
     });
     // #endregion

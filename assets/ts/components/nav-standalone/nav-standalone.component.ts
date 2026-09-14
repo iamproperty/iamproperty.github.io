@@ -1,4 +1,4 @@
-import iamNav from "../nav/nav.component";
+import iamNav from '../nav/nav.component';
 
 class iamNavStandalone extends HTMLElement {
   constructor() {
@@ -12,19 +12,19 @@ class iamNavStandalone extends HTMLElement {
     //const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = /* HTML */`
-    <style class="styles">
-    ${loadCSS}
-    </style>
+    template.innerHTML = /* HTML */ `
+      <style class="styles">
+        ${loadCSS}
+      </style>
 
-    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
-    <div class="wrapper">
-      <iam-nav class="iam-nav">
-        <slot></slot>
-        <slot name="account"></slot>
-        <slot name="secondary"></slot>
-      </iam-nav>
-    </div>
+      <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
+      <div class="wrapper">
+        <iam-nav class="iam-nav">
+          <slot></slot>
+          <slot name="account"></slot>
+          <slot name="secondary"></slot>
+        </iam-nav>
+      </div>
     `;
 
     shadowRoot.appendChild(template.content.cloneNode(true));
@@ -35,10 +35,7 @@ class iamNavStandalone extends HTMLElement {
   }
 
   connectedCallback(): void {
-
-    if (!window.customElements.get(`iam-nav`))
-      window.customElements.define(`iam-nav`, iamNav);
-
+    if (!window.customElements.get(`iam-nav`)) window.customElements.define(`iam-nav`, iamNav);
 
     const wrapper = this.shadowRoot.querySelector('.wrapper');
 
@@ -51,19 +48,16 @@ class iamNavStandalone extends HTMLElement {
     }
 
     wrapper?.addEventListener('change', (e) => {
-
-      const event = new CustomEvent("change", e);
-      this.dispatchEvent(event)
+      const event = new CustomEvent('change', e);
+      this.dispatchEvent(event);
     });
 
     wrapper?.addEventListener('click', (e) => {
-
       console.log(e);
-      const event = new CustomEvent("click", e);
-      this.dispatchEvent(event)
+      const event = new CustomEvent('click', e);
+      this.dispatchEvent(event);
     });
   }
 }
-
 
 export default iamNavStandalone;

@@ -3,10 +3,10 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   const datalistWrapper = datalist.closest('.datalist__wrapper') ? datalist.closest('.datalist__wrapper') : datalist;
 
-  datalistWrapper.setAttribute('slot','datalist');
+  datalistWrapper.setAttribute('slot', 'datalist');
 
-  if(advancedSelect.querySelector('.suffix')){
-    advancedSelect.querySelector('.suffix')?.setAttribute('slot','suffix');
+  if (advancedSelect.querySelector('.suffix')) {
+    advancedSelect.querySelector('.suffix')?.setAttribute('slot', 'suffix');
 
     const shadowSuffix = advancedSelect.shadowRoot.querySelector('.suffix');
     if (shadowSuffix) {
@@ -15,43 +15,34 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     }
   }
 
-
   // Hide the default datalist
   displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
   displayInputField.setAttribute('list', '');
 
-  if(displayInputField.hasAttribute('placeholder'))
+  if (displayInputField.hasAttribute('placeholder'))
     displayInputField.setAttribute('data-placeholder', displayInputField.getAttribute('placeholder'));
 
-  if(displayInputField.hasAttribute('placeholder'))
+  if (displayInputField.hasAttribute('placeholder'))
     displayInputField.setAttribute('data-original-placeholder', displayInputField.getAttribute('placeholder'));
 
-
-
   const checkIfEmpty = (): void => {
-
-    if(displayInputField.value == ""){
+    if (displayInputField.value == '') {
       advancedSelect.classList.add('has-empty-input');
       displayInputField.classList.add('empty');
-    }
-    else {
+    } else {
       advancedSelect.classList.remove('has-empty-input');
       displayInputField.classList.remove('empty');
     }
-
   };
 
   checkIfEmpty();
 
   displayInputField.addEventListener('focus', function () {
-
-    if(displayInputField.value != ""){
-
+    if (displayInputField.value != '') {
       displayInputField.setAttribute('placeholder', displayInputField.value);
       displayInputField.setAttribute('data-value', displayInputField.value);
     }
     displayInputField.value = '';
-
   });
 
   displayInputField.addEventListener('blur', function () {
@@ -59,8 +50,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       displayInputField.value = displayInputField.getAttribute('data-value');
     }
 
-    if(displayInputField.hasAttribute('data-placeholder'))
-      displayInputField.setAttribute('placeholder',displayInputField.getAttribute('data-placeholder'));
+    if (displayInputField.hasAttribute('data-placeholder'))
+      displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-placeholder'));
   });
 
   for (const option of datalist.options) {
@@ -94,16 +85,17 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
       checkIfEmpty();
       setTimeout(() => {
-        advancedSelect.dispatchEvent(new CustomEvent('update-value', {
-          detail: {
-            value: option.value,
-            text: optionText,
-          },
-        }));
+        advancedSelect.dispatchEvent(
+          new CustomEvent('update-value', {
+            detail: {
+              value: option.value,
+              text: optionText,
+            },
+          })
+        );
       }, 0);
     }
   });
-
 
   displayInputField.addEventListener('input', function () {
     displayInputField.removeAttribute('data-value');
@@ -111,7 +103,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
     checkIfEmpty();
 
-    if (advancedSelect.tagName != "IAM-ADDRESS-LOOKUP") {
+    if (advancedSelect.tagName != 'IAM-ADDRESS-LOOKUP') {
       const text = displayInputField.value.toUpperCase();
 
       for (const option of datalist.options) {
@@ -129,7 +121,6 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   });
 
   advancedSelect.addEventListener('keydown', function (e) {
-
     if (e.keyCode == 40) {
       currentFocus++;
       addActive(datalist.options);
@@ -186,9 +177,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
     displayInputField.removeAttribute('placeholder');
 
-    if(displayInputField.hasAttribute('data-original-placeholder'))
+    if (displayInputField.hasAttribute('data-original-placeholder'))
       displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-original-placeholder'));
-
 
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
@@ -204,26 +194,27 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     advancedSelect.dispatchEvent(updateEvent);
 
     // Notify consumers the value was cleared
-    advancedSelect.dispatchEvent(new CustomEvent('update-value', {
-      detail: {
-        value: '',
-        text: '',
-      },
-    }));
-
+    advancedSelect.dispatchEvent(
+      new CustomEvent('update-value', {
+        detail: {
+          value: '',
+          text: '',
+        },
+      })
+    );
 
     checkIfEmpty();
-  }
+  };
 
-  const closeBtn = advancedSelect.querySelector('.clear-search') ? advancedSelect.querySelector('.clear-search') : advancedSelect.shadowRoot.querySelector('.clear-search');
+  const closeBtn = advancedSelect.querySelector('.clear-search')
+    ? advancedSelect.querySelector('.clear-search')
+    : advancedSelect.shadowRoot.querySelector('.clear-search');
 
   closeBtn.addEventListener('click', function (e) {
-
     emptyField();
   });
 
   advancedSelect.addEventListener('empty', function (e) {
-
     emptyField();
   });
 }

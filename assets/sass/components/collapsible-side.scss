@@ -3,11 +3,9 @@
 @use '../elements/container' as *;
 @use '../elements/type' as *;
 
-
-
 /*  Host */
 :host {
-  --side-link-hover: light-dark(#eeeeee,var(--colour-canvas-2));
+  --side-link-hover: light-dark(#eeeeee, var(--colour-canvas-2));
   grid-column: full-width;
 
   display: block;
@@ -17,7 +15,6 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-
 
   @media screen and (min-width: 62em) {
     max-height: calc(100vh - var(--nav-height));

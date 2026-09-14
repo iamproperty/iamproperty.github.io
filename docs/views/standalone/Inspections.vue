@@ -24,9 +24,7 @@
   const view = route.query['view'];
   const search = route.query['search'];
 
-  const handleSubmit = (e) => {
-
-  };
+  const handleSubmit = (e) => {};
 </script>
 
 <template>
@@ -335,7 +333,7 @@
                     </div>
                   </details>
                 </Accordion>
-              <button class="btn btn-primary d-block m-auto" type="button">Apply filters</button>
+                <button class="btn btn-primary d-block m-auto" type="button">Apply filters</button>
               </AppliedFilters>
             </div>
           </dialog>

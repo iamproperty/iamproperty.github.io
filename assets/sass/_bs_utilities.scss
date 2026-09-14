@@ -8,7 +8,6 @@
 @use '_functions/bs_variables' as *;
 @use '_functions/bs_utilities' as *;
 
-
 @layer utilities {
   /*  Missing classes that exist as mixins */
   @include clearfix();

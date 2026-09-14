@@ -1,5 +1,4 @@
 export const openModal = (modal): void => {
-
   const dialog = modal.closest('dialog') || modal.shadowRoot?.querySelector('dialog');
   const id = modal.hasAttribute('id') ? modal.getAttribute('id') : 'unknown';
 
@@ -19,15 +18,14 @@ export const openModal = (modal): void => {
     event: 'openModal',
     id: id,
   });
-}
+};
 
 export const closeModal = (modal): void => {
-
   const dialog = modal.closest('dialog') || modal.shadowRoot?.querySelector('dialog');
   const id = modal.hasAttribute('id') ? modal.getAttribute('id') : 'unknown';
 
   dialog?.close();
-  
+
   const closeEvent = new CustomEvent('modal-closed', {
     bubbles: true,
     cancelable: true,
@@ -41,6 +39,6 @@ export const closeModal = (modal): void => {
     event: 'closeModal',
     id: id,
   });
-}
+};
 
 export const closeButtonHtml = `<button class="btn btn-compact btn-secondary fa-xmark-large" data-close>Close</button>`;

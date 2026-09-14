@@ -1,6 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
 
-
 trackComponentRegistered('iam-tooltip');
 
 class iamTooltip extends HTMLElement {
@@ -29,60 +28,50 @@ class iamTooltip extends HTMLElement {
   }
 
   connectedCallback(): void {
-
-
     const contentWrapper = this.shadowRoot?.querySelector('.tooltip__content');
     const anchor = this.shadowRoot?.querySelector('.tooltip__anchor');
 
+    // #region Set default icon
 
-    // #region Set default icon 
-
-    if(!this.querySelector('[slot="icon"]')){
-
-      this.insertAdjacentHTML('afterbegin',`<i class="fa-solid fa-circle-${this.hasAttribute('data-type') && this.getAttribute('data-type') == "info" ? "info" : "question"}" slot="icon"></i>`);
+    if (!this.querySelector('[slot="icon"]')) {
+      this.insertAdjacentHTML(
+        'afterbegin',
+        `<i class="fa-solid fa-circle-${this.hasAttribute('data-type') && this.getAttribute('data-type') == 'info' ? 'info' : 'question'}" slot="icon"></i>`
+      );
     }
     // #endregion
 
-    if(this.hasAttribute('data-heading'))
+    if (this.hasAttribute('data-heading'))
       contentWrapper?.innerHTML += `<strong>${this.getAttribute('data-heading')}</strong>`;
 
     contentWrapper?.innerHTML += this.getAttribute('title');
-
 
     this.removeAttribute('title');
 
     contentWrapper?.setAttribute('popover', 'auto');
 
     this?.addEventListener('mouseenter', (event) => {
-      
-        contentWrapper.showPopover();
+      contentWrapper.showPopover();
     });
     this?.addEventListener('mouseleave', (event) => {
-
-      if(!contentWrapper?.classList.contains('show-popover'))
-        contentWrapper.hidePopover();
+      if (!contentWrapper?.classList.contains('show-popover')) contentWrapper.hidePopover();
     });
 
-
     // Check if th component sets the tooltip open by default
-    if(this.classList.contains('show-popover')){
+    if (this.classList.contains('show-popover')) {
       contentWrapper?.classList.add('show-popover');
-      
+
       contentWrapper?.setAttribute('popover', 'manual'); // Switch popover type first before showing popover
       contentWrapper.showPopover();
     }
 
     this?.addEventListener('click', (event) => {
-      
       contentWrapper?.classList.toggle('show-popover');
 
-      if(contentWrapper?.classList.contains('show-popover')){
-        
+      if (contentWrapper?.classList.contains('show-popover')) {
         contentWrapper?.setAttribute('popover', 'manual'); // Switch popover type first before showing popover
         contentWrapper.showPopover();
-      }
-      else {
-        
+      } else {
         contentWrapper?.setAttribute('popover', 'auto');
         contentWrapper.hidePopover();
       }
@@ -94,12 +83,10 @@ class iamTooltip extends HTMLElement {
       contentWrapper.hidePopover();
 
       setTimeout(() => {
-          
         contentWrapper?.classList.add('show-popover');
-        
+
         contentWrapper?.setAttribute('popover', 'manual'); // Switch popover type first before showing popover
         contentWrapper.showPopover();
-
       }, 100);
     });
   }

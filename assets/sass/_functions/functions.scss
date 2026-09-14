@@ -6,7 +6,6 @@
 @use 'sass:string';
 
 @function escape-svg($string) {
-  
   $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29'));
   @if string.index($string, 'data:image/svg+xml') {
     @each $char, $encoded in $escaped-characters {
@@ -32,7 +31,6 @@
 
   @return $string;
 }
-
 
 /*  converts pixels to em (context sets the current size of the font) */
 @function em($pixels, $context: 16) {

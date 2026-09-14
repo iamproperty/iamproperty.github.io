@@ -23,18 +23,18 @@
 }
 
 ::slotted(input) {
-  margin: 0!important;
+  margin: 0 !important;
 }
 
 ::slotted(input.has-prefix) {
-  margin: 0!important;
-  border-start-start-radius: 0!important;
-  border-end-start-radius: 0!important;
+  margin: 0 !important;
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
 }
 
 ::slotted(input.has-suffix) {
-  border-start-end-radius: 0!important;
-  border-end-end-radius: 0!important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
 }
 
 /* #region colors */
@@ -48,7 +48,7 @@
   overflow: hidden;
 }
 
-::slotted(input[type='color'])::-webkit-color-swatch{
+::slotted(input[type='color'])::-webkit-color-swatch {
   border-radius: 0;
   border: none;
 }
@@ -63,40 +63,37 @@
 
 /* #region  */
 @layer elements {
-::slotted(select:is([slot="prefix"],[slot="suffix"])){
+  ::slotted(select:is([slot='prefix'], [slot='suffix'])) {
+    --option-colour: red;
 
-  --option-colour: red;
+    /* --input-padding-block: 0; */
 
-  /* --input-padding-block: 0; */
+    margin: 0 !important;
 
-  margin: 0!important;
+    padding-top: 0 !important;
+    padding-left: 0.25rem !important;
+    padding-bottom: 0 !important;
+    padding-right: 2rem !important;
 
-  padding-top: 0!important;
-  padding-left: 0.25rem!important;
-  padding-bottom: 0!important;
-  padding-right: 2rem!important;
-  
-  margin-right: 0rem !important;
-  border: none !important;
-  /* color: white; */
-  height: 100%!important;
-  max-height: 100%!important;
-  min-height: 100%!important;
+    margin-right: 0rem !important;
+    border: none !important;
+    /* color: white; */
+    height: 100% !important;
+    max-height: 100% !important;
+    min-height: 100% !important;
 
-  
-  background: var(--icon-select)!important;
-  background-position: center right!important;
-  background-size: 1.25rem!important;
-  background-repeat: no-repeat!important;
-  background-color: var(--colour-primary)!important;
-  color: var(--colour-white)!important;
+    background: var(--icon-select) !important;
+    background-position: center right !important;
+    background-size: 1.25rem !important;
+    background-repeat: no-repeat !important;
+    background-color: var(--colour-primary) !important;
+    color: var(--colour-white) !important;
 
-  field-sizing: content!important;
-}
+    field-sizing: content !important;
+  }
 }
 /* #endregion */
 
-
-.suffix[role="button"] {
+.suffix[role='button'] {
   cursor: pointer;
 }

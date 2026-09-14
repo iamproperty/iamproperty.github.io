@@ -1,7 +1,5 @@
 @use '../_func' as *;
 
-
-
 /* #region Default view */
 iam-actionbar {
   --actionbar-radius: 0;
@@ -108,8 +106,8 @@ iam-actionbar:has(.selectall input:checked) {
 
 /* #region filters  */
 
-iam-actionbar [slot="filters"]:not(:has(+[slot="filters"])) {
-  margin-inline-end: auto!important;
+iam-actionbar [slot='filters']:not(:has(+ [slot='filters'])) {
+  margin-inline-end: auto !important;
 }
 
 /* #endregion */

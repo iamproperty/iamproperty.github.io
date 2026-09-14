@@ -1,9 +1,9 @@
 <script setup>
   import { onMounted } from 'vue';
-import DSHeader from '../DSHeader.vue';
-import { useRoute } from 'vue-router'
+  import DSHeader from '../DSHeader.vue';
+  import { useRoute } from 'vue-router';
 
-const route = useRoute();
+  const route = useRoute();
   import backgroundsImg from '../../img/colour-backgrounds.png';
   import Tabs from '../../../src/components/Tabs/Tabs.vue';
   import Tab from '../../../src/components/Tabs/Tab.vue';
@@ -31,21 +31,22 @@ const route = useRoute();
     Success: '--colour-success',
     Info: '--colour-info',
     Danger: '--colour-danger',
-    Dark: '--colour-dark'
-  }
+    Dark: '--colour-dark',
+  };
 
   const getVar = (propertyString) => {
+    let returnString = window
+      .getComputedStyle(document.querySelector('body'))
+      .getPropertyValue(propertyString)
+      .toUpperCase();
 
-    let returnString = window.getComputedStyle(document.querySelector('body')).getPropertyValue(propertyString).toUpperCase();
+    returnString = returnString.replace('LIGHT-DARK(', '').replace(')', '');
 
-    returnString = returnString.replace('LIGHT-DARK(','').replace(')','');
-
-    let returnStringArr = returnString.split(",");
+    let returnStringArr = returnString.split(',');
 
     returnString = returnStringArr[0];
 
     if (returnStringArr[1]) {
-      
       returnString = `<span class="light-var">${returnStringArr[0]}</span><span class="dark-var">${returnStringArr[1]}</span>`;
     }
 
@@ -55,20 +56,24 @@ const route = useRoute();
   const widerColours = {};
 
   for (let i = 1; i <= 23; i++) {
-    
     widerColours[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}`);
   }
 
   let urlParams = new URLSearchParams(window.location.search);
-  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
-  
+  const target = urlParams.has('Target')
+    ? urlParams.get('Target')
+    : urlParams.has('target')
+      ? urlParams.get('target')
+      : '';
 </script>
 
 <template>
   <main>
     <DSHeader :route="route"></DSHeader>
 
-    <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
+    <DarkMode
+      ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
+    >
 
     <!-- #region Light mode -->
     <div class="light-mode full-width visualtest--container">
@@ -90,7 +95,7 @@ const route = useRoute();
         </p>
       </div>
 
-      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest1' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
@@ -116,7 +121,7 @@ const route = useRoute();
         </p>
       </div>
 
-      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest2' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
@@ -147,11 +152,15 @@ const route = useRoute();
           feel on-brand and every interaction informative.
         </p>
         <p>
-          We use blue (<span v-html="getVar('--colour-info')"></span>) for selected states. Yellow (<span v-html="getVar('--colour-warning')"></span>) for primary buttons. Green (<span v-html="getVar('--colour-success')"></span>) for completed states and
-          positive interactions. Red (<span v-html="getVar('--colour-danger')"></span>) for incomplete or warning states.
+          We use blue (<span v-html="getVar('--colour-info')"></span>) for selected states. Yellow (<span
+            v-html="getVar('--colour-warning')"
+          ></span
+          >) for primary buttons. Green (<span v-html="getVar('--colour-success')"></span>) for completed states and
+          positive interactions. Red (<span v-html="getVar('--colour-danger')"></span>) for incomplete or warning
+          states.
         </p>
       </div>
-      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest3' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
@@ -165,8 +174,7 @@ const route = useRoute();
             <div :class="`colour-block bg-light`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Light</span>
             <span>CSS Variable: --colour-light</span><br />
-            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span
-            ><br />
+            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span><br />
           </div>
         </div>
       </div>
@@ -186,21 +194,19 @@ const route = useRoute();
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest4' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
             <span class="lead text-primary d-block pb-0">Muted</span>
             <span>CSS Variable: --colour-muted</span><br />
-            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span
-            ><br />
+            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span><br />
           </div>
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-body)"></div>
             <span class="lead text-primary d-block pb-0">Body</span>
             <span>CSS Variable: --colour-body</span><br />
-            <span>Hex code: <span v-html="getVar('--colour-body')"></span></span
-            ><br />
+            <span>Hex code: <span v-html="getVar('--colour-body')"></span></span><br />
           </div>
         </div>
       </div>
@@ -228,7 +234,7 @@ const route = useRoute();
         </p>
       </div>
 
-      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest1' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
@@ -268,7 +274,7 @@ const route = useRoute();
         </p>
       </div>
 
-      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest2' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
@@ -308,7 +314,7 @@ const route = useRoute();
         </p>
       </div>
 
-      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest3' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
@@ -323,8 +329,7 @@ const route = useRoute();
             <div :class="`colour-block bg-light`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Light</span>
             <span>CSS Variable: --colour-light</span><br />
-            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span
-            ><br />
+            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span><br />
           </div>
         </div>
       </div>
@@ -337,14 +342,13 @@ const route = useRoute();
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
+      <div :class="`container visualtest ${target == 'visualtest4' ? 'target' : ''}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
             <span class="lead text-primary d-block pb-0">Muted</span>
             <span>CSS Variable: --colour-muted</span><br />
-            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span
-            ><br />
+            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span><br />
           </div>
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-body)"></div>
@@ -361,7 +365,7 @@ const route = useRoute();
       <h2>Colour tints</h2>
     </div>
 
-    <div :class="`container visualtest ${(target == 'visualtest5' ? 'target' : '')}`">
+    <div :class="`container visualtest ${target == 'visualtest5' ? 'target' : ''}`">
       <div class="overflow-auto mb-3">
         <table class="colour-tints table--fullwidth border-0 mb-0">
           <thead>
@@ -381,7 +385,7 @@ const route = useRoute();
           </thead>
           <tbody>
             <tr>
-              <th style="vertical-align: middle;">{{ colourNames['Primary'] }}</th>
+              <th style="vertical-align: middle">{{ colourNames['Primary'] }}</th>
               <td><span class="colour-circle colour-primary tint-100 light-mode"></span></td>
               <td><span class="colour-circle colour-primary tint-90 light-mode"></span></td>
               <td><span class="colour-circle colour-primary tint-80"></span></td>
@@ -394,7 +398,7 @@ const route = useRoute();
               <td><span class="colour-circle colour-primary tint-10"></span></td>
             </tr>
             <tr>
-              <th style="vertical-align: middle;">{{ colourNames['Warning'] }}</th>
+              <th style="vertical-align: middle">{{ colourNames['Warning'] }}</th>
               <td><span class="colour-circle colour-warning tint-100"></span></td>
               <td><span class="colour-circle colour-warning tint-90"></span></td>
               <td><span class="colour-circle colour-warning tint-80"></span></td>
@@ -407,7 +411,7 @@ const route = useRoute();
               <td><span class="colour-circle colour-warning tint-10"></span></td>
             </tr>
             <tr v-for="(colour, name) in secondaryColours" :key="name">
-              <th style="vertical-align: middle;">{{ colourNames[name] }}</th>
+              <th style="vertical-align: middle">{{ colourNames[name] }}</th>
               <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-100`"></span></td>
               <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-90`"></span></td>
               <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-80`"></span></td>
@@ -420,7 +424,7 @@ const route = useRoute();
               <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-10`"></span></td>
             </tr>
             <tr>
-              <th style="vertical-align: middle;">Pink</th>
+              <th style="vertical-align: middle">Pink</th>
               <td><span class="colour-circle colour-pink tint-100"></span></td>
               <td><span class="colour-circle colour-pink tint-90"></span></td>
               <td><span class="colour-circle colour-pink tint-80"></span></td>
@@ -445,7 +449,7 @@ const route = useRoute();
         background elements sparingly.
       </p>
     </div>
-    <div :class="`container visualtest ${(target == 'visualtest6' ? 'target' : '')}`">
+    <div :class="`container visualtest ${target == 'visualtest6' ? 'target' : ''}`">
       <div class="row row-cols-2 row-cols-sm-3">
         <div class="col pb-2">
           <div class="colour-block bg-info gradient-success"></div>
@@ -502,7 +506,7 @@ const route = useRoute();
     <div class="container">
       <h2>Semantic colour</h2>
     </div>
-    <div :class="`container visualtest ${(target == 'visualtest7' ? 'target' : '')}`">
+    <div :class="`container visualtest ${target == 'visualtest7' ? 'target' : ''}`">
       <div class="overflow-auto mb-3">
         <table class="semantic-colours table--fullwidth border-0 mb-0">
           <thead>
@@ -517,7 +521,7 @@ const route = useRoute();
           </thead>
           <tbody>
             <tr>
-              <th style="vertical-align: middle;">Messages</th>
+              <th style="vertical-align: middle">Messages</th>
               <td><span class="colour-circle bg-info"></span>Inform</td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Success</td>
@@ -525,7 +529,7 @@ const route = useRoute();
               <td><span class="colour-circle bg-danger"></span>Error</td>
             </tr>
             <tr>
-              <th style="vertical-align: middle;">Status</th>
+              <th style="vertical-align: middle">Status</th>
               <td></td>
               <td><span class="colour-circle bg-muted" style="background: var(--colour-muted)"></span>Not started</td>
               <td><span class="colour-circle bg-success"></span>Approved</td>
@@ -533,7 +537,7 @@ const route = useRoute();
               <td><span class="colour-circle bg-danger"></span>Incomplete</td>
             </tr>
             <tr>
-              <th style="vertical-align: middle;">Risk</th>
+              <th style="vertical-align: middle">Risk</th>
               <td></td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Low</td>
@@ -541,7 +545,7 @@ const route = useRoute();
               <td><span class="colour-circle bg-danger"></span>High</td>
             </tr>
             <tr>
-              <th style="vertical-align: middle;">States</th>
+              <th style="vertical-align: middle">States</th>
               <td><span class="colour-circle bg-info"></span>Selected</td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Positive</td>
@@ -549,7 +553,7 @@ const route = useRoute();
               <td><span class="colour-circle bg-danger"></span>Negative</td>
             </tr>
             <tr>
-              <th style="vertical-align: middle;">Priority</th>
+              <th style="vertical-align: middle">Priority</th>
               <td></td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Low</td>
@@ -575,7 +579,7 @@ const route = useRoute();
       <h2>Wider colour pallete</h2>
     </div>
 
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest8' ? 'target' : '')}`">
+    <div :class="`container visualtest pb-5 ${target == 'visualtest8' ? 'target' : ''}`">
       <p class="pb-2">
         The wider colour palette is a range of colours that can be used in instances where colours can help with
         categorisation - calendar events, user types, applied filters, etc. They should not be used for status
@@ -610,7 +614,6 @@ const route = useRoute();
           <div :class="`tag wider-colour-${name} active`">10% darker</div>
         </div>
       </div>
-
     </div>
 
     <div class="container">
@@ -621,9 +624,8 @@ const route = useRoute();
       </p>
     </div>
 
-
-    <div :class="`container visualtest pb-5 ${(target == 'visualtest9' ? 'target' : '')}`">
-        <UserColours></UserColours>
+    <div :class="`container visualtest pb-5 ${target == 'visualtest9' ? 'target' : ''}`">
+      <UserColours></UserColours>
     </div>
 
     <div class="bg-light version-control">
@@ -656,7 +658,6 @@ const route = useRoute();
         <a href="/pdfs/colour-dark-mode.pdf" download>Download dark mode colours</a>
       </div>
     </div>
-
   </main>
 </template>
 
@@ -683,7 +684,7 @@ const route = useRoute();
 
   .colour-tints {
     @container (width >= 60em) {
-      thead th:not(:empty){
+      thead th:not(:empty) {
         min-width: 1px;
       }
     }
@@ -788,8 +789,6 @@ const route = useRoute();
   }
 
   @media screen and (prefers-color-scheme: dark) {
-    
-
     html #visualtest:target ~ main > .dark-mode:not(.visualtest) {
       display: block !important;
 

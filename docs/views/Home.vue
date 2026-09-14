@@ -2,7 +2,7 @@
   import Header from '@/components/Header/Header.vue';
   import Card from '@/components/Card/Card.vue';
   import headerImg from '../img/homepage-banner.png';
-import { routerKey } from 'vue-router';
+  import { routerKey } from 'vue-router';
 
   const items = [
     {

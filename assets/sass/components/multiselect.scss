@@ -1,6 +1,5 @@
 @use '../_func' as *;
 
-
 @use '../elements/forms' as *;
 @use '../elements/admin-panel' as *;
 @use '../elements/buttons' as *;
@@ -70,9 +69,7 @@
   }
 
   .wrapper {
-
     input {
-
       margin-top: unset;
     }
   }
@@ -100,7 +97,7 @@
       all: unset;
       font-size: 1rem;
       line-height: 1.625rem; /* 26 */
-      display: var(--search-display,inline-block);
+      display: var(--search-display, inline-block);
       width: 0;
       flex-grow: 1;
       padding: 0 0.5rem 0 0 !important;
@@ -136,7 +133,7 @@
 
   .dropdown {
     display: none;
-    
+
     position: absolute;
     top: calc(100% + 0.5rem);
     left: 0;
@@ -189,7 +186,7 @@
       input {
         border-color: transparent;
         background: none;
-        margin-left: var(--input-ms,-1rem);
+        margin-left: var(--input-ms, -1rem);
         width: calc(100% + 1rem);
         max-width: calc(100% + 1rem);
         box-shadow: none;
@@ -206,10 +203,8 @@
     }
   }
 
-  :host([data-single]){
-
-    .wrapper.filled{
-      
+  :host([data-single]) {
+    .wrapper.filled {
       slot[name='checked'] {
         pointer-events: none;
       }
@@ -222,15 +217,14 @@
       display: none;
     }
   }
-  :host-context(td){
-
-      input,
-      textarea,
-      select {
-        margin-left: 0!important;
-        width: 100%!important;
-        max-width: 100%!important;
-      }
+  :host-context(td) {
+    input,
+    textarea,
+    select {
+      margin-left: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
   }
 
   ::slotted([slot='checked']) {
