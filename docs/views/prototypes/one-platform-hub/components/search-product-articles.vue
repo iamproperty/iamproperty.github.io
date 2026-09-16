@@ -10,10 +10,11 @@
         .then((response) => response.json())
         .then((response) => {
           response.results.forEach((item) => {
-            dialogElement.value.insertAdjacentHTML(
-              'beforeend',
-              `<option value="${item.name}" data-url="${item.html_url}">${item.name}</option>`
-            );
+            const option = document.createElement('option');
+            option.value = item.name;
+            option.dataset.url = item.html_url;
+            option.textContent = item.name;
+            dialogElement.value.append(option);
           });
 
           return response;
