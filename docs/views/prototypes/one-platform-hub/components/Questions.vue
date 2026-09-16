@@ -197,7 +197,7 @@ const setDisabledLinks = (component, data): void => {
         <datalist id="questions" slot="datalist">
 
         <div v-for="group in groups" :key="group.name" class="optgroup" :value="`${group.name}:`">
-          <option v-for="dashboard in group.children" :key="dashboard.feature" :data-product="dashboard.product" :data-feature="dashboard.feature" :data-disabled="dashboard.linkedDisabled" :title="dashboard.title" :data-slug="dashboard.slug">
+          <option v-for="dashboard in group.children" :key="dashboard.slug" :data-product="dashboard.product" :data-feature="dashboard.feature" :data-disabled="dashboard.linkedDisabled" :title="dashboard.title" :data-slug="dashboard.slug">
             {{ dashboard.suggestionLabel }}
           </option>
         </div>
