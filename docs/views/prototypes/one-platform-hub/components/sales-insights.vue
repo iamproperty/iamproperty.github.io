@@ -88,7 +88,7 @@
         },
       });
 
-      json.value = await response.json();
+      const json = await response.json();
 
       if (json.data) competitors.value = json.data;
     } catch (error) {
