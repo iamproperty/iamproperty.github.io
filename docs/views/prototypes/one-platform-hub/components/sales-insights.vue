@@ -141,7 +141,7 @@
     if (!searchTerm) {
       outcodes.value = [];
     } else {
-      const filtereOutcodes = cachedOutcodes.value.filter((item) => item.title.toLowerCase().startsWith(searchTerm));
+      const filtereOutcodes = cachedOutcodes.value.filter((item) => item.title.toLowerCase().startsWith(searchTerm.toLowerCase()));
 
       outcodes.value = new Set([...outcodes.value, ...filtereOutcodes]);
     }
