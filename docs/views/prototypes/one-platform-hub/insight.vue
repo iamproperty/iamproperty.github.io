@@ -96,8 +96,11 @@ onMounted(async () => {
     return data.dashboards;
   });
 
-  insightTitle.value = dashboards.value.find((dashboard) => dashboard.slug === insight.value || '')?.iframeTitle;
-  search.value = dashboards.value.find((dashboard) => dashboard.slug === insight.value || '')?.suggestionLabel;
+  const selectedDashboard = Array.isArray(dashboards.value)
+    ? dashboards.value.find((dashboard) => dashboard.slug === insight.value)
+    : undefined;
+  insightTitle.value = selectedDashboard?.iframeTitle ?? '';
+  search.value = selectedDashboard?.suggestionLabel ?? '';
 });
 
 
