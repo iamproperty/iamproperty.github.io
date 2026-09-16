@@ -66,7 +66,7 @@
 
       competitors.value = [];
 
-      return false;
+      return;
     }
 
     try {
