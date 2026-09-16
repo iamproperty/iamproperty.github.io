@@ -168,7 +168,7 @@ const loadDashboards = async (): any => {
       <iframe
         id="iframeTable"
         ref="iframeTable"
-        title="Inline Frame Example"
+:title="insightTitle || 'Property insight'"
         src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed"
         frameborder="0"
         allowfullscreen
