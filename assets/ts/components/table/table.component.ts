@@ -49,7 +49,7 @@ class iamTableBasic extends HTMLElement {
     // For when the table contents is updated with an ajax call
     this.addEventListener('update-table', (event) => {
       setupBasicTable(this, table, pagination, form);
-      setupExpandedTable(this, table, form, actionbar);
+      setupExpandedTable(this, table, actionbar, form);
     });
   }
 }

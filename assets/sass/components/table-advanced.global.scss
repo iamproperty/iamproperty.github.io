@@ -136,6 +136,35 @@ $selector: '.table--component';
 }
 
 /* #endregion */
+/* #region Filter indicator in actionbar*/
+:is(#{$selector}) iam-actionbar [data-filters] {
+
+  > * {
+    margin: 0!important;
+  }
+
+
+  &[data-filtered]{
+    position: relative;
+    overflow: visible;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      margin: 0!important;
+      width: 0.75rem;
+      height: 0.75rem;
+      margin: -0.25rem!important;
+      border-radius: 50%;
+      background-color: var(--colour-info);
+    }
+  }
+}
+
+/* #endregion */
 
 /* #region headiner divider */
 .th__divider {

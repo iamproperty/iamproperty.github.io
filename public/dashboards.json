@@ -1,0 +1,88 @@
+{
+  "dashboards": [
+    {
+      "slug": "stock-switch",
+      "pageTitle": "All Insights",
+      "iframeTitle": "Properties most likely to switch",
+      "suggestionLabel": "Show me stock currently on the market most likely to switch",
+      "group": "Win",
+      "lookerHost": "iamproperty.cloud.looker.com",
+      "product": "crm",
+      "feature": "bookSalesAppraisal",
+      "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+    },
+    {
+      "slug": "predicted-movers",
+      "pageTitle": "All Insights",
+      "iframeTitle": "Predicted movers not yet on the market",
+      "suggestionLabel": "Show me predicted movers not yet on the market",
+      "group": "Win",
+      "lookerHost": "iamproperty.cloud.looker.com",
+      "product": "crm",
+      "feature": "bookSalesAppraisal",
+      "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+    },
+    {
+      "slug": "market-appraisals",
+      "pageTitle": "All Insights",
+      "iframeTitle": "Market appraisals not yet on the market",
+      "suggestionLabel": "Show me Market Appraisals carried out, but not yet on market",
+      "group": "Win",
+      "lookerHost": "iamproperty.cloud.looker.com",
+      "product": "mtk",
+      "feature": "marketAppraisalsOverview",
+      "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+    },
+    {
+      "slug": "auction",
+      "pageTitle": "All Insights",
+      "iframeTitle": "Properties potentially suitable for auction",
+      "suggestionLabel": "Show me properties that could be suitable for auction",
+      "group": "Grow",
+      "lookerHost": "iamproperty.cloud.looker.com",
+      "product": "mtk",
+      "feature": "marketAppraisalsOverview",
+      "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+    },
+    {
+      "slug": "vendor-conveyancing",
+      "pageTitle": "All Insights",
+      "iframeTitle": "Vendor Conveyancing opportunities",
+      "suggestionLabel": "Show me current vendor conveyancing opportunities still to convert",
+      "group": "Grow",
+      "lookerHost": "iamproperty.cloud.looker.com",
+      "product": "mtk",
+      "feature": "marketAppraisalsOverview",
+      "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+    },
+    {
+      "slug": "sale-ready",
+      "pageTitle": "All Insights",
+      "iframeTitle": "Sale Ready opportunities",
+      "suggestionLabel": "Show me properties that could be suitable for Sale Ready based on client circumstances",
+      "group": "Grow",
+      "lookerHost": "iamproperty.cloud.looker.com",
+      "product": "mtk",
+      "feature": "marketAppraisalsOverview",
+      "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+    },
+    {
+      "slug": "sales-progression",
+      "pageTitle": "All Insights",
+      "iframeTitle": "Potential sales progression delays",
+      "suggestionLabel": "Show me properties that may experience delays during sales progression",
+      "group": "Grow",
+      "lookerHost": "iamproperty.cloud.looker.com",
+      "product": "mtk",
+      "feature": "marketAppraisalsOverview",
+      "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+    }
+  ]
+}

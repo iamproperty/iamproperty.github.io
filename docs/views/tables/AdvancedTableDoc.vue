@@ -38,13 +38,30 @@
     <div class="container visualtest mb-5 bg-light">
       <TableAdvanced class="table--fullwidth">
         <Actionbar data-selectall>
-          <button class="btn btn-action fa-box-archive">Archive</button
-          ><button class="btn btn-action fa-trash-can">Export to .csv</button>
+          <div data-filters='[{"operator": "equals", "type": "text"}]' data-column="Criteria match">
+
+            <button class="btn btn-action fa-box-archive" popovertarget="criteria-match" style="anchor-name: --criteria-match;">Criteria match</button>
+            <iam-menu id="criteria-match" popover style="position-anchor: --criteria-match;">
+              <fieldset>
+                <label>
+                  All Criteria <input type="radio" name="criteria" value="" checked/>
+                </label>
+                <label>
+                  Full match <input type="radio" name="criteria" value="full" />
+                </label>
+                <label>
+                  Partial match <input type="radio" name="criteria" value="partial" />
+                </label>
+              </fieldset>
+            </iam-menu>
+          </div>
+          <button class="btn btn-action fa-trash-can">Export to .csv</button>
         </Actionbar>
         <table>
           <thead>
             <tr>
               <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
+              <th class="d-none">Criteria match</th>
               <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
               <th data-sort data-filters data-format="price">Current list price</th>
               <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
@@ -55,6 +72,7 @@
           <tbody>
             <tr>
               <td>59 The Glen, NE68 3LS</td>
+              <td>full</td>
               <td>23-04-26</td>
               <td>600000</td>
               <td>Heaton</td>
@@ -63,6 +81,7 @@
             </tr>
             <tr>
               <td>59 Oak Street, NE68 3LS</td>
+              <td>full</td>
               <td>27/04/2026</td>
               <td>£300,000</td>
               <td>Heaton</td>
@@ -71,6 +90,7 @@
             </tr>
             <tr>
               <td>59 The South Gate Wood, NE68 3LS</td>
+              <td>full</td>
               <td>28/04/2026</td>
               <td>£500,000</td>
               <td>Cramlington</td>
@@ -79,6 +99,7 @@
             </tr>
             <tr>
               <td>59 Oak Street, NE68 3LS</td>
+              <td>partial</td>
               <td>27/06/2026</td>
               <td>£1,300,000</td>
               <td>Gosforth</td>

@@ -342,6 +342,10 @@ export const fixTableCells = (table): void => {
           cell.innerHTML = formatData(heading.getAttribute('data-format'), cell.textContent.trim()); //Make sure date format is consistent
         }
 
+        if (heading.classList.contains('d-none')) {
+          cell.classList.add('d-none');
+        }
+
         if (statuses.includes(cell.textContent.trim().toLowerCase())) {
           cell.setAttribute('data-content', cell.textContent.trim().toLowerCase());
         }
@@ -436,7 +440,7 @@ export const addMenuButtons = (component, table): void => {
 // #endregion
 
 // #region Expanded table functions
-export const setupExpandedTable = (component, table, form, actionbar): void => {
+export const setupExpandedTable = (component, table, actionbar, form): void => {
 
 
   if(actionbar && actionbar.hasAttribute('data-selectall')) {
@@ -1116,11 +1120,20 @@ export const populateDataQueries = (component, table, form): void | boolean => {
 // #endregion
 
 // #region Advanced table functions
-export const setupAdvancedTable = (component, table, pagination, form, savedTableBody): void => {
+export const setupAdvancedTable = (component, table, actionbar, pagination, form, savedTableBody): void => {
 
+
+  table.querySelectorAll('thead tr th').forEach((heading) => {
+
+    heading.innerHTML = `<div class="th__content">${heading.textContent.trim()}</div><span class="th__divider"></span>`;
+    heading.setAttribute('data-label', heading.textContent.trim());
+  });
+
+  populateFiltersFromActionbar(component, table, actionbar);
   populateFilterOptions(component, table);
+  setActionbarEvents(component, table, actionbar, pagination);
   createInlineHeaderButtons(component, table);
-  filterAdvancedTable(component, table, pagination);
+  filterAdvancedTable(component, table, actionbar, pagination);
   paginateRows(component, table, pagination);
 
   table.querySelectorAll('thead tr th[data-sort] [data-sort-btn]').forEach((btn) => {
@@ -1129,7 +1142,7 @@ export const setupAdvancedTable = (component, table, pagination, form, savedTabl
       event.stopPropagation();
 
       const heading = event.target.closest('th[data-sort]');
-      sortViaHeader(component, table, pagination, heading, savedTableBody);
+      sortViaHeader(component, table, actionbar, pagination, heading, savedTableBody);
 
       btn.closest('th[data-sort]')?.focus();
     });
@@ -1141,20 +1154,12 @@ export const setupAdvancedTable = (component, table, pagination, form, savedTabl
     btn.addEventListener('click', (event) => {
 
       const heading = event.target.closest('th[data-filters]');
-      createFilterPopover(component, table, heading);
+      createFilterPopover(component, table, heading, actionbar, pagination);
     });
   });
 };
 
 export const createInlineHeaderButtons = (component, table): void => {
-
-
-  table.querySelectorAll('thead tr th[data-sort], thead tr th[data-filters]').forEach((heading) => {
-
-    heading.innerHTML = `<div class="th__content">${heading.textContent.trim()}</div><span class="th__divider"></span>`;
-    heading.setAttribute('data-label', heading.textContent.trim());
-  });
-
 
   table.querySelectorAll('thead tr th[data-sort]').forEach((heading) => {
 
@@ -1177,7 +1182,7 @@ export const createInlineHeaderButtons = (component, table): void => {
   });
 };
 
-export const sortViaHeader = (component, table, pagination, heading, savedTableBody): void => {
+export const sortViaHeader = (component, table, actionbar, pagination, heading, savedTableBody): void => {
 
   const btn = heading.querySelector('[data-sort-btn]');
   const headingText = heading?.querySelector('.th__content')?.textContent.trim();
@@ -1214,14 +1219,9 @@ export const sortViaHeader = (component, table, pagination, heading, savedTableB
     const tbody = table.querySelector('tbody');
     tbody.innerHTML = savedTableBody.innerHTML;
 
-
-    if(component.querySelector('iam-actionbar')) {
-      const actionbar = component.querySelector('iam-actionbar');
-      addSelectboxes(component, table, actionbar);
-    }
-
+    addSelectboxes(component, table, actionbar);
     fixTablebody(component, table, pagination);
-    filterAdvancedTable(component, table, pagination);
+    filterAdvancedTable(component, table, actionbar, pagination);
     paginateRows(component, table, pagination);
 
     // Dispatch event
@@ -1290,7 +1290,51 @@ export const populateFilterOptions = (component, table): void => {
   });
 };
 
-export const getInlineFilters = (component, table): Array<any> => {
+export const setActionbarEvents = (component, table, actionbar, pagination): void => {
+
+  actionbar?.addEventListener('change', (event) => {
+
+    console.log('actionbar change event', event.target);
+
+    const element = event.target;
+
+    if (!element || !element.closest('[data-filters]') || !element.closest('[data-column]')) return;
+
+    const input = element.dataset.filters ? element : element.closest('[data-filters]');
+
+    console.log('actionbar change event', input);
+    const heading = table.querySelector('th[data-label="' + input.dataset.column + '"]');
+    const filters = JSON.parse(input.dataset.filters);
+
+    filters.forEach((filter, index) => {
+
+      filters[index].value = element.value;
+    });
+
+    heading.dataset.filters = JSON.stringify(filters);
+
+    filterAdvancedTable(component, table, actionbar, pagination);
+  });
+};
+
+const populateFiltersFromActionbar = (component, table, actionbar): void => {
+
+  actionbar.querySelectorAll('[data-filters]').forEach(input => {
+
+    console.log(input.dataset.filters);
+
+    if(!input.dataset.filters || !input.dataset.column) return;
+
+    const filters = JSON.parse(input.dataset.filters);
+    const columnName = input.dataset.column;
+    const columnHeading = table.querySelector('th[data-label="' + columnName + '"]');
+
+    columnHeading.dataset.filters = JSON.stringify(filters);
+  });
+
+};
+
+export const getInlineFilters = (component, table, actionbar): Array<any> => {
 
   const columnsArray = [];
 
@@ -1300,9 +1344,13 @@ export const getInlineFilters = (component, table): Array<any> => {
 
     const columnName = heading.dataset.label; // TO DO add a fallback for when a name isnt set
     const filters = JSON.parse(heading.dataset.filters);
+
+    // Todo make more robust to check if the column already exists in the array and update it instead of adding a duplicate
     columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': filters});
   });
 
+
+  console.log('columnsArray', columnsArray);
   return columnsArray;
 };
 
@@ -1335,7 +1383,7 @@ export const resetHeadingFilters = (heading): void => {
   heading.dataset.filters = JSON.stringify(filters);
 };
 
-export const createFilterPopover = (component, table, heading): void => {
+export const createFilterPopover = (component, table, heading, actionbar, pagination): void => {
 
   const filters = JSON.parse(heading.dataset.filters);
 
@@ -1366,7 +1414,6 @@ export const createFilterPopover = (component, table, heading): void => {
   filtersPopover.setAttribute('popover','auto');
 
   filters.forEach((filter, index) => {
-
 
     const filterType = filter.type ?? 'text';
     let filterOperator = filter.operator ?? 'Contains';
@@ -1476,7 +1523,7 @@ export const createFilterPopover = (component, table, heading): void => {
     // TODO: Validate the inputs before updating the filters
 
     updateHeadingFilters(heading, filtersPopover);
-    filterAdvancedTable(component, table, pagination);
+    filterAdvancedTable(component, table, actionbar, pagination);
     filtersPopover.hidePopover();
 
     const submitEvent = new CustomEvent('filters-updated', {
@@ -1496,7 +1543,7 @@ export const createFilterPopover = (component, table, heading): void => {
   filterResetButton.addEventListener('click', (event) => {
 
     resetHeadingFilters(heading);
-    filterAdvancedTable(component, table, pagination);
+    filterAdvancedTable(component, table, actionbar, pagination);
     filtersPopover.hidePopover();
 
     const submitEvent = new CustomEvent('filters-updated', {
@@ -1522,9 +1569,9 @@ export const createFilterPopover = (component, table, heading): void => {
   });
 };
 
-export const filterAdvancedTable = (component, table, pagination): void => {
+export const filterAdvancedTable = (component, table, actionbar, pagination): void => {
 
-  const columns = getInlineFilters(component, table);
+  const columns = getInlineFilters(component, table, actionbar);
   const appliedFilters = [];
   table.classList.remove('table--filtered');
 
@@ -1622,28 +1669,36 @@ export const filterAdvancedTable = (component, table, pagination): void => {
     }
   });
 
-  setFilterIndicator(component, table, appliedFilters);
-  createAppliedFilters(component, table, pagination, appliedFilters);
+  setFilterIndicator(component, table, actionbar, appliedFilters);
+  createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
   paginateRows(component, table, pagination);
 };
 
-export const setFilterIndicator = (component, table, appliedFilters): void => {
+export const setFilterIndicator = (component, table, actionbar, appliedFilters): void => {
 
   table.querySelectorAll(`th[data-filtered]`).forEach((heading) => {
+    heading.removeAttribute('data-filtered');
+  });
+
+  actionbar.querySelectorAll(`[data-filtered]`).forEach((heading) => {
     heading.removeAttribute('data-filtered');
   });
 
   appliedFilters.forEach((filter) => {
 
     const heading = table.querySelector(`th[data-label="${filter}"]`);
+    const actionbarHeading = actionbar.querySelector(`[data-column="${filter}"]`);
 
     if (heading) {
       heading.setAttribute('data-filtered', 'true');
     }
+    if (actionbarHeading) {
+      actionbarHeading.setAttribute('data-filtered', 'true');
+    }
   });
 };
 
-export const createAppliedFilters = (component, table, pagination, appliedFilters): void => {
+export const createAppliedFilters = (component, table, actionbar, pagination, appliedFilters): void => {
 
   const appliedFiltersContainer = component.shadowRoot.querySelector('.table-filters');
 
@@ -1662,12 +1717,12 @@ export const createAppliedFilters = (component, table, pagination, appliedFilter
     filterElement.addEventListener('click', (event) => {
 
       filterElement.remove();
-      removeAppliedFilter(component, table, pagination, filter);
+      removeAppliedFilter(component, table, actionbar, pagination, filter);
     });
   });
 };
 
-export const removeAppliedFilter = (component, table, pagination, filter): void => {
+export const removeAppliedFilter = (component, table, actionbar, pagination, filter): void => {
 
   const heading = table.querySelector(`th[data-label="${filter}"]`);
 
@@ -1685,7 +1740,39 @@ export const removeAppliedFilter = (component, table, pagination, filter): void 
     heading.dataset.filters = JSON.stringify(newFilters);
   }
 
-  filterAdvancedTable(component, table, pagination);
+  const input = actionbar.querySelector(`[data-column="${filter}"]`);
+
+  if (input) {
+    const filters = JSON.parse(input.dataset.filters);
+    const newFilters = [];
+
+    filters.forEach((filterObj) => {
+      if (filterObj.value) {
+        filterObj.value = null;
+      }
+      newFilters.push(filterObj);
+    });
+
+    input.dataset.filters = JSON.stringify(newFilters);
+  }
+
+  if (input && input.tagName === 'INPUT') {
+
+    input.value = '';
+  }
+  else if (input && input.querySelector('input')) {
+
+    const actualInput = input.querySelector('input');
+    actualInput.value = '';
+
+    input.querySelectorAll('[type="checkbox"], [type="radio"]')?.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    input.querySelector(':is([type="checkbox"], [type="radio"])[value=""]')?.checked = true;
+  }
+
+  filterAdvancedTable(component, table, actionbar, pagination);
 };
 
 export const addExportEventListeners = (button, table): void | boolean => {

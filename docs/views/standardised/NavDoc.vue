@@ -28,7 +28,7 @@
     <h2>One platform menu on the hub</h2>
     <p>The one platform Hub view uses the <a href="/nav/nav-dual">navbar dual component</a>.</p>
 
-    <a href="/standalone/hub" class="btn btn-secondary" target="_blank">Eco hub demo</a>
+    <a href="/prototypes/one-platform-hub" class="btn btn-secondary" target="_blank">One platform demo</a>
 
     <h2 class="mt-5">One platform menu within products</h2>
 
@@ -37,7 +37,7 @@
       inclusion of the <a href="/nav/branch-selector">branch selector component</a> as a slotted item.
     </p>
 
-    <a href="/standalone/eco-product" class="btn btn-secondary" target="_blank">Product with One platform menu demo</a>
+    <a href="/prototypes/one-platform-nav" class="btn btn-secondary" target="_blank">Product with One platform menu demo</a>
 
     <Integration component="std-nav" componentName="iam-nav">
       <template #web-component>
@@ -148,8 +148,8 @@
               <td></td>
               <td>String</td>
               <td>No</td>
-              <td>The data-env attribute can be added in order to make the links in the fallback secondary nav (shown when there is not a valid SSO subject) point to the testing environment instead of production. 
-                This is not required and the environment is set to production by default. 
+              <td>The data-env attribute can be added in order to make the links in the fallback secondary nav (shown when there is not a valid SSO subject) point to the testing environment instead of production.
+                This is not required and the environment is set to production by default.
               </td>
             </tr>
           </tbody>

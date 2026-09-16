@@ -1,8 +1,4 @@
-import { verify } from 'node:crypto';
-import { stat } from 'node:fs';
-
-// @ts-nocheck
-const routes = [
+const routes: Array<any> = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
   {
     name: 'Principles',
@@ -669,6 +665,16 @@ const routes = [
         },
         component: () => import('./views/components/Header.vue'),
         searchterms: 'introduce, banner',
+      },
+      {
+        path: 'map',
+        name: 'Map',
+        meta: {
+          title: 'Map | Components | iamkey',
+          alpha: true,
+          standalone: true,
+        },
+        component: () => import('./views/components/MapDoc.vue'),
       },
       {
         path: 'menu',
@@ -1947,6 +1953,40 @@ const routes = [
       },
     ],
   },
+  {
+    /* Prototypes */ path: '/prototypes',
+    name: 'Prototypes',
+    meta: {
+      title: 'Prototypes | iamkey',
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "prototypes" */ './views/Prototypes.vue'),
+    children: [
+      {
+        name: 'Prototypes-index',
+        path: '',
+        component: () => import('./views/prototypes/Index.vue'),
+      },
+      {
+        name: 'One platform hub',
+        path: 'one-platform-hub',
+        component: () => import('./views/prototypes/one-platform-hub/index.vue'),
+      },
+      {
+        name: 'One platform hub insight',
+        path: 'one-platform-hub/:insight',
+        component: () => import('./views/prototypes/one-platform-hub/insight.vue'),
+      },
+      {
+        name: 'Product with one platform nav',
+        path: 'one-platform-nav',
+        component: () => import('./views/prototypes/one-platform-hub/product.vue'),
+      },
+    ],
+  },
+
   {
     path: '/data-layer',
     component: () => import('./views/DataLayer.vue'),
