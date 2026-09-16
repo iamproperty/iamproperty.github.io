@@ -150,7 +150,7 @@
 <template>
   <Notification v-if="showToast" data-type="toast" data-status="success" data-timeout="5000">
     <strong>Sale insights terms agreed</strong><br />
-    You can now access and customise competitor analysis insight from thw Sale insights panel below.
+    You can now access and customise competitor analysis insight from the sales insights panel below.
   </Notification>
 
   <div class="admin-panel bg-white">
