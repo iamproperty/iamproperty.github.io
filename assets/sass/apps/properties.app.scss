@@ -12,6 +12,7 @@
 @use '../elements/forms.scss' as *;
 @use '../components/table-advanced.global.scss';
 @use '../utilities/margins';
+@use '../utilities/paddings';
 @use '../utilities/visually-hidden';
 
 @font-face {
@@ -60,6 +61,10 @@
     box-sizing: border-box;
     font-family: var(--font-body);
   }
+}
+
+iam-actionbar {
+  display: block;
 }
 
 @layer utilities {

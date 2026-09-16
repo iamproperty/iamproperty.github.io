@@ -46,8 +46,10 @@ class iamTableAdvanced extends HTMLElement {
 
     actionbar?.setAttribute('slot', 'before');
     setupBasicTable(this, table, pagination, form);
-    setupExpandedTable(this, table, form, actionbar);
-    setupAdvancedTable(this, table, pagination, form, savedTableBody); /* pagination and sorting is handled by the basic and expanded table setup functions */
+    setupExpandedTable(this, table, actionbar, form);
+    setupAdvancedTable(this, table, actionbar, pagination, form, savedTableBody); /* pagination and sorting is handled by the basic and expanded table setup functions */
+
+
   }
 }
 

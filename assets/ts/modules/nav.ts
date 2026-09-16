@@ -81,7 +81,7 @@ export const loadNavData = async (mode): any => {
   const ajaxURL =
     mode != 'dev'
       ? 'https://hub.iamproperty.group/data/ecosystem-switcher.json'
-      : 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
+      : 'https://hub.dev.iamproperty.group/data/ecosystem-switcher.json';
 
   try {
     const response = await fetch(ajaxURL, {

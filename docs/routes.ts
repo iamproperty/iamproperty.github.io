@@ -1,8 +1,4 @@
-import { verify } from 'node:crypto';
-import { stat } from 'node:fs';
-
-// @ts-nocheck
-const routes = [
+const routes: Array<any> = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
   {
     name: 'Principles',
@@ -669,6 +665,16 @@ const routes = [
         },
         component: () => import('./views/components/Header.vue'),
         searchterms: 'introduce, banner',
+      },
+      {
+        path: 'map',
+        name: 'Map',
+        meta: {
+          title: 'Map | Components | iamkey',
+          alpha: true,
+          standalone: true,
+        },
+        component: () => import('./views/components/MapDoc.vue'),
       },
       {
         path: 'menu',

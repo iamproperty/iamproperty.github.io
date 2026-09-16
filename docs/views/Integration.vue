@@ -5,7 +5,7 @@
   const slots = useSlots();
   const props = defineProps(['component', 'componentName']);
 
-  const showInstall = slots['web-component'] || slots['vue-component'] || slots['html-element'] ? true : false;
+  const showInstall = slots['install'] || slots['web-component'] || slots['vue-component'] || slots['html-element'] ? true : false;
   const showLayout = slots['slots'] ? true : false;
   const showModify = slots['attr'] ? true : false;
   const showStyle = slots['classes'] || slots['parts'] || slots['vars'] ? true : false;
@@ -26,6 +26,8 @@
     </details>
     <details v-if="showInstall">
       <summary><h3>Install</h3></summary>
+
+      <slot name="install"></slot>
 
       <h4 v-if="slots['web-component']">Web component</h4>
 
