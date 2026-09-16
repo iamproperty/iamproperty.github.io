@@ -157,7 +157,7 @@ const loadDashboards = async (): any => {
 
       </div>
 
-      <Questions v-if="dashboards" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
+      <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
     </div>
 
 
