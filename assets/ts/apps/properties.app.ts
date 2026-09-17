@@ -55,6 +55,7 @@ class iamAppProperties extends HTMLElement {
     return `<iam-table-advanced data-selectall>
       <iam-actionbar slot="before" data-selectall>
         ${criteriaMatch}
+        <button data-v-7d119115="" class="btn btn-action fa-box-archive show" slot="selected">Archive</button>
       </iam-actionbar>
       ${table.outerHTML}
       <iam-pagination slot="pagination"></iam-pagination>
@@ -134,8 +135,8 @@ class iamAppProperties extends HTMLElement {
 
 document.addEventListener('DOMContentLoaded', (): void => {
 
-  if (!window.customElements.get(`iam-vis-properties`))
-    window.customElements.define(`iam-vis-properties`, iamAppProperties);
+  if (!window.customElements.get(`iam-properties-insights`) && iamAppProperties)
+    window.customElements.define(`iam-properties-insights`, iamAppProperties);
 
   if (!window.customElements.get(`iam-pagination`) && iamPagination)
     window.customElements.define(`iam-pagination`, iamPagination);

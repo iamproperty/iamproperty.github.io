@@ -1341,9 +1341,9 @@ const routes: Array<any> = [
       },
       {
         path: 'properties',
-        name: 'Properties Visualisation',
+        name: 'Properties insight',
         meta: {
-          title: 'Properties Visualisation | Components | iamkey',
+          title: 'Properties insight | Components | iamkey',
         },
         component: () => import('./views/apps/Properties.vue'),
       },

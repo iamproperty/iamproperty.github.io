@@ -41,7 +41,7 @@ onMounted(() => {
 <template>
   <main>
     <DSHeader section="apps">
-      <h1>Properties Visualisation</h1>
+      <h1>Properties insight</h1>
     </DSHeader>
 
 
