@@ -1327,7 +1327,8 @@ const populateFiltersFromActionbar = (component, table, actionbar): void => {
     const columnName = input.dataset.column;
     const columnHeading = table.querySelector('th[data-label="' + columnName + '"]');
 
-    columnHeading.setAttribute('data-filters', JSON.stringify(filters));
+    if(!columnHeading) return;
+      columnHeading.setAttribute('data-filters', JSON.stringify(filters));
   });
 
 };
