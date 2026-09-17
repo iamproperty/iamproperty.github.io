@@ -135,8 +135,8 @@ class iamAppProperties extends HTMLElement {
 
 document.addEventListener('DOMContentLoaded', (): void => {
 
-  if (!window.customElements.get(`iam-properties-insights`) && iamAppProperties)
-    window.customElements.define(`iam-properties-insights`, iamAppProperties);
+  if (!window.customElements.get(`iam-properties-insight`) && iamAppProperties)
+    window.customElements.define(`iam-properties-insight`, iamAppProperties);
 
   if (!window.customElements.get(`iam-pagination`) && iamPagination)
     window.customElements.define(`iam-pagination`, iamPagination);

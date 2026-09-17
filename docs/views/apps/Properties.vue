@@ -89,11 +89,9 @@ onMounted(() => {
 
         <h4>Add to looker manifest</h4>
         <pre ><code>{{`visualization: {
-  id: "insight-properties",
-  label: "Properties insight"
-
-  file: "insight-properties.js"
-
+  id: "properties-insight",
+  label: "Properties insight",
+  file: "properties-insight.js",
   dependencies: [
     "https://iamproperty.github.io/assets/js/apps/properties.app.min.js"
   ]
@@ -102,7 +100,7 @@ onMounted(() => {
 
 
         <h4 class="pt-3">Add to looker js</h4>
-        <pre><code>{{`<iam-vis-properties>
+        <pre><code>{{`<iam-properties-insight>
   <table>
     <thead>
       <tr></tr>
@@ -112,7 +110,7 @@ onMounted(() => {
       <tr></tr>
     </tbody>
   </table>
-</iam-vis-properties>`}}</code></pre>
+</iam-properties-insight>`}}</code></pre>
       </template>
 
     </Integration>
