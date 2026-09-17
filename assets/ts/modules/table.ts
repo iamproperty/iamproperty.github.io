@@ -1321,15 +1321,13 @@ const populateFiltersFromActionbar = (component, table, actionbar): void => {
 
   actionbar.querySelectorAll('[data-filters]').forEach(input => {
 
-    console.log(input.dataset.filters);
-
     if(!input.dataset.filters || !input.dataset.column) return;
 
     const filters = JSON.parse(input.dataset.filters);
     const columnName = input.dataset.column;
     const columnHeading = table.querySelector('th[data-label="' + columnName + '"]');
 
-    columnHeading.dataset.filters = JSON.stringify(filters);
+    columnHeading.setAttribute('data-filters', JSON.stringify(filters));
   });
 
 };
