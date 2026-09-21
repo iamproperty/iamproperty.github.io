@@ -119,7 +119,6 @@ class iamCarousel extends HTMLElement {
         this.setAttribute('data-current', child);
       }
 
-      console.log(child);
       carouselProgress.value = child;
       carouselProgress.style.setProperty('--percent', progressPercent(child, itemCount));
       carouselProgressSM.value = child;
@@ -247,8 +246,6 @@ class iamCarousel extends HTMLElement {
         progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max'))
       );
       const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * carouselProgressMD.value);
-
-      console.log(carouselProgressMD.value);
 
       carouselElement.scrollTo({
         top: 0,

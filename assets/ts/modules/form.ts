@@ -100,7 +100,6 @@ export const getCheckboxLimit = (element: HTMLElement): number => {
 };
 
 export const limitCheckboxes = (event: Event | null | undefined, root: HTMLElement): void => {
-  console.log(event);
 
   const target = event?.target instanceof HTMLInputElement ? event.target : null;
   const changedCheckbox = target?.matches('input[type="checkbox"]') ? target : null;
