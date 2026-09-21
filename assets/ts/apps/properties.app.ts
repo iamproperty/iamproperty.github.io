@@ -3,6 +3,7 @@ import iamPagination from '../../js/components/pagination/pagination.component.m
 import iamActionbar from '../../js/components/actionbar/actionbar.component.min.js';
 import iamMenu from '../../js/components/menu/menu.component.min.js';
 import iamMap from '../../js/components/map/map.component.min.js';
+import iamNotification from '../../js/components/notification/notification.component.min.js';
 
 class iamAppProperties extends HTMLElement {
   constructor() {
@@ -22,22 +23,16 @@ class iamAppProperties extends HTMLElement {
 
     <span class="h4"><span id="count"></span> Properties most likely to switch</span>
 
-    <div id="map-wrapper">Map here</div>
+    <div id="map-wrapper"></div>
 
-    <p class="pb-1">
-      <strong class="me-1">Criteria match key: </strong>
-      <span class="text-heading me-1"><i class="fa-solid fa-circle text-complete"></i> Full match</span>
-      <span class="text-heading me-1"><i class="fa-solid fa-circle text-warning"></i> Partial match</span>
-    </p>
-    <div id="table-wrapper">Table here</div>`;
+    <div id="table-wrapper">Loading table...</div>`;
 
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   createTableContent = (table: HTMLTableElement): string => {
 
-
-    const criteriaMatch = `<button class="btn btn-action" popovertarget="criteria-match" style="anchor-name: --criteria-match;">Criteria match</button>
+    const criteriaMatch = /* HTML */`<button class="btn btn-action" popovertarget="criteria-match" style="anchor-name: --criteria-match;">Criteria match</button>
       <iam-menu id="criteria-match" popover style="position-anchor: --criteria-match;">
         <fieldset data-filters='[{"operator": "equals", "type": "text"}]' data-column="Criteria match">
           <label>
@@ -52,14 +47,129 @@ class iamAppProperties extends HTMLElement {
         </fieldset>
       </iam-menu>`;
 
-    return `<iam-table-advanced data-selectall>
+    return /* HTML */`
+    <p class="pb-1">
+      <strong class="me-1">Criteria match key: </strong>
+      <span class="text-heading me-1"><i class="fa-solid fa-circle text-complete"></i> Full match</span>
+      <span class="text-heading me-1"><i class="fa-solid fa-circle text-warning"></i> Partial match</span>
+    </p>
+
+    <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
+      <i class="fa-solid fa-circle text-info" slot="icon"></i>
+      <span class="text-heading">Some bulk actions are disabled</span>
+      Some actions are disabled because they require the items to be from the same branch. If you wish to apply these actions, please filter on a specific branch or select items for the same branch in the table below..
+    </iam-notification>
+
+    <iam-table-advanced data-selectall>
       <iam-actionbar slot="before" data-selectall>
         ${criteriaMatch}
-        <button data-v-7d119115="" class="btn btn-action fa-box-archive show" slot="selected">Archive</button>
+        <button class="btn btn-action d-none" id="add-task" slot="selected">Add task</button>
+        <button class="btn btn-action d-none" id="create-print-campaign" slot="selected" disabled>Create print campaign</button>
+        <button class="btn btn-action" id="export-table-data" slot="selected">Export table data</button>
       </iam-actionbar>
       ${table.outerHTML}
       <iam-pagination slot="pagination"></iam-pagination>
     </iam-table-advanced>`;
+  };
+
+  getBranchID = (row: HTMLTableRowElement): string | null => {
+    if (!row) return null;
+
+    // TODO do multiple checks for the correct bit of data
+    if(row.hasAttribute('data-branch')) return row.getAttribute('data-branch');
+
+    return null;
+  };
+
+  isMultiBranchSelected = (table: HTMLTableElement | null): boolean => {
+    if (!table) return false;
+
+    const selectedRows = table.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
+    const branchArray = Array.from(selectedRows).map(row => this.getBranchID(row as HTMLTableRowElement)).filter(branch => branch !== null);
+
+    return [...new Set(branchArray)].length > 1;
+  };
+
+  allSelectedHave = (table: HTMLTableElement | null, attribute: string): boolean => {
+    if (!table) return false;
+    const selectedRows = table.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
+    return Array.from(selectedRows).every(row => row.hasAttribute(attribute));
+  };
+
+  setEvents = (): void => {
+    const table = this.shadowRoot?.querySelector('iam-table-advanced table');
+    const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
+    const notification = this.shadowRoot?.getElementById('branch-notification');
+
+    const addTaskButton = this.shadowRoot?.getElementById('add-task');
+    const createPrintCampaignButton = this.shadowRoot?.getElementById('create-print-campaign');
+
+    if (actionbar && notification) {
+      // Example event listener
+      actionbar.addEventListener('selected', () => {
+
+
+
+        // #region Add task button
+        if(this.allSelectedHave(table, 'data-add-task') && this.allSelectedHave(table, 'data-branch'))
+          addTaskButton?.classList.remove('d-none');
+        else
+          addTaskButton?.classList.add('d-none');
+
+        addTaskButton?.removeAttribute('disabled');
+        // #endregion
+
+        // #region Create print campaign button / branch notification
+
+        if(this?.hasAttribute('data-print-campaign')) {
+          createPrintCampaignButton?.classList.remove('d-none');
+        }
+        else {
+          createPrintCampaignButton?.classList.add('d-none');
+        }
+
+        if(this.isMultiBranchSelected(table)) {
+          notification?.classList.remove('d-none');
+          createPrintCampaignButton?.setAttribute('disabled', 'true');
+        }
+        else {
+          notification?.classList.add('d-none');
+          createPrintCampaignButton?.removeAttribute('disabled');
+        }
+        // #endregion
+      });
+      actionbar.addEventListener('none-selected', () => {
+        addTaskButton?.classList.add('d-none');
+        createPrintCampaignButton?.classList.add('d-none');
+        notification?.classList.add('d-none');
+      });
+    }
+
+
+    createPrintCampaignButton?.addEventListener('click', () => {
+      const selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
+      const properties = [];
+
+      if (selectedRows) {
+        for (const row of Array.from(selectedRows)) {
+
+          const dataKeyValueObject = {};
+          for (const item in row.dataset) { dataKeyValueObject[item] = row.dataset[item]; }
+          properties.push(dataKeyValueObject);
+        }
+      }
+      createPrintCampaignButton.setAttribute('disabled', 'true');
+      this.dispatchEvent(new CustomEvent('insight-action', {
+        detail: {
+          action: 'create-print-campaign',
+          properties: properties
+        },
+        bubbles: true,
+        composed: true
+      }));
+    });
+
+
   };
 
   createMapContent = (): string => {
@@ -80,6 +190,8 @@ class iamAppProperties extends HTMLElement {
       table.setAttribute('id','properties-table');
       tableWrapper.innerHTML = this.createTableContent(table);
       mapWrapper.innerHTML = this.createMapContent();
+
+      this.setEvents();
 
       const dispatchedEvent = new CustomEvent('component-loaded', {
         detail: {
@@ -112,6 +224,7 @@ class iamAppProperties extends HTMLElement {
             table.setAttribute('id','properties-table');
             tableWrapper.innerHTML = this.createTableContent(table);
             mapWrapper.innerHTML = this.createMapContent();
+            this.setEvents();
 
             const dispatchedEvent = new CustomEvent('component-loaded', {
               detail: {
@@ -149,6 +262,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
   if (!window.customElements.get(`iam-menu`) && iamMenu)
     window.customElements.define(`iam-menu`, iamMenu);
+
+  if (!window.customElements.get(`iam-notification`) && iamNotification)
+    window.customElements.define(`iam-notification`, iamNotification);
 
   if (!window.customElements.get(`iam-map`) && iamMap)
     window.customElements.define(`iam-map`, iamMap);

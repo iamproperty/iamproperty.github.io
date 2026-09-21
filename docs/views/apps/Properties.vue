@@ -29,6 +29,11 @@ onMounted(() => {
       const panelHeight = 80 + message.detail.height + 20 + 30;
       componentHeight.value = `${panelHeight}px`;
     }
+
+    if (message.type == "insight-action") {
+
+      console.log('insight-action', message);
+    }
   });
 
   let newScript = document.createElement('script');

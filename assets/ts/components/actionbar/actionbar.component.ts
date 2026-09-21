@@ -544,7 +544,9 @@ class iamActionbar extends HTMLElement {
 
         if (selectAll) setSelectAllInput(selectAll, newVal);
 
-        const event = new CustomEvent('selected', { detail: { selected: newVal } });
+        const eventType = newVal == '0' ? 'none-selected' : 'selected';
+
+        const event = new CustomEvent(eventType, { detail: { selected: newVal } });
         this.dispatchEvent(event);
 
         if (newVal == 'all' && this.hasAttribute('data-select-watch')) {

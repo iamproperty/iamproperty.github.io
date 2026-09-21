@@ -58,10 +58,30 @@
         margin: 0;
       }
     </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const propertiesInsight = document.querySelector('iam-properties-insight');
+        if (propertiesInsight) {
+          
+          propertiesInsight.addEventListener('insight-action', (event) => {
+
+            window.top.postMessage(
+              {
+                type: 'insight-action',
+                action: event.detail.action,
+                properties: event.detail.properties
+              },
+              '*'
+            );
+          });
+        }
+      });
+    </script>
   </head>
   <body>
     <main>
-      <iam-properties-insight>
+      <iam-properties-insight data-print-campaign="true">
         <table>
           <thead>
             <tr>
@@ -77,7 +97,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr data-id="710.0" data-latitude="51.873238" data-longitude="0.558525">
+            <tr data-id="710.0" data-branch="1" data-latitude="51.873238" data-longitude="0.558525">
               <td data-field="stock_switch.property_short_address">
                 <span class="drillable-item" data-links="" data-context="" data-add-filter-json="">
                   <span class="drillable-item-content">6 Appletree Walk, CM7 1EE</span>
@@ -124,7 +144,7 @@
                 </span>
               </td>
             </tr>
-            <tr data-id="710.0" data-latitude="51.401056" data-longitude="0.038019">
+            <tr data-id="710.0" data-branch="1" data-latitude="51.401056" data-longitude="0.038019">
               <td data-field="stock_switch.property_short_address">
                 <span class="drillable-item" data-links="" data-context="" data-add-filter-json="">
                   <span class="drillable-item-content">11b Page Heath Lane, BR1 2DR</span>
@@ -169,7 +189,7 @@
                 </span>
               </td>
             </tr>
-            <tr data-id="710.0" data-latitude="51.554524" data-longitude="-0.00622">
+            <tr data-id="710.0" data-branch="2" data-latitude="51.554524" data-longitude="-0.00622">
               <td data-field="stock_switch.property_short_address">
                 <span class="drillable-item" data-links="" data-context="" data-add-filter-json="">
                   <span class="drillable-item-content">3 Nutfield Road, E15 2DG</span>
@@ -216,7 +236,7 @@
                 </span>
               </td>
             </tr>
-            <tr data-id="710.0" data-latitude="51.497719" data-longitude="-0.018052">
+            <tr data-id="710.0" data-branch="2" data-latitude="51.497719" data-longitude="-0.018052">
               <td data-field="stock_switch.property_short_address">
                 <span class="drillable-item" data-links="" data-context="" data-add-filter-json="">
                   <span class="drillable-item-content">Flat 335 41 Millharbour, E14 9NH</span>
