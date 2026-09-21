@@ -246,3 +246,12 @@
   }
   /* #endregion */
 }
+
+
+/* #region Add padding right to the first title of the modal  */
+
+::slotted(.h3) {
+  padding-right: 4rem;
+
+}
+/* #endregion */

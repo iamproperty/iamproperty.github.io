@@ -4,23 +4,31 @@
   import Modal from '@/components/Modal/Modal.vue';
 
   const contactModal = ref();
+  const contactInput = ref();
   const contactTitle = ref('');
   const contactEmail = ref('');
   const contactPhone = ref('');
   const contactPhoneSafe = ref('');
 
   const openContact = (event: Event): void => {
+
+
     const target = event.target as EventTarget | null;
     if (target instanceof HTMLOptionElement) {
-      console.log(
-        'Opening contact: ' + target.value + '\nPhone: ' + target.dataset.phone + '\nEmail: ' + target.dataset.email
-      );
 
       contactTitle.value = target.value;
       contactEmail.value = target.dataset.email ?? '';
       contactPhone.value = target.dataset.phone ?? '';
       contactPhoneSafe.value = target.dataset.phone?.replace(/ /g, '') ?? '';
       contactModal.value.showModal();
+
+      setTimeout(() => {
+
+        target.classList.remove('active');
+        contactInput.value.value = '';
+        contactInput.value?.removeAttribute('data-value');
+        contactInput.value?.setAttribute('placeholder', 'Search iamproperty contact book');
+      }, 200);
     }
   };
 </script>
@@ -31,6 +39,7 @@
     <Search class="search--stylised search--sm" data-icon="fa-solid fa-address-book">
       <span class="visually-hidden">Search iamproperty contact book</span>
       <input
+        ref="contactInput"
         type="text"
         name="contact-search"
         autocomplete="off"
@@ -56,7 +65,7 @@
     </Search>
   </label>
 
-  <dialog id="modal-contact" ref="contactModal">
+  <dialog id="modal-contact" ref="contactModal" data-type="modal" class="modal--sm">
     <Modal>
       <span class="h3">{{ contactTitle }}</span>
       <p>
@@ -65,6 +74,7 @@
       <p>
         <strong>Email:</strong> <a :href="`mailto:${contactEmail}`" target="_blank">{{ contactEmail }}</a>
       </p>
+      <button type="button" class="btn btn--primary" @click="contactModal.close()">Close</button>
     </Modal>
   </dialog>
 </template>

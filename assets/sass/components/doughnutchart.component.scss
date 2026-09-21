@@ -165,6 +165,10 @@
     align-items: center;
     flex-direction: column;
     height: 67%;
+    min-width: 67%;
+    width: 67%;
+    max-width: 67%;
+    overflow: visible;
 
     span {
       text-align: center;

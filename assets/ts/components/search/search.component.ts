@@ -54,7 +54,7 @@ class iamSearch extends HTMLElement {
     const suffixElement = shadowRoot.querySelector<HTMLButtonElement>('.suffix');
     const clearBtn = shadowRoot.querySelector<HTMLButtonElement>('.clear-search');
 
-    let minLength = this.hasAttribute('data-min-length') ? getIntegerAttribute(this, 'data-min-length', 1) : 1;
+    let minLength = this.hasAttribute('data-min-length') ? getIntegerAttribute(this, 'data-min-length', 1) : 0;
 
     suffixElement?.setAttribute(
       'class',
