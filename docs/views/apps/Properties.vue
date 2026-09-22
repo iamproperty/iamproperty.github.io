@@ -73,6 +73,19 @@ onMounted(() => {
       </div>
 
     </div>
+
+    <h2>Automatic CTA link</h2>
+
+    <p></p>
+
+    <h2>Create buttons</h2>
+
+    <p>To enable certain actions, the relevant data attributes must be set on the component. Currently <code>data-add-task</code> and <code>data-print-campaign</code> are supported. These actions are designed to dispatch an event that is then picked up by the parent application. For example when loaded into a looker js dashboard the event is picked up and then posts a message to the top window for an application like the One platform hub.</p>
+
+    <h2>Export table data</h2>
+
+    <p>The table data can be exported in CSV format for further analysis and reporting. Clicking on the export button will trigger the download, with the current filters still applied.</p>
+
     <h2 class="pt-3 pb-4">One iamproperty hub</h2>
     <p>The hub loads the insight from looker via a signed URL inside of an iframe.</p>
     <a href="/prototypes/one-platform-hub/stock-switch" class="btn btn-secondary mb-3" target="_blank" title="One property hub prototype - Properties most likely to switch">One property hub prototype</a>

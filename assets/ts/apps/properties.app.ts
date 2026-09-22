@@ -64,7 +64,7 @@ class iamAppProperties extends HTMLElement {
       <iam-actionbar slot="before" data-selectall>
         ${criteriaMatch}
         <button class="btn btn-action d-none" id="add-task" slot="selected">Add task</button>
-        <button class="btn btn-action d-none" id="create-print-campaign" slot="selected" disabled>Create print campaign</button>
+        <button class="btn btn-action d-none" id="print-campaign" slot="selected" disabled>Create print campaign</button>
         <button class="btn btn-action" id="export-table-data" slot="selected">Export table data</button>
       </iam-actionbar>
       ${table.outerHTML}
@@ -102,16 +102,14 @@ class iamAppProperties extends HTMLElement {
     const notification = this.shadowRoot?.getElementById('branch-notification');
 
     const addTaskButton = this.shadowRoot?.getElementById('add-task');
-    const createPrintCampaignButton = this.shadowRoot?.getElementById('create-print-campaign');
+    const createPrintCampaignButton = this.shadowRoot?.getElementById('print-campaign');
 
     if (actionbar && notification) {
       // Example event listener
       actionbar.addEventListener('selected', () => {
 
-
-
         // #region Add task button
-        if(this.allSelectedHave(table, 'data-add-task') && this.allSelectedHave(table, 'data-branch'))
+        if(this?.hasAttribute('data-add-task'))
           addTaskButton?.classList.remove('d-none');
         else
           addTaskButton?.classList.add('d-none');
@@ -176,40 +174,66 @@ class iamAppProperties extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  connectedCallback(): void {
+  checkTopWindow = (): void => {
 
-    const table = this.querySelector('table');
+    console.log('checkTopWindow', window.top === window.self, window.top, window.self);
+
+    const topWindow = window.top as Window;
+
+
+    if(topWindow && topWindow == window.self) {
+      this.removeAttribute('data-print-campaign');
+      this.removeAttribute('data-add-task');
+    }
+
+    if (topWindow && topWindow !== window.self) {
+      const topDocument = topWindow.document;
+      const topBody = topDocument.body;
+
+      if (!topBody.querySelector('[data-add-task]'))
+        this.removeAttribute('data-add-task');
+
+      if (!topBody.querySelector('[data-print-campaign]'))
+        this.removeAttribute('data-print-campaign');
+    }
+  };
+
+  createComponent = (component, table): void => {
+
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
     const countElement = this.shadowRoot?.querySelector('#count');
 
     countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
+    table.setAttribute('id','properties-table');
+    tableWrapper.innerHTML = this.createTableContent(table);
+    mapWrapper.innerHTML = this.createMapContent();
+
+    this.checkTopWindow();
+    this.setEvents();
+
+    const dispatchedEvent = new CustomEvent('component-loaded', {
+      detail: {
+        height: this.offsetHeight
+      },
+    });
+    this.dispatchEvent(dispatchedEvent);
+  };
+
+  connectedCallback(): void {
+
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const table = this.querySelector('table');
+    const createComponent = this.createComponent;
 
     if (table){
 
-      table.setAttribute('id','properties-table');
-      tableWrapper.innerHTML = this.createTableContent(table);
-      mapWrapper.innerHTML = this.createMapContent();
-
-      this.setEvents();
-
-      const dispatchedEvent = new CustomEvent('component-loaded', {
-        detail: {
-          height: this.offsetHeight
-        },
-      });
-      this.dispatchEvent(dispatchedEvent);
+      createComponent(this, table);
     }
 
-
-    //const tableAdvanced = this.shadowRoot?.querySelector('iam-table-advanced');
-    //const map = this.shadowRoot?.querySelector('iam-map');
-
-    // HTML Observer
+    // HTML Observer - needed for when the table is loaded via AJAX or other means after the component has been initialized
     const htmlUpdated = (mutationList: any, observer: any): void => {
       observer.disconnect();
-
-      console.log(mutationList);
 
       for (const mutation of mutationList) {
         if (
@@ -221,22 +245,10 @@ class iamAppProperties extends HTMLElement {
           if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
 
             const table = this.querySelector('table');
-            table.setAttribute('id','properties-table');
-            tableWrapper.innerHTML = this.createTableContent(table);
-            mapWrapper.innerHTML = this.createMapContent();
-            this.setEvents();
-
-            const dispatchedEvent = new CustomEvent('component-loaded', {
-              detail: {
-                height: this.offsetHeight
-              },
-            });
-            this.dispatchEvent(dispatchedEvent);
+            createComponent(this, table);
           }
-
         }
       }
-
 
       observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
     };
