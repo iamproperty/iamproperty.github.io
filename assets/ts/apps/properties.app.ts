@@ -226,6 +226,11 @@ class iamAppProperties extends HTMLElement {
     const table = this.querySelector('table');
     const createComponent = this.createComponent;
 
+
+    this.addEventListener('top-window-details', (event: CustomEvent) => {
+      console.log('top-window-details', event.detail);
+    });
+
     if (table){
 
       createComponent(this, table);

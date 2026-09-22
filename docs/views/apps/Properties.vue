@@ -28,6 +28,15 @@ onMounted(() => {
 
       const panelHeight = 80 + message.detail.height + 20 + 30;
       componentHeight.value = `${panelHeight}px`;
+
+      if(event && event.source && event.source.postMessage) {
+        event.source.postMessage(
+          {
+            type: "crm-available",
+          },
+          "*"
+        );
+      }
     }
 
     if (message.type == "insight-action") {
@@ -48,6 +57,8 @@ onMounted(() => {
     <DSHeader section="apps">
       <h1>Properties insight</h1>
     </DSHeader>
+
+    <div data-add-task >modals go here?</div>
 
 
     <p class="lead">Created to be used in the looker studio, the properties visualisation app allows users to explore and manage property data effectively. With inline table filters and an optional supporting map, users can efficiently navigate and visualize property data.</p>

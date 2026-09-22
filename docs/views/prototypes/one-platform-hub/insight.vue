@@ -42,7 +42,7 @@ onMounted(async () => {
 
   window.addEventListener("message", (event) => {
 
-    console.log(event);
+    console.log(event.source);
 
     if (event.origin !== "https://iampropertypbl.cloud.looker.com") {
       return;
@@ -159,6 +159,8 @@ const loadDashboards = async (): any => {
 
       <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
     </div>
+
+    <div data-add-task data-print-campaign>modals go here?</div>
 
 
     <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
