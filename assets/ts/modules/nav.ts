@@ -80,7 +80,7 @@ export const populateLinks = (data): void => {
 export const loadNavData = async (mode): any => {
   const ajaxURL =
     mode != 'dev'
-      ? 'https://hub.iamproperty.group/data/ecosystem-switcher.json'
+      ? 'https://one.iamproperty.com/data/ecosystem-switcher.json'
       : 'https://hub.dev.iamproperty.group/data/ecosystem-switcher.json';
 
   try {
