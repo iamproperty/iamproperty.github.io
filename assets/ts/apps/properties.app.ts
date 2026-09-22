@@ -209,7 +209,7 @@ class iamAppProperties extends HTMLElement {
     tableWrapper.innerHTML = this.createTableContent(table);
     mapWrapper.innerHTML = this.createMapContent();
 
-    this.checkTopWindow();
+    //this.checkTopWindow();
     this.setEvents();
 
     const dispatchedEvent = new CustomEvent('component-loaded', {
