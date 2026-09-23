@@ -228,11 +228,24 @@ class iamAppProperties extends HTMLElement {
     observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
 
 
+
+
     this.addEventListener('top-window-details', (event: CustomEvent) => {
       this.createActionButtons(this, event.detail.actions, event.detail.criteria);
 
       // create the buttons based on the top window details
     });
+
+
+    this.addEventListener('insight-action-completed', (event: CustomEvent) => {
+
+      console.log('insight-action-completed', event.detail);
+
+      // create the buttons based on the top window details
+    });
+
+
+
   }
 }
 

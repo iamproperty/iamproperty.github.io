@@ -89,6 +89,27 @@ onMounted(async () => {
     if (message.type == "insight-action") {
 
       console.log('insight-action', message);
+
+      // Do the action and pass back the result to the iframe
+
+
+      if(event && event.source && event.source.postMessage) {
+        event.source.postMessage(
+          {
+            type: "insight-action-completed",
+            detail: {
+              action: message.detail.action,
+              properties: message.detail.properties,
+              result: {
+                success: true,
+                message: 'Action completed successfully'
+              }
+            }
+          },
+          "*"
+        );
+      }
+
     }
   });
 

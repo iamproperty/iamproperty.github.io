@@ -67,6 +67,7 @@
           return;
         }
         
+        // #region Listen for messages from the parent window
         window.addEventListener("message", event => {
 
           if (event.data.type == "top-window-details") {
@@ -77,6 +78,20 @@
             propertiesInsight.dispatchEvent(dispatchedEvent);
           }
         });
+
+        window.addEventListener("message", event => {
+
+          if (event.data.type == "insight-action-completed") {
+            
+            const dispatchedEvent = new CustomEvent('insight-action-completed', {
+              detail: event.data.detail
+            });
+            propertiesInsight.dispatchEvent(dispatchedEvent);
+          }
+        });
+
+        // #endregion
+
 
         propertiesInsight.addEventListener("component-loaded", event => {
 
