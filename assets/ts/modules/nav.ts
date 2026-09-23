@@ -80,8 +80,8 @@ export const populateLinks = (data): void => {
 export const loadNavData = async (mode): any => {
   const ajaxURL =
     mode != 'dev'
-      ? 'https://hub.iamproperty.group/data/ecosystem-switcher.json'
-      : 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
+      ? 'https://one.iamproperty.com/data/ecosystem-switcher.json'
+      : 'https://hub.dev.iamproperty.group/data/ecosystem-switcher.json';
 
   try {
     const response = await fetch(ajaxURL, {
@@ -106,8 +106,8 @@ export const loadNavData = async (mode): any => {
 export const loadUserData = async (mode, subject, product): any => {
   const ajaxURL =
     mode != 'dev'
-      ? 'https://one.iamproperty.com/data/ecosystem-switcher.json'
-      : 'https://hub.dev.iamproperty.group/data/ecosystem-switcher.json';
+      ? 'https://sso-api.iamproperty.com/navigation/access-context'
+      : 'https://sso-api.dev.iamproperty.group/navigation/access-context';
 
   try {
     const response = await fetch(ajaxURL, {
