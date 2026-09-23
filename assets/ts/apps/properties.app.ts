@@ -48,7 +48,7 @@ class iamAppProperties extends HTMLElement {
       </iam-menu>`;
 
     return /* HTML */`
-    <p class="pb-1">
+    <p class="pb-1" id="criteria-match-key">
       <strong class="me-1">Criteria match key: </strong>
       <span class="text-heading me-1"><i class="fa-solid fa-circle text-complete"></i> Full match</span>
       <span class="text-heading me-1"><i class="fa-solid fa-circle text-warning"></i> Partial match</span>
@@ -72,7 +72,7 @@ class iamAppProperties extends HTMLElement {
   getBranchID = (row: HTMLTableRowElement): string | null => {
     if (!row) return null;
 
-    // TODO do multiple checks for the correct bit of data
+    // TODO update this to the correct data attribute for branch ID when available
     if(row.hasAttribute('data-branch')) return row.getAttribute('data-branch');
 
     return null;
@@ -92,16 +92,16 @@ class iamAppProperties extends HTMLElement {
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
     const notification = this.shadowRoot?.getElementById('branch-notification');
 
-    const createPrintCampaignButton = this.shadowRoot?.getElementById('print-campaign');
-
     if (actionbar && notification) {
       // Example event listener
       actionbar.addEventListener('selected', () => {
 
+        const createPrintCampaignButton = actionbar.querySelector('[data-action="create-print-campaign"]');
+
         // #region Create print campaign button / branch notification
-        if(this.isMultiBranchSelected(table)) {
+        if(createPrintCampaignButton && this.isMultiBranchSelected(table)) {
           notification?.classList.remove('d-none');
-          createPrintCampaignButton?.setAttribute('disabled', 'true');
+          createPrintCampaignButton.setAttribute('disabled', 'true');
         }
         else {
           notification?.classList.add('d-none');
@@ -111,16 +111,22 @@ class iamAppProperties extends HTMLElement {
       });
 
       actionbar.addEventListener('none-selected', () => {
+        const createPrintCampaignButton = actionbar.querySelector('[data-action="create-print-campaign"]');
+
         notification?.classList.add('d-none');
         createPrintCampaignButton?.removeAttribute('disabled');
       });
     }
 
+
+
     // #region actionbar button events
     actionbar.addEventListener('click', (event) => {
 
-      if (event.target && event.target instanceof HTMLElement) {
-        const action = event.target.id;
+
+
+      if (event.target && event.target instanceof HTMLElement && event.target.hasAttribute('data-action')) {
+        const action = event.target.getAttribute('data-action');
 
 
         const selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
@@ -135,6 +141,9 @@ class iamAppProperties extends HTMLElement {
           }
         }
         event.target?.setAttribute('disabled', 'true');
+
+        console.log(this);
+
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
             action: action,
@@ -155,7 +164,6 @@ class iamAppProperties extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-
   createComponent = (component, table): void => {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
@@ -164,6 +172,17 @@ class iamAppProperties extends HTMLElement {
 
     countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
     table.setAttribute('id','properties-table');
+
+    table.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Criteria match" class="d-none">Criteria match</th>`);
+
+    table.querySelectorAll('tbody tr').forEach(row => {
+      const criteriaMatch = row.getAttribute('data-criteria-match');
+
+      row.insertAdjacentHTML('afterbegin', /* HTML */`<td data-label="Criteria match" class="d-none">${criteriaMatch}</td>`);
+
+    });
+
+
     tableWrapper.innerHTML = this.createTableContent(table);
     mapWrapper.innerHTML = this.createMapContent();
 
@@ -183,9 +202,7 @@ class iamAppProperties extends HTMLElement {
 
     actions.forEach(action => {
 
-      const disabled = action.action == "create-print-campaign" ? 'disabled' : '';
-
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" id="${action.action}" slot="selected" ${disabled}>${action.label}</button>`);
+      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${action.label}</button>`);
     });
 
 
@@ -229,22 +246,19 @@ class iamAppProperties extends HTMLElement {
 
 
 
-
+    // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
+
+      if(event.detail.class)
+        this.classList.add(event.detail.class);
+
       this.createActionButtons(this, event.detail.actions, event.detail.criteria);
-
-      // create the buttons based on the top window details
     });
 
-
+    // When the insight action has been completed, re-enable the button that was clicked
     this.addEventListener('insight-action-completed', (event: CustomEvent) => {
-
-      console.log('insight-action-completed', event.detail);
-
-      // create the buttons based on the top window details
+      this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
     });
-
-
 
   }
 }

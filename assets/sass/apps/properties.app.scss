@@ -74,6 +74,10 @@ iam-actionbar {
   }
 }
 
+:host(:not(.inside-hub)) :is(#criteria-match-key, iam-actionbar, th.selectrow-heading, td.selectrow) {
+  display: none!important;
+}
+
 // #region: Icon fixes
 :is(.fa-filter,.fa-arrow-down-arrow-up){
 

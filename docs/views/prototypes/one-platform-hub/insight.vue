@@ -66,8 +66,6 @@ onMounted(async () => {
       const panelHeight = questionTitle.value.offsetHeight + message.detail.height + 20 + 30;
       componentHeight.value = `${panelHeight}px`;
 
-      console.log(event);
-
       const insightConfig = {
         actions: insightActions.value,
         criteria: insightCriteriaMatch.value
@@ -78,6 +76,7 @@ onMounted(async () => {
           {
             type: "top-window-details",
             detail: {
+              class: "inside-hub",
               ...JSON.parse(JSON.stringify(insightConfig))
             }
           },
@@ -88,26 +87,25 @@ onMounted(async () => {
 
     if (message.type == "insight-action") {
 
-      console.log('insight-action', message);
-
       // Do the action and pass back the result to the iframe
-
-
       if(event && event.source && event.source.postMessage) {
-        event.source.postMessage(
-          {
-            type: "insight-action-completed",
-            detail: {
-              action: message.detail.action,
-              properties: message.detail.properties,
-              result: {
-                success: true,
-                message: 'Action completed successfully'
+        setTimeout(() => {
+
+          event.source.postMessage(
+            {
+              type: "insight-action-completed",
+              detail: {
+                action: message.detail.action,
+                properties: message.detail.properties,
+                result: {
+                  success: true,
+                  message: 'Action completed successfully'
+                }
               }
-            }
-          },
-          "*"
-        );
+            },
+            "*"
+          );
+        }, 1000);
       }
 
     }
@@ -142,9 +140,24 @@ onMounted(async () => {
   search.value = selectedDashboard?.suggestionLabel ?? '';
 
   insightActions.value = selectedDashboard?.actions ?? [];
+
+  insightActions.value = checkCRMAccess(insightActions.value);
+
+
   insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
 });
 
+const checkCRMAccess = (actions) => {
+/*
+  const crmAccess = window?.navigation?.getAttribute('data-product') === 'crm';
+
+  if (!crmAccess) {
+    return actions.filter((action) => action.label !== 'Create Task');
+  }
+*/
+
+  return actions;
+};
 
 const loadDashboards = async (): any => {
 
@@ -201,9 +214,6 @@ const loadDashboards = async (): any => {
 
       <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
     </div>
-
-    <div data-add-task data-print-campaign>modals go here?</div>
-
 
     <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
       <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
