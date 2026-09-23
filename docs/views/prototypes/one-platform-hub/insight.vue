@@ -29,6 +29,9 @@ const insight = ref(route.params.insight);
 const insightTitle = ref('');
 const dashboards = ref([]);
 
+const insightActions = ref([]);
+const insightCriteriaMatch = ref('');
+
 
 
 watch(
@@ -56,22 +59,37 @@ onMounted(async () => {
 
   window.addEventListener("message", (event) => {
 
-
     const message = event.data;
-
 
     if (message.type == "component-loaded") {
 
-      console.log('set height on admin panel and iframe');
-      console.log(`${message.detail.height}px`);
-
-
       const panelHeight = questionTitle.value.offsetHeight + message.detail.height + 20 + 30;
-
       componentHeight.value = `${panelHeight}px`;
+
+      console.log(event);
+
+      const insightConfig = {
+        actions: insightActions.value,
+        criteria: insightCriteriaMatch.value
+      };
+
+      if(event && event.source && event.source.postMessage) {
+        event.source.postMessage(
+          {
+            type: "top-window-details",
+            detail: {
+              ...JSON.parse(JSON.stringify(insightConfig))
+            }
+          },
+          "*"
+        );
+      }
     }
 
+    if (message.type == "insight-action") {
 
+      console.log('insight-action', message);
+    }
   });
 
 
@@ -101,6 +119,9 @@ onMounted(async () => {
     : undefined;
   insightTitle.value = selectedDashboard?.iframeTitle ?? '';
   search.value = selectedDashboard?.suggestionLabel ?? '';
+
+  insightActions.value = selectedDashboard?.actions ?? [];
+  insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
 });
 
 
@@ -163,19 +184,28 @@ const loadDashboards = async (): any => {
     <div data-add-task data-print-campaign>modals go here?</div>
 
 
-    <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
+    <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
       <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
 
-      <!--<Properties></Properties>-->
+      <!--<Properties></Properties>
       <iframe
         id="iframeTable"
         ref="iframeTable"
-:title="insightTitle || 'Property insight'"
+        :title="insightTitle || 'Property insight'"
         src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed"
         frameborder="0"
         allowfullscreen
       ></iframe>
-
+-->
+      <iframe
+        id="iframeTable"
+        ref="iframeTable"
+        title="Inline Frame Example"
+        src="/properties-insight.html"
+        frameborder="0"
+        allowfullscreen
+      >
+      </iframe>
 
       <div class="iframe-backdrop"></div>
     </div>

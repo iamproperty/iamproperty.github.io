@@ -63,9 +63,6 @@ class iamAppProperties extends HTMLElement {
     <iam-table-advanced data-selectall>
       <iam-actionbar slot="before" data-selectall>
         ${criteriaMatch}
-        <button class="btn btn-action d-none" id="add-task" slot="selected">Add task</button>
-        <button class="btn btn-action d-none" id="print-campaign" slot="selected" disabled>Create print campaign</button>
-        <button class="btn btn-action" id="export-table-data" slot="selected">Export table data</button>
       </iam-actionbar>
       ${table.outerHTML}
       <iam-pagination slot="pagination"></iam-pagination>
@@ -90,42 +87,18 @@ class iamAppProperties extends HTMLElement {
     return [...new Set(branchArray)].length > 1;
   };
 
-  allSelectedHave = (table: HTMLTableElement | null, attribute: string): boolean => {
-    if (!table) return false;
-    const selectedRows = table.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
-    return Array.from(selectedRows).every(row => row.hasAttribute(attribute));
-  };
-
   setEvents = (): void => {
     const table = this.shadowRoot?.querySelector('iam-table-advanced table');
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
     const notification = this.shadowRoot?.getElementById('branch-notification');
 
-    const addTaskButton = this.shadowRoot?.getElementById('add-task');
     const createPrintCampaignButton = this.shadowRoot?.getElementById('print-campaign');
 
     if (actionbar && notification) {
       // Example event listener
       actionbar.addEventListener('selected', () => {
 
-        // #region Add task button
-        if(this?.hasAttribute('data-add-task'))
-          addTaskButton?.classList.remove('d-none');
-        else
-          addTaskButton?.classList.add('d-none');
-
-        addTaskButton?.removeAttribute('disabled');
-        // #endregion
-
         // #region Create print campaign button / branch notification
-
-        if(this?.hasAttribute('data-print-campaign')) {
-          createPrintCampaignButton?.classList.remove('d-none');
-        }
-        else {
-          createPrintCampaignButton?.classList.add('d-none');
-        }
-
         if(this.isMultiBranchSelected(table)) {
           notification?.classList.remove('d-none');
           createPrintCampaignButton?.setAttribute('disabled', 'true');
@@ -136,37 +109,45 @@ class iamAppProperties extends HTMLElement {
         }
         // #endregion
       });
+
       actionbar.addEventListener('none-selected', () => {
-        addTaskButton?.classList.add('d-none');
-        createPrintCampaignButton?.classList.add('d-none');
         notification?.classList.add('d-none');
+        createPrintCampaignButton?.removeAttribute('disabled');
       });
     }
 
+    // #region actionbar button events
+    actionbar.addEventListener('click', (event) => {
 
-    createPrintCampaignButton?.addEventListener('click', () => {
-      const selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
-      const properties = [];
+      if (event.target && event.target instanceof HTMLElement) {
+        const action = event.target.id;
 
-      if (selectedRows) {
-        for (const row of Array.from(selectedRows)) {
 
-          const dataKeyValueObject = {};
-          for (const item in row.dataset) { dataKeyValueObject[item] = row.dataset[item]; }
-          properties.push(dataKeyValueObject);
+        const selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
+        const properties = [];
+
+        if (selectedRows) {
+          for (const row of Array.from(selectedRows)) {
+
+            const dataKeyValueObject = {};
+            for (const item in row.dataset) { dataKeyValueObject[item] = row.dataset[item]; }
+            properties.push(dataKeyValueObject);
+          }
         }
+        event.target?.setAttribute('disabled', 'true');
+        this.dispatchEvent(new CustomEvent('insight-action', {
+          detail: {
+            action: action,
+            properties: properties
+          },
+          bubbles: true,
+          composed: true
+        }));
+
       }
-      createPrintCampaignButton.setAttribute('disabled', 'true');
-      this.dispatchEvent(new CustomEvent('insight-action', {
-        detail: {
-          action: 'create-print-campaign',
-          properties: properties
-        },
-        bubbles: true,
-        composed: true
-      }));
     });
 
+    // #endregion
 
   };
 
@@ -174,29 +155,6 @@ class iamAppProperties extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  checkTopWindow = (): void => {
-
-    console.log('checkTopWindow', window.top === window.self, window.top, window.self);
-
-    const topWindow = window.top as Window;
-
-
-    if(topWindow && topWindow == window.self) {
-      this.removeAttribute('data-print-campaign');
-      this.removeAttribute('data-add-task');
-    }
-
-    if (topWindow && topWindow !== window.self) {
-      const topDocument = topWindow.document;
-      const topBody = topDocument.body;
-
-      if (!topBody.querySelector('[data-add-task]'))
-        this.removeAttribute('data-add-task');
-
-      if (!topBody.querySelector('[data-print-campaign]'))
-        this.removeAttribute('data-print-campaign');
-    }
-  };
 
   createComponent = (component, table): void => {
 
@@ -214,10 +172,23 @@ class iamAppProperties extends HTMLElement {
 
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
-        height: this.offsetHeight
+        height: component.offsetHeight
       },
     });
-    this.dispatchEvent(dispatchedEvent);
+    component.dispatchEvent(dispatchedEvent);
+  };
+
+  createActionButtons = (component, actions, criteria): void => {
+    const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
+
+    actions.forEach(action => {
+
+      const disabled = action.action == "create-print-campaign" ? 'disabled' : '';
+
+      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" id="${action.action}" slot="selected" ${disabled}>${action.label}</button>`);
+    });
+
+
   };
 
   connectedCallback(): void {
@@ -225,11 +196,6 @@ class iamAppProperties extends HTMLElement {
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
     const createComponent = this.createComponent;
-
-
-    this.addEventListener('top-window-details', (event: CustomEvent) => {
-      console.log('top-window-details', event.detail);
-    });
 
     if (table){
 
@@ -260,6 +226,13 @@ class iamAppProperties extends HTMLElement {
 
     const observer = new MutationObserver(htmlUpdated);
     observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
+
+
+    this.addEventListener('top-window-details', (event: CustomEvent) => {
+      this.createActionButtons(this, event.detail.actions, event.detail.criteria);
+
+      // create the buttons based on the top window details
+    });
   }
 }
 

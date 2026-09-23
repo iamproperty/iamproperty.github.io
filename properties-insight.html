@@ -52,7 +52,6 @@
 
     
 
-    <script src="/assets/js/apps/properties.app.min.js" crossorigin="anonymous"></script>
     <style>
       body {
         margin: 0;
@@ -61,27 +60,54 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const propertiesInsight = document.querySelector('iam-properties-insight');
-        if (propertiesInsight) {
-          
-          propertiesInsight.addEventListener('insight-action', (event) => {
 
-            window.top.postMessage(
-              {
-                type: 'insight-action',
-                action: event.detail.action,
-                properties: event.detail.properties
-              },
-              '*'
-            );
-          });
+        const propertiesInsight = document.querySelector('iam-properties-insight');
+        if(!propertiesInsight) {
+          console.error('No properties insight component found');
+          return;
         }
+        
+        window.addEventListener("message", event => {
+
+          if (event.data.type == "top-window-details") {
+            
+            const dispatchedEvent = new CustomEvent('top-window-details', {
+              detail: event.data.detail
+            });
+            propertiesInsight.dispatchEvent(dispatchedEvent);
+          }
+        });
+
+        propertiesInsight.addEventListener("component-loaded", event => {
+
+          window.top.postMessage(
+            {
+              source: "vis",
+              type: "component-loaded",
+              detail: event.detail
+            },
+            "*"
+          );
+        });
+        
+        propertiesInsight.addEventListener('insight-action', (event) => {
+
+          window.top.postMessage(
+            {
+              type: 'insight-action',
+              detail: event.detail
+            },
+            '*'
+          );
+        });
+        
       });
     </script>
+    <script src="/assets/js/apps/properties.app.min.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <main>
-      <iam-properties-insight data-print-campaign="true" data-add-task="true">
+      <iam-properties-insight>
         <table>
           <thead>
             <tr>

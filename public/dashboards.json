@@ -10,7 +10,22 @@
       "product": "crm",
       "feature": "bookSalesAppraisal",
       "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
-      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more"
+      "disabledTitle": "To unlock this insight you’ll need the Marketing Toolkit - click the insight to find out more",
+      "actions": [
+        {
+          "label": "Create Task",
+          "action": "create-task"
+        },
+        {
+          "label": "Create Print Campaign",
+          "action": "create-print-campaign"
+        },
+        {
+          "label": "Export table data",
+          "action": "export-table-data"
+        }
+      ],
+      "criteria": "match-criteria"
     },
     {
       "slug": "predicted-movers",

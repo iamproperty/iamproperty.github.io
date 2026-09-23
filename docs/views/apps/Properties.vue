@@ -24,15 +24,37 @@ onMounted(() => {
 
     const message = event.data;
 
+    console.log(message);
+
+
     if (message.type == "component-loaded") {
 
       const panelHeight = 80 + message.detail.height + 20 + 30;
       componentHeight.value = `${panelHeight}px`;
 
+      console.log(event);
+
       if(event && event.source && event.source.postMessage) {
         event.source.postMessage(
           {
-            type: "crm-available",
+            type: "top-window-details",
+            detail: {
+              actions: [
+                {
+                  label: "Create Task",
+                  action: "create-task",
+                },
+                {
+                  label: "Create Print Campaign",
+                  action: "create-print-campaign",
+                },
+                {
+                  label: "Export table data",
+                  action: "export-table-data",
+                }
+              ],
+              criteria: 'match-criteria'
+            }
           },
           "*"
         );
@@ -45,9 +67,6 @@ onMounted(() => {
     }
   });
 
-  let newScript = document.createElement('script');
-  newScript.src = '/assets/js/apps/properties.app.min.js';
-  document.head.appendChild(newScript);
 });
 
 </script>
@@ -68,7 +87,7 @@ onMounted(() => {
     <div class="full-width bg-light mb-5">
 
       <div class="container pt-5">
-        <div class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
+        <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
 
           <iframe
             id="iframeTable"
@@ -85,20 +104,10 @@ onMounted(() => {
 
     </div>
 
-    <h2>Automatic CTA link</h2>
-
-    <p></p>
-
-    <h2>Create buttons</h2>
-
-    <p>To enable certain actions, the relevant data attributes must be set on the component. Currently <code>data-add-task</code> and <code>data-print-campaign</code> are supported. These actions are designed to dispatch an event that is then picked up by the parent application. For example when loaded into a looker js dashboard the event is picked up and then posts a message to the top window for an application like the One platform hub.</p>
-
-    <h2>Export table data</h2>
-
-    <p>The table data can be exported in CSV format for further analysis and reporting. Clicking on the export button will trigger the download, with the current filters still applied.</p>
-
     <h2 class="pt-3 pb-4">One iamproperty hub</h2>
     <p>The hub loads the insight from looker via a signed URL inside of an iframe.</p>
+    <p>The hub has some additional requirements to pass the table data to a series of actions. The actions may include creating tasks, exporting table data, and more. The properties insight app facilitates these actions by creating buttons inside the insight that will post messages to the top window i.e. the one platform hub.</p>
+
     <a href="/prototypes/one-platform-hub/stock-switch" class="btn btn-secondary mb-3" target="_blank" title="One property hub prototype - Properties most likely to switch">One property hub prototype</a>
 
     <h2 class="pt-5">Components used</h2>
