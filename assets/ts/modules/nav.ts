@@ -106,8 +106,8 @@ export const loadNavData = async (mode): any => {
 export const loadUserData = async (mode, subject, product): any => {
   const ajaxURL =
     mode != 'dev'
-      ? 'https://api.sso.iamproperty.group/navigation/access-context'
-      : 'https://api.dev.sso.iamproperty.group/navigation/access-context';
+      ? 'https://one.iamproperty.com/data/ecosystem-switcher.json'
+      : 'https://hub.dev.iamproperty.group/data/ecosystem-switcher.json';
 
   try {
     const response = await fetch(ajaxURL, {
