@@ -218,7 +218,7 @@ const loadDashboards = async (): any => {
     <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
       <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
 
-      <!--<Properties></Properties>
+      <!--<Properties></Properties>-->
       <iframe
         id="iframeTable"
         ref="iframeTable"
@@ -227,7 +227,8 @@ const loadDashboards = async (): any => {
         frameborder="0"
         allowfullscreen
       ></iframe>
--->
+
+      <!--
       <iframe
         id="iframeTable"
         ref="iframeTable"
@@ -237,6 +238,7 @@ const loadDashboards = async (): any => {
         allowfullscreen
       >
       </iframe>
+      -->
 
       <div class="iframe-backdrop"></div>
     </div>

@@ -34,15 +34,15 @@ class iamAppProperties extends HTMLElement {
 
     const criteriaMatch = /* HTML */`<button class="btn btn-action" popovertarget="criteria-match" style="anchor-name: --criteria-match;">Criteria match</button>
       <iam-menu id="criteria-match" popover style="position-anchor: --criteria-match;">
-        <fieldset data-filters='[{"operator": "equals", "type": "text"}]' data-column="Criteria match">
+        <fieldset data-filters='[{"operator": "equals", "type": "text"}]' data-column="Match criteria">
           <label>
             All Criteria <input type="radio" name="criteria" value="" checked/>
           </label>
           <label>
-            Full match <input type="radio" name="criteria" value="full" />
+            Full match <input type="radio" name="criteria" value="Full" />
           </label>
           <label>
-            Partial match <input type="radio" name="criteria" value="partial" />
+            Partial match <input type="radio" name="criteria" value="Partial" />
           </label>
         </fieldset>
       </iam-menu>`;
@@ -164,6 +164,37 @@ class iamAppProperties extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
+
+  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
+
+    if (!table) return table;
+
+    if(table.querySelector('tbody tr td[data-match-criteria]')){
+
+      table.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
+
+      table.querySelectorAll('tbody tr').forEach(row => {
+        const criteriaMatch = row.getAttribute('data-match-criteria');
+
+        if(criteriaMatch)
+          row.insertAdjacentHTML('afterbegin', /* HTML */`<td data-label="Match criteria" class="d-none">${criteriaMatch}</td>`);
+      });
+    }
+
+    if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
+
+      const CTAHeading = table.querySelector('thead tr th:last-child');
+      CTAHeading.classList.add('th--fixed');
+      CTAHeading.innerHTML = '';
+
+      table.querySelectorAll('tbody tr td:last-child a:first-child:last-child').forEach(cta => {
+        cta.closest('td').classList.add('td--fixed', 'text-nowrap');
+      });
+    }
+
+    return table;
+  };
+
   createComponent = (component, table): void => {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
@@ -173,15 +204,9 @@ class iamAppProperties extends HTMLElement {
     countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
     table.setAttribute('id','properties-table');
 
-    table.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Criteria match" class="d-none">Criteria match</th>`);
 
-    table.querySelectorAll('tbody tr').forEach(row => {
-      const criteriaMatch = row.getAttribute('data-criteria-match');
 
-      row.insertAdjacentHTML('afterbegin', /* HTML */`<td data-label="Criteria match" class="d-none">${criteriaMatch}</td>`);
-
-    });
-
+    table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(table);
     mapWrapper.innerHTML = this.createMapContent();
