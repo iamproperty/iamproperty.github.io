@@ -4,16 +4,21 @@ import { createApp, ref, onMounted, watch } from 'vue';
 
 import STDNav from '@/components/STDNav/STDNav.vue';
 import Nav from '@/components/Nav/Nav.vue';
+import Modal from '@/components/Modal/Modal.vue';
 
 
 import Questions from './components/Questions.vue';
 import Properties from './components/Properties.vue';
 
+import Notification from '@/components/Notification/Notification.vue';
+
+import Task from './components/Task.vue';
+
 import { useRoute } from 'vue-router';
 
 
 const iframeTable = ref();
-
+const addTaskDialog = ref();
 const panel = ref();
 const componentHeight = ref('100vh');
 
@@ -33,6 +38,33 @@ const insightActions = ref([]);
 const insightCriteriaMatch = ref('');
 
 
+const tasks = ref([]);
+const currentTaskIndex = ref(0);
+const inlineAddedTask = ref({});
+const addedTask = ref({});
+const addedTaskCTA = ref('');
+
+let insightIframeSource;
+
+const postInsightCompleted = (action) => {
+  console.log(action);
+
+  if(insightIframeSource && insightIframeSource.postMessage) {
+    insightIframeSource.postMessage(
+      {
+        type: "insight-action-completed",
+        detail: {
+          action: action,
+          result: {
+            success: true,
+            message: 'Action completed successfully'
+          }
+        }
+      },
+      "*"
+    );
+  }
+};
 
 watch(
   () => route.params.insight,
@@ -89,24 +121,33 @@ onMounted(async () => {
 
       // Do the action and pass back the result to the iframe
       if(event && event.source && event.source.postMessage) {
-        setTimeout(() => {
 
-          event.source.postMessage(
-            {
-              type: "insight-action-completed",
-              detail: {
-                action: message.detail.action,
-                properties: message.detail.properties,
-                result: {
-                  success: true,
-                  message: 'Action completed successfully'
-                }
-              }
-            },
-            "*"
-          );
-        }, 1000);
+        insightIframeSource = event.source; // cache the event source for later use so we can post back the result of the action at a later time i.e. after a fetch request has completed
+
+        if(message.detail.action === 'export-table-data') {
+          exportTableData(message.detail.properties);
+          setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
+            postInsightCompleted(message.detail.action);
+          }, 1000);
+        }
+        else if(message.detail.action === 'create-print-campaign') {
+
+          // TODO: Create print campaign in CRM via API and return the result to the iframe
+          postInsightCompleted(message.detail.action);
+        }
+        else if(message.detail.action === 'create-task') {
+
+          currentTaskIndex.value = 0;
+          tasks.value = [...message.detail.properties];
+          inlineAddedTask.value = {};
+          addedTask.value = {};
+          addTaskDialog.value.showModal();
+        }
+
       }
+
+
+
 
     }
   });
@@ -146,6 +187,40 @@ onMounted(async () => {
 
   insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
 });
+
+const exportTableData = (data) => {
+
+  const csvData = [];
+
+  csvData.push(Object.keys(data[0].columns).join(','));
+
+  data.forEach((row) => {
+
+    csvData.push(Object.values(row.columns).join(','));
+  });
+
+  // Combine each row data with new line character
+  const csvString = csvData.join('\n');
+
+  // Create CSV file object and feed our csvData into it
+  const CSVFile = new Blob([csvString], {
+    type: 'text/csv',
+  });
+
+  // Create to temporary link to initiate download process
+  const tempLink = document.createElement('a');
+  tempLink.download = 'export.csv';
+  const url = window.URL.createObjectURL(CSVFile);
+  tempLink.href = url;
+
+  // This link should not be displayed
+  tempLink.style.display = 'none';
+  document.body.appendChild(tempLink);
+
+  // Automatically click the link to trigger download
+  tempLink.click();
+  document.body.removeChild(tempLink);
+};
 
 const checkCRMAccess = (actions) => {
 /*
@@ -219,7 +294,8 @@ const loadDashboards = async (): any => {
       <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
 
       <!--<Properties></Properties>-->
-      <iframe
+
+      <!--      <iframe
         id="iframeTable"
         ref="iframeTable"
         :title="insightTitle || 'Property insight'"
@@ -227,8 +303,7 @@ const loadDashboards = async (): any => {
         frameborder="0"
         allowfullscreen
       ></iframe>
-
-      <!--
+      -->
       <iframe
         id="iframeTable"
         ref="iframeTable"
@@ -238,11 +313,43 @@ const loadDashboards = async (): any => {
         allowfullscreen
       >
       </iframe>
-      -->
+
 
       <div class="iframe-backdrop"></div>
     </div>
 
+
+    <Notification v-if="addedTask.value" data-type="toast" data-dismiss>
+      {{ addedTask.value.columns['Property Short Address'] }}
+      <a :href="addedTask.value.cta" target="_blank" rel="noopener noreferrer">View task</a>
+    </Notification>
+
+    <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" >
+      <Modal data-type="transactional" class="model--md">
+
+        <Notification v-if="inlineAddedTask.value">
+          {{ inlineAddedTask.value.columns['Property Short Address'] }}
+          <a :href="inlineAddedTask.value.cta" target="_blank" rel="noopener noreferrer">View task</a>
+        </Notification>
+
+          <h2 id="add-task-title" class="h3 text-center px-0 mx-auto">Create CRM task <span v-if="tasks.length > 1" class="h4 d-inline">({{ currentTaskIndex + 1 }} of {{ tasks.length }})</span></h2>
+
+          <template v-for="(task, index) in tasks" :key="index">
+            <Task
+              v-if="index == currentTaskIndex"
+              :index="index"
+              :total="tasks.length"
+              :task="task"
+              @previous="currentTaskIndex--"
+              @close="() => {addTaskDialog.close(); postInsightCompleted('create-task');}"
+              @next="currentTaskIndex++"
+              @added="(returnedTask) => {inlineAddedTask.value = returnedTask; console.log(inlineAddedTask.value) }"
+              @added-last="(returnedTask) => {addedTask.value = returnedTask; postInsightCompleted('create-task'); console.log(addedTask.value) }"
+            />
+          </template>
+
+      </Modal>
+    </dialog>
 
   </main>
 

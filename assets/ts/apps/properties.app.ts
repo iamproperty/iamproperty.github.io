@@ -5,6 +5,7 @@ import iamMenu from '../../js/components/menu/menu.component.min.js';
 import iamMap from '../../js/components/map/map.component.min.js';
 import iamNotification from '../../js/components/notification/notification.component.min.js';
 
+
 class iamAppProperties extends HTMLElement {
   constructor() {
     super();
@@ -61,7 +62,7 @@ class iamAppProperties extends HTMLElement {
     </iam-notification>
 
     <iam-table-advanced data-selectall>
-      <iam-actionbar slot="before" data-selectall>
+      <iam-actionbar slot="before" data-selectall data-disable-responsive>
         ${criteriaMatch}
       </iam-actionbar>
       ${table.outerHTML}
@@ -82,6 +83,10 @@ class iamAppProperties extends HTMLElement {
     if (!table) return false;
 
     const selectedRows = table.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
+
+
+    console.log(selectedRows.length);
+
     const branchArray = Array.from(selectedRows).map(row => this.getBranchID(row as HTMLTableRowElement)).filter(branch => branch !== null);
 
     return [...new Set(branchArray)].length > 1;
@@ -98,16 +103,18 @@ class iamAppProperties extends HTMLElement {
 
         const createPrintCampaignButton = actionbar.querySelector('[data-action="create-print-campaign"]');
 
-        // #region Create print campaign button / branch notification
-        if(createPrintCampaignButton && this.isMultiBranchSelected(table)) {
-          notification?.classList.remove('d-none');
-          createPrintCampaignButton.setAttribute('disabled', 'true');
-        }
-        else {
-          notification?.classList.add('d-none');
-          createPrintCampaignButton?.removeAttribute('disabled');
-        }
-        // #endregion
+        setTimeout(() => {
+          // #region Create print campaign button / branch notification
+          if(createPrintCampaignButton && this.isMultiBranchSelected(table)) {
+            notification?.classList.remove('d-none');
+            createPrintCampaignButton.setAttribute('disabled', 'true');
+          }
+          else {
+            notification?.classList.add('d-none');
+            createPrintCampaignButton?.removeAttribute('disabled');
+          }
+          // #endregion
+        }, 100);
       });
 
       actionbar.addEventListener('none-selected', () => {
@@ -137,6 +144,15 @@ class iamAppProperties extends HTMLElement {
 
             const dataKeyValueObject = {};
             for (const item in row.dataset) { dataKeyValueObject[item] = row.dataset[item]; }
+
+            dataKeyValueObject.columns = {};
+            for (const cell of Array.from(row.cells)) {
+              const columnLabel = cell.getAttribute('data-label');
+              if (columnLabel) dataKeyValueObject.columns[columnLabel] = cell.innerText.trim();
+            }
+
+            console.log(dataKeyValueObject);
+
             properties.push(dataKeyValueObject);
           }
         }
@@ -233,6 +249,8 @@ class iamAppProperties extends HTMLElement {
 
   };
 
+
+
   connectedCallback(): void {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
@@ -269,8 +287,6 @@ class iamAppProperties extends HTMLElement {
     const observer = new MutationObserver(htmlUpdated);
     observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
 
-
-
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
 
@@ -283,6 +299,8 @@ class iamAppProperties extends HTMLElement {
     // When the insight action has been completed, re-enable the button that was clicked
     this.addEventListener('insight-action-completed', (event: CustomEvent) => {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
+      console.log('action returned', event.detail.action, event.detail.properties);
+      this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
     });
 
   }

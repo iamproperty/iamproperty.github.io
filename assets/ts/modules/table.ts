@@ -524,14 +524,8 @@ export const addSelectboxesEvents = (component, table, actionbar): void => {
   });
 
   actionbar?.addEventListener('selected', (event) => {
-    if (event.detail.selected == '0') {
-      Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
-        input.checked = false;
-      });
-
-      const dispatchedEvent = new CustomEvent('all-rows-unselected');
-      component.dispatchEvent(dispatchedEvent);
-    } else if (event.detail.selected == 'all') {
+    if (event.detail.selected == 'all') {
+      console.log('select all rows');
       Array.from(table.querySelectorAll(selectrowcheckboxselector)).forEach((input) => {
         input.checked = true;
       });
@@ -539,6 +533,18 @@ export const addSelectboxesEvents = (component, table, actionbar): void => {
       const dispatchedEvent = new CustomEvent('all-rows-selected');
       component.dispatchEvent(dispatchedEvent);
     }
+  });
+
+  actionbar?.addEventListener('none-selected', (event) => {
+
+      console.log('unselect all rows');
+      Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
+        input.checked = false;
+      });
+
+      const dispatchedEvent = new CustomEvent('all-rows-unselected');
+      component.dispatchEvent(dispatchedEvent);
+
   });
 };
 
