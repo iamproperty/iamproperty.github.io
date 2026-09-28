@@ -26,10 +26,38 @@ iam-rankings {
     display: contents;
   }
 
-  :is(td, th) {
+  :is(td) {
     font-weight: normal;
   }
 
+  .rank-subtitle {
+    display: block; 
+    font-weight: normal;
+    color: var(--colour-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  th:has(.rank-subtitle) + td {
+    padding-top: 1.25rem; /* 20 */
+  }
+
+  .ranking-title {
+    i {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+    }
+
+    &:has(i) {
+      padding-left: 2rem;
+      position: relative;
+    }
+
+  }
+ 
   td {
     font-size: 1.75rem;
     color: var(--colour-heading);
@@ -47,8 +75,9 @@ iam-rankings {
     width: 100%;
     position: relative;
     z-index: 1;
+    gap: 0.5rem;
 
-    &:before {
+    &:not(.hide-position):before {
       counter-increment: countItem; /* Increment the value of section counter by 1 */
       content: counter(countItem) '.';
       font-size: 2rem;
@@ -93,7 +122,8 @@ iam-rankings {
     }
     iam-rank {
       position: absolute;
-      top: 0;
+      top: 50%;
+      transform: translateY(-50%);
       left: 0;
       width: 2rem;
     }
@@ -102,6 +132,7 @@ iam-rankings {
   tr:has(+ tr.highlighted) {
     border: none !important;
   }
+
 
   tr.highlighted {
     background: var(--colour-info);
@@ -114,9 +145,17 @@ iam-rankings {
       display: block;
       background: var(--colour-info);
       z-index: -1;
-      margin: -0.75rem;
+      margin: -0.5rem -1.5rem -0.75rem -0.75rem;
       border-radius: 0.5rem;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    }
+  }
+
+  &.stick-highlighted {
+    tr.highlighted {
+      position: sticky;
+      top: 0.5rem;
+      z-index: 2;
     }
   }
 
