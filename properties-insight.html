@@ -105,6 +105,18 @@
           );
         });
         
+        propertiesInsight.addEventListener("update-height", event => {
+
+          window.top.postMessage(
+            {
+              source: "vis",
+              type: "update-height",
+              detail: event.detail
+            },
+            "*"
+          );
+        });
+        
         propertiesInsight.addEventListener('insight-action', (event) => {
 
           window.top.postMessage(

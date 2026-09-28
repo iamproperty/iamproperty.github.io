@@ -46,8 +46,10 @@ const addedTaskCTA = ref('');
 
 let insightIframeSource;
 
+//const iframeSrc = ref('/properties-insight.html');
+const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed');
+
 const postInsightCompleted = (action) => {
-  console.log(action);
 
   if(insightIframeSource && insightIframeSource.postMessage) {
     insightIframeSource.postMessage(
@@ -77,26 +79,9 @@ onMounted(async () => {
 
   window.addEventListener("message", (event) => {
 
-    console.log(event.source);
-
-    if (event.origin !== "https://iampropertypbl.cloud.looker.com") {
-      return;
-    }
-
-    const message = event.data;
-
-    console.log(message);
-    console.log(iframeTable.value.contentWindow.document.body.querySelector('.json-loader'));
-  });
-
-  window.addEventListener("message", (event) => {
-
     const message = event.data;
 
     if (message.type == "component-loaded") {
-
-      const panelHeight = questionTitle.value.offsetHeight + message.detail.height + 20 + 30;
-      componentHeight.value = `${panelHeight}px`;
 
       const insightConfig = {
         actions: insightActions.value,
@@ -115,6 +100,12 @@ onMounted(async () => {
           "*"
         );
       }
+    }
+
+    if (message.type == "update-height") {
+
+      const panelHeight = message.detail.height;
+      componentHeight.value = `calc(${panelHeight}px + 3.5rem)`; // add 3.5rem to account for the question title height
     }
 
     if (message.type == "insight-action") {
@@ -145,9 +136,6 @@ onMounted(async () => {
         }
 
       }
-
-
-
 
     }
   });
@@ -290,29 +278,26 @@ const loadDashboards = async (): any => {
       <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
     </div>
 
-    <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
+    <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
       <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
 
       <!--<Properties></Properties>-->
 
-      <!--      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        :title="insightTitle || 'Property insight'"
-        src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-      -->
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="/properties-insight.html"
-        frameborder="0"
-        allowfullscreen
-      >
-      </iframe>
+      <div class="iframe__wrapper">
+
+        <!-- loading state to go here -->
+
+        <iframe
+          :title="insightTitle || 'Property insight'"
+          :src="iframeSrc"
+          src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+
+
+      </div>
+
 
 
       <div class="iframe-backdrop"></div>
@@ -367,6 +352,7 @@ const loadDashboards = async (): any => {
   height: var(--componentHeight, calc(100vh - 4rem));
   position: relative;
   overflow: hidden;
+  transition: height 0.1s;
 }
 
 .admin-panel h2 {
@@ -379,5 +365,8 @@ const loadDashboards = async (): any => {
   width: calc(100% + 3rem);
   height: 100%;
 }
-
+.admin-panel .iframe__wrapper {
+  position: relative;
+  height: 100%;
+}
 </style>

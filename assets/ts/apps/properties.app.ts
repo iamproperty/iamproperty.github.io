@@ -219,15 +219,11 @@ class iamAppProperties extends HTMLElement {
 
     countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
     table.setAttribute('id','properties-table');
-
-
-
     table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(table);
     mapWrapper.innerHTML = this.createMapContent();
 
-    //this.checkTopWindow();
     this.setEvents();
 
     const dispatchedEvent = new CustomEvent('component-loaded', {
@@ -235,7 +231,18 @@ class iamAppProperties extends HTMLElement {
         height: component.offsetHeight
       },
     });
+
     component.dispatchEvent(dispatchedEvent);
+
+    setTimeout(() => {
+
+      const dispatchedEvent = new CustomEvent('update-height', {
+        detail: {
+          height: component.offsetHeight
+        },
+      });
+      component.dispatchEvent(dispatchedEvent);
+    }, 1000);
   };
 
   createActionButtons = (component, actions, criteria): void => {
@@ -245,11 +252,7 @@ class iamAppProperties extends HTMLElement {
 
       actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${action.label}</button>`);
     });
-
-
   };
-
-
 
   connectedCallback(): void {
 
@@ -293,6 +296,7 @@ class iamAppProperties extends HTMLElement {
       if(event.detail.class)
         this.classList.add(event.detail.class);
 
+      console.log(event.detail.actions, event.detail.criteria);
       this.createActionButtons(this, event.detail.actions, event.detail.criteria);
     });
 
@@ -302,6 +306,20 @@ class iamAppProperties extends HTMLElement {
       console.log('action returned', event.detail.action, event.detail.properties);
       this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
     });
+
+    // Resize observer to update the height of the component when the table is resized
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+      }
+    });
+    resizeObserver.observe(this);
 
   }
 }
