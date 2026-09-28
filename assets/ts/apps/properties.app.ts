@@ -306,7 +306,7 @@ class iamAppProperties extends HTMLElement {
       console.log('action returned', event.detail.action, event.detail.properties);
       this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
     });
-
+/*
     // Resize observer to update the height of the component when the table is resized
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
@@ -320,7 +320,7 @@ class iamAppProperties extends HTMLElement {
       }
     });
     resizeObserver.observe(this);
-
+*/
   }
 }
 
