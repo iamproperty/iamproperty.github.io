@@ -105,7 +105,7 @@ onMounted(async () => {
     if (message.type == "update-height") {
 
       const panelHeight = message.detail.height;
-      componentHeight.value = `calc(${panelHeight}px + 3.5rem)`; // add 3.5rem to account for the question title height
+      componentHeight.value = `calc(${panelHeight}px + 3.5rem + 50px)`; // add 3.5rem to account for the question title height
     }
 
     if (message.type == "insight-action") {
