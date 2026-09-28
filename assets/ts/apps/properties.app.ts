@@ -115,6 +115,17 @@ class iamAppProperties extends HTMLElement {
           }
           // #endregion
         }, 100);
+
+
+        setTimeout(() => {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+        }, 1000);
       });
 
       actionbar.addEventListener('none-selected', () => {
@@ -125,12 +136,8 @@ class iamAppProperties extends HTMLElement {
       });
     }
 
-
-
     // #region actionbar button events
     actionbar.addEventListener('click', (event) => {
-
-
 
       if (event.target && event.target instanceof HTMLElement && event.target.hasAttribute('data-action')) {
         const action = event.target.getAttribute('data-action');
@@ -158,8 +165,6 @@ class iamAppProperties extends HTMLElement {
         }
         event.target?.setAttribute('disabled', 'true');
 
-        console.log(this);
-
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
             action: action,
@@ -179,7 +184,6 @@ class iamAppProperties extends HTMLElement {
   createMapContent = (): string => {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
-
 
   fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
