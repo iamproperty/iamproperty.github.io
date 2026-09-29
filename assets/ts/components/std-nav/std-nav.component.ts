@@ -60,7 +60,7 @@ class iamSTDNav extends HTMLElement {
     // Update the logo
     nav.querySelector('.brand')?.className = 'brand brand--one';
     nav.querySelector('.brand svg')?.outerHTML = `<svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
-        <title>iam property one</title>
+        <title>iamproperty One</title>
         <defs xmlns="http://www.w3.org/2000/svg">
           <clipPath id="clippath">
             <path
