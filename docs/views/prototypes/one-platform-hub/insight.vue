@@ -1,54 +1,56 @@
 <script lang="ts" setup>
+// #region imports
 import { createApp, ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
+// #endregion
 
-
+// #region Load design system components
 import STDNav from '@/components/STDNav/STDNav.vue';
 import Nav from '@/components/Nav/Nav.vue';
 import Modal from '@/components/Modal/Modal.vue';
 
+import Notification from '@/components/Notification/Notification.vue';
+// #endregion
+
+// #region load vue components
 
 import Questions from './components/Questions.vue';
-import Properties from './components/Properties.vue';
-
-import Notification from '@/components/Notification/Notification.vue';
-
 import Task from './components/Task.vue';
+// #endregion
 
-import { useRoute } from 'vue-router';
+// #region user
 
+const checkCRMAccess = () => {
 
-const iframeTable = ref();
-const addTaskDialog = ref();
-const panel = ref();
-const componentHeight = ref('100vh');
+  return true;
+};
 
-const question = ref('');
-const search = ref('');
-
-const questionTitle = ref();
-
+// #endregion
+// #region load the selected dashboard and embed it in the page
 
 const route = useRoute();
-const insight = ref(route.params.insight);
 
-const insightTitle = ref('');
 const dashboards = ref([]);
 
-const insightActions = ref([]);
-const insightCriteriaMatch = ref('');
+const insight = ref(route.params.insight);
 
-
-const tasks = ref([]);
-const currentTaskIndex = ref(0);
-const inlineAddedTask = ref({});
-const addedTask = ref({});
-const addedTaskCTA = ref('');
-
-let insightIframeSource;
-
-//const iframeSrc = ref('/properties-insight.html');
 const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed');
 
+// #endregion
+
+// #region question panel
+const question = ref('');
+const search = ref('');
+// #endregion
+
+// #region insight panel
+
+const componentHeight = ref('100vh');
+
+const insightTitle = ref('');
+const insightCriteriaMatch = ref('');
+
+let insightIframeSource;
 const postInsightCompleted = (action) => {
 
   if(insightIframeSource && insightIframeSource.postMessage) {
@@ -67,6 +69,61 @@ const postInsightCompleted = (action) => {
     );
   }
 };
+// #endregion
+
+// #region actions
+const tasks = ref([]);
+const addTaskDialog = ref();
+
+const insightActions = ref([]);
+
+const currentTaskIndex = ref(0);
+const inlineAddedTask = ref({});
+const addedTask = ref({});
+
+const exportTableData = (data) => {
+
+  const csvData = [];
+
+  csvData.push(Object.keys(data[0].columns).join(','));
+
+  data.forEach((row) => {
+
+    csvData.push(Object.values(row.columns).join(','));
+  });
+
+  // Combine each row data with new line character
+  const csvString = csvData.join('\n');
+
+  // Create CSV file object and feed our csvData into it
+  const CSVFile = new Blob([csvString], {
+    type: 'text/csv',
+  });
+
+  // Create to temporary link to initiate download process
+  const tempLink = document.createElement('a');
+  tempLink.download = 'export.csv';
+  const url = window.URL.createObjectURL(CSVFile);
+  tempLink.href = url;
+
+  // This link should not be displayed
+  tempLink.style.display = 'none';
+  document.body.appendChild(tempLink);
+
+  // Automatically click the link to trigger download
+  tempLink.click();
+  document.body.removeChild(tempLink);
+};
+// #endregion
+
+
+
+
+
+
+//const iframeSrc = ref('/properties-insight.html');
+
+
 
 watch(
   () => route.params.insight,
@@ -176,51 +233,6 @@ onMounted(async () => {
   insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
 });
 
-const exportTableData = (data) => {
-
-  const csvData = [];
-
-  csvData.push(Object.keys(data[0].columns).join(','));
-
-  data.forEach((row) => {
-
-    csvData.push(Object.values(row.columns).join(','));
-  });
-
-  // Combine each row data with new line character
-  const csvString = csvData.join('\n');
-
-  // Create CSV file object and feed our csvData into it
-  const CSVFile = new Blob([csvString], {
-    type: 'text/csv',
-  });
-
-  // Create to temporary link to initiate download process
-  const tempLink = document.createElement('a');
-  tempLink.download = 'export.csv';
-  const url = window.URL.createObjectURL(CSVFile);
-  tempLink.href = url;
-
-  // This link should not be displayed
-  tempLink.style.display = 'none';
-  document.body.appendChild(tempLink);
-
-  // Automatically click the link to trigger download
-  tempLink.click();
-  document.body.removeChild(tempLink);
-};
-
-const checkCRMAccess = (actions) => {
-/*
-  const crmAccess = window?.navigation?.getAttribute('data-product') === 'crm';
-
-  if (!crmAccess) {
-    return actions.filter((action) => action.label !== 'Create Task');
-  }
-*/
-
-  return actions;
-};
 
 const loadDashboards = async (): any => {
 
@@ -295,10 +307,7 @@ const loadDashboards = async (): any => {
           allowfullscreen
         ></iframe>
 
-
       </div>
-
-
 
       <div class="iframe-backdrop"></div>
     </div>
@@ -364,9 +373,12 @@ const loadDashboards = async (): any => {
   margin-inline: -1.5rem;
   width: calc(100% + 3rem);
   height: 100%;
+  max-height: var(--componentHeight);
 }
 .admin-panel .iframe__wrapper {
   position: relative;
   height: 100%;
+  max-height: var(--componentHeight);
+  overflow: hidden;
 }
 </style>
