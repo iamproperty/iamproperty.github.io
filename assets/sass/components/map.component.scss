@@ -1,36 +1,56 @@
 
+@use '../elements/buttons';
+:host {
+  width: 100%;
+  height: var(--map-height, 22.5rem); /* 360px */
+  border-radius: 0.25rem;
+  margin-bottom: 3rem;
+}
 
 /* #region map */
 #map {
-  //margin-inline: 1.5rem;
+  
   width: 100%;
-  height: 25rem; /* 400px */
+  height: var(--map-height, 22.5rem); /* 360px */
   border-radius: 0.25rem;
-  margin-bottom: 2rem;
 }
 /* #endregion */
 
-/* #region popup */
 /* Remove MapLibre's default popup styling */
 .property-popup .maplibregl-popup-content {
-  width: 300px;
+  width: fit-content;
+  //max-width: 20rem; /* 320px */
+  min-width: 10rem;
   padding: 0;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 0.5rem;
   background: #ffffff;
-  color: #172033;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  color: #00313c;
+  font-family: var(--font-body);
   box-shadow:
-    0 12px 28px rgb(15 23 42 / 20%),
+    0 12px 20px rgb(15 23 42 / 20%),
     0 2px 6px rgb(15 23 42 / 10%);
 }
 
-/* Match the popup arrow to its background */
+/* #region fix the popup position when anchored to the top or bottom */
+.property-popup.maplibregl-popup-anchor-bottom {
+  top: -25px;
+}
+
+.property-popup.maplibregl-popup-anchor-top {
+  top: -12px;
+}
+
+.property-popup.maplibregl-popup-anchor-right {
+  left: 12px;
+}
+
+.property-popup.maplibregl-popup-anchor-left {
+  left: -12px;
+}
+/* #endregion */
+
+/* #region Match the popup arrow to its background */
 .property-popup.maplibregl-popup-anchor-bottom
   .maplibregl-popup-tip {
   border-top-color: #ffffff;
@@ -50,89 +70,9 @@
   .maplibregl-popup-tip {
   border-left-color: #ffffff;
 }
+/* #endregion */
 
-.popup-card {
-  overflow: hidden;
-}
-
-.popup-image {
-  position: relative;
-  height: 140px;
-  background: #e5e7eb;
-}
-
-.popup-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.popup-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: #2563eb;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.popup-content {
-  padding: 16px;
-}
-
-.popup-price {
-  margin: 0 0 5px;
-  color: #111827;
-  font-size: 21px;
-  font-weight: 750;
-}
-
-.popup-title {
-  margin: 0 0 5px;
-  color: #1f2937;
-  font-size: 15px;
-  line-height: 1.4;
-}
-
-.popup-address {
-  margin: 0;
-  color: #6b7280;
-  font-size: 13px;
-}
-
-.popup-details {
-  display: flex;
-  gap: 12px;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
-  color: #4b5563;
-  font-size: 12px;
-}
-
-.popup-action {
-  width: 100%;
-  margin-top: 15px;
-  padding: 10px 14px;
-  border: 0;
-  border-radius: 7px;
-  background: #2563eb;
-  color: #ffffff;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.popup-action:hover {
-  background: #1d4ed8;
-}
-
-/* Style MapLibre's close button */
+/* #region Style MapLibre's close button */
 .property-popup .maplibregl-popup-close-button {
   top: 8px;
   right: 8px;
@@ -145,10 +85,93 @@
   color: #111827;
   font-size: 20px;
   line-height: 28px;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
 }
 
 .property-popup .maplibregl-popup-close-button:hover {
   background: #ffffff;
 }
+/* #endregion */
+
+/* #region Style the popup content */
+.popup__content {
+
+  padding: 1rem;
+}
+
+.popup__content .h4 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: var(--colour-primary);
+  margin-bottom: 1rem;
+  display: block;
+  padding-right: 2rem;
+}
+.popup__content .btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.popup__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
+  margin-bottom: 1.5rem;
+
+  .popup__field {
+    display: contents;
+  }
+
+  span {
+    order: 1;
+    display: block;
+  }
+
+  .popup__field-label {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .popup__field-value {
+    padding-right: 1rem;
+    min-width: 5rem;
+  }
+
+  // Make the table layout for 5 or more fields, so that the last fields are on the right side of the popup
+  &:has(*:nth-child(5)) {
+    
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  &:has(*:nth-child(5)) > *:nth-child(2) *{
+    order: 3
+  }
+  &:has(*:nth-child(5)) > *:nth-child(3) *{
+    order: 5
+  }
+  &:has(*:nth-child(5)) > *:nth-child(4) *{
+    order: 7
+  }
+
+  &:has(*:nth-child(5)) > *:nth-child(5) *{
+    order: 2
+  }
+  &:has(*:nth-child(5)) > *:nth-child(6) *{
+    order: 4
+  }
+  &:has(*:nth-child(5)) > *:nth-child(7) *{
+    order: 6
+  }
+  &:has(*:nth-child(5)) > *:nth-child(8) *{
+    order: 8
+  }
+}
+
+@media screen and (max-width: 36em) {
+  .popup__fields {
+    display: none;
+  }
+}
+
 /* #endregion */
