@@ -14,7 +14,7 @@ class iamAppProperties extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const loadCSS = `@import "${assetLocation}/css/apps/properties.app.css";`;
+    const loadCSS = `@import "${assetLocation}/css/apps/insights.app.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */`
@@ -310,21 +310,7 @@ class iamAppProperties extends HTMLElement {
       console.log('action returned', event.detail.action, event.detail.properties);
       this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
     });
-/*
-    // Resize observer to update the height of the component when the table is resized
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
 
-          const dispatchedEvent = new CustomEvent('update-height', {
-            detail: {
-              height: this.offsetHeight
-            },
-          });
-          this.dispatchEvent(dispatchedEvent);
-      }
-    });
-    resizeObserver.observe(this);
-*/
   }
 }
 

@@ -74,30 +74,30 @@ onMounted(() => {
 <template>
   <main>
     <DSHeader section="apps">
-      <h1>Properties insight</h1>
+      <h1>Insights</h1>
     </DSHeader>
 
-    <div data-add-task >modals go here?</div>
+    <p class="lead">Created to be used in the Looker studio, the Insights component can be integrated into your applications or websites to enhance the user experience and provide valuable insights into property data.</p>
 
+    <p>Using the insights component, you can display and interact with property data in a structured manner. The intended use is to provide a clear and intuitive way to explore and manage property information.</p>
 
-    <p class="lead">Created to be used in the looker studio, the properties visualisation app allows users to explore and manage property data effectively. With inline table filters and an optional supporting map, users can efficiently navigate and visualize property data.</p>
+    <p>The map data display is driven from the table data - if a filter is applied to the table, it also is applied to the map view.</p>
 
-    <p>The properties visualisation app is created as a standalone native web component that can be added to looker as a dependency in the manifest. The Qanalas web fonts used by iamkey are loaded from our CDN and instead of using font awesome, we use inline SVG icons. The iamkey design system components are included in the final compiled web component javascript file.</p>
+    <h2>Layout</h2>
+    <p class="pb-3">The layout is housed in an admin panel and consists of the following features</p>
+    <ol class="mb-5">
+      <li>Item counter</li>
+      <li>MapLibre component (optional)</li>
+      <li>Criteria match key (optional)</li>
+      <li>Action bar containing table customisation component</li>
+      <li>Advanced table</li>
+    </ol>
 
     <div class="full-width bg-light mb-5">
 
       <div class="container pt-5">
         <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
-
-          <iframe
-            id="iframeTable"
-            ref="iframeTable"
-            title="Inline Frame Example"
-            src="/properties-insight.html"
-            frameborder="0"
-            allowfullscreen
-          >
-          </iframe>
+          <h2 class="">Show me stock currently on market most likely to switch</h2>
 
         </div>
       </div>
@@ -110,7 +110,7 @@ onMounted(() => {
 
     <a href="/prototypes/one-platform-hub/stock-switch" class="btn btn-secondary mb-3" target="_blank" title="One property hub prototype - Properties most likely to switch">One property hub prototype</a>
 
-    <h2 class="pt-5">Components used</h2>
+    <h2 class="pt-5">Components used in app</h2>
 
     <div class="sub-grid mb-5">
       <a
@@ -174,27 +174,5 @@ onMounted(() => {
 </template>
 <style lang="scss" scoped>
 
-.questions-container {
-  margin-bottom: 7rem;
-  display: grid;
-  grid-template-columns: subgrid;
-}
-
-.admin-panel {
-  height: var(--componentHeight, calc(100vh - 4rem));
-  position: relative;
-  overflow: hidden;
-}
-
-.admin-panel h2 {
-  margin-bottom: 0;
-}
-
-.admin-panel iframe {
-  padding: 0;
-  margin-inline: -1rem;
-  width: calc(100% + 2rem);
-  height: 100%;
-}
 
 </style>
