@@ -1,0 +1,14 @@
+/* #region map */
+iam-map {
+  width: 100%;
+  height: var(--map-height, 22.5rem); /* 360px */
+  border-radius: 0.25rem;
+  margin-bottom: 3rem;
+
+  background: var(--colour-light);
+}
+
+iam-map * {
+  display: none;
+}
+/* #endregion */
