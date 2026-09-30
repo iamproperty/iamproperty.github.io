@@ -59,8 +59,9 @@ class iamMap extends HTMLElement {
       const bounds = new maplibregl.LngLatBounds();
       const features = [];
 
-      const clusterHighCount = Math.round(table.querySelectorAll('tr[data-longitude][data-latitude]').length * 0.5);
-      const clusterMidCount = Math.round(table.querySelectorAll('tr[data-longitude][data-latitude]').length * 0.25);
+      const pinCount = table.querySelectorAll('tr[data-longitude][data-latitude]').length;
+      const clusterMidCount = Math.max(1, Math.round(pinCount * 0.25));
+      const clusterHighCount = Math.max(clusterMidCount + 1, Math.round(pinCount * 0.5));
 
       const tableHeadings = Array.from(table.querySelectorAll("thead th")).map((th) => th.textContent?.trim() || "");
       let onloadPopup;
@@ -263,24 +264,49 @@ class iamMap extends HTMLElement {
           }
 
           const popupContent = document.createElement("div");
-          popupContent.innerHTML = `
-            <div class="popup__content">
-              <span class="h4 popup__title">${property.properties.title}</span>
-              <div class="popup__fields">
-                ${Object.entries(property.properties).filter(([key]) => key !== "title" && key !== "link" && key !== "linkText").map(([key, value]) => {
-                  return `<div class="popup__field"><span class="popup__field-label strong">${key}:</span> <span class="popup__field-value">${value}</span></div>`;
-                }).join("")}
-              </div>
-              <a class="btn btn-sm btn-primary" href="${property.properties.link || "#"}" target="_blank">
-                ${property.properties.linkText || "View property"}
-              </a>
-            </div>
-          `;
+          const content = document.createElement("div");
+          content.className = "popup__content";
 
-          popupContent.querySelector(".popup__title").textContent = property.properties.title;
-          popupContent
-            .querySelector(".btn-primary")
-            .addEventListener("click", () => {
+          const title = document.createElement("span");
+          title.className = "h4 popup__title";
+          title.textContent = property.properties.title || "";
+          content.appendChild(title);
+
+          const fields = document.createElement("div");
+          fields.className = "popup__fields";
+          Object.entries(property.properties).filter(([key]) => key !== "title" && key !== "link" && key !== "linkText").forEach(([key, value]) => {
+            const field = document.createElement("div");
+            field.className = "popup__field";
+
+            const label = document.createElement("span");
+            label.className = "popup__field-label strong";
+            label.textContent = `${key}:`;
+
+            const fieldValue = document.createElement("span");
+            fieldValue.className = "popup__field-value";
+            fieldValue.textContent = value ?? "";
+
+            field.append(label, document.createTextNode(" "), fieldValue);
+            fields.appendChild(field);
+          });
+          content.appendChild(fields);
+
+          const linkUrl = property.properties.link?.trim();
+          let parsedLink: URL | null = null;
+          if (linkUrl) {
+            try {
+              parsedLink = new URL(linkUrl, document.baseURI);
+            } catch {
+              parsedLink = null;
+            }
+          }
+          if (parsedLink && (parsedLink.protocol === "http:" || parsedLink.protocol === "https:")) {
+            const action = document.createElement("a");
+            action.className = "btn btn-sm btn-primary";
+            action.href = parsedLink.href;
+            action.target = "_blank";
+            action.textContent = property.properties.linkText || "View property";
+            action.addEventListener("click", () => {
               this.dispatchEvent(
                 new CustomEvent("property-selected", {
                   bubbles: true,
@@ -291,6 +317,9 @@ class iamMap extends HTMLElement {
                 })
               );
             });
+            content.appendChild(action);
+          }
+          popupContent.appendChild(content);
 
           this.map.easeTo({
             center: property.geometry.coordinates,
