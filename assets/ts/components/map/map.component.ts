@@ -59,8 +59,9 @@ class iamMap extends HTMLElement {
       const bounds = new maplibregl.LngLatBounds();
       const features = [];
 
-      const clusterHighCount = Math.round(table.querySelectorAll('tr[data-longitude][data-latitude]').length * 0.5);
-      const clusterMidCount = Math.round(table.querySelectorAll('tr[data-longitude][data-latitude]').length * 0.25);
+      const pinCount = table.querySelectorAll('tr[data-longitude][data-latitude]').length;
+      const clusterMidCount = Math.max(1, Math.round(pinCount * 0.25));
+      const clusterHighCount = Math.max(clusterMidCount + 1, Math.round(pinCount * 0.5));
 
       const tableHeadings = Array.from(table.querySelectorAll("thead th")).map((th) => th.textContent?.trim() || "");
       let onloadPopup;
