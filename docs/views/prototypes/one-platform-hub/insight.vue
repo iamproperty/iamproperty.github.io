@@ -18,12 +18,18 @@ import Questions from './components/Questions.vue';
 import Task from './components/Task.vue';
 // #endregion
 
+// #region types
+type InsightTableRow = { columns: Record<string, unknown> };
+// #endregion
+
 // #region user
 
+/*
 const checkCRMAccess = () => {
 
   return true;
 };
+*/
 
 // #endregion
 // #region load the selected dashboard and embed it in the page
@@ -50,8 +56,8 @@ const componentHeight = ref('100vh');
 const insightTitle = ref('');
 const insightCriteriaMatch = ref('');
 
-let insightIframeSource;
-const postInsightCompleted = (action) => {
+let insightIframeSource: MessageEventSource | null = null;
+const postInsightCompleted = (action: string): void => {
 
   if(insightIframeSource && insightIframeSource.postMessage) {
     insightIframeSource.postMessage(
@@ -65,15 +71,15 @@ const postInsightCompleted = (action) => {
           }
         }
       },
-      "*"
+      { targetOrigin: '*' }
     );
   }
 };
 // #endregion
 
 // #region actions
-const tasks = ref([]);
-const addTaskDialog = ref();
+const tasks = ref<Record<string, unknown>[]>([]);
+const addTaskDialog = ref<HTMLDialogElement | null>(null);
 
 const insightActions = ref([]);
 
@@ -81,7 +87,9 @@ const currentTaskIndex = ref(0);
 const inlineAddedTask = ref({});
 const addedTask = ref({});
 
-const exportTableData = (data) => {
+const exportTableData = (data: InsightTableRow[]): void => {
+
+  if (!data.length) return;
 
   const csvData = [];
 
@@ -145,7 +153,7 @@ onMounted(async () => {
         criteria: insightCriteriaMatch.value
       };
 
-      if(event && event.source && event.source.postMessage) {
+      if (event && event.source) {
         event.source.postMessage(
           {
             type: "top-window-details",
@@ -154,7 +162,7 @@ onMounted(async () => {
               ...JSON.parse(JSON.stringify(insightConfig))
             }
           },
-          "*"
+          { targetOrigin: '*' }
         );
       }
     }
@@ -168,7 +176,7 @@ onMounted(async () => {
     if (message.type == "insight-action") {
 
       // Do the action and pass back the result to the iframe
-      if(event && event.source && event.source.postMessage) {
+      if(event && event.source) {
 
         insightIframeSource = event.source; // cache the event source for later use so we can post back the result of the action at a later time i.e. after a fetch request has completed
 
@@ -189,7 +197,7 @@ onMounted(async () => {
           tasks.value = [...message.detail.properties];
           inlineAddedTask.value = {};
           addedTask.value = {};
-          addTaskDialog.value.showModal();
+          addTaskDialog.value?.showModal();
         }
 
       }
@@ -226,10 +234,6 @@ onMounted(async () => {
   search.value = selectedDashboard?.suggestionLabel ?? '';
 
   insightActions.value = selectedDashboard?.actions ?? [];
-
-  insightActions.value = checkCRMAccess(insightActions.value);
-
-
   insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
 });
 
