@@ -4,7 +4,7 @@ import iamActionbar from '../../js/components/actionbar/actionbar.component.min.
 import iamMenu from '../../js/components/menu/menu.component.min.js';
 import iamMap from '../../js/components/map/map.component.min.js';
 import iamNotification from '../../js/components/notification/notification.component.min.js';
-import iamAppInsights from './insights.app.ts';
+import iamAppInsights from './insights.app.js';
 
 document.addEventListener('DOMContentLoaded', (): void => {
 
