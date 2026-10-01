@@ -129,8 +129,7 @@ class iamMap extends HTMLElement {
 
       this.map = new maplibregl.Map({
         container: mapContainer,
-        style: "https://tiles.openfreemap.org/styles/bright",
-        attributionControl: false
+        style: "https://tiles.openfreemap.org/styles/bright"
       });
 
       this.map.jumpTo({
