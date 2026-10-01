@@ -366,11 +366,14 @@ const loadDashboards = async (): any => {
   position: relative;
   overflow: hidden;
   transition: height 0.1s;
+  padding-inline: calc(var(--padding-x) - 10px);
 }
 
 .admin-panel h2 {
   margin-bottom: 0;
+  padding-inline: calc(var(--padding-x) + 10px);
 }
+
 
 .admin-panel iframe {
   padding: 0;
