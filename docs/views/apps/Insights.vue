@@ -11,8 +11,12 @@ import routes from '../../routes.ts';
 const structuredRoutes = convertToStructured(routes);
 
 const components = [
+  routeToIndexCard(structuredRoutes['components']['map'], '/components/map'),
   routeToIndexCard(structuredRoutes['tables']['advanced'], '/tables/advanced'),
-  routeToIndexCard(structuredRoutes['components']['map'], '/components/map')
+  routeToIndexCard(structuredRoutes['components']['pagination'], '/components/pagination'),
+  routeToIndexCard(structuredRoutes['components']['actionbar'], '/components/actionbar'),
+  routeToIndexCard(structuredRoutes['components']['menu'], '/components/menu'),
+  routeToIndexCard(structuredRoutes['notifications']['inline-notification'], '/notifications/inline-notification'),
 ];
 
 const setupComponent = (event) => {
@@ -98,7 +102,7 @@ const insightAction = (event) => {
       <li>Advanced table</li>
     </ol>
 
-    <div class="full-width bg-light mb-5">
+    <div class="full-width bg-light">
 
       <div class="container pt-5">
         <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
@@ -203,8 +207,8 @@ const insightAction = (event) => {
     </div>
     <div class="full-width bg-light mb-5">
 
-      <div class="container pt-5">
-        <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
+      <div class="container pt-2">
+        <div class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
           <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
           <AppInsights @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
