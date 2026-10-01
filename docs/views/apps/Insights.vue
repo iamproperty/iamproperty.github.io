@@ -359,18 +359,18 @@ const insightAction = (event) => {
 
         <h4>Add to looker manifest</h4>
         <pre ><code>{{`visualization: {
-  id: "properties-insight",
-  label: "Properties insight",
-  file: "properties-insight.js",
+  id: "insights",
+  label: "Insights",
+  file: "insights.js",
   dependencies: [
-    "https://iamproperty.github.io/assets/js/apps/properties.app.min.js"
+    "https://iamproperty.github.io/assets/js/apps/insights-loader.app.min.js"
   ]
 }
 `}}</code></pre>
 
 
         <h4 class="pt-3">Add to looker js</h4>
-        <pre><code>{{`<iam-properties-insight>
+        <pre><code>{{`<iam-app-insights>
   <table>
     <thead>
       <tr></tr>
@@ -380,11 +380,11 @@ const insightAction = (event) => {
       <tr></tr>
     </tbody>
   </table>
-</iam-properties-insight>`}}</code></pre>
+</iam-app-insights>`}}</code></pre>
       </template>
 
     </Integration>
-    <Versions pdf="/pdfs/properties.pdf">
+    <Versions pdf="/pdfs/insights.pdf">
       <table>
         <thead>
           <tr>
