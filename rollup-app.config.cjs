@@ -19,8 +19,6 @@ var components = [
   "properties"
 ];
 
-console.log('hi');
-
 Array.from(components).forEach((component) => {
 
   let css = '';
