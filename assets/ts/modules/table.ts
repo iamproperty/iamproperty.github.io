@@ -525,7 +525,7 @@ export const addSelectboxesEvents = (component, table, actionbar): void => {
 
   actionbar?.addEventListener('selected', (event) => {
     if (event.detail.selected == 'all') {
-      console.log('select all rows');
+
       Array.from(table.querySelectorAll(selectrowcheckboxselector)).forEach((input) => {
         input.checked = true;
       });
@@ -537,7 +537,6 @@ export const addSelectboxesEvents = (component, table, actionbar): void => {
 
   actionbar?.addEventListener('none-selected', (event) => {
 
-      console.log('unselect all rows');
       Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
         input.checked = false;
       });
@@ -1300,15 +1299,12 @@ export const setActionbarEvents = (component, table, actionbar, pagination): voi
 
   actionbar?.addEventListener('change', (event) => {
 
-    console.log('actionbar change event', event.target);
-
     const element = event.target;
 
     if (!element || !element.closest('[data-filters]') || !element.closest('[data-column]')) return;
 
     const input = element.dataset.filters ? element : element.closest('[data-filters]');
 
-    console.log('actionbar change event', input);
     const heading = table.querySelector('th[data-label="' + input.dataset.column + '"]');
     const filters = JSON.parse(input.dataset.filters);
 
@@ -1354,8 +1350,6 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
     columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': filters});
   });
 
-
-  console.log('columnsArray', columnsArray);
   return columnsArray;
 };
 
