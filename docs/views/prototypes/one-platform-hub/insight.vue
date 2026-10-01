@@ -374,8 +374,8 @@ const loadDashboards = async (): any => {
 
 .admin-panel iframe {
   padding: 0;
-  margin-inline: -1.5rem;
-  width: calc(100% + 3rem);
+  //margin-inline: -1.5rem;
+  width: 100%;
   height: 100%;
   max-height: var(--componentHeight);
 }
