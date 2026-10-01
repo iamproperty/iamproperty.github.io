@@ -82,6 +82,9 @@ iam-actionbar {
   display: none!important;
 }
 
+:host(.inside-hub) {
+  overflow: clip;
+}
 
 // #region: Criteria match key
 #criteria-match-key {
