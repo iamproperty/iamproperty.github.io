@@ -64,14 +64,8 @@ class iamAppInsights extends HTMLElement {
 
     const selectedRows = table.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
 
-
-    //console.log(selectedRows.length);
-
     const branchColumn = component.getAttribute('data-branch-column');
     const branchArray = Array.from(selectedRows).map(row => this.getBranch(row as HTMLTableRowElement, branchColumn)).filter(branch => branch !== null);
-
-
-    console.log(branchArray);
 
     return [...new Set(branchArray)].length > 1;
   };
@@ -141,8 +135,6 @@ class iamAppInsights extends HTMLElement {
               const columnLabel = cell.getAttribute('data-label');
               if (columnLabel) dataKeyValueObject.columns[columnLabel] = cell.innerText.trim();
             }
-
-            //console.log(dataKeyValueObject);
 
             properties.push(dataKeyValueObject);
           }
@@ -312,7 +304,6 @@ class iamAppInsights extends HTMLElement {
     // When the insight action has been completed, re-enable the button that was clicked
     this.addEventListener('insight-action-completed', (event: CustomEvent) => {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
-      console.log('action returned', event.detail.action, event.detail.properties);
       this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
     });
 

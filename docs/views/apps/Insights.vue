@@ -16,7 +16,6 @@ const components = [
 ];
 
 const setupComponent = (event) => {
-  console.log(event.target);
 
   const dispatchedEvent = new CustomEvent('top-window-details', {
     detail: {
