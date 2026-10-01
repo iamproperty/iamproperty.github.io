@@ -45,9 +45,9 @@ class iamMap extends HTMLElement {
       table = document.querySelector(`table[id="${this.getAttribute("data-for")}"]`);
 
     // If the map component is inside a shadow root, we need to query the table from the shadow root instead of the document
+    // This lookup should trump the previous lookup, as this case covers the map and table being part of the app insights component
     if(this.getRootNode() instanceof ShadowRoot){
 
-      console.log(this.getRootNode());
       table = (this.getRootNode() as ShadowRoot).querySelector(`table`);
     }
 
