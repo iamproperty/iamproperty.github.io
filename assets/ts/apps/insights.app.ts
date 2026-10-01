@@ -1,12 +1,4 @@
-import iamTableAdvanced from '../../js/components/table-advanced/table-advanced.component.min.js';
-import iamPagination from '../../js/components/pagination/pagination.component.min.js';
-import iamActionbar from '../../js/components/actionbar/actionbar.component.min.js';
-import iamMenu from '../../js/components/menu/menu.component.min.js';
-import iamMap from '../../js/components/map/map.component.min.js';
-import iamNotification from '../../js/components/notification/notification.component.min.js';
-
-
-class iamAppProperties extends HTMLElement {
+class iamAppInsights extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -14,7 +6,7 @@ class iamAppProperties extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const loadCSS = `@import "${assetLocation}/css/apps/properties.app.css";`;
+    const loadCSS = `@import "${assetLocation}/css/apps/insights.app.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */`
@@ -22,7 +14,7 @@ class iamAppProperties extends HTMLElement {
     ${loadCSS}
     </style>
 
-    <span class="h4"><span id="count"></span> Properties most likely to switch</span>
+    <strong class="d-block pb-3"><span id="count"></span> Properties most likely to switch</strong>
 
     <div id="map-wrapper"></div>
 
@@ -31,28 +23,13 @@ class iamAppProperties extends HTMLElement {
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
-  createTableContent = (table: HTMLTableElement): string => {
-
-    const criteriaMatch = /* HTML */`<button class="btn btn-action" popovertarget="criteria-match" style="anchor-name: --criteria-match;">Criteria match</button>
-      <iam-menu id="criteria-match" popover style="position-anchor: --criteria-match;">
-        <fieldset data-filters='[{"operator": "equals", "type": "text"}]' data-column="Match criteria">
-          <label>
-            All Criteria <input type="radio" name="criteria" value="" checked/>
-          </label>
-          <label>
-            Full match <input type="radio" name="criteria" value="Full" />
-          </label>
-          <label>
-            Partial match <input type="radio" name="criteria" value="Partial" />
-          </label>
-        </fieldset>
-      </iam-menu>`;
+  createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
     return /* HTML */`
-    <p class="pb-1" id="criteria-match-key">
+    <p class="pb-2" id="criteria-match-key">
       <strong class="me-1">Criteria match key: </strong>
-      <span class="text-heading me-1"><i class="fa-solid fa-circle text-complete"></i> Full match</span>
-      <span class="text-heading me-1"><i class="fa-solid fa-circle text-warning"></i> Partial match</span>
+      <span class="text-heading me-1" id="full-match">Full match</span>
+      <span class="text-heading me-1" id="partial-match">Partial match</span>
     </p>
 
     <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
@@ -63,31 +40,32 @@ class iamAppProperties extends HTMLElement {
 
     <iam-table-advanced data-selectall>
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
-        ${criteriaMatch}
+        <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
       ${table.outerHTML}
       <iam-pagination slot="pagination"></iam-pagination>
     </iam-table-advanced>`;
   };
 
-  getBranchID = (row: HTMLTableRowElement): string | null => {
+  getBranch = (row: HTMLTableRowElement, branchColumn: string | null): string | null => {
     if (!row) return null;
 
-    // TODO update this to the correct data attribute for branch ID when available
-    if(row.hasAttribute('data-branch')) return row.getAttribute('data-branch');
+    // Check the rows dataset
+    if(branchColumn && row.hasAttribute(`data-${branchColumn}`)) return row.getAttribute(`data-${branchColumn}`);
+
+    // If not in the dataset, check the cell with the branch column label
+    if(branchColumn && row.querySelector(`td[data-label="${branchColumn}"]`)) return row.querySelector(`td[data-label="${branchColumn}"]`)?.textContent?.trim() || null;
 
     return null;
   };
 
-  isMultiBranchSelected = (table: HTMLTableElement | null): boolean => {
+  isMultiBranchSelected = (component: HTMLElement, table: HTMLTableElement | null): boolean => {
     if (!table) return false;
 
     const selectedRows = table.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
 
-
-    console.log(selectedRows.length);
-
-    const branchArray = Array.from(selectedRows).map(row => this.getBranchID(row as HTMLTableRowElement)).filter(branch => branch !== null);
+    const branchColumn = component.getAttribute('data-branch-column');
+    const branchArray = Array.from(selectedRows).map(row => this.getBranch(row as HTMLTableRowElement, branchColumn)).filter(branch => branch !== null);
 
     return [...new Set(branchArray)].length > 1;
   };
@@ -105,7 +83,7 @@ class iamAppProperties extends HTMLElement {
 
         setTimeout(() => {
           // #region Create print campaign button / branch notification
-          if(createPrintCampaignButton && this.isMultiBranchSelected(table)) {
+          if(createPrintCampaignButton && this.isMultiBranchSelected(this,table)) {
             notification?.classList.remove('d-none');
             createPrintCampaignButton.setAttribute('disabled', 'true');
           }
@@ -158,8 +136,6 @@ class iamAppProperties extends HTMLElement {
               if (columnLabel) dataKeyValueObject.columns[columnLabel] = cell.innerText.trim();
             }
 
-            console.log(dataKeyValueObject);
-
             properties.push(dataKeyValueObject);
           }
         }
@@ -182,24 +158,16 @@ class iamAppProperties extends HTMLElement {
   };
 
   createMapContent = (): string => {
+
+    if(!this.querySelector('table tr[data-latitude][data-longitude]'))
+      return '';
+
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
   fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
     if (!table) return table;
-
-    if(table.querySelector('tbody tr td[data-match-criteria]')){
-
-      table.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
-
-      table.querySelectorAll('tbody tr').forEach(row => {
-        const criteriaMatch = row.getAttribute('data-match-criteria');
-
-        if(criteriaMatch)
-          row.insertAdjacentHTML('afterbegin', /* HTML */`<td data-label="Match criteria" class="d-none">${criteriaMatch}</td>`);
-      });
-    }
 
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
@@ -225,7 +193,7 @@ class iamAppProperties extends HTMLElement {
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
 
-    tableWrapper.innerHTML = this.createTableContent(table);
+    tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
 
     this.setEvents();
@@ -258,11 +226,86 @@ class iamAppProperties extends HTMLElement {
     });
   };
 
+  createMatchCriteriaFilter = (component, matchCriteriaColumn, matchCriteriaIndicatorColumn): void => {
+
+    if(!matchCriteriaColumn) return;
+
+    const table = this.shadowRoot?.querySelector('table');
+
+    table?.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
+
+    table?.querySelectorAll('tbody tr').forEach(row => {
+      const criteriaMatch = row.getAttribute(`data-${matchCriteriaColumn}`);
+      const criteriaMatchValue = criteriaMatch?.toLocaleLowerCase().replace('match', '').trim() || '';
+      row.insertAdjacentHTML('afterbegin', /* HTML */`<td data-label="Match criteria" class="d-none" data-value="${criteriaMatchValue}">${criteriaMatchValue}</td>`);
+
+      // Highlight the match criteria indicator column, the CSS will then create the circle indicator based on the data-value attribute of the match criteria column
+      const indicatorCell = row.querySelector(`td[data-label="${matchCriteriaIndicatorColumn}"]`);
+      if(indicatorCell) {
+        indicatorCell.innerHTML = `<i class="criteria-match-indicator" data-value="${criteriaMatchValue}"></i>${indicatorCell.innerHTML}`;
+      }
+    });
+
+    const criteriaMatchWrapper = this.shadowRoot?.querySelector('#criteria-match-wrapper');
+    criteriaMatchWrapper?.innerHTML = /* HTML */`<button class="btn btn-action" popovertarget="criteria-match" style="anchor-name: --criteria-match;">Criteria match</button>
+      <iam-menu id="criteria-match" popover style="position-anchor: --criteria-match;">
+        <fieldset data-filters='[{"operator": "equals", "type": "text"}]' data-column="Match criteria">
+          <label>
+            All Criteria <input type="radio" name="criteria" value="" checked/>
+          </label>
+          <label>
+            Full match <input type="radio" name="criteria" value="full" />
+          </label>
+          <label>
+            Partial match <input type="radio" name="criteria" value="partial" />
+          </label>
+        </fieldset>
+      </iam-menu>`;
+  };
+
+  createPopupTitles = (component, popupTitleColumn): void => {
+    if(!popupTitleColumn) return;
+
+    const shadowTable = this.shadowRoot?.querySelector('table');
+
+    shadowTable?.querySelectorAll(`tbody tr td[data-label="${popupTitleColumn}"]`).forEach(cell => {
+      cell.setAttribute('data-popup-title', 'true');
+    });
+
+    // We have to recreate the map at this point because the popup titles are used in the map component to show the title of the popup when a marker is clicked. The map component is created before the popup titles are set, so we need to recreate the map component to ensure that the popup titles are set correctly.
+    const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
+    mapWrapper.innerHTML = this.createMapContent();
+  };
+
+  createMultibranchFlag = (component, branchColumn): void => {
+    if(!branchColumn) return;
+
+    component.setAttribute('data-branch-column', branchColumn);
+  };
+
   connectedCallback(): void {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
     const createComponent = this.createComponent;
+
+    // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
+    this.addEventListener('top-window-details', (event: CustomEvent) => {
+
+      if(event.detail.class)
+        this.classList.add(event.detail.class);
+
+      this.createActionButtons(this, event.detail.actions, event.detail.criteria);
+      this.createMatchCriteriaFilter(this, event.detail['match-criteria-column'],event.detail['match-criteria-indicator-column']);
+      this.createPopupTitles(this, event.detail['popup-title-column']);
+      this.createMultibranchFlag(this, event.detail['branch-column']);
+    });
+
+    // When the insight action has been completed, re-enable the button that was clicked
+    this.addEventListener('insight-action-completed', (event: CustomEvent) => {
+      this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
+      this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
+    });
 
     if (table){
 
@@ -294,64 +337,7 @@ class iamAppProperties extends HTMLElement {
     const observer = new MutationObserver(htmlUpdated);
     observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
 
-    // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
-    this.addEventListener('top-window-details', (event: CustomEvent) => {
-
-      if(event.detail.class)
-        this.classList.add(event.detail.class);
-
-      console.log(event.detail.actions, event.detail.criteria);
-      this.createActionButtons(this, event.detail.actions, event.detail.criteria);
-    });
-
-    // When the insight action has been completed, re-enable the button that was clicked
-    this.addEventListener('insight-action-completed', (event: CustomEvent) => {
-      this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
-      console.log('action returned', event.detail.action, event.detail.properties);
-      this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
-    });
-/*
-    // Resize observer to update the height of the component when the table is resized
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-
-          const dispatchedEvent = new CustomEvent('update-height', {
-            detail: {
-              height: this.offsetHeight
-            },
-          });
-          this.dispatchEvent(dispatchedEvent);
-      }
-    });
-    resizeObserver.observe(this);
-*/
   }
 }
 
-document.addEventListener('DOMContentLoaded', (): void => {
-
-  if (!window.customElements.get(`iam-properties-insight`) && iamAppProperties)
-    window.customElements.define(`iam-properties-insight`, iamAppProperties);
-
-  if (!window.customElements.get(`iam-pagination`) && iamPagination)
-    window.customElements.define(`iam-pagination`, iamPagination);
-
-  if (!window.customElements.get(`iam-actionbar`) && iamActionbar)
-    window.customElements.define(`iam-actionbar`, iamActionbar);
-
-  if (!window.customElements.get(`iam-table-advanced`) && iamTableAdvanced)
-    window.customElements.define(`iam-table-advanced`, iamTableAdvanced);
-
-  if (!window.customElements.get(`iam-menu`) && iamMenu)
-    window.customElements.define(`iam-menu`, iamMenu);
-
-  if (!window.customElements.get(`iam-notification`) && iamNotification)
-    window.customElements.define(`iam-notification`, iamNotification);
-
-  if (!window.customElements.get(`iam-map`) && iamMap)
-    window.customElements.define(`iam-map`, iamMap);
-
-});
-
-
-
+export default iamAppInsights;

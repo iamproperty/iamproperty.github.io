@@ -1,6 +1,7 @@
 
 @use '../elements/buttons';
 :host {
+  display: block;
   width: 100%;
   height: var(--map-height, 22.5rem); /* 360px */
   border-radius: 0.25rem;

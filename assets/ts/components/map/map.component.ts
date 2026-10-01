@@ -36,8 +36,6 @@ class iamMap extends HTMLElement {
 
     let table;
 
-    table = this.querySelector(`table`);
-
     // Hide the table if it is a child of the map component
     if(table){
       table.setAttribute("slot", "map");
@@ -45,6 +43,13 @@ class iamMap extends HTMLElement {
 
     if(!table)
       table = document.querySelector(`table[id="${this.getAttribute("data-for")}"]`);
+
+    // If the map component is inside a shadow root, we need to query the table from the shadow root instead of the document
+    // This lookup should trump the previous lookup, as this case covers the map and table being part of the app insights component
+    if(this.getRootNode() instanceof ShadowRoot){
+
+      table = (this.getRootNode() as ShadowRoot).querySelector(`table`);
+    }
 
     if(!table) return;
 
@@ -63,7 +68,7 @@ class iamMap extends HTMLElement {
       const clusterMidCount = Math.max(1, Math.round(pinCount * 0.25));
       const clusterHighCount = Math.max(clusterMidCount + 1, Math.round(pinCount * 0.5));
 
-      const tableHeadings = Array.from(table.querySelectorAll("thead th")).map((th) => th.textContent?.trim() || "");
+      const tableHeadings = Array.from(table.querySelectorAll("thead th")).map((th) => th.querySelector(".th__content")?.textContent?.trim() || th.textContent?.trim() || "");
       let onloadPopup;
 
       table.querySelectorAll('tr[data-longitude][data-latitude]').forEach((row, index) => {
@@ -83,8 +88,15 @@ class iamMap extends HTMLElement {
         const rowData: Record<string, string> = {};
         tableHeadings.forEach((heading, headingIndex) => {
           const cell = row.querySelector(`td:nth-child(${headingIndex + 1})`);
-          if (!cell?.hasAttribute("data-popup-title") && !cell?.querySelector("a:first-child:last-child")) {
-            rowData[heading] = cell?.textContent?.trim() || "";
+
+          if (
+            !cell?.hasAttribute("data-popup-title") &&
+            !cell?.querySelector("a:first-child:last-child") &&
+            !cell.classList.contains("selectrow") &&
+            !cell.classList.contains("d-none") &&
+            !cell.classList.contains("td--expand")
+          ) {
+            rowData[heading] = cell.querySelector(".td__content")?.textContent?.trim() || cell?.textContent?.trim() || "";
           }
         });
 
@@ -117,7 +129,10 @@ class iamMap extends HTMLElement {
 
       this.map = new maplibregl.Map({
         container: mapContainer,
-        style: "https://tiles.openfreemap.org/styles/bright",
+        style: "https://tiles.openfreemap.org/styles/bright"
+      });
+
+      this.map.jumpTo({
         center: [longitude, latitude],
         zoom: maxZoom
       });
@@ -327,17 +342,19 @@ class iamMap extends HTMLElement {
             padding: { left: 0, top: 250, right: 0, bottom: 0 }
           });
 
-          new maplibregl.Popup({
-            offset: 14,
-            closeButton: true,
-            closeOnClick: true,
-            className: "property-popup",
-            maxWidth: "600px",
-            focusAfterOpen: false
-          })
-          .setLngLat(property.geometry.coordinates)
-          .setDOMContent(popupContent)
-          .addTo(this.map);
+          setTimeout(() => {
+            new maplibregl.Popup({
+              offset: 14,
+              closeButton: true,
+              closeOnClick: true,
+              className: "property-popup",
+              maxWidth: "600px",
+              focusAfterOpen: false
+            })
+            .setLngLat(property.geometry.coordinates)
+            .setDOMContent(popupContent)
+            .addTo(this.map);
+          }, 500);
         }
         this.map.on("click", "property-points", openPopup);
 

@@ -1340,12 +1340,12 @@ const routes: Array<any> = [
         component: () => import('./views/apps/Index.vue'),
       },
       {
-        path: 'properties',
-        name: 'Properties insight',
+        path: 'insights',
+        name: 'Insights',
         meta: {
-          title: 'Properties insight | Components | iamkey',
+          title: 'Insights | Components | iamkey',
         },
-        component: () => import('./views/apps/Properties.vue'),
+        component: () => import('./views/apps/Insights.vue'),
       },
     ],
   },

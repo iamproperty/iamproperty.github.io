@@ -16,10 +16,8 @@ const ESM = process.env.ESM === 'true'
 const rollupConfig = [];
 
 var components = [
-  "properties"
+  "insights", "insights-loader"
 ];
-
-console.log('hi');
 
 Array.from(components).forEach((component) => {
 

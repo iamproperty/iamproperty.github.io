@@ -44,15 +44,18 @@
   font-style: normal;
 }
 
+iam-map {
+  margin-bottom: 2rem;
+}
 
 :host {
   --font-body: 'Qanelas - Hosted', sans-serif;
   --font-heading: 'Qanelas - Hosted', sans-serif;
   display: block;
   //height: 100%;
-  padding-top: calc(1rem - 10px);
-  padding-bottom: calc(1.5rem - 10px);
-  padding-inline: calc(1.5rem - 10px);
+  //padding-top: calc(1rem - 10px);
+  //padding-bottom: calc(1.5rem - 10px);
+  //padding-inline: calc(1.5rem - 10px);
   overflow: auto;
   width: 100%;
   box-sizing: border-box;
@@ -79,15 +82,68 @@ iam-actionbar {
   display: none!important;
 }
 
+
+// #region: Criteria match key
+#criteria-match-key {
+
+  :is(#full-match, #partial-match)::before {
+
+    content: "";
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    margin-top: 0.2em;
+    vertical-align: top;
+  }
+  #full-match::before {
+    background: var(--colour-complete);
+  }
+  #partial-match::before {
+    background: var(--colour-warning);
+  }
+}
+
+table td:has(.criteria-match-indicator) {
+  padding-left: 1.5rem;
+  position: relative;
+}
+table .criteria-match-indicator {
+  position: absolute;
+  padding: 0.75rem 2rem .75rem 0;
+  top: 0;
+  left: 0;
+  display: inline-block;
+}
+table .criteria-match-indicator::before {
+  content: "";
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  margin-top: 0.2em;
+  border-radius: 50%;
+}
+
+table .criteria-match-indicator[data-value="full"]::before {
+
+  background: var(--colour-complete);
+}
+
+table .criteria-match-indicator[data-value="partial"]::before {
+  background: var(--colour-warning);
+}
+
+// #endregion
+
+
 // #region: Icon fixes
 :is(.fa-filter,.fa-arrow-down-arrow-up){
 
   position: relative;
-    display: inline-block;
-
-    height: 1em;
-    width: 1em;
-
+  display: inline-block;
+  height: 1em;
+  width: 1em;
 
   &:before {
     position: absolute;
