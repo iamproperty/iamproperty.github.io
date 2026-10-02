@@ -203,8 +203,38 @@ onMounted(async () => {
       }
 
     }
+
+    console.log(message);
+
+    if(message.type == "dashboard:run:complete") {
+
+      const layouts = message.dashboard?.options?.layouts;
+
+      console.log(layouts);
+    }
   });
 
+
+  const iframe = document.querySelector("#looker-dashboard");
+
+  iframe.contentWindow.postMessage(
+    JSON.stringify({
+      type: "dashboard:options:set",
+      layouts: [
+        {
+          id: "YOUR_LAYOUT_ID",
+          dashboard_layout_components: [
+            {
+              id: "YOUR_LAYOUT_COMPONENT_ID",
+              dashboard_element_id: "YOUR_TILE_ID",
+              height: 12 // Approximately 600px for newspaper layout
+            }
+          ]
+        }
+      ]
+    }),
+    "https://your-instance.looker.com"
+  );
 
   const urlParams = new URLSearchParams(window.location.search);
   console.log(urlParams.has('question')); // true
@@ -235,6 +265,133 @@ onMounted(async () => {
 
   insightActions.value = selectedDashboard?.actions ?? [];
   insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
+
+/*
+const dashboardIframe = document.querySelector("#looker-dashboard");
+
+const lookerOrigin = "https://iampropertypbl.cloud.looker.com";
+
+// Set this to the origin that sends your custom visualization messages.
+// It may differ from the dashboard's origin.
+const visualizationOrigin = "https://your-visualization-origin.com";
+
+// The dashboard element ID of your iam-app-insights tile.
+const tileId = "123";
+
+let dashboardLayouts;
+let requestedHeightRows;
+let lastAppliedHeightRows;
+
+function parseMessage(data) {
+  if (typeof data !== "string") {
+    return data;
+  }
+
+  try {
+    return JSON.parse(data);
+  } catch {
+    return null;
+  }
+}
+
+function applyTileHeight() {
+  if (!dashboardLayouts || requestedHeightRows === undefined) {
+    return;
+  }
+
+  if (requestedHeightRows === lastAppliedHeightRows) {
+    return;
+  }
+
+  const layouts = structuredClone(dashboardLayouts);
+  let foundTile = false;
+
+  for (const layout of layouts) {
+    if (layout.active === false) {
+      continue;
+    }
+
+    for (const component of layout.dashboard_layout_components ?? []) {
+      if (String(component.dashboard_element_id) !== String(tileId)) {
+        continue;
+      }
+
+      // Looker only accepts properties returned in its layout options.
+      if (!Object.prototype.hasOwnProperty.call(component, "height")) {
+        continue;
+      }
+
+      component.height = requestedHeightRows;
+      foundTile = true;
+    }
+  }
+
+  if (!foundTile) {
+    return;
+  }
+
+  dashboardIframe.contentWindow.postMessage(
+    JSON.stringify({
+      type: "dashboard:options:set",
+      layouts
+    }),
+    lookerOrigin
+  );
+
+  dashboardLayouts = layouts;
+  lastAppliedHeightRows = requestedHeightRows;
+}
+
+window.addEventListener("message", event => {
+  const message = parseMessage(event.data);
+
+  if (!message || typeof message !== "object") {
+    return;
+  }
+
+  // Capture Looker's layout once the dashboard has finished running.
+  if (
+    event.origin === lookerOrigin &&
+    event.source === dashboardIframe.contentWindow &&
+    message.type === "dashboard:run:complete"
+  ) {
+    const layouts = message.dashboard?.options?.layouts;
+
+    if (Array.isArray(layouts)) {
+      dashboardLayouts = layouts;
+      lastAppliedHeightRows = undefined;
+
+      // Apply any height request received before the dashboard was ready.
+      applyTileHeight();
+    }
+
+    return;
+  }
+
+  // Receive the pixel height requested by your visualization.
+  if (
+    event.origin === visualizationOrigin &&
+    message.source === "vis" &&
+    message.type === "update-height"
+  ) {
+    const heightPx = Number(message.detail?.heightPx);
+
+    if (!Number.isFinite(heightPx) || heightPx <= 0) {
+      return;
+    }
+
+    // For a newspaper dashboard layout: approximately 50px per row.
+    requestedHeightRows = Math.max(
+      1,
+      Math.ceil(heightPx / 50)
+    );
+
+    applyTileHeight();
+  }
+});
+
+
+*/
 });
 
 
@@ -304,9 +461,10 @@ const loadDashboards = async (): any => {
         <!-- loading state to go here -->
 
         <iframe
+          id="looker-dashboard"
           :title="insightTitle || 'Property insight'"
           :src="iframeSrc"
-          src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed"
+          src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed&embed_domain=http://localhost"
           frameborder="0"
           allowfullscreen
         ></iframe>
