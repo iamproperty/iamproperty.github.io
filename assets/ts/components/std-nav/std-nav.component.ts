@@ -1,5 +1,4 @@
-import { populateNav, loadNavData, loadUserData, setEnabledLinks } from '../../modules/nav';
-
+import { populateNav, loadNavData, loadUserData, setEnabledLinks, hideLinks } from '../../modules/nav';
 
 class iamSTDNav extends HTMLElement {
   constructor() {
@@ -59,6 +58,7 @@ class iamSTDNav extends HTMLElement {
 
     // Update the logo
     nav.querySelector('.brand')?.className = 'brand brand--one';
+
     nav.querySelector('.brand svg')?.outerHTML = /* HTML */ `<style>
         iam-nav .brand--one {
           --svg-width: 1.576923076923077em;
@@ -156,6 +156,7 @@ class iamSTDNav extends HTMLElement {
       if (!data.attributes) return false;
 
       setEnabledLinks(nav, data);
+      hideLinks(nav, data);
 
       Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
         if (data.attributes[element.getAttribute('data-variable')])

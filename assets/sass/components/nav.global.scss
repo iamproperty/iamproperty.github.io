@@ -106,6 +106,8 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky {
 
     &[data-product][data-feature]:not([data-is-enabled='true']) {
       padding-left: 2rem !important;
+      clear: both;
+      
       &:before {
         content: '\f023';
         font-family: var(--fa-family, var(--fa-style-family, 'Font Awesome 7 Pro'));
@@ -706,6 +708,8 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky {
         display: block;
         padding-top: 0.5rem;
         margin-top: 0.5rem;
+        float: left;
+        width: 100%;
       }
     }
   }
@@ -862,7 +866,17 @@ iam-nav .switch-account[slot='account'] {
 
 
 /* #region tab order fix */
+:is(iam-nav, .iam-nav) {
+  display: block;
+  reading-flow: source-order;
+}
+
 :is(iam-nav, .iam-nav) * {
+
+  reading-order: 2;
+}
+
+:is(iam-nav, .iam-nav)::part(btn-menu-account) {
 
   reading-order: 2;
 }

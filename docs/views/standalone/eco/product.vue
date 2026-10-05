@@ -21,15 +21,15 @@
       <span class="mt-4 title h3" slot="account">John Jones</span>
       <BranchSelector data-indicator="3" slot="account">
         <label>
-          <input type="checkbox" name="branch" value="gosforth" />
+          <input type="radio" name="branch" value="gosforth" />
           Gosforth Agent & Co
         </label>
         <label>
-          <input type="checkbox" name="branch" value="heaton" />
+          <input type="radio" name="branch" value="heaton" />
           Heaton Agent & Co
         </label>
         <label>
-          <input type="checkbox" name="branch" value="newcastle" />
+          <input type="radio" name="branch" value="newcastle" />
           Newcastle Agent & Co
         </label>
       </BranchSelector>
@@ -44,7 +44,7 @@
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
-      <STDNav slot="secondary" data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="iamsold"></STDNav>
+      <STDNav slot="secondary" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="iamsold"></STDNav>
     </Nav>
   </nav>
 

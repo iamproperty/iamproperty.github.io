@@ -71,7 +71,7 @@ export const populateLinks = (data): void => {
   let html = ``;
 
   data.forEach((link) => {
-    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
+    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}" ${ link.visibility?.hideWhenAny ? `data-hide-when-any='{"values":${JSON.stringify(link.visibility.hideWhenAny)}}'` : ''}>${link.title}</a>`;
   });
 
   return html;
@@ -155,6 +155,20 @@ export const setEnabledLinks = (component, data): void => {
         element.removeAttribute('target');
         element.removeAttribute('title');
       }
+    }
+  });
+};
+
+export const hideLinks = (component, data): void => {
+  const elements = component.querySelectorAll('[data-hide-when-any]');
+
+  elements.forEach((element) => {
+
+    const hideConditions = JSON.parse(element.getAttribute('data-hide-when-any')).values;
+    const shouldHide = hideConditions.some((condition) => !data.attributes.features[condition.product]?.includes(condition.feature));
+
+    if (shouldHide) {
+      element.style.display = 'none';
     }
   });
 };
