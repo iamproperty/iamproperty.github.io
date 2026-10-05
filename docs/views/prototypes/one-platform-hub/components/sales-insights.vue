@@ -62,7 +62,6 @@
     console.log(outcodes.length);
 
     if (!outcodes || !outcodes.length) {
-      console.log('hi');
 
       competitors.value = [];
 

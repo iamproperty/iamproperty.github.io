@@ -3,6 +3,8 @@
   import Search from '@/components/Search/Search.vue';
 
   const dialogElement = ref();
+  const searchInput = ref();
+  const searchComponent = ref();
 
   onMounted(async () => {
     try {
@@ -13,6 +15,7 @@
             const option = document.createElement('option');
             option.value = item.name;
             option.dataset.url = item.html_url;
+            option.setAttribute('tabindex', '1');
             option.textContent = item.name;
             dialogElement.value.append(option);
           });
@@ -27,11 +30,24 @@
   const openLink = (event: Event): void => {
     const target = event.target as EventTarget | null;
     if (target instanceof HTMLOptionElement && target.dataset.url) {
+
       window.open(target.dataset.url, '_blank');
+
+      setTimeout(() => {
+
+        searchInput.value.value = '';
+        searchInput.value.setAttribute('placeholder', 'Search all support articles');
+        searchInput.value.removeAttribute('data-value');
+
+        dialogElement.value.querySelectorAll('.active, .js-hide').forEach(element => {
+          element.classList.remove('active', 'js-hide');
+        });
+      }, 100);
+
     }
   };
+
   const trackSearch = (event: Event): void => {
-    console.log(event);
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -45,8 +61,9 @@
 <template>
   <label>
     <span class="visually-hidden">Search existing transactions</span>
-    <Search class="search--stylised">
+    <Search ref="searchComponent" class="search--stylised">
       <input
+        ref="searchInput"
         type="text"
         name="query"
         autocomplete="off"

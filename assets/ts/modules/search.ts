@@ -48,6 +48,8 @@ const appendDatalistOption = (
   const optionElement = document.createElement('option');
   optionElement.value = String(actualValue);
   optionElement.textContent = `${groupLabel}${displayValue}`;
+  console.log('Appending option:', optionElement);
+  optionElement.setAttribute('tabindex', '1');
   datalistElement.appendChild(optionElement);
 };
 

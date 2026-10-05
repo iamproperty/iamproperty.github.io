@@ -78,7 +78,7 @@ const loadDashboards = async (): any => {
 </script>
 <template>
   <nav>
-    <Nav class="nav--btn-compact">
+    <Nav class="nav--btn-compact nav--sticky">
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
           <title>iam key</title>

@@ -351,12 +351,13 @@
     left: anchor(left);
     right: anchor(right);
     bottom: anchor(bottom);
+
   }
 
   @supports not selector(::scroll-marker-group) {
     iam-carousel {
       --button-height: 0rem;
-      --marker-height: 0rem;
+      //--marker-height: 0rem;
       --marker-mb: 0rem;
       --carousel-controls-display: block;
     }
@@ -365,7 +366,7 @@
       display: block;
     }
 
-    @container (min-width: 30em) and (max-width: 63em) {
+    @container (min-width: 30em) and (max-width: 62em) {
       iam-carousel::part(carousel__progress-xs) {
         display: none;
       }
@@ -375,6 +376,9 @@
     }
 
     @container (min-width: 62em) {
+      iam-carousel::part(carousel__progress-xs) {
+        display: none;
+      }
       iam-carousel::part(carousel__progress-sm) {
         display: none;
       }
