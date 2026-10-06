@@ -25,7 +25,10 @@
           "action": "export-table-data"
         }
       ],
-      "criteria": "match-criteria"
+      "class": "inside-hub",
+      "title-column": "Property",
+      "match-criteria-column": "match-criteria",
+      "branch-column": "Branch"
     },
     {
       "slug": "predicted-movers",

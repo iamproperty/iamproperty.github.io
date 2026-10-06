@@ -277,6 +277,19 @@ class iamAppInsights extends HTMLElement {
     mapWrapper.innerHTML = this.createMapContent();
   };
 
+  createActionTitles = (component, actionTitleColumn): void => {
+    if(!actionTitleColumn) return;
+
+    console.log(actionTitleColumn);
+
+    const shadowTable = this.shadowRoot?.querySelector('table');
+
+    shadowTable?.querySelectorAll(`tbody tr td[data-label="${actionTitleColumn}"]`).forEach(cell => {
+      cell.setAttribute('data-action-title', 'true');
+    });
+
+  };
+
   createMultibranchFlag = (component, branchColumn): void => {
     if(!branchColumn) return;
 
@@ -296,8 +309,9 @@ class iamAppInsights extends HTMLElement {
         this.classList.add(event.detail.class);
 
       this.createActionButtons(this, event.detail.actions, event.detail.criteria);
-      this.createMatchCriteriaFilter(this, event.detail['match-criteria-column'],event.detail['match-criteria-indicator-column']);
-      this.createPopupTitles(this, event.detail['popup-title-column']);
+      this.createMatchCriteriaFilter(this, event.detail['match-criteria-column'],event.detail['title-column']);
+      this.createPopupTitles(this, event.detail['title-column']);
+      this.createActionTitles(this, event.detail['title-column']);
       this.createMultibranchFlag(this, event.detail['branch-column']);
     });
 

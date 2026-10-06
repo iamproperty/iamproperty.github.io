@@ -65,69 +65,70 @@ const addLast = () => {
 <template>
   <p class="lead text-heading text-center">Task details for {{ task['Property Short Address'] }}</p>
 
-  <label>Task title *
-    <input type="text" v-model="task.title" required />
-  </label>
-
-
-  <label>Priority status
-    <select v-model="task.priority" required>
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select>
-  </label>
-
-  <label v-if="assignees.length > 0">
-    Task assignee(s)
-    <select
-      v-model="task.assignee"
-      required
-    >
-      <option v-for="assignee in assignees" :key="assignee" :value="assignee">{{ assignee }}</option>
-    </select>
-  </label>
-
-  <div class="dates">
-    <label>
-      Start date *
-      <input type="date" v-model="task.startDate" required />
+  <div class="text-start">
+    <label>Task title *
+      <input type="text" v-model="task.title" required />
     </label>
-    <label>
-      Due date *
-      <input type="date" v-model="task.dueDate" required />
+
+
+    <label>Priority status
+      <select v-model="task.priority" required>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
     </label>
-  </div>
 
+    <label v-if="assignees.length > 0">
+      Task assignee(s)
+      <select
+        v-model="task.assignee"
+        required
+      >
+        <option v-for="assignee in assignees" :key="assignee" :value="assignee">{{ assignee }}</option>
+      </select>
+    </label>
 
-  <label>
-    Task description
-    <textarea v-model="task.description" rows="3"></textarea>
-  </label>
+    <div class="dates">
+      <label>
+        Start date *
+        <input type="date" v-model="task.startDate" required />
+      </label>
+      <label>
+        Due date *
+        <input type="date" v-model="task.dueDate" required />
+      </label>
+    </div>
 
-
-  <div class="add-checklist">
 
     <label>
-      Task checklist
-      <input name="checklist-item" v-model="checklistItem" @keydown.enter.prevent="addChecklistItem" class="input--sm" />
+      Task description
+      <textarea v-model="task.description" rows="3"></textarea>
     </label>
-    <button @click.prevent="addChecklistItem" class="btn btn-action">Add item</button>
 
+
+    <div class="add-checklist">
+
+      <label>
+        Task checklist
+        <input name="checklist-item" v-model="checklistItem" @keydown.enter.prevent="addChecklistItem" class="input--sm" />
+      </label>
+      <button @click.prevent="addChecklistItem" class="btn btn-action">Add item</button>
+
+    </div>
+
+    <fieldset v-for="(item, index) in task.checklist" :key="index" class="checklist-item">
+      <label><input type="checkbox" v-model="task.checklist[index].completed" /></label>
+      <span>{{ item.text }}</span>
+      <button @click.prevent="task.checklist.splice(index, 1)" class="btn btn-secondary colour-danger btn-sm btn-compact fa-trash">Remove</button>
+    </fieldset>
+
+    <div class="btn__group mb-0 pt-2">
+      <button @click="$emit('close')" class="btn btn-secondary">Cancel</button>
+      <button v-if="index < total - 1" @click="add" class="btn btn-primary">Confirm and add next</button>
+      <button v-else @click="addLast" class="btn btn-primary">Confirm and finish</button>
+    </div>
   </div>
-
-  <fieldset v-for="(item, index) in task.checklist" :key="index" class="checklist-item">
-    <label><input type="checkbox" v-model="task.checklist[index].completed" /></label>
-    <span>{{ item.text }}</span>
-    <button @click.prevent="task.checklist.splice(index, 1)" class="btn btn-secondary colour-danger btn-sm btn-compact fa-trash">Remove</button>
-  </fieldset>
-
-  <div class="btn__group mb-0 pt-2">
-    <button @click="$emit('close')" class="btn btn-secondary">Cancel</button>
-    <button v-if="index < total - 1" @click="add" class="btn btn-primary">Confirm and add next</button>
-    <button v-else @click="addLast" class="btn btn-primary">Confirm and finish</button>
-  </div>
-
   <div class="text-center mb-0 mt-2" v-if="index < total - 1">
     <button @click="$emit('next')" class="btn btn-tertiary">Skip this item</button>
   </div>

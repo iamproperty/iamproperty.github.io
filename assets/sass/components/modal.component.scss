@@ -129,6 +129,7 @@
   /*  Size variants */
   /*  small */
   @media screen and (min-width: 36em) {
+    :host(.modal--sm):not(:has(dialog[open])),
     :host(.modal--sm) dialog[open] {
       min-width: 20.9375rem;
       width: 20.9375rem;
@@ -137,6 +138,7 @@
   }
 
   @media screen and (min-width: 62em) {
+    :host(.modal--sm):not(:has(dialog[open])),
     :host(.modal--sm) dialog[open] {
       min-width: 28.375rem;
       width: 28.375rem;
@@ -146,6 +148,7 @@
 
   /*  large */
   @media screen and (min-width: 36em) {
+    :host(.modal--lg):not(:has(dialog[open])),
     :host(.modal--lg) dialog[open] {
       min-width: 42.875rem;
       width: 42.875rem;
@@ -154,6 +157,7 @@
   }
 
   @media screen and (min-width: 62em) {
+    :host(.modal--lg):not(:has(dialog[open])),
     :host(.modal--lg) dialog[open] {
       min-width: 46rem;
       width: 46rem;
@@ -194,7 +198,7 @@
   }
 
   /* #region transactional */
-  :host(:is([data-type='transactional'], [data-type='acknowledgement'])) dialog[open] {
+  :host(:is([data-type='transactional'], [data-type='acknowledgement'])) {
     text-align: center;
 
     .scroll > .fa-circle {
@@ -227,7 +231,8 @@
       }
     }
 
-    > button:first-child {
+    > button:first-child,
+    > dialog > button:first-child {
       display: none;
     }
 

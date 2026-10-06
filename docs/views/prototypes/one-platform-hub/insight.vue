@@ -40,7 +40,7 @@ const dashboards = ref([]);
 
 const insight = ref(route.params.insight);
 
-const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed');
+const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/199?Agent+Name=&Branch+Name=&Property=&theme=hub_embed');
 
 // #endregion
 
@@ -481,28 +481,28 @@ const loadDashboards = async (): any => {
     </Notification>
 
     <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" >
-      <Modal data-type="transactional" class="model--md">
+      <Modal data-type="transactional" data-icon="" class="modal--lg">
 
         <Notification v-if="inlineAddedTask.value">
           {{ inlineAddedTask.value.columns['Property Short Address'] }}
           <a :href="inlineAddedTask.value.cta" target="_blank" rel="noopener noreferrer">View task</a>
         </Notification>
 
-          <h2 id="add-task-title" class="h3 text-center px-0 mx-auto">Create CRM task <span v-if="tasks.length > 1" class="h4 d-inline">({{ currentTaskIndex + 1 }} of {{ tasks.length }})</span></h2>
+        <h2 id="add-task-title" class="h3 text-center px-0 mx-auto">Create CRM task <span v-if="tasks.length > 1" class="h4 d-inline">({{ currentTaskIndex + 1 }} of {{ tasks.length }})</span></h2>
 
-          <template v-for="(task, index) in tasks" :key="index">
-            <Task
-              v-if="index == currentTaskIndex"
-              :index="index"
-              :total="tasks.length"
-              :task="task"
-              @previous="currentTaskIndex--"
-              @close="() => {addTaskDialog.close(); postInsightCompleted('create-task');}"
-              @next="currentTaskIndex++"
-              @added="(returnedTask) => {inlineAddedTask.value = returnedTask; console.log(inlineAddedTask.value) }"
-              @added-last="(returnedTask) => {addedTask.value = returnedTask; postInsightCompleted('create-task'); console.log(addedTask.value) }"
-            />
-          </template>
+        <template v-for="(task, index) in tasks" :key="index">
+          <Task
+            v-if="index == currentTaskIndex"
+            :index="index"
+            :total="tasks.length"
+            :task="task"
+            @previous="currentTaskIndex--"
+            @close="() => {addTaskDialog.close(); postInsightCompleted('create-task');}"
+            @next="currentTaskIndex++"
+            @added="(returnedTask) => {inlineAddedTask.value = returnedTask; console.log(inlineAddedTask.value) }"
+            @added-last="(returnedTask) => {addedTask.value = returnedTask; postInsightCompleted('create-task'); console.log(addedTask.value) }"
+          />
+        </template>
 
       </Modal>
     </dialog>
@@ -521,6 +521,8 @@ const loadDashboards = async (): any => {
 
 .admin-panel {
   height: var(--componentHeight, calc(100vh - 4rem));
+  height: 2200px!important; // This height is needed due to the embedded Looker dashboard content being a fixed height
+
   position: relative;
   overflow: hidden;
   transition: height 0.1s;

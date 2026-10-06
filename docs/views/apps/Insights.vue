@@ -38,7 +38,7 @@ const setupComponent = (event) => {
           "action": "export-table-data"
         }
       ],
-      "popup-title-column": "Property",
+      "title-column": "Property",
       "match-criteria-column": "match-criteria", // This is show the menu button and the match criteria key. The value is the key that is used to match the table data to the action.
       "match-criteria-indicator-column": "Property",
       "branch-column": "Branch"

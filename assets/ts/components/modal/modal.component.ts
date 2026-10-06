@@ -51,6 +51,7 @@ class iamModal extends HTMLElement {
       ? this.querySelector('button[slot="agreed-button"]')
       : this.shadowRoot?.querySelector('[data-agreed]');
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
+    const modalIcon = this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : (modalType == 'transactional' || modalType == 'acknowledgement' ? 'info' : '');
 
     if (hasDialogParent) this.classList.add('has-parent-dialog');
 
@@ -174,11 +175,13 @@ class iamModal extends HTMLElement {
       }
     });
 
-    if (modalType == 'transactional' || modalType == 'acknowledgement') {
+
+
+    if (modalIcon) {
       this.shadowRoot?.querySelector('.scroll')?.insertAdjacentHTML(
         'afterbegin',
         `<i class="fa-light fa-circle" aria-hidden="true">
-          <i class="fa-regular fa-${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'info'}" aria-hidden="true"></i>
+          <i class="fa-regular fa-${modalIcon}" aria-hidden="true"></i>
         </i>`
       );
     }
