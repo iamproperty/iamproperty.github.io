@@ -23,7 +23,6 @@ const setupComponent = (event) => {
 
   const dispatchedEvent = new CustomEvent('top-window-details', {
     detail: {
-      "class": "inside-hub",
       "actions": [
         {
           "label": "Create Task",
@@ -38,10 +37,13 @@ const setupComponent = (event) => {
           "action": "export-table-data"
         }
       ],
-      "title-column": "Property",
-      "match-criteria-column": "match-criteria", // This is show the menu button and the match criteria key. The value is the key that is used to match the table data to the action.
-      "match-criteria-indicator-column": "Property",
-      "branch-column": "Branch"
+      "properties": {
+        "class": "inside-hub",
+        "title-column": "Property",
+        "match-criteria-column": "match-criteria", // This is show the menu button and the match criteria key. The value is the key that is used to match the table data to the action.
+        "match-criteria-indicator-column": "Property",
+        "branch-column": "Branch"
+      }
     }
   });
   event.target.dispatchEvent(dispatchedEvent);

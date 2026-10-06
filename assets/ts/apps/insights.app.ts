@@ -217,7 +217,7 @@ class iamAppInsights extends HTMLElement {
     }, 1000);
   };
 
-  createActionButtons = (component, actions, criteria): void => {
+  createActionButtons = (component, actions): void => {
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
 
     actions.forEach(action => {
@@ -309,11 +309,11 @@ class iamAppInsights extends HTMLElement {
       if(event.detail.class)
         this.classList.add(event.detail.class);
 
-      this.createActionButtons(this, event.detail.actions, event.detail.criteria);
-      this.createMatchCriteriaFilter(this, event.detail['match-criteria-column'],event.detail['title-column']);
-      this.createPopupTitles(this, event.detail['title-column']);
-      this.createActionTitles(this, event.detail['title-column']);
-      this.createMultibranchFlag(this, event.detail['branch-column']);
+      this.createActionButtons(this, event.detail.actions);
+      this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
+      this.createPopupTitles(this, event.detail.properties['title-column']);
+      this.createActionTitles(this, event.detail.properties['title-column']);
+      this.createMultibranchFlag(this, event.detail.properties['branch-column']);
     });
 
     // When the insight action has been completed, re-enable the button that was clicked

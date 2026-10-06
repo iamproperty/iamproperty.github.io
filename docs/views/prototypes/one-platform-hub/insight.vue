@@ -75,13 +75,45 @@ const postInsightCompleted = (action: string): void => {
     );
   }
 };
+
+const getInsightActions = (insightSlug: string): Record<string, unknown>[] => {
+
+  console.log(insightSlug);
+  return [
+    {
+      "label": "Create Task",
+      "action": "create-task"
+    },
+    {
+      "label": "Create Print Campaign",
+      "action": "create-print-campaign"
+    },
+    {
+      "label": "Export table data",
+      "action": "export-table-data"
+    }
+  ];
+};
+
+const getInsightProperties = (insightSlug: string): Record<string, unknown> => {
+
+  console.log(insightSlug);
+  return {
+    "class": "inside-hub",
+    "title-column": "Property",
+    "match-criteria-column": "match-criteria",
+    "branch-column": "Branch"
+  };
+};
 // #endregion
 
 // #region actions
 const tasks = ref<Record<string, unknown>[]>([]);
 const addTaskDialog = ref<HTMLDialogElement | null>(null);
 
+const insightSlug = ref('');
 const insightActions = ref([]);
+const insightProperties = ref({});
 
 const currentTaskIndex = ref(0);
 const inlineAddedTask = ref({});
@@ -148,11 +180,13 @@ onMounted(async () => {
 
     if (message.type == "component-loaded") {
 
+      // To do change depending on the specific insight being loaded
       const insightConfig = {
-        actions: insightActions.value,
-        criteria: insightCriteriaMatch.value
+        "actions": insightActions.value.length ? insightActions.value : getInsightActions(insightSlug.value),
+        "properties": insightProperties.value && Object.keys(insightProperties.value).length ? insightProperties.value : getInsightProperties(insightSlug.value)
       };
 
+      console.log(JSON.parse(JSON.stringify(insightConfig)));
       if (event && event.source) {
         event.source.postMessage(
           {
@@ -263,8 +297,9 @@ onMounted(async () => {
   insightTitle.value = selectedDashboard?.iframeTitle ?? '';
   search.value = selectedDashboard?.suggestionLabel ?? '';
 
+  insightSlug.value = selectedDashboard?.slug ?? '';
   insightActions.value = selectedDashboard?.actions ?? [];
-  insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
+  insightProperties.value = selectedDashboard?.properties ?? {};
 
 /*
 const dashboardIframe = document.querySelector("#looker-dashboard");
