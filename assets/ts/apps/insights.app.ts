@@ -285,7 +285,8 @@ class iamAppInsights extends HTMLElement {
     const shadowTable = this.shadowRoot?.querySelector('table');
 
     shadowTable?.querySelectorAll(`tbody tr td[data-label="${actionTitleColumn}"]`).forEach(cell => {
-      cell.setAttribute('data-action-title', 'true');
+      const row = cell.closest('tr');
+      row.setAttribute('data-action-title', cell.querySelector('.td__content') ? cell.querySelector('.td__content').textContent : cell.textContent);
     });
 
   };
