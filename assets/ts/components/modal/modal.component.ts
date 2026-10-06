@@ -26,6 +26,7 @@ class iamModal extends HTMLElement {
       ${closeButtonHtml}
       <div class="scroll">
         <slot></slot>
+        <slot name="btns"></slot>
         <div class="btn__group">
           <button class="btn btn-secondary" data-cancel>${this.hasAttribute('data-cancel-text') ? this.getAttribute('data-cancel-text') : 'Cancel'}</button>
           <slot name="agreed-button">
@@ -184,6 +185,10 @@ class iamModal extends HTMLElement {
           <i class="fa-regular fa-${modalIcon}" aria-hidden="true"></i>
         </i>`
       );
+    }
+
+    if(this.querySelector('[slot="btns"]')) {
+      this.shadowRoot?.querySelector('.btn__group')?.remove();
     }
   }
 }

@@ -123,13 +123,14 @@ const addLast = () => {
       <button @click.prevent="task.checklist.splice(index, 1)" class="btn btn-secondary colour-danger btn-sm btn-compact fa-trash">Remove</button>
     </fieldset>
 
-    <div class="btn__group mb-0 pt-2">
-      <button @click="$emit('close')" class="btn btn-secondary">Cancel</button>
-      <button v-if="index < total - 1" @click="add" class="btn btn-primary">Confirm and add next</button>
-      <button v-else @click="addLast" class="btn btn-primary">Confirm and finish</button>
-    </div>
   </div>
-  <div class="text-center mb-0 mt-2" v-if="index < total - 1">
+
+  <div class="btn__group mb-0 pt-2" slot="btns">
+    <button @click="$emit('close')" class="btn btn-secondary">Cancel</button>
+    <button v-if="index < total - 1" @click="add" class="btn btn-primary">Confirm and add next</button>
+    <button v-else @click="addLast" class="btn btn-primary">Confirm and finish</button>
+  </div>
+  <div class="text-center mb-0 mt-2" v-if="index < total - 1" slot="btns">
     <button @click="$emit('next')" class="btn btn-tertiary">Skip this item</button>
   </div>
 

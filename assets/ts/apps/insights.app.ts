@@ -306,8 +306,8 @@ class iamAppInsights extends HTMLElement {
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
 
-      if(event.detail.class)
-        this.classList.add(event.detail.class);
+      if(event.detail.properties.class)
+        this.classList.add(event.detail.properties.class);
 
       this.createActionButtons(this, event.detail.actions);
       this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
