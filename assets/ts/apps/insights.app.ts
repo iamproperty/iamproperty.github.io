@@ -305,7 +305,7 @@ class iamAppInsights extends HTMLElement {
     component.setAttribute('data-branch-column', branchColumn);
   };
 
-  createCTAs = (component, ctaIdColumn, ctaUrlStructure): void => {
+  createCTAs = (component, ctaIdColumn, ctaUrlStructure, ctaText): void => {
     if(!ctaIdColumn || !ctaUrlStructure) return;
 
     const shadowTable = this.shadowRoot?.querySelector('table');
@@ -319,7 +319,7 @@ class iamAppInsights extends HTMLElement {
         //const ctaId = ctaCell?.querySelector('.td__content') ? ctaCell.querySelector('.td__content').textContent : ctaCell?.textContent;
         const ctaId = ':id'; //temporary placeholder for CTA ID
 
-        row?.innerHTML = `<td class="td__fixed"><a href="${ctaUrlStructure.replace('{ctaId}', ctaId)}" class="cta-link">CTA</a></td>`;
+        row?.innerHTML = `<td class="td__fixed"><a href="${ctaUrlStructure.replace('{ctaId}', ctaId)}" class="cta-link">${ctaText ?? 'View property'}</a></td>`;
       //}
     });
   };
@@ -342,7 +342,7 @@ class iamAppInsights extends HTMLElement {
       this.createPopupTitles(this, event.detail.properties['title-column']);
       this.createActionTitles(this, event.detail.properties['title-column']);
       this.createMultibranchFlag(this, event.detail.properties['branch-column']);
-      this.createCTAs(this, event.detail.properties['cta-id-column'], event.detail.properties['cta-url-structure']);
+      this.createCTAs(this, event.detail.properties['cta-id-column'], event.detail.properties['cta-url-structure'], event.detail.properties['cta-text']);
     });
 
     // When the insight action has been completed, re-enable the button that was clicked
