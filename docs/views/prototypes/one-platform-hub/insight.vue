@@ -53,8 +53,10 @@ const search = ref('');
 
 const componentHeight = ref('100vh');
 
+const insightSlug = ref('');
+const insightActions = ref([]);
+const insightProperties = ref({});
 const insightTitle = ref('');
-const insightCriteriaMatch = ref('');
 
 let insightIframeSource: MessageEventSource | null = null;
 const postInsightCompleted = (action: string): void => {
@@ -110,10 +112,6 @@ const getInsightProperties = (insightSlug: string): Record<string, unknown> => {
 // #region actions
 const tasks = ref<Record<string, unknown>[]>([]);
 const addTaskDialog = ref<HTMLDialogElement | null>(null);
-
-const insightSlug = ref('');
-const insightActions = ref([]);
-const insightProperties = ref({});
 
 const currentTaskIndex = ref(0);
 const inlineAddedTask = ref({});
@@ -186,7 +184,6 @@ onMounted(async () => {
         "properties": insightProperties.value && Object.keys(insightProperties.value).length ? insightProperties.value : getInsightProperties(insightSlug.value)
       };
 
-      console.log(JSON.parse(JSON.stringify(insightConfig)));
       if (event && event.source) {
         event.source.postMessage(
           {
