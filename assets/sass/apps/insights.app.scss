@@ -153,7 +153,7 @@ table .criteria-match-indicator[data-value="partial"]::before {
   &:before {
     position: absolute;
     inset: 0;
-    content: "";
+    content: ""!important;
     display: inline-block;
     height: 1em;
     width: 1em;
