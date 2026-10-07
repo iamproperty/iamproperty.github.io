@@ -187,7 +187,7 @@ class iamModal extends HTMLElement {
       );
     }
 
-    if(this.querySelector('[slot="btns"]')) {
+    if(this.hasAttribute('data-hide-buttons')) {
       this.shadowRoot?.querySelector('.btn__group')?.remove();
     }
   }

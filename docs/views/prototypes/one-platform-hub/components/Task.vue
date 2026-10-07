@@ -63,7 +63,7 @@ const addLast = () => {
 </script>
 
 <template>
-  <p class="lead text-heading text-center">Task details for {{ task['Property Short Address'] }}</p>
+  <p class="lead text-heading text-center">Task details for {{ task.actionTitle }}</p>
 
   <div class="text-start">
     <label>Task title *
@@ -125,12 +125,12 @@ const addLast = () => {
 
   </div>
 
-  <div class="btn__group mb-0 pt-2" slot="btns">
+  <div class="btn__group mb-0 pt-2">
     <button @click="$emit('close')" class="btn btn-secondary">Cancel</button>
     <button v-if="index < total - 1" @click="add" class="btn btn-primary">Confirm and add next</button>
     <button v-else @click="addLast" class="btn btn-primary">Confirm and finish</button>
   </div>
-  <div class="text-center mb-0 mt-2" v-if="index < total - 1" slot="btns">
+  <div class="text-center mb-0 mt-2" v-if="index < total - 1">
     <button @click="$emit('next')" class="btn btn-tertiary">Skip this item</button>
   </div>
 

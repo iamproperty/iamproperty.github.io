@@ -101,7 +101,7 @@ const getInsightProperties = (insightSlug: string): Record<string, unknown> => {
   return {
     "class": "inside-hub",
     "title-column": "Property",
-    "match-criteria-column": "match-criteria",
+    "match-criteria-column": "criteria-match",
     "branch-column": "Branch"
   };
 };
@@ -125,11 +125,11 @@ const exportTableData = (data: InsightTableRow[]): void => {
 
   const csvData = [];
 
-  csvData.push(Object.keys(data[0].columns).join(','));
+  csvData.push(Object.keys(data[0].columns).filter(key => key !== 'Match criteria').join(','));
 
   data.forEach((row) => {
 
-    csvData.push(Object.values(row.columns).join(','));
+    csvData.push(Object.keys(row.columns).filter(key => key !== 'Match criteria').map(key => row.columns[key]).join(','));
   });
 
   // Combine each row data with new line character
@@ -223,7 +223,10 @@ onMounted(async () => {
         else if(message.detail.action === 'create-print-campaign') {
 
           // TODO: Create print campaign in CRM via API and return the result to the iframe
-          postInsightCompleted(message.detail.action);
+          // Question: What is the action, open up a new page? in a new tab?
+          setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
+            postInsightCompleted(message.detail.action);
+          }, 1000);
         }
         else if(message.detail.action === 'create-task') {
 
@@ -509,17 +512,16 @@ const loadDashboards = async (): any => {
       <div class="iframe-backdrop"></div>
     </div>
 
-
-    <Notification v-if="addedTask.value" data-type="toast" data-dismiss>
-      {{ addedTask.value.columns['Property Short Address'] }}
+    <Notification data-status="success" v-if="addedTask.value" data-type="toast" data-dismiss >
+      Task has been created for {{ addedTask.value.actionTitle }}
       <a :href="addedTask.value.cta" target="_blank" rel="noopener noreferrer">View task</a>
     </Notification>
 
     <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" >
-      <Modal data-type="transactional" data-icon="" class="modal--lg">
+      <Modal data-type="transactional" data-icon="" class="modal--lg" data-hide-buttons>
 
-        <Notification v-if="inlineAddedTask.value">
-          {{ inlineAddedTask.value.columns['Property Short Address'] }}
+        <Notification data-status="success" v-if="inlineAddedTask.value">
+          Task has been created for {{ inlineAddedTask.value.actionTitle }}
           <a :href="inlineAddedTask.value.cta" target="_blank" rel="noopener noreferrer">View task</a>
         </Notification>
 
