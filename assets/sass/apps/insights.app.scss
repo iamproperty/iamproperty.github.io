@@ -163,6 +163,21 @@ table .criteria-match-indicator[data-value="partial"]::before {
   }
 }
 
+iam-notification::part(dismiss-btn) {
+  position: relative;
+  display: inline-block;
+
+  &:before {
+    position: absolute;
+    inset: 0;
+    content: ""!important;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
 :is(.fa-arrow-down-arrow-up){
 
   &:after {
