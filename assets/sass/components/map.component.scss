@@ -97,6 +97,8 @@
 .popup__content {
 
   padding: 1rem;
+  max-height: 14rem; /* 224px */
+  overflow-y: auto;
 }
 
 .popup__content .h4 {
@@ -137,6 +139,11 @@
   .popup__field-value {
     padding-right: 1rem;
     min-width: 5rem;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   // Make the table layout for 5 or more fields, so that the last fields are on the right side of the popup
