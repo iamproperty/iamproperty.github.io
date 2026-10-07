@@ -50,7 +50,6 @@ const search = ref('');
 // #endregion
 
 // #region insight panel
-
 const componentHeight = ref('100vh');
 
 const insightSlug = ref('');
@@ -116,6 +115,8 @@ const addTaskDialog = ref<HTMLDialogElement | null>(null);
 const currentTaskIndex = ref(0);
 const inlineAddedTask = ref({});
 const addedTask = ref({});
+const actionStatus = ref('danger');
+const printCampaignCreated = ref(false);
 
 const exportTableData = (data: InsightTableRow[]): void => {
 
@@ -219,11 +220,18 @@ onMounted(async () => {
         }
         else if(message.detail.action === 'create-print-campaign') {
 
+          printCampaignCreated.value = true;
+          //actionStatus.value = 'success';
           // TODO: Create print campaign in CRM via API and return the result to the iframe
           // Question: What is the action, open up a new page? in a new tab?
           setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
             postInsightCompleted(message.detail.action);
           }, 1000);
+
+          setTimeout(() => {
+            printCampaignCreated.value = false;
+            actionStatus.value = 'danger';
+          }, 5000); // reset the notification after 5 seconds
         }
         else if(message.detail.action === 'create-task') {
 
@@ -231,7 +239,13 @@ onMounted(async () => {
           tasks.value = [...message.detail.properties];
           inlineAddedTask.value = {};
           addedTask.value = {};
+          //actionStatus.value = 'success';
           addTaskDialog.value?.showModal();
+
+          setTimeout(() => {
+            addedTask.value = {};
+            actionStatus.value = 'danger';
+          }, 5000); // reset the notification after 5 seconds
         }
 
       }
@@ -509,17 +523,21 @@ const loadDashboards = async (): any => {
       <div class="iframe-backdrop"></div>
     </div>
 
-    <Notification data-status="success" v-if="addedTask.value" data-type="toast" data-dismiss >
-      Task has been created for {{ addedTask.value.actionTitle }}
-      <a :href="addedTask.value.cta" target="_blank" rel="noopener noreferrer">View task</a>
+    <Notification :data-status="actionStatus" v-if="printCampaignCreated" data-type="toast">
+      There was been an error with creating a new print campaign.
+    </Notification>
+
+    <Notification :data-status="actionStatus" v-if="addedTask.value" data-type="toast">
+      {{(actionStatus == 'success' ? 'Task has been created for' : 'There has been an error with the creating the task for')}} {{ addedTask.value.actionTitle }}
+      <a :href="addedTask.value.cta" target="_blank" rel="noopener noreferrer" v-if="actionStatus == 'success'">View task</a>
     </Notification>
 
     <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" >
       <Modal data-type="transactional" data-icon="" class="modal--lg" data-hide-buttons>
 
-        <Notification data-status="success" v-if="inlineAddedTask.value">
-          Task has been created for {{ inlineAddedTask.value.actionTitle }}
-          <a :href="inlineAddedTask.value.cta" target="_blank" rel="noopener noreferrer">View task</a>
+        <Notification :data-status="actionStatus" v-if="inlineAddedTask.value">
+          {{(actionStatus == 'success' ? 'Task has been created for' : 'There has been an error with the creating the task for')}} {{ inlineAddedTask.value.actionTitle }}
+          <a :href="inlineAddedTask.value.cta" target="_blank" rel="noopener noreferrer" v-if="actionStatus == 'success'">View task</a>
         </Notification>
 
         <h2 id="add-task-title" class="h3 text-center px-0 mx-auto">Create CRM task <span v-if="tasks.length > 1" class="h4 d-inline">({{ currentTaskIndex + 1 }} of {{ tasks.length }})</span></h2>
