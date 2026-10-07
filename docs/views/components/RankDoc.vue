@@ -162,13 +162,19 @@
 
     <ol class="mb-5">
       <li>
-        <strong>Ranking position or icon:</strong> A numerical indication of rank, or, if ranked first, an icon showing
+        <strong>Ranking position (optional):</strong> A numerical indication of rank, or, if ranked first, an icon showing
+        a gold medal.
+      </li>
+      <li>
+        <strong>Icon (optional):</strong> A numerical indication of rank, or, if ranked first, an icon showing
         a gold medal.
       </li>
       <li><strong>Item title:</strong> The title of the ranked item.</li>
+      <li><strong>Item subtitle (optional):</strong> The subtitle of the ranked item.</li>
+
       <li><strong>Value (optional):</strong> The value of the ranked item.</li>
       <li>
-        <strong>Progress indicator (optional):</strong> Horizontal bar showing progress towards the value of the top
+        <strong>Progress bar (optional):</strong> Horizontal bar showing progress towards the value of the top
         ranked item.
       </li>
       <li><strong>Divider:</strong> A 1px horizontal line spanning the rank item to separate items in a list.</li>
@@ -188,7 +194,13 @@
         </thead>
         <tbody>
           <tr>
-            <th>Pinnacle Homes</th>
+            <th>
+              <div class="ranking-title">
+                <i class="fa fa-regular fa-user"></i>
+                Pinnacle Homes 
+                <span class="rank-subtitle">Item subtitle</span>
+              </div>
+            </th>
             <td>11</td>
           </tr>
         </tbody>
@@ -252,13 +264,38 @@
       </table>
     </Rankings>
 
+    <h3 class="mt-3">Usage examples</h3>
     <p>
       Each type can also be used displaying any combination of position, value and progress indicator. In Figma this is
       toggled by a display property.
     </p>
 
     <div class="md-col-end-5">
-      <strong>Position and value</strong>
+      <strong>All optional elements</strong>
+      <Rankings data-max="12" class="hide-podium hide-gold visualtest">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Sales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><div class="ranking-title">
+                  <i class="fa fa-regular fa-user"></i>
+                  Item title 
+                  <span class="rank-subtitle">Item subtitle</span>
+                </div></th>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </Rankings>
+    </div>
+
+    <div class="md-col-start-7 md-col-end-11">
+      <strong>Without progress bar</strong>
       <Rankings data-max="12" class="hide-podium hide-progress hide-gold visualtest">
         <table>
           <thead>
@@ -269,16 +306,22 @@
           </thead>
           <tbody>
             <tr>
-              <th>Pinnacle Homes</th>
-              <td>11</td>
+              <th>
+                <div class="ranking-title">
+                  <i class="fa fa-regular fa-user"></i>
+                  Item title 
+                  <span class="rank-subtitle">Item subtitle</span>
+                </div>
+              </th>
+              <td>12</td>
             </tr>
           </tbody>
         </table>
       </Rankings>
     </div>
 
-    <div class="md-col-start-7 md-col-end-11">
-      <strong>Position and progress indicator</strong>
+    <div class="md-col-end-5">
+      <strong>Without value</strong>
       <Rankings data-max="12" class="hide-podium hide-value hide-gold visualtest">
         <table>
           <thead>
@@ -289,17 +332,23 @@
           </thead>
           <tbody>
             <tr>
-              <th>Pinnacle Homes</th>
-              <td>11</td>
+              <th>
+                <div class="ranking-title">
+                  <i class="fa fa-regular fa-user"></i>
+                  Item title 
+                  <span class="rank-subtitle">Item subtitle</span>
+                </div>
+              </th>
+              <td>12</td>
             </tr>
           </tbody>
         </table>
       </Rankings>
     </div>
 
-    <div class="md-col-end-5 mb-5">
-      <strong>Position only</strong>
-      <Rankings data-max="12" class="hide-podium hide-value hide-progress hide-gold visualtest">
+    <div class="md-col-start-7 md-col-end-11">
+      <strong>Without icon</strong>
+      <Rankings data-max="12" class="hide-podium hide-gold visualtest">
         <table>
           <thead>
             <tr>
@@ -309,8 +358,113 @@
           </thead>
           <tbody>
             <tr>
-              <th>Pinnacle Homes</th>
-              <td>11</td>
+              <th>
+                <div class="ranking-title">
+                  Item title 
+                  <span class="rank-subtitle">Item subtitle</span>
+                </div>
+              </th>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </Rankings>
+    </div>
+
+    <div class="md-col-end-5">
+      <strong>Without subtitle</strong>
+      <Rankings data-max="12" class="hide-podium hide-gold visualtest">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Sales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                <div class="ranking-title">
+                  <i class="fa fa-regular fa-user"></i>
+                  Item title 
+                </div>
+              </th>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </Rankings>
+    </div>
+
+      <div class="md-col-start-7 md-col-end-11">
+      <strong>Without position, progress bar, subtitle</strong>
+      <Rankings data-max="12" class="hide-podium hide-progress hide-gold visualtest">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Sales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hide-position">
+              <th>
+                <div class="ranking-title">
+                  <i class="fa fa-regular fa-user"></i>
+                  Item title 
+                </div>
+              </th>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </Rankings>
+    </div>
+
+    <div class="md-col-end-5">
+      <strong>Without icon, subtitle</strong>
+      <Rankings data-max="12" class="hide-podium hide-gold visualtest">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Sales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                <div class="ranking-title">
+                  Item title 
+                </div>
+              </th>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </Rankings>
+    </div>
+
+    <div class="md-col-start-7 md-col-end-11">
+      <strong>Without progress bar, value</strong>
+      <Rankings data-max="12" class="hide-podium hide-progress hide-value hide-gold visualtest">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Sales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                <div class="ranking-title">
+                  <i class="fa fa-regular fa-user"></i>
+                  Item title 
+                  <span class="rank-subtitle">Item subtitle</span>
+                </div>
+              </th>
+              <td>12</td>
             </tr>
           </tbody>
         </table>
@@ -341,7 +495,7 @@
             <td>8</td>
           </tr>
           <tr class="highlighted">
-            <th>Deacon & partners</th>
+            <th>Deacon &amp; partners</th>
             <td>11</td>
           </tr>
           <tr>
@@ -371,6 +525,79 @@
         </tbody>
       </table>
     </Rankings>
+
+      <h3>Highlighted list item behaviour</h3>
+      <p class="pb-3">
+        To bring greater prominence to the highlighted list item it can be used as a sticky panel within the ranking
+        component. When used as a sticky panel there are two possible positions for the highlighted item:
+      </p>
+
+      <ol class="mb-5">
+        <li>
+          When the required position is in view, the highlighted item scrolls in numerical position along with other list items.
+        </li>
+
+        <li>
+          When the required position is higher in the list than currently viewed items, the highlighted item sticks to the top of the panel, positioned over the list.
+        </li>
+      </ol>
+
+      <div class="admin-panel md-col-end-5 mb-5 visualtest">
+      <h2 class="bg-light">Ranking component</h2>
+      <Rankings data-max="12" class="leaderboard-scroll stick-highlighted hide-podium mb-5">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Sales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Pinnacle Homes</th>
+              <td>11</td>
+            </tr>
+            <tr>
+              <th>Meadowbrook Estates</th>
+              <td>9</td>
+            </tr>
+            <tr>
+              <th>KeyHaven Residential</th>
+              <td>8</td>
+            </tr>
+            <tr class="highlighted">
+              <th>Sticky highlighted item</th>
+              <td>11</td>
+            </tr>
+            <tr>
+              <th>Pinnacle Homes</th>
+              <td>11</td>
+            </tr>
+            <tr>
+              <th>Pinnacle Homes</th>
+              <td>11</td>
+            </tr>
+            <tr>
+              <th>Pinnacle Homes</th>
+              <td>11</td>
+            </tr>
+            <tr>
+              <th>Pinnacle Homes</th>
+              <td>11</td>
+            </tr>
+            <tr>
+              <th>Pinnacle Homes</th>
+              <td>11</td>
+            </tr>
+            <tr>
+              <th>Pinnacle Homes</th>
+              <td>11</td>
+            </tr>
+          </tbody>
+        </table>
+      </Rankings>
+    </div>
+
 
     <h3>Sizing</h3>
 
@@ -494,6 +721,7 @@
           </tbody>
         </table>
       </Rankings>
+
     </div>
 
     <h3>Usage</h3>
@@ -738,6 +966,10 @@
             <tr>
               <th>.leaderboard-scroll</th>
               <td>Adds a scroll bar to the leaderboard</td>
+            </tr>
+            <tr>
+              <th>.stick-highlighted</th>
+              <td>When added, if a highlighted item is about to go out of view in a scrollable ranking list, it will stick to the top of the list</td>
             </tr>
             <tr>
               <th>.hide-progress</th>
