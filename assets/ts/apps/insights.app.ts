@@ -314,15 +314,13 @@ class iamAppInsights extends HTMLElement {
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
-      row.insertAdjacentHTML('beforeend', `<td class="td__fixed"></td>`);
-
-      if(row?.querySelector(`td[data-label="${ctaIdColumn}"]`)) {
-        const ctaCell = row.querySelector(`td[data-label="${ctaIdColumn}"]`);
+      //if(row?.querySelector(`td[data-label="${ctaIdColumn}"]`)) {
+        //const ctaCell = row.querySelector(`td[data-label="${ctaIdColumn}"]`);
         //const ctaId = ctaCell?.querySelector('.td__content') ? ctaCell.querySelector('.td__content').textContent : ctaCell?.textContent;
         const ctaId = ':id'; //temporary placeholder for CTA ID
 
-        row?.innerHTML = `<a href="${ctaUrlStructure.replace('{ctaId}', ctaId)}" class="cta-link">CTA</a>`;
-      }
+        row?.innerHTML = `<td class="td__fixed"><a href="${ctaUrlStructure.replace('{ctaId}', ctaId)}" class="cta-link">CTA</a></td>`;
+      //}
     });
   };
 
