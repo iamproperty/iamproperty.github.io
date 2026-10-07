@@ -310,7 +310,7 @@ class iamAppInsights extends HTMLElement {
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
-    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th__fixed text-nowrap"></th>`);
+    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
@@ -319,7 +319,7 @@ class iamAppInsights extends HTMLElement {
         //const ctaId = ctaCell?.querySelector('.td__content') ? ctaCell.querySelector('.td__content').textContent : ctaCell?.textContent;
         const ctaId = ':id'; //temporary placeholder for CTA ID
 
-        row?.insertAdjacentHTML('beforeend', `<td class="td__fixed"><a href="${ctaUrlStructure.replace('{ctaId}', ctaId)}" class="text-nowrap">${ctaText ?? 'View property'}</a></td>`);
+        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaUrlStructure.replace('{ctaId}', ctaId)}" class="text-nowrap">${ctaText ?? 'View property'}</a></td>`);
       //}
     });
   };
