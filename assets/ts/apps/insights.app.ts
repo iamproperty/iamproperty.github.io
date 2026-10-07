@@ -1,3 +1,4 @@
+
 class iamAppInsights extends HTMLElement {
   constructor() {
     super();

@@ -114,7 +114,7 @@ const insightAction = (event) => {
             <table>
               <thead>
                 <tr>
-                  <th data-filters data-sort>Property</th>
+                  <th data-filters='[{"type":"text"}]' data-sort>Property</th>
                   <th data-filters data-sort>Date listed</th>
                   <th data-filters data-sort>Current list price</th>
                   <th data-filters data-sort>Branch</th>
