@@ -109,6 +109,11 @@
   margin-bottom: 1rem;
   display: block;
   padding-right: 2rem;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .popup__content .btn {
