@@ -34,8 +34,8 @@ class iamAppInsights extends HTMLElement {
       <span class="text-heading me-1" id="partial-match">Partial match</span>
     </p>
 
-    <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
-      <i class="fa-solid fa-circle text-info" slot="icon"></i>
+    <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info">
+      <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
       <span class="text-heading">Some bulk actions are disabled</span>
       Some actions are disabled because they require the items to be from the same branch. If you wish to apply these actions, please filter on a specific branch or select items for the same branch in the table below..
     </iam-notification>
