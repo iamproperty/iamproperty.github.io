@@ -82,6 +82,10 @@ iam-actionbar {
   display: block;
 }
 
+iam-notification {
+  box-shadow: none;
+}
+
 @layer utilities {
   .text-nowrap {
     white-space: nowrap !important;
