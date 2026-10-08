@@ -16,7 +16,7 @@ class iamAppInsights extends HTMLElement {
     ${loadCSS}
     </style>
 
-    <strong class="d-block pb-3"><span id="count"></span> <span id="count-text"></span></strong>
+    <strong class="d-block pb-3"><span id="count"></span> <!--<span id="count-text"></span>-->properties</strong>
 
     <div id="map-wrapper"></div>
 
@@ -219,12 +219,12 @@ class iamAppInsights extends HTMLElement {
     }, 1000);
   };
 
-  setCounterText = (component, text): void => {
+  /*setCounterText = (component, text): void => {
     const counterText = this.shadowRoot?.querySelector('#count-text');
     if(counterText) {
       counterText.innerHTML = text || '';
     }
-  };
+  };*/
 
   createActionButtons = (component, actions): void => {
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
@@ -346,7 +346,7 @@ class iamAppInsights extends HTMLElement {
       if(event.detail && event.detail.properties && event.detail.properties.class)
         this.classList.add(event.detail.properties.class);
 
-      this.setCounterText(this, event.detail.properties['counter-text']);
+      //this.setCounterText(this, event.detail.properties['counter-text']);
       this.createActionButtons(this, event.detail.actions);
       this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
       this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
