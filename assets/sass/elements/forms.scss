@@ -293,7 +293,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 
   /* #region radio/checkbox field */
-  @supports selector(:has(*)) {
+  
     input:is([type='radio'], [type='checkbox']) {
       position: absolute;
       top: 0;
@@ -557,7 +557,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         border-color: #e0e0e0 !important;
       }
     }
-  }
+  
   /* #endregion */
 
   /* #region Conditional reveal */

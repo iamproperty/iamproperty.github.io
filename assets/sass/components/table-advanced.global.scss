@@ -144,25 +144,28 @@ $selector: '.table--component';
   }
 
 
-  &[data-filtered]{
-    position: relative;
-    overflow: visible;
+}
+:is(#{$selector}) iam-actionbar div:has(iam-menu [data-filters][data-filtered]) {
 
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
-      margin: 0!important;
-      width: 0.75rem;
-      height: 0.75rem;
-      margin: -0.25rem!important;
-      border-radius: 50%;
-      background-color: var(--colour-info);
-    }
+  position: relative;
+  overflow: visible;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0.5rem;
+    z-index: 1;
+    margin: 0!important;
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: -0.25rem!important;
+    border-radius: 50%;
+    background-color: var(--colour-info);
   }
 }
+
+
 
 /* #endregion */
 
