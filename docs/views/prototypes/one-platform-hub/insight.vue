@@ -102,7 +102,6 @@ const getInsightProperties = (insightSlug: string): Record<string, unknown> => {
   return {
     "class": "inside-hub",
     "title-column": "Property",
-    "match-criteria-column": "criteria-match",
     "branch-column": "Branch"
   };
 };
