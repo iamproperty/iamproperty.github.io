@@ -28,7 +28,7 @@ class iamAppInsights extends HTMLElement {
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
     return /* HTML */`
-    <p class="pb-2" id="criteria-match-key">
+    <p class="pb-2 d-none" id="criteria-match-key">
       <strong class="me-1">Criteria match key: </strong>
       <span class="text-heading me-1" id="full-match">Full match</span>
       <span class="text-heading me-1" id="partial-match">Partial match</span>
@@ -272,6 +272,15 @@ class iamAppInsights extends HTMLElement {
       </iam-menu>`;
   };
 
+  showCriteriaMatchKey = (component, matchCriteriaColumn): void => {
+
+    if(!matchCriteriaColumn) return;
+    const criteriaMatchKey = this.shadowRoot?.querySelector('#criteria-match-key');
+    if(criteriaMatchKey) {
+      criteriaMatchKey.classList.remove('d-none');
+    }
+  };
+
   createPopupTitles = (component, popupTitleColumn): void => {
     if(!popupTitleColumn) return;
 
@@ -340,6 +349,7 @@ class iamAppInsights extends HTMLElement {
       this.setCounterText(this, event.detail.properties['counter-text']);
       this.createActionButtons(this, event.detail.actions);
       this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
+      this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
       this.createPopupTitles(this, event.detail.properties['title-column']);
       this.createActionTitles(this, event.detail.properties['title-column']);
       this.createMultibranchFlag(this, event.detail.properties['branch-column']);
