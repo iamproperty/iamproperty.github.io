@@ -18,6 +18,7 @@
 @use '../utilities/visually-hidden';
 @use '../utilities/colours';
 
+
 @layer legacy, reset, elements, components, templates, overrides, utilities, debug;
 
 @font-face {
@@ -89,6 +90,10 @@ iam-actionbar {
   overflow: clip;
 }
 
+iam-table-advanced {
+  --table__container-display: contents;
+}
+
 // #region: Criteria match key
 #criteria-match-key {
 
@@ -110,6 +115,7 @@ iam-actionbar {
     background: var(--colour-warning);
   }
 }
+
 
 table td:has(.criteria-match-indicator) {
   padding-left: 1.5rem;
@@ -259,6 +265,25 @@ iam-pagination::part(next):after {
 
 
 @layer elements {
+
+  iam-actionbar::part(selectall-label-checked):after {
+    content: "";
+    display: inline-block;
+    background-size: 1em 1em!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300313c' viewBox='0 0 512 512'%3E%3Cpath d='M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z'/%3E%3C/svg%3E")!important;
+  }
+
+  iam-actionbar::part(selectall-label-indeterminate):after {
+    content: "";
+    display: inline-block;
+    background-size: 1em 1em!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300313c' viewBox='0 0 512 512'%3E%3Cpath d='M0 256c0-13.3 10.7-24 24-24l464 0c13.3 0 24 10.7 24 24s-10.7 24-24 24L24 280c-13.3 0-24-10.7-24-24z'/%3E%3C/svg%3E")!important;
+  }
+
   input[type=checkbox]:indeterminate+label:not(:has(>iam-card)):after {
     content: "";
     display: inline-block;
@@ -279,7 +304,4 @@ iam-pagination::part(next):after {
   }
 }
 
-iam-table-advanced {
-  --table__container-display: contents;
-}
 // #endregion

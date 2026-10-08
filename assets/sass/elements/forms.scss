@@ -464,7 +464,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);
         line-height: 1.625rem; /* 26 */
-        background: none !important;
+        background: none;
         border: none !important;
         outline: none !important;
         top: var(--checkbox-inner-top, 0.5rem);
@@ -491,7 +491,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);
         line-height: 1.625rem; /* 26 */
-        background: none !important;
+        background: none;
         border: none !important;
         outline: none !important;
         top: var(--checkbox-inner-top, 0.5rem);
@@ -537,7 +537,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       }
 
       &:before {
-        background-color: none !important;
+        background-color: none;
         outline: none !important;
         border-color: var(--colour-primary) !important;
       }

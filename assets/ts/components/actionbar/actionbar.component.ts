@@ -18,18 +18,22 @@ function setSelectAllInput(element, value): void {
     element.querySelector('input').indeterminate = false;
     element.querySelector('input').checked = true;
     element.querySelector('label').textContent = `Select all`;
+    element.querySelector('label').setAttribute('part', 'selectall-label-checked');
   } else if (element && value == 0) {
     element.querySelector('input').indeterminate = false;
     element.querySelector('input').checked = false;
     element.querySelector('label').textContent = `Select all`;
+    element.querySelector('label').setAttribute('part', 'selectall-label');
   } else if (element && value) {
     element.querySelector('input').indeterminate = true;
     element.querySelector('input').checked = false;
     element.querySelector('label').textContent = `${value} item${value > 1 ? 's' : ''} selected`;
+    element.querySelector('label').setAttribute('part', 'selectall-label-indeterminate');
   } else if (element) {
     element.querySelector('input').checked = false;
     element.querySelector('input').indeterminate = false;
     element.querySelector('label').textContent = `Select all`;
+    element.querySelector('label').setAttribute('part', 'selectall-label');
   }
 }
 
@@ -153,7 +157,7 @@ class iamActionbar extends HTMLElement {
     if (this.hasAttribute('data-selectall')) {
       actionbarWrapper?.insertAdjacentHTML(
         'afterbegin',
-        `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall"><label for="selectall" class="m-0"><span>Select all</span></label></div>`
+        `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall" part="selectall-input"><label for="selectall" class="m-0" part="selectall-label"><span>Select all</span></label></div>`
       );
       const selectAll = this.shadowRoot?.querySelector('.selectall');
 
