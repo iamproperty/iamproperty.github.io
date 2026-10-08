@@ -1708,6 +1708,7 @@ export const createAppliedFilters = (component, table, actionbar, pagination, ap
   appliedFilters.forEach((filter) => {
 
     const filterElement = document.createElement('button');
+    filterElement.setAttribute('part', 'table-filter');
     filterElement.classList.add('tag');
     filterElement.classList.add('wider-colour-3');
     filterElement.textContent = filter;

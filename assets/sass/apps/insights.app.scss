@@ -325,6 +325,15 @@ iam-pagination::part(next):after {
 
 }
 
+iam-table-advanced::part(table-filter):after {
+  content: "";
+
+  background-size: 1em 1em!important;
+  background-repeat: no-repeat!important;
+  background-position: center!important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300313c' viewBox='0 0 384 512'%3E%3Cpath d='M7.5 105c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l151 151 151-151c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-151 151 151 151c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-151-151-151 151c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l151-151-151-151z'/%3E%3C/svg%3E")!important;
+}
+
 // #endregion
 
 // #region suffix icons fixes
@@ -339,3 +348,4 @@ iam-pagination::part(next):after {
   height: 1em;
   width: 1em;
 }
+// #endregion
