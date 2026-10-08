@@ -255,26 +255,26 @@ iam-pagination::part(next):after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='var(--colour-info)' viewBox='0 0 512 512'%3E%3Cpath d='M313.5 239c9.4 9.4 9.4 24.6 0 33.9l-200 200c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l183-183-183-183c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l200 200z'/%3E%3C/svg%3E")!important;
 }
 
-input[type=checkbox]:indeterminate+label:not(:has(>iam-card)):after {
-  content: "";
-  display: inline-block;
-  background-size: 1em 1em!important;
-  background-repeat: no-repeat!important;
-  background-position: center!important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 472c-119.1 0-216-96.9-216-216S136.9 40 256 40s216 96.9 216 216-96.9 216-216 216z'/%3E%3C/svg%3E")!important;
+@layer elements {
+  input[type=checkbox]:indeterminate+label:not(:has(>iam-card)):after {
+    content: "";
+    display: inline-block;
+    background-size: 1em 1em!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 472c-119.1 0-216-96.9-216-216S136.9 40 256 40s216 96.9 216 216-96.9 216-216 216z'/%3E%3C/svg%3E")!important;
+  }
+
+
+  input[type=checkbox]:checked+label:not(:has(>iam-card)):after {
+    content: "";
+    display: inline-block;
+    background-size: 1em 1em!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 448 512'%3E%3Cpath d='M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z'/%3E%3C/svg%3E")!important;
+  }
 }
-
-
-input[type=checkbox]:checked+label:not(:has(>iam-card)):after {
-  content: "";
-  display: inline-block;
-  background-size: 1em 1em!important;
-  background-repeat: no-repeat!important;
-  background-position: center!important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 448 512'%3E%3Cpath d='M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z'/%3E%3C/svg%3E")!important;
-  background: red!important;
-}
-
 
 iam-table-advanced {
   --table__container-display: contents;
