@@ -237,6 +237,11 @@ export const formatData = (format, data): any => {
         new Date(data).toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' })
       );
     case 'date':
+
+
+      console.log(data);
+
+
       return new Date(prepareData('date', data)).toLocaleDateString('en-gb', {
         day: 'numeric',
         month: 'numeric',
