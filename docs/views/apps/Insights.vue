@@ -115,7 +115,7 @@ const insightAction = (event) => {
               <thead>
                 <tr>
                   <th data-filters='[{"type":"text"}]' data-sort>Property</th>
-                  <th data-filters data-sort>Date listed</th>
+                  <th data-filters data-sort data-format="date">Date listed</th>
                   <th data-filters data-sort>Current list price</th>
                   <th data-filters data-sort>Branch</th>
                   <th data-filters data-sort>Weeks on market</th>
@@ -129,7 +129,7 @@ const insightAction = (event) => {
               <tbody>
                 <tr data-latitude="51.46702877541017" data-longitude="-0.12037120753760178" data-match-criteria="full">
                   <td>59 Glen Street, NE68 3LS</td>
-                  <td>22/09/26</td>
+                  <td>2026-08-05</td>
                   <td>£300,000</td>
                   <td>Heaton</td>
                   <td>13 weeks</td>

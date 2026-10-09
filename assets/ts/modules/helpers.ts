@@ -208,9 +208,21 @@ export const isValidPostcode = (searchValue: string): boolean => {
 export const prepareData = (format, data): any => {
   switch (format) {
     case 'date': {
+
+      console.log(data);
       const normalised = String(data).replaceAll('-', '/').trim();
-      const [day, month, yy] = normalised.split('/');
+      let [day, month, yy] = normalised.split('/');
+
+      // if the first value is the year (YYYY), reverse the array to get day, month, year
+      if(day.length === 4) {
+        [day, month, yy] = normalised.split('/').reverse();
+      }
+
       const year = yy?.length === 2 ? `20${yy}` : yy;
+
+
+      console.log(`${year}-${zeroPad(parseInt(month, 10), 2)}-${zeroPad(parseInt(day, 10), 2)}`);
+
       return `${year}-${zeroPad(parseInt(month, 10), 2)}-${zeroPad(parseInt(day, 10), 2)}`;
     }
     case 'price':
