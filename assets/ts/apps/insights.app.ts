@@ -183,7 +183,7 @@ class iamAppInsights extends HTMLElement {
     }
 
     // Give the table formatting info
-    table.querySelectorAll('td[data-field-type="date_date"]').forEach(td => td.setAttribute('data-format', 'date'));
+    table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
 
     return table;
   };
