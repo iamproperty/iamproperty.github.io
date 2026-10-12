@@ -71,24 +71,30 @@ class iamCarousel extends HTMLElement {
 
   progressPercent = (value, total): string => {
 
-    return ((value-1) / (total-1)) * 100 + '%';
+    const returnValue = ((value-1) / (total-1)) * 100;
+
+    if (isNaN(returnValue)) {
+      return '100%';
+    }
+
+    return returnValue + '%';
   };
 
   updateProgressCompleteClass = (carouselProgress: HTMLElement, carouselProgressSM: HTMLElement, carouselProgressMD: HTMLElement): void => {
     if(carouselProgress.getAttribute('max') <= carouselProgress.getAttribute('step')) {
-      //carouselProgress?.classList.add('carousel__progress--complete');
+      carouselProgress?.classList.add('carousel__progress--complete');
     } else {
       carouselProgress?.classList.remove('carousel__progress--complete');
     }
 
     if(carouselProgressSM.getAttribute('max') <= carouselProgressSM.getAttribute('step')) {
-      //carouselProgressSM?.classList.add('carousel__progress--complete');
+      carouselProgressSM?.classList.add('carousel__progress--complete');
     } else {
       carouselProgressSM?.classList.remove('carousel__progress--complete');
     }
 
     if(carouselProgressMD.getAttribute('max') <= carouselProgressMD.getAttribute('step')) {
-      //carouselProgressMD?.classList.add('carousel__progress--complete');
+      carouselProgressMD?.classList.add('carousel__progress--complete');
     } else {
       carouselProgressMD?.classList.remove('carousel__progress--complete');
     }
