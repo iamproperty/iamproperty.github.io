@@ -209,7 +209,6 @@ export const prepareData = (format, data): any => {
   switch (format) {
     case 'date': {
 
-      console.log(data);
       const normalised = String(data).replaceAll('-', '/').trim();
       let [day, month, yy] = normalised.split('/');
 
@@ -219,10 +218,6 @@ export const prepareData = (format, data): any => {
       }
 
       const year = yy?.length === 2 ? `20${yy}` : yy;
-
-
-      console.log(`${year}-${zeroPad(parseInt(month, 10), 2)}-${zeroPad(parseInt(day, 10), 2)}`);
-
       return `${year}-${zeroPad(parseInt(month, 10), 2)}-${zeroPad(parseInt(day, 10), 2)}`;
     }
     case 'price':
@@ -233,7 +228,6 @@ export const prepareData = (format, data): any => {
       return data;
   }
 };
-
 
 export const formatData = (format, data): any => {
   switch (format) {
@@ -249,11 +243,6 @@ export const formatData = (format, data): any => {
         new Date(data).toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' })
       );
     case 'date':
-
-
-      console.log(data);
-
-
       return new Date(prepareData('date', data)).toLocaleDateString('en-gb', {
         day: 'numeric',
         month: 'numeric',
@@ -272,4 +261,16 @@ export const formatData = (format, data): any => {
     default:
       return data;
   }
+};
+
+export const convertToNumber = (value: string): number => parseFloat(value.replace(/[^0-9.-]+/g,""));
+
+export const convertToDate = (value: string): Date => new Date(value);
+
+export const convertToUnixTimestamp = (value: string): number => {
+  const toConvert = prepareData('date', value);
+  console.log(`Converting value to Unix timestamp:`, toConvert);
+
+  console.log(`Unix timestamp for value:`, Math.floor(new Date(toConvert).getTime() / 1000));
+  return Math.floor(new Date(toConvert).getTime() / 1000);
 };

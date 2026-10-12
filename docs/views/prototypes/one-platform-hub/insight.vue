@@ -79,7 +79,6 @@ const postInsightCompleted = (action: string): void => {
 
 const getInsightActions = (insightSlug: string): Record<string, unknown>[] => {
 
-  console.log(insightSlug);
   return [
     {
       "label": "Create Task",
@@ -98,11 +97,14 @@ const getInsightActions = (insightSlug: string): Record<string, unknown>[] => {
 
 const getInsightProperties = (insightSlug: string): Record<string, unknown> => {
 
-  console.log(insightSlug);
   return {
     "class": "inside-hub",
     "title-column": "Property",
-    "branch-column": "Branch"
+    "match-criteria-column": "criteria-match",
+    "branch-column": "Branch",
+    "counter-text": "Properties most likely to switch",
+    "cta-url-structure": "https://my.eco.iamproperty.group/iamproperty-one/login?return=/DataServices/PropertyProfile/:UDPRN/:UMRRN",
+    "cta-text": "View property"
   };
 };
 // #endregion
@@ -180,9 +182,11 @@ onMounted(async () => {
 
       // To do change depending on the specific insight being loaded
       const insightConfig = {
-        "actions": insightActions.value.length ? insightActions.value : getInsightActions(insightSlug.value),
-        "properties": insightProperties.value && Object.keys(insightProperties.value).length ? insightProperties.value : getInsightProperties(insightSlug.value)
+        "actions": getInsightActions(insightSlug.value),
+        "properties": getInsightProperties(insightSlug.value)
       };
+
+      console.log(insightConfig);
 
       if (event && event.source) {
         event.source.postMessage(

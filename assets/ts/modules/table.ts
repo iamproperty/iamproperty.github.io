@@ -1,4 +1,4 @@
-import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData } from './helpers.js';
+import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData, convertToNumber, convertToDate, convertToUnixTimestamp } from './helpers.js';
 
 export const tableHTML = `<div class="table__container" part="container">
   <div class="table-filters" part="filters"></div>
@@ -1427,6 +1427,16 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
       filterOperator = filter.operator ?? 'Equals';
     }
 
+    if(filterType == 'number' && !filter.operators){
+      filterOperators = ['Equals', 'Does not equal','Less than','Greater than','Between'];
+      filterOperator = filter.operator ?? 'Equals';
+    }
+
+    if(filterType == 'price' && !filter.operators){
+      filterOperators = ['Equals', 'Does not equal','Less than','Greater than','Between'];
+      filterOperator = filter.operator ?? 'Equals';
+    }
+
     if(filterType == 'select' && !filter.operators)
       filterOperators = ['Equals'];
 
@@ -1455,14 +1465,27 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     // #region Create the filter input
     if(filterType != 'select' ){
 
-      const icon = filterType == 'date' ? 'fa-regular fa-calendar-days' : 'fa-solid fa-magnifying-glass';
+      let icon = filterType == 'date' ? 'fa-regular fa-calendar-days' : 'fa-solid fa-magnifying-glass';
+
+      if(filterType == 'number'){
+        icon = '';
+      }
+
+      let filterValue = filter.value;
+      let filterValue2 = '';
+
+      if(filter.operator && filter.operator.toLowerCase() == 'between' && filter.value){
+        filterValue = filter.value.split(',')[0] ?? '';
+        filterValue2 = filter.value.split(',')[1] ?? '';
+      }
+
       filterFieldset.insertAdjacentHTML('beforeend',
         /* HTML */`
         <label class="mb-0" data-filter-label>
           <span class="visually-hidden">Filter</span>
           <span>
-          <input type="${filterType}" name="filter-${index}" value="${filter.value ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
-          <span class="suffix ${icon}"></span>
+          <input type="${filterType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
 
@@ -1472,8 +1495,8 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         <label class="mb-0" data-filter-label>
           <span class="visually-hidden">Filter</span>
           <span>
-          <input type="${filterType}" name="filter-${index}-2" value="${filter.value ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
-          <span class="suffix ${icon}"></span>
+          <input type="${filterType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
     }
@@ -1485,6 +1508,10 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
       let filterOptionsHTML = '';
 
       filterOptions.forEach(option => {
+
+        if(filterType == 'number'){
+          option = String(convertToNumber(option));
+        }
         filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${option.trim()}</option>`;
       });
 
@@ -1591,56 +1618,81 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
     column.filters.forEach((filter) => {
 
       const filterOperator = String(filter.operator ?? 'equals').toLowerCase();
+      const filterType = String(filter.type ?? 'text').toLowerCase();
       const filterValue = filter.value;
-      const value = String(filterValue ?? '');
+      let compareValue = String(filterValue ?? '');
 
-      if(value == '' || value == null || value == 'undefined') return;
+      if(filterValue == '' || filterValue == null || filterValue == 'undefined') return;
+
+      const betweenValues = filterOperator === 'between' && filterValue
+        ? (Array.isArray(filterValue) ? filterValue : filterValue.split(','))
+        : [];
+
+      if(filterType == 'number' || filterType == 'price'){
+        compareValue = convertToNumber(filterValue);
+      }
+
+      if(filterType == 'date'){
+        compareValue = convertToUnixTimestamp(filterValue);
+      }
 
       appliedFilters.push(columnName);
-
-      const betweenValues = filterOperator === 'between'
-        ? (Array.isArray(filterValue) ? filterValue : value.split(','))
-        : [];
 
       table.classList.add('table--filtered');
       table.querySelectorAll(`tbody tr td:nth-child(${columnIndex + 1})`).forEach((cell) => {
 
-        const cellValue = cell.textContent ?? '';
+        let cellValue = cell.textContent ?? '';
 
+        if(filterType == 'number' || filterType == 'price'){
+          cellValue = convertToNumber(cellValue);
+        }
+
+        if(filterType == 'date'){
+          cellValue = convertToUnixTimestamp(cellValue);
+        }
+
+        console.log(`Comparing cell value:`, cellValue, `with filter value:`, compareValue);
         // TODO format the cell value based on the column type (e.g., date, number) if needed
         let matched = false;
 
         switch (filterOperator) {
           case 'contains':
-            matched = cellValue.includes(value);
+            matched = cellValue.includes(compareValue);
             break;
           case 'does not contain':
-            matched = !cellValue.includes(value);
+            matched = !cellValue.includes(compareValue);
             break;
           case 'equals':
-            matched = cellValue === value;
+            matched = cellValue === compareValue;
             break;
           case 'does not equal':
           case 'not':
-            matched = cellValue !== value;
+            matched = cellValue !== compareValue;
             break;
           case 'begins with':
-            matched = cellValue.startsWith(value);
+            matched = cellValue.startsWith(compareValue);
             break;
           case 'ends with':
-            matched = cellValue.endsWith(value);
+            matched = cellValue.endsWith(compareValue);
             break;
           case 'before':
           case 'less':
-            matched = cellValue < value;
+          case 'less than':
+            matched = cellValue < compareValue;
             break;
           case 'after':
           case 'greater':
-            matched = cellValue > value;
+          case 'greater than':
+            matched = cellValue > compareValue;
             break;
           case 'between': {
-            const [from, to] = betweenValues;
-            matched = from != null && to != null && cellValue >= String(from).trim() && cellValue <= String(to).trim();
+            let [from, to] = betweenValues;
+
+            if(filterOperator == "between" && filterType == 'date') {
+              from = convertToUnixTimestamp(String(from).trim());
+              to = convertToUnixTimestamp(String(to).trim());
+            }
+            matched = from != null && to != null && cellValue >= from && cellValue <= to;
             break;
           }
           case 'set':

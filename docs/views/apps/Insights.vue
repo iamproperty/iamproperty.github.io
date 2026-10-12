@@ -39,10 +39,12 @@ const setupComponent = (event) => {
       ],
       "properties": {
         "class": "inside-hub",
-        "title-column": "Property",
-        "match-criteria-column": "match-criteria", // This is show the menu button and the match criteria key. The value is the key that is used to match the table data to the action.
-        "match-criteria-indicator-column": "Property",
-        "branch-column": "Branch"
+      "title-column": "Property",
+      "match-criteria-column": "criteria-match",
+      "branch-column": "Branch",
+      "counter-text": "Properties most likely to switch",
+      "cta-url-structure": "https://my.eco.iamproperty.group/iamproperty-one/login?return=/DataServices/PropertyProfile/:UDPRN/:UMRRN",
+      "cta-text": "View property",
       }
     }
   });
@@ -113,91 +115,85 @@ const insightAction = (event) => {
           <AppInsights @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
             <table>
               <thead>
+
                 <tr>
                   <th data-filters='[{"type":"text"}]' data-sort>Property</th>
-                  <th data-filters data-sort data-format="date">Date listed</th>
-                  <th data-filters data-sort>Current list price</th>
+                  <th data-filters='[{"type":"date"}]' data-sort data-format="date">Date listed</th>
+                  <th data-filters='[{"type":"price"}]' data-sort data-format="price">Current list price</th>
                   <th data-filters data-sort>Branch</th>
-                  <th data-filters data-sort>Weeks on market</th>
+                  <th data-filters='[{"type": "number", "operator": "equals", "value": "11"}]' data-sort>Weeks on market</th>
                   <th data-filters data-sort>Latest fall through</th>
                   <th data-filters data-sort>Latest price reduction</th>
                   <th data-filters data-sort>Price reduction %</th>
                   <th data-filters data-sort>Listed agent</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr data-latitude="51.46702877541017" data-longitude="-0.12037120753760178" data-match-criteria="full">
+                <tr data-latitude="51.46702877541017" data-longitude="-0.12037120753760178" data-criteria-match="full" data-branch-id="385440" data-udprn="22900034" data-umrrn="230">
                   <td>59 Glen Street, NE68 3LS</td>
                   <td>2026-08-05</td>
-                  <td>£300,000</td>
+                  <td>250000</td>
                   <td>Heaton</td>
-                  <td>13 weeks</td>
+                  <td>11 weeks</td>
                   <td>22/09/26</td>
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
-                <tr data-latitude="51.467336224030646" data-longitude="-0.11552177363870442" data-match-criteria="full">
+                <tr data-latitude="51.467336224030646" data-longitude="-0.11552177363870442" data-criteria-match="full" data-udprn="22900034" data-umrrn="20">
                   <td>59 Glen Street, NE68 3LS</td>
                   <td>22/09/26</td>
-                  <td>£300,000</td>
+                  <td>£100,000</td>
                   <td>Gosforth</td>
-                  <td>13 weeks</td>
+                  <td>23 weeks</td>
                   <td>22/09/26</td>
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
-                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-match-criteria="partial">
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
                   <td>59 Glen Street, NE68 3LS</td>
                   <td>22/09/26</td>
-                  <td>£300,000</td>
+                  <td>£50,000</td>
                   <td>Heaton</td>
                   <td>13 weeks</td>
                   <td>22/09/26</td>
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
-                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-match-criteria="partial">
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
                   <td>59 Glen Street, NE68 3LS</td>
                   <td>22/09/26</td>
-                  <td>£300,000</td>
+                  <td>300,000</td>
                   <td>Heaton</td>
-                  <td>13 weeks</td>
+                  <td>3 weeks</td>
                   <td>22/09/26</td>
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
-                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-match-criteria="partial">
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
                   <td>59 Glen Street, NE68 3LS</td>
                   <td>22/09/26</td>
-                  <td>£300,000</td>
+                  <td>2300,000</td>
                   <td>Heaton</td>
-                  <td>13 weeks</td>
+                  <td>113 weeks</td>
                   <td>22/09/26</td>
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
-                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-match-criteria="partial">
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
                   <td>59 Glen Street, NE68 3LS</td>
                   <td>22/09/26</td>
-                  <td>£300,000</td>
+                  <td>£300000</td>
                   <td>Heaton</td>
-                  <td>13 weeks</td>
+                  <td>213 weeks</td>
                   <td>22/09/26</td>
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
 
               </tbody>

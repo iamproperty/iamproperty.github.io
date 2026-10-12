@@ -1,5 +1,3 @@
-
-
 class iamAppInsights extends HTMLElement {
   constructor() {
     super();
@@ -302,8 +300,6 @@ class iamAppInsights extends HTMLElement {
   createActionTitles = (component, actionTitleColumn): void => {
     if(!actionTitleColumn) return;
 
-    console.log(actionTitleColumn);
-
     const shadowTable = this.shadowRoot?.querySelector('table');
 
     shadowTable?.querySelectorAll(`tbody tr td[data-label="${actionTitleColumn}"]`).forEach(cell => {
@@ -319,8 +315,17 @@ class iamAppInsights extends HTMLElement {
     component.setAttribute('data-branch-column', branchColumn);
   };
 
-  createCTAs = (component, ctaIdColumn, ctaUrlStructure, ctaText): void => {
-    if(!ctaIdColumn || !ctaUrlStructure) return;
+  createCTAs = (component, ctaUrlStructure, ctaText): void => {
+    if(!ctaUrlStructure) return;
+
+    const searches = [];
+    let ctaLink = ctaUrlStructure;
+    let areSearchesMet = true;
+
+    if(ctaUrlStructure.toLowerCase().includes(':udprn'))
+      searches.push('udprn');
+    if(ctaUrlStructure.toLowerCase().includes(':umrrn'))
+      searches.push('umrrn');
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
@@ -328,13 +333,19 @@ class iamAppInsights extends HTMLElement {
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
-      //if(row?.querySelector(`td[data-label="${ctaIdColumn}"]`)) {
-        //const ctaCell = row.querySelector(`td[data-label="${ctaIdColumn}"]`);
-        //const ctaId = ctaCell?.querySelector('.td__content') ? ctaCell.querySelector('.td__content').textContent : ctaCell?.textContent;
-        const ctaId = ':id'; //temporary placeholder for CTA ID
+      searches.forEach(search => {
+        const datasetSearch = search;
+        if(row.dataset[datasetSearch] && row.dataset[datasetSearch] !== '' &&  row.dataset[datasetSearch] !== '0') {
+          ctaLink = ctaLink.toLowerCase().replace(`:${search}`, row.dataset[datasetSearch]);
+        } else {
+          areSearchesMet = false;
+        }
+      });
 
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaUrlStructure.replace('{ctaId}', ctaId)}" class="text-nowrap">${ctaText ?? 'View property'}</a></td>`);
-      //}
+      if(areSearchesMet)
+        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
+      else
+        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
     });
   };
 
@@ -357,7 +368,7 @@ class iamAppInsights extends HTMLElement {
       this.createPopupTitles(this, event.detail.properties['title-column']);
       this.createActionTitles(this, event.detail.properties['title-column']);
       this.createMultibranchFlag(this, event.detail.properties['branch-column']);
-      this.createCTAs(this, event.detail.properties['cta-id-column'], event.detail.properties['cta-url-structure'], event.detail.properties['cta-text']);
+      this.createCTAs(this, event.detail.properties['cta-url-structure'], event.detail.properties['cta-text']);
     });
 
     // When the insight action has been completed, re-enable the button that was clicked
