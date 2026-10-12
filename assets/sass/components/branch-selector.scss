@@ -75,9 +75,23 @@
     display: none !important;
   }
 
+  .wrapper {
+    position: relative;
+  }
   .dropdown {
     width: fit-content;
     margin-inline: 0 !important;
+    top: calc(anchor(top) + anchor-size(height));
+    left: anchor(left);
+    bottom: auto;
+    right: auto;
+  }
+
+  @supports (-moz-appearance:none) {
+    .dropdown {
+      top: 2.25rem !important;
+      left: calc(50% - 34.5rem) !important;
+    }
   }
 
   :host([slot='account']) {
