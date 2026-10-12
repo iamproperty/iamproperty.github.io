@@ -41,7 +41,6 @@ const dashboards = ref([]);
 const insight = ref(route.params.insight);
 
 const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/199?Agent+Name=&Branch+Name=&Property=&theme=hub_embed');
-
 // #endregion
 
 // #region question panel
@@ -56,6 +55,7 @@ const insightSlug = ref('');
 const insightActions = ref([]);
 const insightProperties = ref({});
 const insightTitle = ref('');
+const isLoading = ref(true);
 
 let insightIframeSource: MessageEventSource | null = null;
 const postInsightCompleted = (action: string): void => {
@@ -186,7 +186,10 @@ onMounted(async () => {
         "properties": getInsightProperties(insightSlug.value)
       };
 
-      console.log(insightConfig);
+      setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
+        isLoading.value = false;
+      }, 1000);
+
 
       if (event && event.source) {
         event.source.postMessage(
@@ -508,6 +511,10 @@ const loadDashboards = async (): any => {
 
       <!--<Properties></Properties>-->
 
+      <div v-if="isLoading" class="loading">
+        <span class="spinner"></span>
+        <strong class="lead">Loading...</strong>
+      </div>
       <div class="iframe__wrapper">
 
         <!-- loading state to go here -->
@@ -602,5 +609,32 @@ const loadDashboards = async (): any => {
   height: 100%;
   max-height: var(--componentHeight);
   overflow: hidden;
+}
+
+.admin-panel:has(.loading) {
+  height: 500px!important;
+}
+
+.loading {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.loading .spinner {
+  --spinner-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.loading .lead {
+  margin-inline: auto;
+}
+.admin-panel .loading + .iframe__wrapper {
+
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
