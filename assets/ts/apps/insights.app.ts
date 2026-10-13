@@ -240,7 +240,8 @@ class iamAppInsights extends HTMLElement {
 
     actions.forEach(action => {
 
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${action.label}</button>`);
+      const icon = action.action == "export-table-data" ? `<i class="fa-regular fa-file-export"></i>` : ``;
+      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${icon}${action.label}</button>`);
     });
   };
 

@@ -205,6 +205,18 @@ table .criteria-match-indicator[data-value="partial"]::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M32 64C19.1 64 7.4 71.8 2.4 83.8S.2 109.5 9.4 118.6L192 301.3 192 416c0 8.5 3.4 16.6 9.4 22.6l64 64c9.2 9.2 22.9 11.9 34.9 6.9S320 492.9 320 480l0-178.7 182.6-182.6c9.2-9.2 11.9-22.9 6.9-34.9S492.9 64 480 64L32 64z'/%3E%3C/svg%3E");
 }
 
+.btn.btn-action .fa-file-export {
+  margin-right: 0.25em !important;
+  margin-top: 0.1em;
+  margin-bottom: -0.1em;
+  margin-left: 0.1em;
+}
+
+.fa-file-export:before {
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath d='M208.5 48l-112 0c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16l0-48 48 0 0 48c0 35.3-28.7 64-64 64l-256 0c-35.3 0-64-28.7-64-64l0-384c0-35.3 28.7-64 64-64L230 0c17 0 33.3 6.7 45.3 18.7L397.8 141.3c12 12 18.7 28.3 18.7 45.3l0 69.5-48 0 0-48-88 0c-39.8 0-72-32.2-72-72l0-88zm72 256l214.1 0-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-214.1 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm68.1-144l-92.1-92.1 0 68.1c0 13.3 10.7 24 24 24l68.1 0z'/%3E%3C/svg%3E");
+}
+
 iam-notification::part(dismiss-btn) {
   position: relative;
   display: inline-block;
