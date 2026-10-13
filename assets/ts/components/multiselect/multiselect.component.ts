@@ -18,7 +18,7 @@ class iamMultiselect extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <label for="search" class="mb-0">hi<span class="inner-label label"><slot name="label"></slot><slot name="tooltip"></slot></span> <slot name="feedback"></slot>
+    <label for="search" class="mb-0"><span class="inner-label label"><slot name="label"></slot><slot name="tooltip"></slot></span> <slot name="feedback"></slot>
     <div class="outer">
       <div class="wrapper">
 
@@ -49,7 +49,7 @@ class iamMultiselect extends HTMLElement {
 
     const minLength = this.hasAttribute('data-min') ? this.getAttribute('data-min') : 3;
 
-    if(this.hasAttribute('data-pre-filled') && this.getAttribute('data-pre-filled') === 'true')
+    if(this.hasAttribute('data-pre-filled') && this.getAttribute('data-pre-filled') == true)
       wrapper.classList.add('filled');
 
     // Make sure the dropdown options are set
