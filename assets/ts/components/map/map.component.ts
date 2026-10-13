@@ -290,19 +290,22 @@ class iamMap extends HTMLElement {
           const fields = document.createElement("div");
           fields.className = "popup__fields";
           Object.entries(property.properties).filter(([key]) => key !== "title" && key !== "link" && key !== "linkText").forEach(([key, value]) => {
-            const field = document.createElement("div");
-            field.className = "popup__field";
 
-            const label = document.createElement("span");
-            label.className = "popup__field-label strong";
-            label.textContent = `${key}:`;
+            if(key != '') {
+              const field = document.createElement("div");
+              field.className = "popup__field";
 
-            const fieldValue = document.createElement("span");
-            fieldValue.className = "popup__field-value";
-            fieldValue.textContent = value ?? "";
+              const label = document.createElement("span");
+              label.className = "popup__field-label strong";
+              label.textContent = `${key}:`;
 
-            field.append(label, document.createTextNode(" "), fieldValue);
-            fields.appendChild(field);
+              const fieldValue = document.createElement("span");
+              fieldValue.className = "popup__field-value";
+              fieldValue.textContent = value ?? "";
+
+              field.append(label, document.createTextNode(" "), fieldValue);
+              fields.appendChild(field);
+            }
           });
           content.appendChild(fields);
 

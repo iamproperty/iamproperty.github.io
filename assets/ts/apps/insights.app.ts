@@ -200,6 +200,13 @@ class iamAppInsights extends HTMLElement {
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
 
+
+    /* Set the property column to fixed */
+    tableWrapper?.querySelector('table th[data-label="Property"]').classList.add('th--fixed');
+    tableWrapper?.querySelectorAll('table td[data-label="Property"]').forEach(element => {
+      element.classList.add('td--fixed');
+    })
+
     this.setEvents();
 
     const dispatchedEvent = new CustomEvent('component-loaded', {

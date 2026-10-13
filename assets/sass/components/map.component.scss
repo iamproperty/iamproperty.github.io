@@ -140,6 +140,7 @@
   .popup__field-label {
     font-weight: 600;
     white-space: nowrap;
+    margin-bottom: .5rem;
   }
 
   .popup__field-value {
@@ -150,6 +151,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin-bottom: .5rem;
   }
 
   // Make the table layout for 5 or more fields, so that the last fields are on the right side of the popup
