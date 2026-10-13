@@ -1385,7 +1385,7 @@ export const resetHeadingFilters = (heading): void => {
 export const createFilterPopover = (component, table, heading, actionbar, pagination): void => {
 
   const filters = JSON.parse(heading.dataset.filters);
-
+  let hasFilterValueSet = false;
 
   if(component.querySelector('.dialog--inline-filter')){
 
@@ -1413,6 +1413,10 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   filtersPopover.setAttribute('popover','auto');
 
   filters.forEach((filter, index) => {
+
+    if(filter.value !== null && filter.value !== undefined && filter.value !== ''){
+      hasFilterValueSet = true;
+    }
 
     const filterType = filter.type ?? 'text';
     let filterOperator = filter.operator ?? 'Contains';
@@ -1559,28 +1563,32 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     component.dispatchEvent(submitEvent);
   });
 
-  const filterResetButton = document.createElement("button");
-  filterResetButton.setAttribute('type','button');
-  filterResetButton.classList.add('btn');
-  filterResetButton.classList.add('btn-action');
-  filterResetButton.classList.add('mb-0');
-  filterResetButton.textContent = 'Reset';
+  filterButtonGroup.insertAdjacentElement('beforeend',filterButton);
 
-  filterResetButton.addEventListener('click', (event) => {
+  if(hasFilterValueSet) {
 
-    resetHeadingFilters(heading);
-    filterAdvancedTable(component, table, actionbar, pagination);
-    filtersPopover.hidePopover();
+    const filterResetButton = document.createElement("button");
+    filterResetButton.setAttribute('type','button');
+    filterResetButton.classList.add('btn');
+    filterResetButton.classList.add('btn-action');
+    filterResetButton.classList.add('mb-0');
+    filterResetButton.textContent = 'Reset';
 
-    const submitEvent = new CustomEvent('filters-updated', {
-      detail: getInlineFilters(component, table)
+    filterResetButton.addEventListener('click', (event) => {
+
+      resetHeadingFilters(heading);
+      filterAdvancedTable(component, table, actionbar, pagination);
+      filtersPopover.hidePopover();
+
+      const submitEvent = new CustomEvent('filters-updated', {
+        detail: getInlineFilters(component, table)
+      });
+
+      component.dispatchEvent(submitEvent);
     });
 
-    component.dispatchEvent(submitEvent);
-  });
-
-  filterButtonGroup.insertAdjacentElement('beforeend',filterButton);
-  filterButtonGroup.insertAdjacentElement('beforeend',filterResetButton);
+    filterButtonGroup.insertAdjacentElement('beforeend',filterResetButton);
+  }
   filtersPopover.insertAdjacentElement('beforeend',filterButtonGroup);
   // #endregion
 
