@@ -127,10 +127,13 @@ iam-table-advanced {
 }
 
 
+table td[data-label="Property"] {
+  min-width: 15rem;
+}
+
 table td:has(.criteria-match-indicator) {
   padding-left: 1.5rem;
   position: relative;
-  min-width: 15rem;
 }
 
 table td:has(.criteria-match-indicator).td--fixed {
