@@ -1659,7 +1659,6 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
           cellValue = convertToUnixTimestamp(cellValue);
         }
 
-        console.log(`Comparing cell value:`, cellValue, `with filter value:`, compareValue);
         // TODO format the cell value based on the column type (e.g., date, number) if needed
         let matched = false;
 
@@ -1727,6 +1726,7 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
       row.classList.add('filtered--matched');
     }
   });
+
 
   setFilterIndicator(component, table, actionbar, appliedFilters);
   createAppliedFilters(component, table, actionbar, pagination, appliedFilters);

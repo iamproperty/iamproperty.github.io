@@ -71,9 +71,11 @@ class iamAppInsights extends HTMLElement {
   };
 
   setEvents = (): void => {
-    const table = this.shadowRoot?.querySelector('iam-table-advanced table');
+    const table = this.shadowRoot?.querySelector('iam-table-advanced table') as HTMLTableElement | null;
+    const tableComponent = this.shadowRoot?.querySelector('iam-table-advanced') as HTMLElement | null;
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
     const notification = this.shadowRoot?.getElementById('branch-notification');
+    const countElement = this.shadowRoot?.querySelector('#count');
 
     if (actionbar && notification) {
       // Example event listener
@@ -152,8 +154,14 @@ class iamAppInsights extends HTMLElement {
 
       }
     });
-
     // #endregion
+
+    console.log(tableComponent);
+    tableComponent.addEventListener('filters-updated', (event) => {
+
+      console.log('hello')
+      countElement?.innerHTML = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    });
 
   };
 
@@ -187,13 +195,13 @@ class iamAppInsights extends HTMLElement {
     return table;
   };
 
+
   createComponent = (component, table): void => {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
     const countElement = this.shadowRoot?.querySelector('#count');
 
-    countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
 
@@ -202,10 +210,10 @@ class iamAppInsights extends HTMLElement {
 
 
     /* Set the property column to fixed */
-    tableWrapper?.querySelector('table th[data-label="Property"]').classList.add('th--fixed');
-    tableWrapper?.querySelectorAll('table td[data-label="Property"]').forEach(element => {
+    tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
+    tableWrapper?.querySelectorAll('table td[data-label="Property"]')?.forEach(element => {
       element.classList.add('td--fixed');
-    })
+    });
 
     this.setEvents();
 
@@ -217,6 +225,8 @@ class iamAppInsights extends HTMLElement {
 
     component.dispatchEvent(dispatchedEvent);
 
+    countElement?.innerHTML = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+
     setTimeout(() => {
 
       const dispatchedEvent = new CustomEvent('update-height', {
@@ -227,13 +237,6 @@ class iamAppInsights extends HTMLElement {
       component.dispatchEvent(dispatchedEvent);
     }, 1000);
   };
-
-  /*setCounterText = (component, text): void => {
-    const counterText = this.shadowRoot?.querySelector('#count-text');
-    if(counterText) {
-      counterText.innerHTML = text || '';
-    }
-  };*/
 
   createActionButtons = (component, actions): void => {
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
