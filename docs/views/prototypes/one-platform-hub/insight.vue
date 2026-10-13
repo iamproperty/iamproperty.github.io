@@ -120,39 +120,42 @@ const actionStatus = ref('danger');
 const printCampaignCreated = ref(false);
 
 const exportTableData = (data: InsightTableRow[]): void => {
-
   if (!data.length) return;
 
-  const csvData = [];
+  const escapeCSV = (value: unknown): string => {
+    const text = String(value ?? '');
+    return `"${text.replace(/"/g, '""')}"`;
+  };
 
-  csvData.push(Object.keys(data[0].columns).filter(key => key !== 'Match criteria').join(','));
+  const headers = Object.keys(data[0].columns);
 
-  data.forEach((row) => {
+  const csvData = [
+    headers.map(escapeCSV).join(','),
+    ...data.map((row) =>
+      headers.map((header) => escapeCSV(row.columns[header])).join(',')
+    ),
+  ];
 
-    csvData.push(Object.keys(row.columns).filter(key => key !== 'Match criteria').map(key => row.columns[key]).join(','));
+  const csvString = csvData.join('\r\n');
+
+  // UTF-8 BOM helps Excel recognise the encoding.
+  const CSVFile = new Blob(['\uFEFF', csvString], {
+    type: 'text/csv;charset=utf-8;',
   });
 
-  // Combine each row data with new line character
-  const csvString = csvData.join('\n');
-
-  // Create CSV file object and feed our csvData into it
-  const CSVFile = new Blob([csvString], {
-    type: 'text/csv',
-  });
-
-  // Create to temporary link to initiate download process
   const tempLink = document.createElement('a');
-  tempLink.download = 'export.csv';
   const url = window.URL.createObjectURL(CSVFile);
+
+  tempLink.download = 'export.csv';
   tempLink.href = url;
-
-  // This link should not be displayed
   tempLink.style.display = 'none';
-  document.body.appendChild(tempLink);
 
-  // Automatically click the link to trigger download
+  document.body.appendChild(tempLink);
   tempLink.click();
-  document.body.removeChild(tempLink);
+  tempLink.remove();
+
+  // Release the temporary URL after the download starts.
+  window.setTimeout(() => window.URL.revokeObjectURL(url), 1000);
 };
 // #endregion
 

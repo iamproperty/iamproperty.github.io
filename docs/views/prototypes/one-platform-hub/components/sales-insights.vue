@@ -6,6 +6,7 @@
   import Bone from '@/components/Skeleton/Bone.vue';
 
   import Tabs from '@/components/Tabs/Tabs.vue';
+  import Tooltip from '@/components/Tooltip/Tooltip.vue';
   import Tab from '@/components/Tabs/Tab.vue';
   import Modal from '@/components/Modal/Modal.vue';
   import Form from '@/components/Form/Form.vue';
@@ -261,9 +262,8 @@
         <h3 id="competitor-list-title">Customise your competitor list</h3>
         <p>Update the competitors you see within your the sales insights widget.</p>
 
+        <span class="label">Search outcodes <Tooltip slot="tooltip" title="An outcode is the first part of a UK postcode (before the space) that identifies the general area or district."><i class="fa-solid fa-info-circle text-info" slot="icon"></i></Tooltip> </span>
         <Multiselect
-          data-label="Search outcodes"
-          data-tooltip="Tooltip text"
           @change="onOutcodeChange"
           @input="searchOutcodes"
           @clear="clearEvent"
@@ -272,6 +272,7 @@
             <input type="checkbox" :name="`outcodes[${outcode.title}]`" :value="outcode.value" />{{ outcode.title }}
           </label>
         </Multiselect>
+
 
         <p class="pt-4 text-body">Select up to 10 competitors you want to compare against.</p>
         <div v-if="!competitors.length" class="text-center pb-5">
