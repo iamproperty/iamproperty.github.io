@@ -349,10 +349,10 @@ class iamAppInsights extends HTMLElement {
         }
       });
 
-      if(areSearchesMet)
+      //if(areSearchesMet)
         row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
-      else
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
+      //else
+      //  row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
     });
   };
 
