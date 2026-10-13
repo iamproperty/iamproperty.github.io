@@ -545,7 +545,7 @@ const loadDashboards = async (): any => {
       <a :href="addedTask.value.cta" target="_blank" rel="noopener noreferrer" v-if="actionStatus == 'success'">View task</a>
     </Notification>
 
-    <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" >
+    <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" @close="() => {addTaskDialog.close(); postInsightCompleted('create-task');}">
       <Modal data-type="transactional" data-icon="" class="modal--lg" data-hide-buttons>
 
         <Notification :data-status="actionStatus" v-if="inlineAddedTask.value">

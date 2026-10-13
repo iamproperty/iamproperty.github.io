@@ -176,4 +176,16 @@ const addLast = () => {
     }
   }
 
+  .btn__group {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    * {
+      flex-basis: 50%;
+      max-width: unset;
+    }
+  }
+
 </style>
