@@ -160,6 +160,13 @@ const addLast = () => {
   .checklist-item {
     display: flex;
 
+    span {
+      padding-top: 0.5rem;
+      flex-basis: 100%;
+      color: var(--colour-heading);
+      font-weight: bold;
+    }
+
     &:has(input[type="checkbox"]:checked) span{
       text-decoration: line-through;
     }
