@@ -1,0 +1,59 @@
+@use '../_func' as *;
+
+@use '../elements/buttons--global.css';
+@use '../elements/buttons--action.css';
+@use '../elements/forms.scss';
+@use '../elements/input.scss';
+
+
+@use '../elements/dropdown' as *;
+
+.wrapper {
+  anchor-name: --customisation;
+}
+
+.btn-action {
+  margin: 0!important;
+}
+
+dialog {
+
+  position: absolute;
+  position-anchor: --customisation;
+
+  top: anchor(bottom);
+  left: auto;
+  right: anchor(right);
+
+}
+
+// #region checkboxes
+
+label {
+  margin: 0!important;
+
+  --radio-size: 1.5rem;
+}
+
+// #endregion checkboxes
+
+// #region buttons
+#dialog-actions {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+#reset-button {
+  margin-right: 1rem!important;
+  border: none;
+
+  outline: 1px solid var(--colour-muted);
+  
+  &:not(:hover, :focus) {
+    background: none;
+    outline: none;
+  }
+}
+// #endregion buttons

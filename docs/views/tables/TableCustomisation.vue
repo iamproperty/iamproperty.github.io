@@ -1,10 +1,14 @@
 <script setup>
-  import TableAdvanced from '@/components/Table/TableAdvanced.vue';
+  import TableCustomisation from '@/components/Table/TableCustomisation.vue';
   import Integration from '../Integration.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
 
   import Versions from '../Versions.vue';
+
+  import TableAdvanced from '@/components/Table/TableAdvanced.vue';
+
+  import Actionbar from '@/components/Actionbar/Actionbar.vue';
 
 </script>
 
@@ -26,6 +30,69 @@
     <p>Clicking the ‘Customise’ button displays a dialog that allows users to show/hide columns by checking or unchecking the checkbox adjacent to the column name. This change can occur immediately or upon save.</p>
 
     <p>An ajax call can be used to receive the new columns if desired.</p><!-- Requirement -->
+
+    <div class="container visualtest mb-5 bg-light">
+      <TableAdvanced class="table--fullwidth">
+        <Actionbar data-selectall>
+
+          <TableCustomisation />
+        </Actionbar>
+        <table>
+          <thead>
+            <tr>
+              <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
+              <th class="d-none">Criteria match</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
+              <th data-sort data-filters data-format="price">Current list price</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
+              <th data-sort>Weeks on market</th>
+              <th class="th--fixed"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>59 The Glen, NE68 3LS</td>
+              <td>full</td>
+              <td>23-04-26</td>
+              <td>600000</td>
+              <td>Heaton</td>
+              <td>11 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>full</td>
+              <td>27/04/2026</td>
+              <td>£300,000</td>
+              <td>Heaton</td>
+              <td>13 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 The South Gate Wood, NE68 3LS</td>
+              <td>full</td>
+              <td>28/04/2026</td>
+              <td>£500,000</td>
+              <td>Cramlington</td>
+              <td>213 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>partial</td>
+              <td>27/06/2026</td>
+              <td>£1,300,000</td>
+              <td>Gosforth</td>
+              <td>21 days 3 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableAdvanced>
+    </div>
+
+
+    <hr class="mb-5"/>
 
     <h3>Show/hide on change</h3>
 
