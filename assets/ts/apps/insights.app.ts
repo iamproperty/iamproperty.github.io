@@ -76,6 +76,7 @@ class iamAppInsights extends HTMLElement {
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
     const notification = this.shadowRoot?.getElementById('branch-notification');
     const countElement = this.shadowRoot?.querySelector('#count');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
 
     if (actionbar && notification) {
       // Example event listener
@@ -157,12 +158,10 @@ class iamAppInsights extends HTMLElement {
     // #endregion
 
     console.log(tableComponent);
-    tableComponent.addEventListener('filters-updated', (event) => {
-
-      console.log('hello')
+    tableComponent.addEventListener('table-filtered', (event) => {
       countElement?.innerHTML = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+      mapWrapper.innerHTML = this.createMapContent();
     });
-
   };
 
   createMapContent = (): string => {

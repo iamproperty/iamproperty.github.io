@@ -71,7 +71,7 @@ class iamMap extends HTMLElement {
       const tableHeadings = Array.from(table.querySelectorAll("thead th")).map((th) => th.querySelector(".th__content")?.textContent?.trim() || th.textContent?.trim() || "");
       let onloadPopup;
 
-      table.querySelectorAll('tr[data-longitude][data-latitude]').forEach((row, index) => {
+      table.querySelectorAll('tr[data-longitude][data-latitude]:not(.filtered)').forEach((row, index) => {
         const rowLongitude = Number(row.dataset.longitude);
         const rowLatitude = Number(row.dataset.latitude);
 

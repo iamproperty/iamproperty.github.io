@@ -1471,9 +1471,14 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     if(filterType != 'select' ){
 
       let icon = filterType == 'date' ? 'fa-regular fa-calendar-days' : 'fa-solid fa-magnifying-glass';
+      let prefixIcon = '';
 
       if(filterType == 'number'){
         icon = '';
+      }
+      else if(filterType == 'price'){
+        icon = '';
+        prefixIcon = 'fa-regular fa-sterling-sign';
       }
 
       let filterValue = filter.value;
@@ -1484,11 +1489,18 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         filterValue2 = filter.value.split(',')[1] ?? '';
       }
 
+      if(filterType == 'price'){
+        // Hide the pound sign for price inputs as its in the icon
+        filterValue = filterValue?.replace('£','');
+        filterValue2 = filterValue2?.replace('£','');
+      }
+
       filterFieldset.insertAdjacentHTML('beforeend',
         /* HTML */`
         <label class="mb-0" data-filter-label>
           <span class="visually-hidden">Filter</span>
           <span>
+          ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
           <input type="${filterType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
@@ -1514,10 +1526,16 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
 
       filterOptions.forEach(option => {
 
+        let optionDisplay = option;
+
         if(filterType == 'number'){
           option = String(convertToNumber(option));
         }
-        filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${option.trim()}</option>`;
+        else if(filterType == 'price'){
+          // Hide the pound sign for price inputs as its in the icon
+          optionDisplay = option?.replace('£','');
+        }
+        filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${optionDisplay.trim()}</option>`;
       });
 
       if(filterType != 'select')
@@ -1732,6 +1750,9 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
   setFilterIndicator(component, table, actionbar, appliedFilters);
   createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
   paginateRows(component, table, pagination);
+
+  const submitEvent = new CustomEvent('table-filtered');
+  component.dispatchEvent(submitEvent);
 };
 
 export const setFilterIndicator = (component, table, actionbar, appliedFilters): void => {

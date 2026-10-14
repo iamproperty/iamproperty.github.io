@@ -195,8 +195,8 @@ $selector: '.table--component';
 
   inset: auto;
   top: anchor(bottom) !important;
-  right: anchor(right) !important;
-  min-width: 10rem;
+  left: calc(anchor(left) - 1rem) !important;
+  min-width: 15rem;
   width: calc(anchor-size(width) + 2rem)!important;
   max-width: 20rem;
   position: fixed;
