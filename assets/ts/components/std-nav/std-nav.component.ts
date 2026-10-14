@@ -1,4 +1,4 @@
-import { populateNav, loadNavData, loadUserData, setEnabledLinks, hideLinks } from '../../modules/nav';
+import { populateNav, loadNavData, loadUserData, loadInsightsData, setEnabledLinks, hideLinks } from '../../modules/nav';
 
 class iamSTDNav extends HTMLElement {
   constructor() {
@@ -8,7 +8,7 @@ class iamSTDNav extends HTMLElement {
   async connectedCallback(): void {
     const nav = this.closest('iam-nav');
     const mode = this.hasAttribute('data-mode') ? this.getAttribute('data-mode') : 'dev';
-
+    const slot = this.hasAttribute('slot') ? this.getAttribute('slot') : '';
     // if not an sso use load default from component
 
     if (
@@ -59,7 +59,7 @@ class iamSTDNav extends HTMLElement {
     // Update the logo
     nav.querySelector('.brand')?.className = 'brand brand--one';
 
-    nav.querySelector('.brand svg')?.outerHTML = /* HTML */ `<style>
+    nav.querySelector('.brand svg')?.outerHTML = `<style>
         iam-nav .brand--one {
           --svg-width: 1.576923076923077em;
         }
@@ -123,7 +123,7 @@ class iamSTDNav extends HTMLElement {
         return data;
       }
 
-      if (!this.hasAttribute('slot')) {
+      if (!slot) {
         // This is the nav on the hub page
 
         const filteredData = data.filter((section) => section.attributes.title != 'Learning and support'); // Not needed for the hub page
@@ -170,6 +170,25 @@ class iamSTDNav extends HTMLElement {
 
       return true;
     });
+
+    // #region Insights button and pull out
+    if (nav && slot == 'secondary') {
+
+      nav.insertAdjacentHTML('beforeend', `<a href="https://iamproperty.com/insights" slot="secondary" class="btn btn-action ms-2">Insights</a>`);
+
+      const insightsData = await loadInsightsData(mode).then((data) => {
+
+
+        if (!data.dashboards) return false;
+
+
+        console.log(slot);
+        console.log(data.dashboards);
+        return data;
+      });
+    }
+
+    // #endregion
   }
 }
 

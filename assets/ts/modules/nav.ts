@@ -140,6 +140,211 @@ export const loadUserData = async (mode, subject, product): any => {
   }
 };
 
+export const loadInsightsData = async (mode, subject, product): any => {
+  // Simulate an API call delay
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const data = {
+    "dashboards": [
+      {
+          "slug": "stock-switch",
+          "pageTitle": "All Insights",
+          "iframeTitle": "Properties most likely to switch",
+          "suggestionLabel": "Show me stock currently on the market most likely to switch",
+          "group": "Win",
+          "requiredProducts": [
+              "mtk"
+          ],
+          "lockedUrl": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+      },
+      {
+          "slug": "predicted-movers",
+          "pageTitle": "All Insights",
+          "iframeTitle": "Predicted movers not yet on the market",
+          "suggestionLabel": "Show me predicted movers not yet on the market",
+          "group": "Win",
+          "requiredProducts": [
+              "mtk"
+          ],
+          "lockedUrl": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+          "actions": [
+              {
+                  "label": "Create Task",
+                  "action": "create-task"
+              },
+              {
+                  "label": "Create Print Campaign",
+                  "action": "create-print-campaign"
+              },
+              {
+                  "label": "Export table data",
+                  "action": "export-table-data"
+              }
+          ],
+          "properties": {
+              "class": "inside-hub",
+              "title-column": "Property",
+              "branch-column": "Branch",
+              "counter-text": "Predicted movers not yet on the market",
+              "cta-url-structure": "https://my.eco.iamproperty.group/iamproperty-one/login?return=/DataServices/PropertyProfile/:UDPRN/:UMRRN",
+              "cta-text": "View property"
+          },
+          "lookerHost": "iamproperty.cloud.looker.com"
+      },
+      {
+          "slug": "market-appraisals",
+          "pageTitle": "All Insights",
+          "iframeTitle": "Market appraisals not yet on the market",
+          "suggestionLabel": "Show me Market Appraisals carried out, but not yet on market",
+          "group": "Win",
+          "requiredProducts": [
+              "mtk"
+          ],
+          "lockedUrl": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+          "actions": [
+              {
+                  "label": "Create Task",
+                  "action": "create-task"
+              },
+              {
+                  "label": "Create Print Campaign",
+                  "action": "create-print-campaign"
+              },
+              {
+                  "label": "Export table data",
+                  "action": "export-table-data"
+              }
+          ],
+          "properties": {
+              "class": "inside-hub",
+              "title-column": "Property",
+              "branch-column": "Branch",
+              "cta-url-structure": "https://my.eco.iamproperty.group/iamproperty-one/login?return=/MarketAppraisals/:InstructionType/Appraisal/:AppraisalId?s_Id=4003",
+              "cta-text": "View appraisal"
+          },
+          "lookerHost": "iamproperty.cloud.looker.com"
+      },
+      {
+          "slug": "vendor-conveyancing",
+          "pageTitle": "All Insights",
+          "iframeTitle": "Vendor conveyancing opportunities",
+          "suggestionLabel": "Show me current vendor conveyancing opportunities still to convert",
+          "group": "Grow",
+          "requiredProducts": [
+              "crm",
+              "movebutler"
+          ],
+          "lockedUrl": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+          "actions": [
+              {
+                  "label": "Create Task",
+                  "action": "create-task"
+              },
+              {
+                  "label": "Export table data",
+                  "action": "export-table-data"
+              }
+          ],
+          "properties": {
+              "class": "inside-hub",
+              "title-column": "Property",
+              "branch-column": "Branch",
+              "cta-url-structure": "https://my.iamproperty.com/iamproperty-one/login?return=/ic/transaction/:transactionId/view",
+              "cta-text": "View transaction overview"
+          },
+          "lookerHost": "iamproperty.cloud.looker.com"
+      },
+      {
+          "slug": "sale-ready",
+          "pageTitle": "All Insights",
+          "iframeTitle": "Sale Ready opportunities",
+          "suggestionLabel": "Show me properties that could be suitable for Sale Ready based on client circumstances",
+          "group": "Grow",
+          "requiredProducts": [
+              "crm",
+              "movebutler"
+          ],
+          "lockedUrl": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+          "actions": [
+              {
+                  "label": "Create Task",
+                  "action": "create-task"
+              },
+              {
+                  "label": "Export table data",
+                  "action": "export-table-data"
+              }
+          ],
+          "properties": {
+              "class": "inside-hub",
+              "title-column": "Property",
+              "branch-column": "Branch",
+              "cta-url-structure": "/ic/transaction/:transaction/:action",
+              "cta-text": "See details"
+          },
+          "lookerHost": "iamproperty.cloud.looker.com"
+      },
+      {
+          "slug": "sales-progression",
+          "pageTitle": "All Insights",
+          "iframeTitle": "Potential sales progression delays",
+          "suggestionLabel": "Show me properties that may experience delays during sales progression",
+          "group": "Grow",
+          "requiredProducts": [
+              "crm",
+              "movebutler"
+          ],
+          "lockedUrl": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+          "actions": [
+              {
+                  "label": "Create Task",
+                  "action": "create-task"
+              },
+              {
+                  "label": "Export table data",
+                  "action": "export-table-data"
+              }
+          ],
+          "properties": {
+              "class": "inside-hub",
+              "title-column": "Property",
+              "branch-column": "Branch",
+              "cta-url-structure": "/ic/transaction/:transaction/:action",
+              "cta-text": "See details"
+          },
+          "lookerHost": "iamproperty.cloud.looker.com"
+      },
+      {
+          "slug": "auction",
+          "pageTitle": "All Insights",
+          "iframeTitle": "Properties potentially suitable for auction",
+          "suggestionLabel": "Show me properties that could be suitable for auction",
+          "group": "Grow",
+          "requiredProducts": [
+              "ias"
+          ],
+          "lockedUrl": "https://iamproperty.com/ecosystem/auction/",
+          "actions": [
+              {
+                  "label": "Create Task",
+                  "action": "create-task"
+              },
+              {
+                  "label": "Export table data",
+                  "action": "export-table-data"
+              }
+          ],
+          "properties": {
+              "class": "inside-hub",
+              "title-column": "Property"
+          },
+          "lookerHost": "iamproperty.cloud.looker.com"
+      }
+    ]
+  };
+  return data;
+};
+
 export const setEnabledLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-product][data-feature]');
 
