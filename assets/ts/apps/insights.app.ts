@@ -337,6 +337,12 @@ class iamAppInsights extends HTMLElement {
       searches.push('udprn');
     if(ctaUrlStructure.toLowerCase().includes(':umrrn'))
       searches.push('umrrn');
+    if(ctaUrlStructure.toLowerCase().includes(':AppraisalId'))
+      searches.push('AppraisalId');
+    if(ctaUrlStructure.toLowerCase().includes(':transactionid'))
+      searches.push('transactionid');
+    if(ctaUrlStructure.toLowerCase().includes(':transaction'))
+      searches.push('transaction');
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
@@ -345,9 +351,19 @@ class iamAppInsights extends HTMLElement {
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
       searches.forEach(search => {
-        const datasetSearch = search;
+        let datasetSearch = search;
+
+        // Update the datasearch to match looker columns
+        if(search == "AppraisalId")
+          datasetSearch = 'appraisal-id';
+        else if(search == "transactionid")
+          datasetSearch = 'transaction-id';
+        else if(search == "transaction")
+          datasetSearch = 'mb-transaction-id';
+
+
         if(row.dataset[datasetSearch] && row.dataset[datasetSearch] !== '' &&  row.dataset[datasetSearch] !== '0') {
-          ctaLink = ctaLink.toLowerCase().replace(`:${search}`, row.dataset[datasetSearch]);
+          ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.dataset[datasetSearch.toLowerCase()]);
         } else {
           areSearchesMet = false;
         }

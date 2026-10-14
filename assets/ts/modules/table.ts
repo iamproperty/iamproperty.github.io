@@ -338,6 +338,7 @@ export const fixTableCells = (table): void => {
         if (heading.hasAttribute('data-td-class')) cell.setAttribute('class', heading.getAttribute('data-td-class'));
 
         if (heading.hasAttribute('data-format')) {
+          cell.setAttribute('data-original-value', cell.textContent.trim());
           cell.setAttribute('data-format', heading.getAttribute('data-format'));
           cell.innerHTML = formatData(heading.getAttribute('data-format'), cell.textContent.trim()); //Make sure date format is consistent
         }
