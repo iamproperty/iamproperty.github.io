@@ -8,7 +8,7 @@ class iamSTDNav extends HTMLElement {
   async connectedCallback(): void {
     const nav = this.closest('iam-nav');
     const mode = this.hasAttribute('data-mode') ? this.getAttribute('data-mode') : 'dev';
-
+    const brand = nav.querySelector('.brand');
     // if not an sso use load default from component
 
     if (
@@ -57,9 +57,24 @@ class iamSTDNav extends HTMLElement {
     }
 
     // Update the logo
-    nav.querySelector('.brand')?.className = 'brand brand--one';
-    nav.querySelector('.brand svg')?.outerHTML = `<svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
-        <title>iamproperty One</title>
+    brand?.className = 'brand brand--one';
+    brand?.setAttribute('title', 'iamproperty One');
+    brand?.setAttribute('aria-label', 'iamproperty One');
+
+    switch (mode) {
+      case 'dev':
+      case 'test':
+        brand?.setAttribute('href', 'https://hub.dev.iamproperty.group/dashboard');
+        break;
+      case 'pre-prod':
+        brand?.setAttribute('href', 'https://hub.pre-prod.iamproperty.group/dashboard');
+        break;
+      default:
+        brand?.setAttribute('href', 'https://one.iamproperty.com/dashboard');
+        break;
+    }
+
+    brand?.querySelector('svg')?.outerHTML = `<svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
         <defs xmlns="http://www.w3.org/2000/svg">
           <clipPath id="clippath">
             <path
