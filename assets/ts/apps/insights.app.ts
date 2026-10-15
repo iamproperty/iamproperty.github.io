@@ -43,7 +43,7 @@ class iamAppInsights extends HTMLElement {
         <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
       ${table.outerHTML}
-      <iam-pagination slot="pagination"></iam-pagination>
+      <iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
     </iam-table-advanced>`;
   };
 
