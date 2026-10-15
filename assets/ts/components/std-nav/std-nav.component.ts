@@ -1,81 +1,183 @@
-import { populateNav, loadNavData, loadUserData, loadInsightsData, setEnabledLinks, hideLinks } from '../../modules/nav';
+import { bindNavigationVariables } from '../../modules/navigation-variables';
+import {
+  populateNav,
+  loadNavData,
+  getNavigationEnvironment,
+  setEnabledLinks,
+  hideLinks,
+  loadAuthenticatedUserData,
+  NavigationTokenProvider,
+  setInsightsLinks,
+  loadInsightsData
+} from '../../modules/nav';
 
 class iamSTDNav extends HTMLElement {
+  private tokenProvider?: NavigationTokenProvider;
+  private request?: AbortController;
+  private generation = 0;
+  //private renderedNodes: Node[] = [];
+  private restoreVariables: Array<() => void> = [];
+
+  get getAccessToken(): NavigationTokenProvider | undefined {
+    return this.tokenProvider;
+  }
+  set getAccessToken(provider: NavigationTokenProvider | undefined) {
+    this.tokenProvider = provider;
+    if (this.isConnected) void this.refresh();
+  }
+
+  disconnectedCallback(): void {
+    this.generation++;
+    this.request?.abort();
+    // I dont think we need to do this
+    /*
+    this.renderedNodes.forEach((node) => {
+      if (node instanceof HTMLElement && node.matches('details[open]')) {
+        const nav = node.closest('iam-nav');
+        const otherDropdown = Array.from(nav?.querySelectorAll(':scope > details[open]') ?? []).some(
+          (details) => !this.renderedNodes.includes(details)
+        );
+        const otherMenu = nav?.shadowRoot?.querySelector('.menu.open, .nav--menu.open');
+        if (nav && !otherDropdown && !otherMenu) {
+          nav.classList.remove('open', 'open-secondary');
+          nav.shadowRoot?.querySelector('.backdrop')?.classList.remove('show');
+        }
+      }
+      node.parentNode?.removeChild(node);
+    });
+    this.renderedNodes = [];
+    */
+    this.restoreVariables.forEach((restore) => restore());
+    this.restoreVariables = [];
+  }
+
+  // Call on sign-out/account switch, even when the provider function itself is unchanged.
+  async refresh(): Promise<void> {
+    this.disconnectedCallback();
+
+    // Check for the closest iam-nav element, if not found terminate early.
+    const nav = this.closest('iam-nav');
+    const mode = this.getAttribute('data-mode');
+    const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
+    if (!nav) return;
+
+    // #region Load in the navigation content
+    const schema = await loadNavData(mode);
+    if (!Array.isArray(schema)) throw new Error('Navigation schema unavailable');
+
+    // Remove existing navigation elements that are not the standard navigation or branch selector.
+    nav.querySelectorAll(isSecondary? ':scope > [slot="secondary"]:not(iam-std-nav):not(iam-branch-selector):not(#insights-button)': ':scope > :not([slot]):not(iam-std-nav)').forEach((element) => element.remove());
+
+    const template = document.createElement('template');
+    template.innerHTML = populateNav(
+      isSecondary ? schema : schema.filter((section) => section.attributes.title !== 'Learning and support'),
+      isSecondary ? 'secondary' : ''
+    );
+
+    //this.renderedNodes = Array.from(template.content.childNodes);
+    this.before(template.content);
+    // #endregion
+
+    // If the component is in mock mode, skip the token provider check and user data loading. We then need to load a mock of the navigation data.
+    if (this.getAttribute('data-mode') === 'mock') {
+
+      try {
+        const response = await fetch('/access-context.json', {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+
+        const json = await response.json();
+        const data = json.data ? json.data : json;
+
+        const mockedUserData = data;
+
+        setEnabledLinks(nav, mockedUserData);
+        hideLinks(nav, mockedUserData);
+
+        setInsightsLinks(nav, mockedUserData);
+
+        this.restoreVariables.push(bindNavigationVariables(mockedUserData.attributes));
+
+      } catch (error) {
+        if (error?.name === 'AbortError') {
+          return true;
+        }
+        console.log(error);
+        return 'There has been a problem. Please try again in a few moments.';
+      }
+
+      return;
+    }
+
+    // #region Code to maintain the lifecyle
+    const generation = this.generation;
+    if (!this.isConnected) return;
+    this.hidden = true; // Keep a lifecycle anchor; links remain direct children of iam-nav.
+    const current = (): boolean => this.isConnected && generation === this.generation;
+    this.setAttribute('data-access-context-status', 'loading');
+    this.request = new AbortController();
+    // #endregion
+    // #region Authentication and user data loading
+    try {
+
+      if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
+      // Load the authenticated user data using the token provider and the current mode.
+      const userData = await loadAuthenticatedUserData(
+        mode,
+        this.getAttribute('data-product'),
+        this.tokenProvider,
+        this.request.signal
+      );
+
+
+      //if (!current()) return;
+      if (!current()) return;
+
+
+      setEnabledLinks(nav, userData);
+      hideLinks(nav, userData);
+      setInsightsLinks(nav, userData);
+
+      this.restoreVariables.push(bindNavigationVariables(userData.attributes));
+      this.setAttribute('data-access-context-status', 'loaded');
+    } catch {
+      if (current()) {
+        this.setAttribute('data-access-context-status', 'error');
+        // No token or provider errors are exposed in event details or logs.
+        this.dispatchEvent(new CustomEvent('navigation-access-error', { bubbles: true }));
+      }
+    }
+    // #endregion
+  }
+
   constructor() {
     super();
   }
 
-  async connectedCallback(): void {
+  async connectedCallback(): Promise<void> {
+
     const nav = this.closest('iam-nav');
-    const mode = this.hasAttribute('data-mode') ? this.getAttribute('data-mode') : 'dev';
-    const slot = this.hasAttribute('slot') ? this.getAttribute('slot') : '';
-    const brand = nav.querySelector('.brand');
-    // if not an sso use load default from component
+    if (!nav) return;
 
-    if (
-      !this.hasAttribute('data-sso-subject') ||
-      this.getAttribute('data-sso-subject') == 'false' ||
-      this.getAttribute('data-sso-subject') == false ||
-      this.getAttribute('data-sso-subject') == null
-    ) {
-      if (this.hasAttribute('slot') && this.getAttribute('slot') == 'secondary') {
-        const env = this.hasAttribute('data-env') ? this.getAttribute('data-env') : 'production';
-        const envMap = {
-          production: {
-            iap: 'https://my.iamproperty.com',
-            crm: 'https://crm.iamproperty.com',
-            mtk: 'frontend.informationworks.co.uk'
-          },
-          test: {
-            iap: 'https://my.eco.iamproperty.group',
-            crm: 'https://dev.vtopenview.com',
-            mtk: 'frontend-test.informationworks.co.uk'
-          }
-        };
-
-        this.outerHTML = `<a href="${envMap[env].iap}" slot="secondary">iamproperty</a>
-                          <a href="${envMap[env].crm}/MyDay" slot="secondary">CRM</a>
-                          <a href="${envMap[env].iap}/ic/dashboard" slot="secondary">movebutler</a>
-                          <a href="${envMap[env].iap}/auction" slot="secondary">iamsold</a>`;
-
-        nav.querySelector(`a[href*='${window.location.hostname}'][slot="secondary"]`)?.classList.add('selected');
-
-        /* For local environments */
-        if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'movebutler')
-          nav
-            .querySelector(`a[href='${envMap[env].iap}/ic/dashboard'][slot="secondary"]`)
-            ?.classList.add('selected');
-
-        if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'crm')
-          nav.querySelector(`a[href='${envMap[env].crm}/MyDay'][slot="secondary"]`)?.classList.add('selected');
-
-        if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'iamsold')
-          nav
-            .querySelector(`a[href='${envMap[env].iap}/auction'][slot="secondary"]`)
-            ?.classList.add('selected');
-      }
-      return;
-    }
+    const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
+    const mode = this.getAttribute('data-mode');
+    if (mode === 'non-sso') return;
 
     // Update the logo
-    brand?.className = 'brand brand--one';
+    const brand = nav.querySelector('.brand');
+    if (brand) brand.className = 'brand brand--one';
     brand?.setAttribute('title', 'iamproperty One');
     brand?.setAttribute('aria-label', 'iamproperty One');
 
-    switch (mode) {
-      case 'dev':
-      case 'test':
-        brand?.setAttribute('href', 'https://hub.dev.iamproperty.group/dashboard');
-        break;
-      case 'pre-prod':
-        brand?.setAttribute('href', 'https://hub.pre-prod.iamproperty.group/dashboard');
-        break;
-      default:
-        brand?.setAttribute('href', 'https://one.iamproperty.com/dashboard');
-        break;
-    }
+    brand?.setAttribute('href', `${getNavigationEnvironment(mode).hub}/dashboard`);
 
-    brand?.querySelector('svg')?.outerHTML = `<svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
+    const brandSvg = brand?.querySelector('svg');
+    if (brandSvg)
+      brandSvg.outerHTML = `<svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
+        <title>iamproperty One</title>
         <defs xmlns="http://www.w3.org/2000/svg">
           <clipPath id="clippath">
             <path
@@ -123,38 +225,9 @@ class iamSTDNav extends HTMLElement {
         />
       </svg>`;
 
-    const data = await loadNavData(mode).then((data) => {
-      if (typeof data == 'string') {
-        return data;
-      }
-
-      if (!slot) {
-        // This is the nav on the hub page
-
-        const filteredData = data.filter((section) => section.attributes.title != 'Learning and support'); // Not needed for the hub page
-        this.closest('iam-nav')
-          .querySelectorAll(`:scope > *:not([slot]):not(iam-std-nav)`)
-          .forEach((element) => {
-            element.remove(); // Remove the default links
-          });
-
-        this.outerHTML = populateNav(filteredData);
-      } else {
-        this.closest('iam-nav')
-          .querySelectorAll(`:scope > *[slot="secondary"]:not(iam-std-nav):not(iam-branch-selector)`)
-          .forEach((element) => {
-            element.remove(); // Remove the default links
-          });
-
-        this.outerHTML = populateNav(data, 'secondary');
-      }
-
-      return true;
-    });
-
 
     // #region Insights button and pull out
-    if (nav && slot == 'secondary') {
+    if (isSecondary) {
 
       nav.insertAdjacentHTML('beforeend', `<a href="https://iamproperty.com/insights" target="_blank" slot="secondary" class="btn btn-action ms-2" id="insights-button">Insights</a>`);
 
@@ -266,8 +339,6 @@ class iamSTDNav extends HTMLElement {
         });
 
         // Populate the questions into the nav menu
-
-
         groups.forEach((group) => {
           const groupTitle = document.createElement('span');
           groupTitle.classList.add('d-block');
@@ -277,9 +348,12 @@ class iamSTDNav extends HTMLElement {
           group.children.forEach((dashboard) => {
             const questionElement = document.createElement('a');
             questionElement.textContent = dashboard.suggestionLabel;
-            questionElement.setAttribute('href', dashboard.slug); // Add a default href or modify as needed
+            questionElement.setAttribute('href', dashboard.lockedUrl); // Add a default href or modify as needed
             questionElement.setAttribute('data-required-products', JSON.stringify(dashboard.requiredProducts));
-            questionElement.setAttribute('data-disabled', dashboard.lockedUrl);
+            questionElement.setAttribute('data-enabled', dashboard.slug);
+            questionElement.setAttribute('target', '_blank');
+            questionElement.setAttribute('title', 'Requires product access — learn more');
+
             insightsMenu.appendChild(questionElement);
           });
         });
@@ -290,49 +364,14 @@ class iamSTDNav extends HTMLElement {
 
     // #endregion
 
-    if (!this.hasAttribute('data-sso-subject') && !this.hasAttribute('data-product')) return;
 
-    const subject = this.getAttribute('data-sso-subject');
-    const product = this.getAttribute('data-product');
-
-    const userData = await loadUserData(mode, subject, product).then((data) => {
-      if (!data.attributes) return false;
-
-      setEnabledLinks(nav, data);
-      hideLinks(nav, data);
-
-      Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
-        if (data.attributes[element.getAttribute('data-variable')])
-          element.innerHTML = data.attributes[element.getAttribute('data-variable')];
-      });
-
-      Array.from(document.querySelectorAll('[data-save-variable]')).forEach((element) => {
-        if (data.attributes[element.getAttribute('data-save-variable')])
-          element.setAttribute('data-variable-value', data.attributes[element.getAttribute('data-save-variable')]);
-      });
-
-      // Disable Insights based on required products and user data
-      const insights = nav.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
-      console.log(insights);
-      insights.forEach((insight) => {
-
-        const requiredProducts = JSON.parse(insight.getAttribute('data-required-products'));
-
-        requiredProducts.forEach((product) => {
-          console.log(product);
-          console.log(data.attributes.features);
-          if (!data.attributes.features[product]){
-            insight.setAttribute('data-is-disabled', true);
-            insight.setAttribute('href', insight.getAttribute('data-disabled'));
-            insight.setAttribute('target', '_blank');
-            insight.setAttribute('title', 'Requires product access — learn more');
-          }
-        });
-      });
-
-      return true;
-    });
-
+    // Recover a property assigned before the custom element was registered.
+    if (Object.prototype.hasOwnProperty.call(this, 'getAccessToken')) {
+      const provider = this.getAccessToken;
+      delete this.getAccessToken;
+      this.tokenProvider = provider;
+    }
+    await this.refresh();
   }
 }
 
