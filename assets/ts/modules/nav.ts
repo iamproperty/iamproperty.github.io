@@ -71,17 +71,27 @@ export const populateLinks = (data): void => {
   let html = ``;
 
   data.forEach((link) => {
-    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}" ${ link.visibility?.hideWhenAny ? `data-hide-when-any='{"values":${JSON.stringify(link.visibility.hideWhenAny)}}'` : ''}>${link.title}</a>`;
+    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}" ${link.visibility?.hideWhenAny ? `data-hide-when-any='{"values":${JSON.stringify(link.visibility.hideWhenAny)}}'` : ''}>${link.title}</a>`;
   });
 
   return html;
 };
 
-export const loadNavData = async (mode): any => {
-  const ajaxURL =
-    mode != 'dev'
-      ? 'https://one.iamproperty.com/data/ecosystem-switcher.json'
-      : 'https://hub.dev.iamproperty.group/data/ecosystem-switcher.json';
+export const getNavigationEnvironment = (mode?: string | null): { hub: string; api: string } => {
+  switch (mode ?? 'production') {
+    case 'dev':
+      return { hub: 'https://hub.dev.iamproperty.group', api: 'https://sso-api.dev.iamproperty.group' };
+    case 'test':
+    case 'uat':
+    case 'pre-prod':
+      return { hub: 'https://hub.pre-prod.iamproperty.group', api: 'https://sso-api.pre-prod.iamproperty.group' };
+    default:
+      return { hub: 'https://one.iamproperty.com', api: 'https://sso-api.iamproperty.com' };
+  }
+};
+
+export const loadNavData = async (mode?: string | null): Promise<any> => {
+  const ajaxURL = `${getNavigationEnvironment(mode).hub}/data/ecosystem-switcher.json`;
 
   try {
     const response = await fetch(ajaxURL, {
@@ -103,41 +113,46 @@ export const loadNavData = async (mode): any => {
   }
 };
 
-export const loadUserData = async (mode, subject, product): any => {
-  const ajaxURL =
-    mode != 'dev'
-      ? 'https://sso-api.iamproperty.com/navigation/access-context'
-      : 'https://sso-api.dev.iamproperty.group/navigation/access-context';
+export type NavigationTokenProvider = () => string | null | Promise<string | null>;
 
-  try {
-    const response = await fetch(ajaxURL, {
-      method: 'post',
-      headers: {
-        Accept: 'application/vnd.api+json',
-        'Content-Type': 'application/vnd.api+json',
+// Navigation access is always resolved from the verified access token.
+export const loadAuthenticatedUserData = async (
+  mode: string | null | undefined,
+  product: string | null,
+  getAccessToken: NavigationTokenProvider,
+  signal?: AbortSignal
+): Promise<any> => {
+  const token = await getAccessToken();
+  if (signal?.aborted) throw new Error('Navigation request cancelled');
+  if (typeof token !== 'string' || !token.trim()) throw new Error('Navigation access token unavailable');
+  const base = getNavigationEnvironment(mode).api;
+  const response = await fetch(`${base}/v2/navigation/access-context`, {
+    method: 'POST',
+    signal,
+    headers: {
+      Accept: 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      data: {
+        type: 'navigation-access-context-request',
+        attributes: { requestingProduct: product, navigationSchemaVersion: '2026-04-16' },
       },
-      body: JSON.stringify({
-        data: {
-          type: 'navigation-access-context-request',
-          attributes: {
-            subject: subject,
-            requestingProduct: product,
-            navigationSchemaVersion: '2026-04-16',
-          },
-        },
-      }),
-    });
-
-    const json = await response.json();
-    const data = json.data ? json.data : json;
-    return data;
-  } catch (error) {
-    if (error?.name === 'AbortError') {
-      return true;
-    }
-    console.log(error);
-    return 'There has been a problem. Please try again in a few moments.';
+    }),
+  });
+  if (!response.ok) throw new Error(`Navigation access request failed (${response.status})`);
+  const json = await response.json();
+  const data = json.data ?? json;
+  if (
+    !data?.attributes?.features ||
+    typeof data.attributes.features !== 'object' ||
+    Array.isArray(data.attributes.features) ||
+    !Object.values(data.attributes.features).every((features) => Array.isArray(features))
+  ) {
+    throw new Error('Invalid navigation access response');
   }
+  return data;
 };
 
 export const setEnabledLinks = (component, data): void => {
@@ -163,9 +178,10 @@ export const hideLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-hide-when-any]');
 
   elements.forEach((element) => {
-
     const hideConditions = JSON.parse(element.getAttribute('data-hide-when-any')).values;
-    const shouldHide = hideConditions.some((condition) => !data.attributes.features[condition.product]?.includes(condition.feature));
+    const shouldHide = hideConditions.some(
+      (condition) => !data.attributes.features[condition.product]?.includes(condition.feature)
+    );
 
     if (shouldHide) {
       element.style.display = 'none';
