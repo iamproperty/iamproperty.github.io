@@ -780,12 +780,12 @@ slot[name='menus'] {
     }
   }
 
-  a[data-is-disabled] {
+  a:not([data-is-enabled]) {
     padding-left: 1.5em;
     position: relative;
   }
 
-  a[data-is-disabled]:before {
+  a:not([data-is-enabled]):before {
     
     position: absolute;
     top: 0.15em;

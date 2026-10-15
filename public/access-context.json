@@ -1,0 +1,51 @@
+{
+  "jsonapi": {
+    "version": "1.1"
+  },
+  "meta": {
+    "schemaVersion": "2026-04-16",
+    "generatedAt": "2026-10-15T19:38:50.000Z"
+  },
+  "data": {
+    "type": "navigation-access-context",
+    "id": "current-user",
+    "attributes": {
+      "features": {
+        "iampropertyOne": [
+          "productAccess"
+        ],
+        "mtk": [
+          "onMarketProspecting",
+          "offMarketProspecting",
+          "recentSalesSuccess",
+          "recentListings",
+          "triggerAutomation",
+          "marketAppraisalsOverview",
+          "addSalesAppraisal",
+          "salesPresentationReporting",
+          "lettingsPresentations",
+          "lettingsPresentationReporting",
+          "competitorAnalysis",
+          "lettingsComparables",
+          "lettingsPropertyReports",
+          "salesComparables",
+          "salesPropertyReports",
+          "productAccess"
+        ],
+        "crm": [
+          "bookSalesAppraisal",
+          "bookLettingsAppraisal",
+          "accountsDashboard",
+          "addRecord",
+          "calendar",
+          "lettingsDashboard",
+          "myDay",
+          "reportingDashboard",
+          "salesDashboard",
+          "startCompliance",
+          "productAccess"
+        ]
+      }
+    }
+  }
+}

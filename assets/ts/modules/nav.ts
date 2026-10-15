@@ -379,6 +379,29 @@ export const setEnabledLinks = (component, data): void => {
   });
 };
 
+export const setInsightsLinks = (component, data): void => {
+  const insights = component.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
+
+  console.log(insights);
+
+  insights.forEach((insight) => {
+    const requiredProducts = JSON.parse(insight.getAttribute('data-required-products'));
+    requiredProducts.forEach((product) => {
+      if (!data.attributes.features[product]){
+        insight.setAttribute('data-is-disabled', true);
+      }
+    });
+  });
+  insights.forEach((insight) => {
+    if (!insight.hasAttribute('data-is-disabled')) {
+      insight.setAttribute('data-is-enabled', true);
+      insight.setAttribute('href', insight.getAttribute('data-enabled'));
+      insight.removeAttribute('target');
+      insight.removeAttribute('title');
+    }
+  });
+};
+
 export const hideLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-hide-when-any]');
 
