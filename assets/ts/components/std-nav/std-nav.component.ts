@@ -152,6 +152,144 @@ class iamSTDNav extends HTMLElement {
       return true;
     });
 
+
+    // #region Insights button and pull out
+    if (nav && slot == 'secondary') {
+
+      nav.insertAdjacentHTML('beforeend', `<a href="https://iamproperty.com/insights" target="_blank" slot="secondary" class="btn btn-action ms-2" id="insights-button">Insights</a>`);
+
+      const insightsData = await loadInsightsData(mode).then((data) => {
+
+        if (!data.dashboards) return false;
+
+        nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', /* HTML */`<div class="nav--menu" id="insights-menu" part="insights--menu">
+          <button id="insights-close" class="btn btn-action">Close</button>
+          <div class="text-center">
+            <div class="brand brand--insights p-1">
+              <svg viewBox="0 0 600 130" preserveAspectRatio="xMinYMid meet">
+                <title>iam property insights</title>
+                <defs xmlns="http://www.w3.org/2000/svg">
+                  <clipPath id="clippath">
+                    <path d="M44.36,16.04C21.42,16.04,2.81,34.65,2.81,57.59s18.6,41.55,41.55,41.55,41.55-18.6,41.55-41.55-18.6-41.55-41.55-41.55ZM60.28,73.51c-8.79,8.79-23.04,8.79-31.83,0-8.79-8.79-8.79-23.04,0-31.83,8.79-8.79,23.04-8.79,31.83,0,8.79,8.79,8.79,23.04,0,31.83Z"/>
+                  </clipPath>
+                </defs>
+
+                <g style="clip-path: url(#clippath); display: block">
+                  <foreignObject class="logoBack" x="0" y="0" width="88" height="130">
+                    <div class="one-gradient" xmlns="http://www.w3.org/1999/xhtml"></div>
+                  </foreignObject>
+                </g>
+
+                <path d="M204.65,69.03c0,1.48-.11,2.85-.23,4.22-.23,1.82-1.37,2.62-3.08,2.62h-38.09c2.05,6.73,7.41,9.47,13.34,9.47,3.19,0,6.39-1.14,8.44-2.85,1.14-.91,2.05-1.48,3.54-1.48l10.95-.11c2.05,0,3.19,1.37,2.28,3.19-4.45,9.92-13.8,15.05-25.43,15.05-18.93,0-31.02-13.11-31.02-30.11s12.54-30.11,30.56-30.11c16.65,0,28.74,12.89,28.74,30.11ZM175.8,54.09c-6.39,0-10.83,2.97-12.66,8.78h24.52c-1.82-6.61-6.84-8.78-11.86-8.78Z" />
+                <path d="M141.74,61.39v33.3c0,1.82-1.03,2.85-2.85,2.85h-11.4c-1.82,0-2.85-1.03-2.85-2.85v-31.82c0-5.7-3.31-8.21-7.64-8.21-5.13,0-8.32,2.85-8.32,9.58v30.45c0,1.82-1.03,2.85-2.85,2.85h-11.4c-1.82,0-2.85-1.03-2.85-2.85v-51.32c0-1.82,1.03-2.85,2.85-2.85h11.4c1.82,0,2.85,1.03,2.85,2.85v2.39c2.62-3.88,7.53-6.84,14.83-6.84,10.61,0,18.25,8.21,18.25,22.47Z"/>
+                <path d="M236.15,94.27v-51.21c0-1.82,1.02-2.85,2.83-2.85h11.32c1.81,0,2.83,1.02,2.83,2.85v51.22c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85h0Z"/>
+                <path d="M236.15,30.54v-10.24c0-1.82,1.02-2.85,2.83-2.85h11.32c1.81,0,2.83,1.02,2.83,2.85v10.24c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85Z"/>
+                <path d="M311.42,61.04v33.24c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85v-31.76c0-5.69-3.28-8.2-7.58-8.2-5.09,0-8.26,2.85-8.26,9.56v30.39c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85v-51.22c0-1.82,1.02-2.85,2.83-2.85h11.32c1.81,0,2.83,1.02,2.83,2.85v2.39c2.6-3.87,7.47-6.83,14.72-6.83,10.53,0,18.11,8.2,18.11,22.42Z"/>
+                <path d="M363.26,80.05c0,13.09-11.09,18.67-23.54,18.67-11.55,0-21.96-5.24-23.32-17.3-.23-1.94.9-2.96,2.72-2.96h11.09c1.7,0,2.27.91,3.06,2.39.9,1.94,3.06,3.07,6.45,3.07,4.75,0,6.57-1.59,6.57-3.87,0-8.2-29.55-.68-29.55-22.76,0-12.86,11.1-18.67,22.98-18.67,10.53,0,20.83,5.24,22.19,17.3.23,1.93-.9,2.96-2.72,2.96h-11.09c-1.7,0-2.27-.91-3.06-2.5-.79-1.82-2.72-2.96-5.32-2.96-4.19,0-6,1.59-6,3.87,0,8.42,29.54.57,29.54,22.76Z"/>
+                <path d="M369.49,30.54v-10.24c0-1.82,1.02-2.85,2.83-2.85h11.32c1.81,0,2.83,1.02,2.83,2.85v10.24c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85Z"/>
+                <path d="M369.49,94.27v-51.21c0-1.82,1.02-2.85,2.83-2.85h11.32c1.81,0,2.83,1.02,2.83,2.85v51.22c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85h0Z"/>
+                <path d="M453.02,43.06v51.22c0,19.12-15.28,27.2-29.09,27.2s-26.83-6.6-28.53-20.26c-.11-1.93,1.02-2.96,2.83-2.96h11.43c1.7,0,2.49.91,3.06,2.5,1.25,3.41,4.98,5.69,11.21,5.69,7.58,0,12.57-4.1,12.57-12.18v-5.12c-3.74,4.44-9.4,7.28-17.32,7.28-14.83,0-27.05-13.09-27.05-28.91s12.23-28.91,27.05-28.91c7.92,0,13.58,2.85,17.32,7.28v-2.85c0-1.82,1.02-2.85,2.83-2.85h10.87c1.81,0,2.83,1.02,2.83,2.85ZM436.5,67.53c0-7.85-5.66-13.2-13.7-13.2s-13.7,5.35-13.7,13.2,5.66,13.2,13.7,13.2,13.7-5.35,13.7-13.2Z"/>
+                <path d="M511.32,61.04v33.24c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85v-31.76c0-5.69-3.28-8.2-7.58-8.2-5.09,0-8.26,2.85-8.26,9.56v30.39c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85V20.29c0-1.82,1.02-2.85,2.83-2.85h11.32c1.81,0,2.83,1.02,2.83,2.85v25.16c2.6-3.87,7.47-6.83,14.72-6.83,10.53,0,18.11,8.2,18.11,22.42Z"/>
+                <path d="M548.9,43.06v10.7c0,1.82-1.02,2.85-2.83,2.85h-6.23v37.68c0,1.82-1.02,2.85-2.83,2.85h-11.32c-1.81,0-2.83-1.02-2.83-2.85v-37.68h-6.23c-1.81,0-2.83-1.02-2.83-2.85v-10.7c0-1.82,1.02-2.85,2.83-2.85h6.23v-15.37c0-1.82,1.02-2.85,2.83-2.85h11.32c1.81,0,2.83,1.02,2.83,2.85v15.37h6.23c1.81,0,2.83,1.02,2.83,2.85Z"/>
+                <path d="M597.12,80.05c0,13.09-11.09,18.67-23.55,18.67-11.55,0-21.96-5.24-23.32-17.3-.23-1.94.91-2.96,2.72-2.96h11.1c1.7,0,2.26.91,3.05,2.39.91,1.94,3.06,3.07,6.45,3.07,4.76,0,6.57-1.59,6.57-3.87,0-8.2-29.54-.68-29.54-22.76,0-12.86,11.09-18.67,22.98-18.67,10.53,0,20.83,5.24,22.19,17.3.23,1.93-.91,2.96-2.72,2.96h-11.09c-1.7,0-2.26-.91-3.05-2.5-.79-1.82-2.72-2.96-5.32-2.96-4.19,0-6,1.59-6,3.87,0,8.42,29.55.57,29.55,22.76Z"/>
+              </svg>
+            </div>
+          </div>
+          <p class="strapline pb-3">
+            Turn everyday data into smarter decisions. Win more instructions, retain customers, improve performance and grow
+            your business.
+          </p>
+        </div>`);
+
+        const dashboards = data.dashboards;
+        const defaultGroupOrder = ['Win', 'Grow'];
+        const createGroups = (dashboards) => {
+          return [...new Set<string>(dashboards.map((dashboard) => dashboard.group))]
+            .sort((a, b) => {
+              const aIndex = defaultGroupOrder.indexOf(a);
+              const bIndex = defaultGroupOrder.indexOf(b);
+              return (
+                (aIndex === -1 ? defaultGroupOrder.length : aIndex) - (bIndex === -1 ? defaultGroupOrder.length : bIndex)
+              );
+            })
+            .map((name) => ({
+              name,
+              children: dashboards.filter((dashboard: any) => dashboard.group === name),
+            }));
+        };
+        const groups = createGroups(dashboards);
+
+        const insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+        const insightsButton = nav.querySelector('#insights-button');
+        const insightsClose = nav.shadowRoot.querySelector('#insights-close');
+        const backdrop = nav.shadowRoot.querySelector('.backdrop');
+
+        const menuButton = nav.shadowRoot.querySelector('#btn-menu');
+        const menu = nav.shadowRoot.querySelector('.menu');
+        const accountMenuButton = nav.shadowRoot.querySelector('#btn-menu-account');
+        const accountMenu = nav.shadowRoot.querySelector('.nav--menu');
+
+        insightsButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          insightsMenu.classList.toggle('open');
+
+          menu.classList.remove('open');
+          menuButton?.removeAttribute('aria-expanded');
+          accountMenu.classList.remove('open');
+          accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+          accountMenuButton?.removeAttribute('aria-expanded');
+          nav.querySelector(':scope > details[open]')?.removeAttribute('open');
+
+          if (insightsMenu.classList.contains('open')) {
+            insightsButton.classList.add('active');
+            insightsButton?.setAttribute('aria-expanded', true);
+
+            nav.classList.add('open');
+            nav.classList.add('open-secondary');
+            backdrop.classList.add('show');
+          } else {
+            insightsButton.classList.remove('active');
+            nav.classList.remove('open');
+            nav.classList.remove('open-secondary');
+            backdrop.classList.remove('show');
+          }
+        });
+
+        insightsClose?.addEventListener('click', (e) => {
+          e.preventDefault();
+          insightsMenu.classList.remove('open');
+          insightsButton.classList.remove('active');
+          insightsButton?.removeAttribute('aria-expanded');
+          nav.classList.remove('open');
+          nav.classList.remove('open-secondary');
+          backdrop.classList.remove('show');
+        });
+
+        // Populate the questions into the nav menu
+
+
+        groups.forEach((group) => {
+          const groupTitle = document.createElement('span');
+          groupTitle.classList.add('d-block');
+          groupTitle.textContent = group.name;
+          insightsMenu.appendChild(groupTitle);
+
+          group.children.forEach((dashboard) => {
+            const questionElement = document.createElement('a');
+            questionElement.textContent = dashboard.suggestionLabel;
+            questionElement.setAttribute('href', dashboard.slug); // Add a default href or modify as needed
+            questionElement.setAttribute('data-required-products', JSON.stringify(dashboard.requiredProducts));
+            questionElement.setAttribute('data-disabled', dashboard.lockedUrl);
+            insightsMenu.appendChild(questionElement);
+          });
+        });
+
+        return data;
+      });
+    }
+
+    // #endregion
+
     if (!this.hasAttribute('data-sso-subject') && !this.hasAttribute('data-product')) return;
 
     const subject = this.getAttribute('data-sso-subject');
@@ -173,44 +311,28 @@ class iamSTDNav extends HTMLElement {
           element.setAttribute('data-variable-value', data.attributes[element.getAttribute('data-save-variable')]);
       });
 
+      // Disable Insights based on required products and user data
+      const insights = nav.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
+      console.log(insights);
+      insights.forEach((insight) => {
+
+        const requiredProducts = JSON.parse(insight.getAttribute('data-required-products'));
+
+        requiredProducts.forEach((product) => {
+          console.log(product);
+          console.log(data.attributes.features);
+          if (!data.attributes.features[product]){
+            insight.setAttribute('data-is-disabled', true);
+            insight.setAttribute('href', insight.getAttribute('data-disabled'));
+            insight.setAttribute('target', '_blank');
+            insight.setAttribute('title', 'Requires product access — learn more');
+          }
+        });
+      });
+
       return true;
     });
 
-    // #region Insights button and pull out
-    if (nav && slot == 'secondary') {
-
-      nav.insertAdjacentHTML('beforeend', `<a href="https://iamproperty.com/insights" target="_blank" slot="secondary" class="btn btn-action ms-2" id="insights-button">Insights</a>`);
-
-      const insightsData = await loadInsightsData(mode).then((data) => {
-
-        if (!data.dashboards) return false;
-
-        nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', `<div class="nav--menu" id="insights-menu" part="insights--menu">
-          <h2>One insights</h2>
-        </div>`);
-
-
-
-        const insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
-        const insightsButton = nav.querySelector('#insights-button');
-
-
-        insightsButton.addEventListener('click', (e) => {
-          e.preventDefault();
-          insightsMenu.classList.toggle('open');
-        });
-
-        console.log(nav);
-        console.log(nav.shadowRoot);
-
-
-        console.log(slot);
-        console.log(data.dashboards);
-        return data;
-      });
-    }
-
-    // #endregion
   }
 }
 

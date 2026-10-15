@@ -472,7 +472,7 @@ export const megaMenusEvents = (component, menu, menuButton, accountMenu, accoun
           insightsMenu.classList.remove('open');
 
         if (insightsButton){
-          insightsButton?.querySelector('.btn-primary').classList.remove('active');
+          insightsButton?.classList.remove('active');
           insightsButton?.removeAttribute('aria-expanded');
         }
       }
@@ -500,8 +500,8 @@ export const accountMenuEvents = (component, menu, menuButton, accountMenu, acco
 
       /* insights menu */
       if (insightsButton) {
-        insightsButton?.querySelector('.btn-primary').classList.add('active');
-        insightsButton?.setAttribute('aria-expanded', true);
+        insightsButton?.classList.remove('active');
+        insightsButton?.removeAttribute('aria-expanded');
       }
 
     } else {
@@ -513,6 +513,7 @@ export const accountMenuEvents = (component, menu, menuButton, accountMenu, acco
 
     component.querySelector(':scope > details[open]')?.removeAttribute('open');
     menuButton?.removeAttribute('aria-expanded');
+
     if (insightsMenu)
       insightsMenu.classList.remove('open');
   });
@@ -538,7 +539,7 @@ export const backdropEvents = (component, menu, menuButton, accountMenu, account
       insightsMenu.classList.remove('open');
 
     if (insightsButton){
-      insightsButton?.querySelector('.btn-primary').classList.remove('active');
+      insightsButton?.classList.remove('active');
       insightsButton?.removeAttribute('aria-expanded');
     }
 
