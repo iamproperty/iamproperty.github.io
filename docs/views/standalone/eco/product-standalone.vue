@@ -1,7 +1,6 @@
 <script lang="ts" setup>
   import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
   import NavStandalone from '@/components/NavStandalone/NavStandalone.vue';
-  import STDNav from '@/components/STDNav/STDNav.vue';
   import Card from '@/components/Card/Card.vue';
 
   function changeEvent(e) {
@@ -45,9 +44,7 @@
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
-      <STDNav slot="secondary">
-        <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
-      </STDNav>
+      <router-link slot="secondary" to="/standalone/premium-conveyancing">Eco Hub</router-link>
     </NavStandalone>
   </nav>
 

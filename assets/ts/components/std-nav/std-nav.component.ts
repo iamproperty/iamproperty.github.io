@@ -1,80 +1,129 @@
-import { populateNav, loadNavData, loadUserData, setEnabledLinks, hideLinks } from '../../modules/nav';
+import { bindNavigationVariables } from '../../modules/navigation-variables';
+import {
+  populateNav,
+  loadNavData,
+  getNavigationEnvironment,
+  setEnabledLinks,
+  hideLinks,
+  loadAuthenticatedUserData,
+  NavigationTokenProvider,
+} from '../../modules/nav';
 
 class iamSTDNav extends HTMLElement {
+  private tokenProvider?: NavigationTokenProvider;
+  private request?: AbortController;
+  private generation = 0;
+  private renderedNodes: Node[] = [];
+  private restoreVariables: Array<() => void> = [];
+
+  get getAccessToken(): NavigationTokenProvider | undefined {
+    return this.tokenProvider;
+  }
+  set getAccessToken(provider: NavigationTokenProvider | undefined) {
+    this.tokenProvider = provider;
+    if (this.isConnected) void this.refresh();
+  }
+
+  disconnectedCallback(): void {
+    this.generation++;
+    this.request?.abort();
+    this.renderedNodes.forEach((node) => {
+      if (node instanceof HTMLElement && node.matches('details[open]')) {
+        const nav = node.closest('iam-nav');
+        const otherDropdown = Array.from(nav?.querySelectorAll(':scope > details[open]') ?? []).some(
+          (details) => !this.renderedNodes.includes(details)
+        );
+        const otherMenu = nav?.shadowRoot?.querySelector('.menu.open, .nav--menu.open');
+        if (nav && !otherDropdown && !otherMenu) {
+          nav.classList.remove('open', 'open-secondary');
+          nav.shadowRoot?.querySelector('.backdrop')?.classList.remove('show');
+        }
+      }
+      node.parentNode?.removeChild(node);
+    });
+    this.renderedNodes = [];
+    this.restoreVariables.forEach((restore) => restore());
+    this.restoreVariables = [];
+  }
+
+  // Call on sign-out/account switch, even when the provider function itself is unchanged.
+  async refresh(): Promise<void> {
+    this.disconnectedCallback();
+    const generation = this.generation;
+    if (!this.isConnected) return;
+    this.hidden = true; // Keep a lifecycle anchor; links remain direct children of iam-nav.
+    const nav = this.closest('iam-nav');
+    if (!nav) return;
+    const current = (): boolean => this.isConnected && generation === this.generation;
+    this.setAttribute('data-access-context-status', 'loading');
+    this.request = new AbortController();
+    try {
+      if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
+      const mode = this.getAttribute('data-mode');
+      const userData = await loadAuthenticatedUserData(
+        mode,
+        this.getAttribute('data-product'),
+        this.tokenProvider,
+        this.request.signal
+      );
+      if (!current()) return;
+      const schema = await loadNavData(mode);
+      if (!current()) return;
+      if (!Array.isArray(schema)) throw new Error('Navigation schema unavailable');
+      const secondary = this.hasAttribute('slot');
+      const template = document.createElement('template');
+      template.innerHTML = populateNav(
+        secondary ? schema : schema.filter((section) => section.attributes.title !== 'Learning and support'),
+        secondary ? 'secondary' : ''
+      );
+      setEnabledLinks(template.content, userData);
+      hideLinks(template.content, userData);
+      nav
+        .querySelectorAll(
+          secondary
+            ? ':scope > [slot="secondary"]:not(iam-std-nav):not(iam-branch-selector)'
+            : ':scope > :not([slot]):not(iam-std-nav)'
+        )
+        .forEach((element) => element.remove());
+      this.renderedNodes = Array.from(template.content.childNodes);
+      this.before(template.content);
+      this.restoreVariables.push(bindNavigationVariables(userData.attributes));
+      this.setAttribute('data-access-context-status', 'loaded');
+    } catch {
+      if (current()) {
+        this.setAttribute('data-access-context-status', 'error');
+        // No token or provider errors are exposed in event details or logs.
+        this.dispatchEvent(new CustomEvent('navigation-access-error', { bubbles: true }));
+      }
+    }
+  }
+
   constructor() {
     super();
   }
 
-  async connectedCallback(): void {
-    const nav = this.closest('iam-nav');
-    const mode = this.hasAttribute('data-mode') ? this.getAttribute('data-mode') : 'dev';
-    const brand = nav.querySelector('.brand');
-    // if not an sso use load default from component
-
-    if (
-      !this.hasAttribute('data-sso-subject') ||
-      this.getAttribute('data-sso-subject') == 'false' ||
-      this.getAttribute('data-sso-subject') == false ||
-      this.getAttribute('data-sso-subject') == null
-    ) {
-      if (this.hasAttribute('slot') && this.getAttribute('slot') == 'secondary') {
-        const env = this.hasAttribute('data-env') ? this.getAttribute('data-env') : 'production';
-        const envMap = {
-          production: {
-            iap: 'https://my.iamproperty.com',
-            crm: 'https://crm.iamproperty.com',
-            mtk: 'frontend.informationworks.co.uk'
-          },
-          test: {
-            iap: 'https://my.eco.iamproperty.group',
-            crm: 'https://dev.vtopenview.com',
-            mtk: 'frontend-test.informationworks.co.uk'
-          }
-        };
-
-        this.outerHTML = `<a href="${envMap[env].iap}" slot="secondary">iamproperty</a>
-                          <a href="${envMap[env].crm}/MyDay" slot="secondary">CRM</a>
-                          <a href="${envMap[env].iap}/ic/dashboard" slot="secondary">movebutler</a>
-                          <a href="${envMap[env].iap}/auction" slot="secondary">iamsold</a>`;
-
-        nav.querySelector(`a[href*='${window.location.hostname}'][slot="secondary"]`)?.classList.add('selected');
-
-        /* For local environments */
-        if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'movebutler')
-          nav
-            .querySelector(`a[href='${envMap[env].iap}/ic/dashboard'][slot="secondary"]`)
-            ?.classList.add('selected');
-
-        if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'crm')
-          nav.querySelector(`a[href='${envMap[env].crm}/MyDay'][slot="secondary"]`)?.classList.add('selected');
-
-        if (this.hasAttribute('data-product') && this.getAttribute('data-product') == 'iamsold')
-          nav
-            .querySelector(`a[href='${envMap[env].iap}/auction'][slot="secondary"]`)
-            ?.classList.add('selected');
-      }
-      return;
+  async connectedCallback(): Promise<void> {
+    // Recover a property assigned before the custom element was registered.
+    if (Object.prototype.hasOwnProperty.call(this, 'getAccessToken')) {
+      const provider = this.getAccessToken;
+      delete this.getAccessToken;
+      this.tokenProvider = provider;
     }
-
+    const nav = this.closest('iam-nav');
+    if (!nav) return;
     // Update the logo
-    brand?.className = 'brand brand--one';
+    const mode = this.getAttribute('data-mode');
+    const brand = nav.querySelector('.brand');
+    if (brand) brand.className = 'brand brand--one';
     brand?.setAttribute('title', 'iamproperty One');
     brand?.setAttribute('aria-label', 'iamproperty One');
 
-    switch (mode) {
-      case 'dev':
-      case 'test':
-        brand?.setAttribute('href', 'https://hub.dev.iamproperty.group/dashboard');
-        break;
-      case 'pre-prod':
-        brand?.setAttribute('href', 'https://hub.pre-prod.iamproperty.group/dashboard');
-        break;
-      default:
-        brand?.setAttribute('href', 'https://one.iamproperty.com/dashboard');
-        break;
-    }
+    brand?.setAttribute('href', `${getNavigationEnvironment(mode).hub}/dashboard`);
 
-    brand?.querySelector('svg')?.outerHTML = `<svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
+    const brandSvg = brand?.querySelector('svg');
+    if (brandSvg)
+      brandSvg.outerHTML = `<svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
+        <title>iamproperty One</title>
         <defs xmlns="http://www.w3.org/2000/svg">
           <clipPath id="clippath">
             <path
@@ -122,58 +171,7 @@ class iamSTDNav extends HTMLElement {
         />
       </svg>`;
 
-    const data = await loadNavData(mode).then((data) => {
-      if (typeof data == 'string') {
-        return data;
-      }
-
-      if (!this.hasAttribute('slot')) {
-        // This is the nav on the hub page
-
-        const filteredData = data.filter((section) => section.attributes.title != 'Learning and support'); // Not needed for the hub page
-        this.closest('iam-nav')
-          .querySelectorAll(`:scope > *:not([slot]):not(iam-std-nav)`)
-          .forEach((element) => {
-            element.remove(); // Remove the default links
-          });
-
-        this.outerHTML = populateNav(filteredData);
-      } else {
-        this.closest('iam-nav')
-          .querySelectorAll(`:scope > *[slot="secondary"]:not(iam-std-nav):not(iam-branch-selector)`)
-          .forEach((element) => {
-            element.remove(); // Remove the default links
-          });
-
-        this.outerHTML = populateNav(data, 'secondary');
-      }
-
-      return true;
-    });
-
-    if (!this.hasAttribute('data-sso-subject') && !this.hasAttribute('data-product')) return;
-
-    const subject = this.getAttribute('data-sso-subject');
-    const product = this.getAttribute('data-product');
-
-    const userData = await loadUserData(mode, subject, product).then((data) => {
-      if (!data.attributes) return false;
-
-      setEnabledLinks(nav, data);
-      hideLinks(nav, data);
-
-      Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
-        if (data.attributes[element.getAttribute('data-variable')])
-          element.innerHTML = data.attributes[element.getAttribute('data-variable')];
-      });
-
-      Array.from(document.querySelectorAll('[data-save-variable]')).forEach((element) => {
-        if (data.attributes[element.getAttribute('data-save-variable')])
-          element.setAttribute('data-variable-value', data.attributes[element.getAttribute('data-save-variable')]);
-      });
-
-      return true;
-    });
+    await this.refresh();
   }
 }
 
