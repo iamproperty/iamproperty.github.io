@@ -2,6 +2,7 @@ import { bindNavigationVariables } from '../../modules/navigation-variables';
 import {
   populateNav,
   loadNavData,
+  getNavigationEnvironment,
   setEnabledLinks,
   hideLinks,
   loadAuthenticatedUserData,
@@ -58,7 +59,7 @@ class iamSTDNav extends HTMLElement {
     this.request = new AbortController();
     try {
       if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
-      const mode = this.getAttribute('data-mode') ?? 'dev';
+      const mode = this.getAttribute('data-mode');
       const userData = await loadAuthenticatedUserData(
         mode,
         this.getAttribute('data-product'),
@@ -111,24 +112,13 @@ class iamSTDNav extends HTMLElement {
     const nav = this.closest('iam-nav');
     if (!nav) return;
     // Update the logo
-    const mode = this.getAttribute('data-mode') || 'dev';
+    const mode = this.getAttribute('data-mode');
     const brand = nav.querySelector('.brand');
     if (brand) brand.className = 'brand brand--one';
     brand?.setAttribute('title', 'iamproperty One');
     brand?.setAttribute('aria-label', 'iamproperty One');
 
-    switch (mode) {
-      case 'dev':
-      case 'test':
-        brand?.setAttribute('href', 'https://hub.dev.iamproperty.group/dashboard');
-        break;
-      case 'pre-prod':
-        brand?.setAttribute('href', 'https://hub.pre-prod.iamproperty.group/dashboard');
-        break;
-      default:
-        brand?.setAttribute('href', 'https://one.iamproperty.com/dashboard');
-        break;
-    }
+    brand?.setAttribute('href', `${getNavigationEnvironment(mode).hub}/dashboard`);
 
     const brandSvg = brand?.querySelector('svg');
     if (brandSvg)

@@ -86,6 +86,23 @@ it('handles v2 connection, refresh, stale responses and disconnect without legac
     const legacy = makeComponent();
     legacy.setAttribute('data-sso-subject', 'one_legacy');
     await legacy.connectedCallback();
+    const brand = createElement('a', { class: 'brand', slot: 'logo' });
+    nav.append(brand);
+    for (const [mode, destination] of [
+      [null, 'https://one.iamproperty.com/dashboard'],
+      ...['production', '', 'unknown'].map((mode) => [mode, 'https://one.iamproperty.com/dashboard']),
+      ['dev', 'https://hub.dev.iamproperty.group/dashboard'],
+      ...['pre-prod', 'test', 'uat'].map((mode) => [
+        mode,
+        'https://hub.pre-prod.iamproperty.group/dashboard',
+      ]),
+    ]) {
+      if (mode === null) legacy.removeAttribute('data-mode');
+      else legacy.setAttribute('data-mode', mode);
+      await legacy.connectedCallback();
+      expect(brand.getAttribute('href') === destination);
+    }
+    brand.remove();
     const element = makeComponent();
     // An own property models assignment before custom element registration.
     Object.defineProperty(element, 'getAccessToken', {

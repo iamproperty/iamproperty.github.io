@@ -44,7 +44,7 @@ describe('Navigation module', () => {
 });
 
 it('uses v2 bearer authentication without a subject and never falls back after failure', async () => {
-  const { loadAuthenticatedUserData } = await import('./nav.ts');
+  const { loadAuthenticatedUserData, loadNavData } = await import('./nav.ts');
   const originalFetch = globalThis.fetch;
   const requests: any[] = [];
   let status = 200;
@@ -64,6 +64,26 @@ it('uses v2 bearer authentication without a subject and never falls back after f
     await loadAuthenticatedUserData('production', 'crm', () => 'fresh-token');
     expect(requests[1].url === 'https://sso-api.iamproperty.com/v2/navigation/access-context');
     expect(requests[1].options.headers.Authorization === 'Bearer fresh-token');
+    for (const [mode, hub, api] of [
+      [undefined, 'https://one.iamproperty.com', 'https://sso-api.iamproperty.com'],
+      [null, 'https://one.iamproperty.com', 'https://sso-api.iamproperty.com'],
+      ...['production', '', 'unknown'].map((mode) => [
+        mode,
+        'https://one.iamproperty.com',
+        'https://sso-api.iamproperty.com',
+      ]),
+      ['dev', 'https://hub.dev.iamproperty.group', 'https://sso-api.dev.iamproperty.group'],
+      ...['pre-prod', 'test', 'uat'].map((mode) => [
+        mode,
+        'https://hub.pre-prod.iamproperty.group',
+        'https://sso-api.pre-prod.iamproperty.group',
+      ]),
+    ]) {
+      await loadAuthenticatedUserData(mode, 'crm', () => 'environment-token');
+      expect(requests.at(-1).url === `${api}/v2/navigation/access-context`);
+      await loadNavData(mode);
+      expect(requests.at(-1).url === `${hub}/data/ecosystem-switcher.json`);
+    }
     for (const code of [401, 403, 500]) {
       status = code;
       const count = requests.length;

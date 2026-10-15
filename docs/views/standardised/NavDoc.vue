@@ -47,7 +47,7 @@
   data-mode="dev" data-product="crm" />`}}</code></pre>
     <p>For product navigation, also add slot="secondary". Omit it for Hub navigation.
       data-mode="dev" selects development; data-mode="production" selects production.
-      The existing default is development. Token acquisition and refresh remain the product's responsibility.</p>
+      The values test, uat and pre-prod select pre-production. Omitted, empty or unrecognised values default to production. Token acquisition and refresh remain the product's responsibility.</p>
     <p>On logout or account switch, update your authentication state and call navigation.refresh()
       (navigation.value.refresh() for a Vue ref). This immediately removes the previously loaded links and
       ignores outstanding responses. A null token leaves personalised navigation unavailable.
@@ -157,10 +157,10 @@ document.getElementById('navigation').getAccessToken = getAccessToken;`}}</code>
             </tr>
             <tr>
               <th>data-mode</th>
-              <td>Dev</td>
+              <td>production</td>
               <td>String</td>
               <td>No</td>
-              <td>This will change the endpoint used by default the endpoint is a 'dev' environment.</td>
+              <td>Use dev for development, or test, uat and pre-prod for pre-production. Production is the default for all other values, including an omitted or empty attribute. Applies to the API, navigation schema and logo destination.</td>
             </tr>
             <tr>
               <th>slot</th>

@@ -77,11 +77,21 @@ export const populateLinks = (data): void => {
   return html;
 };
 
-export const loadNavData = async (mode): any => {
-  const ajaxURL =
-    mode != 'dev'
-      ? 'https://one.iamproperty.com/data/ecosystem-switcher.json'
-      : 'https://hub.dev.iamproperty.group/data/ecosystem-switcher.json';
+export const getNavigationEnvironment = (mode?: string | null): { hub: string; api: string } => {
+  switch (mode ?? 'production') {
+    case 'dev':
+      return { hub: 'https://hub.dev.iamproperty.group', api: 'https://sso-api.dev.iamproperty.group' };
+    case 'test':
+    case 'uat':
+    case 'pre-prod':
+      return { hub: 'https://hub.pre-prod.iamproperty.group', api: 'https://sso-api.pre-prod.iamproperty.group' };
+    default:
+      return { hub: 'https://one.iamproperty.com', api: 'https://sso-api.iamproperty.com' };
+  }
+};
+
+export const loadNavData = async (mode?: string | null): Promise<any> => {
+  const ajaxURL = `${getNavigationEnvironment(mode).hub}/data/ecosystem-switcher.json`;
 
   try {
     const response = await fetch(ajaxURL, {
@@ -107,7 +117,7 @@ export type NavigationTokenProvider = () => string | null | Promise<string | nul
 
 // Navigation access is always resolved from the verified access token.
 export const loadAuthenticatedUserData = async (
-  mode: string,
+  mode: string | null | undefined,
   product: string | null,
   getAccessToken: NavigationTokenProvider,
   signal?: AbortSignal
@@ -115,7 +125,7 @@ export const loadAuthenticatedUserData = async (
   const token = await getAccessToken();
   if (signal?.aborted) throw new Error('Navigation request cancelled');
   if (typeof token !== 'string' || !token.trim()) throw new Error('Navigation access token unavailable');
-  const base = mode === 'dev' ? 'https://sso-api.dev.iamproperty.group' : 'https://sso-api.iamproperty.com';
+  const base = getNavigationEnvironment(mode).api;
   const response = await fetch(`${base}/v2/navigation/access-context`, {
     method: 'POST',
     signal,
