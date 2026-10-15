@@ -361,7 +361,7 @@ class iamAppInsights extends HTMLElement {
           datasetSearch = 'mb-transaction-id';
 
 
-        if(row.dataset[datasetSearch] && row.dataset[datasetSearch] !== '' &&  row.dataset[datasetSearch] !== '0') {
+        if(row.dataset[datasetSearch] && row.dataset[datasetSearch] !== '') {
           ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.dataset[datasetSearch.toLowerCase()]);
         } else {
           areSearchesMet = false;
