@@ -285,7 +285,7 @@
     }
   }
 
-  ::slotted(a:not([slot='logo']):not(.btn-compact):not(.btn-primary):not(.switch-account)) {
+  ::slotted(a:not([slot='logo']):not(.btn-compact):not(.btn-primary):not(.switch-account):not(#insights-button)) {
     display: block !important;
     line-height: 1.25rem !important;
     padding: 1.5rem 0 !important;
@@ -309,7 +309,7 @@
     padding-bottom: 3rem;
   }
 
-  ::slotted(.btn:not(.btn-compact):not(.btn-primary)) {
+  ::slotted(.btn:not(.btn-compact):not(.btn-primary):not(#insights-button)) {
     display: block !important;
     margin: 0 0 1.5rem 0 !important;
     width: 100% !important;
@@ -739,6 +739,30 @@ slot[name='menus'] {
       margin-left: auto;
       flex-direction: row-reverse;
     }
+  }
+}
+/* #endregion */
+
+/* #region Insights menu button */
+::slotted(#insights-button) {
+  display: inline-block!important;
+  
+  outline-offset: 1px!important;
+}
+@media screen and (max-width: 62em) {
+  ::slotted(#insights-button) {
+    margin: 1.5rem 0  0 0!important;
+  }
+}
+
+@media screen and (min-width: 62em) {
+  ::slotted(#insights-button) {
+    display: inline-block!important;
+    font-size: .75rem!important; /* 12px */
+    padding-block: 0!important;
+    line-height: 1.5rem!important; 
+    height: 1.5rem!important;
+    outline-offset: 1px!important;
   }
 }
 /* #endregion */

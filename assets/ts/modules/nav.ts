@@ -464,6 +464,17 @@ export const megaMenusEvents = (component, menu, menuButton, accountMenu, accoun
         accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
         menuButton?.removeAttribute('aria-expanded');
         accountMenuButton?.removeAttribute('aria-expanded');
+
+        const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+        const insightsButton = component.querySelector('#insights-button');
+
+        if (insightsMenu)
+          insightsMenu.classList.remove('open');
+
+        if (insightsButton){
+          insightsButton?.querySelector('.btn-primary').classList.remove('active');
+          insightsButton?.removeAttribute('aria-expanded');
+        }
       }
     }
   });
@@ -471,15 +482,28 @@ export const megaMenusEvents = (component, menu, menuButton, accountMenu, accoun
 
 export const accountMenuEvents = (component, menu, menuButton, accountMenu, accountMenuButton, backdrop): void => {
   accountMenuButton.addEventListener('click', () => {
+
+    const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+    const insightsButton = component.querySelector('#insights-button');
+
     // Close the main menu
     menu.classList.remove('open');
     accountMenu.classList.toggle('open');
+
 
     if (accountMenu.classList.contains('open')) {
       component.classList.add('open');
       accountMenuButton?.querySelector('.btn-primary').classList.add('active');
       accountMenuButton?.setAttribute('aria-expanded', true);
+
       backdrop.classList.add('show');
+
+      /* insights menu */
+      if (insightsButton) {
+        insightsButton?.querySelector('.btn-primary').classList.add('active');
+        insightsButton?.setAttribute('aria-expanded', true);
+      }
+
     } else {
       component.classList.remove('open');
       accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
@@ -489,6 +513,8 @@ export const accountMenuEvents = (component, menu, menuButton, accountMenu, acco
 
     component.querySelector(':scope > details[open]')?.removeAttribute('open');
     menuButton?.removeAttribute('aria-expanded');
+    if (insightsMenu)
+      insightsMenu.classList.remove('open');
   });
 };
 
@@ -496,6 +522,8 @@ export const backdropEvents = (component, menu, menuButton, accountMenu, account
   // Close the menu on the click of the backdrop on desktop
   backdrop.addEventListener('click', () => {
     const openMenu = component.querySelector(':scope > details[open]');
+    const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+    const insightsButton = component.querySelector('#insights-button');
 
     if (openMenu) openMenu.removeAttribute('open');
 
@@ -505,6 +533,14 @@ export const backdropEvents = (component, menu, menuButton, accountMenu, account
     accountMenu.classList.remove('open');
     accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
     accountMenuButton?.removeAttribute('aria-expanded');
+
+    if (insightsMenu)
+      insightsMenu.classList.remove('open');
+
+    if (insightsButton){
+      insightsButton?.querySelector('.btn-primary').classList.remove('active');
+      insightsButton?.removeAttribute('aria-expanded');
+    }
 
     backdrop.classList.remove('show');
   });

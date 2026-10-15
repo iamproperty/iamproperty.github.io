@@ -179,12 +179,29 @@ class iamSTDNav extends HTMLElement {
     // #region Insights button and pull out
     if (nav && slot == 'secondary') {
 
-      nav.insertAdjacentHTML('beforeend', `<a href="https://iamproperty.com/insights" slot="secondary" class="btn btn-action ms-2">Insights</a>`);
+      nav.insertAdjacentHTML('beforeend', `<a href="https://iamproperty.com/insights" target="_blank" slot="secondary" class="btn btn-action ms-2" id="insights-button">Insights</a>`);
 
       const insightsData = await loadInsightsData(mode).then((data) => {
 
-
         if (!data.dashboards) return false;
+
+        nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', `<div class="nav--menu" id="insights-menu" part="insights--menu">
+          <h2>One insights</h2>
+        </div>`);
+
+
+
+        const insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+        const insightsButton = nav.querySelector('#insights-button');
+
+
+        insightsButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          insightsMenu.classList.toggle('open');
+        });
+
+        console.log(nav);
+        console.log(nav.shadowRoot);
 
 
         console.log(slot);
