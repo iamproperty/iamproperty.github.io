@@ -154,7 +154,8 @@ const UpdateResults = () => {
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="2692b2f4-f051-70e3-d71e-15a7dffc3f29" data-product="crm"></STDNav>
+      <STDNav :get-access-token="() => null" data-product="crm"></STDNav>
+      <span slot="secondary">Product navigation is unavailable in this signed-out demo.</span>
 
     </Nav>
   </nav>
