@@ -1,3 +1,4 @@
+import { bindNavigationVariables } from '../../modules/navigation-variables';
 import {
   populateNav,
   loadNavData,
@@ -25,7 +26,20 @@ class iamSTDNav extends HTMLElement {
   disconnectedCallback(): void {
     this.generation++;
     this.request?.abort();
-    this.renderedNodes.forEach((node) => node.parentNode?.removeChild(node));
+    this.renderedNodes.forEach((node) => {
+      if (node instanceof HTMLElement && node.matches('details[open]')) {
+        const nav = node.closest('iam-nav');
+        const otherDropdown = Array.from(nav?.querySelectorAll(':scope > details[open]') ?? []).some(
+          (details) => !this.renderedNodes.includes(details)
+        );
+        const otherMenu = nav?.shadowRoot?.querySelector('.menu.open, .nav--menu.open');
+        if (nav && !otherDropdown && !otherMenu) {
+          nav.classList.remove('open', 'open-secondary');
+          nav.shadowRoot?.querySelector('.backdrop')?.classList.remove('show');
+        }
+      }
+      node.parentNode?.removeChild(node);
+    });
     this.renderedNodes = [];
     this.restoreVariables.forEach((restore) => restore());
     this.restoreVariables = [];
@@ -72,23 +86,7 @@ class iamSTDNav extends HTMLElement {
         .forEach((element) => element.remove());
       this.renderedNodes = Array.from(template.content.childNodes);
       this.before(template.content);
-      document.querySelectorAll('[data-variable], [data-save-variable]').forEach((element) => {
-        const key = element.getAttribute('data-variable') ?? element.getAttribute('data-save-variable');
-        const value = userData.attributes[key];
-        if (typeof value !== 'string' && typeof value !== 'number') return;
-        if (element.hasAttribute('data-variable')) {
-          const original = Array.from(element.childNodes);
-          this.restoreVariables.push(() => element.replaceChildren(...original));
-          element.textContent = String(value);
-        } else {
-          const original = element.getAttribute('data-variable-value');
-          this.restoreVariables.push(() => {
-            if (original === null) element.removeAttribute('data-variable-value');
-            else element.setAttribute('data-variable-value', original);
-          });
-          element.setAttribute('data-variable-value', String(value));
-        }
-      });
+      this.restoreVariables.push(bindNavigationVariables(userData.attributes));
       this.setAttribute('data-access-context-status', 'loaded');
     } catch {
       if (current()) {

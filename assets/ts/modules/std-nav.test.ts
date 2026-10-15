@@ -5,6 +5,16 @@ it('handles v2 connection, refresh, stale responses and disconnect without legac
   const { document } = installTestDom();
   const nav = createElement('iam-nav');
   document.body.append(nav);
+  nav.shadowRoot = createElement('div');
+  const backdrop = createElement('div', { class: 'backdrop' });
+  const mobileMenu = createElement('div', { class: 'menu' });
+  const accountMenu = createElement('div', { class: 'nav--menu' });
+  nav.shadowRoot.append(backdrop, mobileMenu, accountMenu);
+  const openDropdown = (): void => {
+    nav.querySelector('details').setAttribute('open', '');
+    nav.classList.add('open', 'open-secondary');
+    backdrop.classList.add('show');
+  };
 
   // The lightweight DOM does not parse HTML. Supply the rendered schema's DOM
   // fixture, as nav.test.ts does, while exercising the real component lifecycle.
@@ -19,7 +29,9 @@ it('handles v2 connection, refresh, stale responses and disconnect without legac
       dataEnabled: '/dashboard',
     });
     const content = createElement('div');
-    content.append(link);
+    const dropdown = createElement('details', { slot: 'secondary' });
+    dropdown.append(link);
+    content.append(dropdown);
     Object.defineProperty(content, 'childNodes', { get: () => content.children });
     template.content = content;
     return template;
@@ -85,11 +97,15 @@ it('handles v2 connection, refresh, stale responses and disconnect without legac
     expect(legacy.getAttribute('data-access-context-status') === 'error');
     expect(element.getAttribute('data-access-context-status') === 'loaded');
     expect(document.querySelector('a').getAttribute('href') === '/dashboard');
+    openDropdown();
     element.getAccessToken = (): Promise<string> =>
       new Promise((resolve) => {
         pending = resolve;
       });
     expect(!document.querySelector('a'));
+    expect(!nav.classList.contains('open'));
+    expect(!nav.classList.contains('open-secondary'));
+    expect(!backdrop.classList.contains('show'));
     element.getAccessToken = (): null => null;
     await settle();
     pending('old-user-token');
@@ -99,8 +115,21 @@ it('handles v2 connection, refresh, stale responses and disconnect without legac
     element.getAccessToken = (): string => 'new-user-token';
     await settle();
     expect(Boolean(document.querySelector('a')));
+    // Refreshing generated links must not close an independently open menu.
+    for (const menu of [mobileMenu, accountMenu]) {
+      openDropdown();
+      menu.classList.add('open');
+      await element.refresh();
+      expect(nav.classList.contains('open'));
+      expect(backdrop.classList.contains('show'));
+      expect(menu.classList.contains('open'));
+      menu.classList.remove('open');
+    }
+    openDropdown();
     element.remove();
     element.disconnectedCallback();
+    expect(!nav.classList.contains('open'));
+    expect(!backdrop.classList.contains('show'));
     expect(!document.querySelector('a'));
     expect(requests.every((url) => url.includes('/v2/') || url.includes('ecosystem-switcher.json')));
   } finally {
