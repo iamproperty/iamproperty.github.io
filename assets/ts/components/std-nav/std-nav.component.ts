@@ -179,7 +179,7 @@ class iamSTDNav extends HTMLElement {
     const mode = this.getAttribute('data-mode');
 
     // #region Add in the non-sso standard links then stop further processing for non-sso mode
-    if (!this.hasAttribute('get-access-token') && mode !== 'mock') {
+    if (this.hasAttribute('data-non-sso')) {
 
       if(!isSecondary) return;
 
