@@ -37,7 +37,7 @@ describe('Navigation module', () => {
 
     expect(populateLinks(links).includes('data-product="sales"'));
     expect(link.getAttribute('data-is-enabled') === 'true');
-    expect(link.getAttribute('href') === '/linked');
+    expect(link.getAttribute('href') === 'http://localhost/linked');
     expect(!link.hasAttribute('target'));
     expect(!link.hasAttribute('title'));
   });
@@ -60,7 +60,7 @@ describe('Navigation module', () => {
       attributes: { features: { sales: ['dashboard'], crm: [] } },
     });
     hideLinks(component, { attributes: { features: { sales: ['dashboard'], crm: [] } } });
-    expect(link.getAttribute('href') === '/linked' && link.style.display === 'none');
+    expect(link.getAttribute('href') === 'http://localhost/linked' && link.style.display === 'none');
 
     setEnabledLinks(component, {
       attributes: { features: { sales: [], crm: ['dashboard'] } },
@@ -68,7 +68,7 @@ describe('Navigation module', () => {
     hideLinks(component, { attributes: { features: { sales: [], crm: ['dashboard'] } } });
 
     expect(link.getAttribute('data-is-enabled') === 'false');
-    expect(link.getAttribute('href') === '/locked');
+    expect(link.getAttribute('href') === 'http://localhost/locked');
     expect(link.getAttribute('target') === '_blank');
     expect(link.getAttribute('title') === 'Learn more about this features product');
     expect(link.style.display === '');
@@ -89,11 +89,11 @@ describe('Navigation module', () => {
     };
 
     setInsightsLinks(component, { attributes: { features: { crm: ['dashboard'] } } });
-    expect(link.getAttribute('href') === '/dashboard' && link.hasAttribute('data-is-enabled'));
+    expect(link.getAttribute('href') === 'http://localhost/dashboard' && link.hasAttribute('data-is-enabled'));
 
     setInsightsLinks(component, { attributes: { features: { crm: [] } } });
 
-    expect(link.getAttribute('href') === '/locked');
+    expect(link.getAttribute('href') === 'http://localhost/locked');
     expect(!link.hasAttribute('data-is-enabled'));
     expect(link.getAttribute('data-is-disabled') === 'true');
     expect(link.getAttribute('target') === '_blank');
@@ -113,7 +113,7 @@ describe('Navigation module', () => {
     setEnabledLinks(component, { attributes: { features: { crm: ['dashboard'] } } });
 
     expect(link.getAttribute('data-is-enabled') === 'false');
-    expect(link.getAttribute('href') === '/locked');
+    expect(link.getAttribute('href') === 'http://localhost/locked');
   });
 });
 

@@ -382,9 +382,10 @@ const setSafeNavigationHref = (element, destination): boolean => {
     return false;
   }
 
+  let url: URL;
   try {
-    const protocol = new URL(destination, 'https://navigation.invalid').protocol;
-    if (protocol !== 'http:' && protocol !== 'https:') {
+    url = new URL(destination, window.location.href);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
       element.removeAttribute('href');
       return false;
     }
@@ -393,7 +394,7 @@ const setSafeNavigationHref = (element, destination): boolean => {
     return false;
   }
 
-  element.setAttribute('href', destination);
+  element.setAttribute('href', url.href);
   return true;
 };
 
