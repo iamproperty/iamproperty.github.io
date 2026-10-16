@@ -838,6 +838,10 @@ slot[name='menus'] {
   }
 }
 
+#insights-menu:not(.open) {
+  visibility: hidden;
+}
+
 #insights-menu.open {
   left: 0;
 }
