@@ -11,7 +11,8 @@ import {
   loadInsightsData,
   insightsEvents,
   populateInsightsMenu,
-  getEnvUrl
+  getEnvUrl,
+  resetNavigationAccessState
 } from '../../modules/nav';
 
 class iamSTDNav extends HTMLElement {
@@ -19,6 +20,10 @@ class iamSTDNav extends HTMLElement {
   private request?: AbortController;
   private generation = 0;
   private restoreVariables: Array<() => void> = [];
+  private generatedNavigation: Element[] = [];
+  private insightsButton?: Element;
+  private insightsMenu?: Element;
+  private insightsEventsBound = false;
 
   constructor() {
     super();
@@ -75,14 +80,17 @@ class iamSTDNav extends HTMLElement {
 
   // Call on sign-out/account switch, even when the provider function itself is unchanged.
   async refresh(): Promise<void> {
-    this.disconnectedCallback();
+    this.cancelPendingRequests();
     const generation = this.generation;
     const current = (): boolean => this.isConnected && generation === this.generation;
     if (!current()) return;
 
     const nav = this.closest('iam-nav');
+    if (!nav) return;
     const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
     const mode = this.getAttribute('data-mode');
+    resetNavigationAccessState(nav, this.generatedNavigation, isSecondary);
+    if (isSecondary) this.resetInsightsMenu(nav);
 
 
     // #region Insights menu
@@ -91,12 +99,18 @@ class iamSTDNav extends HTMLElement {
       if (!current()) return;
 
       if (insightsData.dashboards){;
-
-        nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', this.insightsMenuHTML);
-
-        const insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+        let insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+        if (!insightsMenu) {
+          nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', this.insightsMenuHTML);
+          insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+          this.insightsEventsBound = false;
+        }
+        this.insightsMenu = insightsMenu;
         populateInsightsMenu(insightsMenu, insightsData.dashboards);
-        insightsEvents(nav);
+        if (!this.insightsEventsBound) {
+          insightsEvents(nav);
+          this.insightsEventsBound = true;
+        }
       }
     }
     // #endregion
@@ -192,6 +206,7 @@ class iamSTDNav extends HTMLElement {
                             <a href="${getEnvUrl(mode, 'iap')}/ic/dashboard" slot="secondary">movebutler</a>
                             <a href="${getEnvUrl(mode, 'iap')}/auction" slot="secondary">iamsold</a>`;
 
+      this.generatedNavigation = Array.from(template.content.children);
       this.before(template.content);
 
       nav.querySelector(`a[href*='${window.location.hostname}'][slot="secondary"]`)?.classList.add('selected');
@@ -234,6 +249,7 @@ class iamSTDNav extends HTMLElement {
       isSecondary ? schema : schema.filter((section) => section.attributes.title !== 'Learning and support'),
       isSecondary ? 'secondary' : ''
     );
+    this.generatedNavigation = Array.from(template.content.children);
     this.before(template.content);
     // #endregion
 
@@ -249,6 +265,7 @@ class iamSTDNav extends HTMLElement {
           Insights
         </a>`
       );
+      this.insightsButton = nav.querySelector('#insights-button');
     }
     // #endregion
 
@@ -262,10 +279,48 @@ class iamSTDNav extends HTMLElement {
   }
 
   disconnectedCallback(): void {
+    this.cancelPendingRequests();
+    const nav = this.closest('iam-nav');
+    if (nav) {
+      const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
+      resetNavigationAccessState(nav, this.generatedNavigation, isSecondary);
+      if (isSecondary) this.resetInsightsMenu(nav);
+    }
+    this.generatedNavigation.forEach((element) => element.remove());
+    this.generatedNavigation = [];
+    this.insightsButton?.remove();
+    this.insightsButton = undefined;
+    this.insightsMenu?.remove();
+    this.insightsMenu = undefined;
+    this.insightsEventsBound = false;
+    this.removeAttribute('data-access-context-status');
+  }
+
+  private cancelPendingRequests(): void {
     this.generation++;
     this.request?.abort();
     this.restoreVariables.forEach((restore) => restore());
     this.restoreVariables = [];
+  }
+
+  private resetInsightsMenu(nav): void {
+    const insightsMenu = nav.shadowRoot?.querySelector('#insights-menu') ?? this.insightsMenu;
+    const insightsButton = nav.querySelector('#insights-button') ?? this.insightsButton;
+    const wasOpen = insightsMenu?.classList.contains('open');
+
+    insightsMenu?.classList.remove('open');
+    insightsMenu?.querySelectorAll('.group-title, [data-required-products]').forEach((element) => element.remove());
+    insightsButton?.classList.remove('active');
+    insightsButton?.removeAttribute('aria-expanded');
+
+    if (wasOpen) {
+      const otherMenuOpen = nav.shadowRoot.querySelector('.menu.open, .nav--menu:not(#insights-menu).open');
+      const detailsOpen = nav.querySelector(':scope > details[open]');
+      if (!otherMenuOpen && !detailsOpen) {
+        nav.classList.remove('open', 'open-secondary');
+        nav.shadowRoot.querySelector('.backdrop')?.classList.remove('show');
+      }
+    }
   }
 }
 

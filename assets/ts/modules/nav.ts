@@ -71,7 +71,7 @@ export const populateLinks = (data): void => {
   let html = ``;
 
   data.forEach((link) => {
-    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}" ${link.visibility?.hideWhenAny ? `data-hide-when-any='{"values":${JSON.stringify(link.visibility.hideWhenAny)}}'` : ''}>${link.title}</a>`;
+    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}" data-unlinked="${link.destinations.unlinked}" ${link.visibility?.hideWhenAny ? `data-hide-when-any='{"values":${JSON.stringify(link.visibility.hideWhenAny)}}'` : ''}>${link.title}</a>`;
   });
 
   return html;
@@ -380,17 +380,23 @@ export const setEnabledLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-product][data-feature]');
 
   elements.forEach((element) => {
-    if (data.attributes.features[element.getAttribute('data-product')]) {
-      const isEnabled = data.attributes.features[element.getAttribute('data-product')].includes(
-        element.getAttribute('data-feature')
-      );
+    const isEnabled = data.attributes.features[element.getAttribute('data-product')]?.includes(
+      element.getAttribute('data-feature')
+    ) ?? false;
 
-      element.setAttribute('data-is-enabled', isEnabled);
-      if (isEnabled && element.getAttribute('data-enabled')) {
-        element.setAttribute('href', element.getAttribute('data-enabled'));
-        element.removeAttribute('target');
-        element.removeAttribute('title');
-      }
+    element.setAttribute('data-is-enabled', isEnabled);
+    element.setAttribute(
+      'href',
+      isEnabled
+        ? element.getAttribute('data-enabled')
+        : element.getAttribute('data-unlinked') ?? element.getAttribute('href')
+    );
+    if (isEnabled) {
+      element.removeAttribute('target');
+      element.removeAttribute('title');
+    } else {
+      element.setAttribute('target', '_blank');
+      element.setAttribute('title', 'Learn more about this features product');
     }
   });
 };
@@ -398,9 +404,15 @@ export const setEnabledLinks = (component, data): void => {
 export const setInsightsLinks = (component, data): void => {
   const insights = component.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
   insights.forEach((insight) => {
+    insight.removeAttribute('data-is-disabled');
+    insight.removeAttribute('data-is-enabled');
+    insight.setAttribute('href', insight.getAttribute('data-locked'));
+    insight.setAttribute('target', '_blank');
+    insight.setAttribute('title', 'Requires product access — learn more');
+
     const requiredProducts = JSON.parse(insight.getAttribute('data-required-products'));
     requiredProducts.forEach((product) => {
-      if (!data.attributes.features[product]){
+      if (!data.attributes.features[product]?.length) {
         insight.setAttribute('data-is-disabled', true);
       }
     });
@@ -419,6 +431,7 @@ export const hideLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-hide-when-any]');
 
   elements.forEach((element) => {
+    element.style.display = '';
     const hideConditions = JSON.parse(element.getAttribute('data-hide-when-any')).values;
     const shouldHide = hideConditions.some(
       (condition) => !data.attributes.features[condition.product]?.includes(condition.feature)
@@ -430,6 +443,14 @@ export const hideLinks = (component, data): void => {
   });
 };
 
+export const resetNavigationAccessState = (component, navigationNodes = [component], includeInsights = true): void => {
+  const noAccess = { attributes: { features: {} } };
+  navigationNodes.forEach((node) => {
+    setEnabledLinks(node, noAccess);
+    hideLinks(node, noAccess);
+  });
+  if (includeInsights) setInsightsLinks(component, noAccess);
+};
 
 export const populateInsightsMenu = (insightsMenu, dashboards): void => {
 
@@ -463,6 +484,7 @@ export const populateInsightsMenu = (insightsMenu, dashboards): void => {
       const questionElement = document.createElement('a');
       questionElement.textContent = dashboard.suggestionLabel;
       questionElement.setAttribute('href', dashboard.lockedUrl); // Add a default href or modify as needed
+      questionElement.setAttribute('data-locked', dashboard.lockedUrl);
       questionElement.setAttribute('data-required-products', JSON.stringify(dashboard.requiredProducts));
       questionElement.setAttribute('data-enabled', dashboard.slug);
       questionElement.setAttribute('target', '_blank');
