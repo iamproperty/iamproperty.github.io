@@ -135,7 +135,7 @@ class iamSTDNav extends HTMLElement {
 
         setEnabledLinks(nav, mockedUserData);
         hideLinks(nav, mockedUserData);
-        setInsightsLinks(nav, mockedUserData);
+        setInsightsLinks(nav, mode, mockedUserData);
 
         this.restoreVariables.push(bindNavigationVariables(mockedUserData.attributes));
 
@@ -173,7 +173,7 @@ class iamSTDNav extends HTMLElement {
 
       setEnabledLinks(nav, userData);
       hideLinks(nav, userData);
-      setInsightsLinks(nav, userData);
+      setInsightsLinks(nav, mode, userData);
 
       this.restoreVariables.push(bindNavigationVariables(userData.attributes));
       this.setAttribute('data-access-context-status', 'loaded');
@@ -257,7 +257,7 @@ class iamSTDNav extends HTMLElement {
     if (isSecondary) {
 
       nav.insertAdjacentHTML('beforeend',
-        /* HTML */ `<a href="https://iamproperty.com/insights" target="_blank" slot="secondary" class="btn btn-action ms-2" id="insights-button">
+        /* HTML */ `<a href="${getNavigationEnvironment(mode).hub}/dashboard" target="_blank" slot="secondary" class="btn btn-action ms-2" id="insights-button">
           <svg viewBox="0 0 130 130" preserveAspectRatio="xMinYMid meet">
             <title>iam property insights</title>
             ${this.oSVG}

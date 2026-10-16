@@ -77,17 +77,19 @@ export const populateLinks = (data): void => {
   return html;
 };
 
-export const getEnvUrl = (mode?: string | null, product?: 'iap' | 'crm' | 'mtk'): string => {
+export const getEnvUrl = (mode?: string | null, product?: 'iap' | 'crm' | 'mtk' | 'hub'): string => {
   const envMap = {
     production: {
       iap: 'https://my.iamproperty.com',
       crm: 'https://crm.iamproperty.com',
-      mtk: 'frontend.informationworks.co.uk'
+      mtk: 'frontend.informationworks.co.uk',
+      hub: 'https://hub.dev.iamproperty.group'
     },
     test: {
       iap: 'https://my.eco.iamproperty.group',
       crm: 'https://dev.vtopenview.com',
-      mtk: 'frontend-test.informationworks.co.uk'
+      mtk: 'frontend-test.informationworks.co.uk',
+      hub: 'https://hub.dev.iamproperty.group'
     }
   };
   return envMap[mode ?? 'production'][product ?? 'iap'];
@@ -401,7 +403,11 @@ export const setEnabledLinks = (component, data): void => {
   });
 };
 
-export const setInsightsLinks = (component, data): void => {
+export const setInsightsLinks = (component, mode, data): void => {
+
+
+  const hubBaseUrl = getEnvUrl(mode, 'hub');
+
   const insights = component.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
   insights.forEach((insight) => {
     insight.removeAttribute('data-is-disabled');
@@ -420,7 +426,7 @@ export const setInsightsLinks = (component, data): void => {
   insights.forEach((insight) => {
     if (!insight.hasAttribute('data-is-disabled')) {
       insight.setAttribute('data-is-enabled', true);
-      insight.setAttribute('href', insight.getAttribute('data-enabled'));
+      insight.setAttribute('href', hubBaseUrl + '/insights/' + insight.getAttribute('data-enabled'));
       insight.removeAttribute('target');
       insight.removeAttribute('title');
     }
