@@ -63,8 +63,8 @@
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav :get-access-token="() => null" data-product="crm"></STDNav>
-      <span slot="secondary">Product navigation is unavailable in this signed-out demo.</span>
+      <STDNav :get-access-token="() => null" data-mode="mock" data-product="crm"></STDNav>
+
     </Nav>
   </nav>
 

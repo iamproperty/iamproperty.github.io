@@ -44,8 +44,7 @@
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
-      <STDNav slot="secondary" :get-access-token="() => null" data-product="iamsold"></STDNav>
-      <span slot="secondary">Product navigation is unavailable in this signed-out demo.</span>
+      <STDNav slot="secondary" :get-access-token="() => null" data-mode="mock" data-product="iamsold"></STDNav>
     </Nav>
   </nav>
 
