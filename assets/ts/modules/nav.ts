@@ -483,7 +483,7 @@ export const insightsEvents = (component): void => {
   const menuButton = component.shadowRoot.querySelector('#btn-menu');
   const menu = component.shadowRoot.querySelector('.menu');
   const accountMenuButton = component.shadowRoot.querySelector('#btn-menu-account');
-  const accountMenu = component.shadowRoot.querySelector('.nav--menu');
+  const accountMenu = component.shadowRoot.querySelector('.nav--menu:not(#insights-menu)');
 
   insightsButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -491,7 +491,7 @@ export const insightsEvents = (component): void => {
 
     menu.classList.remove('open');
     menuButton?.removeAttribute('aria-expanded');
-    accountMenu.classList.remove('open');
+    accountMenu?.classList.remove('open');
     accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
     accountMenuButton?.removeAttribute('aria-expanded');
     component.querySelector(':scope > details[open]')?.removeAttribute('open');
