@@ -90,7 +90,6 @@ class iamSTDNav extends HTMLElement {
     const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
     const mode = this.getAttribute('data-mode');
     resetNavigationAccessState(nav, this.generatedNavigation, isSecondary);
-    if (isSecondary) this.resetInsightsMenu(nav);
 
 
     // #region Insights menu
@@ -284,7 +283,6 @@ class iamSTDNav extends HTMLElement {
     if (nav) {
       const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
       resetNavigationAccessState(nav, this.generatedNavigation, isSecondary);
-      if (isSecondary) this.resetInsightsMenu(nav);
     }
     this.generatedNavigation.forEach((element) => element.remove());
     this.generatedNavigation = [];
@@ -301,26 +299,6 @@ class iamSTDNav extends HTMLElement {
     this.request?.abort();
     this.restoreVariables.forEach((restore) => restore());
     this.restoreVariables = [];
-  }
-
-  private resetInsightsMenu(nav): void {
-    const insightsMenu = nav.shadowRoot?.querySelector('#insights-menu') ?? this.insightsMenu;
-    const insightsButton = nav.querySelector('#insights-button') ?? this.insightsButton;
-    const wasOpen = insightsMenu?.classList.contains('open');
-
-    insightsMenu?.classList.remove('open');
-    insightsMenu?.querySelectorAll('.group-title, [data-required-products]').forEach((element) => element.remove());
-    insightsButton?.classList.remove('active');
-    insightsButton?.removeAttribute('aria-expanded');
-
-    if (wasOpen) {
-      const otherMenuOpen = nav.shadowRoot.querySelector('.menu.open, .nav--menu:not(#insights-menu).open');
-      const detailsOpen = nav.querySelector(':scope > details[open]');
-      if (!otherMenuOpen && !detailsOpen) {
-        nav.classList.remove('open', 'open-secondary');
-        nav.shadowRoot.querySelector('.backdrop')?.classList.remove('show');
-      }
-    }
   }
 }
 

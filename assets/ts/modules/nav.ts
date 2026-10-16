@@ -77,19 +77,17 @@ export const populateLinks = (data): void => {
   return html;
 };
 
-export const getEnvUrl = (mode?: string | null, product?: 'iap' | 'crm' | 'mtk' | 'hub'): string => {
+export const getEnvUrl = (mode?: string | null, product?: 'iap' | 'crm' | 'mtk'): string => {
   const envMap = {
     production: {
       iap: 'https://my.iamproperty.com',
       crm: 'https://crm.iamproperty.com',
-      mtk: 'frontend.informationworks.co.uk',
-      hub: 'https://hub.dev.iamproperty.group'
+      mtk: 'frontend.informationworks.co.uk'
     },
     test: {
       iap: 'https://my.eco.iamproperty.group',
       crm: 'https://dev.vtopenview.com',
-      mtk: 'frontend-test.informationworks.co.uk',
-      hub: 'https://hub.dev.iamproperty.group'
+      mtk: 'frontend-test.informationworks.co.uk'
     }
   };
   return envMap[mode ?? 'production'][product ?? 'iap'];
@@ -405,8 +403,7 @@ export const setEnabledLinks = (component, data): void => {
 
 export const setInsightsLinks = (component, mode, data): void => {
 
-
-  const hubBaseUrl = getEnvUrl(mode, 'hub');
+  const hubBaseUrl = getNavigationEnvironment(mode).hub;
 
   const insights = component.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
   insights.forEach((insight) => {
