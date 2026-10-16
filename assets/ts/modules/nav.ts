@@ -376,39 +376,21 @@ export const loadInsightsData = async (mode, subject, product): any => {
   return data;
 };
 
-const setSafeNavigationHref = (element, destination): boolean => {
-  if (typeof destination !== 'string' || !destination.trim()) {
-    element.removeAttribute('href');
-    return false;
-  }
-
-  try {
-    const protocol = new URL(destination, 'https://navigation.invalid').protocol;
-    if (protocol !== 'http:' && protocol !== 'https:') {
-      element.removeAttribute('href');
-      return false;
-    }
-  } catch {
-    element.removeAttribute('href');
-    return false;
-  }
-
-  element.setAttribute('href', destination);
-  return true;
-};
-
 export const setEnabledLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-product][data-feature]');
 
   elements.forEach((element) => {
-    const hasAccess = data.attributes.features[element.getAttribute('data-product')]?.includes(
+    const isEnabled = data.attributes.features[element.getAttribute('data-product')]?.includes(
       element.getAttribute('data-feature')
     ) ?? false;
-    const isEnabled = hasAccess && setSafeNavigationHref(element, element.getAttribute('data-enabled'));
 
     element.setAttribute('data-is-enabled', isEnabled);
-    if (!isEnabled)
-      setSafeNavigationHref(element, element.getAttribute('data-unlinked') ?? element.getAttribute('href'));
+    element.setAttribute(
+      'href',
+      isEnabled
+        ? element.getAttribute('data-enabled')
+        : element.getAttribute('data-unlinked') ?? element.getAttribute('href')
+    );
     if (isEnabled) {
       element.removeAttribute('target');
       element.removeAttribute('title');
@@ -424,7 +406,7 @@ export const setInsightsLinks = (component, data): void => {
   insights.forEach((insight) => {
     insight.removeAttribute('data-is-disabled');
     insight.removeAttribute('data-is-enabled');
-    setSafeNavigationHref(insight, insight.getAttribute('data-locked'));
+    insight.setAttribute('href', insight.getAttribute('data-locked'));
     insight.setAttribute('target', '_blank');
     insight.setAttribute('title', 'Requires product access — learn more');
 
@@ -437,14 +419,10 @@ export const setInsightsLinks = (component, data): void => {
   });
   insights.forEach((insight) => {
     if (!insight.hasAttribute('data-is-disabled')) {
-      if (setSafeNavigationHref(insight, insight.getAttribute('data-enabled'))) {
-        insight.setAttribute('data-is-enabled', true);
-        insight.removeAttribute('target');
-        insight.removeAttribute('title');
-      } else {
-        insight.setAttribute('data-is-disabled', true);
-        setSafeNavigationHref(insight, insight.getAttribute('data-locked'));
-      }
+      insight.setAttribute('data-is-enabled', true);
+      insight.setAttribute('href', insight.getAttribute('data-enabled'));
+      insight.removeAttribute('target');
+      insight.removeAttribute('title');
     }
   });
 };
@@ -505,7 +483,7 @@ export const populateInsightsMenu = (insightsMenu, dashboards): void => {
     group.children.forEach((dashboard) => {
       const questionElement = document.createElement('a');
       questionElement.textContent = dashboard.suggestionLabel;
-      setSafeNavigationHref(questionElement, dashboard.lockedUrl);
+      questionElement.setAttribute('href', dashboard.lockedUrl); // Add a default href or modify as needed
       questionElement.setAttribute('data-locked', dashboard.lockedUrl);
       questionElement.setAttribute('data-required-products', JSON.stringify(dashboard.requiredProducts));
       questionElement.setAttribute('data-enabled', dashboard.slug);

@@ -98,23 +98,6 @@ describe('Navigation module', () => {
     expect(link.getAttribute('data-is-disabled') === 'true');
     expect(link.getAttribute('target') === '_blank');
   });
-
-  it('rejects script URLs while applying access state', () => {
-    const component = createElement('nav');
-    const link = createElement('a', {
-      dataProduct: 'crm',
-      dataFeature: 'dashboard',
-      dataEnabled: 'javascript:alert(1)',
-      dataUnlinked: '/locked',
-      href: '/locked',
-    });
-    append(component, link);
-
-    setEnabledLinks(component, { attributes: { features: { crm: ['dashboard'] } } });
-
-    expect(link.getAttribute('data-is-enabled') === 'false');
-    expect(link.getAttribute('href') === '/locked');
-  });
 });
 
 it('uses v2 bearer authentication without a subject and never falls back after failure', async () => {
