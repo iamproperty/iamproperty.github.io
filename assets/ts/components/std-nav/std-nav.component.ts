@@ -76,6 +76,9 @@ class iamSTDNav extends HTMLElement {
   // Call on sign-out/account switch, even when the provider function itself is unchanged.
   async refresh(): Promise<void> {
     this.disconnectedCallback();
+    const generation = this.generation;
+    const current = (): boolean => this.isConnected && generation === this.generation;
+    if (!current()) return;
 
     const nav = this.closest('iam-nav');
     const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
@@ -85,6 +88,7 @@ class iamSTDNav extends HTMLElement {
     // #region Insights menu
     if (isSecondary) {
       const insightsData = await loadInsightsData(mode);
+      if (!current()) return;
 
       if (insightsData.dashboards){;
 
@@ -107,8 +111,10 @@ class iamSTDNav extends HTMLElement {
             Accept: 'application/json',
           },
         });
+        if (!current()) return;
 
         const json = await response.json();
+        if (!current()) return;
         const data = json.data ? json.data : json;
 
         const mockedUserData = data;
@@ -132,10 +138,7 @@ class iamSTDNav extends HTMLElement {
     // #endregion
 
     // #region Code to maintain the lifecyle
-    const generation = this.generation;
-    if (!this.isConnected) return;
     this.hidden = true; // Keep a lifecycle anchor; links remain direct children of iam-nav.
-    const current = (): boolean => this.isConnected && generation === this.generation;
     this.setAttribute('data-access-context-status', 'loading');
     this.request = new AbortController();
     // #endregion
