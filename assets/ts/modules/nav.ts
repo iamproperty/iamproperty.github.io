@@ -77,6 +77,22 @@ export const populateLinks = (data): void => {
   return html;
 };
 
+export const getEnvUrl = (mode?: string | null, product?: 'iap' | 'crm' | 'mtk'): string => {
+  const envMap = {
+    production: {
+      iap: 'https://my.iamproperty.com',
+      crm: 'https://crm.iamproperty.com',
+      mtk: 'frontend.informationworks.co.uk'
+    },
+    test: {
+      iap: 'https://my.eco.iamproperty.group',
+      crm: 'https://dev.vtopenview.com',
+      mtk: 'frontend-test.informationworks.co.uk'
+    }
+  };
+  return envMap[mode ?? 'production'][product ?? 'iap'];
+};
+
 export const getNavigationEnvironment = (mode?: string | null): { hub: string; api: string } => {
   switch (mode ?? 'production') {
     case 'dev':
@@ -381,9 +397,6 @@ export const setEnabledLinks = (component, data): void => {
 
 export const setInsightsLinks = (component, data): void => {
   const insights = component.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
-
-  console.log(insights);
-
   insights.forEach((insight) => {
     const requiredProducts = JSON.parse(insight.getAttribute('data-required-products'));
     requiredProducts.forEach((product) => {
@@ -416,6 +429,98 @@ export const hideLinks = (component, data): void => {
     }
   });
 };
+
+
+export const populateInsightsMenu = (insightsMenu, dashboards): void => {
+
+  const createGroups = (dashboards: any[]): { name: string; children: any[] }[] => {
+
+    const defaultGroupOrder = ['Win', 'Grow'];
+    return [...new Set<string>(dashboards.map((dashboard) => dashboard.group))]
+      .sort((a, b) => {
+        const aIndex = defaultGroupOrder.indexOf(a);
+        const bIndex = defaultGroupOrder.indexOf(b);
+        return (
+          (aIndex === -1 ? defaultGroupOrder.length : aIndex) - (bIndex === -1 ? defaultGroupOrder.length : bIndex)
+        );
+      })
+      .map((name) => ({
+        name,
+        children: dashboards.filter((dashboard: any) => dashboard.group === name),
+      }));
+  };
+
+  const groups = createGroups(dashboards);
+
+  // Populate the questions into the nav menu
+  groups.forEach((group) => {
+    const groupTitle = document.createElement('span');
+    groupTitle.classList.add('group-title');
+    groupTitle.textContent = group.name;
+    insightsMenu.appendChild(groupTitle);
+
+    group.children.forEach((dashboard) => {
+      const questionElement = document.createElement('a');
+      questionElement.textContent = dashboard.suggestionLabel;
+      questionElement.setAttribute('href', dashboard.lockedUrl); // Add a default href or modify as needed
+      questionElement.setAttribute('data-required-products', JSON.stringify(dashboard.requiredProducts));
+      questionElement.setAttribute('data-enabled', dashboard.slug);
+      questionElement.setAttribute('target', '_blank');
+      questionElement.setAttribute('title', 'Requires product access — learn more');
+
+      insightsMenu.appendChild(questionElement);
+    });
+  });
+};
+
+export const insightsEvents = (component): void => {
+
+  const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+  const insightsButton = component.querySelector('#insights-button');
+  const insightsClose = component.shadowRoot.querySelector('#insights-close');
+  const backdrop = component.shadowRoot.querySelector('.backdrop');
+
+  const menuButton = component.shadowRoot.querySelector('#btn-menu');
+  const menu = component.shadowRoot.querySelector('.menu');
+  const accountMenuButton = component.shadowRoot.querySelector('#btn-menu-account');
+  const accountMenu = component.shadowRoot.querySelector('.nav--menu');
+
+  insightsButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    insightsMenu.classList.toggle('open');
+
+    menu.classList.remove('open');
+    menuButton?.removeAttribute('aria-expanded');
+    accountMenu.classList.remove('open');
+    accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+    accountMenuButton?.removeAttribute('aria-expanded');
+    component.querySelector(':scope > details[open]')?.removeAttribute('open');
+
+    if (insightsMenu.classList.contains('open')) {
+      insightsButton.classList.add('active');
+      insightsButton?.setAttribute('aria-expanded', true);
+
+      component.classList.add('open');
+      component.classList.add('open-secondary');
+      backdrop.classList.add('show');
+    } else {
+      insightsButton.classList.remove('active');
+      component.classList.remove('open');
+      component.classList.remove('open-secondary');
+      backdrop.classList.remove('show');
+    }
+  });
+
+  insightsClose?.addEventListener('click', (e) => {
+    e.preventDefault();
+    insightsMenu.classList.remove('open');
+    insightsButton.classList.remove('active');
+    insightsButton?.removeAttribute('aria-expanded');
+    component.classList.remove('open');
+    component.classList.remove('open-secondary');
+    backdrop.classList.remove('show');
+  });
+};
 // #endregion
 
 export const branchSelector = (component): void => {
@@ -429,6 +534,7 @@ export const branchSelector = (component): void => {
     else branchSelector?.setAttribute('slot', 'account');
   });
 };
+
 
 export const menuEvents = (component, menu, menuButton, accountMenu, accountMenuButton): void => {
   menuButton.addEventListener(

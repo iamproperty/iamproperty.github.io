@@ -22,6 +22,12 @@
 @use '../utilities/sizes' as *;
 @use '../utilities/display' as *;
 
+/* #region Utilities */
+
+.text-center {
+  text-align: center;
+}
+/* #endregion */
 
 *,
 *::before,
@@ -441,7 +447,7 @@
     }
   }
 
-  ::slotted(a[slot='secondary']) {
+  ::slotted(a[slot='secondary']:not(#insights-button)) {
     font-size: 0.75rem !important;
     line-height: 2rem !important;
     margin: 0 !important;
@@ -743,41 +749,67 @@ slot[name='menus'] {
 }
 /* #endregion */
 
-/* #region Insights menu button */
-::slotted(#insights-button) {
-  display: inline-block!important;
-  
-  outline-offset: 1px!important;
-}
-@media screen and (max-width: 62em) {
-  ::slotted(#insights-button) {
-    margin: 1.5rem 0  0 0!important;
-  }
-}
-
-@media screen and (min-width: 62em) {
-  ::slotted(#insights-button) {
-    display: inline-block!important;
-    font-size: .75rem!important; /* 12px */
-    padding-block: 0!important;
-    line-height: 1.5rem!important; 
-    height: 1.5rem!important;
-    outline-offset: 1px!important;
-  }
-}
-/* #endregion */
-
 /* #region Insights menu */
 
 #insights-menu {
   width: 100vw;
   height: 100vh;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem; 
+  border: 1px solid transparent;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+
+  background:
+    linear-gradient(var(--colour-canvas), var(--colour-canvas)) padding-box,
+    linear-gradient(90.24deg, #4DF3F3 0.19%, #102430 99.76%) border-box;
+
+  #insights-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    margin: 0.25rem;
+
+    &:before {
+        
+      font-weight: 400;
+    }
+  }
+
+  :is(.lead, .strapline) {
+    font-size: 1.125rem; /* 18/16 */
+    line-height: 1.75rem; /* 28/16 */
+    padding-bottom: 3rem;
+    max-width: var(--content-max-width);
+    font-weight: 700;
+  }
+
+  .group-title {
+    display: block;
+    color: var(--colour-body);
+    padding-bottom: 1rem;
+  }
+  a + .group-title {
+    padding-top: 1rem;
+    border-top: 1px solid var(--colour-border);
+    margin-inline: -0.5rem;
+    padding-inline: 0.5rem;
+  }
 
   a {
+
+    display: inline-block;
+    width: fit-content;
+    margin: 0 0 1rem 0;
 
     &::after {
       display: none;
     }
+  }
+
+  a:is(:hover,:focus) {
+    text-decoration: underline;
   }
 
   a:not([data-is-enabled]) {
@@ -814,6 +846,8 @@ slot[name='menus'] {
     width: 40rem;
     height: calc(100vh - 2.5rem);
     top: 2.5rem;
+
+    padding: 1rem 3rem;
   }
   #insights-menu.open {
     left: calc(100% - 40rem);
