@@ -505,6 +505,7 @@ export const insightsEvents = (component): void => {
       backdrop.classList.add('show');
     } else {
       insightsButton.classList.remove('active');
+      insightsButton.removeAttribute('aria-expanded');
       component.classList.remove('open');
       component.classList.remove('open-secondary');
       backdrop.classList.remove('show');
