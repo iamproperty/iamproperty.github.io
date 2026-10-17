@@ -262,7 +262,7 @@
         <h3 id="competitor-list-title">Customise your competitor list</h3>
         <p>Update the competitors you see within your the sales insights widget.</p>
 
-        <span class="label">Search outcodes <Tooltip slot="tooltip" title="An outcode is the first part of a UK postcode (before the space) that identifies the general area or district."><i class="fa-solid fa-info-circle text-info" slot="icon"></i></Tooltip> </span>
+        <span class="label">Search outcodes <Tooltip data-type="info" title="An outcode is the first part of a UK postcode (before the space) that identifies the general area or district."><i class="fa-solid fa-info-circle text-info" slot="icon"></i></Tooltip> </span>
         <Multiselect
           @change="onOutcodeChange"
           @input="searchOutcodes"
