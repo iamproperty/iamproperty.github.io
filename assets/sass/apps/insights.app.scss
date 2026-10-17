@@ -296,8 +296,20 @@ iam-pagination::part(next):after {
   background-repeat: no-repeat!important;
   background-position: center!important;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='var(--colour-info)' viewBox='0 0 512 512'%3E%3Cpath d='M313.5 239c9.4 9.4 9.4 24.6 0 33.9l-200 200c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l183-183-183-183c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l200 200z'/%3E%3C/svg%3E")!important;
+
 }
 
+iam-pagination::part(select--minimal):after {
+  content: "";
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  background-size: contain!important;
+  background-repeat: no-repeat!important;
+  background-position: center!important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='var(--colour-info)' viewBox='0 0 640 640'%3E%3Cpath d='M303.5 473C312.9 482.4 328.1 482.4 337.4 473L537.4 273C546.8 263.6 546.8 248.4 537.4 239.1C528 229.8 512.8 229.7 503.5 239.1L320.5 422.1L137.5 239.1C128.1 229.7 112.9 229.7 103.6 239.1C94.3 248.5 94.2 263.7 103.6 273L303.6 473z'/%3E%3C/svg%3E")!important;
+
+}
 
 @layer elements {
 
