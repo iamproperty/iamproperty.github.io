@@ -6,9 +6,9 @@ import {
   setEnabledLinks,
   hideLinks,
   loadAuthenticatedUserData,
+  loadAuthenticatedDashboardData,
   NavigationTokenProvider,
   setInsightsLinks,
-  loadInsightsData,
   insightsEvents,
   populateInsightsMenu,
   getEnvUrl,
@@ -91,33 +91,41 @@ class iamSTDNav extends HTMLElement {
     const mode = this.getAttribute('data-mode');
     resetNavigationAccessState(nav, this.generatedNavigation, isSecondary);
 
-
-    // #region Insights menu
-    if (isSecondary) {
-      const insightsData = await loadInsightsData(mode);
-      if (!current()) return;
-
-      if (insightsData.dashboards){;
-        let insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
-        if (!insightsMenu) {
-          nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', this.insightsMenuHTML);
-          insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
-          this.insightsEventsBound = false;
-        }
-        this.insightsMenu = insightsMenu;
-        populateInsightsMenu(insightsMenu, insightsData.dashboards);
-        if (!this.insightsEventsBound) {
-          insightsEvents(nav);
-          this.insightsEventsBound = true;
-        }
-      }
-    }
-    // #endregion
-
     // #region If the component is in mock mode, skip the token provider check and user data loading. We then need to load a mock of the navigation data.
     if (this.getAttribute('data-mode') === 'mock') {
 
       try {
+
+        if (isSecondary) {
+
+          const insightsData = await fetch('/dashboards.json', {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+            },
+          });
+
+          const insightsJson = await insightsData.json();
+          console.log(insightsJson);
+
+          if (insightsJson.dashboards){
+
+            let insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+            if (!insightsMenu) {
+              nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', this.insightsMenuHTML);
+              insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+              this.insightsEventsBound = false;
+            }
+            this.insightsMenu = insightsMenu;
+            populateInsightsMenu(insightsMenu, insightsJson.dashboards);
+            if (!this.insightsEventsBound) {
+              insightsEvents(nav);
+              this.insightsEventsBound = true;
+            }
+          }
+        }
+
+
         const response = await fetch('/access-context.json', {
           method: 'GET',
           headers: {
@@ -148,7 +156,10 @@ class iamSTDNav extends HTMLElement {
 
       return;
     }
+
+
     // #endregion
+
 
     // #region Code to maintain the lifecyle
     this.hidden = true; // Keep a lifecycle anchor; links remain direct children of iam-nav.
@@ -156,7 +167,55 @@ class iamSTDNav extends HTMLElement {
     this.request = new AbortController();
     // #endregion
 
-    // #region Authentication and user data loading
+
+
+
+    // #region Load the authenticated dashboard data if this is a secondary navigation component.
+    if (isSecondary) {
+
+      try {
+
+      if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
+
+        console.log('Loading insights data for mode:', mode);
+
+        const insightsData = await loadAuthenticatedDashboardData(
+          mode,
+          this.getAttribute('data-product'),
+          this.tokenProvider,
+          this.request.signal
+        );
+        console.log(insightsData);
+
+        if (insightsData.dashboards){
+
+          let insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+          if (!insightsMenu) {
+            nav.shadowRoot.querySelector('.container')?.insertAdjacentHTML('beforeend', this.insightsMenuHTML);
+            insightsMenu = nav.shadowRoot.querySelector('#insights-menu');
+            this.insightsEventsBound = false;
+          }
+          this.insightsMenu = insightsMenu;
+          populateInsightsMenu(insightsMenu, insightsData.dashboards);
+          if (!this.insightsEventsBound) {
+            insightsEvents(nav);
+            this.insightsEventsBound = true;
+          }
+        }
+      } catch {
+        if (current()) {
+          this.setAttribute('data-access-context-status', 'error');
+          // No token or provider errors are exposed in event details or logs.
+          this.dispatchEvent(new CustomEvent('navigation-access-error', { bubbles: true }));
+        }
+      }
+    }
+    // #endregion
+    // #endregion
+
+    // #region Authentication and user data loading, including dashboard data for secondary navigation components
+
+
     try {
 
       if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
@@ -176,6 +235,7 @@ class iamSTDNav extends HTMLElement {
 
       this.restoreVariables.push(bindNavigationVariables(userData.attributes));
       this.setAttribute('data-access-context-status', 'loaded');
+
     } catch {
       if (current()) {
         this.setAttribute('data-access-context-status', 'error');
