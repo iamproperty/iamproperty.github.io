@@ -412,3 +412,39 @@ iam-table-advanced::part(table-filter):after {
   width: 1em;
 }
 // #endregion
+
+// #region Empty State Image
+
+.wrapper:not(:has(tbody tr)){
+
+  display: none!important;
+}
+
+.empty-state {
+  display: none;
+}
+
+.wrapper:not(:has(tbody tr)) + .empty-state {
+  display: block;
+  padding-top: 1rem;
+}
+
+.wrapper:has(.table--filtered):not(:has(tbody tr.filtered--matched)) + .empty-state {
+  display: block;
+  padding-top: 1rem;
+}
+
+.empty-state img {
+  display: block;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 6rem;
+  height: auto;
+}
+.empty-state span{
+  display: block;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 0;
+}
+// #endregion

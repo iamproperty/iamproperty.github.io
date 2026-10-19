@@ -14,11 +14,17 @@ class iamAppInsights extends HTMLElement {
     ${loadCSS}
     </style>
 
-    <strong class="d-block pb-3"><span id="count"></span> <!--<span id="count-text"></span>-->properties</strong>
+    <div class="wrapper">
+      <strong class="d-block pb-3 insight-count"><span id="count"></span> <!--<span id="count-text"></span>-->properties</strong>
 
-    <div id="map-wrapper"></div>
+      <div id="map-wrapper"></div>
 
-    <div id="table-wrapper">Loading table...</div>`;
+      <div id="table-wrapper">Loading table...</div>
+    </div>
+    <div class="empty-state">
+      <img src="/img/illustrations/estate-agents.png" alt="" loading="lazy" />
+      <span class="lead text-heading">No results found</span>
+    </div>`;
 
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }

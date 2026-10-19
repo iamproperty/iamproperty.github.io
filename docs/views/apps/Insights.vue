@@ -307,6 +307,141 @@ const insightAction = (event) => {
 
     </div>
 
+    <h2>Empty State</h2>
+
+    <div class="full-width bg-light mb-5">
+
+      <div class="container pt-5">
+        <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
+          <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
+
+          <AppInsights @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
+            <table>
+              <thead>
+
+                <tr>
+                  <th data-filters='[{"type":"text"}]' data-sort>Property</th>
+                  <th data-filters='[{"type":"date"}]' data-sort data-format="date">Date listed</th>
+                  <th data-filters='[{"type":"price"}]' data-sort data-format="price">Current list price</th>
+                  <th data-filters data-sort>Branch</th>
+                  <th data-filters='[{"type": "number", "operator": "equals"}]' data-sort>Weeks on market</th>
+                  <th data-filters data-sort>Latest fall through</th>
+                  <th data-filters data-sort>Latest price reduction</th>
+                  <th data-filters data-sort>Price reduction %</th>
+                  <th data-filters data-sort>Listed agent</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </AppInsights>
+        </div>
+      </div>
+
+    </div>
+
+    <h3>Empty after filtering</h3>
+
+    <div class="full-width bg-light mb-5">
+
+      <div class="container pt-5">
+        <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
+          <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
+
+          <AppInsights @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
+            <table>
+              <thead>
+
+                <tr>
+                  <th data-filters='[{"type":"text"}]' data-sort>Property</th>
+                  <th data-filters='[{"type":"date"}]' data-sort data-format="date">Date listed</th>
+                  <th data-filters='[{"type":"price"}]' data-sort data-format="price">Current list price</th>
+                  <th data-filters data-sort>Branch</th>
+                  <th data-filters='[{"type": "number", "operator": "equals", "value": "11"}]' data-sort>Weeks on market</th>
+                  <th data-filters data-sort>Latest fall through</th>
+                  <th data-filters data-sort>Latest price reduction</th>
+                  <th data-filters data-sort>Price reduction %</th>
+                  <th data-filters data-sort>Listed agent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-latitude="51.46702877541017" data-longitude="-0.12037120753760178" data-criteria-match="full" data-branch-id="385440" data-udprn="22900034" data-umrrn="230">
+                  <td>59 Glen Street, NE68 3LS</td>
+                  <td>2026-08-05</td>
+                  <td>250000</td>
+                  <td>Heaton</td>
+                  <td>12 weeks</td>
+                  <td>22/09/26</td>
+                  <td>£300,000</td>
+                  <td>5%</td>
+                  <td>John Smith</td>
+                </tr>
+                <tr data-latitude="51.467336224030646" data-longitude="-0.11552177363870442" data-criteria-match="full" data-udprn="22900034" data-umrrn="20">
+                  <td>59 Glen Street, NE68 3LS</td>
+                  <td>22/09/26</td>
+                  <td>£100,000</td>
+                  <td>Gosforth</td>
+                  <td>23 weeks</td>
+                  <td>22/09/26</td>
+                  <td>£300,000</td>
+                  <td>5%</td>
+                  <td>John Smith</td>
+                </tr>
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
+                  <td>59 Glen Street, NE68 3LS</td>
+                  <td>22/09/26</td>
+                  <td>£50,000</td>
+                  <td>Heaton</td>
+                  <td>13 weeks</td>
+                  <td>22/09/26</td>
+                  <td>£300,000</td>
+                  <td>5%</td>
+                  <td>John Smith</td>
+                </tr>
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
+                  <td>59 Glen Street, NE68 3LS</td>
+                  <td>22/09/26</td>
+                  <td>300,000</td>
+                  <td>Heaton</td>
+                  <td>3 weeks</td>
+                  <td>22/09/26</td>
+                  <td>£300,000</td>
+                  <td>5%</td>
+                  <td>John Smith</td>
+                </tr>
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
+                  <td>59 Glen Street, NE68 3LS</td>
+                  <td>22/09/26</td>
+                  <td>2300,000</td>
+                  <td>Heaton</td>
+                  <td>113 weeks</td>
+                  <td>22/09/26</td>
+                  <td>£300,000</td>
+                  <td>5%</td>
+                  <td>John Smith</td>
+                </tr>
+                <tr data-latitude="51.46838554393864" data-longitude="-0.11286102229553308" data-criteria-match="partial">
+                  <td>59 Glen Street, NE68 3LS</td>
+                  <td>22/09/26</td>
+                  <td>£300000</td>
+                  <td>Heaton</td>
+                  <td>213 weeks</td>
+                  <td>22/09/26</td>
+                  <td>£300,000</td>
+                  <td>5%</td>
+                  <td>John Smith</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </AppInsights>
+        </div>
+      </div>
+
+    </div>
+
+
     <h2 class="pt-3 pb-4">One iamproperty hub</h2>
     <p>The hub loads the insight from looker via a signed URL inside of an iframe.</p>
     <p>The hub has some additional requirements to pass the table data to a series of actions. The actions may include creating tasks, exporting table data, and more. The properties insight app facilitates these actions by creating buttons inside the insight that will post messages to the top window i.e. the one platform hub.</p>
