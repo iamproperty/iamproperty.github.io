@@ -33,40 +33,46 @@
     <h2 class="mt-5">One platform menu within products</h2>
 
     <p>
-      The product view of the one platform menu uses the <a href="/nav/nav-secondary">navbar secondary</a> with the
-      inclusion of the <a href="/nav/branch-selector">branch selector component</a> as a slotted item.
+      The product view of the one platform menu uses the <a href="/nav/nav-secondary">navbar secondary</a> with the inclusion of the <a href="/nav/branch-selector">branch selector component</a> as a slot. The One platform menu within the product also includes the One Insights action button which gives the user the ability to view and select an insight to view - upon selection of an insight the user is pointed to the One Insight page for with a pre-populated view of the relevant data.
     </p>
 
     <a href="/standalone/eco-product" class="btn btn-secondary" target="_blank">Product with One platform menu demo</a>
 
-    <h2>Authenticated navigation (v2)</h2>
-    <p>Pass a function that returns the current iamproperty One access token (or a Promise of it).
-      The component sends it to POST /v2/navigation/access-context using the Authorization header.
-      Do not pass an ID token or put tokens in HTML attributes. Deploy v2 in the target environment first.</p>
-    <pre><code>{{`<STDNav ref="navigation" :get-access-token="getAgentOidcAccessToken"
-  data-mode="dev" data-product="crm" />`}}</code></pre>
-    <p>For product navigation, also add slot="secondary". Omit it for Hub navigation.
-      data-mode="dev" selects development; data-mode="production" selects production.
-      The values test, uat and pre-prod select pre-production. Omitted, empty or unrecognised values default to production. Token acquisition and refresh remain the product's responsibility.</p>
-    <p>On logout or account switch, update your authentication state and call navigation.refresh()
-      (navigation.value.refresh() for a Vue ref). This immediately removes the previously loaded links and
-      ignores outstanding responses. A null token leaves personalised navigation unavailable.
-      Unmounting the component also removes its generated links.</p>
-    <pre><code>{{`// Plain web component: set the property before appending the element.
-const navigation = document.createElement('iam-std-nav');
-navigation.setAttribute('data-mode', 'dev');
-navigation.setAttribute('data-product', 'crm');
-navigation.getAccessToken = () => auth.getAccessToken();
-document.querySelector('iam-nav').append(navigation);`}}</code></pre>
-    <p>For markup upgraded asynchronously, assign getAccessToken as a JavaScript property.
-      A missing provider or token leaves personalised navigation unavailable. Listen for navigation-access-error
-      on the element to show a retry or sign-in action; call refresh() to retry.</p>
-    <p>This is a breaking component upgrade: data-sso-subject, data-access-context-version and the
-      data-env fallback are no longer supported. All access requests use v2. Products that have not migrated
-      should stay on their existing design-system release. The backend legacy endpoint remains available
-      for those older releases.</p>
+
 
     <Integration component="std-nav" componentName="iam-nav">
+      <template #details>
+
+        <span class="h4 d-block">Authenticated navigation (v2)</span>
+        <p>Pass a function that returns the current iamproperty One access token (or a Promise of it).
+          The component sends it to POST /v2/navigation/access-context using the Authorization header.
+          Do not pass an ID token or put tokens in HTML attributes. Deploy v2 in the target environment first.</p>
+        <pre><code>{{`<STDNav ref="navigation" :get-access-token="getAgentOidcAccessToken"
+      data-mode="dev" data-product="crm" />`}}</code></pre>
+        <p>For product navigation, also add slot="secondary". Omit it for Hub navigation.
+          data-mode="dev" selects development; data-mode="production" selects production.
+          The values test, uat and pre-prod select pre-production. Omitted, empty or unrecognised values default to production. Token acquisition and refresh remain the product's responsibility.</p>
+        <p>On logout or account switch, update your authentication state and call navigation.refresh()
+          (navigation.value.refresh() for a Vue ref). This immediately removes the previously loaded links and
+          ignores outstanding responses. A null token leaves personalised navigation unavailable.
+          Unmounting the component also removes its generated links.</p>
+        <pre><code>{{`// Plain web component: set the property before appending the element.
+    const navigation = document.createElement('iam-std-nav');
+    navigation.setAttribute('data-mode', 'dev');
+    navigation.setAttribute('data-product', 'crm');
+    navigation.getAccessToken = () => auth.getAccessToken();
+    document.querySelector('iam-nav').append(navigation);`}}</code></pre>
+        <p>For markup upgraded asynchronously, assign getAccessToken as a JavaScript property.
+          A missing provider or token leaves personalised navigation unavailable. Listen for navigation-access-error
+          on the element to show a retry or sign-in action; call refresh() to retry.</p>
+        <p>This is a breaking component upgrade: data-sso-subject, data-access-context-version and the
+          data-env fallback are no longer supported. All access requests use v2. Products that have not migrated
+          should stay on their existing design-system release. The backend legacy endpoint remains available
+          for those older releases.</p>
+
+
+
+      </template>
       <template #web-component>
         <pre><code>{{`<iam-std-nav id="navigation" data-mode="dev" data-product="crm"></iam-std-nav>
 // Assign the property from your application's authentication integration:
@@ -195,6 +201,11 @@ document.getElementById('navigation').getAccessToken = getAccessToken;`}}</code>
           </tr>
         </thead>
         <tbody class="text-body">
+          <tr>
+            <td>V1.1 added</td>
+            <td>15.10.2026</td>
+            <td>Inclusion of the One Insight action button into the product navigation</td>
+          </tr>
           <tr>
             <td>V1 added</td>
             <td>17.07.2025</td>
