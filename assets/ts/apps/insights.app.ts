@@ -349,6 +349,9 @@ class iamAppInsights extends HTMLElement {
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
+      console.log(row);
+
+
       searches.forEach(search => {
         let datasetSearch = search;
 
