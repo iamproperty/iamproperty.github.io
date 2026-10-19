@@ -178,11 +178,12 @@ export const loadAuthenticatedDashboardData = async (
   signal?: AbortSignal
 ): Promise<any> => {
   const token = await getAccessToken();
+
   if (signal?.aborted) throw new Error('Navigation request cancelled');
   if (typeof token !== 'string' || !token.trim()) throw new Error('Navigation access token unavailable');
-  const base = getNavigationEnvironment(mode).api;
-  const response = await fetch(`https://hub.dev.iamproperty.group/api/agent/looker/dashboards`, {
-    method: 'POST',
+  const base = getNavigationEnvironment(mode).hub;
+  const response = await fetch(`${base}/api/agent/looker/dashboards`, {
+    method: 'GET',
     signal,
     headers: {
       Accept: 'application/vnd.api+json',

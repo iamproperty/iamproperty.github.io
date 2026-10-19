@@ -106,7 +106,6 @@ class iamSTDNav extends HTMLElement {
           });
 
           const insightsJson = await insightsData.json();
-          console.log(insightsJson);
 
           if (insightsJson.dashboards){
 
@@ -156,10 +155,7 @@ class iamSTDNav extends HTMLElement {
 
       return;
     }
-
-
     // #endregion
-
 
     // #region Code to maintain the lifecyle
     this.hidden = true; // Keep a lifecycle anchor; links remain direct children of iam-nav.
@@ -167,17 +163,11 @@ class iamSTDNav extends HTMLElement {
     this.request = new AbortController();
     // #endregion
 
-
-
-
     // #region Load the authenticated dashboard data if this is a secondary navigation component.
     if (isSecondary) {
 
       try {
-
-      if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
-
-        console.log('Loading insights data for mode:', mode);
+        if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
 
         const insightsData = await loadAuthenticatedDashboardData(
           mode,
@@ -185,7 +175,6 @@ class iamSTDNav extends HTMLElement {
           this.tokenProvider,
           this.request.signal
         );
-        console.log(insightsData);
 
         if (insightsData.dashboards){
 
@@ -211,11 +200,8 @@ class iamSTDNav extends HTMLElement {
       }
     }
     // #endregion
-    // #endregion
 
     // #region Authentication and user data loading, including dashboard data for secondary navigation components
-
-
     try {
 
       if (typeof this.tokenProvider !== 'function') throw new Error('Navigation token provider unavailable');
