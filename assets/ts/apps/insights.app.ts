@@ -349,8 +349,7 @@ class iamAppInsights extends HTMLElement {
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
-      console.log(row);
-
+      ctaLink = ctaUrlStructure;
 
       searches.forEach(search => {
         let datasetSearch = search;
@@ -364,7 +363,7 @@ class iamAppInsights extends HTMLElement {
           datasetSearch = 'mb-transaction-id';
 
 
-        if(row.dataset[datasetSearch] && row.dataset[datasetSearch] !== '') {
+        if(row.dataset[datasetSearch.toLowerCase()] && row.dataset[datasetSearch.toLowerCase()] !== '') {
           ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.dataset[datasetSearch.toLowerCase()]);
         } else {
           areSearchesMet = false;
