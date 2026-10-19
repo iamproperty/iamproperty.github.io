@@ -20,6 +20,10 @@
 <template>
   <h2 class="pb-0 pt-5">Integration</h2>
   <Tabs class="container">
+    <details v-if="slots['details']">
+      <summary><h3>Details</h3></summary>
+      <slot name="details"></slot>
+    </details>
     <details v-if="showInstall">
       <summary><h3>Install</h3></summary>
 

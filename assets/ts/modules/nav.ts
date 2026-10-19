@@ -71,10 +71,26 @@ export const populateLinks = (data): void => {
   let html = ``;
 
   data.forEach((link) => {
-    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}" ${link.visibility?.hideWhenAny ? `data-hide-when-any='{"values":${JSON.stringify(link.visibility.hideWhenAny)}}'` : ''}>${link.title}</a>`;
+    html += `<a href="${link.destinations.unlinked}" title="Learn more about this features product" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}" data-unlinked="${link.destinations.unlinked}" ${link.visibility?.hideWhenAny ? `data-hide-when-any='{"values":${JSON.stringify(link.visibility.hideWhenAny)}}'` : ''}>${link.title}</a>`;
   });
 
   return html;
+};
+
+export const getEnvUrl = (mode?: string | null, product?: 'iap' | 'crm' | 'mtk'): string => {
+  const envMap = {
+    production: {
+      iap: 'https://my.iamproperty.com',
+      crm: 'https://crm.iamproperty.com',
+      mtk: 'frontend.informationworks.co.uk'
+    },
+    test: {
+      iap: 'https://my.eco.iamproperty.group',
+      crm: 'https://dev.vtopenview.com',
+      mtk: 'frontend-test.informationworks.co.uk'
+    }
+  };
+  return envMap[mode ?? 'production'][product ?? 'iap'];
 };
 
 export const getNavigationEnvironment = (mode?: string | null): { hub: string; api: string } => {
@@ -155,21 +171,81 @@ export const loadAuthenticatedUserData = async (
   return data;
 };
 
+export const loadAuthenticatedDashboardData = async (
+  mode: string | null | undefined,
+  product: string | null,
+  getAccessToken: NavigationTokenProvider,
+  signal?: AbortSignal
+): Promise<any> => {
+  const token = await getAccessToken();
+  if (signal?.aborted) throw new Error('Navigation request cancelled');
+  if (typeof token !== 'string' || !token.trim()) throw new Error('Navigation access token unavailable');
+  const base = getNavigationEnvironment(mode).api;
+  const response = await fetch(`https://hub.dev.iamproperty.group/api/agent/looker/dashboards`, {
+    method: 'POST',
+    signal,
+    headers: {
+      Accept: 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  if (!response.ok) throw new Error(`Navigation dashboard request failed (${response.status})`);
+  const json = await response.json();
+  const data = json.data ?? json;
+  return data;
+};
+
 export const setEnabledLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-product][data-feature]');
 
   elements.forEach((element) => {
-    if (data.attributes.features[element.getAttribute('data-product')]) {
-      const isEnabled = data.attributes.features[element.getAttribute('data-product')].includes(
-        element.getAttribute('data-feature')
-      );
+    const isEnabled = data.attributes.features[element.getAttribute('data-product')]?.includes(
+      element.getAttribute('data-feature')
+    ) ?? false;
 
-      element.setAttribute('data-is-enabled', isEnabled);
-      if (isEnabled && element.getAttribute('data-enabled')) {
-        element.setAttribute('href', element.getAttribute('data-enabled'));
-        element.removeAttribute('target');
-        element.removeAttribute('title');
+    element.setAttribute('data-is-enabled', isEnabled);
+    element.setAttribute(
+      'href',
+      isEnabled
+        ? element.getAttribute('data-enabled')
+        : element.getAttribute('data-unlinked') ?? element.getAttribute('href')
+    );
+    if (isEnabled) {
+      element.removeAttribute('target');
+      element.removeAttribute('title');
+    } else {
+      element.setAttribute('target', '_blank');
+      element.setAttribute('title', 'Learn more about this features product');
+    }
+  });
+};
+
+export const setInsightsLinks = (component, mode, data): void => {
+
+  const hubBaseUrl = getNavigationEnvironment(mode).hub;
+
+  const insights = component.shadowRoot.querySelectorAll('#insights-menu [data-required-products]');
+  insights.forEach((insight) => {
+    insight.removeAttribute('data-is-disabled');
+    insight.removeAttribute('data-is-enabled');
+    insight.setAttribute('href', insight.getAttribute('data-locked'));
+    insight.setAttribute('target', '_blank');
+    insight.setAttribute('title', 'Requires product access — learn more');
+
+    const requiredProducts = JSON.parse(insight.getAttribute('data-required-products'));
+    requiredProducts.forEach((product) => {
+      if (!data.attributes.features[product]?.length) {
+        insight.setAttribute('data-is-disabled', true);
       }
+    });
+  });
+  insights.forEach((insight) => {
+    if (!insight.hasAttribute('data-is-disabled')) {
+      insight.setAttribute('data-is-enabled', true);
+      insight.setAttribute('href', hubBaseUrl + '/insights/' + insight.getAttribute('data-enabled'));
+      insight.removeAttribute('target');
+      insight.removeAttribute('title');
     }
   });
 };
@@ -178,6 +254,7 @@ export const hideLinks = (component, data): void => {
   const elements = component.querySelectorAll('[data-hide-when-any]');
 
   elements.forEach((element) => {
+    element.style.display = '';
     const hideConditions = JSON.parse(element.getAttribute('data-hide-when-any')).values;
     const shouldHide = hideConditions.some(
       (condition) => !data.attributes.features[condition.product]?.includes(condition.feature)
@@ -186,6 +263,108 @@ export const hideLinks = (component, data): void => {
     if (shouldHide) {
       element.style.display = 'none';
     }
+  });
+};
+
+export const resetNavigationAccessState = (component, navigationNodes = [component], includeInsights = true): void => {
+  const noAccess = { attributes: { features: {} } };
+  navigationNodes.forEach((node) => {
+    setEnabledLinks(node, noAccess);
+    hideLinks(node, noAccess);
+  });
+  if (includeInsights) setInsightsLinks(component, noAccess);
+};
+
+export const populateInsightsMenu = (insightsMenu, dashboards): void => {
+
+  const createGroups = (dashboards: any[]): { name: string; children: any[] }[] => {
+
+    const defaultGroupOrder = ['Win', 'Grow'];
+    return [...new Set<string>(dashboards.map((dashboard) => dashboard.group))]
+      .sort((a, b) => {
+        const aIndex = defaultGroupOrder.indexOf(a);
+        const bIndex = defaultGroupOrder.indexOf(b);
+        return (
+          (aIndex === -1 ? defaultGroupOrder.length : aIndex) - (bIndex === -1 ? defaultGroupOrder.length : bIndex)
+        );
+      })
+      .map((name) => ({
+        name,
+        children: dashboards.filter((dashboard: any) => dashboard.group === name),
+      }));
+  };
+
+  const groups = createGroups(dashboards);
+
+  // Populate the questions into the nav menu
+  groups.forEach((group) => {
+    const groupTitle = document.createElement('span');
+    groupTitle.classList.add('group-title');
+    groupTitle.textContent = group.name;
+    insightsMenu.appendChild(groupTitle);
+
+    group.children.forEach((dashboard) => {
+      const questionElement = document.createElement('a');
+      questionElement.textContent = dashboard.suggestionLabel;
+      questionElement.setAttribute('href', dashboard.lockedUrl); // Add a default href or modify as needed
+      questionElement.setAttribute('data-locked', dashboard.lockedUrl);
+      questionElement.setAttribute('data-required-products', JSON.stringify(dashboard.requiredProducts));
+      questionElement.setAttribute('data-enabled', dashboard.slug);
+      questionElement.setAttribute('target', '_blank');
+      questionElement.setAttribute('title', 'Requires product access — learn more');
+
+      insightsMenu.appendChild(questionElement);
+    });
+  });
+};
+
+export const insightsEvents = (component): void => {
+
+  const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+  const insightsButton = component.querySelector('#insights-button');
+  const insightsClose = component.shadowRoot.querySelector('#insights-close');
+  const backdrop = component.shadowRoot.querySelector('.backdrop');
+
+  const menuButton = component.shadowRoot.querySelector('#btn-menu');
+  const menu = component.shadowRoot.querySelector('.menu');
+  const accountMenuButton = component.shadowRoot.querySelector('#btn-menu-account');
+  const accountMenu = component.shadowRoot.querySelector('.nav--menu:not(#insights-menu)');
+
+  insightsButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    insightsMenu.classList.toggle('open');
+
+    menu.classList.remove('open');
+    menuButton?.removeAttribute('aria-expanded');
+    accountMenu?.classList.remove('open');
+    accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+    accountMenuButton?.removeAttribute('aria-expanded');
+    component.querySelector(':scope > details[open]')?.removeAttribute('open');
+
+    if (insightsMenu.classList.contains('open')) {
+      insightsButton.classList.add('active');
+      insightsButton?.setAttribute('aria-expanded', true);
+
+      component.classList.add('open');
+      component.classList.add('open-secondary');
+      backdrop.classList.add('show');
+    } else {
+      insightsButton.classList.remove('active');
+      insightsButton.removeAttribute('aria-expanded');
+      component.classList.remove('open');
+      component.classList.remove('open-secondary');
+      backdrop.classList.remove('show');
+    }
+  });
+
+  insightsClose?.addEventListener('click', (e) => {
+    e.preventDefault();
+    insightsMenu.classList.remove('open');
+    insightsButton.classList.remove('active');
+    insightsButton?.removeAttribute('aria-expanded');
+    component.classList.remove('open');
+    component.classList.remove('open-secondary');
+    backdrop.classList.remove('show');
   });
 };
 // #endregion
@@ -201,6 +380,7 @@ export const branchSelector = (component): void => {
     else branchSelector?.setAttribute('slot', 'account');
   });
 };
+
 
 export const menuEvents = (component, menu, menuButton, accountMenu, accountMenuButton): void => {
   menuButton.addEventListener(
@@ -275,6 +455,17 @@ export const megaMenusEvents = (component, menu, menuButton, accountMenu, accoun
         accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
         menuButton?.removeAttribute('aria-expanded');
         accountMenuButton?.removeAttribute('aria-expanded');
+
+        const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+        const insightsButton = component.querySelector('#insights-button');
+
+        if (insightsMenu)
+          insightsMenu.classList.remove('open');
+
+        if (insightsButton){
+          insightsButton?.classList.remove('active');
+          insightsButton?.removeAttribute('aria-expanded');
+        }
       }
     }
   });
@@ -282,15 +473,28 @@ export const megaMenusEvents = (component, menu, menuButton, accountMenu, accoun
 
 export const accountMenuEvents = (component, menu, menuButton, accountMenu, accountMenuButton, backdrop): void => {
   accountMenuButton.addEventListener('click', () => {
+
+    const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+    const insightsButton = component.querySelector('#insights-button');
+
     // Close the main menu
     menu.classList.remove('open');
     accountMenu.classList.toggle('open');
+
 
     if (accountMenu.classList.contains('open')) {
       component.classList.add('open');
       accountMenuButton?.querySelector('.btn-primary').classList.add('active');
       accountMenuButton?.setAttribute('aria-expanded', true);
+
       backdrop.classList.add('show');
+
+      /* insights menu */
+      if (insightsButton) {
+        insightsButton?.classList.remove('active');
+        insightsButton?.removeAttribute('aria-expanded');
+      }
+
     } else {
       component.classList.remove('open');
       accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
@@ -300,6 +504,9 @@ export const accountMenuEvents = (component, menu, menuButton, accountMenu, acco
 
     component.querySelector(':scope > details[open]')?.removeAttribute('open');
     menuButton?.removeAttribute('aria-expanded');
+
+    if (insightsMenu)
+      insightsMenu.classList.remove('open');
   });
 };
 
@@ -307,6 +514,8 @@ export const backdropEvents = (component, menu, menuButton, accountMenu, account
   // Close the menu on the click of the backdrop on desktop
   backdrop.addEventListener('click', () => {
     const openMenu = component.querySelector(':scope > details[open]');
+    const insightsMenu = component.shadowRoot.querySelector('#insights-menu');
+    const insightsButton = component.querySelector('#insights-button');
 
     if (openMenu) openMenu.removeAttribute('open');
 
@@ -316,6 +525,14 @@ export const backdropEvents = (component, menu, menuButton, accountMenu, account
     accountMenu.classList.remove('open');
     accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
     accountMenuButton?.removeAttribute('aria-expanded');
+
+    if (insightsMenu)
+      insightsMenu.classList.remove('open');
+
+    if (insightsButton){
+      insightsButton?.classList.remove('active');
+      insightsButton?.removeAttribute('aria-expanded');
+    }
 
     backdrop.classList.remove('show');
   });

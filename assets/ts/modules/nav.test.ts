@@ -1,7 +1,7 @@
 import { describe, expect, it } from './test.ts';
 import { createElement, installTestDom } from './test-dom.ts';
 import { append } from './test-utils.ts';
-import { populateLinks, setEnabledLinks } from './nav.ts';
+import { hideLinks, populateLinks, setEnabledLinks, setInsightsLinks } from './nav.ts';
 
 installTestDom();
 
@@ -40,6 +40,63 @@ describe('Navigation module', () => {
     expect(link.getAttribute('href') === '/linked');
     expect(!link.hasAttribute('target'));
     expect(!link.hasAttribute('title'));
+  });
+
+  it('restores navigation destinations and visibility when access is revoked', () => {
+    const component = createElement('nav');
+    const link = createElement('a', {
+      dataProduct: 'sales',
+      dataFeature: 'dashboard',
+      dataEnabled: '/linked',
+      dataUnlinked: '/locked',
+      href: '/locked',
+      title: 'Learn more',
+      target: '_blank',
+      dataHideWhenAny: JSON.stringify({ values: [{ product: 'crm', feature: 'dashboard' }] }),
+    });
+    append(component, link);
+
+    setEnabledLinks(component, {
+      attributes: { features: { sales: ['dashboard'], crm: [] } },
+    });
+    hideLinks(component, { attributes: { features: { sales: ['dashboard'], crm: [] } } });
+    expect(link.getAttribute('href') === '/linked' && link.style.display === 'none');
+
+    setEnabledLinks(component, {
+      attributes: { features: { sales: [], crm: ['dashboard'] } },
+    });
+    hideLinks(component, { attributes: { features: { sales: [], crm: ['dashboard'] } } });
+
+    expect(link.getAttribute('data-is-enabled') === 'false');
+    expect(link.getAttribute('href') === '/locked');
+    expect(link.getAttribute('target') === '_blank');
+    expect(link.getAttribute('title') === 'Learn more about this features product');
+    expect(link.style.display === '');
+  });
+
+  it('clears stale Insights link state when access is revoked', () => {
+    const link = createElement('a', {
+      dataRequiredProducts: JSON.stringify(['crm']),
+      dataLocked: '/locked',
+      dataEnabled: '/dashboard',
+      href: '/locked',
+      target: '_blank',
+      title: 'Requires product access',
+    });
+    const component = createElement('nav');
+    component.shadowRoot = {
+      querySelectorAll: (): Array<typeof link> => [link],
+    };
+
+    setInsightsLinks(component, { attributes: { features: { crm: ['dashboard'] } } });
+    expect(link.getAttribute('href') === '/dashboard' && link.hasAttribute('data-is-enabled'));
+
+    setInsightsLinks(component, { attributes: { features: { crm: [] } } });
+
+    expect(link.getAttribute('href') === '/locked');
+    expect(!link.hasAttribute('data-is-enabled'));
+    expect(link.getAttribute('data-is-disabled') === 'true');
+    expect(link.getAttribute('target') === '_blank');
   });
 });
 
