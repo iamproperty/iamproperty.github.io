@@ -371,13 +371,11 @@ class iamAppInsights extends HTMLElement {
           datasetSearch = 'appraisal-id';
         else if(search == "transactionid")
           datasetSearch = 'transaction-id';
-        else if(search == "transaction")
-          datasetSearch = 'mb-transaction-id';
-*/
-        console.log(`Dataset search for ${search}: ${datasetSearch}`);
+        */
 
-        console.log(row.dataset);
-        console.log(`Row dataset for ${datasetSearch}: ${row.dataset[datasetSearch.toLowerCase()]}`);
+        if(search == "transaction")
+          datasetSearch = 'mbtransactionid';
+
 
         if(row.dataset[datasetSearch.toLowerCase()] && row.dataset[datasetSearch.toLowerCase()] !== '') {
           ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.dataset[datasetSearch.toLowerCase()]);
