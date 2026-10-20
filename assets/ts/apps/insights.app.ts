@@ -414,7 +414,7 @@ class iamAppInsights extends HTMLElement {
     // When the insight action has been completed, re-enable the button that was clicked
     this.addEventListener('insight-action-completed', (event: CustomEvent) => {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
-      this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
+      //this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0'); // This also clears the seleted items in the table
     });
 
     if (table){
