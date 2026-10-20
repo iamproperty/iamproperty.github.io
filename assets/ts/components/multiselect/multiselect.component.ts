@@ -20,7 +20,7 @@ class iamMultiselect extends HTMLElement {
     </style>
     <label for="search" class="mb-0"><span class="inner-label label"><slot name="label"></slot><slot name="tooltip"></slot></span> <slot name="feedback"></slot>
     <div class="outer">
-      <div class="wrapper">
+      <div class="wrapper filled">
 
         <slot name="checked"></slot>
         <input name="search" id="search" autocomplete="off" required part="search-input"/>
