@@ -198,6 +198,7 @@ class iamAppInsights extends HTMLElement {
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
 
 
+    // Remove any null values represented by the symbol "∅"
     table.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach(td => td.innerText = '');
 
 
