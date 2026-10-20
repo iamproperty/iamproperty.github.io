@@ -342,8 +342,8 @@ class iamAppInsights extends HTMLElement {
       searches.push('udprn');
     if(ctaUrlStructure.toLowerCase().includes(':umrrn'))
       searches.push('umrrn');
-    if(ctaUrlStructure.toLowerCase().includes(':AppraisalId'))
-      searches.push('AppraisalId');
+    if(ctaUrlStructure.toLowerCase().includes(':appraisalid'))
+      searches.push('appraisalid');
     if(ctaUrlStructure.toLowerCase().includes(':transactionid'))
       searches.push('transactionid');
     if(ctaUrlStructure.toLowerCase().includes(':transaction'))
@@ -361,7 +361,7 @@ class iamAppInsights extends HTMLElement {
         let datasetSearch = search;
 
         // Update the datasearch to match looker columns
-        if(search == "AppraisalId")
+        if(search == "appraisalid")
           datasetSearch = 'appraisal-id';
         else if(search == "transactionid")
           datasetSearch = 'transaction-id';
