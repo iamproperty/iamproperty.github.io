@@ -197,6 +197,10 @@ class iamAppInsights extends HTMLElement {
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
 
+
+    table.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach(td => td.innerText = '');
+
+
     return table;
   };
 
