@@ -366,13 +366,14 @@ class iamAppInsights extends HTMLElement {
         let datasetSearch = search;
 
         // Update the datasearch to match looker columns
+        /*
         if(search == "appraisalid")
           datasetSearch = 'appraisal-id';
         else if(search == "transactionid")
           datasetSearch = 'transaction-id';
         else if(search == "transaction")
           datasetSearch = 'mb-transaction-id';
-
+*/
         console.log(`Dataset search for ${search}: ${datasetSearch}`);
 
         console.log(row.dataset);
