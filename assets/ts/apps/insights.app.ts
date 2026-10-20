@@ -375,6 +375,7 @@ class iamAppInsights extends HTMLElement {
 
         console.log(`Dataset search for ${search}: ${datasetSearch}`);
 
+        console.log(row.dataset);
         console.log(`Row dataset for ${datasetSearch}: ${row.dataset[datasetSearch.toLowerCase()]}`);
 
         if(row.dataset[datasetSearch.toLowerCase()] && row.dataset[datasetSearch.toLowerCase()] !== '') {
