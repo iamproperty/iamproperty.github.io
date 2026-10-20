@@ -357,6 +357,7 @@ class iamAppInsights extends HTMLElement {
 
       ctaLink = ctaUrlStructure.toLowerCase();
 
+      console.log(searches);
       searches.forEach(search => {
         let datasetSearch = search;
 
