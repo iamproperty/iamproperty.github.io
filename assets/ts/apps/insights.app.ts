@@ -163,7 +163,6 @@ class iamAppInsights extends HTMLElement {
     });
     // #endregion
 
-    console.log(tableComponent);
     tableComponent.addEventListener('table-filtered', (event) => {
       countElement?.innerHTML = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
       mapWrapper.innerHTML = this.createMapContent();
@@ -374,6 +373,7 @@ class iamAppInsights extends HTMLElement {
         else if(search == "transaction")
           datasetSearch = 'mb-transaction-id';
 
+        console.log(`Dataset search for ${search}: ${datasetSearch}`);
 
         if(row.dataset[datasetSearch.toLowerCase()] && row.dataset[datasetSearch.toLowerCase()] !== '') {
           ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.dataset[datasetSearch.toLowerCase()]);
