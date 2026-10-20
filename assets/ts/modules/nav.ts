@@ -396,6 +396,7 @@ export const menuEvents = (component, menu, menuButton, accountMenu, accountMenu
         component.classList.add('open');
       } else {
         component.classList.remove('open');
+        component.classList.remove('open-secondary');
       }
 
       accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
@@ -498,6 +499,7 @@ export const accountMenuEvents = (component, menu, menuButton, accountMenu, acco
 
     } else {
       component.classList.remove('open');
+      component.classList.remove('open-secondary');
       accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
       accountMenuButton?.removeAttribute('aria-expanded');
       backdrop.classList.remove('show');
@@ -521,6 +523,7 @@ export const backdropEvents = (component, menu, menuButton, accountMenu, account
     if (openMenu) openMenu.removeAttribute('open');
 
     component.classList.remove('open');
+    component.classList.remove('open-secondary');
     menu.classList.remove('open');
     menuButton?.removeAttribute('aria-expanded');
     accountMenu.classList.remove('open');
