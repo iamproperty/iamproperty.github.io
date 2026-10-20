@@ -196,11 +196,6 @@ class iamAppInsights extends HTMLElement {
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
 
-
-    // Remove any null values represented by the symbol "∅"
-    table.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach(td => td.innerText = '');
-
-
     return table;
   };
 
@@ -388,6 +383,11 @@ class iamAppInsights extends HTMLElement {
     });
   };
 
+  hideNullValues(): void {
+    const shadowTable = this.shadowRoot?.querySelector('table');
+    shadowTable?.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach(td => td.innerText = '');
+  }
+
   connectedCallback(): void {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
@@ -401,6 +401,7 @@ class iamAppInsights extends HTMLElement {
         this.classList.add(event.detail.properties.class);
 
       //this.setCounterText(this, event.detail.properties['counter-text']);
+      this.hideNullValues();
       this.createActionButtons(this, event.detail.actions);
       this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
       this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
