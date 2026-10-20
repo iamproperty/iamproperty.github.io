@@ -415,7 +415,7 @@ iam-table-advanced::part(table-filter):after {
 
 // #region Empty State Image
 
-.wrapper:not(:has(tbody tr)){
+.wrapper[aria-busy="false"]:not(:has(tbody tr)){
 
   display: none!important;
 }
@@ -424,12 +424,12 @@ iam-table-advanced::part(table-filter):after {
   display: none;
 }
 
-.wrapper:not(:has(tbody tr)) + .empty-state {
+.wrapper[aria-busy="false"]:not(:has(tbody tr)) + .empty-state {
   display: block;
   padding-top: 1rem;
 }
 
-.wrapper:has(.table--filtered):not(:has(tbody tr.filtered--matched)) + .empty-state {
+.wrapper[aria-busy="false"]:has(.table--filtered):not(:has(tbody tr.filtered--matched)) + .empty-state {
   display: block;
   padding-top: 1rem;
 }
