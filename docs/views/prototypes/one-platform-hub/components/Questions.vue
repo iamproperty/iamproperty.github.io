@@ -148,7 +148,7 @@
   };
 </script>
 <template>
-  <div class="insights-panel bg-primary">
+  <div class="insights-panel bg-primary col-start-1 col-end-12 lg-col-start-3 lg-col-end-10">
     <div class="text-center">
       <div class="brand brand--insights p-1">
         <svg viewBox="0 0 600 130" preserveAspectRatio="xMinYMid meet">
@@ -254,7 +254,7 @@
 
     padding-inline: 2rem;
 
-    grid-column: col-1-start / col-12-end;
+    //grid-column: col-1-start / col-12-end;
 
     background-image:
       radial-gradient(ellipse 90% 190% at 0% 0%, var(--colour-primary) 15%, transparent 80%),

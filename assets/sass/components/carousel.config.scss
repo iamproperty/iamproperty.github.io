@@ -204,6 +204,14 @@
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
+      &[data-smcols='4']:not(:has(> *:nth-child(5))) {
+        //--hide-buttons: 1;
+        --hide-markers: 1;
+
+        //--button-height: 0rem;
+        --marker-height: 0rem;
+        --marker-mb: 0rem;
+      }
     }
 
     @container (min-width: 62em) {
@@ -216,6 +224,14 @@
         --marker-mb: 0rem;
       }
       &[data-mdcols='3']:not(:has(> *:nth-child(4))) {
+        --hide-buttons: 1;
+        --hide-markers: 1;
+
+        --button-height: 0rem;
+        --marker-height: 0rem;
+        --marker-mb: 0rem;
+      }
+      &[data-mdcols='4']:not(:has(> *:nth-child(5))) {
         --hide-buttons: 1;
         --hide-markers: 1;
 
@@ -242,6 +258,9 @@
       }
       &[data-smcols='3'] {
         --count: 3;
+      }
+      &[data-smcols='4'] {
+        --count: 4;
       }
     }
 
@@ -432,6 +451,18 @@
       iam-carousel[data-smcols='3']:has(> *:nth-child(15))::part(carousel__progress-sm) {
         display: block;
       }
+      iam-carousel[data-smcols='4']:has(> *:nth-child(20)) {
+        --button-height: 0rem;
+
+        //--hide-buttons: 1;
+        --hide-markers: 1;
+
+        --carousel-controls-display: block;
+      }
+
+      iam-carousel[data-smcols='4']:has(> *:nth-child(20))::part(carousel__progress-sm) {
+        display: block;
+      }
     }
 
     @container (min-width: 62em) {
@@ -463,6 +494,18 @@
       }
 
       iam-carousel[data-mdcols='3']:has(> *:nth-child(15))::part(carousel__progress-md) {
+        display: block;
+      }
+      iam-carousel[data-mdcols='4']:has(> *:nth-child(20)) {
+        --button-height: 0rem;
+
+        //--hide-buttons: 1;
+        --hide-markers: 1;
+
+        --carousel-controls-display: block;
+      }
+
+      iam-carousel[data-mdcols='4']:has(> *:nth-child(20))::part(carousel__progress-md) {
         display: block;
       }
     }

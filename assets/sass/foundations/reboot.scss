@@ -39,29 +39,42 @@
     }
 
     @media (min-width: #{em(1440)}) {
+
+      
       font-size: 112.5%;
 
+      &:has(.enable-lg-breakpoint) {
+        font-size: 112.5%;
+      }
+      
       &:has(.nav--large) {
         font-size: 100%;
       }
     }
 
     @media (min-width: #{em(1680)}) {
-      /* font-size: 131.25%; */
+      //font-size: 131.25%;
+
+      &:has(.enable-lg-breakpoint) {
+        --root-fs-px: 1920;
+        font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
+      }
     }
+
+    @media screen and (min-width: 120em) {
+      /*  1920 */
+      &:is(:has(.nav--large), :has(.enable-lg-breakpoint)) {
+        //--root-fs-px: 1920;
+        //font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
+        font-size: 100%;
+      }
+    }
+
 
     @media print {
       font-size: 16px;
     }
 
-    @media screen and (min-width: 120em) {
-      /*  1920 */
-
-      &:has(.nav--large) {
-        --root-fs-px: 1920;
-        font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
-      }
-    }
   }
 
   body {
@@ -182,14 +195,23 @@
     @for $i from 1 to $columns {
       $templateColumns: $templateColumns + 'var(--col-size) [col-' + $i + '-end col-'+ ($i + 1)+'-start] ';
     }
+    /*
     grid-template-columns:
       [full-width-start container-start] calc(var(--gutter) - var(--gap))
       [content-start col-1-start]
       #{$templateColumns}
       var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
       [container-end full-width-end];
-
-    @media screen and (min-width: 90em) {
+      */
+    grid-template-columns:
+      [full-width-start] calc(var(--excess-space) - var(--gap))
+      [container-start] calc(var(--gutter) - var(--gap))
+      [content-start col-1-start]
+      #{$templateColumns}
+      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
+      [container-end] calc(var(--excess-space) - var(--gap)) [full-width-end];
+      /*
+    @media screen and (min-width: 80em) {
       grid-template-columns:
         [full-width-start] calc(var(--excess-space) - var(--gap))
         [container-start] calc(var(--gutter) - var(--gap))
@@ -198,6 +220,7 @@
         var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
         [container-end] calc(var(--excess-space) - var(--gap)) [full-width-end];
     }
+        */
 
     & * {
       grid-column: content;
