@@ -355,7 +355,7 @@ class iamAppInsights extends HTMLElement {
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
-      ctaLink = ctaUrlStructure;
+      ctaLink = ctaUrlStructure.toLowerCase();
 
       searches.forEach(search => {
         let datasetSearch = search;
