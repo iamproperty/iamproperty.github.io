@@ -366,19 +366,16 @@ class iamAppInsights extends HTMLElement {
         let datasetSearch = search;
 
         // Update the datasearch to match looker columns
-        /*
         if(search == "appraisalid")
           datasetSearch = 'appraisal-id';
         else if(search == "transactionid")
           datasetSearch = 'transaction-id';
-        */
-
-        if(search == "transaction")
-          datasetSearch = 'mbtransactionid';
+        else if(search == "transaction")
+          datasetSearch = 'mb-transaction-id';
 
 
-        if(row.dataset[datasetSearch.toLowerCase()] && row.dataset[datasetSearch.toLowerCase()] !== '') {
-          ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.dataset[datasetSearch.toLowerCase()]);
+        if(row.hasAttribute('data-' + datasetSearch.toLowerCase()) && row.getAttribute('data-' + datasetSearch.toLowerCase()) !== '') {
+          ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.getAttribute('data-' + datasetSearch.toLowerCase()));
         } else {
           areSearchesMet = false;
         }
