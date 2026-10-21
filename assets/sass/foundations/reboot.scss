@@ -59,7 +59,7 @@
     @media screen and (min-width: 120em) {
       /*  1920 */
       &:is(:has(.nav--large), :has(.enable-lg-breakpoint)) {
-        //--root-fs-px: 1920;
+        --root-fs-px: 1920;
         font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
         //font-size: 100%;
       }
