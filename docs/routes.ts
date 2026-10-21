@@ -48,13 +48,23 @@ const routes: Array<any> = [
       },
       {
         path: 'spacing',
-        name: 'Spacing and Layout',
+        name: 'Spacing',
         meta: {
-          title: 'Spacing and Layout | Foundations | iamkey',
+          title: 'Spacing | Foundations | iamkey',
           status: 'stable',
           ver: '7.8.0',
         },
         component: () => import('./views/foundations/Spacing.vue'),
+        searchterms:
+          'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
+      },
+      {
+        path: 'layout',
+        name: 'Layout',
+        meta: {
+          title: 'Layout | Foundations | iamkey',
+        },
+        component: () => import('./views/foundations/Layout.vue'),
         searchterms:
           'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
       },
@@ -121,7 +131,7 @@ const routes: Array<any> = [
         path: 'icons',
         name: 'Icons',
         meta: {
-          title: 'Icons | Foundations | iamkey',
+          title: 'Icons | Elements | iamkey',
         },
         component: () => import('./views/elements/Icons.vue'),
         searchterms: 'svg, status, font awesome',
@@ -200,7 +210,7 @@ const routes: Array<any> = [
         path: 'container',
         name: 'Container (alpha)',
         meta: {
-          title: 'Container | Elemenets | iamkey',
+          title: 'Container | Elements | iamkey',
         },
         component: () => import('./views/elements/Container.vue'),
         searchterms: 'fundamental, backgrounds, curve',
