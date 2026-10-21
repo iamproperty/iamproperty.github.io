@@ -10,11 +10,12 @@ class iamAppInsights extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */`
+    <style>.empty-state { display: none; }</style>
     <style>
     ${loadCSS}
     </style>
 
-    <div class="wrapper">
+    <div class="wrapper" aria-busy="true">
       <strong class="d-block pb-3 insight-count"><span id="count"></span> <!--<span id="count-text"></span>-->properties</strong>
 
       <div id="map-wrapper"></div>
@@ -220,6 +221,10 @@ class iamAppInsights extends HTMLElement {
     });
 
     this.setEvents();
+
+    // Absence of rows is only an empty result once the table is constructed.
+    // This also keeps the loading message visible while AJAX supplies the table.
+    this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
 
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
