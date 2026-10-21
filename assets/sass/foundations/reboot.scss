@@ -39,7 +39,6 @@
     }
 
     @media (min-width: #{em(1440)}) {
-
       
       font-size: 112.5%;
 
@@ -65,8 +64,17 @@
       /*  1920 */
       &:is(:has(.nav--large), :has(.enable-lg-breakpoint)) {
         //--root-fs-px: 1920;
+        font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
+        //font-size: 100%;
+      }
+    }
+
+    @media screen and (min-width: 132em) { /* 1920 + 10% */
+      /*  1920 */
+      &:is(:has(.nav--large), :has(.enable-lg-breakpoint)) {
+        //--root-fs-px: 1920;
         //font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
-        font-size: 100%;
+        font-size: 110%;
       }
     }
 
