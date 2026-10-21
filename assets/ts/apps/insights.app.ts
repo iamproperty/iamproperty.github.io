@@ -163,7 +163,6 @@ class iamAppInsights extends HTMLElement {
     });
     // #endregion
 
-    console.log(tableComponent);
     tableComponent.addEventListener('table-filtered', (event) => {
       countElement?.innerHTML = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
       mapWrapper.innerHTML = this.createMapContent();
@@ -342,8 +341,8 @@ class iamAppInsights extends HTMLElement {
       searches.push('udprn');
     if(ctaUrlStructure.toLowerCase().includes(':umrrn'))
       searches.push('umrrn');
-    if(ctaUrlStructure.toLowerCase().includes(':AppraisalId'))
-      searches.push('AppraisalId');
+    if(ctaUrlStructure.toLowerCase().includes(':appraisalid'))
+      searches.push('appraisalid');
     if(ctaUrlStructure.toLowerCase().includes(':transactionid'))
       searches.push('transactionid');
     if(ctaUrlStructure.toLowerCase().includes(':transaction'))
@@ -355,13 +354,14 @@ class iamAppInsights extends HTMLElement {
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
-      ctaLink = ctaUrlStructure;
+      ctaLink = ctaUrlStructure.toLowerCase();
 
+      console.log(searches);
       searches.forEach(search => {
         let datasetSearch = search;
 
         // Update the datasearch to match looker columns
-        if(search == "AppraisalId")
+        if(search == "appraisalid")
           datasetSearch = 'appraisal-id';
         else if(search == "transactionid")
           datasetSearch = 'transaction-id';
@@ -369,8 +369,8 @@ class iamAppInsights extends HTMLElement {
           datasetSearch = 'mb-transaction-id';
 
 
-        if(row.dataset[datasetSearch.toLowerCase()] && row.dataset[datasetSearch.toLowerCase()] !== '') {
-          ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.dataset[datasetSearch.toLowerCase()]);
+        if(row.hasAttribute('data-' + datasetSearch.toLowerCase()) && row.getAttribute('data-' + datasetSearch.toLowerCase()) !== '') {
+          ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.getAttribute('data-' + datasetSearch.toLowerCase()));
         } else {
           areSearchesMet = false;
         }
@@ -382,6 +382,11 @@ class iamAppInsights extends HTMLElement {
       //  row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
     });
   };
+
+  hideNullValues(): void {
+    const shadowTable = this.shadowRoot?.querySelector('table');
+    shadowTable?.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach(td => td.innerText = '');
+  }
 
   connectedCallback(): void {
 
@@ -396,6 +401,7 @@ class iamAppInsights extends HTMLElement {
         this.classList.add(event.detail.properties.class);
 
       //this.setCounterText(this, event.detail.properties['counter-text']);
+      this.hideNullValues();
       this.createActionButtons(this, event.detail.actions);
       this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
       this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
@@ -408,7 +414,7 @@ class iamAppInsights extends HTMLElement {
     // When the insight action has been completed, re-enable the button that was clicked
     this.addEventListener('insight-action-completed', (event: CustomEvent) => {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
-      this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
+      //this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0'); // This also clears the seleted items in the table
     });
 
     if (table){
