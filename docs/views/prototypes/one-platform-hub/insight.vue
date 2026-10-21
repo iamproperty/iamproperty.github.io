@@ -324,132 +324,6 @@ onMounted(async () => {
   insightActions.value = selectedDashboard?.actions ?? [];
   insightProperties.value = selectedDashboard?.properties ?? {};
 
-/*
-const dashboardIframe = document.querySelector("#looker-dashboard");
-
-const lookerOrigin = "https://iampropertypbl.cloud.looker.com";
-
-// Set this to the origin that sends your custom visualization messages.
-// It may differ from the dashboard's origin.
-const visualizationOrigin = "https://your-visualization-origin.com";
-
-// The dashboard element ID of your iam-app-insights tile.
-const tileId = "123";
-
-let dashboardLayouts;
-let requestedHeightRows;
-let lastAppliedHeightRows;
-
-function parseMessage(data) {
-  if (typeof data !== "string") {
-    return data;
-  }
-
-  try {
-    return JSON.parse(data);
-  } catch {
-    return null;
-  }
-}
-
-function applyTileHeight() {
-  if (!dashboardLayouts || requestedHeightRows === undefined) {
-    return;
-  }
-
-  if (requestedHeightRows === lastAppliedHeightRows) {
-    return;
-  }
-
-  const layouts = structuredClone(dashboardLayouts);
-  let foundTile = false;
-
-  for (const layout of layouts) {
-    if (layout.active === false) {
-      continue;
-    }
-
-    for (const component of layout.dashboard_layout_components ?? []) {
-      if (String(component.dashboard_element_id) !== String(tileId)) {
-        continue;
-      }
-
-      // Looker only accepts properties returned in its layout options.
-      if (!Object.prototype.hasOwnProperty.call(component, "height")) {
-        continue;
-      }
-
-      component.height = requestedHeightRows;
-      foundTile = true;
-    }
-  }
-
-  if (!foundTile) {
-    return;
-  }
-
-  dashboardIframe.contentWindow.postMessage(
-    JSON.stringify({
-      type: "dashboard:options:set",
-      layouts
-    }),
-    lookerOrigin
-  );
-
-  dashboardLayouts = layouts;
-  lastAppliedHeightRows = requestedHeightRows;
-}
-
-window.addEventListener("message", event => {
-  const message = parseMessage(event.data);
-
-  if (!message || typeof message !== "object") {
-    return;
-  }
-
-  // Capture Looker's layout once the dashboard has finished running.
-  if (
-    event.origin === lookerOrigin &&
-    event.source === dashboardIframe.contentWindow &&
-    message.type === "dashboard:run:complete"
-  ) {
-    const layouts = message.dashboard?.options?.layouts;
-
-    if (Array.isArray(layouts)) {
-      dashboardLayouts = layouts;
-      lastAppliedHeightRows = undefined;
-
-      // Apply any height request received before the dashboard was ready.
-      applyTileHeight();
-    }
-
-    return;
-  }
-
-  // Receive the pixel height requested by your visualization.
-  if (
-    event.origin === visualizationOrigin &&
-    message.source === "vis" &&
-    message.type === "update-height"
-  ) {
-    const heightPx = Number(message.detail?.heightPx);
-
-    if (!Number.isFinite(heightPx) || heightPx <= 0) {
-      return;
-    }
-
-    // For a newspaper dashboard layout: approximately 50px per row.
-    requestedHeightRows = Math.max(
-      1,
-      Math.ceil(heightPx / 50)
-    );
-
-    applyTileHeight();
-  }
-});
-
-
-*/
 });
 
 
@@ -495,12 +369,11 @@ const loadDashboards = async (): any => {
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
-
+      <STDNav :get-access-token="() => null" data-mode="mock" data-product="crm"></STDNav>
     </Nav>
   </nav>
 
-  <main>
+  <main class="enable-lg-breakpoint">
     <div class="bg-primary full-width questions-container">
       <div class="container">
 

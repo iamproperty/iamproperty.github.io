@@ -8,7 +8,7 @@
 <template>
   <main>
     <DSHeader :image="headerImg">
-      <h1>Spacing and Layout</h1>
+      <h1>Spacing</h1>
     </DSHeader>
 
     <div class="container">
@@ -192,132 +192,6 @@
         in sass that can be used.
       </p>
 
-      <h2>Layout</h2>
-      <p>
-        Our grid system is based upon bootstraps gird system. When designing page layouts in Adobe XD or Figma,
-        pleaserefer to the grid template supplied to match the design at the ‘100%’ size for each breakpoint (375px,
-        768px, 1280px).
-      </p>
-
-      <Tabs class="mb-5">
-        <Tab title="Mobile">
-          <div class="row row-example row--mobile">
-            <div class="col-12">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-6">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-6">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-          </div>
-        </Tab>
-        <Tab title="Tablet">
-          <div class="row row-example row--tablet">
-            <div class="col-12">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-6">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-6">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-4">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-4">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-4">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-          </div>
-        </Tab>
-        <Tab title="Desktop">
-          <div class="row row-example row--desktop">
-            <div class="col-12">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-6">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-6">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-4">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-4">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-4">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-3">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-            <div class="col-2">
-              <span class="grid-example"></span>
-            </div>
-          </div>
-        </Tab>
-      </Tabs>
     </div>
 
     <div class="bg-light version-control mb-0 mt-5">

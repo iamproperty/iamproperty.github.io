@@ -35,7 +35,25 @@ onMounted(async () => {
 
     return data.dashboards;
   });
+
+  // #region Fix Carousel Cards for Admin Panel
+  const mq = window.matchMedia('(min-width: 105em)');
+  mq.addEventListener('change', (e) => {
+    fixCarouselCards();
+  });
+  fixCarouselCards();
+  // #endregion
 });
+
+const fixCarouselCards = ():void => {
+  const mq = window.matchMedia('(min-width: 105em)');
+  if (mq.matches) {
+    document.querySelectorAll('.admin-panel iam-carousel')?.forEach(el => el.setAttribute('data-smcols', 4));
+  } else {
+    document.querySelectorAll('.admin-panel iam-carousel')?.forEach(el => el.setAttribute('data-smcols', 3));
+  }
+};
+
 
 // todo load from api call
 
@@ -53,8 +71,6 @@ function addProductSearch(event): void {
     createApp(SearchProductArticles).mount(find);
   }
 }
-
-
 const loadDashboards = async (): any => {
 
   try {
@@ -95,11 +111,11 @@ const loadDashboards = async (): any => {
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
+      <STDNav :get-access-token="() => null" data-mode="mock" data-product="crm"></STDNav>
     </Nav>
   </nav>
 
-  <main>
+  <main class="enable-lg-breakpoint">
     <div class="bg-primary full-width questions-container">
       <div class="container">
         <h1 class="pb-2 md-col-end-7 h2">Welcome, <span data-variable="shortname"></span></h1>
@@ -119,14 +135,14 @@ const loadDashboards = async (): any => {
       </Skeleton>
     </Content>
 
-    <div class="md-col-end-6">
+    <div class="md-col-end-6 lg-col-end-7">
       <div class="admin-panel bg-white">
         <h2 class="bg-light iam-content--title">Featured learning</h2>
         <Content
           :data-url="hubEnv.VITE_HUB_LEARNING_URL"
           data-title-tag="h2"
           data-title-class="bg-light"
-          @content-loaded="addLearningSearch"
+          @content-loaded="() => {addLearningSearch(); fixCarouselCards();}"
         >
           <Skeleton>
             <Bone class="card"></Bone>
@@ -159,14 +175,14 @@ const loadDashboards = async (): any => {
         </Content>
       </div>
     </div>
-    <div class="md-col-start-7">
+    <div class="md-col-start-7 lg-col-start-8">
       <div class="admin-panel bg-white">
         <h2 class="bg-light iam-content--title">Product support</h2>
         <Content
           :data-url="hubEnv.VITE_HUB_SUPPORT_URL"
           data-title-tag="h2"
           data-title-class="bg-light"
-          @content-loaded="addProductSearch"
+          @content-loaded="() => {addProductSearch(); fixCarouselCards();}"
         >
           <Skeleton>
             <Bone class="search"></Bone>
