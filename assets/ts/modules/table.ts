@@ -1759,18 +1759,19 @@ export const filterAdvancedTable = (component, table, actionbar, pagination, dis
   });
 
 
-  setFilterIndicator(component, table, actionbar, appliedFilters);
-  createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
-  paginateRows(component, table, pagination);
-
-  const submitEvent = new CustomEvent('table-filtered', {
-    detail: {
-      filters: Array.from(filtersSet),
-      rowCount: table?.querySelectorAll('tbody tr:not(.filtered)').length || 0
-    }
-  });
 
   if(dispatchEvent) {
+
+    setFilterIndicator(component, table, actionbar, appliedFilters);
+    createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
+    paginateRows(component, table, pagination);
+
+    const submitEvent = new CustomEvent('table-filtered', {
+      detail: {
+        filters: Array.from(filtersSet),
+        rowCount: table?.querySelectorAll('tbody tr:not(.filtered)').length || 0
+      }
+    });
     component.dispatchEvent(submitEvent);
   }
 };
