@@ -18,6 +18,7 @@ class iamAppInsights extends HTMLElement {
     <div class="wrapper" aria-busy="true">
       <strong class="d-block pb-3 insight-count">Showing <span id="count"></span> <span id="count-text"></span></strong>
 
+
       <div id="map-wrapper"></div>
 
       <div id="table-wrapper">Loading table...</div>
