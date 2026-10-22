@@ -268,11 +268,8 @@ class iamAppInsights extends HTMLElement {
     // Add data-label attributes to table headings and corresponding cells
     // data-label is used for cross referencing between original table and the shadow table
     table.querySelectorAll('th').forEach((heading, index) => {
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
-      const headingText = tempDiv.textContent || tempDiv.innerText || '';
-      heading.setAttribute('data-label', headingText);
-      console.log(`Heading ${index}: ${headingText}`);
+      heading.setAttribute('data-label', heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML);
+      console.log(`Heading ${index}: ${heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML}`);
     });
 
 
