@@ -219,7 +219,11 @@ class iamAppInsights extends HTMLElement {
 
     tableComponent.addEventListener('table-filtered', (event) => {
 
-      const initialCount = tableComponent?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
+
+      console.log(originalTable);
+
+      const initialCount = originalTable.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
       countElement?.innerHTML = initialCount;
 
       const countTextElement = this.shadowRoot?.querySelector('#count-text');
@@ -239,14 +243,14 @@ class iamAppInsights extends HTMLElement {
 
       mapWrapper.innerHTML = this.createMapContent();
 
+      if(parseInt(initialCount) < this.rowlimit) {
 
-      console.log('hey')
-      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
+        const tableFilteredEvent = new CustomEvent('table-filtered', {
+          detail: event.detail
+        });
+        //this.dispatchEvent(tableFilteredEvent);
+      }
 
-      const tableFilteredEvent = new CustomEvent('table-filtered', {
-        detail: event.detail
-      });
-      //this.dispatchEvent(tableFilteredEvent);
     });
   };
 
