@@ -284,7 +284,6 @@ class iamAppInsights extends HTMLElement {
     console.log(paginationElement);
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
-    paginationElement?.setAttribute('data-hello', '1');
 
 
     paginationElement.addEventListener('update-page', (event: Event) => {
