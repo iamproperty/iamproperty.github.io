@@ -309,6 +309,7 @@ class iamAppInsights extends HTMLElement {
         element.classList.add('td--fixed');
       });
 
+      console.log(component);
       this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
     }
 
