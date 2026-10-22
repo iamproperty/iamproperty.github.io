@@ -1,4 +1,154 @@
-import { filterAdvancedTable } from '../modules/table';
+const getInlineFilters = (component, table): Array<any> => {
+
+  const columnsArray = [];
+
+  table.querySelectorAll('th[data-filters]').forEach(heading => {
+
+    const columnIndex = heading.cellIndex;
+
+    const columnName = heading.dataset.label; // TO DO add a fallback for when a name isnt set
+
+    if(heading.dataset.filters === undefined || heading.dataset.filters === null || heading.dataset.filters === '') return;
+
+    //console.log('Heading:', heading, 'Filters:', heading.dataset.filters);
+    const filters = JSON.parse(heading.dataset.filters);
+
+    // Todo make more robust to check if the column already exists in the array and update it instead of adding a duplicate
+    columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': filters});
+  });
+
+  return columnsArray;
+};
+
+const filterAdvancedTable = (component, table, actionbar, pagination, dispatchEvent = true): void => {
+
+  console.log(table);
+
+  const columns = getInlineFilters(component, table, actionbar);
+  const appliedFilters = [];
+  const filtersSet = new Set();
+  table.classList.remove('table--filtered');
+
+  if(columns.length == 0) return;
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+
+    row.classList.remove('filtered--matched');
+    row.classList.remove('filtered--show');
+    row.classList.remove('filtered');
+  });
+
+  columns.forEach((column) => {
+
+    const columnIndex = column.index;
+    const columnName = column.column;
+
+    column.filters.forEach((filter) => {
+
+      const filterOperator = String(filter.operator ?? 'equals').toLowerCase();
+      const filterType = String(filter.type ?? 'text').toLowerCase();
+      const filterValue = filter.value;
+      let compareValue = String(filterValue ?? '');
+
+      if(filterValue == '' || filterValue == null || filterValue == 'undefined') return;
+
+      const betweenValues = filterOperator === 'between' && filterValue
+        ? (Array.isArray(filterValue) ? filterValue : filterValue.split(','))
+        : [];
+
+      if(filterType == 'number' || filterType == 'price'){
+        compareValue = convertToNumber(filterValue);
+      }
+
+      if(filterType == 'date'){
+        compareValue = convertToUnixTimestamp(filterValue);
+      }
+
+      appliedFilters.push(columnName);
+      filtersSet.add({ 'column': columnName, 'operator': filterOperator, 'type': filterType, 'value': filterValue });
+
+      table.classList.add('table--filtered');
+      table.querySelectorAll(`tbody tr td:nth-child(${columnIndex + 1})`).forEach((cell) => {
+
+        let cellValue = cell.textContent ?? '';
+
+        if(filterType == 'number' || filterType == 'price'){
+          cellValue = convertToNumber(cellValue);
+        }
+
+        if(filterType == 'date'){
+          cellValue = convertToUnixTimestamp(cellValue);
+        }
+
+        // TODO format the cell value based on the column type (e.g., date, number) if needed
+        let matched = false;
+
+        switch (filterOperator) {
+          case 'contains':
+            matched = cellValue.includes(compareValue);
+            break;
+          case 'does not contain':
+            matched = !cellValue.includes(compareValue);
+            break;
+          case 'equals':
+            matched = cellValue === compareValue;
+            break;
+          case 'does not equal':
+          case 'not':
+            matched = cellValue !== compareValue;
+            break;
+          case 'begins with':
+            matched = cellValue.startsWith(compareValue);
+            break;
+          case 'ends with':
+            matched = cellValue.endsWith(compareValue);
+            break;
+          case 'before':
+          case 'less':
+          case 'less than':
+            matched = cellValue < compareValue;
+            break;
+          case 'after':
+          case 'greater':
+          case 'greater than':
+            matched = cellValue > compareValue;
+            break;
+          case 'between': {
+            let [from, to] = betweenValues;
+
+            if(filterOperator == "between" && filterType == 'date') {
+              from = convertToUnixTimestamp(String(from).trim());
+              to = convertToUnixTimestamp(String(to).trim());
+            }
+            matched = from != null && to != null && cellValue >= from && cellValue <= to;
+            break;
+          }
+          case 'set':
+            matched = cellValue.trim() !== '';
+            break;
+          case 'empty':
+            matched = cellValue.trim() === '';
+            break;
+        }
+
+        if (!matched)
+          cell.closest('tr').classList.add('filtered');
+        //else
+          //cell.closest('tr').classList.add('filtered--matched');
+      });
+
+    });
+  });
+
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+
+    if (!row.classList.contains('filtered')) {
+      row.classList.add('filtered--matched');
+    }
+  });
+
+};
 
 
 class iamAppInsights extends HTMLElement {
