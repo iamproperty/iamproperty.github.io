@@ -174,11 +174,11 @@ class iamAppInsights extends HTMLElement {
 
       if(parseInt(initialCount) == 1) {
 
-        countTextElement?.insertAdjacentHTML('afterend', /* HTML */`property`);
+        countTextElement?.innerHTML = /* HTML */`property`;
       }
       else {
 
-        countTextElement?.insertAdjacentHTML('afterend', /* HTML */`properties`);
+        countTextElement?.innerHTML = /* HTML */`properties`;
       }
 
       mapWrapper.innerHTML = this.createMapContent();
@@ -265,15 +265,15 @@ class iamAppInsights extends HTMLElement {
 
     if(parseInt(initialCount) == 1) {
 
-      countTextElement?.insertAdjacentHTML('afterend', /* HTML */`property`);
+      countTextElement?.innerHTML = /* HTML */`property`;
     }
     else if(parseInt(initialCount) < 500) {
 
-      countTextElement?.insertAdjacentHTML('afterend', /* HTML */`properties`);
+      countTextElement?.innerHTML = /* HTML */`properties`;
     }
     else {
 
-      countTextElement?.insertAdjacentHTML('afterend', /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`);
+      countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
     }
 
 
