@@ -222,7 +222,6 @@ class iamAppInsights extends HTMLElement {
 
     if (!table) return table;
 
-    /* TO DO: Return
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
       const CTAHeading = table.querySelector('thead tr th:last-child');
@@ -233,8 +232,6 @@ class iamAppInsights extends HTMLElement {
         cta.closest('td').classList.add('td--fixed', 'text-nowrap');
       });
     }
-     */
-
 
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
