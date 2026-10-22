@@ -103,6 +103,7 @@ class iamAppInsights extends HTMLElement {
     const originalTable = this.querySelector('table') as HTMLTableElement | null;
     const tableComponent = this.shadowRoot?.querySelector('iam-table-advanced') as HTMLElement | null;
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
+    const pagination = this.shadowRoot?.querySelector('iam-pagination');
     const notification = this.shadowRoot?.getElementById('branch-notification');
     const countElement = this.shadowRoot?.querySelector('#count');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
@@ -276,7 +277,6 @@ class iamAppInsights extends HTMLElement {
 
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
-    const pagination = component.shadowRoot?.querySelector('iam-pagination');
     const countElement = component.shadowRoot?.querySelector('#count');
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
