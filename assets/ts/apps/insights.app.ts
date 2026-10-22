@@ -255,6 +255,12 @@ class iamAppInsights extends HTMLElement {
 
     if (!table) return table;
 
+    table.querySelectorAll('th').forEach((heading, index) => {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
+      const headingText = tempDiv.textContent || tempDiv.innerText || '';
+      heading.setAttribute('data-label', headingText);
+    });
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
