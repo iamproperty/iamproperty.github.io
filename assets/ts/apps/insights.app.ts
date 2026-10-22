@@ -34,7 +34,7 @@ class iamAppInsights extends HTMLElement {
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
-
+/*
     const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
     table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
@@ -45,7 +45,7 @@ class iamAppInsights extends HTMLElement {
 
     const tempTable = document.createElement('table') as HTMLTableElement;
     tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
-
+*/
 
 
     return /* HTML */`
@@ -65,7 +65,7 @@ class iamAppInsights extends HTMLElement {
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
         <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
-      ${tempTable.outerHTML}
+      ${table.outerHTML}
       <iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
     </iam-table-advanced>`;
   };

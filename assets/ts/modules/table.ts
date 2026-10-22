@@ -1274,6 +1274,8 @@ export const populateFilterOptions = (component, table): void => {
       if (!filter || filter.options) return;
 
       const headingIndex = heading.cellIndex;
+
+      /*
       const uniqueValues = new Set<string>();
 
       Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
@@ -1290,6 +1292,7 @@ export const populateFilterOptions = (component, table): void => {
       if (uniqueValues.size) {
         filters[index].options = Array.from(uniqueValues);
       }
+      */
     });
 
     heading.dataset.filters = JSON.stringify(filters);
