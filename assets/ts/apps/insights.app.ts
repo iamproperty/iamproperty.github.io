@@ -245,6 +245,7 @@ class iamAppInsights extends HTMLElement {
 
       // Apply advanced table filtering to original table based on the current state of the table component
 
+      console.log(originalTable);
       filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
 
       //this.dispatchEvent(tableFilteredEvent);
