@@ -238,7 +238,7 @@ class iamAppInsights extends HTMLElement {
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
 
-    tableWrapper.innerHTML = this.createTableContent(component, table);
+    //tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
 
 
