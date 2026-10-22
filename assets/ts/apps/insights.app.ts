@@ -608,7 +608,7 @@ class iamAppInsights extends HTMLElement {
       if(table.hasAttribute('id') === false) {
 
         table.setAttribute('id', 'properties-table');
-        table = this.fixOriginalTable(table);
+        this.fixOriginalTable(table);
       }
       createComponent(this, table);
     }
@@ -631,7 +631,7 @@ class iamAppInsights extends HTMLElement {
             if(table.hasAttribute('id') === false) {
 
               table.setAttribute('id', 'properties-table');
-              table = this.fixOriginalTable(table);
+              this.fixOriginalTable(table);
             }
 
             if (tableWrapper.querySelector('iam-table-advanced') === null) {
