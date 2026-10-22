@@ -6,7 +6,6 @@ import iamMap from '../../js/components/map/map.component.min.js';
 import iamNotification from '../../js/components/notification/notification.component.min.js';
 import iamTooltip from '../../js/components/tooltip/tooltip.component.min.js';
 import iamAppInsights from './insights.app.min.js';
-import iamTooltip from '../../js/components/tooltip/tooltip.component.min.js';
 
 document.addEventListener('DOMContentLoaded', (): void => {
 
