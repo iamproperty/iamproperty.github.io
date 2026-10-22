@@ -247,7 +247,7 @@ class iamAppInsights extends HTMLElement {
 
       filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
 
-      this.dispatchEvent(tableFilteredEvent);
+      //this.dispatchEvent(tableFilteredEvent);
     });
   };
 
