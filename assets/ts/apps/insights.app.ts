@@ -263,6 +263,7 @@ class iamAppInsights extends HTMLElement {
 
   fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
+    console.log(table);
     if (!table) return table;
 
     // Add data-label attributes to table headings and corresponding cells
