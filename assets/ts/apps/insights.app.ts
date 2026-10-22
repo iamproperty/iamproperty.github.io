@@ -244,10 +244,13 @@ class iamAppInsights extends HTMLElement {
 
   createComponent = (component, table): void => {
 
-    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
-    const countElement = this.shadowRoot?.querySelector('#count');
-    const paginationElement = this.shadowRoot?.querySelector('iam-pagination');
+    const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
+    const countElement = component.shadowRoot?.querySelector('#count');
+    const paginationElement = component.shadowRoot?.querySelector('iam-pagination');
+
+    console.log(paginationElement);
+
 
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
@@ -277,9 +280,21 @@ class iamAppInsights extends HTMLElement {
     component.dispatchEvent(dispatchedEvent);
 
     const initialCount = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+
+
+
+    /* #region Pagination */
+    console.log(paginationElement);
+    paginationElement?.setAttribute('data-total', initialCount);
+    paginationElement?.setAttribute('data-page', '1');
+    paginationElement?.setAttribute('data-hello', '1');
+    /* #endregion Pagination */
+
+
+
     countElement?.innerHTML = initialCount;
 
-    const countTextElement = this.shadowRoot?.querySelector('#count-text');
+    const countTextElement = component.shadowRoot?.querySelector('#count-text');
 
     if(parseInt(initialCount) == 1) {
 
@@ -294,18 +309,11 @@ class iamAppInsights extends HTMLElement {
       countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
     }
 
-    const tooltip = this.shadowRoot?.querySelector('iam-tooltip');
+    const tooltip = component.shadowRoot?.querySelector('iam-tooltip');
     if(tooltip) {
       tooltip.setAttribute('title', 'Some properties may not be in your initial view and we recommend filtering to reveal them.');
     }
 
-
-    /* #region Pagination */
-    console.log(paginationElement)
-    paginationElement?.setAttribute('data-total', initialCount);
-    paginationElement?.setAttribute('data-page', '1');
-    paginationElement?.setAttribute('data-hello', '1');
-    /* #endregion Pagination */
 
     setTimeout(() => {
 
