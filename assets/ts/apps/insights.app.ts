@@ -34,6 +34,10 @@ class iamAppInsights extends HTMLElement {
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
+
+    const tempTable = createElement('table') as HTMLTableElement;
+    tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead>${table.querySelector('tbody tr:first-child')?.outerHTML || ''}<tbody></tbody>`;
+
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
       <strong class="me-1">Criteria match key: </strong>
@@ -210,6 +214,7 @@ class iamAppInsights extends HTMLElement {
 
     if (!table) return table;
 
+    /* TO DO: Return
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
       const CTAHeading = table.querySelector('thead tr th:last-child');
@@ -220,6 +225,8 @@ class iamAppInsights extends HTMLElement {
         cta.closest('td').classList.add('td--fixed', 'text-nowrap');
       });
     }
+     */
+
 
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
@@ -238,7 +245,7 @@ class iamAppInsights extends HTMLElement {
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
 
-    //tableWrapper.innerHTML = this.createTableContent(component, table);
+    tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
 
 
