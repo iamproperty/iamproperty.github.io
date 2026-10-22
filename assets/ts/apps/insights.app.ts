@@ -198,6 +198,8 @@ class iamAppInsights extends HTMLElement {
 
   createMapContent = (): string => {
 
+    return '';
+
     if(!this.querySelector('table tr[data-latitude][data-longitude]'))
       return '';
 
