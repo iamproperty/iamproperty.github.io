@@ -290,7 +290,6 @@ class iamAppInsights extends HTMLElement {
     const countElement = component.shadowRoot?.querySelector('#count');
 
     table.setAttribute('id','properties-table');
-    table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
@@ -588,8 +587,10 @@ class iamAppInsights extends HTMLElement {
   connectedCallback(): void {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const table = this.querySelector('table');
+    let table = this.querySelector('table');
     const createComponent = this.createComponent;
+
+    table = this.fixOriginalTable(table);
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
