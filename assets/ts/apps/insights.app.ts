@@ -229,29 +229,6 @@ class iamAppInsights extends HTMLElement {
   };
 
 
-
-  updateComponent = (component, table):void => {
-    //this.createComponent(component, table);
-    console.log('hey');
-
-    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
-    const countElement = this.shadowRoot?.querySelector('#count');
-
-    table.setAttribute('id','properties-table');
-    table = this.fixOriginalTable(table);
-
-    tableWrapper.innerHTML = this.createTableContent(component, table);
-    mapWrapper.innerHTML = this.createMapContent();
-
-    /* Set the property column to fixed */
-    tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
-    tableWrapper?.querySelectorAll('table td[data-label="Property"]')?.forEach(element => {
-      element.classList.add('td--fixed');
-    });
-
-  }
-
   createComponent = (component, table): void => {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
@@ -472,7 +449,6 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
     const createComponent = this.createComponent;
-    const updateComponent = this.updateComponent;
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
@@ -513,11 +489,13 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
-          if (this.querySelector('table')) {
+          console.log('hi3');
+
+          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
 
             const table = this.querySelector('table');
 
-            //updateComponent(this, table);
+            createComponent(this, table);
           }
         }
       }
