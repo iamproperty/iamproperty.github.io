@@ -66,8 +66,9 @@ class iamAppInsights extends HTMLElement {
         <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
       ${tempTable.outerHTML}
-      <iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
-    </iam-table-advanced>`;
+    </iam-table-advanced>
+    <iam-pagination data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
+    `;
   };
 
   getBranch = (row: HTMLTableRowElement, branchColumn: string | null): string | null => {
@@ -246,6 +247,7 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
     const countElement = this.shadowRoot?.querySelector('#count');
+    const paginationElement = this.shadowRoot?.querySelector('iam-pagination');
 
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
@@ -292,13 +294,16 @@ class iamAppInsights extends HTMLElement {
       countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
     }
 
-
-
-
     const tooltip = this.shadowRoot?.querySelector('iam-tooltip');
     if(tooltip) {
       tooltip.setAttribute('title', 'Some properties may not be in your initial view and we recommend filtering to reveal them.');
     }
+
+
+    /* #region Pagination */
+    paginationElement?.setAttribute('data-total', initialCount);
+    paginationElement?.setAttribute('data-page', '1');
+    /* #endregion Pagination */
 
     setTimeout(() => {
 
