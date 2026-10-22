@@ -242,10 +242,10 @@ class iamAppInsights extends HTMLElement {
       console.log('hey')
       filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
 
-      //this.dispatchEvent(tableFilteredEvent);
       const tableFilteredEvent = new CustomEvent('table-filtered', {
         detail: event.detail
       });
+      //this.dispatchEvent(tableFilteredEvent);
     });
   };
 
