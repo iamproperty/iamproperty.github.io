@@ -36,7 +36,6 @@ class iamAppInsights extends HTMLElement {
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
-
     const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
     table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
@@ -48,7 +47,11 @@ class iamAppInsights extends HTMLElement {
     const tempTable = document.createElement('table') as HTMLTableElement;
     tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
 
-
+    this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
+    this.hideNullValues();
+    this.updateMatchCriteriaIndicators(component, component.getAttribute('data-match-criteria-column'), component.getAttribute('data-match-criteria-indicator-column'));
+    this.createPopupTitles(component, component.getAttribute('data-popup-title-column'));
+    this.createActionTitles(component, component.getAttribute('data-action-title-column'));
 
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
@@ -237,7 +240,6 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
     const countElement = component.shadowRoot?.querySelector('#count');
-    const createCTAs = this.createCTAs;
 
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
@@ -312,8 +314,7 @@ class iamAppInsights extends HTMLElement {
         element.classList.add('td--fixed');
       });
 
-      console.log(component);
-      createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
+      this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
       this.hideNullValues();
       this.updateMatchCriteriaIndicators(component, component.getAttribute('data-match-criteria-column'), component.getAttribute('data-match-criteria-indicator-column'));
       this.createPopupTitles(component, component.getAttribute('data-popup-title-column'));
