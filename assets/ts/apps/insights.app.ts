@@ -1,5 +1,6 @@
 import { filterAdvancedTable } from '../modules/table';
 
+
 class iamAppInsights extends HTMLElement {
   constructor() {
     super();
