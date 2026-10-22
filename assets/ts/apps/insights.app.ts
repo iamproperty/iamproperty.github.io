@@ -263,8 +263,7 @@ class iamAppInsights extends HTMLElement {
 
   fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
-    console.log(table);
-    if (!table) return table;
+    if (!table) return;
 
     // Add data-label attributes to table headings and corresponding cells
     // data-label is used for cross referencing between original table and the shadow table
@@ -277,8 +276,6 @@ class iamAppInsights extends HTMLElement {
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
-
-    return table;
   };
 
   createComponent = (component, table): void => {
@@ -288,6 +285,8 @@ class iamAppInsights extends HTMLElement {
     const countElement = component.shadowRoot?.querySelector('#count');
 
     table.setAttribute('id','properties-table');
+
+    this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
@@ -588,7 +587,6 @@ class iamAppInsights extends HTMLElement {
     let table = this.querySelector('table');
     const createComponent = this.createComponent;
 
-    table = this.fixOriginalTable(table);
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
