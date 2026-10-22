@@ -96,6 +96,7 @@ class iamAppInsights extends HTMLElement {
 
   setEvents = (): void => {
     const table = this.shadowRoot?.querySelector('iam-table-advanced table') as HTMLTableElement | null;
+    const originalTable = this.querySelector('table') as HTMLTableElement | null;
     const tableComponent = this.shadowRoot?.querySelector('iam-table-advanced') as HTMLElement | null;
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
     const notification = this.shadowRoot?.getElementById('branch-notification');
@@ -148,7 +149,13 @@ class iamAppInsights extends HTMLElement {
         const action = event.target.getAttribute('data-action');
 
 
-        const selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
+        let selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
+
+        if(actionbar?.hasAttribute('data-selected') && actionbar.getAttribute('data-selected') === 'all') {
+
+          selectedRows = originalTable?.querySelectorAll('tbody tr:not(.filtered)');
+        }
+
         const properties = [];
 
         if (selectedRows) {
