@@ -284,6 +284,7 @@ class iamAppInsights extends HTMLElement {
     };
 
 
+
     const updatePagination = (newPage: number, newShow: number):void => {
       const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
       table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
@@ -291,12 +292,13 @@ class iamAppInsights extends HTMLElement {
         if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
 
         const newRow = row.cloneNode(true) as HTMLTableRowElement;
+        const rowID = uniqueID(index);
 
         newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
 
         newRow.insertAdjacentHTML(
             'afterbegin',
-            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${uniqueID(index)}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${uniqueID(index)}"><span class="visually-hidden">Select row</span></label></td>`
+            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`
           );
 
         tempTbody.appendChild(newRow);
