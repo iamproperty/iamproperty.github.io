@@ -190,8 +190,8 @@ class iamPagination extends HTMLElement {
         if (oldVal != newVal) {
           this.setAttribute('data-show', newVal);
           //this.setAttribute('data-page', 1);
-          this.setup();
           this.dispatchEvent(new CustomEvent('update-show', { detail: { show: newVal } }));
+          this.setup();
         }
         break;
       }
