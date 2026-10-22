@@ -219,10 +219,38 @@ class iamAppInsights extends HTMLElement {
 
     tableComponent.addEventListener('table-filtered', (event) => {
 
-      const columns = getInlineFilters(tableComponent, table, actionbar);
-      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
+      const originalTable = this.querySelector('table') as HTMLTableElement | null;
+      if (!originalTable) return;
 
-      console.log(originalTable);
+      const columns = getInlineFilters(tableComponent, table, actionbar);
+
+      // The criteria column is generated for the displayed table, so also supply
+      // its values on the source table before applying the same filters there.
+      const matchCriteriaColumn = this.getAttribute('data-match-criteria-column');
+      if (matchCriteriaColumn && columns.some((column) => column.column === 'Match criteria')) {
+        if (!originalTable.querySelector('thead th[data-label="Match criteria"]')) {
+          const heading = document.createElement('th');
+          heading.setAttribute('data-label', 'Match criteria');
+          heading.classList.add('d-none');
+          heading.textContent = 'Match criteria';
+          originalTable.querySelector('thead tr')?.appendChild(heading);
+        }
+
+        originalTable.querySelectorAll('tbody tr').forEach((row) => {
+          let cell = row.querySelector('td[data-label="Match criteria"]');
+          if (!cell) {
+            cell = document.createElement('td');
+            cell.setAttribute('data-label', 'Match criteria');
+            cell.classList.add('d-none');
+            row.appendChild(cell);
+          }
+          const value = row.getAttribute(`data-${matchCriteriaColumn}`)?.toLocaleLowerCase().replace('match', '').trim() || '';
+          cell.textContent = value;
+          cell.setAttribute('data-value', value);
+        });
+      }
+
+      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
 
       const initialCount = originalTable.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
       countElement?.innerHTML = initialCount;

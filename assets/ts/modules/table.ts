@@ -1630,16 +1630,12 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   });
 };
 
-export const filterAdvancedTable = (component, table, actionbar, pagination, columns, dispatchEvent = true): void => {
-
-  console.log(table);
+export const filterAdvancedTable = (component, table, actionbar, pagination, columns: Array<any> | undefined = undefined, dispatchEvent = true): void => {
 
   const columnFilters = columns ?? getInlineFilters(component, table, actionbar);
   const appliedFilters = [];
   const filtersSet = new Set();
   table.classList.remove('table--filtered');
-
-  if(columnFilters.length == 0) return;
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
 
@@ -1648,9 +1644,16 @@ export const filterAdvancedTable = (component, table, actionbar, pagination, col
     row.classList.remove('filtered');
   });
 
+  if(columnFilters.length == 0) return;
+
   columnFilters.forEach((column) => {
 
-    const columnIndex = column.index;
+    // Supplied filters may come from a table with extra selection/expansion columns.
+    const heading = columns
+      ? Array.from(table.querySelectorAll('thead th')).find((heading) => heading.getAttribute('data-label') === column.column)
+      : null;
+    if (columns && !heading) return;
+    const columnIndex = heading ? heading.cellIndex : column.index;
     const columnName = column.column;
 
     column.filters.forEach((filter) => {
@@ -1872,7 +1875,8 @@ export const removeAppliedFilter = (component, table, actionbar, pagination, fil
       checkbox.checked = false;
     });
 
-    input.querySelector(':is([type="checkbox"], [type="radio"])[value=""]')?.checked = true;
+    const emptyOption = input.querySelector(':is([type="checkbox"], [type="radio"])[value=""]');
+    if (emptyOption) emptyOption.checked = true;
   }
 
   filterAdvancedTable(component, table, actionbar, pagination);
