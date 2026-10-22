@@ -323,6 +323,7 @@ class iamAppInsights extends HTMLElement {
         element.classList.add('td--fixed');
       });
 
+      this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
     });
 
     paginationElement.addEventListener('update-show', (event: Event) => {
@@ -460,6 +461,12 @@ class iamAppInsights extends HTMLElement {
 
   createCTAs = (component, ctaUrlStructure, ctaText): void => {
     if(!ctaUrlStructure) return;
+
+    if(!component.hasAttribute('data-cta-url-structure'))
+      component.setAttribute('data-cta-url-structure', ctaUrlStructure);
+    if(!component.hasAttribute('data-cta-text') && ctaText)
+      component.setAttribute('data-cta-text', ctaText);
+
 
     const searches = [];
     let ctaLink = ctaUrlStructure;
