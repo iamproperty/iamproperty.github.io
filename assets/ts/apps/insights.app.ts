@@ -47,11 +47,6 @@ class iamAppInsights extends HTMLElement {
     const tempTable = document.createElement('table') as HTMLTableElement;
     tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
 
-    this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
-    this.hideNullValues();
-    this.updateMatchCriteriaIndicators(component, component.getAttribute('data-match-criteria-column'), component.getAttribute('data-match-criteria-indicator-column'));
-    this.createPopupTitles(component, component.getAttribute('data-popup-title-column'));
-    this.createActionTitles(component, component.getAttribute('data-action-title-column'));
 
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
