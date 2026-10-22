@@ -106,6 +106,7 @@ const insightAction = (event) => {
       <li>Advanced table</li>
     </ol>
 
+    <!--
     <div class="full-width bg-light">
 
       <div class="container pt-5">
@@ -203,6 +204,7 @@ const insightAction = (event) => {
       </div>
 
     </div>
+    -->
     <div class="full-width bg-light mb-5">
 
       <div class="container pt-2">
@@ -213,16 +215,15 @@ const insightAction = (event) => {
             <table>
               <thead>
                 <tr>
-                  <th data-filters data-sort>Property</th>
-                  <th data-filters data-sort>Date listed</th>
-                  <th data-filters data-sort>Current list price</th>
+                  <th data-filters='[{"type":"text"}]' data-sort>Property</th>
+                  <th data-filters='[{"type":"date"}]' data-sort data-format="date">Date listed</th>
+                  <th data-filters='[{"type":"price"}]' data-sort data-format="price">Current list price</th>
                   <th data-filters data-sort>Branch</th>
-                  <th data-filters data-sort>Weeks on market</th>
+                  <th data-filters='[{"type": "number", "operator": "equals", "value": "13"}]' data-sort>Weeks on market</th>
                   <th data-filters data-sort>Latest fall through</th>
                   <th data-filters data-sort>Latest price reduction</th>
                   <th data-filters data-sort>Price reduction %</th>
                   <th data-filters data-sort>Listed agent</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -236,7 +237,6 @@ const insightAction = (event) => {
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
                 <tr data-match-criteria="full">
                   <td>59 Glen Street, NE68 3LS</td>
@@ -248,7 +248,6 @@ const insightAction = (event) => {
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
                 <tr data-match-criteria="partial">
                   <td>59 Glen Street, NE68 3LS</td>
@@ -260,7 +259,6 @@ const insightAction = (event) => {
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
                 <tr data-match-criteria="partial">
                   <td>59 Glen Street, NE68 3LS</td>
@@ -272,7 +270,6 @@ const insightAction = (event) => {
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
                 <tr data-match-criteria="partial">
                   <td>59 Glen Street, NE68 3LS</td>
@@ -284,7 +281,6 @@ const insightAction = (event) => {
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
                 <tr data-match-criteria="partial">
                   <td>59 Glen Street, NE68 3LS</td>
@@ -296,7 +292,6 @@ const insightAction = (event) => {
                   <td>£300,000</td>
                   <td>5%</td>
                   <td>John Smith</td>
-                  <td><a href="/property" target="_blank">View property</a></td>
                 </tr>
 
               </tbody>

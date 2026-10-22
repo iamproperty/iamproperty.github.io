@@ -16,7 +16,7 @@ class iamAppInsights extends HTMLElement {
     </style>
 
     <div class="wrapper" aria-busy="true">
-      <strong class="d-block pb-3 insight-count"><span id="count"></span> <!--<span id="count-text"></span>-->properties</strong>
+      <strong class="d-block pb-3 insight-count">Showing <span id="count"></span> <span id="count-text"></span></strong>
 
       <div id="map-wrapper"></div>
 
@@ -165,8 +165,31 @@ class iamAppInsights extends HTMLElement {
     // #endregion
 
     tableComponent.addEventListener('table-filtered', (event) => {
-      countElement?.innerHTML = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+
+      const initialCount = tableComponent?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+      countElement?.innerHTML = initialCount;
+
+      const countTextElement = this.shadowRoot?.querySelector('#count-text');
+
+      if(parseInt(initialCount) == 1) {
+
+        countTextElement?.insertAdjacentHTML('afterend', /* HTML */`property`);
+      }
+      else {
+
+        countTextElement?.insertAdjacentHTML('afterend', /* HTML */`properties`);
+      }
+
       mapWrapper.innerHTML = this.createMapContent();
+
+      console.log(event);
+
+      const tableFilteredEvent = new CustomEvent('table-filtered', {
+        detail: {
+          height: table?.offsetHeight
+        }
+      });
+      this.dispatchEvent(tableFilteredEvent);
     });
   };
 
@@ -234,7 +257,31 @@ class iamAppInsights extends HTMLElement {
 
     component.dispatchEvent(dispatchedEvent);
 
-    countElement?.innerHTML = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    countElement?.innerHTML = initialCount;
+
+    const countTextElement = this.shadowRoot?.querySelector('#count-text');
+
+    if(parseInt(initialCount) == 1) {
+
+      countTextElement?.insertAdjacentHTML('afterend', /* HTML */`property`);
+    }
+    else if(parseInt(initialCount) < 5) {
+
+      countTextElement?.insertAdjacentHTML('afterend', /* HTML */`properties`);
+    }
+    else {
+
+      countTextElement?.insertAdjacentHTML('afterend', /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`);
+    }
+
+
+
+
+    const tooltip = this.shadowRoot?.querySelector('iam-tooltip');
+    if(tooltip) {
+      tooltip.setAttribute('title', 'Some properties may not be in your initial view and we recommend filtering to reveal them.');
+    }
 
     setTimeout(() => {
 
@@ -361,7 +408,6 @@ class iamAppInsights extends HTMLElement {
 
       ctaLink = ctaUrlStructure.toLowerCase();
 
-      console.log(searches);
       searches.forEach(search => {
         let datasetSearch = search;
 

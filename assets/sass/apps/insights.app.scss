@@ -168,7 +168,7 @@ table .criteria-match-indicator[data-value="partial"]::before {
 
 
 // #region: Icon fixes
-[class*="fa-"]:not(.suffix, .prefix) {
+[class*="fa-"]:not(.suffix, .prefix, [slot="icon"]) {
 
   position: relative;
   display: inline-block;
@@ -269,6 +269,17 @@ iam-notification::part(dismiss-btn):before {
   }
 }
 
+@layer components {
+    
+  iam-tooltip [slot="icon"] {
+    
+    height: 1em;
+    width: 1em;
+    display: inline-block !important;
+    vertical-align: text-top;
+  }
+}
+
 iam-pagination::part(prev):before {
 
   content: "";
@@ -279,6 +290,7 @@ iam-pagination::part(prev):before {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z'/%3E%3C/svg%3E")!important;
+
 }
 
 iam-pagination::part(prev):disabled:before {
