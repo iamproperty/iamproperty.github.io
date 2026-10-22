@@ -285,6 +285,21 @@ class iamAppInsights extends HTMLElement {
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
     paginationElement?.setAttribute('data-hello', '1');
+
+
+    paginationElement.addEventListener('update-page', (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const newPage = customEvent.detail.page;
+      console.log(`Page changed to: ${newPage}`);
+    });
+
+    paginationElement.addEventListener('update-show', (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const newShow = customEvent.detail.show;
+      console.log(`Show changed to: ${newShow}`);
+    });
+
+
     /* #endregion Pagination */
 
 
