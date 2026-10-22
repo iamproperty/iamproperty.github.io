@@ -175,6 +175,8 @@ class iamAppInsights extends HTMLElement {
         }
         event.target?.setAttribute('disabled', 'true');
 
+        console.log(properties);
+
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
             action: action,
