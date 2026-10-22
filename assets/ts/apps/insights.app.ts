@@ -286,7 +286,7 @@ class iamAppInsights extends HTMLElement {
     console.log(paginationElement);
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
-
+    let newShow = 15;
 
     paginationElement.addEventListener('update-page', (event: Event) => {
       const customEvent = event as CustomEvent;
@@ -296,20 +296,16 @@ class iamAppInsights extends HTMLElement {
       const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
       table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
-        if (index >= 15) return;
+        if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
 
         tempTbody.appendChild(row.cloneNode(true));
       });
 
       const tempTable = document.createElement('table') as HTMLTableElement;
       tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
-      table.parentNode?.replaceChild(tempTable, table);
-      table = tempTable;
-      table.setAttribute('id','properties-table');
-      tableWrapper.innerHTML = this.createTableContent(component, table);
-      table = tableWrapper.querySelector('table');
-      table?.querySelector('thead th[data-label="Property"]')?.classList.add('th--fixed');
-      table?.querySelectorAll('tbody td[data-label="Property"]')?.forEach(element => {
+
+      tableWrapper?.querySelector('table tbody').innerHTML = tempTbody.innerHTML;
+      tableWrapper?.querySelector('table tbody')?.querySelectorAll('td[data-label="Property"]')?.forEach(element => {
         element.classList.add('td--fixed');
       });
 
@@ -317,7 +313,7 @@ class iamAppInsights extends HTMLElement {
 
     paginationElement.addEventListener('update-show', (event: Event) => {
       const customEvent = event as CustomEvent;
-      const newShow = customEvent.detail.show;
+      newShow = customEvent.detail.show;
       console.log(`Show changed to: ${newShow}`);
     });
 
