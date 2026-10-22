@@ -586,8 +586,6 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
 
-    table.setAttribute('id','properties-table');
-
     const createComponent = this.createComponent;
 
 
