@@ -83,6 +83,7 @@ class iamAppInsights extends HTMLElement {
     return null;
   };
 
+
   isMultiBranchSelected = (component: HTMLElement, table: HTMLTableElement | null): boolean => {
     if (!table) return false;
 
@@ -111,6 +112,11 @@ class iamAppInsights extends HTMLElement {
 
         setTimeout(() => {
           // #region Create print campaign button / branch notification
+          if(actionbar.hasAttribute('data-selected') && actionbar.getAttribute('data-selected') === 'all') {
+            // TODO: make this smarter and actually check if more than one branch is selected in the original table
+            notification?.classList.remove('d-none');
+            createPrintCampaignButton.setAttribute('disabled', 'true');
+          }
           if(createPrintCampaignButton && this.isMultiBranchSelected(this,table)) {
             notification?.classList.remove('d-none');
             createPrintCampaignButton.setAttribute('disabled', 'true');
@@ -167,7 +173,6 @@ class iamAppInsights extends HTMLElement {
                 tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
                 const headingText = tempDiv.textContent || tempDiv.innerText || '';
                 cell.setAttribute('data-label', headingText);
-
               }
             });
           });

@@ -106,7 +106,7 @@ const insightAction = (event) => {
       <li>Advanced table</li>
     </ol>
 
-    <!--
+
     <div class="full-width bg-light">
 
       <div class="container pt-5">
@@ -204,7 +204,7 @@ const insightAction = (event) => {
       </div>
 
     </div>
-    -->
+
     <div class="full-width bg-light mb-5">
 
       <div class="container pt-2">

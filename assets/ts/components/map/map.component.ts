@@ -46,7 +46,7 @@ class iamMap extends HTMLElement {
 
     // If the map component is inside a shadow root, we need to query the table from the shadow root instead of the document
     // This lookup should trump the previous lookup, as this case covers the map and table being part of the app insights component
-    if(this.getRootNode() instanceof ShadowRoot){
+    if(!table && this.getRootNode() instanceof ShadowRoot){
 
       table = (this.getRootNode() as ShadowRoot).querySelector(`table`);
     }
@@ -395,10 +395,6 @@ class iamMap extends HTMLElement {
         this.map.on("click", (event) => {
           const center = this.map.getCenter();
           const zoom = this.map.getZoom();
-          console.log("Map clicked");
-          console.log("Center:", center.lat, center.lng);
-          console.log("Current zoom:", zoom);
-          console.log("Clicked coordinates:", event.lngLat.lat, event.lngLat.lng);
         });
       }
 
