@@ -247,10 +247,6 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
     const countElement = component.shadowRoot?.querySelector('#count');
-    const paginationElement = component.shadowRoot?.querySelector('iam-pagination');
-
-    console.log(paginationElement);
-
 
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
@@ -284,6 +280,7 @@ class iamAppInsights extends HTMLElement {
 
 
     /* #region Pagination */
+    const paginationElement = component.shadowRoot?.querySelector('iam-pagination');
     console.log(paginationElement);
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
