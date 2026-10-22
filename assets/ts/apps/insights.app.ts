@@ -29,6 +29,7 @@ class iamAppInsights extends HTMLElement {
     </div>`;
 
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
+    this.rowlimit = 500;
   }
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
@@ -176,10 +177,15 @@ class iamAppInsights extends HTMLElement {
 
         countTextElement?.innerHTML = /* HTML */`property`;
       }
-      else {
+      else if(parseInt(initialCount) < this.rowlimit) {
 
         countTextElement?.innerHTML = /* HTML */`properties`;
       }
+      else {
+
+        countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
+      }
+
 
       mapWrapper.innerHTML = this.createMapContent();
 
@@ -267,7 +273,7 @@ class iamAppInsights extends HTMLElement {
 
       countTextElement?.innerHTML = /* HTML */`property`;
     }
-    else if(parseInt(initialCount) < 500) {
+    else if(parseInt(initialCount) < this.rowlimit) {
 
       countTextElement?.innerHTML = /* HTML */`properties`;
     }
