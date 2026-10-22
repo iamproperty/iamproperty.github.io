@@ -243,12 +243,6 @@ class iamAppInsights extends HTMLElement {
     return table;
   };
 
-  uniqueID = (index = 1): number => {
-    const ID = Math.floor(Math.random() * Date.now() * (index + 1));
-
-    return ID;
-  };
-
   createComponent = (component, table): void => {
 
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
@@ -293,6 +287,12 @@ class iamAppInsights extends HTMLElement {
     paginationElement?.setAttribute('data-page', '1');
     let newShow = 15;
 
+    const uniqueID = (index = 1): number => {
+      const ID = Math.floor(Math.random() * Date.now() * (index + 1));
+
+      return ID;
+    };
+
 
     function updatePagination(newPage: number, newShow: number):void {
       const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
@@ -306,7 +306,7 @@ class iamAppInsights extends HTMLElement {
 
         newRow.insertAdjacentHTML(
             'afterbegin',
-            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${this.uniqueID(index)}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${this.uniqueID(index)}"><span class="visually-hidden">Select row</span></label></td>`
+            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${uniqueID(index)}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${uniqueID(index)}"><span class="visually-hidden">Select row</span></label></td>`
           );
 
         tempTbody.appendChild(newRow);
