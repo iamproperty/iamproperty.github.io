@@ -225,17 +225,6 @@ class iamAppInsights extends HTMLElement {
 
     if (!table) return table;
 
-    if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
-
-      const CTAHeading = table.querySelector('thead tr th:last-child');
-      CTAHeading.classList.add('th--fixed');
-      CTAHeading.innerHTML = '';
-
-      table.querySelectorAll('tbody tr td:last-child a:first-child:last-child').forEach(cta => {
-        cta.closest('td').classList.add('td--fixed', 'text-nowrap');
-      });
-    }
-
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
@@ -516,7 +505,7 @@ class iamAppInsights extends HTMLElement {
       });
 
       //if(areSearchesMet)
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
+        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed text-nowrap"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
       //else
       //  row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
     });
