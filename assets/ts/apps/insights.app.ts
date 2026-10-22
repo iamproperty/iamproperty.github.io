@@ -253,8 +253,9 @@ class iamAppInsights extends HTMLElement {
 
   fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
-    if (!table) return table;
+    //if (!table) return table;
 
+    table.setAttribute('id','properties-table');
     table.querySelectorAll('th').forEach((heading, index) => {
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
