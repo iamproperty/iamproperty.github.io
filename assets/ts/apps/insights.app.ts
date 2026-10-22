@@ -238,6 +238,7 @@ class iamAppInsights extends HTMLElement {
       mapWrapper.innerHTML = this.createMapContent();
 
 
+      console.log('hey')
       filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
 
       //this.dispatchEvent(tableFilteredEvent);
