@@ -276,6 +276,7 @@ class iamAppInsights extends HTMLElement {
 
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
+    const pagination = component.shadowRoot?.querySelector('iam-pagination');
     const countElement = component.shadowRoot?.querySelector('#count');
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
