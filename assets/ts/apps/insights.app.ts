@@ -1,5 +1,3 @@
-//import { getInlineFilters, filterAdvancedTable } from '../modules/table';
-
 class iamAppInsights extends HTMLElement {
   constructor() {
     super();
@@ -102,7 +100,6 @@ class iamAppInsights extends HTMLElement {
     const originalTable = this.querySelector('table') as HTMLTableElement | null;
     const tableComponent = this.shadowRoot?.querySelector('iam-table-advanced') as HTMLElement | null;
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
-    const pagination = this.shadowRoot?.querySelector('iam-pagination');
     const notification = this.shadowRoot?.getElementById('branch-notification');
     const countElement = this.shadowRoot?.querySelector('#count');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
@@ -201,7 +198,7 @@ class iamAppInsights extends HTMLElement {
         }
         event.target?.setAttribute('disabled', 'true');
 
-        //console.log(properties);
+        console.log(properties);
 
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
@@ -238,18 +235,11 @@ class iamAppInsights extends HTMLElement {
 
       mapWrapper.innerHTML = this.createMapContent();
 
-
-
-      // Apply advanced table filtering to original table based on the current state of the table component
-      //console.log(this.querySelector('table'));
-      //filterAdvancedTable(tableComponent, this.querySelector('table'), actionbar, pagination, false);
-
-
-      //console.log(getInlineFilters(tableComponent, this.querySelector('table')));
       const tableFilteredEvent = new CustomEvent('table-filtered', {
         detail: event.detail
       });
-      //this.dispatchEvent(tableFilteredEvent);
+
+      this.dispatchEvent(tableFilteredEvent);
     });
   };
 
@@ -261,21 +251,15 @@ class iamAppInsights extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  fixOriginalTable = (table: HTMLTableElement): void => {
+  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
-    if (!table) return;
-
-    // Add data-label attributes to table headings and corresponding cells
-    // data-label is used for cross referencing between original table and the shadow table
-    table.querySelectorAll('th').forEach((heading, index) => {
-      heading.setAttribute('data-label', heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML);
-      console.log(`Heading ${index}: ${heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML}`);
-    });
-
+    if (!table) return table;
 
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
+
+    return table;
   };
 
   createComponent = (component, table): void => {
@@ -285,8 +269,7 @@ class iamAppInsights extends HTMLElement {
     const countElement = component.shadowRoot?.querySelector('#count');
 
     table.setAttribute('id','properties-table');
-
-    this.fixOriginalTable(table);
+    table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
@@ -318,7 +301,7 @@ class iamAppInsights extends HTMLElement {
 
     /* #region Pagination */
     const paginationElement = component.shadowRoot?.querySelector('iam-pagination');
-    //console.log(paginationElement);
+    console.log(paginationElement);
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
     let newShow = 15;
@@ -585,9 +568,7 @@ class iamAppInsights extends HTMLElement {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
-
     const createComponent = this.createComponent;
-
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
