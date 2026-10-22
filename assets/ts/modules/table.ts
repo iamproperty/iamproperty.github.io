@@ -1632,7 +1632,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
 
 export const filterAdvancedTable = (component, table, actionbar, pagination, dispatchEvent = true): void => {
 
-  console.log(table);
+  console.trace(table);
 
   const columns = getInlineFilters(component, table, actionbar);
   const appliedFilters = [];
