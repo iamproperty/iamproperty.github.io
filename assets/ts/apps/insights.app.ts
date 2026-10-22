@@ -227,6 +227,12 @@ class iamAppInsights extends HTMLElement {
   };
 
 
+
+  updateComponent = (component, table):void => {
+    //this.createComponent(component, table);
+    console.log('hey');
+  }
+
   createComponent = (component, table): void => {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
@@ -447,6 +453,7 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
     const createComponent = this.createComponent;
+    const updateComponent = this.updateComponent;
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
@@ -487,15 +494,11 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
-          console.log('hi3');
-
           if (this.querySelector('table')) {
-
-          console.log('hi33');
 
             const table = this.querySelector('table');
 
-            createComponent(this, table);
+            updateComponent(this, table);
           }
         }
       }
