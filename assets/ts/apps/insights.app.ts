@@ -1,4 +1,4 @@
-import { getInlineFilters, filterAdvancedTable } from '../modules/table';
+//import { getInlineFilters, filterAdvancedTable } from '../modules/table';
 
 class iamAppInsights extends HTMLElement {
   constructor() {
@@ -242,7 +242,7 @@ class iamAppInsights extends HTMLElement {
 
       // Apply advanced table filtering to original table based on the current state of the table component
       //console.log(this.querySelector('table'));
-      filterAdvancedTable(tableComponent, this.querySelector('table'), actionbar, pagination, false);
+      //filterAdvancedTable(tableComponent, this.querySelector('table'), actionbar, pagination, false);
 
 
       //console.log(getInlineFilters(tableComponent, this.querySelector('table')));
