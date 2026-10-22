@@ -274,7 +274,7 @@ class iamAppInsights extends HTMLElement {
 
     component.dispatchEvent(dispatchedEvent);
 
-    const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    const initialCount = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
     countElement?.innerHTML = initialCount;
 
     const countTextElement = this.shadowRoot?.querySelector('#count-text');
