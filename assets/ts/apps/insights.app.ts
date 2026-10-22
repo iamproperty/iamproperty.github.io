@@ -243,6 +243,11 @@ class iamAppInsights extends HTMLElement {
     return table;
   };
 
+  uniqueID = (index = 1): number => {
+    const ID = Math.floor(Math.random() * Date.now() * (index + 1));
+
+    return ID;
+  };
 
   createComponent = (component, table): void => {
 
@@ -298,7 +303,16 @@ class iamAppInsights extends HTMLElement {
 
         if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
 
-        tempTbody.appendChild(row.cloneNode(true));
+        const newRow = row.cloneNode(true) as HTMLTableRowElement;
+
+        newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
+
+        newRow.insertAdjacentHTML(
+            'afterend',
+            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${this.uniqueID(index)}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${this.uniqueID(index)}"><span class="visually-hidden">Select row</span></label></td>`
+          );
+
+        tempTbody.appendChild(newRow);
       });
 
       const tempTable = document.createElement('table') as HTMLTableElement;
