@@ -261,7 +261,7 @@ class iamAppInsights extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
+  fixOriginalTable = (table: HTMLTableElement): void => {
 
     if (!table) return;
 
@@ -584,7 +584,7 @@ class iamAppInsights extends HTMLElement {
   connectedCallback(): void {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    let table = this.querySelector('table');
+    const table = this.querySelector('table');
     const createComponent = this.createComponent;
 
 
