@@ -257,9 +257,7 @@ class iamAppInsights extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
-
-    //if (!table) return table;
+  fixOriginalTable = (table: HTMLTableElement): void => {
 
     table.setAttribute('id','properties-table');
     table.querySelectorAll('th').forEach((heading, index) => {
@@ -272,7 +270,6 @@ class iamAppInsights extends HTMLElement {
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
 
-    return table;
   };
 
   createComponent = (component, table): void => {
