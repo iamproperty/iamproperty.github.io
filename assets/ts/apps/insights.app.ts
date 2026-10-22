@@ -284,7 +284,7 @@ class iamAppInsights extends HTMLElement {
     };
 
 
-    function updatePagination(newPage: number, newShow: number):void {
+    const updatePagination = (newPage: number, newShow: number):void => {
       const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
       table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
