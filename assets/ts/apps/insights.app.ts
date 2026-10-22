@@ -266,7 +266,7 @@ class iamAppInsights extends HTMLElement {
 
       countTextElement?.insertAdjacentHTML('afterend', /* HTML */`property`);
     }
-    else if(parseInt(initialCount) < 5) {
+    else if(parseInt(initialCount) < 500) {
 
       countTextElement?.insertAdjacentHTML('afterend', /* HTML */`properties`);
     }
