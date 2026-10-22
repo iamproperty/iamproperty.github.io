@@ -1310,6 +1310,7 @@ export const setActionbarEvents = (component, table, actionbar, pagination): voi
     const input = element.dataset.filters ? element : element.closest('[data-filters]');
 
     const heading = table.querySelector('th[data-label="' + input.dataset.column + '"]');
+
     const filters = JSON.parse(input.dataset.filters);
 
     filters.forEach((filter, index) => {
@@ -1348,6 +1349,10 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
     const columnIndex = heading.cellIndex;
 
     const columnName = heading.dataset.label; // TO DO add a fallback for when a name isnt set
+
+    if(heading.dataset.filters === undefined || heading.dataset.filters === null || heading.dataset.filters === '') return;
+
+    console.log('Heading:', heading, 'Filters:', heading.dataset.filters);
     const filters = JSON.parse(heading.dataset.filters);
 
     // Todo make more robust to check if the column already exists in the array and update it instead of adding a duplicate
@@ -1625,7 +1630,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   });
 };
 
-export const filterAdvancedTable = (component, table, actionbar, pagination): void => {
+export const filterAdvancedTable = (component, table, actionbar, pagination, dispatchEvent = true): void => {
 
   const columns = getInlineFilters(component, table, actionbar);
   const appliedFilters = [];
@@ -1763,7 +1768,9 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
     }
   });
 
-  component.dispatchEvent(submitEvent);
+  if(dispatchEvent) {
+    component.dispatchEvent(submitEvent);
+  }
 };
 
 export const setFilterIndicator = (component, table, actionbar, appliedFilters): void => {

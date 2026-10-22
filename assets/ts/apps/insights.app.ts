@@ -1,3 +1,5 @@
+import { filterAdvancedTable } from '../modules/table';
+
 class iamAppInsights extends HTMLElement {
   constructor() {
     super();
@@ -100,6 +102,7 @@ class iamAppInsights extends HTMLElement {
     const originalTable = this.querySelector('table') as HTMLTableElement | null;
     const tableComponent = this.shadowRoot?.querySelector('iam-table-advanced') as HTMLElement | null;
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
+    const pagination = this.shadowRoot?.querySelector('iam-pagination');
     const notification = this.shadowRoot?.getElementById('branch-notification');
     const countElement = this.shadowRoot?.querySelector('#count');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
@@ -239,6 +242,11 @@ class iamAppInsights extends HTMLElement {
         detail: event.detail
       });
 
+
+      // Apply advanced table filtering to original table based on the current state of the table component
+
+      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
+
       this.dispatchEvent(tableFilteredEvent);
     });
   };
@@ -255,6 +263,14 @@ class iamAppInsights extends HTMLElement {
 
     if (!table) return table;
 
+    // Add data-label attributes to table headings and corresponding cells
+    // data-label is used for cross referencing between original table and the shadow table
+    table.querySelectorAll('th').forEach((heading, index) => {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
+      const headingText = tempDiv.textContent || tempDiv.innerText || '';
+      heading.setAttribute('data-label', headingText);
+    });
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
