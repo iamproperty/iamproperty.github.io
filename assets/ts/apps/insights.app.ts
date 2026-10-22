@@ -275,8 +275,8 @@ class iamAppInsights extends HTMLElement {
     const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
     const countElement = component.shadowRoot?.querySelector('#count');
 
-    table.setAttribute('id','properties-table');
-    table = this.fixOriginalTable(table);
+    //table.setAttribute('id','properties-table');
+    //table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
