@@ -1630,16 +1630,16 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   });
 };
 
-export const filterAdvancedTable = (component, table, actionbar, pagination, dispatchEvent = true): void => {
+export const filterAdvancedTable = (component, table, actionbar, pagination, columns, dispatchEvent = true): void => {
 
   console.log(table);
 
-  const columns = getInlineFilters(component, table, actionbar);
+  const columnFilters = columns ?? getInlineFilters(component, table, actionbar);
   const appliedFilters = [];
   const filtersSet = new Set();
   table.classList.remove('table--filtered');
 
-  if(columns.length == 0) return;
+  if(columnFilters.length == 0) return;
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
 
@@ -1648,7 +1648,7 @@ export const filterAdvancedTable = (component, table, actionbar, pagination, dis
     row.classList.remove('filtered');
   });
 
-  columns.forEach((column) => {
+  columnFilters.forEach((column) => {
 
     const columnIndex = column.index;
     const columnName = column.column;
