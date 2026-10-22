@@ -1630,10 +1630,9 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   });
 };
 
-export const filterAdvancedTable = (component, table, actionbar, pagination): void => {
+export const filterAdvancedTable = (component, table, actionbar, pagination, dispatchEvent = true): void => {
 
-  console.log('hi')
-  console.trace(table);
+  console.log(table);
 
   const columns = getInlineFilters(component, table, actionbar);
   const appliedFilters = [];
@@ -1760,18 +1759,21 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
   });
 
 
-  setFilterIndicator(component, table, actionbar, appliedFilters);
-  createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
-  paginateRows(component, table, pagination);
 
-  const submitEvent = new CustomEvent('table-filtered', {
-    detail: {
-      filters: Array.from(filtersSet),
-      rowCount: table?.querySelectorAll('tbody tr:not(.filtered)').length || 0
-    }
-  });
-  component.dispatchEvent(submitEvent);
+  if(dispatchEvent) {
 
+    setFilterIndicator(component, table, actionbar, appliedFilters);
+    createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
+    paginateRows(component, table, pagination);
+
+    const submitEvent = new CustomEvent('table-filtered', {
+      detail: {
+        filters: Array.from(filtersSet),
+        rowCount: table?.querySelectorAll('tbody tr:not(.filtered)').length || 0
+      }
+    });
+    component.dispatchEvent(submitEvent);
+  }
 };
 
 export const setFilterIndicator = (component, table, actionbar, appliedFilters): void => {
