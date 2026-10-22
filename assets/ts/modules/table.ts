@@ -1755,7 +1755,8 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
 
   const submitEvent = new CustomEvent('table-filtered', {
     detail: {
-      filters: Array.from(filtersSet)
+      filters: Array.from(filtersSet),
+      rowCount: table?.querySelectorAll('tbody tr:not(.filtered)').length || 0
     }
   });
 

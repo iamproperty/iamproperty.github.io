@@ -261,6 +261,13 @@ onMounted(async () => {
 
     }
 
+
+    if (message.type == "table-filtered") {
+
+      console.log(message.detail?.filters);
+      console.log(message.detail?.rowCount);
+    }
+
     console.log(message);
 
     if(message.type == "dashboard:run:complete") {
@@ -323,6 +330,8 @@ onMounted(async () => {
   insightSlug.value = selectedDashboard?.slug ?? '';
   insightActions.value = selectedDashboard?.actions ?? [];
   insightProperties.value = selectedDashboard?.properties ?? {};
+
+
 
 });
 

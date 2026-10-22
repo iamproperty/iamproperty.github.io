@@ -192,10 +192,9 @@ class iamAppInsights extends HTMLElement {
       console.log(event);
 
       const tableFilteredEvent = new CustomEvent('table-filtered', {
-        detail: {
-          height: table?.offsetHeight
-        }
+        detail: event.detail
       });
+
       this.dispatchEvent(tableFilteredEvent);
     });
   };
