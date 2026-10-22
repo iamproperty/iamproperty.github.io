@@ -308,7 +308,7 @@ class iamAppInsights extends HTMLElement {
         newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
 
         newRow.insertAdjacentHTML(
-            'afterend',
+            'afterbegin',
             `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${this.uniqueID(index)}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${this.uniqueID(index)}"><span class="visually-hidden">Select row</span></label></td>`
           );
 
