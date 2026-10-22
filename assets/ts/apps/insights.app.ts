@@ -151,8 +151,26 @@ class iamAppInsights extends HTMLElement {
 
         let selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
 
+        // When selecting all rows we need to collect the row data from the orininal table instead of the shadow dom table
+        // We will need to do some fixing of the table so we can pass the correct data to the action handler
         if(actionbar?.hasAttribute('data-selected') && actionbar.getAttribute('data-selected') === 'all') {
 
+          const colHeadings = Array.from(originalTable.querySelectorAll('thead th'));
+
+          originalTable?.querySelectorAll('tbody tr').forEach(row => {
+
+            const cells = Array.from(row.querySelectorAll('th, td'));
+            cells.forEach((cell, cellIndex) => {
+              const heading = colHeadings[cellIndex];
+              if (typeof heading != 'undefined') {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
+                const headingText = tempDiv.textContent || tempDiv.innerText || '';
+                cell.setAttribute('data-label', headingText);
+
+              }
+            });
+          });
           selectedRows = originalTable?.querySelectorAll('tbody tr:not(.filtered)');
         }
 
