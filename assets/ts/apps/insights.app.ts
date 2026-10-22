@@ -238,16 +238,15 @@ class iamAppInsights extends HTMLElement {
 
       mapWrapper.innerHTML = this.createMapContent();
 
-      const tableFilteredEvent = new CustomEvent('table-filtered', {
-        detail: event.detail
-      });
 
 
       // Apply advanced table filtering to original table based on the current state of the table component
+      console.log(this.querySelector('table'));
+      filterAdvancedTable(tableComponent, this.querySelector('table'), actionbar, pagination, false);
 
-      console.log(originalTable);
-      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
-
+      const tableFilteredEvent = new CustomEvent('table-filtered', {
+        detail: event.detail
+      });
       //this.dispatchEvent(tableFilteredEvent);
     });
   };
