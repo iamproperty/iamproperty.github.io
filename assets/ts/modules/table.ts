@@ -1352,7 +1352,7 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
 
     if(heading.dataset.filters === undefined || heading.dataset.filters === null || heading.dataset.filters === '') return;
 
-    console.log('Heading:', heading, 'Filters:', heading.dataset.filters);
+    //console.log('Heading:', heading, 'Filters:', heading.dataset.filters);
     const filters = JSON.parse(heading.dataset.filters);
 
     // Todo make more robust to check if the column already exists in the array and update it instead of adding a duplicate

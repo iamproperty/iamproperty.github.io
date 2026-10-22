@@ -1,4 +1,4 @@
-import { filterAdvancedTable } from '../modules/table';
+import { getInlineFilters, filterAdvancedTable } from '../modules/table';
 
 class iamAppInsights extends HTMLElement {
   constructor() {
@@ -201,7 +201,7 @@ class iamAppInsights extends HTMLElement {
         }
         event.target?.setAttribute('disabled', 'true');
 
-        console.log(properties);
+        //console.log(properties);
 
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
@@ -241,9 +241,11 @@ class iamAppInsights extends HTMLElement {
 
 
       // Apply advanced table filtering to original table based on the current state of the table component
-      console.log(this.querySelector('table'));
+      //console.log(this.querySelector('table'));
       filterAdvancedTable(tableComponent, this.querySelector('table'), actionbar, pagination, false);
 
+
+      //console.log(getInlineFilters(tableComponent, this.querySelector('table')));
       const tableFilteredEvent = new CustomEvent('table-filtered', {
         detail: event.detail
       });
@@ -270,7 +272,10 @@ class iamAppInsights extends HTMLElement {
       tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
       const headingText = tempDiv.textContent || tempDiv.innerText || '';
       heading.setAttribute('data-label', headingText);
+      console.log(`Heading ${index}: ${headingText}`);
     });
+
+
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
@@ -317,7 +322,7 @@ class iamAppInsights extends HTMLElement {
 
     /* #region Pagination */
     const paginationElement = component.shadowRoot?.querySelector('iam-pagination');
-    console.log(paginationElement);
+    //console.log(paginationElement);
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
     let newShow = 15;
