@@ -40,7 +40,7 @@ const dashboards = ref([]);
 
 const insight = ref(route.params.insight);
 
-const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/199?Agent+Name=&Branch+Name=&Property=&theme=hub_embed');
+const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/199?theme=hub_embed');
 // #endregion
 
 // #region question panel
@@ -266,6 +266,38 @@ onMounted(async () => {
 
       console.log(message.detail?.filters);
       console.log(message.detail?.rowCount);
+
+      const iframe = document.querySelector("#looker-dashboard");
+
+
+      const messagefilters = message.detail?.filters || [];
+
+      const filterOperator = (operator) => {
+
+        switch(operator) {
+          case 'equals':
+            return '';
+          default:
+            return operator;
+        }
+      }
+
+      const filters = messagefilters.map(filter => {
+
+        let column = filter.column.replaceAll(' ','+');
+        let operator = filterOperator(filter.operator);
+        let value = filter.value.replaceAll(' ','+');
+
+        return `${column}=${operator}${filter.type == "text" ? '"' : ''}${value}${filter.type == "text" ? '"' : ''}`
+      }
+      ).join('&');
+
+      const filtersString = JSON.stringify(filters);
+
+
+      console.log(`${iframe.src}&${filtersString}`);
+
+      iframe.setAttribute('src', `${iframeSrc.value}&${encodeURI(filtersString.replaceAll('"',''))}`);
     }
 
     console.log(message);

@@ -186,10 +186,7 @@ class iamAppInsights extends HTMLElement {
         countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
       }
 
-
       mapWrapper.innerHTML = this.createMapContent();
-
-      console.log(event);
 
       const tableFilteredEvent = new CustomEvent('table-filtered', {
         detail: event.detail
@@ -490,9 +487,12 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
+          console.log('hi');
+
           if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
 
             const table = this.querySelector('table');
+
             createComponent(this, table);
           }
         }
