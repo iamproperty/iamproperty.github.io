@@ -575,7 +575,6 @@ class iamAppInsights extends HTMLElement {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
-    table.setAttribute('id','properties-table');
     const createComponent = this.createComponent;
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
@@ -603,6 +602,7 @@ class iamAppInsights extends HTMLElement {
 
     if (table){
 
+      table.setAttribute('id','properties-table');
       createComponent(this, table);
     }
 
