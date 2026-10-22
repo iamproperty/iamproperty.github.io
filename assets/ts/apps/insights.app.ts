@@ -237,6 +237,7 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
     const countElement = component.shadowRoot?.querySelector('#count');
+    const createCTAs = this.createCTAs;
 
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
@@ -310,7 +311,7 @@ class iamAppInsights extends HTMLElement {
       });
 
       console.log(component);
-      this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
+      createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
     }
 
     paginationElement.addEventListener('update-page', (event: Event) => {
