@@ -231,6 +231,24 @@ class iamAppInsights extends HTMLElement {
   updateComponent = (component, table):void => {
     //this.createComponent(component, table);
     console.log('hey');
+
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const countElement = this.shadowRoot?.querySelector('#count');
+
+    table.setAttribute('id','properties-table');
+    table = this.fixOriginalTable(table);
+
+    tableWrapper.innerHTML = this.createTableContent(component, table);
+    mapWrapper.innerHTML = this.createMapContent();
+
+
+    /* Set the property column to fixed */
+    tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
+    tableWrapper?.querySelectorAll('table td[data-label="Property"]')?.forEach(element => {
+      element.classList.add('td--fixed');
+    });
+
   }
 
   createComponent = (component, table): void => {
