@@ -488,10 +488,13 @@ class iamAppInsights extends HTMLElement {
         ) {
 
           console.log('hi2');
+
+          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
+
             const table = this.querySelector('table');
 
             createComponent(this, table);
-
+          }
         }
       }
 
