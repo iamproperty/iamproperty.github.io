@@ -1,3 +1,5 @@
+import { filterAdvancedTable } from '../modules/table';
+
 class iamAppInsights extends HTMLElement {
   constructor() {
     super();
@@ -239,6 +241,8 @@ class iamAppInsights extends HTMLElement {
         detail: event.detail
       });
 
+      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, false);
+
       //this.dispatchEvent(tableFilteredEvent);
     });
   };
@@ -274,9 +278,6 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
     const countElement = component.shadowRoot?.querySelector('#count');
-
-    //table.setAttribute('id','properties-table');
-    //table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
@@ -602,7 +603,11 @@ class iamAppInsights extends HTMLElement {
 
     if (table){
 
-      table.setAttribute('id','properties-table');
+      if(table.hasAttribute('id') === false) {
+
+        table.setAttribute('id', 'properties-table');
+        table = this.fixOriginalTable(table);
+      }
       createComponent(this, table);
     }
 
@@ -621,8 +626,11 @@ class iamAppInsights extends HTMLElement {
 
           if (table) {
 
-            if(table.hasAttribute('id') === false)
+            if(table.hasAttribute('id') === false) {
+
               table.setAttribute('id', 'properties-table');
+              table = this.fixOriginalTable(table);
+            }
 
             if (tableWrapper.querySelector('iam-table-advanced') === null) {
               createComponent(this, table);
