@@ -481,7 +481,8 @@ class iamAppInsights extends HTMLElement {
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
-    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
+    if(!shadowTable?.querySelector('thead tr')?.querySelector('.cta-link-container'))
+      shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap cta-link-container"></th>`);
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
