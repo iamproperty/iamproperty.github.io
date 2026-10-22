@@ -617,14 +617,14 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
-          console.log('hi3');
+          const table = this.querySelector('table');
 
-          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
+          if (table) {
+            table.setAttribute('id', 'properties-table');
 
-            const table = this.querySelector('table');
-            table.setAttribute('id','properties-table');
-
-            createComponent(this, table);
+            if (this.querySelector('iam-table-advanced') === null) {
+              createComponent(this, table);
+            }
           }
         }
       }
