@@ -314,6 +314,10 @@ class iamAppInsights extends HTMLElement {
 
       console.log(component);
       createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
+      this.hideNullValues();
+      this.updateMatchCriteriaIndicators(component, component.getAttribute('data-match-criteria-column'), component.getAttribute('data-match-criteria-indicator-column'));
+      this.createPopupTitles(component, component.getAttribute('data-popup-title-column'));
+      this.createActionTitles(component, component.getAttribute('data-action-title-column'));
     }
 
     paginationElement.addEventListener('update-page', (event: Event) => {
@@ -383,6 +387,11 @@ class iamAppInsights extends HTMLElement {
 
     if(!matchCriteriaColumn) return;
 
+    if(!component.hasAttribute('data-match-criteria-column'))
+      component.setAttribute('data-match-criteria-column', matchCriteriaColumn);
+    if(!component.hasAttribute('data-match-criteria-indicator-column'))
+      component.setAttribute('data-match-criteria-indicator-column', matchCriteriaIndicatorColumn);
+
     const table = this.shadowRoot?.querySelector('table');
 
     table?.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
@@ -428,6 +437,9 @@ class iamAppInsights extends HTMLElement {
   createPopupTitles = (component, popupTitleColumn): void => {
     if(!popupTitleColumn) return;
 
+    if(!component.hasAttribute('data-popup-title-column'))
+      component.setAttribute('data-popup-title-column', popupTitleColumn);
+
     const shadowTable = this.shadowRoot?.querySelector('table');
 
     shadowTable?.querySelectorAll(`tbody tr td[data-label="${popupTitleColumn}"]`).forEach(cell => {
@@ -441,6 +453,9 @@ class iamAppInsights extends HTMLElement {
 
   createActionTitles = (component, actionTitleColumn): void => {
     if(!actionTitleColumn) return;
+
+    if(!component.hasAttribute('data-action-title-column'))
+      component.setAttribute('data-action-title-column', actionTitleColumn);
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
