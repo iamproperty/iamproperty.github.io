@@ -32,6 +32,8 @@ class iamAppInsights extends HTMLElement {
     this.rowlimit = 500;
   }
 
+
+
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
 
@@ -290,6 +292,27 @@ class iamAppInsights extends HTMLElement {
       const customEvent = event as CustomEvent;
       const newPage = customEvent.detail.page;
       console.log(`Page changed to: ${newPage}`);
+
+      const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
+      table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
+
+        if (index >= 15) return;
+
+        tempTbody.appendChild(row.cloneNode(true));
+      });
+
+      const tempTable = document.createElement('table') as HTMLTableElement;
+      tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
+      table.parentNode?.replaceChild(tempTable, table);
+      table = tempTable;
+      table.setAttribute('id','properties-table');
+      tableWrapper.innerHTML = this.createTableContent(component, table);
+      table = tableWrapper.querySelector('table');
+      table?.querySelector('thead th[data-label="Property"]')?.classList.add('th--fixed');
+      table?.querySelectorAll('tbody td[data-label="Property"]')?.forEach(element => {
+        element.classList.add('td--fixed');
+      });
+
     });
 
     paginationElement.addEventListener('update-show', (event: Event) => {
