@@ -293,11 +293,8 @@ class iamAppInsights extends HTMLElement {
     paginationElement?.setAttribute('data-page', '1');
     let newShow = 15;
 
-    paginationElement.addEventListener('update-page', (event: Event) => {
-      const customEvent = event as CustomEvent;
-      const newPage = customEvent.detail.page;
-      console.log(`Page changed to: ${newPage}`);
 
+    function updatePagination(newPage: number, newShow: number):void {
       const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
       table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
@@ -324,12 +321,20 @@ class iamAppInsights extends HTMLElement {
       });
 
       this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
+    }
+
+    paginationElement.addEventListener('update-page', (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const newPage = customEvent.detail.page;
+
+      updatePagination(newPage, parseInt(paginationElement.getAttribute('data-show') || '15', 10));
     });
 
     paginationElement.addEventListener('update-show', (event: Event) => {
       const customEvent = event as CustomEvent;
       newShow = customEvent.detail.show;
-      console.log(`Show changed to: ${newShow}`);
+
+      updatePagination(1, newShow);
     });
 
 
