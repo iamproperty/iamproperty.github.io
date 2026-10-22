@@ -35,8 +35,18 @@ class iamAppInsights extends HTMLElement {
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
 
+    const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
+    table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
+
+      if (index >= 15) return;
+
+      tempTbody.appendChild(row.cloneNode(true));
+    });
+
     const tempTable = document.createElement('table') as HTMLTableElement;
-    tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead>${table.querySelector('tbody tr:first-child')?.outerHTML || ''}<tbody></tbody>`;
+    tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
+
+
 
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
