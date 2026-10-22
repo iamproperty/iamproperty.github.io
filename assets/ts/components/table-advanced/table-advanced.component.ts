@@ -7,6 +7,7 @@ import {
   setupAdvancedTable,
 } from '../../modules/table';
 
+
 class iamTableAdvanced extends HTMLElement {
   constructor() {
     super();
