@@ -303,6 +303,7 @@ class iamAppInsights extends HTMLElement {
     /* #region Pagination */
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
+    paginationElement?.setAttribute('data-hello', '1');
     /* #endregion Pagination */
 
     setTimeout(() => {
