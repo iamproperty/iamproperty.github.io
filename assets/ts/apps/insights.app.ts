@@ -620,7 +620,9 @@ class iamAppInsights extends HTMLElement {
           const table = this.querySelector('table');
 
           if (table) {
-            table.setAttribute('id', 'properties-table');
+
+            if(table.hasAttribute('id') === false)
+              table.setAttribute('id', 'properties-table');
 
             if (this.querySelector('iam-table-advanced') === null) {
               createComponent(this, table);
