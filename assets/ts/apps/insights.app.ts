@@ -621,8 +621,8 @@ class iamAppInsights extends HTMLElement {
 
           if (table) {
 
-            //if(table.hasAttribute('id') === false)
-            //  table.setAttribute('id', 'properties-table');
+            if(table.hasAttribute('id') === false)
+              table.setAttribute('id', 'properties-table');
 
             if (tableWrapper.querySelector('iam-table-advanced') === null) {
               createComponent(this, table);
