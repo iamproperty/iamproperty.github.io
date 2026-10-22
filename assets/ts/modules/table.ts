@@ -1626,6 +1626,7 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
 
   const columns = getInlineFilters(component, table, actionbar);
   const appliedFilters = [];
+  const filtersSet = new Set();
   table.classList.remove('table--filtered');
 
   if(columns.length == 0) return;
@@ -1664,6 +1665,7 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
       }
 
       appliedFilters.push(columnName);
+      filtersSet.add({ 'column': columnName, 'operator': filterOperator, 'type': filterType, 'value': filterValue });
 
       table.classList.add('table--filtered');
       table.querySelectorAll(`tbody tr td:nth-child(${columnIndex + 1})`).forEach((cell) => {
@@ -1751,7 +1753,12 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
   createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
   paginateRows(component, table, pagination);
 
-  const submitEvent = new CustomEvent('table-filtered');
+  const submitEvent = new CustomEvent('table-filtered', {
+    detail: {
+      filters: Array.from(filtersSet)
+    }
+  });
+
   component.dispatchEvent(submitEvent);
 };
 

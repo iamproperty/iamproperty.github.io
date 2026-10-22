@@ -11,6 +11,7 @@
       'menu',
       'notification',
       'map',
+      'tooltip',
     ];
 
     components.forEach((component) => {
