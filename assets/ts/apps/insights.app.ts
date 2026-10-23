@@ -15,17 +15,19 @@ class iamAppInsights extends HTMLElement {
     ${loadCSS}
     </style>
 
-    <div class="loading">
-      <span class="spinner"></span>
-      <strong class="lead">Loading...</strong>
-    </div>
     <div class="wrapper" aria-busy="true">
       <strong class="d-block pb-3 insight-count"><span id="count"></span> <span id="count-text"></span></strong>
 
 
       <div id="map-wrapper"></div>
 
-      <div id="table-wrapper"><div class="text-center">Loading</div></div>
+      <div id="table-wrapper">
+
+        <div class="loading">
+          <span class="spinner"></span>
+          <strong class="lead">Loading...</strong>
+        </div>
+      </div>
     </div>
     <div class="empty-state">
       <img src="/img/illustrations/estate-agents.png" alt="" loading="lazy" />
