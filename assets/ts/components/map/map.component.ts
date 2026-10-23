@@ -377,7 +377,8 @@ class iamMap extends HTMLElement {
           this.map.fitBounds(bounds, {
             padding: 60,
             minZoom,
-            maxZoom
+            maxZoom,
+            animate: false
           });
         }
 
