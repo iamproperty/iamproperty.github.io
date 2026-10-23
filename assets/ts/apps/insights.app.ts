@@ -255,6 +255,12 @@ class iamAppInsights extends HTMLElement {
 
       table?.querySelector('tbody')?.replaceWith(tempTbody);
 
+      this.createCTAs(this, this.getAttribute('data-cta-url-structure'), this.getAttribute('data-cta-text'));
+      this.hideNullValues();
+      this.createMatchCriteriaFilter(this, this.getAttribute('data-match-criteria-column'), this.getAttribute('data-match-criteria-indicator-column'));
+      this.createPopupTitles(this, this.getAttribute('data-popup-title-column'));
+      this.createActionTitles(this, this.getAttribute('data-action-title-column'));
+
       //console.log(tempTable);
 
       const initialCount = originalTable.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
