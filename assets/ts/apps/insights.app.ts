@@ -15,13 +15,17 @@ class iamAppInsights extends HTMLElement {
     ${loadCSS}
     </style>
 
+    <div class="loading">
+      <span class="spinner"></span>
+      <strong class="lead">Loading...</strong>
+    </div>
     <div class="wrapper" aria-busy="true">
-      <strong class="d-block pb-3 insight-count">Showing <span id="count"></span> <span id="count-text"></span></strong>
+      <strong class="d-block pb-3 insight-count"><span id="count"></span> <span id="count-text"></span></strong>
 
 
       <div id="map-wrapper"></div>
 
-      <div id="table-wrapper">Loading table...</div>
+      <div id="table-wrapper"><div class="text-center">Loading</div></div>
     </div>
     <div class="empty-state">
       <img src="/img/illustrations/estate-agents.png" alt="" loading="lazy" />
@@ -275,7 +279,7 @@ class iamAppInsights extends HTMLElement {
     component.dispatchEvent(dispatchedEvent);
 
     const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
-    countElement?.innerHTML = initialCount;
+    countElement?.innerHTML = `${parseInt(initialCount) > 0 ? 'Showing' : ''} ${initialCount}`;
 
     const countTextElement = this.shadowRoot?.querySelector('#count-text');
 

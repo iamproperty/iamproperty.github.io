@@ -3,6 +3,7 @@
 
 @use '../foundations/root.scss' as *;
 @use '../foundations/reboot.scss' as *;
+@use '../foundations/animations.scss' as *;
 @use '../elements/table.element' as *;
 @use '../elements/links.scss' as *;
 @use '../elements/buttons.scss' as *;
@@ -13,6 +14,7 @@
 @use '../elements/select.scss' as *;
 @use '../elements/forms.scss' as *;
 @use '../elements/prefix.scss' as *;
+@use '../elements/spinner.css' as *;
 @use '../components/table-advanced.global.scss';
 @use '../utilities/margins';
 @use '../utilities/paddings';
@@ -48,6 +50,38 @@
   font-weight: 900;
   font-style: normal;
 }
+
+
+// #region Loading spinner styles
+
+.loading {
+  padding-block: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.loading .spinner {
+  --spinner-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.loading .lead {
+  margin-inline: auto;
+}
+
+.spinner::before{
+  content: "";
+  height: var(--spinner-size);
+  width: var(--spinner-size);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M521 436C532.5 442.6 547.3 438.7 552.8 426.7C567.7 394.2 576 358.1 576 320C576 186.7 474.1 77.2 344 65.1C330.8 63.9 320 74.7 320 88C320 101.3 330.8 111.9 344 113.4C447.6 125.3 528 213.3 528 320C528 349.3 521.9 377.3 511 402.6C505.7 414.8 509.5 429.4 521 436.1z'/%3E%3C/svg%3E");
+}
+// #endregion Loading spinner styles
 
 // #region utilities
 .w-100 {
