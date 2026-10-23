@@ -210,7 +210,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     ? advancedSelect.querySelector('.clear-search')
     : advancedSelect.shadowRoot.querySelector('.clear-search');
 
-  closeBtn.addEventListener('click', function (e) {
+  closeBtn?.addEventListener('click', function (e) {
     emptyField();
   });
 
