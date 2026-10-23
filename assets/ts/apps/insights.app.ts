@@ -292,7 +292,7 @@ class iamAppInsights extends HTMLElement {
         const tableFilteredEvent = new CustomEvent('table-filtered', {
           detail: event.detail
         });
-        //this.dispatchEvent(tableFilteredEvent);
+        this.dispatchEvent(tableFilteredEvent);
       }
 
     });
