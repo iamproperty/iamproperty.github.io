@@ -39,13 +39,7 @@ class iamAppInsights extends HTMLElement {
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
-    const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
-    table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
-
-      if (index >= 15) return;
-
-      tempTbody.appendChild(row.cloneNode(true));
-    });
+    const tempTbody = this.createTbodyFromOriginal(table, 1, 15);
 
     const tempTable = document.createElement('table') as HTMLTableElement;
     tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
@@ -306,6 +300,40 @@ class iamAppInsights extends HTMLElement {
 
   };
 
+  createNewRow = (row: HTMLTableRowElement, index: number): HTMLTableRowElement => {
+
+    const uniqueID = (index = 1): number => {
+      const ID = Math.floor(Math.random() * Date.now() * (index + 1));
+
+      return ID;
+    };
+
+    const newRow = row.cloneNode(true) as HTMLTableRowElement;
+    const rowID = uniqueID(index);
+
+    newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
+
+    newRow.insertAdjacentHTML(
+        'afterbegin',
+        `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`
+      );
+
+    return newRow;
+  };
+
+  createTbodyFromOriginal = (table: HTMLTableElement, newPage: number, newShow: number): HTMLTableSectionElement => {
+
+    const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
+    table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
+
+      if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
+
+      const newRow = this.createNewRow(row, index);
+      tempTbody.appendChild(newRow);
+    });
+    return tempTbody;
+  };
+
   createComponent = (component, table): void => {
 
     const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
@@ -320,6 +348,10 @@ class iamAppInsights extends HTMLElement {
     tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
     tableWrapper?.querySelectorAll('table td[data-label="Property"]')?.forEach(element => {
       element.classList.add('td--fixed');
+    });
+
+    table.querySelectorAll('th[data-label="Property"]')?.forEach(heading => {
+      heading.classList.add('th--fixed');
     });
 
     this.setEvents();
@@ -347,32 +379,10 @@ class iamAppInsights extends HTMLElement {
     paginationElement?.setAttribute('data-page', '1');
     let newShow = 15;
 
-    const uniqueID = (index = 1): number => {
-      const ID = Math.floor(Math.random() * Date.now() * (index + 1));
-
-      return ID;
-    };
-
-
-
     const updatePagination = (newPage: number, newShow: number):void => {
-      const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
-      table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
-        if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
+      const tempTbody = this.createTbodyFromOriginal(table, newPage, newShow);
 
-        const newRow = row.cloneNode(true) as HTMLTableRowElement;
-        const rowID = uniqueID(index);
-
-        newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
-
-        newRow.insertAdjacentHTML(
-            'afterbegin',
-            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-          );
-
-        tempTbody.appendChild(newRow);
-      });
 
       const tempTable = document.createElement('table') as HTMLTableElement;
       tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
