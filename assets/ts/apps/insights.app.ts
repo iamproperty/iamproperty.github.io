@@ -352,11 +352,6 @@ class iamAppInsights extends HTMLElement {
 
   createTbodyFromOriginal = (table: HTMLTableElement, newPage: number, newShow: number): HTMLTableSectionElement => {
 
-
-
-    filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
-
-
     const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
     table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
@@ -436,6 +431,11 @@ class iamAppInsights extends HTMLElement {
     paginationElement.addEventListener('update-page', (event: Event) => {
       const customEvent = event as CustomEvent;
       const newPage = customEvent.detail.page;
+
+      // Filter the table?
+
+
+      //filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
 
       updatePagination(newPage, parseInt(paginationElement.getAttribute('data-show') || '15', 10));
     });
