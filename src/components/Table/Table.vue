@@ -1,7 +1,7 @@
 <template>
-  <iam-table>
+  <iam-table ref="table" :data-backed="dataBacked ? '' : null">
     <slot name="before"></slot>
-    <table v-if="fields">
+    <table v-if="fields && !dataBacked">
       <thead>
         <tr>
           <th v-for="field in fields" :key="field.key">{{ cellHeading(field.key) }}</th>
@@ -19,7 +19,7 @@
         </tr>
       </tbody>
     </table>
-    <slot v-else></slot>
+    <slot v-else-if="!dataBacked"></slot>
   </iam-table>
 </template>
 
@@ -29,6 +29,8 @@
   export default {
     name: 'Table',
     props: {
+      dataBacked: { type: Boolean, default: false },
+      rowKey: { type: [String, Function], default: 'id' },
       items: {
         type: Array,
         required: false,
@@ -36,6 +38,48 @@
       fields: {
         type: Array,
         required: false,
+      },
+    },
+    watch: {
+      items() {
+        this.syncData();
+      },
+      fields() {
+        this.syncData();
+      },
+    },
+    methods: {
+      syncData() {
+        if (!this.dataBacked || !this.$refs.table?.setData) return;
+        this.$refs.table.setData(this.items || [], {
+          rowKey: this.rowKey,
+          columns: (this.fields || []).map((field) => ({
+            key: field.key,
+            label: field.label || this.cellHeading(field.key),
+            render: field.render,
+            sort: field.sort,
+            filters: field.filters,
+            format: field.format,
+          })),
+        });
+      },
+      getSelectedRecords() {
+        return this.$refs.table.getSelectedRecords();
+      },
+      getSelectedIds() {
+        return this.$refs.table.getSelectedIds();
+      },
+      selectAll() {
+        this.$refs.table.selectAll();
+      },
+      clearSelection() {
+        this.$refs.table.clearSelection();
+      },
+      setFilter(predicate) {
+        this.$refs.table.setFilter(predicate);
+      },
+      setSort(comparator) {
+        this.$refs.table.setSort(comparator);
       },
     },
     computed: {
@@ -50,6 +94,7 @@
         import(`../../../assets/js/components/table/table.component.min.js`)
           .then((module) => {
             if (!window.customElements.get(`iam-table`)) window.customElements.define(`iam-table`, module.default);
+            this.syncData();
           })
           .catch((err) => {
             console.log(err.message);
