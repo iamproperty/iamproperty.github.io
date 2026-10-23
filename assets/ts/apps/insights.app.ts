@@ -371,8 +371,10 @@ class iamAppInsights extends HTMLElement {
     newRow.querySelectorAll('td').forEach((td, index) => {
       const heading = colHeadings[index];
 
-      td.setAttribute('data-label', heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML);
-      td.setAttribute('data-format', heading.getAttribute('data-format') || '');
+      if(heading) {
+        td.setAttribute('data-label', heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML);
+        td.setAttribute('data-format', heading.getAttribute('data-format') || '');
+      }
 
     });
 
