@@ -245,6 +245,17 @@ class iamAppInsights extends HTMLElement {
       }
 
 
+      const initialCount = originalTable.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+      if(parseInt(initialCount) < this.rowlimit) {
+
+        const tableFilteredEvent = new CustomEvent('table-filtered', {
+          detail: event.detail
+        });
+
+        // push the event up so that the page will know to update the iframe
+        this.dispatchEvent(tableFilteredEvent);
+      }
+
       filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
 
 
@@ -261,7 +272,7 @@ class iamAppInsights extends HTMLElement {
 
       //console.log(tempTable);
 
-      const initialCount = originalTable.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+
       countElement?.innerHTML = initialCount;
 
       const countTextElement = this.shadowRoot?.querySelector('#count-text');
@@ -287,13 +298,6 @@ class iamAppInsights extends HTMLElement {
       pagination?.setAttribute('data-show', 15);
 
 
-      if(parseInt(initialCount) < this.rowlimit) {
-
-        const tableFilteredEvent = new CustomEvent('table-filtered', {
-          detail: event.detail
-        });
-        this.dispatchEvent(tableFilteredEvent);
-      }
 
     });
   };
