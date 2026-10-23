@@ -410,11 +410,10 @@ class iamAppInsights extends HTMLElement {
 
     const updatePagination = (newPage: number, newShow: number):void => {
 
-      const tempTbody = this.createTbodyFromOriginal(table, newPage, newShow);
+      const originalTable = this.querySelector('table');
+      if (!originalTable) return;
 
-
-      const tempTable = document.createElement('table') as HTMLTableElement;
-      tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
+      const tempTbody = this.createTbodyFromOriginal(originalTable, newPage, newShow);
 
       tableWrapper?.querySelector('table tbody').innerHTML = tempTbody.innerHTML;
       tableWrapper?.querySelector('table tbody')?.querySelectorAll('td[data-label="Property"]')?.forEach(element => {
@@ -433,9 +432,6 @@ class iamAppInsights extends HTMLElement {
       const newPage = customEvent.detail.page;
 
       // Filter the table?
-
-
-      //filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
 
       updatePagination(newPage, parseInt(paginationElement.getAttribute('data-show') || '15', 10));
     });
