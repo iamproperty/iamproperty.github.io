@@ -250,8 +250,7 @@ class iamAppInsights extends HTMLElement {
 
       const tempTbody = this.createTbodyFromOriginal(originalTable, 1, 15);
 
-      //const tempTable = document.createElement('table') as HTMLTableElement;
-      //tempTable.innerHTML = `<thead>${originalTable.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
+      console.log(tempTbody);
 
       table?.querySelector('tbody')?.replaceWith(tempTbody);
 
