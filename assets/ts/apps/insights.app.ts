@@ -336,6 +336,10 @@ class iamAppInsights extends HTMLElement {
         `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`
       );
 
+      newRow.classList.remove('filtered');
+      newRow.classList.add('filtered--matched');
+      newRow.classList.add('filtered--show');
+
     return newRow;
   };
 
