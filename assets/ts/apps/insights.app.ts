@@ -1,6 +1,3 @@
-import { getInlineFilters, filterAdvancedTable } from '../modules/table';
-
-
 class iamAppInsights extends HTMLElement {
   constructor() {
     super();
@@ -35,23 +32,20 @@ class iamAppInsights extends HTMLElement {
     this.rowlimit = 500;
   }
 
-
-
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
+/*
     const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
-    const newShow = parseInt(component.getAttribute('data-show') || '15', 10);
-    const newPage = parseInt(component.getAttribute('data-page') || '1', 10);
-
     table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
-      if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
+      if (index >= 15) return;
 
-      tempTbody.appendChild(row);
+      tempTbody.appendChild(row.cloneNode(true));
     });
 
     const tempTable = document.createElement('table') as HTMLTableElement;
     tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
+*/
 
 
     return /* HTML */`
@@ -71,10 +65,9 @@ class iamAppInsights extends HTMLElement {
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
         <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
-      ${tempTable.outerHTML}
-    </iam-table-advanced>
-    <iam-pagination data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
-    `;
+      ${table.outerHTML}
+      <iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
+    </iam-table-advanced>`;
   };
 
   getBranch = (row: HTMLTableRowElement, branchColumn: string | null): string | null => {
@@ -89,7 +82,6 @@ class iamAppInsights extends HTMLElement {
     return null;
   };
 
-
   isMultiBranchSelected = (component: HTMLElement, table: HTMLTableElement | null): boolean => {
     if (!table) return false;
 
@@ -103,10 +95,8 @@ class iamAppInsights extends HTMLElement {
 
   setEvents = (): void => {
     const table = this.shadowRoot?.querySelector('iam-table-advanced table') as HTMLTableElement | null;
-    const originalTable = this.querySelector('table') as HTMLTableElement | null;
     const tableComponent = this.shadowRoot?.querySelector('iam-table-advanced') as HTMLElement | null;
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
-    const pagination = this.shadowRoot?.querySelector('iam-pagination');
     const notification = this.shadowRoot?.getElementById('branch-notification');
     const countElement = this.shadowRoot?.querySelector('#count');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
@@ -119,11 +109,6 @@ class iamAppInsights extends HTMLElement {
 
         setTimeout(() => {
           // #region Create print campaign button / branch notification
-          if(actionbar.hasAttribute('data-selected') && actionbar.getAttribute('data-selected') === 'all') {
-            // TODO: make this smarter and actually check if more than one branch is selected in the original table
-            notification?.classList.remove('d-none');
-            createPrintCampaignButton.setAttribute('disabled', 'true');
-          }
           if(createPrintCampaignButton && this.isMultiBranchSelected(this,table)) {
             notification?.classList.remove('d-none');
             createPrintCampaignButton.setAttribute('disabled', 'true');
@@ -162,30 +147,7 @@ class iamAppInsights extends HTMLElement {
         const action = event.target.getAttribute('data-action');
 
 
-        let selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
-
-        // When selecting all rows we need to collect the row data from the orininal table instead of the shadow dom table
-        // We will need to do some fixing of the table so we can pass the correct data to the action handler
-        if(actionbar?.hasAttribute('data-selected') && actionbar.getAttribute('data-selected') === 'all') {
-
-          const colHeadings = Array.from(originalTable.querySelectorAll('thead th'));
-
-          originalTable?.querySelectorAll('tbody tr').forEach(row => {
-
-            const cells = Array.from(row.querySelectorAll('th, td'));
-            cells.forEach((cell, cellIndex) => {
-              const heading = colHeadings[cellIndex];
-              if (typeof heading != 'undefined') {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
-                const headingText = tempDiv.textContent || tempDiv.innerText || '';
-                cell.setAttribute('data-label', headingText);
-              }
-            });
-          });
-          selectedRows = originalTable?.querySelectorAll('tbody tr:not(.filtered)');
-        }
-
+        const selectedRows = table?.querySelectorAll('tbody tr:has(.selectrow input:checked):not(.filtered)');
         const properties = [];
 
         if (selectedRows) {
@@ -220,66 +182,7 @@ class iamAppInsights extends HTMLElement {
 
     tableComponent.addEventListener('table-filtered', (event) => {
 
-      const originalTable = this.querySelector('table') as HTMLTableElement | null;
-      if (!originalTable) return;
-
-      const columns = getInlineFilters(tableComponent, table, actionbar);
-
-      // The criteria column is generated for the displayed table, so also supply
-      // its values on the source table before applying the same filters there.
-      const matchCriteriaColumn = this.getAttribute('data-match-criteria-column');
-      if (matchCriteriaColumn && columns.some((column) => column.column === 'Match criteria')) {
-        if (!originalTable.querySelector('thead th[data-label="Match criteria"]')) {
-          const heading = document.createElement('th');
-          heading.setAttribute('data-label', 'Match criteria');
-          heading.classList.add('d-none');
-          heading.textContent = 'Match criteria';
-          originalTable.querySelector('thead tr')?.appendChild(heading);
-        }
-
-        originalTable.querySelectorAll('tbody tr').forEach((row) => {
-          let cell = row.querySelector('td[data-label="Match criteria"]');
-          if (!cell) {
-            cell = document.createElement('td');
-            cell.setAttribute('data-label', 'Match criteria');
-            cell.classList.add('d-none');
-            row.appendChild(cell);
-          }
-          const value = row.getAttribute(`data-${matchCriteriaColumn}`)?.toLocaleLowerCase().replace('match', '').trim() || '';
-          cell.textContent = value;
-          cell.setAttribute('data-value', value);
-        });
-      }
-
-
-      const initialCount = originalTable.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
-      if(parseInt(initialCount) < this.rowlimit) {
-
-        const tableFilteredEvent = new CustomEvent('table-filtered', {
-          detail: event.detail
-        });
-
-        // push the event up so that the page will know to update the iframe
-        this.dispatchEvent(tableFilteredEvent);
-      }
-
-      filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
-
-
-      const tempTbody = this.createTbodyFromOriginal(originalTable, 1, 15);
-
-
-      table?.querySelector('tbody')?.replaceWith(tempTbody);
-
-      this.createCTAs(this, this.getAttribute('data-cta-url-structure'), this.getAttribute('data-cta-text'));
-      this.hideNullValues();
-      //this.createMatchCriteriaFilter(this, this.getAttribute('data-match-criteria-column'), this.getAttribute('data-match-criteria-indicator-column'));
-      this.createPopupTitles(this, this.getAttribute('data-popup-title-column'));
-      this.createActionTitles(this, this.getAttribute('data-action-title-column'));
-
-      //console.log(tempTable);
-
-
+      const initialCount = tableComponent?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
       countElement?.innerHTML = initialCount;
 
       const countTextElement = this.shadowRoot?.querySelector('#count-text');
@@ -299,26 +202,11 @@ class iamAppInsights extends HTMLElement {
 
       mapWrapper.innerHTML = this.createMapContent();
 
-      // Fix the pagination after filtering
-      pagination?.setAttribute('data-total', initialCount);
-      pagination?.setAttribute('data-page', 1);
-      pagination?.setAttribute('data-show', 15);
-
-
-
-    });
-
-    tableComponent?.addEventListener('sort-by-heading', (event) => {
-
-
-      console.log(event.detail);
-
-      const tableSortedEvent = new CustomEvent('table-sorted', {
+      const tableFilteredEvent = new CustomEvent('table-filtered', {
         detail: event.detail
       });
 
-      // push the event up so that the page will know to update the iframe
-      //this.dispatchEvent(tableSortedEvent);
+      this.dispatchEvent(tableFilteredEvent);
     });
   };
 
@@ -330,86 +218,37 @@ class iamAppInsights extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  fixOriginalTable = (table: HTMLTableElement): void => {
+  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
-    table.setAttribute('id','properties-table');
-    table.querySelectorAll('th').forEach((heading, index) => {
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
-      const headingText = tempDiv.textContent || tempDiv.innerText || '';
-      heading.setAttribute('data-label', headingText);
-    });
+    if (!table) return table;
+
+    if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
+
+      const CTAHeading = table.querySelector('thead tr th:last-child');
+      CTAHeading.classList.add('th--fixed');
+      CTAHeading.innerHTML = '';
+
+      table.querySelectorAll('tbody tr td:last-child a:first-child:last-child').forEach(cta => {
+        cta.closest('td').classList.add('td--fixed', 'text-nowrap');
+      });
+    }
+
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
 
+    return table;
   };
 
-  createNewRow = (row: HTMLTableRowElement, index: number, thead: HTMLTableSectionElement): HTMLTableRowElement => {
-
-    const colHeadings = Array.from(thead.querySelectorAll('th'));
-
-    console.log(colHeadings);
-    const uniqueID = (index = 1): number => {
-      const ID = Math.floor(Math.random() * Date.now() * (index + 1));
-
-      return ID;
-    };
-
-    const newRow = row.cloneNode(true) as HTMLTableRowElement;
-    const rowID = uniqueID(index);
-
-
-    if(!newRow.querySelector('td[data-label="Expand"]')) {
-      newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="Expand" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
-    }
-    if(!newRow.querySelector('td[data-label="Select"]')) {
-      newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed selectrow" data-label="Select" data-previous-col-widths="0" style="--left-offset: 0px;"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`);
-    }
-
-
-    newRow.querySelectorAll('td').forEach((td, index) => {
-      const heading = colHeadings[index];
-
-      if(heading) {
-        td.setAttribute('data-label', heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML);
-        td.setAttribute('data-format', heading.getAttribute('data-format') || '');
-      }
-
-    });
-
-    newRow?.querySelectorAll('td[data-label="Property"]')?.forEach(element => {
-      element.classList.add('td--fixed');
-    });
-
-    newRow.classList.remove('filtered');
-    newRow.classList.add('filtered--matched');
-    newRow.classList.add('filtered--show');
-
-    return newRow;
-  };
-
-  createTbodyFromOriginal = (table: HTMLTableElement, newPage: number, newShow: number): HTMLTableSectionElement => {
-
-    const originaltable = this.querySelector('table');
-
-    const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
-    const thead = originaltable.querySelector('thead') as HTMLTableSectionElement;
-    originaltable.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
-
-      if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
-
-      const newRow = this.createNewRow(row, index, thead);
-      tempTbody.appendChild(row);
-    });
-    return tempTbody;
-  };
 
   createComponent = (component, table): void => {
 
-    const tableWrapper = component.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = component.shadowRoot?.querySelector('#map-wrapper');
-    const countElement = component.shadowRoot?.querySelector('#count');
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const countElement = this.shadowRoot?.querySelector('#count');
+
+    table.setAttribute('id','properties-table');
+    table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
@@ -419,10 +258,6 @@ class iamAppInsights extends HTMLElement {
     tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
     tableWrapper?.querySelectorAll('table td[data-label="Property"]')?.forEach(element => {
       element.classList.add('td--fixed');
-    });
-
-    table.querySelectorAll('th[data-label="Property"]')?.forEach(heading => {
-      heading.classList.add('th--fixed');
     });
 
     this.setEvents();
@@ -439,60 +274,10 @@ class iamAppInsights extends HTMLElement {
 
     component.dispatchEvent(dispatchedEvent);
 
-    const initialCount = table?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
-
-
-
-    /* #region Pagination */
-    const paginationElement = component.shadowRoot?.querySelector('iam-pagination');
-
-    paginationElement?.setAttribute('data-total', initialCount);
-    paginationElement?.setAttribute('data-page', '1');
-    let newShow = 15;
-
-    const updatePagination = (newPage: number, newShow: number):void => {
-
-      const originalTable = this.querySelector('table');
-      if (!originalTable) return;
-
-      const tempTbody = this.createTbodyFromOriginal(originalTable, newPage, newShow);
-
-      tableWrapper?.querySelector('table tbody').innerHTML = tempTbody.innerHTML;
-      tableWrapper?.querySelector('table tbody')?.querySelectorAll('td[data-label="Property"]')?.forEach(element => {
-        element.classList.add('td--fixed');
-      });
-
-      this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
-      this.hideNullValues();
-      //this.createMatchCriteriaFilter(component, component.getAttribute('data-match-criteria-column'), component.getAttribute('data-match-criteria-indicator-column'));
-      this.createPopupTitles(component, component.getAttribute('data-popup-title-column'));
-      this.createActionTitles(component, component.getAttribute('data-action-title-column'));
-    }
-
-    paginationElement.addEventListener('update-page', (event: Event) => {
-      const customEvent = event as CustomEvent;
-      const newPage = customEvent.detail.page;
-
-      // Filter the table?
-
-      updatePagination(newPage, parseInt(paginationElement.getAttribute('data-show') || '15', 10));
-    });
-
-    paginationElement.addEventListener('update-show', (event: Event) => {
-      const customEvent = event as CustomEvent;
-      newShow = customEvent.detail.show;
-
-      updatePagination(1, newShow);
-    });
-
-
-    /* #endregion Pagination */
-
-
-
+    const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
     countElement?.innerHTML = initialCount;
 
-    const countTextElement = component.shadowRoot?.querySelector('#count-text');
+    const countTextElement = this.shadowRoot?.querySelector('#count-text');
 
     if(parseInt(initialCount) == 1) {
 
@@ -507,11 +292,13 @@ class iamAppInsights extends HTMLElement {
       countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
     }
 
-    const tooltip = component.shadowRoot?.querySelector('iam-tooltip');
+
+
+
+    const tooltip = this.shadowRoot?.querySelector('iam-tooltip');
     if(tooltip) {
       tooltip.setAttribute('title', 'Some properties may not be in your initial view and we recommend filtering to reveal them.');
     }
-
 
     setTimeout(() => {
 
@@ -538,16 +325,9 @@ class iamAppInsights extends HTMLElement {
 
     if(!matchCriteriaColumn) return;
 
-    if(!component.hasAttribute('data-match-criteria-column'))
-      component.setAttribute('data-match-criteria-column', matchCriteriaColumn);
-    if(!component.hasAttribute('data-match-criteria-indicator-column'))
-      component.setAttribute('data-match-criteria-indicator-column', matchCriteriaIndicatorColumn);
-
     const table = this.shadowRoot?.querySelector('table');
 
-    if(table?.querySelector('thead tr [data-label="Match criteria"]') === null) {
-      table?.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
-    }
+    table?.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
 
     table?.querySelectorAll('tbody tr').forEach(row => {
       const criteriaMatch = row.getAttribute(`data-${matchCriteriaColumn}`);
@@ -590,9 +370,6 @@ class iamAppInsights extends HTMLElement {
   createPopupTitles = (component, popupTitleColumn): void => {
     if(!popupTitleColumn) return;
 
-    if(!component.hasAttribute('data-popup-title-column'))
-      component.setAttribute('data-popup-title-column', popupTitleColumn);
-
     const shadowTable = this.shadowRoot?.querySelector('table');
 
     shadowTable?.querySelectorAll(`tbody tr td[data-label="${popupTitleColumn}"]`).forEach(cell => {
@@ -606,9 +383,6 @@ class iamAppInsights extends HTMLElement {
 
   createActionTitles = (component, actionTitleColumn): void => {
     if(!actionTitleColumn) return;
-
-    if(!component.hasAttribute('data-action-title-column'))
-      component.setAttribute('data-action-title-column', actionTitleColumn);
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
@@ -628,12 +402,6 @@ class iamAppInsights extends HTMLElement {
   createCTAs = (component, ctaUrlStructure, ctaText): void => {
     if(!ctaUrlStructure) return;
 
-    if(!component.hasAttribute('data-cta-url-structure'))
-      component.setAttribute('data-cta-url-structure', ctaUrlStructure);
-    if(!component.hasAttribute('data-cta-text') && ctaText)
-      component.setAttribute('data-cta-text', ctaText);
-
-
     const searches = [];
     let ctaLink = ctaUrlStructure;
     let areSearchesMet = true;
@@ -651,8 +419,7 @@ class iamAppInsights extends HTMLElement {
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
-    if(!shadowTable?.querySelector('thead tr th.cta-link-container'))
-      shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap cta-link-container"></th>`);
+    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
 
     shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
@@ -678,7 +445,7 @@ class iamAppInsights extends HTMLElement {
       });
 
       //if(areSearchesMet)
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed text-nowrap"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
+        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
       //else
       //  row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
     });
@@ -720,11 +487,6 @@ class iamAppInsights extends HTMLElement {
 
     if (table){
 
-      if(table.hasAttribute('id') === false) {
-
-        table.setAttribute('id', 'properties-table');
-        this.fixOriginalTable(table);
-      }
       createComponent(this, table);
     }
 
@@ -739,19 +501,13 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
-          const table = this.querySelector('table');
+          console.log('hi3');
 
-          if (table) {
+          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
 
-            if(table.hasAttribute('id') === false) {
+            const table = this.querySelector('table');
 
-              table.setAttribute('id', 'properties-table');
-              this.fixOriginalTable(table);
-            }
-
-            if (tableWrapper.querySelector('iam-table-advanced') === null) {
-              createComponent(this, table);
-            }
+            createComponent(this, table);
           }
         }
       }
