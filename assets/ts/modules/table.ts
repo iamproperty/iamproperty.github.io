@@ -1160,6 +1160,7 @@ export const setupAdvancedTable = (component, table, actionbar, pagination, form
     btn.addEventListener('click', (event) => {
 
       const heading = event.target.closest('th[data-filters]');
+
       createFilterPopover(component, table, heading, actionbar, pagination);
     });
   });
@@ -1262,43 +1263,6 @@ export const sortViaHeader = (component, table, actionbar, pagination, heading, 
   }
 };
 
-export const populateFilterOptions = (component, table): void => {
-  if (!table) return;
-
-  table.querySelectorAll('th[data-filters]').forEach((heading) => {
-    const filters = JSON.parse(heading.dataset.filters || '[]');
-
-    if (!Array.isArray(filters)) return;
-
-    filters.forEach((filter, index) => {
-      if (!filter || filter.options) return;
-
-      const headingIndex = heading.cellIndex;
-
-      /*
-      const uniqueValues = new Set<string>();
-
-      Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
-        const cells = Array.from(row.querySelectorAll('td, th'));
-        const cell = cells[headingIndex];
-
-        if (!cell) return;
-
-        const value = cell.textContent?.replace(/\s+/g, ' ').trim();
-
-        if (value) uniqueValues.add(value);
-      });
-
-      if (uniqueValues.size) {
-        filters[index].options = Array.from(uniqueValues);
-      }
-      */
-    });
-
-    heading.dataset.filters = JSON.stringify(filters);
-  });
-};
-
 export const setActionbarEvents = (component, table, actionbar, pagination): void => {
 
   actionbar?.addEventListener('change', (event) => {
@@ -1391,6 +1355,44 @@ export const resetHeadingFilters = (heading): void => {
   heading.dataset.filters = JSON.stringify(filters);
 };
 
+
+export const populateFilterOptions = (filter, component, table, heading): void => {
+  if (!table) return;
+
+  if(filter.options && Array.isArray(filter.options) && filter.options.length)
+    return filter.options;
+
+  const filterType = filter.type ?? 'text';
+  if(filterType == 'date') return [];
+
+  const filterOptions = [];
+
+  console.log(heading);
+  console.log(filter);
+
+  const headingIndex = heading.cellIndex;
+  const uniqueValues = new Set<string>();
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+    const cells = Array.from(row.querySelectorAll('td, th'));
+    const cell = cells[headingIndex];
+
+    if (!cell) return;
+
+    const value = cell.textContent?.replace(/\s+/g, ' ').trim();
+
+    if (value) uniqueValues.add(value);
+  });
+
+  if (uniqueValues.size) {
+    filterOptions.push(...Array.from(uniqueValues));
+  }
+
+  console.log(filterOptions);
+  return filterOptions;
+
+};
+
 export const createFilterPopover = (component, table, heading, actionbar, pagination): void => {
 
   const filters = JSON.parse(heading.dataset.filters);
@@ -1430,7 +1432,11 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     const filterType = filter.type ?? 'text';
     let filterOperator = filter.operator ?? 'Contains';
     const filterFieldset = document.createElement("fieldset");
-    const filterOptions = filter.options && Array.isArray(filter.options) && filterType != 'date' ? filter.options : null;
+
+
+
+    // Add the filter options in here if they arent present
+    const filterOptions = populateFilterOptions(filter, component, table, heading);
 
     // #region Create the operators select
     let filterOperators = filter.operators ?? ['Contains','Does not contain', 'Equals', 'Does not equal', 'Begins with', 'Ends with'];

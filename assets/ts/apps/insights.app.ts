@@ -206,7 +206,7 @@ class iamAppInsights extends HTMLElement {
         detail: event.detail
       });
 
-      this.dispatchEvent(tableFilteredEvent);
+      //this.dispatchEvent(tableFilteredEvent);
     });
   };
 
