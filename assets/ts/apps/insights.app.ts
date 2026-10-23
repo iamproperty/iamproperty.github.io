@@ -250,7 +250,6 @@ class iamAppInsights extends HTMLElement {
 
       const tempTbody = this.createTbodyFromOriginal(originalTable, 1, 15);
 
-      console.log(tempTbody);
 
       table?.querySelector('tbody')?.replaceWith(tempTbody);
 
@@ -282,6 +281,10 @@ class iamAppInsights extends HTMLElement {
 
       mapWrapper.innerHTML = this.createMapContent();
 
+      // Fix the pagination after filtering
+      pagination?.setAttribute('data-total', initialCount);
+      pagination?.setAttribute('data-page', 1);
+      pagination?.setAttribute('data-show', 15);
 
 
       if(parseInt(initialCount) < this.rowlimit) {
@@ -336,14 +339,23 @@ class iamAppInsights extends HTMLElement {
         `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`
       );
 
-      newRow.classList.remove('filtered');
-      newRow.classList.add('filtered--matched');
-      newRow.classList.add('filtered--show');
+    newRow?.querySelectorAll('td[data-label="Property"]')?.forEach(element => {
+      element.classList.add('td--fixed');
+    });
+
+    newRow.classList.remove('filtered');
+    newRow.classList.add('filtered--matched');
+    newRow.classList.add('filtered--show');
 
     return newRow;
   };
 
   createTbodyFromOriginal = (table: HTMLTableElement, newPage: number, newShow: number): HTMLTableSectionElement => {
+
+
+
+    filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
+
 
     const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
     table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
