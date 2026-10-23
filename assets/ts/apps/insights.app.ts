@@ -244,7 +244,18 @@ class iamAppInsights extends HTMLElement {
         });
       }
 
+
       filterAdvancedTable(tableComponent, originalTable, actionbar, pagination, columns, false);
+
+
+      const tempTbody = this.createTbodyFromOriginal(originalTable, 1, 15);
+
+      //const tempTable = document.createElement('table') as HTMLTableElement;
+      //tempTable.innerHTML = `<thead>${originalTable.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
+
+      table?.querySelector('tbody')?.replaceWith(tempTbody);
+
+      //console.log(tempTable);
 
       const initialCount = originalTable.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
       countElement?.innerHTML = initialCount;
@@ -265,6 +276,8 @@ class iamAppInsights extends HTMLElement {
       }
 
       mapWrapper.innerHTML = this.createMapContent();
+
+
 
       if(parseInt(initialCount) < this.rowlimit) {
 
