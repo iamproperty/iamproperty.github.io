@@ -39,7 +39,16 @@ class iamAppInsights extends HTMLElement {
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
-    const tempTbody = this.createTbodyFromOriginal(table, 1, 15);
+    const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
+    const newShow = parseInt(component.getAttribute('data-show') || '15', 10);
+    const newPage = parseInt(component.getAttribute('data-page') || '1', 10);
+
+    table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
+
+      if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
+
+      tempTbody.appendChild(row);
+    });
 
     const tempTable = document.createElement('table') as HTMLTableElement;
     tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
@@ -196,8 +205,6 @@ class iamAppInsights extends HTMLElement {
         }
         event.target?.setAttribute('disabled', 'true');
 
-        console.log(properties);
-
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
             action: action,
@@ -266,7 +273,7 @@ class iamAppInsights extends HTMLElement {
 
       this.createCTAs(this, this.getAttribute('data-cta-url-structure'), this.getAttribute('data-cta-text'));
       this.hideNullValues();
-      this.createMatchCriteriaFilter(this, this.getAttribute('data-match-criteria-column'), this.getAttribute('data-match-criteria-indicator-column'));
+      //this.createMatchCriteriaFilter(this, this.getAttribute('data-match-criteria-column'), this.getAttribute('data-match-criteria-indicator-column'));
       this.createPopupTitles(this, this.getAttribute('data-popup-title-column'));
       this.createActionTitles(this, this.getAttribute('data-action-title-column'));
 
@@ -300,6 +307,19 @@ class iamAppInsights extends HTMLElement {
 
 
     });
+
+    tableComponent?.addEventListener('sort-by-heading', (event) => {
+
+
+      console.log(event.detail);
+
+      const tableSortedEvent = new CustomEvent('table-sorted', {
+        detail: event.detail
+      });
+
+      // push the event up so that the page will know to update the iframe
+      //this.dispatchEvent(tableSortedEvent);
+    });
   };
 
   createMapContent = (): string => {
@@ -325,8 +345,11 @@ class iamAppInsights extends HTMLElement {
 
   };
 
-  createNewRow = (row: HTMLTableRowElement, index: number): HTMLTableRowElement => {
+  createNewRow = (row: HTMLTableRowElement, index: number, thead: HTMLTableSectionElement): HTMLTableRowElement => {
 
+    const colHeadings = Array.from(thead.querySelectorAll('th'));
+
+    console.log(colHeadings);
     const uniqueID = (index = 1): number => {
       const ID = Math.floor(Math.random() * Date.now() * (index + 1));
 
@@ -336,12 +359,22 @@ class iamAppInsights extends HTMLElement {
     const newRow = row.cloneNode(true) as HTMLTableRowElement;
     const rowID = uniqueID(index);
 
-    newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
 
-    newRow.insertAdjacentHTML(
-        'afterbegin',
-        `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-      );
+    if(!newRow.querySelector('td[data-label="Expand"]')) {
+      newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed td--expand" data-label="Expand" data-previous-col-widths="0" style="--left-offset: 0px;"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button="" data-index="0">Expand</button></td>`);
+    }
+    if(!newRow.querySelector('td[data-label="Select"]')) {
+      newRow.insertAdjacentHTML('afterbegin', `<td class="td--fixed selectrow" data-label="Select" data-previous-col-widths="0" style="--left-offset: 0px;"><input type="checkbox" name="row" id="row${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="row${rowID}"><span class="visually-hidden">Select row</span></label></td>`);
+    }
+
+
+    newRow.querySelectorAll('td').forEach((td, index) => {
+      const heading = colHeadings[index];
+
+      td.setAttribute('data-label', heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML);
+      td.setAttribute('data-format', heading.getAttribute('data-format') || '');
+
+    });
 
     newRow?.querySelectorAll('td[data-label="Property"]')?.forEach(element => {
       element.classList.add('td--fixed');
@@ -356,13 +389,16 @@ class iamAppInsights extends HTMLElement {
 
   createTbodyFromOriginal = (table: HTMLTableElement, newPage: number, newShow: number): HTMLTableSectionElement => {
 
+    const originaltable = this.querySelector('table');
+
     const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
-    table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
+    const thead = originaltable.querySelector('thead') as HTMLTableSectionElement;
+    originaltable.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
 
       if (index < newShow * (newPage - 1) || index >= newShow * (newPage - 1) + newShow) return;
 
-      const newRow = this.createNewRow(row, index);
-      tempTbody.appendChild(newRow);
+      const newRow = this.createNewRow(row, index, thead);
+      tempTbody.appendChild(row);
     });
     return tempTbody;
   };
@@ -407,7 +443,7 @@ class iamAppInsights extends HTMLElement {
 
     /* #region Pagination */
     const paginationElement = component.shadowRoot?.querySelector('iam-pagination');
-    console.log(paginationElement);
+
     paginationElement?.setAttribute('data-total', initialCount);
     paginationElement?.setAttribute('data-page', '1');
     let newShow = 15;
@@ -426,7 +462,7 @@ class iamAppInsights extends HTMLElement {
 
       this.createCTAs(component, component.getAttribute('data-cta-url-structure'), component.getAttribute('data-cta-text'));
       this.hideNullValues();
-      this.createMatchCriteriaFilter(component, component.getAttribute('data-match-criteria-column'), component.getAttribute('data-match-criteria-indicator-column'));
+      //this.createMatchCriteriaFilter(component, component.getAttribute('data-match-criteria-column'), component.getAttribute('data-match-criteria-indicator-column'));
       this.createPopupTitles(component, component.getAttribute('data-popup-title-column'));
       this.createActionTitles(component, component.getAttribute('data-action-title-column'));
     }
@@ -507,7 +543,9 @@ class iamAppInsights extends HTMLElement {
 
     const table = this.shadowRoot?.querySelector('table');
 
-    table?.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
+    if(table?.querySelector('thead tr [data-label="Match criteria"]') === null) {
+      table?.querySelector('thead tr').insertAdjacentHTML('afterbegin', /* HTML */`<th data-label="Match criteria" class="d-none">Match criteria</th>`);
+    }
 
     table?.querySelectorAll('tbody tr').forEach(row => {
       const criteriaMatch = row.getAttribute(`data-${matchCriteriaColumn}`);
