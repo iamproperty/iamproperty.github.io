@@ -16,7 +16,16 @@ class iamAppInsights extends HTMLElement {
     </style>
 
     <div class="wrapper" aria-busy="true">
-      <strong class="d-block pb-3 insight-count"><span id="count"></span> <span id="count-text"></span></strong>
+      <div class="insights-header pb-2">
+        <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
+        <div id="view-controls" class="d-none">
+
+          <label class="tag tag--toggle"><input type="radio" name="view" value="split">Split</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="list">List</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="map">Map</label>
+        </div>
+      </div>
+
 
       <div id="branch-wrapper"></div>
 
@@ -257,17 +266,38 @@ class iamAppInsights extends HTMLElement {
 
   createComponent = (component, table): void => {
 
-
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
     const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
     const countElement = this.shadowRoot?.querySelector('#count');
+    const viewControls = this.shadowRoot?.querySelector('#view-controls');
+
 
     table.setAttribute('id','properties-table');
     table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
+
+
+    // #region set the view controls
+
+    if(this.querySelector('table tr[data-latitude][data-longitude]')) {
+      viewControls?.classList.remove('d-none');
+      viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
+      this.setAttribute('data-view', 'split');
+    }
+
+    viewControls?.addEventListener('change', (event) => {
+      const target = event.target as HTMLInputElement;
+      if(target?.name === 'view') {
+
+        this.setAttribute('data-view', target.value);
+      }
+    });
+
+    // #endregion set the view controls
+
 
     // #region add titles to the table cells
 

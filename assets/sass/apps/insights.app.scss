@@ -15,6 +15,7 @@
 @use '../elements/forms.scss' as *;
 @use '../elements/prefix.scss' as *;
 @use '../elements/spinner.css' as *;
+@use '../elements/badge-tag.css';
 @use '../components/table-advanced.global.scss';
 @use '../utilities/margins';
 @use '../utilities/paddings';
@@ -50,6 +51,26 @@
   font-weight: 900;
   font-style: normal;
 }
+
+.insights-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+//#region view controls
+#view-controls label{
+  margin: 1px;
+}
+
+:host([data-view="list"]) #map-wrapper {
+  display: none;
+}
+:host([data-view="map"]) #table-wrapper {
+  display: none;
+}
+//#endregion view controls
+
 
 
 // #region Loading spinner styles
