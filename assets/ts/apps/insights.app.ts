@@ -18,6 +18,7 @@ class iamAppInsights extends HTMLElement {
     <div class="wrapper" aria-busy="true">
       <strong class="d-block pb-3 insight-count"><span id="count"></span> <span id="count-text"></span></strong>
 
+      <div id="branch-wrapper"></div>
 
       <div id="map-wrapper"></div>
 
@@ -224,6 +225,14 @@ class iamAppInsights extends HTMLElement {
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
+  createBranchContent = (): string => {
+
+    const options = Array.from(this.querySelectorAll('table th[data-label="Branch"]')).map(th => th.innerText);
+
+
+    return `<iam-branch-selector data-for="properties-table"></iam-branch-selector>`;
+  };
+
   fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
 
     if (!table) return table;
@@ -246,11 +255,12 @@ class iamAppInsights extends HTMLElement {
     return table;
   };
 
-
   createComponent = (component, table): void => {
+
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
     const countElement = this.shadowRoot?.querySelector('#count');
 
     table.setAttribute('id','properties-table');
@@ -259,6 +269,20 @@ class iamAppInsights extends HTMLElement {
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
 
+    // #region add titles to the table cells
+
+    tableWrapper.querySelectorAll('tbody tr td:not([data-label="Property"])').forEach(td => {
+      const label = td.getAttribute('data-label');
+      if(label) {
+        td.setAttribute('title', label);
+      }
+    });
+
+    // #endregion
+
+    if(table.querySelector('th[data-label="Branch"]')) {
+      //branchWrapper?.innerHTML = this.createBranchContent();
+    }
 
     /* Set the property column to fixed */
     tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
@@ -506,8 +530,6 @@ class iamAppInsights extends HTMLElement {
           (mutation.type == 'childList' && mutation.addedNodes.length) ||
           mutation.type === 'attributes'
         ) {
-
-          console.log('hi3');
 
           if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
 
