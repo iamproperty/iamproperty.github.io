@@ -117,6 +117,9 @@ class iamAppInsights extends HTMLElement {
     const countElement = this.shadowRoot?.querySelector('#count');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
 
+    const initialCountOnload = tableComponent?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    const needToReload = parseInt(initialCountOnload) >= this.rowlimit;
+
     if (actionbar && notification) {
       // Example event listener
       actionbar.addEventListener('selected', () => {
@@ -219,10 +222,10 @@ class iamAppInsights extends HTMLElement {
       mapWrapper.innerHTML = this.createMapContent();
 
       const tableFilteredEvent = new CustomEvent('table-filtered', {
-        detail: event.detail
+        detail: { ...event.detail, reload: needToReload }
       });
 
-      //this.dispatchEvent(tableFilteredEvent);
+      this.dispatchEvent(tableFilteredEvent);
     });
   };
 
