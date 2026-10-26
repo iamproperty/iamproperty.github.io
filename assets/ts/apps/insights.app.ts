@@ -348,6 +348,8 @@ class iamAppInsights extends HTMLElement {
 
       const icon = action.action == "export-table-data" ? `<i class="fa-regular fa-file-export"></i>` : ``;
       actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${icon}${action.label}</button>`);
+      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" disabled>${icon}${action.label}</button>`);
+
     });
   };
 
@@ -501,8 +503,8 @@ class iamAppInsights extends HTMLElement {
       //this.setCounterText(this, event.detail.properties['counter-text']);
       this.hideNullValues();
       this.createActionButtons(this, event.detail.actions);
-      this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
-      this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
+      //this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
+      //this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
       this.createPopupTitles(this, event.detail.properties['title-column']);
       this.createActionTitles(this, event.detail.properties['title-column']);
       this.createMultibranchFlag(this, event.detail.properties['branch-column']);
