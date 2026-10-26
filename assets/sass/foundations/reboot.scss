@@ -199,22 +199,14 @@
     @for $i from 1 to $columns {
       $templateColumns: $templateColumns + 'var(--col-size) [col-' + $i + '-end col-'+ ($i + 1)+'-start] ';
     }
-    /*
+    
     grid-template-columns:
       [full-width-start container-start] calc(var(--gutter) - var(--gap))
       [content-start col-1-start]
       #{$templateColumns}
       var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
       [container-end full-width-end];
-      */
-    grid-template-columns:
-      [full-width-start] calc(var(--excess-space) - var(--gap))
-      [container-start] calc(var(--gutter) - var(--gap))
-      [content-start col-1-start]
-      #{$templateColumns}
-      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
-      [container-end] calc(var(--excess-space) - var(--gap)) [full-width-end];
-      /*
+      
     @media screen and (min-width: 80em) {
       grid-template-columns:
         [full-width-start] calc(var(--excess-space) - var(--gap))
@@ -224,7 +216,7 @@
         var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
         [container-end] calc(var(--excess-space) - var(--gap)) [full-width-end];
     }
-        */
+        
 
     & * {
       grid-column: content;
