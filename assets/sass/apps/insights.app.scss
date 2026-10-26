@@ -138,9 +138,14 @@ iam-table-advanced {
   --table__container-display: contents;
 }
 
+table td[data-label="Property"] {
+  min-width: 15rem;
+}
+
 // #region: Criteria match key
 #criteria-match-key {
 
+  
   :is(#full-match, #partial-match)::before {
 
     content: "";
@@ -158,11 +163,6 @@ iam-table-advanced {
   #partial-match::before {
     background: var(--colour-warning);
   }
-}
-
-
-table td[data-label="Property"] {
-  min-width: 15rem;
 }
 
 table td:has(.criteria-match-indicator) {
