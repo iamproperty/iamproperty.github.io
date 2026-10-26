@@ -332,4 +332,54 @@
       font-weight: 700;
     }
   }
+
+  .one-insights-inline {
+    margin-bottom: 1.5rem;
+    min-height: 3rem;
+    background-image:
+      radial-gradient(ellipse 190% 400% at 0% 0%, var(--colour-primary) 15%, transparent 80%),
+      linear-gradient(var(--colour-info), var(--colour-info)) !important;
+
+    margin-top: -1rem;
+  }
+
+  @media screen and (min-width: 36em) {
+    .one-insights-inline .text-center {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+  }
+
+  .one-insights-inline .brand {
+    width: 2.923076923076923rem;
+    margin: 0;
+    font-size: 5rem;
+  }
+  @layer utilities {
+
+    .one-insights-inline .brand {
+      padding: 0 !important;
+    }
+  }
+  .one-insights-inline .strapline {
+    display: none;
+  }
+  .one-insights-inline iam-search {
+    width: 100%;
+    flex-grow: 1;
+    margin: 0!important;
+  }
+
+  @media screen and (min-width: 36em) {
+
+    @layer utilities {
+
+      .one-insights-inline iam-search {
+        margin: 0!important;
+      }
+    }
+  }
+
 </style>

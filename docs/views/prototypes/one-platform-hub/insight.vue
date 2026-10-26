@@ -10,6 +10,8 @@ import Nav from '@/components/Nav/Nav.vue';
 import Modal from '@/components/Modal/Modal.vue';
 
 import Notification from '@/components/Notification/Notification.vue';
+
+import Header from '@/components/Header/Header.vue';
 // #endregion
 
 // #region load vue components
@@ -415,13 +417,16 @@ const loadDashboards = async (): any => {
   </nav>
 
   <main class="enable-lg-breakpoint">
-    <div class="bg-primary full-width questions-container">
-      <div class="container">
 
-      </div>
+    <Header>
 
-      <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
-    </div>
+      <ul class="breadcrumbs">
+        <li><a href="/">One hub</a></li>
+        <li>One insights</li>
+      </ul>
+      <Questions v-if="dashboards.length" class="one-insights-inline" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
+    </Header>
+
 
     <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
       <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
@@ -493,7 +498,7 @@ const loadDashboards = async (): any => {
 <style lang="scss" scoped>
 
 .questions-container {
-  margin-bottom: 7rem;
+  margin-bottom: 2rem;
   display: grid;
   grid-template-columns: subgrid;
 }
@@ -553,5 +558,12 @@ const loadDashboards = async (): any => {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+iam-header::part(gradient-background) {
+  left: 0%;
+}
+iam-header {
+  --padding-bottom: 0!important;
 }
 </style>

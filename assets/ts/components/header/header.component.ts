@@ -23,7 +23,7 @@ class iamHeader extends HTMLElement {
     </style>
     <div class="header-banner">
       <div class="gradient-overflow">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 776.72 776.73" class="gradient-background">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 776.72 776.73" class="gradient-background" part="gradient-background">
           <defs>
             <style>
               .cls-1 {
@@ -62,7 +62,7 @@ class iamHeader extends HTMLElement {
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
         </picture>
       </div>
-      <div class="container">
+      <div class="container" part="container">
         <slot name="before"></slot>
         <slot></slot>
         <slot name="badge"></slot>
