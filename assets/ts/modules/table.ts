@@ -1413,7 +1413,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
 
   Array.from(table.querySelectorAll('th[data-filters]')).forEach((element) => {
     if (element != heading) {
-      element.removeAttribute('style');
+      element.style.removeProperty('anchor-name');
     }
   });
 
