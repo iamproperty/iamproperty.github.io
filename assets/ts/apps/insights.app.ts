@@ -301,6 +301,38 @@ class iamAppInsights extends HTMLElement {
 
     // #region add titles to the table cells
 
+
+
+    tableWrapper.querySelectorAll('thead tr th)').forEach(td => {
+      const label = td.getAttribute('data-label');
+      switch(label) {
+        case 'Property':
+          td.setAttribute('title', 'Property address');
+          break;
+        case 'Listing Agent':
+          td.setAttribute('title', 'Agent the property is currently listed with');
+          break;
+        case 'Current Price':
+          td.setAttribute('title', 'Current price of the property');
+          break;
+        case 'Listed Date':
+          td.setAttribute('title', 'Date the property was listed');
+          break;
+        case 'Original Price':
+          td.setAttribute('title', 'Original price of the property');
+          break;
+        case 'Price Reduction':
+          td.setAttribute('title', 'Date of the latest price reduction');
+          break;
+        case 'Days on Market':
+          td.setAttribute('title', 'Number of days the property has been on the market');
+          break;
+        case 'Fall Through':
+          td.setAttribute('title', 'Date of the latest fall through');
+          break;
+      }
+    });
+
     tableWrapper.querySelectorAll('tbody tr td:not([data-label="Property"])').forEach(td => {
       const label = td.getAttribute('data-label');
       if(label) {
