@@ -20,9 +20,9 @@ class iamAppInsights extends HTMLElement {
         <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
         <div id="view-controls" class="d-none">
 
-          <label class="tag tag--toggle"><input type="radio" name="view" value="split">Split</label>
-          <label class="tag tag--toggle"><input type="radio" name="view" value="list">List</label>
-          <label class="tag tag--toggle"><input type="radio" name="view" value="map">Map</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="split"><i class="fa-regular fa-table-columns"></i> Split</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="list"><i class="fa-regular fa-list"></i> List</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="map"><i class="fa-regular fa-map"></i> Map</label>
         </div>
       </div>
 
