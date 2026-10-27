@@ -257,7 +257,6 @@ class iamAppInsights extends HTMLElement {
     // #region fix original table
     table.setAttribute('id','properties-table');
 
-
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
       const CTAHeading = table.querySelector('thead tr th:last-child');
@@ -608,7 +607,7 @@ class iamAppInsights extends HTMLElement {
           console.log('HTML updated mutation:', mutation);
 
 
-          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
+          if (this.querySelector('table')) {
 
             const table = this.querySelector('table');
 
