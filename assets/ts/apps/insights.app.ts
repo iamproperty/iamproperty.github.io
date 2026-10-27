@@ -305,7 +305,7 @@ class iamAppInsights extends HTMLElement {
             },
           });
           this.dispatchEvent(dispatchedEvent);
-        }, 1000);
+        }, 300);
       }
     });
 
