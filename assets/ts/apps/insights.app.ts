@@ -418,8 +418,10 @@ class iamAppInsights extends HTMLElement {
     actions.forEach(action => {
 
       const icon = action.action == "export-table-data" ? `<i class="fa-regular fa-file-export"></i>` : ``;
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${icon}${action.label}</button>`);
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" disabled title="Select items from the table to use this action.">${icon}${action.label}</button>`);
+      if(!actionbar?.querySelector('#' + action.action + '-btn')) {
+        actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${icon}${action.label}</button>`);
+        actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" disabled title="Select items from the table to use this action.">${icon}${action.label}</button>`);
+      }
 
     });
   };
