@@ -245,9 +245,18 @@ class iamAppInsights extends HTMLElement {
     return `<iam-branch-selector data-for="properties-table"></iam-branch-selector>`;
   };
 
-  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
+  createComponent = (component, table): void => {
 
-    if (!table) return table;
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
+    const countElement = this.shadowRoot?.querySelector('#count');
+    const viewControls = this.shadowRoot?.querySelector('#view-controls');
+
+
+    // #region fix original table
+    table.setAttribute('id','properties-table');
+
 
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
@@ -263,21 +272,9 @@ class iamAppInsights extends HTMLElement {
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
-
-    return table;
-  };
-
-  createComponent = (component, table): void => {
-
-    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
-    const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
-    const countElement = this.shadowRoot?.querySelector('#count');
-    const viewControls = this.shadowRoot?.querySelector('#view-controls');
+    // #endregion fix original table
 
 
-    table.setAttribute('id','properties-table');
-    table = this.fixOriginalTable(table);
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
@@ -609,6 +606,7 @@ class iamAppInsights extends HTMLElement {
         ) {
 
           console.log('HTML updated mutation:', mutation);
+
 
           if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
 
