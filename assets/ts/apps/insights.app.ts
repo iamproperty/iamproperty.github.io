@@ -608,7 +608,7 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
-          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
+          if (this.querySelector('table')) {
 
             const table = this.querySelector('table');
 
