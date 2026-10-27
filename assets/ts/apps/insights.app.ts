@@ -296,6 +296,16 @@ class iamAppInsights extends HTMLElement {
       if(target?.name === 'view') {
 
         this.setAttribute('data-view', target.value);
+
+        setTimeout(() => {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+        }, 1000);
       }
     });
 
