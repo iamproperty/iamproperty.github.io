@@ -611,7 +611,7 @@ class iamAppInsights extends HTMLElement {
           if (this.querySelector('table')) {
 
             const table = this.querySelector('table');
-
+            console.log('createComponent called');
             createComponent(this, table);
           }
         }
