@@ -1530,6 +1530,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         <label class="mb-0" data-filter-label>
           <span class="visually-hidden">Filter</span>
           <span>
+          ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
           <input type="${filterType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
