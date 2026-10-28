@@ -400,6 +400,10 @@ iam-pagination::part(select--minimal):after {
 
 }
 
+iam-pagination[data-total="0"] {
+  display: none!important;
+}
+
 @layer elements {
 
   iam-actionbar::part(selectall-label-checked):after {
