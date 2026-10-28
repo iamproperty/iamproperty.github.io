@@ -58,6 +58,7 @@ const insightActions = ref([]);
 const insightProperties = ref({});
 const insightTitle = ref('');
 const isLoading = ref(true);
+const lookerFilters = ref<Record<string, unknown>>({});
 
 let insightIframeSource: MessageEventSource | null = null;
 const postInsightCompleted = (action: string): void => {
@@ -290,16 +291,15 @@ onMounted(async () => {
         let operator = filterOperator(filter.operator);
         let value = filter.value.replaceAll(' ','+');
 
-        return `${column}=${operator}${filter.type == "text" ? '"' : ''}${value}${filter.type == "text" ? '"' : ''}`
+        return `${column}=${operator}"${value}"`;
       }
       ).join('&');
 
-      const filtersString = JSON.stringify(filters);
+      console.log(filters);
 
+      console.log(`${iframeSrc.value}&${encodeURI(filters)}`);
 
-      console.log(`${iframe.src}&${filtersString}`);
-
-      iframe.setAttribute('src', `${iframeSrc.value}&${encodeURI(filtersString.replaceAll('"',''))}`);
+      iframe.setAttribute('src', `${iframeSrc.value}&${encodeURI(filters)}`);
     }
 
     console.log(message);
