@@ -538,36 +538,38 @@ class iamAppInsights extends HTMLElement {
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
-    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
 
-    shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
+    if(!shadowTable?.querySelector('[data-cta-heading]')) {
 
-      ctaLink = ctaUrlStructure.toLowerCase();
+      shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap" data-cta-heading></th>`);
 
-      searches.forEach(search => {
-        let datasetSearch = search;
+      shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
-        // Update the datasearch to match looker columns
-        if(search == "appraisalid")
-          datasetSearch = 'appraisal-id';
-        else if(search == "transactionid")
-          datasetSearch = 'transaction-id';
-        else if(search == "transaction")
-          datasetSearch = 'mb-transaction-id';
+        ctaLink = ctaUrlStructure.toLowerCase();
+
+        searches.forEach(search => {
+          let datasetSearch = search;
+
+          // Update the datasearch to match looker columns
+          if(search == "appraisalid")
+            datasetSearch = 'appraisal-id';
+          else if(search == "transactionid")
+            datasetSearch = 'transaction-id';
+          else if(search == "transaction")
+            datasetSearch = 'mb-transaction-id';
 
 
-        if(row.hasAttribute('data-' + datasetSearch.toLowerCase()) && row.getAttribute('data-' + datasetSearch.toLowerCase()) !== '') {
-          ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.getAttribute('data-' + datasetSearch.toLowerCase()));
-        } else {
-          areSearchesMet = false;
-        }
+          if(row.hasAttribute('data-' + datasetSearch.toLowerCase()) && row.getAttribute('data-' + datasetSearch.toLowerCase()) !== '') {
+            ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.getAttribute('data-' + datasetSearch.toLowerCase()));
+          } else {
+            areSearchesMet = false;
+          }
+        });
+
+        if(!row.querySelector('[data-cta]'))
+          row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank" data-cta>${ctaText ?? 'View details'}</a></td>`);
       });
-
-      //if(areSearchesMet)
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
-      //else
-      //  row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
-    });
+    }
   };
 
   hideNullValues(): void {
