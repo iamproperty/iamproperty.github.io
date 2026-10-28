@@ -1429,11 +1429,15 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
       hasFilterValueSet = true;
     }
 
-    const filterType = filter.type ?? 'text';
+    let filterType = filter.type ?? 'text';
     let filterOperator = filter.operator ?? 'Contains';
     const filterFieldset = document.createElement("fieldset");
 
 
+    // double check the heading has a data-field-type attribute
+    if(heading.dataset.format) {
+      filterType = heading.dataset.format;
+    }
 
     // Add the filter options in here if they arent present
     const filterOptions = populateFilterOptions(filter, component, table, heading);
