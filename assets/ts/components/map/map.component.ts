@@ -342,7 +342,7 @@ class iamMap extends HTMLElement {
           this.map.easeTo({
             center: property.geometry.coordinates,
             zoom: Math.max(this.map.getZoom(), 12),
-            padding: { left: 0, top: 270, right: 0, bottom: 0 }
+            padding: { left: 0, top: 280, right: 0, bottom: 0 }
           });
 
           setTimeout(() => {
