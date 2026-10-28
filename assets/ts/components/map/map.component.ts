@@ -48,7 +48,7 @@ class iamMap extends HTMLElement {
     // This lookup should trump the previous lookup, as this case covers the map and table being part of the app insights component
     if(!table && this.getRootNode() instanceof ShadowRoot){
 
-      table = (this.getRootNode() as ShadowRoot).querySelector(`table`);
+      table = (this.getRootNode() as ShadowRoot).querySelector(`table[id="${this.getAttribute("data-for")}"]`);
     }
 
     if(!table) return;

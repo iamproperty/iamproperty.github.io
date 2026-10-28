@@ -255,7 +255,7 @@ class iamAppInsights extends HTMLElement {
 
 
     // #region fix original table
-    table.setAttribute('id','properties-table');
+    // table.setAttribute('id','properties-table');
 
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
