@@ -226,6 +226,16 @@ class iamAppInsights extends HTMLElement {
       });
 
       this.dispatchEvent(tableFilteredEvent);
+
+      // Update the height
+      setTimeout(() => {
+        const dispatchedEvent = new CustomEvent('update-height', {
+          detail: {
+            height: this.offsetHeight
+          },
+        });
+        this.dispatchEvent(dispatchedEvent);
+      }, 300);
     });
   };
 
@@ -413,7 +423,7 @@ class iamAppInsights extends HTMLElement {
         },
       });
       component.dispatchEvent(dispatchedEvent);
-    }, 1000);
+    }, 300);
   };
 
   createActionButtons = (component, actions): void => {
