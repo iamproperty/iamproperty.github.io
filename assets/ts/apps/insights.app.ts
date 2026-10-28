@@ -522,11 +522,11 @@ class iamAppInsights extends HTMLElement {
     if(ctaUrlStructure.toLowerCase().includes(':transaction'))
       searches.push('transaction');
 
-    const originalTable = this.querySelector('table');
+    const shadowTable = this.querySelector('table');
 
-    originalTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
+    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
 
-    originalTable?.querySelectorAll(`tbody tr`).forEach(row => {
+    shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
       ctaLink = ctaUrlStructure.toLowerCase();
 
