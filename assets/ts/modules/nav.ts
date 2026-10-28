@@ -442,9 +442,9 @@ export const megaMenusEvents = (component, menu, menuButton, accountMenu, accoun
           if (details?.hasAttribute('slot') && details?.getAttribute('slot') == 'secondary')
             component.classList.add('open-secondary');
 
-          // Open the first details element if one isn't open
-          if (!details.querySelector('details[open]') && details.querySelector('details'))
-            details.querySelector('details').setAttribute('open', true);
+          // Open the first details element if one isn't open - SSO-301 remove the auto update functionality
+          //if (!details.querySelector('details[open]') && details.querySelector('details'))
+            //details.querySelector('details').setAttribute('open', true);
         }
 
         // Close all other siblings of details
