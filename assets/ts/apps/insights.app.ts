@@ -231,7 +231,11 @@ class iamAppInsights extends HTMLElement {
 
   createMapContent = (): string => {
 
-    if(!this.querySelector('table tr[data-latitude][data-longitude]'))
+    // Load the table from the shadow root so the table formatting is correct and CTA's created
+    const table = this.shadowRoot?.querySelector('table');
+    table.setAttribute('id','properties-table');
+
+    if(!table.querySelector('tr[data-latitude][data-longitude]'))
       return '';
 
     return `<iam-map data-for="properties-table"></iam-map>`;
