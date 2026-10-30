@@ -35,6 +35,7 @@ export { default as Snapshot } from './components/Snapshot/Snapshot.vue';
 export { default as Stepper } from './components/Stepper/Stepper.vue';
 export { default as Step } from './components/Stepper/Step.vue';
 export { default as Table } from './components/Table/Table.vue';
+export { default as TableAdvanced } from './components/Table/TableAdvanced.vue';
 export { default as Tabs } from './components/Tabs/Tabs.vue';
 export { default as Tab } from './components/Tabs/Tab.vue';
 export { default as Testimonial } from './components/Testimonial/Testimonial.vue';

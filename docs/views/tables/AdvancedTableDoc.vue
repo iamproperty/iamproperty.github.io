@@ -27,6 +27,10 @@
       <h1>Advanced table</h1>
     </DSHeader>
 
+    <h2>Large datasets</h2>
+    <p>Use the optional <code>data-backed</code> mode to keep all records in memory while rendering only the current page. Selection uses stable record IDs and persists across pagination, filtering and sorting. The consuming application can retrieve the original selected objects for any backend. Column definitions support <code>sort</code>, <code>filters</code> and <code>format</code>; existing headers can use <code>data-sort</code>, <code>data-filters</code> and <code>data-format</code>, with <code>data-key</code> identifying the record property.</p>
+    <p><a href="/standalone/table-data">Open the data-backed table example, API usage and performance comparison.</a></p>
+
     <p class="lead">Advanced tables are used to organise and display data efficiently where the need for a greater level of analysis is required vs standard tables. The Advanced table allows for customisation of table structure with additional greater filtering and sorting functionality.</p>
 
     <p>The Advanced table’s features are ideal for analysis, reporting and insights data where the user has greater requirements from the data shown in the table.</p>

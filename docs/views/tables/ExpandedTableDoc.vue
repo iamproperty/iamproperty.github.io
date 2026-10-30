@@ -28,10 +28,6 @@
 
     <p class="note mb-5"><strong>Note:</strong> The table component inherits all of the functionality and styling of the basic table component.</p>
 
-    <h2>Large datasets</h2>
-    <p>Use the optional <code>data-backed</code> mode to keep all records in memory while rendering only the current page. Selection uses stable record IDs and persists across pagination, filtering and sorting. The consuming application can retrieve the original selected objects for any backend. Column definitions support <code>sort</code>, <code>filters</code> and <code>format</code>; existing headers can use <code>data-sort</code>, <code>data-filters</code> and <code>data-format</code>, with <code>data-key</code> identifying the record property.</p>
-    <p><a href="/table-data-demo.html">Open the data-backed table example, API usage and performance comparison.</a></p>
-
     <h2>Anatomy</h2>
 
     <div class="container visualtest bg-light mb-3">

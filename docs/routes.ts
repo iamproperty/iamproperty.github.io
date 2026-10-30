@@ -1888,6 +1888,12 @@ const routes: Array<any> = [
         component: () => import('./views/standalone/AccountSwitched.vue'),
       },
       {
+        path: 'table-data',
+        name: 'Table performance comparison',
+        meta: { title: 'Table performance comparison | iamkey' },
+        component: () => import('./views/standalone/TableData.vue'),
+      },
+      {
         path: 'movebutler',
         name: 'movebutler',
         meta: {
