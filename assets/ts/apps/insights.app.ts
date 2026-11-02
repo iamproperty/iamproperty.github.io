@@ -284,6 +284,7 @@ class iamAppInsights extends HTMLElement {
 
     // Give the table formatting info
     table.querySelectorAll('th[data-field-type="date_date"],th[data-field-type="date"]').forEach(th => th.setAttribute('data-format', 'date'));
+    table.querySelectorAll('th[data-field-type="number"]').forEach(th => th.setAttribute('data-format', 'number'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
     // #endregion fix original table
 
