@@ -1,4 +1,4 @@
-import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData, convertToNumber, convertToDate, convertToUnixTimestamp } from './helpers.js';
+import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData, convertToNumber, convertToDate, convertToUnixTimestamp, isStringValidJSON } from './helpers.js';
 
 export const tableHTML = `<div class="table__container" part="container">
   <div class="table-filters" part="filters"></div>
@@ -1133,6 +1133,17 @@ export const setupAdvancedTable = (component, table, actionbar, pagination, form
 
     heading.innerHTML = `<div class="th__content">${heading.textContent.trim()}</div><span class="th__divider"></span>`;
     heading.setAttribute('data-label', heading.textContent.trim());
+
+
+
+    if(heading.hasAttribute('data-filters') && isStringValidJSON(heading.getAttribute('data-filters'))) {
+
+      console.log('Original Filters:', JSON.parse(heading.getAttribute('data-filters')));
+
+
+      const cleanFilters = cleanFilterValues(JSON.parse(heading.getAttribute('data-filters')));
+      heading.setAttribute('data-filters', JSON.stringify(cleanFilters));
+    }
   });
 
   populateFiltersFromActionbar(component, table, actionbar);
@@ -1324,6 +1335,139 @@ const cleanFilterValues = (filters): Array<any> => {
 
   return cleanedFilters;
 };
+
+/*
+    const parseAppliedFilter = (appliedFilter, field) => {
+      const expression = String(
+        typeof appliedFilter === "object"
+          ? appliedFilter.value ?? ""
+          : appliedFilter
+      ).trim();
+
+      let type = "text";
+
+      if (field.type === "date_date") {
+        type = "date";
+      } else if (field.value_format_name === "gbp_0") {
+        type = "price";
+      }
+
+      const result = (operator, value) => ({
+        operator,
+        type,
+        ...(value !== undefined ? { value } : {})
+      });
+
+      const isNumeric =
+        type === "price" ||
+        /^(number|int|integer|float|decimal|sum|average|count|count_distinct)$/.test(
+          field.type || ""
+        );
+
+
+      if (expression.startsWith('[')) {
+        return result("Between", expression);
+      }
+
+      // Numeric comparisons: >=100, <50, !=10, etc.
+      if (isNumeric) {
+        const match = expression.match(
+          /^(>=|<=|!=|<>|>|<|=)?\s*(-?\d+(?:\.\d+)?)$/
+        );
+
+        if (!match) return result("Equals", expression);
+
+        const operators = {
+          ">=": "Greater than",
+          "<=": "Less than",
+          ">": "Greater than",
+          "<": "Less than",
+          "!=": "Does not equal",
+          "<>": "Does not equal",
+          "=": "Equals"
+        };
+
+        return result(
+          operators[match[1] || "="],
+          match[2]
+        );
+      }
+
+      if (type === "date") {
+        // Preserve date semantics:
+        // Looker's "after" includes the specified date.
+        const match = expression.match(
+          /^(before|after)\s+(\d{4}[-/]\d{2}[-/]\d{2})$/i
+        );
+
+        if (match) {
+          return result(
+            match[1].toLowerCase() === "before"
+              ? "Less than"
+              : "greater_than_or_equal",
+            match[2]
+          );
+        }
+
+        if (/^\d{4}[-/]\d{2}[-/]\d{2}$/.test(expression)) {
+          return result("equals", expression);
+        }
+
+        return result("Equals", expression);
+      }
+
+      // Handle simple text filters.
+      // Leave compound, quoted and escaped expressions untouched.
+      if (/[,\^\\"_]/.test(expression)) return result("equals", expression);
+
+      // Leave special Looker expressions untouched.
+      if (/^-?(NULL|EMPTY)$/i.test(expression)) return result("equals", expression);
+
+      const negative = expression.startsWith("-");
+      const value = negative ? expression.slice(1) : expression;
+
+      const match = value.match(/^(%)?([^%]+?)(%)?$/);
+
+      if (!match) return result("Equals", expression);
+
+      const [, leadingWildcard, text, trailingWildcard] = match;
+
+      if (leadingWildcard && trailingWildcard) {
+        return result(negative ? "not_contains" : "Does not contain", text);
+      }
+
+      if (trailingWildcard) {
+        return result(negative ? "not_starts_with" : "Begins with", text);
+      }
+
+      if (leadingWildcard) {
+        return result(negative ? "not_ends_with" : "Ends with", text);
+      }
+
+      return result(negative ? "not_equals" : "Equals", text);
+    };
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const getInlineFilters = (component, table, actionbar): Array<any> => {
@@ -1580,6 +1724,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
           // Hide the pound sign for price inputs as its in the icon
           optionDisplay = option?.replace('£','');
         }
+
         filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${optionDisplay.trim()}</option>`;
       });
 
@@ -1670,6 +1815,8 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
 export const filterAdvancedTable = (component, table, actionbar, pagination, columns: Array<any> | undefined = undefined, dispatchEvent = true): void => {
 
   const columnFilters = columns ?? getInlineFilters(component, table, actionbar);
+
+  console.log('Column Filters:', columnFilters);
   const appliedFilters = [];
   const filtersSet = new Set();
   table.classList.remove('table--filtered');
