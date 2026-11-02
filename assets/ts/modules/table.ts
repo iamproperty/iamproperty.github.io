@@ -1323,10 +1323,10 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
     filters.forEach((filter) => {
       let filterValue = filter.value;
 
-      if (filterValue?.startsWith('"')) {
+      if (filterValue?.startsWith('"') || filterValue?.startsWith("[")) {
         filterValue = filterValue.slice(1);
       }
-      if (filterValue?.endsWith('"')) {
+      if (filterValue?.endsWith('"') || filterValue?.endsWith("]")) {
         filterValue = filterValue.slice(0, -1);
       }
 
