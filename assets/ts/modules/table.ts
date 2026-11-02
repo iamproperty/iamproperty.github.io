@@ -1323,8 +1323,6 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
     filters.forEach((filter) => {
       let filterValue = filter.value;
       if(filterValue?.includes(',')) {
-        filterValue = filterValue.replace(/"/g, '\\"');
-
         if (filterValue?.startsWith('"')) {
           filterValue = filterValue.slice(1);
         }
