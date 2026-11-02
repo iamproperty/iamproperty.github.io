@@ -1325,10 +1325,10 @@ const cleanFilterValues = (filters): Array<any> => {
       filter.operator = 'Between';
     }
 
-    if (filterValue?.startsWith('"') || filterValue?.startsWith("[")) {
+    if (filterValue?.startsWith('"') || filterValue?.startsWith("[") || filterValue?.startsWith("%")) {
       filterValue = filterValue.slice(1);
     }
-    if (filterValue?.endsWith('"') || filterValue?.endsWith("]")) {
+    if (filterValue?.endsWith('"') || filterValue?.endsWith("]") || filterValue?.endsWith("%")) {
       filterValue = filterValue.slice(0, -1);
     }
 
