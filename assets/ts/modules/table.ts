@@ -1382,9 +1382,6 @@ export const populateFilterOptions = (filter, component, table, heading): void =
 
   const filterOptions = [];
 
-  //console.log(heading);
-  //console.log(filter);
-
   const headingIndex = heading.cellIndex;
   const uniqueValues = new Set<string>();
 
@@ -1563,7 +1560,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         let optionDisplay = option;
 
         if(filterType == 'number'){
-          option = String(convertToNumber(option));
+          optionDisplay = String(convertToNumber(option));
         }
         else if(filterType == 'price'){
           // Hide the pound sign for price inputs as its in the icon
