@@ -1318,9 +1318,26 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
 
     //console.log('Heading:', heading, 'Filters:', heading.dataset.filters);
     const filters = JSON.parse(heading.dataset.filters);
+    // We need to clean up the filter values due to integration with 3rd parties i.e. Looker, which may add extra characters like quotes around comma-separated values.
+    const cleanedFilters = [];
+    filters.forEach((filter) => {
+      let filterValue = filter.value;
+      if(filterValue?.includes(',')) {
+        filterValue = filterValue.replace(/"/g, '\\"');
+
+        if (filterValue?.startsWith('"')) {
+          filterValue = filterValue.slice(1);
+        }
+        if (filterValue?.endsWith('"')) {
+          filterValue = filterValue.slice(0, -1);
+        }
+      }
+      filter.value = filterValue;
+      cleanedFilters.push(filter);
+    });
 
     // Todo make more robust to check if the column already exists in the array and update it instead of adding a duplicate
-    columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': filters});
+    columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': cleanedFilters});
   });
 
   return columnsArray;
@@ -1367,8 +1384,8 @@ export const populateFilterOptions = (filter, component, table, heading): void =
 
   const filterOptions = [];
 
-  console.log(heading);
-  console.log(filter);
+  //console.log(heading);
+  //console.log(filter);
 
   const headingIndex = heading.cellIndex;
   const uniqueValues = new Set<string>();
@@ -1388,7 +1405,7 @@ export const populateFilterOptions = (filter, component, table, heading): void =
     filterOptions.push(...Array.from(uniqueValues));
   }
 
-  console.log(filterOptions);
+  //console.log(filterOptions);
   return filterOptions;
 
 };

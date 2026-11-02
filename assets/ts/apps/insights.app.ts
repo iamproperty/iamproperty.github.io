@@ -622,8 +622,7 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
-          console.log('HTML updated mutation:', mutation);
-
+          //console.log('HTML updated mutation:', mutation);
 
           if (this.querySelector('table') && mutation.addedNodes.length) {
 
