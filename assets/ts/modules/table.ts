@@ -1321,9 +1321,12 @@ const cleanFilterValues = (filters): Array<any> => {
   filters.forEach((filter) => {
     let filterValue = filter.value;
 
+    if(filterValue?.startsWith("[")){
+      filter.operator = 'Between';
+    }
+
     if (filterValue?.startsWith('"') || filterValue?.startsWith("[")) {
       filterValue = filterValue.slice(1);
-      filter.operator = 'Between';
     }
     if (filterValue?.endsWith('"') || filterValue?.endsWith("]")) {
       filterValue = filterValue.slice(0, -1);
