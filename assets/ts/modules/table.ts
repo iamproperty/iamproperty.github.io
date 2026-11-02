@@ -1322,14 +1322,14 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
     const cleanedFilters = [];
     filters.forEach((filter) => {
       let filterValue = filter.value;
-      if(filterValue?.includes(',')) {
-        if (filterValue?.startsWith('"')) {
-          filterValue = filterValue.slice(1);
-        }
-        if (filterValue?.endsWith('"')) {
-          filterValue = filterValue.slice(0, -1);
-        }
+
+      if (filterValue?.startsWith('"')) {
+        filterValue = filterValue.slice(1);
       }
+      if (filterValue?.endsWith('"')) {
+        filterValue = filterValue.slice(0, -1);
+      }
+
       filter.value = filterValue;
       cleanedFilters.push(filter);
     });
@@ -1460,22 +1460,22 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     // #region Create the operators select
     let filterOperators = filter.operators ?? ['Contains','Does not contain', 'Equals', 'Does not equal', 'Begins with', 'Ends with'];
 
-    if(filterType == 'date' && !filter.operators){
+    if(filterType == 'date'){
       filterOperators = ['Equals', 'Does not equal','Before','After','Between'];
       filterOperator = filter.operator ?? 'Equals';
     }
 
-    if(filterType == 'number' && !filter.operators){
+    if(filterType == 'number'){
       filterOperators = ['Equals', 'Does not equal','Less than','Greater than','Between'];
       filterOperator = filter.operator ?? 'Equals';
     }
 
-    if(filterType == 'price' && !filter.operators){
+    if(filterType == 'price'){
       filterOperators = ['Equals', 'Does not equal','Less than','Greater than','Between'];
       filterOperator = filter.operator ?? 'Equals';
     }
 
-    if(filterType == 'select' && !filter.operators)
+    if(filterType == 'select')
       filterOperators = ['Equals'];
 
     if(filterOperators && Array.isArray(filterOperators) && filterOperators.length == 1 && filterOperators[0].toLowerCase() == 'equals'){
