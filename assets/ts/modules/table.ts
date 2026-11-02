@@ -1304,6 +1304,28 @@ const populateFiltersFromActionbar = (component, table, actionbar): void => {
 
 };
 
+const cleanFilterValues = (filters): Array<any> => {
+
+  const cleanedFilters = [];
+  filters.forEach((filter) => {
+    let filterValue = filter.value;
+
+    if (filterValue?.startsWith('"') || filterValue?.startsWith("[")) {
+      filterValue = filterValue.slice(1);
+      filter.operator = 'Between';
+    }
+    if (filterValue?.endsWith('"') || filterValue?.endsWith("]")) {
+      filterValue = filterValue.slice(0, -1);
+    }
+
+    filter.value = filterValue;
+    cleanedFilters.push(filter);
+  });
+
+  return cleanedFilters;
+};
+
+
 export const getInlineFilters = (component, table, actionbar): Array<any> => {
 
   const columnsArray = [];
@@ -1318,21 +1340,9 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
 
     //console.log('Heading:', heading, 'Filters:', heading.dataset.filters);
     const filters = JSON.parse(heading.dataset.filters);
+
     // We need to clean up the filter values due to integration with 3rd parties i.e. Looker, which may add extra characters like quotes around comma-separated values.
-    const cleanedFilters = [];
-    filters.forEach((filter) => {
-      let filterValue = filter.value;
-
-      if (filterValue?.startsWith('"') || filterValue?.startsWith("[")) {
-        filterValue = filterValue.slice(1);
-      }
-      if (filterValue?.endsWith('"') || filterValue?.endsWith("]")) {
-        filterValue = filterValue.slice(0, -1);
-      }
-
-      filter.value = filterValue;
-      cleanedFilters.push(filter);
-    });
+    const cleanedFilters = cleanFilterValues(filters);
 
     // Todo make more robust to check if the column already exists in the array and update it instead of adding a duplicate
     columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': cleanedFilters});
@@ -1345,29 +1355,31 @@ export const updateHeadingFilters = (heading, dialog): void => {
 
   const filters = JSON.parse(heading.dataset.filters);
 
-  filters.forEach((filter, index) => {
+  const cleanedFilters = cleanFilterValues(filters);
 
-    filters[index].operator = dialog.querySelector(`[name="filter-${index}-operator"]`) ? dialog.querySelector(`[name="filter-${index}-operator"]`).value : null;
+  cleanedFilters.forEach((filter, index) => {
 
-    filters[index].value = dialog.querySelector(`[name="filter-${index}"]`) ? dialog.querySelector(`[name="filter-${index}"]`).value : null;
+    cleanedFilters[index].operator = dialog.querySelector(`[name="filter-${index}-operator"]`) ? dialog.querySelector(`[name="filter-${index}-operator"]`).value : null;
 
-    if(filters[index].operator?.toLowerCase() == 'between'){
-      filters[index].value = `${dialog.querySelector(`[name="filter-${index}"]`).value},${dialog.querySelector(`[name="filter-${index}-2"]`).value}`;
+    cleanedFilters[index].value = dialog.querySelector(`[name="filter-${index}"]`) ? dialog.querySelector(`[name="filter-${index}"]`).value : null;
+
+    if(cleanedFilters[index].operator?.toLowerCase() == 'between'){
+      cleanedFilters[index].value = `${dialog.querySelector(`[name="filter-${index}"]`).value},${dialog.querySelector(`[name="filter-${index}-2"]`).value}`;
     }
   });
 
-  heading.dataset.filters = JSON.stringify(filters);
+  heading.dataset.filters = JSON.stringify(cleanedFilters);
 };
 
 export const resetHeadingFilters = (heading): void => {
 
   const filters = JSON.parse(heading.dataset.originalFilters);
-
-  filters.forEach((filter, index) => {
-    filters[index].value = null;
+  const cleanedFilters = cleanFilterValues(filters);
+  cleanedFilters.forEach((filter, index) => {
+    cleanedFilters[index].value = null;
   });
 
-  heading.dataset.filters = JSON.stringify(filters);
+  heading.dataset.filters = JSON.stringify(cleanedFilters);
 };
 
 
@@ -1408,6 +1420,8 @@ export const populateFilterOptions = (filter, component, table, heading): void =
 export const createFilterPopover = (component, table, heading, actionbar, pagination): void => {
 
   const filters = JSON.parse(heading.dataset.filters);
+  const cleanedFilters = cleanFilterValues(filters);
+
   let hasFilterValueSet = false;
 
   if(component.querySelector('.dialog--inline-filter')){
@@ -1435,7 +1449,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   filtersPopover.style.setProperty('position-anchor', '--filters-button')
   filtersPopover.setAttribute('popover','auto');
 
-  filters.forEach((filter, index) => {
+  cleanedFilters.forEach((filter, index) => {
 
     if(filter.value !== null && filter.value !== undefined && filter.value !== ''){
       hasFilterValueSet = true;
