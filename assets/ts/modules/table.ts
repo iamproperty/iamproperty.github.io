@@ -1679,6 +1679,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         prefixIcon = 'fa-regular fa-sterling-sign';
       }
 
+      let inputType = filterType;
       let filterValue = filter.value;
       let filterValue2 = '';
 
@@ -1691,6 +1692,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         // Hide the pound sign for price inputs as its in the icon
         filterValue = filterValue?.replace('£','');
         filterValue2 = filterValue2?.replace('£','');
+        inputType = 'number';
       }
 
       filterFieldset.insertAdjacentHTML('beforeend',
@@ -1699,7 +1701,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
           <span class="visually-hidden">Filter</span>
           <span>
           ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
-          <input type="${filterType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          <input type="${inputType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
@@ -1711,7 +1713,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
           <span class="visually-hidden">Filter</span>
           <span>
           ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
-          <input type="${filterType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          <input type="${inputType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
@@ -1733,6 +1735,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         else if(filterType == 'price'){
           // Hide the pound sign for price inputs as its in the icon
           optionDisplay = option?.replace('£','');
+          optionDisplay = optionDisplay?.replaceAll(',','');
         }
 
         filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${optionDisplay.trim()}</option>`;
