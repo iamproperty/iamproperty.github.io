@@ -1702,7 +1702,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
           <span class="visually-hidden">Filter</span>
           <span>
           ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
-          <input type="${inputType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          <input type="${inputType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions.length ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
@@ -1714,7 +1714,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
           <span class="visually-hidden">Filter</span>
           <span>
           ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
-          <input type="${inputType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          <input type="${inputType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions.length ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
