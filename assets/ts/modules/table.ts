@@ -1321,6 +1321,13 @@ const cleanFilterValues = (filters): Array<any> => {
   filters.forEach((filter) => {
     let filterValue = filter.value;
 
+    // Make sure this call stays before any other processing of the filter value
+    // as it determines if the filter is a "Does not equal" type based on the leading "-"
+    if(filterValue?.startsWith("-")){
+      filter.operator = 'Does not equal';
+      filterValue = filterValue.slice(1);
+    }
+
     if(filterValue?.startsWith("[")){
       filter.operator = 'Between';
     }
