@@ -1620,7 +1620,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     }
 
     // Add the filter options in here if they arent present
-    const filterOptions = populateFilterOptions(filter, component, table, heading);
+    let filterOptions = populateFilterOptions(filter, component, table, heading);
 
     // #region Create the operators select
     let filterOperators = filter.operators ?? ['Contains','Does not contain', 'Equals', 'Does not equal', 'Begins with', 'Ends with'];
@@ -1628,6 +1628,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     if(filterType == 'date'){
       filterOperators = ['Equals', 'Does not equal','Before','After','Between'];
       filterOperator = filter.operator ?? 'Equals';
+      filterOptions = [];
     }
 
     if(filterType == 'number'){
