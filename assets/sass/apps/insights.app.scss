@@ -25,6 +25,29 @@
 
 @layer legacy, reset, elements, components, templates, overrides, utilities, debug;
 
+
+  ::-webkit-calendar-picker-indicator {
+    display: block!important;
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    order: 3;
+    z-index: 98;
+  }
+
+
+
+
+
+
+
 @font-face {
   font-family: 'Qanelas - Hosted';
   src:
