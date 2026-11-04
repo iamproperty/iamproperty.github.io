@@ -46,9 +46,9 @@ class iamMap extends HTMLElement {
 
     // If the map component is inside a shadow root, we need to query the table from the shadow root instead of the document
     // This lookup should trump the previous lookup, as this case covers the map and table being part of the app insights component
-    if(this.getRootNode() instanceof ShadowRoot){
+    if(!table && this.getRootNode() instanceof ShadowRoot){
 
-      table = (this.getRootNode() as ShadowRoot).querySelector(`table`);
+      table = (this.getRootNode() as ShadowRoot).querySelector(`table[id="${this.getAttribute("data-for")}"]`);
     }
 
     if(!table) return;
@@ -71,7 +71,7 @@ class iamMap extends HTMLElement {
       const tableHeadings = Array.from(table.querySelectorAll("thead th")).map((th) => th.querySelector(".th__content")?.textContent?.trim() || th.textContent?.trim() || "");
       let onloadPopup;
 
-      table.querySelectorAll('tr[data-longitude][data-latitude]').forEach((row, index) => {
+      table.querySelectorAll('tr[data-longitude][data-latitude]:not(.filtered)').forEach((row, index) => {
         const rowLongitude = Number(row.dataset.longitude);
         const rowLatitude = Number(row.dataset.latitude);
 
@@ -342,7 +342,7 @@ class iamMap extends HTMLElement {
           this.map.easeTo({
             center: property.geometry.coordinates,
             zoom: Math.max(this.map.getZoom(), 12),
-            padding: { left: 0, top: 270, right: 0, bottom: 0 }
+            padding: { left: 0, top: 280, right: 0, bottom: 0 }
           });
 
           setTimeout(() => {
@@ -377,7 +377,8 @@ class iamMap extends HTMLElement {
           this.map.fitBounds(bounds, {
             padding: 60,
             minZoom,
-            maxZoom
+            maxZoom,
+            animate: false
           });
         }
 
@@ -395,10 +396,6 @@ class iamMap extends HTMLElement {
         this.map.on("click", (event) => {
           const center = this.map.getCenter();
           const zoom = this.map.getZoom();
-          console.log("Map clicked");
-          console.log("Center:", center.lat, center.lng);
-          console.log("Current zoom:", zoom);
-          console.log("Clicked coordinates:", event.lngLat.lat, event.lngLat.lng);
         });
       }
 

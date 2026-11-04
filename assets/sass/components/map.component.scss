@@ -6,6 +6,7 @@
   height: var(--map-height, 22.5rem); /* 360px */
   border-radius: 0.25rem;
   margin-bottom: 3rem;
+  background: var(--colour-light); /* Light gray background */
 }
 
 /* #region map */
@@ -97,7 +98,7 @@
 .popup__content {
 
   padding: 1rem;
-  max-height: 14rem; /* 224px */
+  max-height: 15rem; /* 240px */
   overflow-y: auto;
 }
 
@@ -126,7 +127,7 @@
   grid-template-columns: 1fr 1fr;
   column-gap: 0.5rem;
   row-gap: 0.25rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 
   .popup__field {
     display: contents;

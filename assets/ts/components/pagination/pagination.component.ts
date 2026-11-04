@@ -20,7 +20,7 @@ class iamPagination extends HTMLElement {
 
       <div class="minimal" part="minimal">
         <div class="page-jump">
-          <div><select class="select--minimal"></select></div>
+          <div part="select--minimal"><select class="select--minimal"></select></div>
           <span class="total-pages"></span>
         </div>
 
@@ -30,7 +30,7 @@ class iamPagination extends HTMLElement {
 
       <div class="item-count" part="item-count"></div>
       <div class="per-page" part="per-page">
-        <div>
+        <div part="select--minimal">
           <select class="select--minimal">
             <option value="15">15</option>
             <option value="25">25</option>
@@ -190,8 +190,8 @@ class iamPagination extends HTMLElement {
         if (oldVal != newVal) {
           this.setAttribute('data-show', newVal);
           //this.setAttribute('data-page', 1);
-          this.setup();
           this.dispatchEvent(new CustomEvent('update-show', { detail: { show: newVal } }));
+          this.setup();
         }
         break;
       }

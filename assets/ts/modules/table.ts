@@ -1,4 +1,4 @@
-import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData, convertToNumber, convertToDate, convertToUnixTimestamp } from './helpers.js';
+import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData, convertToNumber, convertToDate, convertToUnixTimestamp, isStringValidJSON } from './helpers.js';
 
 export const tableHTML = `<div class="table__container" part="container">
   <div class="table-filters" part="filters"></div>
@@ -1133,6 +1133,17 @@ export const setupAdvancedTable = (component, table, actionbar, pagination, form
 
     heading.innerHTML = `<div class="th__content">${heading.textContent.trim()}</div><span class="th__divider"></span>`;
     heading.setAttribute('data-label', heading.textContent.trim());
+
+
+
+    if(heading.hasAttribute('data-filters') && isStringValidJSON(heading.getAttribute('data-filters'))) {
+
+      console.log('Original Filters:', JSON.parse(heading.getAttribute('data-filters')));
+
+
+      const cleanFilters = cleanFilterValues(JSON.parse(heading.getAttribute('data-filters')));
+      heading.setAttribute('data-filters', JSON.stringify(cleanFilters));
+    }
   });
 
   populateFiltersFromActionbar(component, table, actionbar);
@@ -1160,6 +1171,7 @@ export const setupAdvancedTable = (component, table, actionbar, pagination, form
     btn.addEventListener('click', (event) => {
 
       const heading = event.target.closest('th[data-filters]');
+
       createFilterPopover(component, table, heading, actionbar, pagination);
     });
   });
@@ -1262,40 +1274,6 @@ export const sortViaHeader = (component, table, actionbar, pagination, heading, 
   }
 };
 
-export const populateFilterOptions = (component, table): void => {
-  if (!table) return;
-
-  table.querySelectorAll('th[data-filters]').forEach((heading) => {
-    const filters = JSON.parse(heading.dataset.filters || '[]');
-
-    if (!Array.isArray(filters)) return;
-
-    filters.forEach((filter, index) => {
-      if (!filter || filter.options) return;
-
-      const headingIndex = heading.cellIndex;
-      const uniqueValues = new Set<string>();
-
-      Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
-        const cells = Array.from(row.querySelectorAll('td, th'));
-        const cell = cells[headingIndex];
-
-        if (!cell) return;
-
-        const value = cell.textContent?.replace(/\s+/g, ' ').trim();
-
-        if (value) uniqueValues.add(value);
-      });
-
-      if (uniqueValues.size) {
-        filters[index].options = Array.from(uniqueValues);
-      }
-    });
-
-    heading.dataset.filters = JSON.stringify(filters);
-  });
-};
-
 export const setActionbarEvents = (component, table, actionbar, pagination): void => {
 
   actionbar?.addEventListener('change', (event) => {
@@ -1307,6 +1285,7 @@ export const setActionbarEvents = (component, table, actionbar, pagination): voi
     const input = element.dataset.filters ? element : element.closest('[data-filters]');
 
     const heading = table.querySelector('th[data-label="' + input.dataset.column + '"]');
+
     const filters = JSON.parse(input.dataset.filters);
 
     filters.forEach((filter, index) => {
@@ -1336,6 +1315,171 @@ const populateFiltersFromActionbar = (component, table, actionbar): void => {
 
 };
 
+const cleanFilterValues = (filters): Array<any> => {
+
+  const cleanedFilters = [];
+  filters.forEach((filter) => {
+    let filterValue = filter.value;
+
+    // Make sure this call stays before any other processing of the filter value
+    // as it determines if the filter is a "Does not equal" type based on the leading "-"
+    if(filterValue?.startsWith("-")){
+      filter.operator = 'Does not equal';
+      filterValue = filterValue.slice(1);
+    }
+
+    if(filterValue?.startsWith("[")){
+      filter.operator = 'Between';
+    }
+
+    if (filterValue?.startsWith('"') || filterValue?.startsWith("[") || filterValue?.startsWith("%")) {
+      filterValue = filterValue.slice(1);
+    }
+    if (filterValue?.endsWith('"') || filterValue?.endsWith("]") || filterValue?.endsWith("%")) {
+      filterValue = filterValue.slice(0, -1);
+    }
+
+    filter.value = filterValue;
+    cleanedFilters.push(filter);
+  });
+
+  return cleanedFilters;
+};
+
+/*
+    const parseAppliedFilter = (appliedFilter, field) => {
+      const expression = String(
+        typeof appliedFilter === "object"
+          ? appliedFilter.value ?? ""
+          : appliedFilter
+      ).trim();
+
+      let type = "text";
+
+      if (field.type === "date_date") {
+        type = "date";
+      } else if (field.value_format_name === "gbp_0") {
+        type = "price";
+      }
+
+      const result = (operator, value) => ({
+        operator,
+        type,
+        ...(value !== undefined ? { value } : {})
+      });
+
+      const isNumeric =
+        type === "price" ||
+        /^(number|int|integer|float|decimal|sum|average|count|count_distinct)$/.test(
+          field.type || ""
+        );
+
+
+      if (expression.startsWith('[')) {
+        return result("Between", expression);
+      }
+
+      // Numeric comparisons: >=100, <50, !=10, etc.
+      if (isNumeric) {
+        const match = expression.match(
+          /^(>=|<=|!=|<>|>|<|=)?\s*(-?\d+(?:\.\d+)?)$/
+        );
+
+        if (!match) return result("Equals", expression);
+
+        const operators = {
+          ">=": "Greater than",
+          "<=": "Less than",
+          ">": "Greater than",
+          "<": "Less than",
+          "!=": "Does not equal",
+          "<>": "Does not equal",
+          "=": "Equals"
+        };
+
+        return result(
+          operators[match[1] || "="],
+          match[2]
+        );
+      }
+
+      if (type === "date") {
+        // Preserve date semantics:
+        // Looker's "after" includes the specified date.
+        const match = expression.match(
+          /^(before|after)\s+(\d{4}[-/]\d{2}[-/]\d{2})$/i
+        );
+
+        if (match) {
+          return result(
+            match[1].toLowerCase() === "before"
+              ? "Less than"
+              : "greater_than_or_equal",
+            match[2]
+          );
+        }
+
+        if (/^\d{4}[-/]\d{2}[-/]\d{2}$/.test(expression)) {
+          return result("equals", expression);
+        }
+
+        return result("Equals", expression);
+      }
+
+      // Handle simple text filters.
+      // Leave compound, quoted and escaped expressions untouched.
+      if (/[,\^\\"_]/.test(expression)) return result("equals", expression);
+
+      // Leave special Looker expressions untouched.
+      if (/^-?(NULL|EMPTY)$/i.test(expression)) return result("equals", expression);
+
+      const negative = expression.startsWith("-");
+      const value = negative ? expression.slice(1) : expression;
+
+      const match = value.match(/^(%)?([^%]+?)(%)?$/);
+
+      if (!match) return result("Equals", expression);
+
+      const [, leadingWildcard, text, trailingWildcard] = match;
+
+      if (leadingWildcard && trailingWildcard) {
+        return result(negative ? "not_contains" : "Does not contain", text);
+      }
+
+      if (trailingWildcard) {
+        return result(negative ? "not_starts_with" : "Begins with", text);
+      }
+
+      if (leadingWildcard) {
+        return result(negative ? "not_ends_with" : "Ends with", text);
+      }
+
+      return result(negative ? "not_equals" : "Equals", text);
+    };
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const getInlineFilters = (component, table, actionbar): Array<any> => {
 
   const columnsArray = [];
@@ -1345,10 +1489,17 @@ export const getInlineFilters = (component, table, actionbar): Array<any> => {
     const columnIndex = heading.cellIndex;
 
     const columnName = heading.dataset.label; // TO DO add a fallback for when a name isnt set
+
+    if(heading.dataset.filters === undefined || heading.dataset.filters === null || heading.dataset.filters === '') return;
+
+    //console.log('Heading:', heading, 'Filters:', heading.dataset.filters);
     const filters = JSON.parse(heading.dataset.filters);
 
+    // We need to clean up the filter values due to integration with 3rd parties i.e. Looker, which may add extra characters like quotes around comma-separated values.
+    const cleanedFilters = cleanFilterValues(filters);
+
     // Todo make more robust to check if the column already exists in the array and update it instead of adding a duplicate
-    columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': filters});
+    columnsArray.push({'column' : columnName, 'index': columnIndex, 'filters': cleanedFilters});
   });
 
   return columnsArray;
@@ -1358,34 +1509,73 @@ export const updateHeadingFilters = (heading, dialog): void => {
 
   const filters = JSON.parse(heading.dataset.filters);
 
-  filters.forEach((filter, index) => {
+  const cleanedFilters = cleanFilterValues(filters);
 
-    filters[index].operator = dialog.querySelector(`[name="filter-${index}-operator"]`) ? dialog.querySelector(`[name="filter-${index}-operator"]`).value : null;
+  cleanedFilters.forEach((filter, index) => {
 
-    filters[index].value = dialog.querySelector(`[name="filter-${index}"]`) ? dialog.querySelector(`[name="filter-${index}"]`).value : null;
+    cleanedFilters[index].operator = dialog.querySelector(`[name="filter-${index}-operator"]`) ? dialog.querySelector(`[name="filter-${index}-operator"]`).value : null;
 
-    if(filters[index].operator?.toLowerCase() == 'between'){
-      filters[index].value = `${dialog.querySelector(`[name="filter-${index}"]`).value},${dialog.querySelector(`[name="filter-${index}-2"]`).value}`;
+    cleanedFilters[index].value = dialog.querySelector(`[name="filter-${index}"]`) ? dialog.querySelector(`[name="filter-${index}"]`).value : null;
+
+    if(cleanedFilters[index].operator?.toLowerCase() == 'between'){
+      cleanedFilters[index].value = `${dialog.querySelector(`[name="filter-${index}"]`).value},${dialog.querySelector(`[name="filter-${index}-2"]`).value}`;
     }
   });
 
-  heading.dataset.filters = JSON.stringify(filters);
+  heading.dataset.filters = JSON.stringify(cleanedFilters);
 };
 
 export const resetHeadingFilters = (heading): void => {
 
   const filters = JSON.parse(heading.dataset.originalFilters);
-
-  filters.forEach((filter, index) => {
-    filters[index].value = null;
+  const cleanedFilters = cleanFilterValues(filters);
+  cleanedFilters.forEach((filter, index) => {
+    cleanedFilters[index].value = null;
   });
 
-  heading.dataset.filters = JSON.stringify(filters);
+  heading.dataset.filters = JSON.stringify(cleanedFilters);
+};
+
+
+export const populateFilterOptions = (filter, component, table, heading): void => {
+  if (!table) return;
+
+  if(filter.options && Array.isArray(filter.options) && filter.options.length)
+    return filter.options;
+
+  const filterType = filter.type ?? 'text';
+  if(filterType == 'date') return [];
+
+  const filterOptions = [];
+
+  const headingIndex = heading.cellIndex;
+  const uniqueValues = new Set<string>();
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+    const cells = Array.from(row.querySelectorAll('td, th'));
+    const cell = cells[headingIndex];
+
+    if (!cell) return;
+
+    const value = cell.textContent?.replace(/\s+/g, ' ').trim();
+
+    if (value) uniqueValues.add(value);
+  });
+
+  if (uniqueValues.size) {
+    filterOptions.push(...Array.from(uniqueValues));
+  }
+
+  //console.log(filterOptions);
+  return filterOptions;
+
 };
 
 export const createFilterPopover = (component, table, heading, actionbar, pagination): void => {
 
   const filters = JSON.parse(heading.dataset.filters);
+  const cleanedFilters = cleanFilterValues(filters);
+
   let hasFilterValueSet = false;
 
   if(component.querySelector('.dialog--inline-filter')){
@@ -1403,7 +1593,7 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
 
   Array.from(table.querySelectorAll('th[data-filters]')).forEach((element) => {
     if (element != heading) {
-      element.removeAttribute('style');
+      element.style.removeProperty('anchor-name');
     }
   });
 
@@ -1413,36 +1603,45 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   filtersPopover.style.setProperty('position-anchor', '--filters-button')
   filtersPopover.setAttribute('popover','auto');
 
-  filters.forEach((filter, index) => {
+  cleanedFilters.forEach((filter, index) => {
 
     if(filter.value !== null && filter.value !== undefined && filter.value !== ''){
       hasFilterValueSet = true;
     }
 
-    const filterType = filter.type ?? 'text';
+    let filterType = filter.type ?? 'text';
     let filterOperator = filter.operator ?? 'Contains';
     const filterFieldset = document.createElement("fieldset");
-    const filterOptions = filter.options && Array.isArray(filter.options) && filterType != 'date' ? filter.options : null;
+
+
+    // double check the heading has a data-field-type attribute
+    if(heading.dataset.format) {
+      filterType = heading.dataset.format;
+    }
+
+    // Add the filter options in here if they arent present
+    let filterOptions = populateFilterOptions(filter, component, table, heading);
 
     // #region Create the operators select
     let filterOperators = filter.operators ?? ['Contains','Does not contain', 'Equals', 'Does not equal', 'Begins with', 'Ends with'];
 
-    if(filterType == 'date' && !filter.operators){
+    if(filterType == 'date'){
       filterOperators = ['Equals', 'Does not equal','Before','After','Between'];
       filterOperator = filter.operator ?? 'Equals';
+      filterOptions = [];
     }
 
-    if(filterType == 'number' && !filter.operators){
+    if(filterType == 'number'){
       filterOperators = ['Equals', 'Does not equal','Less than','Greater than','Between'];
       filterOperator = filter.operator ?? 'Equals';
     }
 
-    if(filterType == 'price' && !filter.operators){
+    if(filterType == 'price'){
       filterOperators = ['Equals', 'Does not equal','Less than','Greater than','Between'];
       filterOperator = filter.operator ?? 'Equals';
     }
 
-    if(filterType == 'select' && !filter.operators)
+    if(filterType == 'select')
       filterOperators = ['Equals'];
 
     if(filterOperators && Array.isArray(filterOperators) && filterOperators.length == 1 && filterOperators[0].toLowerCase() == 'equals'){
@@ -1471,11 +1670,17 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
     if(filterType != 'select' ){
 
       let icon = filterType == 'date' ? 'fa-regular fa-calendar-days' : 'fa-solid fa-magnifying-glass';
+      let prefixIcon = '';
 
       if(filterType == 'number'){
         icon = '';
       }
+      else if(filterType == 'price'){
+        icon = '';
+        prefixIcon = 'fa-regular fa-sterling-sign';
+      }
 
+      let inputType = filterType;
       let filterValue = filter.value;
       let filterValue2 = '';
 
@@ -1484,12 +1689,20 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         filterValue2 = filter.value.split(',')[1] ?? '';
       }
 
+      if(filterType == 'price'){
+        // Hide the pound sign for price inputs as its in the icon
+        filterValue = filterValue?.replace('£','');
+        filterValue2 = filterValue2?.replace('£','');
+        inputType = 'number';
+      }
+
       filterFieldset.insertAdjacentHTML('beforeend',
         /* HTML */`
         <label class="mb-0" data-filter-label>
           <span class="visually-hidden">Filter</span>
           <span>
-          <input type="${filterType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
+          <input type="${inputType}" name="filter-${index}" value="${filterValue ?? ''}" ${filterOptions.length ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
@@ -1500,7 +1713,8 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
         <label class="mb-0" data-filter-label>
           <span class="visually-hidden">Filter</span>
           <span>
-          <input type="${filterType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
+          ${prefixIcon ? `<span class="prefix ${prefixIcon}"></span>` : ''}
+          <input type="${inputType}" name="filter-${index}-2" value="${filterValue2 ?? ''}" ${filterOptions.length ? `list="filter-${index}-options"` : ''}  autofocus autocomplete="off" />
           ${icon ? `<span class="suffix ${icon}"></span>` : ''}
           </span>
         </label>`);
@@ -1514,10 +1728,18 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
 
       filterOptions.forEach(option => {
 
+        let optionDisplay = option;
+
         if(filterType == 'number'){
-          option = String(convertToNumber(option));
+          optionDisplay = String(convertToNumber(option));
         }
-        filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${option.trim()}</option>`;
+        else if(filterType == 'price'){
+          // Hide the pound sign for price inputs as its in the icon
+          optionDisplay = option?.replace('£','');
+          optionDisplay = optionDisplay?.replaceAll(',','');
+        }
+
+        filterOptionsHTML += `<option ${ option.trim() == filter.value ? 'selected="selected"' : ''}>${optionDisplay.trim()}</option>`;
       });
 
       if(filterType != 'select')
@@ -1604,13 +1826,14 @@ export const createFilterPopover = (component, table, heading, actionbar, pagina
   });
 };
 
-export const filterAdvancedTable = (component, table, actionbar, pagination): void => {
+export const filterAdvancedTable = (component, table, actionbar, pagination, columns: Array<any> | undefined = undefined, dispatchEvent = true): void => {
 
-  const columns = getInlineFilters(component, table, actionbar);
+  const columnFilters = columns ?? getInlineFilters(component, table, actionbar);
+
+  console.log('Column Filters:', columnFilters);
   const appliedFilters = [];
+  const filtersSet = new Set();
   table.classList.remove('table--filtered');
-
-  if(columns.length == 0) return;
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
 
@@ -1619,9 +1842,16 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
     row.classList.remove('filtered');
   });
 
-  columns.forEach((column) => {
+  if(columnFilters.length == 0) return;
 
-    const columnIndex = column.index;
+  columnFilters.forEach((column) => {
+
+    // Supplied filters may come from a table with extra selection/expansion columns.
+    const heading = columns
+      ? Array.from(table.querySelectorAll('thead th')).find((heading) => heading.getAttribute('data-label') === column.column)
+      : null;
+    if (columns && !heading) return;
+    const columnIndex = heading ? heading.cellIndex : column.index;
     const columnName = column.column;
 
     column.filters.forEach((filter) => {
@@ -1646,6 +1876,7 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
       }
 
       appliedFilters.push(columnName);
+      filtersSet.add({ 'column': columnName, 'operator': filterOperator, 'type': filterType, 'value': filterValue });
 
       table.classList.add('table--filtered');
       table.querySelectorAll(`tbody tr td:nth-child(${columnIndex + 1})`).forEach((cell) => {
@@ -1729,9 +1960,21 @@ export const filterAdvancedTable = (component, table, actionbar, pagination): vo
   });
 
 
-  setFilterIndicator(component, table, actionbar, appliedFilters);
-  createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
-  paginateRows(component, table, pagination);
+
+  if(dispatchEvent) {
+
+    setFilterIndicator(component, table, actionbar, appliedFilters);
+    createAppliedFilters(component, table, actionbar, pagination, appliedFilters);
+    paginateRows(component, table, pagination);
+
+    const submitEvent = new CustomEvent('table-filtered', {
+      detail: {
+        filters: Array.from(filtersSet),
+        rowCount: table?.querySelectorAll('tbody tr:not(.filtered)').length || 0
+      }
+    });
+    component.dispatchEvent(submitEvent);
+  }
 };
 
 export const setFilterIndicator = (component, table, actionbar, appliedFilters): void => {
@@ -1830,7 +2073,8 @@ export const removeAppliedFilter = (component, table, actionbar, pagination, fil
       checkbox.checked = false;
     });
 
-    input.querySelector(':is([type="checkbox"], [type="radio"])[value=""]')?.checked = true;
+    const emptyOption = input.querySelector(':is([type="checkbox"], [type="radio"])[value=""]');
+    if (emptyOption) emptyOption.checked = true;
   }
 
   filterAdvancedTable(component, table, actionbar, pagination);
