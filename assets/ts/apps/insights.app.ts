@@ -239,6 +239,7 @@ class iamAppInsights extends HTMLElement {
     });
   };
 
+
   createMapContent = (): string => {
 
     // Load the table from the shadow root so the table formatting is correct and CTA's created
@@ -266,6 +267,7 @@ class iamAppInsights extends HTMLElement {
     const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
     const countElement = this.shadowRoot?.querySelector('#count');
     const viewControls = this.shadowRoot?.querySelector('#view-controls');
+
 
 
     // #region fix original table

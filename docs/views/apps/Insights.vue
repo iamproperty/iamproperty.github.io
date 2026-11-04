@@ -118,11 +118,11 @@ const insightAction = (event) => {
               <thead>
 
                 <tr>
-                  <th data-filters='[{"type":"text"}]' data-sort>Property</th>
+                  <th data-filters='[{"type":"text", "operator": "equals", "value": "59 Glen Street, NE68 3LS"}]' data-sort>Property</th>
                   <th data-filters='[{"type":"date"}]' data-sort data-format="date">Date listed</th>
                   <th data-filters='[{"type":"price"}]' data-sort data-format="price">Current list price</th>
                   <th data-filters data-sort>Branch</th>
-                  <th data-filters='[{"type": "number", "operator": "equals", "value": "11"}]' data-sort>Weeks on market</th>
+                  <th data-filters='[{"type": "number", "operator": "equals", "value": "[10,200]"}]' data-sort>Weeks on market</th>
                   <th data-filters data-sort>Latest fall through</th>
                   <th data-filters data-sort>Latest price reduction</th>
                   <th data-filters data-sort>Price reduction %</th>
@@ -131,7 +131,7 @@ const insightAction = (event) => {
               </thead>
               <tbody>
                 <tr data-latitude="51.46702877541017" data-longitude="-0.12037120753760178" data-criteria-match="full" data-branch-id="385440" data-udprn="22900034" data-umrrn="230">
-                  <td>59 Glen Street, NE68 3LS</td>
+                  <td>56 Glen Street, NE68 3LS</td>
                   <td>2026-08-05</td>
                   <td>250000</td>
                   <td>Heaton</td>

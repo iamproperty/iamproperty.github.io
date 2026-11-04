@@ -50,6 +50,17 @@ const question = ref('');
 const search = ref('');
 // #endregion
 
+// #region looker filters
+
+//const lookerFilters = ref<Record<string, unknown>>({});
+const filterCausingNoReload = ref<{ column: string, operator: string, value: string } | null>(null);
+const cachedFilters = ref<{ column: string, operator: string, value: string }[]>([]);
+const filterAliases = ref<Record<string, string>>({
+  "Weeks on Market": "Weeks on the Market",
+});
+
+// #endregion
+
 // #region insight panel
 const componentHeight = ref('100vh');
 
@@ -58,7 +69,6 @@ const insightActions = ref([]);
 const insightProperties = ref({});
 const insightTitle = ref('');
 const isLoading = ref(true);
-const lookerFilters = ref<Record<string, unknown>>({});
 
 let insightIframeSource: MessageEventSource | null = null;
 const postInsightCompleted = (action: string): void => {
@@ -267,48 +277,131 @@ onMounted(async () => {
 
     if (message.type == "table-filtered") {
 
-      console.log(message.detail?.filters);
-      console.log(message.detail?.rowCount);
-
-      const iframe = document.querySelector("#looker-dashboard");
+      let filters: Array<{ column: string, operator: string, value: string }> = [];
 
 
-      const messagefilters = message.detail?.filters || [];
+      message.detail?.filters.forEach((filter: { column: string, operator: string, value: string }) => {
 
-      const filterOperator = (operator) => {
+        let filterValue = filter.value;
 
-        switch(operator) {
-          case 'equals':
-            return '';
-          default:
-            return operator;
+        // first character is % them remove it
+        if (filterValue?.startsWith('%')) {
+          filterValue = filterValue.slice(1);
         }
+        if (filterValue?.startsWith('-')) {
+          filterValue = filterValue.slice(1);
+        }
+        if (filterValue?.endsWith('%')) {
+          filterValue = filterValue.slice(0, -1);
+        }
+
+        filterValue = filterValue?.trim();
+
+
+
+        // Correct filter names that dont match up with the display name
+        if (filterAliases.value[filter.column]) {
+          filter.column = filterAliases.value[filter.column];
+        }
+
+        console.log('Processing filter:', filter);
+
+        // Make sure string is kept intacked if it contains commas
+        switch (filter.operator.toLowerCase()) {
+          case "equals":
+          case "does not equal":
+              if(filterValue.includes(',')) {
+                filterValue = `"${filterValue}"`;
+              }
+            break;
+        }
+
+        switch (filter.operator.toLowerCase()) {
+          case "contains":
+            filterValue = `%${filterValue}%`;
+            break;
+          case "does not contain":
+            filterValue = `-%${filterValue}%`;
+            break;
+          case "equals":
+            filterValue = `${filterValue}`;
+            break;
+          case "does not equal":
+            filterValue = `-${filterValue}`;
+            break;
+          case "begins with":
+            filterValue = `${filterValue}%`;
+            break;
+          case "ends with":
+            filterValue = `%${filterValue}`;
+            break;
+          case "less than":
+            filterValue = `<${parseFloat(filterValue)}`;
+            break;
+          case "greater than":
+            filterValue = `>${parseFloat(filterValue)}`;
+            break;
+          case "between":
+            filterValue = `[${filterValue}]`; // You might want to format this differently depending on how "between" is represented
+            break;
+        }
+
+        filters.push({ column: filter.column, operator: filter.operator, value: filterValue });
+      });
+
+      let shouldLookerFilters = false;
+
+      // if reload true then reload the dashboard
+      if (message.detail?.reload) {
+        shouldLookerFilters = true;
+
+        // See what the new filters are, will hopefully only be one
+        const newFilters = filters.filter(f => !cachedFilters.value.some(cf => cf.column === f.column && cf.operator === f.operator && cf.value === f.value));
+
+        // Save the first new filter as the one causing no reload, i.e. changing the filter functionality
+        filterCausingNoReload.value = newFilters[0];
+      }
+      else if(!filters.find(f => f.column === filterCausingNoReload.value?.column && f.operator === filterCausingNoReload.value?.operator && f.value === filterCausingNoReload.value?.value)) {
+        // Do something if the filter causing no reload is not present in the filters
+        console.log('Filter causing no reload is not present:', filterCausingNoReload.value);
+
+        shouldLookerFilters = true;
+
+        if(!filters.length) {
+          filters = [{ column: filterCausingNoReload.value.column, operator: filterCausingNoReload.value.operator, value: "" }];
+        }
+
+        filterCausingNoReload.value = null;
       }
 
-      const filters = messagefilters.map(filter => {
+      if (shouldLookerFilters) {
 
-        let column = filter.column.replaceAll(' ','+');
-        let operator = filterOperator(filter.operator);
-        let value = filter.value.replaceAll(' ','+');
+        const filtersString = filters.map(f => `${f.column}=${encodeURIComponent(f.value)}`).join('&');
 
-        return `${column}=${operator}"${value}"`;
+        const iframe = document.querySelector("#looker-dashboard");
+        iframe.setAttribute('src', `${iframeSrc.value}&${filtersString.replace(/ /g,'+')}`);
+
+        /* #region Hube code only
+        const filterObject = filters.reduce((acc, f) => {
+          acc[f.column] = f.value;
+          return acc;
+        }, {} as Record<string, string>);
+        dashboardConnection?.updateFilters(filterObject);
+        dashboardConnection?.run();
+        /* #endregion */
       }
-      ).join('&');
 
-      console.log(filters);
 
-      console.log(`${iframeSrc.value}&${encodeURI(filters)}`);
-
-      iframe.setAttribute('src', `${iframeSrc.value}&${encodeURI(filters)}`);
+      cachedFilters.value = [ ...filters ];
     }
 
-    console.log(message);
+    //console.log(message);
 
     if(message.type == "dashboard:run:complete") {
 
       const layouts = message.dashboard?.options?.layouts;
 
-      console.log(layouts);
+      //console.log(layouts);
     }
   });
 
@@ -335,7 +428,7 @@ onMounted(async () => {
   );
 
   const urlParams = new URLSearchParams(window.location.search);
-  console.log(urlParams.has('question')); // true
+  //console.log(urlParams.has('question')); // true
 
   if (urlParams.has('question')) {
     question.value = urlParams.get('question');
