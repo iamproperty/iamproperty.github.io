@@ -1,10 +1,10 @@
 import Cookies from '../../../node_modules/js-cookie/dist/js.cookie.mjs';
 
 export const filterList = (component, search): void => {
-  // If search empty then hide the dropdown options still loaded
+  // An empty search restores all options that were hidden by filtering.
   if (!search.value) {
-    Array.from(component.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
-      label.setAttribute('slot', 'notmatched');
+    Array.from(component.querySelectorAll(`label[slot="notmatched"]`)).forEach((label) => {
+      label.removeAttribute('slot');
     });
 
     return;
