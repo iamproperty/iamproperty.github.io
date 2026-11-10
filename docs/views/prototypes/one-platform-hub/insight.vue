@@ -216,7 +216,7 @@ onMounted(async () => {
             detail: {
               class: "inside-hub",
               ...JSON.parse(JSON.stringify(insightConfig)),
-              ...JSON.parse(JSON.stringify(tableCustomisation))
+              customisation: tableCustomisation
             }
           },
           { targetOrigin: '*' }
