@@ -53,6 +53,11 @@ class iamTableCustomisation extends HTMLElement {
 
     const titleElement = this.shadowRoot.querySelector('#title');
     const dialog = this.shadowRoot.querySelector('dialog');
+    dialog.addEventListener('toggle', () => {
+      this.shadowRoot.querySelector('#customisation-button').setAttribute(
+        'aria-expanded', dialog.matches(':popover-open') ? 'true' : 'false'
+      );
+    });
     const cancelButton = this.shadowRoot.querySelector('#cancel-button');
     const resetButton = this.shadowRoot.querySelector('#reset-button');
     const saveButton = this.shadowRoot.querySelector('#save-button');
