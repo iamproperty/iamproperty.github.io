@@ -374,7 +374,7 @@ class iamTableCustomisation extends HTMLElement {
       if(this.hasAttribute('data-customisation')) {
         this.setAttribute('data-customisation', JSON.stringify(newCustomisation));
       }
-      else {
+      if(this.hasAttribute('data-save')) {
         localStorage.setItem(localStorageKey, JSON.stringify(newCustomisation));
       }
 
