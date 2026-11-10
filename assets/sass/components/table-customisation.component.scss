@@ -68,6 +68,11 @@ label {
     padding-left: 1rem;
   }
 
+  .customisation-option :is(.btn-up, .btn-down) {
+    text-indent: -300%;
+    overflow: hidden;
+  }
+
   .customisation-option .btn-up {
 
     margin-left: auto;

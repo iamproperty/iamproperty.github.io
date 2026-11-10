@@ -583,13 +583,10 @@ iam-table-advanced::part(table-filter):after {
 }
 // #endregion
 
-iam-table-customisation .customisation-option [class*="fa-"] {
+iam-table-customisation [class*="fa-"] {
   margin-right: 0.2em;
-
-  text-indent: -300%;
-  overflow: hidden;
 }
-iam-table-customisation .customisation-option [class*="fa-"]:before {
+iam-table-customisation [class*="fa-"]:before {
   height: 1.2em!important;
-  width: 1.2em!important;
+  width: 1.2em;
 }
