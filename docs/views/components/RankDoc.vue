@@ -166,8 +166,7 @@
         a gold medal.
       </li>
       <li>
-        <strong>Icon (optional):</strong> A numerical indication of rank, or, if ranked first, an icon showing
-        a gold medal.
+        <strong>Icon (optional):</strong> An icon representing the ranked item.
       </li>
       <li><strong>Item title:</strong> The title of the ranked item.</li>
       <li><strong>Item subtitle (optional):</strong> The subtitle of the ranked item.</li>
