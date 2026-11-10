@@ -972,6 +972,10 @@
               <td>When added, if a highlighted item is about to go out of view in a scrollable ranking list, it will stick to the top of the list</td>
             </tr>
             <tr>
+              <th>.hide-position (on a ranking row)</th>
+              <td>Hides the numerical or medal position for that item</td>
+            </tr>
+            <tr>
               <th>.hide-progress</th>
               <td>Hides the progress bar of each item in the leaderboard</td>
             </tr>
