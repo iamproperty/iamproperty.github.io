@@ -110,6 +110,7 @@ class iamTableCustomisation extends HTMLElement {
       // Add customisation data for each column based on the headers
       const columns = Array.from(headers).map(header => {
 
+        console.log(customisation);
         const columnCustomisation = customisation.find(col => col.label === header.getAttribute('data-label')) || {};
 
         const isVisible = columnCustomisation.isVisible !== undefined ? columnCustomisation.isVisible : true; // True by default if not specified
