@@ -10,9 +10,11 @@ $rows-per-page: 20;
 $grid-utility-count: 10;
 
 $breakpoints: (
-  sm: 36em,
-  /* 576 */ md: 62em /* 992 */,
+  sm: 36em, /* 576 */
+  md: 62em /* 992 */,
+  lg: 90em /* 1280 */
 );
+
 
 /* #region grid mixins */
 @mixin grid-utilities($br: '') {
@@ -191,6 +193,9 @@ $breakpoints: (
   }
   @media screen and (min-width: 62em) {
     @include grid-columns(#{'md-'});
+  }
+  @media screen and (min-width: 105em) {
+    @include grid-columns(#{'lg-'});
   }
   /* #endregion */
 

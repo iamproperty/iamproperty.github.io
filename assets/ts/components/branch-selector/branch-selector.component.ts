@@ -109,6 +109,21 @@ class iamBranchSelector extends HTMLElement {
     // Make the component focusable
 
     this.addEventListener('keydown', (event) => {
+
+      // #region enter button
+      if (event.key === 'Enter' && !event.target.matches('iam-branch-selector')) {
+        event.preventDefault();
+
+        if(event.target.matches('input')) {
+
+          event.target.click();
+          event.target.dispatchEvent(new Event('change', { bubbles: true }));
+          menuButton?.click();
+        }
+      }
+
+      // #endregion
+      // #region up and down navigation
       if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
         return;
       }
@@ -133,6 +148,7 @@ class iamBranchSelector extends HTMLElement {
 
       inputs[nextIndex].focus();
     });
+    // #endregion
   }
 }
 

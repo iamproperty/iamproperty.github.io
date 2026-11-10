@@ -1,5 +1,6 @@
 import search, { filterDatalist, datalistSelectOption } from '../../modules/search';
 
+
 const getIntegerAttribute = (element: HTMLElement, attributeName: string, fallback: number): number => {
   const value = Number.parseInt(element.getAttribute(attributeName) || '', 10);
 
@@ -94,7 +95,8 @@ class iamSearch extends HTMLElement {
     datalistElement.setAttribute('slot', 'datalist');
 
     datalistElement.querySelectorAll<HTMLOptionElement>('option').forEach((option) => {
-      option.setAttribute('tabindex', '0');
+
+      option.setAttribute('tabindex', '1');
 
       if (option.textContent == '' && option.hasAttribute('value')) {
         option.textContent = option.getAttribute('value');
@@ -186,6 +188,7 @@ class iamSearch extends HTMLElement {
     // #region keyboard navigation
 
     this.addEventListener('keydown', (event) => {
+      /*
       switch (event.key) {
         case 'ArrowDown':
           //event.stopPropagation();
@@ -197,6 +200,36 @@ class iamSearch extends HTMLElement {
 
           break;
       }
+*/
+      // #region up and down navigation
+      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+        return;
+      }
+
+      const options = Array.from(this.querySelectorAll('datalist option'));
+
+      if (!options.length) {
+        return;
+      }
+
+      const direction = event.key === 'ArrowDown' ? 1 : -1;
+      const currentIndex = options.indexOf(document.activeElement as HTMLOptionElement);
+      let nextIndex = currentIndex === -1
+        ? direction === 1 ? 0 : options.length - 1
+        : (currentIndex + direction + options.length) % options.length;
+
+      if(event.target.matches('input')) {
+        nextIndex = 0;
+
+        this.classList.add('js-force-show-datalist');
+      }
+
+      options[nextIndex].focus();
+
+      event.preventDefault();
+    // #endregion
+
+
 
       /*
       if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary')) {

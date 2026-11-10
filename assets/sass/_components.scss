@@ -8,6 +8,7 @@
 @use 'components/carousel.config';
 @use 'components/multi-step-modal.global';
 
+@use 'components/map.preload';
 @use 'components/inline-edit.preload';
 @use 'components/charts.config';
 @use 'components/menu.global';

@@ -51,7 +51,19 @@
   /* #endregion */
 
   /* #region Dropdown */
-  :is(.dropdown, datalist, [popover]),
+  :is(.dropdown, datalist, [popover]) {
+    border-top: none;
+    border: none !important;
+
+    font-size: 1rem;
+    background: var(--dropdown-bg);
+    margin-block: var(--dropdown-margin-block);
+    padding: var(--dropdown-padding);
+    border-radius: var(--dropdown-border-radius);
+    box-shadow: var(--dropdown-box-shadow);
+  }
+  
+  /* This ruleblock shoult match the :is(.dropdown, datalist, [popover]) ruleset above, is seperate due to a firefow bug */
   select::picker(select) {
     border-top: none;
     border: none !important;

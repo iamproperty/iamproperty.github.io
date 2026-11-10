@@ -1,36 +1,183 @@
 <script lang="ts" setup>
+// #region imports
 import { createApp, ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
+// #endregion
 
-
+// #region Load design system components
 import STDNav from '@/components/STDNav/STDNav.vue';
 import Nav from '@/components/Nav/Nav.vue';
+import Modal from '@/components/Modal/Modal.vue';
 
+import Notification from '@/components/Notification/Notification.vue';
+
+import Header from '@/components/Header/Header.vue';
+// #endregion
+
+// #region load vue components
 
 import Questions from './components/Questions.vue';
-import Properties from './components/Properties.vue';
+import Task from './components/Task.vue';
+// #endregion
 
-import { useRoute } from 'vue-router';
+// #region types
+type InsightTableRow = { columns: Record<string, unknown> };
+// #endregion
 
+// #region user
 
-const iframeTable = ref();
+/*
+const checkCRMAccess = () => {
 
-const panel = ref();
-const componentHeight = ref('100vh');
+  return true;
+};
+*/
 
-const question = ref('');
-const search = ref('');
-
-const questionTitle = ref();
-
+// #endregion
+// #region load the selected dashboard and embed it in the page
 
 const route = useRoute();
-const insight = ref(route.params.insight);
 
-const insightTitle = ref('');
 const dashboards = ref([]);
 
+const insight = ref(route.params.insight);
+
+const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/199?theme=hub_embed');
+// #endregion
+
+// #region question panel
+const question = ref('');
+const search = ref('');
+// #endregion
+
+// #region looker filters
+
+//const lookerFilters = ref<Record<string, unknown>>({});
+const filterCausingNoReload = ref<{ column: string, operator: string, value: string } | null>(null);
+const cachedFilters = ref<{ column: string, operator: string, value: string }[]>([]);
+const filterAliases = ref<Record<string, string>>({
+  "Weeks on Market": "Weeks on the Market",
+});
+
+// #endregion
+
+// #region insight panel
+const componentHeight = ref('100vh');
+
+const insightSlug = ref('');
 const insightActions = ref([]);
-const insightCriteriaMatch = ref('');
+const insightProperties = ref({});
+const insightTitle = ref('');
+const isLoading = ref(true);
+
+let insightIframeSource: MessageEventSource | null = null;
+const postInsightCompleted = (action: string): void => {
+
+  if(insightIframeSource && insightIframeSource.postMessage) {
+    insightIframeSource.postMessage(
+      {
+        type: "insight-action-completed",
+        detail: {
+          action: action,
+          result: {
+            success: true,
+            message: 'Action completed successfully'
+          }
+        }
+      },
+      { targetOrigin: '*' }
+    );
+  }
+};
+
+const getInsightActions = (insightSlug: string): Record<string, unknown>[] => {
+
+  return [
+    {
+      "label": "Create Task",
+      "action": "create-task"
+    },
+    {
+      "label": "Create Print Campaign",
+      "action": "create-print-campaign"
+    },
+    {
+      "label": "Export table data",
+      "action": "export-table-data"
+    }
+  ];
+};
+
+const getInsightProperties = (insightSlug: string): Record<string, unknown> => {
+
+  return {
+    "class": "inside-hub",
+    "title-column": "Property",
+    "match-criteria-column": "criteria-match",
+    "branch-column": "Branch",
+    "counter-text": "Properties most likely to switch",
+    "cta-url-structure": "https://my.eco.iamproperty.group/iamproperty-one/login?return=/DataServices/PropertyProfile/:UDPRN/:UMRRN",
+    "cta-text": "View property"
+  };
+};
+// #endregion
+
+// #region actions
+const tasks = ref<Record<string, unknown>[]>([]);
+const addTaskDialog = ref<HTMLDialogElement | null>(null);
+
+const currentTaskIndex = ref(0);
+const inlineAddedTask = ref({});
+const addedTask = ref({});
+const actionStatus = ref('danger');
+const printCampaignCreated = ref(false);
+
+const exportTableData = (data: InsightTableRow[]): void => {
+  if (!data.length) return;
+
+  const escapeCSV = (value: unknown): string => {
+    const text = String(value ?? '');
+    return `"${text.replace(/"/g, '""')}"`;
+  };
+
+  const headers = Object.keys(data[0].columns);
+
+  const csvData = [
+    headers.map(escapeCSV).join(','),
+    ...data.map((row) =>
+      headers.map((header) => escapeCSV(row.columns[header])).join(',')
+    ),
+  ];
+
+  const csvString = csvData.join('\r\n');
+
+  // UTF-8 BOM helps Excel recognise the encoding.
+  const CSVFile = new Blob(['\uFEFF', csvString], {
+    type: 'text/csv;charset=utf-8;',
+  });
+
+  const tempLink = document.createElement('a');
+  const url = window.URL.createObjectURL(CSVFile);
+
+  tempLink.download = 'export.csv';
+  tempLink.href = url;
+  tempLink.style.display = 'none';
+
+  document.body.appendChild(tempLink);
+  tempLink.click();
+  tempLink.remove();
+
+  // Release the temporary URL after the download starts.
+  window.setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+};
+// #endregion
+
+
+
+
+
+
+//const iframeSrc = ref('/properties-insight.html');
 
 
 
@@ -45,33 +192,22 @@ onMounted(async () => {
 
   window.addEventListener("message", (event) => {
 
-    console.log(event.source);
-
-    if (event.origin !== "https://iampropertypbl.cloud.looker.com") {
-      return;
-    }
-
-    const message = event.data;
-
-    console.log(message);
-    console.log(iframeTable.value.contentWindow.document.body.querySelector('.json-loader'));
-  });
-
-  window.addEventListener("message", (event) => {
-
     const message = event.data;
 
     if (message.type == "component-loaded") {
 
-      const panelHeight = questionTitle.value.offsetHeight + message.detail.height + 20 + 30;
-      componentHeight.value = `${panelHeight}px`;
-
+      // To do change depending on the specific insight being loaded
       const insightConfig = {
-        actions: insightActions.value,
-        criteria: insightCriteriaMatch.value
+        "actions": getInsightActions(insightSlug.value),
+        "properties": getInsightProperties(insightSlug.value)
       };
 
-      if(event && event.source && event.source.postMessage) {
+      setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
+        isLoading.value = false;
+      }, 1000);
+
+
+      if (event && event.source) {
         event.source.postMessage(
           {
             type: "top-window-details",
@@ -80,40 +216,219 @@ onMounted(async () => {
               ...JSON.parse(JSON.stringify(insightConfig))
             }
           },
-          "*"
+          { targetOrigin: '*' }
         );
       }
+    }
+
+    if (message.type == "update-height") {
+
+      const panelHeight = message.detail.height;
+      componentHeight.value = `calc(${panelHeight}px + 3.5rem + 50px)`; // add 3.5rem to account for the question title height
     }
 
     if (message.type == "insight-action") {
 
       // Do the action and pass back the result to the iframe
-      if(event && event.source && event.source.postMessage) {
-        setTimeout(() => {
+      if(event && event.source) {
 
-          event.source.postMessage(
-            {
-              type: "insight-action-completed",
-              detail: {
-                action: message.detail.action,
-                properties: message.detail.properties,
-                result: {
-                  success: true,
-                  message: 'Action completed successfully'
-                }
-              }
-            },
-            "*"
-          );
-        }, 1000);
+        insightIframeSource = event.source; // cache the event source for later use so we can post back the result of the action at a later time i.e. after a fetch request has completed
+
+        if(message.detail.action === 'export-table-data') {
+          exportTableData(message.detail.properties);
+          setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
+            postInsightCompleted(message.detail.action);
+          }, 1000);
+        }
+        else if(message.detail.action === 'create-print-campaign') {
+
+          printCampaignCreated.value = true;
+          //actionStatus.value = 'success';
+          // TODO: Create print campaign in CRM via API and return the result to the iframe
+          // Question: What is the action, open up a new page? in a new tab?
+          setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
+            postInsightCompleted(message.detail.action);
+          }, 1000);
+
+          setTimeout(() => {
+            printCampaignCreated.value = false;
+            actionStatus.value = 'danger';
+          }, 5000); // reset the notification after 5 seconds
+        }
+        else if(message.detail.action === 'create-task') {
+
+          currentTaskIndex.value = 0;
+          tasks.value = [...message.detail.properties];
+          inlineAddedTask.value = {};
+          addedTask.value = {};
+          //actionStatus.value = 'success';
+          addTaskDialog.value?.showModal();
+
+          setTimeout(() => {
+            addedTask.value = {};
+            actionStatus.value = 'danger';
+          }, 5000); // reset the notification after 5 seconds
+        }
+
       }
 
+    }
+
+
+    if (message.type == "table-filtered") {
+
+      let filters: Array<{ column: string, operator: string, value: string }> = [];
+
+
+      message.detail?.filters.forEach((filter: { column: string, operator: string, value: string }) => {
+
+        let filterValue = filter.value;
+
+        // first character is % them remove it
+        if (filterValue?.startsWith('%')) {
+          filterValue = filterValue.slice(1);
+        }
+        if (filterValue?.startsWith('-')) {
+          filterValue = filterValue.slice(1);
+        }
+        if (filterValue?.endsWith('%')) {
+          filterValue = filterValue.slice(0, -1);
+        }
+
+        filterValue = filterValue?.trim();
+
+
+
+        // Correct filter names that dont match up with the display name
+        if (filterAliases.value[filter.column]) {
+          filter.column = filterAliases.value[filter.column];
+        }
+
+        console.log('Processing filter:', filter);
+
+        // Make sure string is kept intacked if it contains commas
+        switch (filter.operator.toLowerCase()) {
+          case "equals":
+          case "does not equal":
+              if(filterValue.includes(',')) {
+                filterValue = `"${filterValue}"`;
+              }
+            break;
+        }
+
+        switch (filter.operator.toLowerCase()) {
+          case "contains":
+            filterValue = `%${filterValue}%`;
+            break;
+          case "does not contain":
+            filterValue = `-%${filterValue}%`;
+            break;
+          case "equals":
+            filterValue = `${filterValue}`;
+            break;
+          case "does not equal":
+            filterValue = `-${filterValue}`;
+            break;
+          case "begins with":
+            filterValue = `${filterValue}%`;
+            break;
+          case "ends with":
+            filterValue = `%${filterValue}`;
+            break;
+          case "less than":
+            filterValue = `<${parseFloat(filterValue)}`;
+            break;
+          case "greater than":
+            filterValue = `>${parseFloat(filterValue)}`;
+            break;
+          case "between":
+            filterValue = `[${filterValue}]`; // You might want to format this differently depending on how "between" is represented
+            break;
+        }
+
+        filters.push({ column: filter.column, operator: filter.operator, value: filterValue });
+      });
+
+      let shouldLookerFilters = false;
+
+      // if reload true then reload the dashboard
+      if (message.detail?.reload) {
+        shouldLookerFilters = true;
+
+        // See what the new filters are, will hopefully only be one
+        const newFilters = filters.filter(f => !cachedFilters.value.some(cf => cf.column === f.column && cf.operator === f.operator && cf.value === f.value));
+
+        // Save the first new filter as the one causing no reload, i.e. changing the filter functionality
+        filterCausingNoReload.value = newFilters[0];
+      }
+      else if(!filters.find(f => f.column === filterCausingNoReload.value?.column && f.operator === filterCausingNoReload.value?.operator && f.value === filterCausingNoReload.value?.value)) {
+        // Do something if the filter causing no reload is not present in the filters
+        console.log('Filter causing no reload is not present:', filterCausingNoReload.value);
+
+        shouldLookerFilters = true;
+
+        if(!filters.length) {
+          filters = [{ column: filterCausingNoReload.value.column, operator: filterCausingNoReload.value.operator, value: "" }];
+        }
+
+        filterCausingNoReload.value = null;
+      }
+
+      if (shouldLookerFilters) {
+
+        const filtersString = filters.map(f => `${f.column}=${encodeURIComponent(f.value)}`).join('&');
+
+        const iframe = document.querySelector("#looker-dashboard");
+        iframe.setAttribute('src', `${iframeSrc.value}&${filtersString.replace(/ /g,'+')}`);
+
+        /* #region Hube code only
+        const filterObject = filters.reduce((acc, f) => {
+          acc[f.column] = f.value;
+          return acc;
+        }, {} as Record<string, string>);
+        dashboardConnection?.updateFilters(filterObject);
+        dashboardConnection?.run();
+        /* #endregion */
+      }
+
+
+      cachedFilters.value = [ ...filters ];
+    }
+
+    //console.log(message);
+
+    if(message.type == "dashboard:run:complete") {
+
+      const layouts = message.dashboard?.options?.layouts;
+
+      //console.log(layouts);
     }
   });
 
 
+  const iframe = document.querySelector("#looker-dashboard");
+
+  iframe.contentWindow.postMessage(
+    JSON.stringify({
+      type: "dashboard:options:set",
+      layouts: [
+        {
+          id: "YOUR_LAYOUT_ID",
+          dashboard_layout_components: [
+            {
+              id: "YOUR_LAYOUT_COMPONENT_ID",
+              dashboard_element_id: "YOUR_TILE_ID",
+              height: 12 // Approximately 600px for newspaper layout
+            }
+          ]
+        }
+      ]
+    }),
+    "https://your-instance.looker.com"
+  );
+
   const urlParams = new URLSearchParams(window.location.search);
-  console.log(urlParams.has('question')); // true
+  //console.log(urlParams.has('question')); // true
 
   if (urlParams.has('question')) {
     question.value = urlParams.get('question');
@@ -139,25 +454,14 @@ onMounted(async () => {
   insightTitle.value = selectedDashboard?.iframeTitle ?? '';
   search.value = selectedDashboard?.suggestionLabel ?? '';
 
+  insightSlug.value = selectedDashboard?.slug ?? '';
   insightActions.value = selectedDashboard?.actions ?? [];
+  insightProperties.value = selectedDashboard?.properties ?? {};
 
-  insightActions.value = checkCRMAccess(insightActions.value);
 
 
-  insightCriteriaMatch.value = selectedDashboard?.criteria ?? '';
 });
 
-const checkCRMAccess = (actions) => {
-/*
-  const crmAccess = window?.navigation?.getAttribute('data-product') === 'crm';
-
-  if (!crmAccess) {
-    return actions.filter((action) => action.label !== 'Create Task');
-  }
-*/
-
-  return actions;
-};
 
 const loadDashboards = async (): any => {
 
@@ -201,48 +505,84 @@ const loadDashboards = async (): any => {
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
-
+      <STDNav :get-access-token="() => null" data-mode="mock" data-product="crm"></STDNav>
     </Nav>
   </nav>
 
-  <main>
-    <div class="bg-primary full-width questions-container">
-      <div class="container">
+  <main class="enable-lg-breakpoint">
 
-      </div>
+    <Header>
 
-      <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
-    </div>
+      <ul class="breadcrumbs">
+        <li><a href="/">One hub</a></li>
+        <li>One insights</li>
+      </ul>
+      <Questions v-if="dashboards.length" class="one-insights-inline" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
+    </Header>
 
-    <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
+
+    <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
       <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
 
       <!--<Properties></Properties>-->
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        :title="insightTitle || 'Property insight'"
-        src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
 
-      <!--
-      <iframe
-        id="iframeTable"
-        ref="iframeTable"
-        title="Inline Frame Example"
-        src="/properties-insight.html"
-        frameborder="0"
-        allowfullscreen
-      >
-      </iframe>
-      -->
+      <div v-if="isLoading" class="loading">
+        <span class="spinner"></span>
+        <strong class="lead">Loading...</strong>
+      </div>
+      <div class="iframe__wrapper">
+
+        <!-- loading state to go here -->
+
+        <iframe
+          id="looker-dashboard"
+          :title="insightTitle || 'Property insight'"
+          :src="iframeSrc"
+          src="https://iampropertypbl.cloud.looker.com/embed/dashboards/156?Agent+Name=&Branch+Name=&Property=&theme=hub_embed&embed_domain=http://localhost"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+
+      </div>
 
       <div class="iframe-backdrop"></div>
     </div>
 
+    <Notification :data-status="actionStatus" v-if="printCampaignCreated" data-type="toast">
+      There was been an error with creating a new print campaign.
+    </Notification>
+
+    <Notification :data-status="actionStatus" v-if="addedTask.value" data-type="toast">
+      {{(actionStatus == 'success' ? 'Task has been created for' : 'There has been an error with the creating the task for')}} {{ addedTask.value.actionTitle }}
+      <a :href="addedTask.value.cta" target="_blank" rel="noopener noreferrer" v-if="actionStatus == 'success'">View task</a>
+    </Notification>
+
+    <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" @close="() => {addTaskDialog.close(); postInsightCompleted('create-task');}">
+      <Modal data-type="transactional" data-icon="" class="modal--lg" data-hide-buttons>
+
+        <Notification :data-status="actionStatus" v-if="inlineAddedTask.value">
+          {{(actionStatus == 'success' ? 'Task has been created for' : 'There has been an error with the creating the task for')}} {{ inlineAddedTask.value.actionTitle }}
+          <a :href="inlineAddedTask.value.cta" target="_blank" rel="noopener noreferrer" v-if="actionStatus == 'success'">View task</a>
+        </Notification>
+
+        <h2 id="add-task-title" class="h3 text-center px-0 mx-auto">Create CRM task <span v-if="tasks.length > 1" class="h4 d-inline">({{ currentTaskIndex + 1 }} of {{ tasks.length }})</span></h2>
+
+        <template v-for="(task, index) in tasks" :key="index">
+          <Task
+            v-if="index == currentTaskIndex"
+            :index="index"
+            :total="tasks.length"
+            :task="task"
+            @previous="currentTaskIndex--"
+            @close="() => {addTaskDialog.close(); postInsightCompleted('create-task');}"
+            @next="currentTaskIndex++"
+            @added="(returnedTask) => {inlineAddedTask.value = returnedTask; console.log(inlineAddedTask.value) }"
+            @added-last="(returnedTask) => {addedTask.value = returnedTask; postInsightCompleted('create-task'); console.log(addedTask.value) }"
+          />
+        </template>
+
+      </Modal>
+    </dialog>
 
   </main>
 
@@ -251,26 +591,72 @@ const loadDashboards = async (): any => {
 <style lang="scss" scoped>
 
 .questions-container {
-  margin-bottom: 7rem;
+  margin-bottom: 2rem;
   display: grid;
   grid-template-columns: subgrid;
 }
 
 .admin-panel {
   height: var(--componentHeight, calc(100vh - 4rem));
+  height: 2200px!important; // This height is needed due to the embedded Looker dashboard content being a fixed height
+
   position: relative;
   overflow: hidden;
+  transition: height 0.1s;
+  padding-inline: calc(var(--padding-x) - 10px);
 }
 
 .admin-panel h2 {
   margin-bottom: 0;
+  padding-inline: calc(var(--padding-x) + 10px);
 }
+
 
 .admin-panel iframe {
   padding: 0;
-  margin-inline: -1.5rem;
-  width: calc(100% + 3rem);
+  //margin-inline: -1.5rem;
+  width: 100%;
   height: 100%;
+  max-height: var(--componentHeight);
+}
+.admin-panel .iframe__wrapper {
+  position: relative;
+  height: 100%;
+  max-height: var(--componentHeight);
+  overflow: hidden;
 }
 
+.admin-panel:has(.loading) {
+  height: 500px!important;
+}
+
+.loading {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.loading .spinner {
+  --spinner-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.loading .lead {
+  margin-inline: auto;
+}
+.admin-panel .loading + .iframe__wrapper {
+
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+iam-header::part(gradient-background) {
+  left: 0%;
+}
+iam-header {
+  --padding-bottom: 0!important;
+}
 </style>

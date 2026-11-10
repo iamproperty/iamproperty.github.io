@@ -9,6 +9,7 @@
   const contactEmail = ref('');
   const contactPhone = ref('');
   const contactPhoneSafe = ref('');
+  const dialogElement = ref();
 
   const openContact = (event: Event): void => {
 
@@ -28,6 +29,10 @@
         contactInput.value.value = '';
         contactInput.value?.removeAttribute('data-value');
         contactInput.value?.setAttribute('placeholder', 'Search iamproperty contact book');
+
+        dialogElement.value.querySelectorAll('.active, .js-hide').forEach(element => {
+          element.classList.remove('active', 'js-hide');
+        });
       }, 200);
     }
   };
@@ -48,7 +53,7 @@
         class="input--sm box-shadow w-100 mw-100"
         placeholder="Search iamproperty contact book"
       />
-      <datalist id="contacts">
+      <datalist id="contacts" ref="dialogElement"  >
         <option
           value="Auction Specialist team"
           data-phone="0191 234 5678"

@@ -18,18 +18,22 @@ function setSelectAllInput(element, value): void {
     element.querySelector('input').indeterminate = false;
     element.querySelector('input').checked = true;
     element.querySelector('label').textContent = `Select all`;
+    element.querySelector('label').setAttribute('part', 'selectall-label-checked');
   } else if (element && value == 0) {
     element.querySelector('input').indeterminate = false;
     element.querySelector('input').checked = false;
     element.querySelector('label').textContent = `Select all`;
+    element.querySelector('label').setAttribute('part', 'selectall-label');
   } else if (element && value) {
     element.querySelector('input').indeterminate = true;
     element.querySelector('input').checked = false;
     element.querySelector('label').textContent = `${value} item${value > 1 ? 's' : ''} selected`;
+    element.querySelector('label').setAttribute('part', 'selectall-label-indeterminate');
   } else if (element) {
     element.querySelector('input').checked = false;
     element.querySelector('input').indeterminate = false;
     element.querySelector('label').textContent = `Select all`;
+    element.querySelector('label').setAttribute('part', 'selectall-label');
   }
 }
 
@@ -153,7 +157,7 @@ class iamActionbar extends HTMLElement {
     if (this.hasAttribute('data-selectall')) {
       actionbarWrapper?.insertAdjacentHTML(
         'afterbegin',
-        `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall"><label for="selectall" class="m-0"><span>Select all</span></label></div>`
+        `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall" part="selectall-input"><label for="selectall" class="m-0" part="selectall-label"><span>Select all</span></label></div>`
       );
       const selectAll = this.shadowRoot?.querySelector('.selectall');
 
@@ -302,152 +306,154 @@ class iamActionbar extends HTMLElement {
     // #endregion
 
     // #region Reponsive safe area
-    const hideButtons = (): void => {
-      const wrapperWidth = actionbarWrapper.scrollWidth;
-      const screenWidth = document.documentElement.scrollWidth;
-      let safeAreaWidth = 750;
-      let elementMargin = 16;
-      let tabletSafeWidth = 450;
-      let mobileSafeWidth = this?.hasAttribute('data-switchviews') ? 144 : 210;
+    if(!this.hasAttribute('data-disable-responsive')) {
+      const hideButtons = (): void => {
+        const wrapperWidth = actionbarWrapper.scrollWidth;
+        const screenWidth = document.documentElement.scrollWidth;
+        let safeAreaWidth = 750;
+        let elementMargin = 16;
+        let tabletSafeWidth = 450;
+        let mobileSafeWidth = this?.hasAttribute('data-switchviews') ? 144 : 210;
 
-      if (this.hasAttribute('data-large-safe-area')) {
-        safeAreaWidth = 1048;
-        tabletSafeWidth = 620;
-        mobileSafeWidth = 260;
-      }
+        if (this.hasAttribute('data-large-safe-area')) {
+          safeAreaWidth = 1048;
+          tabletSafeWidth = 620;
+          mobileSafeWidth = 260;
+        }
 
-      // We need to modify the widths to mimic the CSS's scaling functionality
-      let modifier = 1;
-      if (screenWidth >= 992 && screenWidth <= 1280) {
-        modifier = screenWidth / 1280;
-      } else if (screenWidth >= 576 && screenWidth < 992) {
-        modifier = screenWidth / 768;
-      } else if (screenWidth < 576) {
-        modifier = screenWidth / 375;
-      }
+        // We need to modify the widths to mimic the CSS's scaling functionality
+        let modifier = 1;
+        if (screenWidth >= 992 && screenWidth <= 1280) {
+          modifier = screenWidth / 1280;
+        } else if (screenWidth >= 576 && screenWidth < 992) {
+          modifier = screenWidth / 768;
+        } else if (screenWidth < 576) {
+          modifier = screenWidth / 375;
+        }
 
-      // Work out the safe sapce width depending upon the wrappers width and modifier comp
-      if (wrapperWidth >= 992 && wrapperWidth <= 1280) {
-        safeAreaWidth = safeAreaWidth * modifier;
-      } else if (wrapperWidth >= 576 && wrapperWidth < 992) {
-        safeAreaWidth = tabletSafeWidth * modifier;
-      } else if (wrapperWidth < 576) {
-        safeAreaWidth = mobileSafeWidth * modifier;
-      }
+        // Work out the safe sapce width depending upon the wrappers width and modifier comp
+        if (wrapperWidth >= 992 && wrapperWidth <= 1280) {
+          safeAreaWidth = safeAreaWidth * modifier;
+        } else if (wrapperWidth >= 576 && wrapperWidth < 992) {
+          safeAreaWidth = tabletSafeWidth * modifier;
+        } else if (wrapperWidth < 576) {
+          safeAreaWidth = mobileSafeWidth * modifier;
+        }
 
-      // Margin in between elements
-      elementMargin = elementMargin * modifier;
+        // Margin in between elements
+        elementMargin = elementMargin * modifier;
 
-      // If the wrapper width is small we want to reduce the btn sizes by adding or removing btn-compact classes
-      if (wrapperWidth < 576) {
-        Array.from(
-          this.querySelectorAll(
-            ':scope > .btn:not(.js-updated), :scope > .menu__wrapper  > .btn[class*="fa-"]:first-child:not(.js-updated)'
+        // If the wrapper width is small we want to reduce the btn sizes by adding or removing btn-compact classes
+        if (wrapperWidth < 576) {
+          Array.from(
+            this.querySelectorAll(
+              ':scope > .btn:not(.js-updated), :scope > .menu__wrapper  > .btn[class*="fa-"]:first-child:not(.js-updated)'
+            )
+          ).forEach((element: HTMLElement) => {
+            element.className = element.className.replace(' btn-compact', ' _btn-compact');
+            element.classList.add('btn-compact');
+            element.classList.add('js-updated');
+          });
+        } else {
+          Array.from(
+            this.querySelectorAll(':scope > .btn.js-updated, :scope > .menu__wrapper  > .btn.js-updated:first-child')
+          ).forEach((element: HTMLElement) => {
+            element.classList.remove('btn-compact');
+            element.classList.remove('js-updated');
+            element.className = element.className.replace(' _btn-compact', ' btn-compact');
+          });
+        }
+
+        // Reset the elements before we decide what elements become slotted into the overflow
+        Array.from(this.querySelectorAll('[slot]')).forEach((element: HTMLElement) => {
+          if (element.getAttribute('slot') == 'overflow') element.removeAttribute('slot');
+
+          if (element.getAttribute('slot') == 'selected-overflow') element.setAttribute('slot', 'selected');
+        });
+
+        Array.from(this.querySelectorAll('.show')).forEach((element: HTMLElement) => {
+          element.classList.remove('show');
+        });
+
+        // Foreach safe area lets check what elements are slotted in them and if they need an overflow
+        Array.from(this.shadowRoot.querySelectorAll('.safe-area')).forEach((element: HTMLElement) => {
+          // Decide on which overflow slot to use
+          let overflowSlot = 'overflow';
+
+          if (
+            element.querySelector('slot')?.hasAttribute('name') &&
+            element.querySelector('slot')?.getAttribute('name') == 'selected'
           )
-        ).forEach((element: HTMLElement) => {
-          element.className = element.className.replace(' btn-compact', ' _btn-compact');
-          element.classList.add('btn-compact');
-          element.classList.add('js-updated');
+            overflowSlot = 'selected-overflow';
+
+          // Get the slotted elements, remember they aren't children of the safe area
+          const elements = element.querySelector('slot')?.assignedElements() as Array<HTMLElement>;
+          let tempWidth = 44 * modifier; // Allow space for the overflow button
+
+          // If search then allow for the search button width
+          if (this.hasAttribute('data-search')) tempWidth += 44 * modifier;
+
+          // Foreach element this isn't an action button or dialog wrapper add to the width, these will not be moved into the overflow slot
+          for (let i = 0; i < elements.length; i++) {
+            if (!elements[i].classList.contains('btn-action') && !elements[i].classList.contains('menu__wrapper ')) {
+              tempWidth += elements[i].offsetWidth;
+              tempWidth += elementMargin;
+            }
+          }
+
+          // Foreach dialog wrapper decide if safe in safe area or move into the overflow slot, dialog wrappers have priority over the action buttons
+          for (let i = 0; i < elements.length; i++) {
+            if (elements[i].classList.contains('menu__wrapper ')) {
+              elements[i].classList.add('show');
+              tempWidth += elements[i].offsetWidth;
+              tempWidth += elementMargin / 2;
+
+              // If we have exceeded the safe area then lets break the loop
+              if (tempWidth - elementMargin / 2 > safeAreaWidth) {
+                elements[i].classList.remove('show');
+                break;
+              }
+            }
+          }
+
+          // Foreach action button
+          for (let i = 0; i < elements.length; i++) {
+            if (elements[i].classList.contains('btn-action')) {
+              elements[i].classList.add('show');
+              tempWidth += elements[i].offsetWidth;
+              tempWidth += elementMargin / 2;
+
+              // If we have exceeded the safe area then lets break the loop
+              if (tempWidth - elementMargin / 2 > safeAreaWidth) {
+                elements[i].classList.remove('show');
+                break;
+              }
+            }
+          }
+
+          const overflowDialog = element.querySelector('.dialog-overflow');
+
+          if (overflowDialog) overflowDialog.classList.add('d-none');
+
+          // Decide which elements go into the overflow slot
+          for (let i = 0; i < elements.length; i++) {
+            if (elements[i].classList.contains('btn-action') || elements[i].classList.contains('menu__wrapper ')) {
+              if (!elements[i].classList.contains('show')) {
+                // Move to the slot by changing the attribute
+                elements[i].setAttribute('slot', overflowSlot);
+
+                // if an element has been added to overflow slot then make sure we show the overflow menu button
+                if (overflowDialog) overflowDialog.classList.remove('d-none');
+              }
+            }
+          }
         });
-      } else {
-        Array.from(
-          this.querySelectorAll(':scope > .btn.js-updated, :scope > .menu__wrapper  > .btn.js-updated:first-child')
-        ).forEach((element: HTMLElement) => {
-          element.classList.remove('btn-compact');
-          element.classList.remove('js-updated');
-          element.className = element.className.replace(' _btn-compact', ' btn-compact');
-        });
-      }
+      };
 
-      // Reset the elements before we decide what elements become slotted into the overflow
-      Array.from(this.querySelectorAll('[slot]')).forEach((element: HTMLElement) => {
-        if (element.getAttribute('slot') == 'overflow') element.removeAttribute('slot');
-
-        if (element.getAttribute('slot') == 'selected-overflow') element.setAttribute('slot', 'selected');
-      });
-
-      Array.from(this.querySelectorAll('.show')).forEach((element: HTMLElement) => {
-        element.classList.remove('show');
-      });
-
-      // Foreach safe area lets check what elements are slotted in them and if they need an overflow
-      Array.from(this.shadowRoot.querySelectorAll('.safe-area')).forEach((element: HTMLElement) => {
-        // Decide on which overflow slot to use
-        let overflowSlot = 'overflow';
-
-        if (
-          element.querySelector('slot')?.hasAttribute('name') &&
-          element.querySelector('slot')?.getAttribute('name') == 'selected'
-        )
-          overflowSlot = 'selected-overflow';
-
-        // Get the slotted elements, remember they aren't children of the safe area
-        const elements = element.querySelector('slot')?.assignedElements() as Array<HTMLElement>;
-        let tempWidth = 44 * modifier; // Allow space for the overflow button
-
-        // If search then allow for the search button width
-        if (this.hasAttribute('data-search')) tempWidth += 44 * modifier;
-
-        // Foreach element this isn't an action button or dialog wrapper add to the width, these will not be moved into the overflow slot
-        for (let i = 0; i < elements.length; i++) {
-          if (!elements[i].classList.contains('btn-action') && !elements[i].classList.contains('menu__wrapper ')) {
-            tempWidth += elements[i].offsetWidth;
-            tempWidth += elementMargin;
-          }
-        }
-
-        // Foreach dialog wrapper decide if safe in safe area or move into the overflow slot, dialog wrappers have priority over the action buttons
-        for (let i = 0; i < elements.length; i++) {
-          if (elements[i].classList.contains('menu__wrapper ')) {
-            elements[i].classList.add('show');
-            tempWidth += elements[i].offsetWidth;
-            tempWidth += elementMargin / 2;
-
-            // If we have exceeded the safe area then lets break the loop
-            if (tempWidth - elementMargin / 2 > safeAreaWidth) {
-              elements[i].classList.remove('show');
-              break;
-            }
-          }
-        }
-
-        // Foreach action button
-        for (let i = 0; i < elements.length; i++) {
-          if (elements[i].classList.contains('btn-action')) {
-            elements[i].classList.add('show');
-            tempWidth += elements[i].offsetWidth;
-            tempWidth += elementMargin / 2;
-
-            // If we have exceeded the safe area then lets break the loop
-            if (tempWidth - elementMargin / 2 > safeAreaWidth) {
-              elements[i].classList.remove('show');
-              break;
-            }
-          }
-        }
-
-        const overflowDialog = element.querySelector('.dialog-overflow');
-
-        if (overflowDialog) overflowDialog.classList.add('d-none');
-
-        // Decide which elements go into the overflow slot
-        for (let i = 0; i < elements.length; i++) {
-          if (elements[i].classList.contains('btn-action') || elements[i].classList.contains('menu__wrapper ')) {
-            if (!elements[i].classList.contains('show')) {
-              // Move to the slot by changing the attribute
-              elements[i].setAttribute('slot', overflowSlot);
-
-              // if an element has been added to overflow slot then make sure we show the overflow menu button
-              if (overflowDialog) overflowDialog.classList.remove('d-none');
-            }
-          }
-        }
-      });
-    };
-
-    // Check buttons on load and when the wrapper element gets resized.
-    hideButtons();
-    new ResizeObserver(hideButtons).observe(actionbarWrapper);
+      // Check buttons on load and when the wrapper element gets resized.
+      hideButtons();
+      new ResizeObserver(hideButtons).observe(actionbarWrapper);
+    }
     // #endregion
 
     // #region cloumn filters

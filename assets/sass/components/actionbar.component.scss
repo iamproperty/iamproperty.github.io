@@ -11,6 +11,7 @@
 @use '../utilities/visually-hidden' as *;
 @use '../utilities/display' as *;
 
+
 *,
 *::before,
 *::after {
@@ -199,6 +200,9 @@ slot[name='selectall'] {
   margin-left: 1rem !important;
   margin-right: 0 !important;
   place-self: unset !important;
+}
+::slotted(.btn-action) {
+  margin-left: 0.25rem !important;
 }
 
 ::slotted(.btn:not(.btn-action)) {

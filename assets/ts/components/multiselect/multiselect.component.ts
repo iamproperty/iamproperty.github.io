@@ -18,9 +18,9 @@ class iamMultiselect extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <label for="search" class="mb-0"><span class="inner-label label"></span> <slot name="feedback"></slot>
+    <label for="search" class="mb-0"><span class="inner-label label"><slot name="label"></slot><slot name="tooltip"></slot></span> <slot name="feedback"></slot></label>
     <div class="outer">
-      <div class="wrapper">
+      <div class="wrapper filled">
 
         <slot name="checked"></slot>
         <input name="search" id="search" autocomplete="off" required part="search-input"/>
@@ -31,7 +31,6 @@ class iamMultiselect extends HTMLElement {
         <button id="clear" class="btn btn-action "><span class="visually-hidden">Clear</span></button>
       </div>
     </div>
-    </label>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
@@ -46,9 +45,33 @@ class iamMultiselect extends HTMLElement {
     let order = 0;
     const innerLabel = multiselect.shadowRoot.querySelector('label .inner-label');
     const ajaxURL = this.getAttribute('data-url');
-    innerLabel.innerHTML = multiselect.getAttribute('data-label');
 
     const minLength = this.hasAttribute('data-min') ? this.getAttribute('data-min') : 3;
+
+    multiselect.addEventListener(
+      'pointerdown',
+      (event) => {
+        const path = event.composedPath();
+        const clickedCheckbox = path.find(
+          (element) => element instanceof HTMLInputElement && element.type === 'checkbox'
+        );
+        if (clickedCheckbox) return;
+
+        const option = path.find(
+          (element) => element instanceof HTMLLabelElement && element.classList.contains('dropdown__option')
+        ) as HTMLLabelElement | undefined;
+        const checkbox = option?.querySelector<HTMLInputElement>('input[type="checkbox"]');
+        if (!option || !checkbox) return;
+
+        event.preventDefault();
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+      },
+      true
+    );
+
+    if (this.hasAttribute('data-pre-filled') && this.getAttribute('data-pre-filled') == true)
+      wrapper.classList.add('filled');
 
     // Make sure the dropdown options are set
     Array.from(this.querySelectorAll(':scope > label')).forEach((label) => {
@@ -161,9 +184,12 @@ class iamMultiselect extends HTMLElement {
 
     // Set items
     multiselect.addEventListener('change', (event) => {
-      if (event && event.target instanceof HTMLElement && event.target.closest('input[type="checkbox"]')) {
-        const checkbox = event.target.closest('input[type="checkbox"]');
+      const checkbox = event
+        .composedPath()
+        .find((element) => element instanceof HTMLInputElement && element.type === 'checkbox') as
+        HTMLInputElement | undefined;
 
+      if (checkbox) {
         if (multiselect.hasAttribute('data-single')) {
           Array.from(multiselect.querySelectorAll(`label[slot="checked"] input`)).forEach((inputToCancel) => {
             inputToCancel.checked = false;
@@ -187,6 +213,28 @@ class iamMultiselect extends HTMLElement {
           //multiselect.classList.remove('hover');
         }
       }
+    });
+
+    // A click on the option text is not consistently exposed as a checkbox
+    // change event across browsers. Delegate the label interaction and create
+    // the same composed change event used by a native checkbox click.
+    multiselect.addEventListener('click', (event) => {
+      const path = event.composedPath();
+      const clickedCheckbox = path.find(
+        (element) => element instanceof HTMLInputElement && element.type === 'checkbox'
+      );
+      if (clickedCheckbox) return;
+
+      const option = path.find(
+        (element) => element instanceof HTMLLabelElement && element.classList.contains('dropdown__option')
+      ) as HTMLLabelElement | undefined;
+      const checkbox = option?.querySelector<HTMLInputElement>('input[type="checkbox"]');
+
+      if (!option || !checkbox) return;
+
+      event.preventDefault();
+      checkbox.checked = !checkbox.checked;
+      checkbox.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     });
 
     // Clear all

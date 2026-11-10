@@ -70,7 +70,34 @@ class iamCarousel extends HTMLElement {
   };
 
   progressPercent = (value, total): string => {
-    return (value / total) * 100 + '%';
+
+    const returnValue = ((value-1) / (total-1)) * 100;
+
+    if (isNaN(returnValue)) {
+      return '100%';
+    }
+
+    return returnValue + '%';
+  };
+
+  updateProgressCompleteClass = (carouselProgress: HTMLElement, carouselProgressSM: HTMLElement, carouselProgressMD: HTMLElement): void => {
+    if(carouselProgress.getAttribute('max') <= carouselProgress.getAttribute('step')) {
+      carouselProgress?.classList.add('carousel__progress--complete');
+    } else {
+      carouselProgress?.classList.remove('carousel__progress--complete');
+    }
+
+    if(carouselProgressSM.getAttribute('max') <= carouselProgressSM.getAttribute('step')) {
+      carouselProgressSM?.classList.add('carousel__progress--complete');
+    } else {
+      carouselProgressSM?.classList.remove('carousel__progress--complete');
+    }
+
+    if(carouselProgressMD.getAttribute('max') <= carouselProgressMD.getAttribute('step')) {
+      carouselProgressMD?.classList.add('carousel__progress--complete');
+    } else {
+      carouselProgressMD?.classList.remove('carousel__progress--complete');
+    }
   };
 
   connectedCallback(): void {
@@ -120,8 +147,11 @@ class iamCarousel extends HTMLElement {
       }
 
       carouselProgress.value = child;
+
       carouselProgress.style.setProperty('--percent', progressPercent(child, itemCount));
+
       carouselProgressSM.value = child;
+
       carouselProgressSM.style.setProperty(
         '--percent',
         progressPercent(child, carouselProgressSM?.getAttribute('max'))
@@ -131,6 +161,7 @@ class iamCarousel extends HTMLElement {
         '--percent',
         progressPercent(child, carouselProgressMD?.getAttribute('max'))
       );
+
     });
 
     let stepperInterval,
@@ -157,6 +188,7 @@ class iamCarousel extends HTMLElement {
     });
 
     carouselProgress.addEventListener('change', () => {
+
       clearInterval(stepperInterval);
       carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
       const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * (carouselProgress.value - 1));
@@ -169,9 +201,9 @@ class iamCarousel extends HTMLElement {
     });
 
     // SM Progress bar
-    const smStep = this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : 1;
-    //const smItemCount = Math.floor(itemCount / smStep) * smStep;
-    const SMMax = (Math.floor(itemCount / smStep) - 1) * smStep + 1;
+    const smStep = parseInt(this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : '1');
+    const smItemCount = ((Math.floor(itemCount / smStep) - 1) * smStep) + 1;
+    const SMMax = smItemCount;
 
     carouselProgressSM.setAttribute('max', SMMax);
     carouselProgressSM.setAttribute('step', smStep);
@@ -186,7 +218,7 @@ class iamCarousel extends HTMLElement {
       stepperInterval = setInterval(function () {
         carouselProgressSM.style.setProperty(
           '--percent',
-          progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max'))
+          progressPercent(carouselProgressSM.value, smItemCount)
         );
       });
     });
@@ -202,7 +234,7 @@ class iamCarousel extends HTMLElement {
         '--percent',
         progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max'))
       );
-      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * carouselProgressSM.value);
+      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * (carouselProgressSM.value - 1));
 
       carouselElement.scrollTo({
         top: 0,
@@ -213,8 +245,9 @@ class iamCarousel extends HTMLElement {
 
     // MD Progress bar
 
-    const mdStep = this.getAttribute('data-mdcols') ? this.getAttribute('data-mdcols') : 1;
-    const mdMax = (Math.floor(itemCount / mdStep) - 1) * mdStep + 1;
+    const mdStep = parseInt(this.getAttribute('data-mdcols') ? this.getAttribute('data-mdcols') : '1');
+    const mdItemCount = ((Math.floor(itemCount / mdStep) - 1) * mdStep) + 1;
+    const mdMax = mdItemCount;
 
     carouselProgressMD.setAttribute('max', mdMax);
     carouselProgressMD.setAttribute('step', mdStep);
@@ -245,7 +278,7 @@ class iamCarousel extends HTMLElement {
         '--percent',
         progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max'))
       );
-      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * carouselProgressMD.value);
+      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * (carouselProgressMD.value - 1));
 
       carouselElement.scrollTo({
         top: 0,
@@ -253,6 +286,11 @@ class iamCarousel extends HTMLElement {
         behavior: 'smooth',
       });
     });
+
+    // #region update progress complete class
+    // This section updates the 'carousel__progress--complete' class based on the progress percentage.
+    this.updateProgressCompleteClass(carouselProgress, carouselProgressSM, carouselProgressMD);
+    // #endregion
 
     // Thumbnails
     const carouselPips = this.shadowRoot.querySelector('.carousel__pips');

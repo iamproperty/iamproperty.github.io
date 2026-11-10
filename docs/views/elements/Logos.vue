@@ -16,7 +16,7 @@
 <div class="p-5 bg-primary mb-5">
     <div class="brand brand--one">
       <svg viewBox="0 0 205 130" preserveAspectRatio="xMinYMid meet">
-        <title>iam property one</title>
+        <title>iamproperty One</title>
         <defs xmlns="http://www.w3.org/2000/svg">
           <clipPath id="clippath">
             <path

@@ -193,6 +193,15 @@ export const getSwipeDirection = (touchstartX, touchstartY, touchendX, touchendY
   }
 };
 
+export const isStringValidJSON = (str: string): boolean => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
 export const uniqueID = (index = 1): number => {
   const ID = Math.floor(Math.random() * Date.now() * (index + 1));
 
@@ -208,8 +217,15 @@ export const isValidPostcode = (searchValue: string): boolean => {
 export const prepareData = (format, data): any => {
   switch (format) {
     case 'date': {
+
       const normalised = String(data).replaceAll('-', '/').trim();
-      const [day, month, yy] = normalised.split('/');
+      let [day, month, yy] = normalised.split('/');
+
+      // if the first value is the year (YYYY), reverse the array to get day, month, year
+      if(day.length === 4) {
+        [day, month, yy] = normalised.split('/').reverse();
+      }
+
       const year = yy?.length === 2 ? `20${yy}` : yy;
       return `${year}-${zeroPad(parseInt(month, 10), 2)}-${zeroPad(parseInt(day, 10), 2)}`;
     }
@@ -221,7 +237,6 @@ export const prepareData = (format, data): any => {
       return data;
   }
 };
-
 
 export const formatData = (format, data): any => {
   switch (format) {
@@ -255,4 +270,16 @@ export const formatData = (format, data): any => {
     default:
       return data;
   }
+};
+
+export const convertToNumber = (value: string): number => parseFloat(value.replace(/[^0-9.-]+/g,""));
+
+export const convertToDate = (value: string): Date => new Date(value);
+
+export const convertToUnixTimestamp = (value: string): number => {
+  const toConvert = prepareData('date', value);
+  console.log(`Converting value to Unix timestamp:`, toConvert);
+
+  console.log(`Unix timestamp for value:`, Math.floor(new Date(toConvert).getTime() / 1000));
+  return Math.floor(new Date(toConvert).getTime() / 1000);
 };

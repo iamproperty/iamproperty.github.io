@@ -133,6 +133,13 @@
   }
   /* #endregion */
 
+  /* #region hide carousel controls and markers when necessary */
+
+  .carousel__progress--complete {
+    display: none !important;
+  }
+
+  /* #endregion */
   .carousel__pips {
     display: flex !important;
     flex-wrap: nowrap;

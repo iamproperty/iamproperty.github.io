@@ -18,6 +18,7 @@
     &:not(.btn-primary):not(.border-0) {
       background-color: var(--colour-canvas-2);
       outline: var(--btn-border-width) solid var(--colour-muted);
+      outline-offset: -1px;
     }
 
     &.btn[class*='fa-']:before {

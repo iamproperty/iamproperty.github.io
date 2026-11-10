@@ -63,7 +63,8 @@
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
+      <STDNav :get-access-token="() => null" data-mode="mock" data-product="crm"></STDNav>
+
     </Nav>
   </nav>
 
