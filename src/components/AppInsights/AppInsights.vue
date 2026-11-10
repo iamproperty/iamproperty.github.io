@@ -12,6 +12,7 @@
       'notification',
       'map',
       'tooltip',
+      'table-customisation',
     ];
 
     components.forEach((component) => {

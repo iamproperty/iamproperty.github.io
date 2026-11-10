@@ -202,6 +202,8 @@ onMounted(async () => {
         "properties": getInsightProperties(insightSlug.value)
       };
 
+      const tableCustomisation = [{"label": "Date listed", "isVisible": false}];
+
       setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
         isLoading.value = false;
       }, 1000);
@@ -213,7 +215,8 @@ onMounted(async () => {
             type: "top-window-details",
             detail: {
               class: "inside-hub",
-              ...JSON.parse(JSON.stringify(insightConfig))
+              ...JSON.parse(JSON.stringify(insightConfig)),
+              customisation: tableCustomisation
             }
           },
           { targetOrigin: '*' }

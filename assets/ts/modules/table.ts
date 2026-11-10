@@ -1138,9 +1138,6 @@ export const setupAdvancedTable = (component, table, actionbar, pagination, form
 
     if(heading.hasAttribute('data-filters') && isStringValidJSON(heading.getAttribute('data-filters'))) {
 
-      console.log('Original Filters:', JSON.parse(heading.getAttribute('data-filters')));
-
-
       const cleanFilters = cleanFilterValues(JSON.parse(heading.getAttribute('data-filters')));
       heading.setAttribute('data-filters', JSON.stringify(cleanFilters));
     }

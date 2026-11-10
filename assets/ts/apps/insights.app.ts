@@ -3,6 +3,8 @@ class iamAppInsights extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
 
+
+
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
@@ -412,7 +414,6 @@ class iamAppInsights extends HTMLElement {
 
 
 
-
     const tooltip = this.shadowRoot?.querySelector('iam-tooltip');
     if(tooltip) {
       tooltip.setAttribute('title', 'Some properties may not be in your initial view and we recommend filtering to reveal them.');
@@ -441,6 +442,29 @@ class iamAppInsights extends HTMLElement {
       }
 
     });
+
+
+  };
+
+  createCustomisationButton = (component, customisation): void => {
+
+    if(!customisation) return;
+
+    const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
+
+    if(!actionbar?.querySelector('iam-table-customisation')) {
+      const tableCustomisation = document.createElement('iam-table-customisation');
+      tableCustomisation.setAttribute('data-customisation', JSON.stringify(customisation));
+
+      actionbar?.insertAdjacentElement('beforeend', tableCustomisation);
+      // Fake button to be displayed in the action bar when the selection is required for the customisation action, to maintain layout consistency
+      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" slot="selected" disabled>Customise</button>`);
+
+      // Listen for the table customisation saved event and re-dispatch it from the parent component
+      tableCustomisation.addEventListener('table-customisation-saved', (event) => {
+        this.dispatchEvent(new CustomEvent('table-customisation-saved', { detail: event.detail }));
+      });
+    }
   };
 
   createMatchCriteriaFilter = (component, matchCriteriaColumn, matchCriteriaIndicatorColumn): void => {
@@ -595,6 +619,7 @@ class iamAppInsights extends HTMLElement {
       //this.setCounterText(this, event.detail.properties['counter-text']);
       this.hideNullValues();
       this.createActionButtons(this, event.detail.actions);
+      this.createCustomisationButton(this, event.detail.customisation);
       //this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
       //this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
       this.createPopupTitles(this, event.detail.properties['title-column']);

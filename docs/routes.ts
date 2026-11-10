@@ -1145,6 +1145,15 @@ const routes: Array<any> = [
         },
         component: () => import('./views/tables/AjaxTableDoc.vue'),
       },
+      {
+        path: 'table-customisation',
+        name: 'Table customisation',
+        meta: {
+          title: 'Table customisation | Components | iamkey',
+          desc: 'Table customisation options to give further customisation functionality to the user when used the action bar is use in conjunction with expanded/advanced tables.',
+        },
+        component: () => import('./views/tables/TableCustomisation.vue'),
+      },
     ],
   },
   {
