@@ -258,22 +258,20 @@ class iamTableCustomisation extends HTMLElement {
       customisation = JSON.parse(this.getAttribute('data-customisation'));
     }
 
+    // Generate a selector for the table customisation.
+    if(tableElement && tableElement.id) {
+      this.setAttribute('data-for', tableElement.id.replace('table-', ''));
+    }
+    // Fall back to the component index when the table has no ID.
+    document.querySelectorAll('iam-table-customisation').forEach((customisationElement, index) => {
+      customisationElement.setAttribute('data-index', index.toString());
+    });
+
+    const tableCustomisationSelector = this.getAttribute('data-for') ? `iam-table-customisation[data-for="${this.getAttribute('data-for')}"]` : `${this.getAttribute('data-index') ? `iam-table-customisation[data-index="${this.getAttribute('data-index')}"]` : ''}`;
+    this.setAttribute('data-selector', tableCustomisationSelector);
+    const localStorageKey = `${this.getAttribute('data-selector') || ''}@${window.location.pathname}`;
+
     if(this.hasAttribute('data-save')) {
-
-      // generate a selector for the table customisation
-      if(tableElement && tableElement.id) {
-        this.setAttribute('data-for', tableElement.id.replace('table-', ''));
-      }
-      // Else, if the table element does not have an ID, rely on the data-index attribute for identification
-      document.querySelectorAll('iam-table-customisation').forEach((customisationElement, index) => {
-        customisationElement.setAttribute('data-index', index.toString());
-      });
-
-      const tableCustomisationSelector = this.getAttribute('data-for') ? `iam-table-customisation[data-for="${this.getAttribute('data-for')}"]` : `${this.getAttribute('data-index') ? `iam-table-customisation[data-index="${this.getAttribute('data-index')}"]` : ''}`;
-
-      this.setAttribute('data-selector', tableCustomisationSelector);
-
-      const localStorageKey = `${this.getAttribute('data-selector') || ''}@${window.location.pathname}`;
       const savedCustomisation = localStorage.getItem(localStorageKey) || '[]';
 
       if(savedCustomisation) {
