@@ -463,6 +463,9 @@ class iamAppInsights extends HTMLElement {
       tableCustomisation.addEventListener('table-customisation-saved', (event) => {
         this.dispatchEvent(new CustomEvent('table-customisation-saved', { detail: event.detail }));
       });
+      tableCustomisation.addEventListener('table-customisation-reset', (event) => {
+        this.dispatchEvent(new CustomEvent('table-customisation-reset'));
+      });
     }
   };
 
@@ -636,16 +639,27 @@ class iamAppInsights extends HTMLElement {
     this.addEventListener('table-customisation-saved', (event: CustomEvent) => {
       // Handle table customisation changes here if needed
 
-      console.log(event.detail);
+      this.dispatchEvent(new CustomEvent('insight-action', {
+        detail: {
+          action: 'table-customisation-saved',
+          customisation: event.detail
+        },
+        bubbles: true,
+        composed: true
+      }));
+
+    });
+
+    this.addEventListener('table-customisation-reset', (event: CustomEvent) => {
+      // Handle table customisation changes here if needed
 
       this.dispatchEvent(new CustomEvent('insight-action', {
-          detail: {
-            action: 'table-customisation-saved',
-            customisation: event.detail
-          },
-          bubbles: true,
-          composed: true
-        }));
+        detail: {
+          action: 'table-customisation-reset'
+        },
+        bubbles: true,
+        composed: true
+      }));
 
     });
 

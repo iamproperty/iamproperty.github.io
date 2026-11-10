@@ -1,3 +1,4 @@
+import C from "../../../js/components/table-basic/table-basic.component.min";
 import { uniqueID } from "../../modules/helpers";
 
 class iamTableCustomisation extends HTMLElement {
@@ -196,40 +197,46 @@ class iamTableCustomisation extends HTMLElement {
 
     const updateColumnOrder = (customisation): void => {
 
-      tableElement.classList.add('table--ordered');
+      if(customisation && customisation.length > 0){
 
-      const gridTemplateColumns = Array.from(tableElement.querySelectorAll('thead tr th:not(.d-none,.expand-button-heading)')).map((heading) =>
-        {
-          if (heading.classList.contains('th--fixed')) {
-            return 'min-content';
+        tableElement.classList.add('table--ordered');
+
+        const gridTemplateColumns = Array.from(tableElement.querySelectorAll('thead tr th:not(.d-none,.expand-button-heading)')).map((heading) =>
+          {
+            if (heading.classList.contains('th--fixed')) {
+              return 'min-content';
+            }
+            return 'auto';
           }
-          return 'auto';
-        }
-      ).join(' ');
+        ).join(' ');
 
-      tableElement.style.setProperty('--grid-template-columns', gridTemplateColumns);
-      let columnCount = tableElement.querySelectorAll('thead tr th:not(.d-none,.expand-button-heading)').length;
-      // Make sure the selectall column is counted even if it hasn't been added yet
-      if (tableComponent.querySelector('iam-actionbar[data-selectall]') && !tableElement.querySelector('thead tr th.selectrow-heading')) {
-        columnCount += 1;
+        tableElement.style.setProperty('--grid-template-columns', gridTemplateColumns);
+        let columnCount = tableElement.querySelectorAll('thead tr th:not(.d-none,.expand-button-heading)').length;
+        // Make sure the selectall column is counted even if it hasn't been added yet
+        if (tableComponent.querySelector('iam-actionbar[data-selectall]') && !tableElement.querySelector('thead tr th.selectrow-heading')) {
+          columnCount += 1;
+        }
+        tableElement.style.setProperty('--column-count', columnCount);
+
+        tableElement.querySelectorAll('tbody tr').forEach((row, index) => {
+          row.style.setProperty('--grid-row', index+2);
+        });
+
+        const columns = getColumnsWithCustomisation(tableElement, customisation);
+
+        columns.forEach((column, index) => {
+
+          if (column && typeof column.order !== 'undefined') {
+            const cells = tableElement.querySelectorAll(`:is(th,td)[data-label="${column.label}"]`);
+            cells.forEach(cell => {
+              cell.style.setProperty('--order', column.order.toString());
+            });
+          }
+        });
       }
-      tableElement.style.setProperty('--column-count', columnCount);
-
-      tableElement.querySelectorAll('tbody tr').forEach((row, index) => {
-        row.style.setProperty('--grid-row', index+2);
-      });
-
-      const columns = getColumnsWithCustomisation(tableElement, customisation);
-
-      columns.forEach((column, index) => {
-
-        if (column && typeof column.order !== 'undefined') {
-          const cells = tableElement.querySelectorAll(`:is(th,td)[data-label="${column.label}"]`);
-          cells.forEach(cell => {
-            cell.style.setProperty('--order', column.order.toString());
-          });
-        }
-      });
+      else {
+        tableElement.classList.remove('table--ordered');
+      }
     }
 
     // #region set the title if attribute is provided
@@ -352,7 +359,9 @@ class iamTableCustomisation extends HTMLElement {
     resetButton.addEventListener('click', () => {
 
       this.removeAttribute('data-customisation');
-      localStorage.removeItem(localStorageKey);
+      if(!this.closest('iam-table-customisation'))
+        localStorage.removeItem(localStorageKey);
+
       this.dispatchEvent(new CustomEvent('table-customisation-reset'));
 
       optionsContainer?.innerHTML = createDialogOptions(tableElement,[]);
