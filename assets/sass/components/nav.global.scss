@@ -887,4 +887,52 @@ iam-nav .switch-account[slot='account'] {
 /* #endregion */
 
 
+/* #region Insights menu button */
+iam-nav #insights-button {
+  display: inline-block!important;
+  outline: none!important;
+  
+  position: relative;
+  padding-left: 1.5rem;
 
+  svg {
+    position: absolute;
+    top: 0.2em;
+    left: 0.4em;
+    height: 1.8em !important;
+    width: 1.8em !important;
+  }
+}
+
+iam-nav #insights-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: linear-gradient(90deg, #001824 0%, #4EF3F4 99.99%) border-box;
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  margin: 0!important;
+}
+
+@media screen and (max-width: 62em) {
+  iam-nav #insights-button {
+    margin: 1.5rem 0  0 0!important;
+  }
+}
+
+@media screen and (min-width: 62em) {
+  iam-nav #insights-button {
+    display: inline-block!important;
+    font-size: .75rem!important; /* 12px */
+    padding-block: 0!important;
+    line-height: 1.5rem!important; 
+    height: 1.5rem!important;
+    outline-offset: 1px!important;
+  }
+}
+/* #endregion */
