@@ -270,8 +270,6 @@ class iamAppInsights extends HTMLElement {
     const countElement = this.shadowRoot?.querySelector('#count');
     const viewControls = this.shadowRoot?.querySelector('#view-controls');
 
-
-
     // #region fix original table
     // table.setAttribute('id','properties-table');
 
@@ -292,11 +290,8 @@ class iamAppInsights extends HTMLElement {
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
     // #endregion fix original table
 
-
-
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
-
 
     // #region set the view controls
 
@@ -448,13 +443,17 @@ class iamAppInsights extends HTMLElement {
 
   createCustomisationButton = (component, customisation): void => {
 
-    if(!customisation) return;
+    if(!customisation) customisation = [];
 
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
 
     if(!actionbar?.querySelector('iam-table-customisation')) {
       const tableCustomisation = document.createElement('iam-table-customisation');
-      tableCustomisation.setAttribute('data-customisation', JSON.stringify(customisation));
+      tableCustomisation.setAttribute('data-orderable', true);
+      tableCustomisation.setAttribute('data-save', true);
+
+      if(customisation && customisation.length > 0)
+        tableCustomisation.setAttribute('data-customisation', JSON.stringify(customisation));
 
       actionbar?.insertAdjacentElement('beforeend', tableCustomisation);
       // Fake button to be displayed in the action bar when the selection is required for the customisation action, to maintain layout consistency
@@ -633,6 +632,14 @@ class iamAppInsights extends HTMLElement {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
       //this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0'); // This also clears the seleted items in the table
     });
+
+    this.addEventListener('table-customisation-saved', (event: CustomEvent) => {
+      // Handle table customisation changes here if needed
+
+      if(this.hasAttribute('id'))
+        localStorage.setItem(`insight-customisation#${this.getAttribute('id')}`, JSON.stringify(event.detail));
+    });
+
 
     if (table){
 

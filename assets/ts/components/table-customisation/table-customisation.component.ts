@@ -66,8 +66,6 @@ class iamTableCustomisation extends HTMLElement {
     // Force the dialog to be open
     if(this.hasAttribute('data-open')) {
       dialog?.setAttribute('open', '');
-      dialog?.setAttribute('popover-open', '');
-      dialog?.showPopover();
     }
 
     const setDataLabel = ():void => {
@@ -87,6 +85,10 @@ class iamTableCustomisation extends HTMLElement {
     }
 
     const hideColumns = (customisation) => {
+
+      // Reset all previously hidden columns
+      tableElement.querySelectorAll(`:is(th,td).d-none`).forEach(element => element.classList.remove('d-none'));
+
       customisation.forEach(column => {
         const columnLabel = column.label;
 
@@ -104,7 +106,6 @@ class iamTableCustomisation extends HTMLElement {
     const getColumnsWithCustomisation = (tableElement, customisation): Array<{label: string, order: number, isVisible: boolean, isDisabled: boolean}> => {
 
       const headers = tableElement.querySelectorAll('thead th:not(.selectrow-heading)');
-
 
       // Add customisation data for each column based on the headers
       const columns = Array.from(headers).map(header => {
@@ -271,7 +272,7 @@ class iamTableCustomisation extends HTMLElement {
     this.setAttribute('data-selector', tableCustomisationSelector);
     const localStorageKey = `${this.getAttribute('data-selector') || ''}@${window.location.pathname}`;
 
-    if(this.hasAttribute('data-save')) {
+    if(this.hasAttribute('data-save') && !this.closest('iam-table-customisation')) {
       const savedCustomisation = localStorage.getItem(localStorageKey) || '[]';
 
       if(savedCustomisation) {
@@ -348,16 +349,14 @@ class iamTableCustomisation extends HTMLElement {
     });
 
     resetButton.addEventListener('click', () => {
-      // Reset the customisation settings by either removing the settings from local storage or updating the data attribute on the component itself
-      if(this.hasAttribute('data-customisation')) {
-        this.setAttribute('data-customisation', '[]');
-      }
 
+      this.removeAttribute('data-customisation');
       localStorage.removeItem(localStorageKey);
       this.dispatchEvent(new CustomEvent('table-customisation-reset'));
 
-
       optionsContainer?.innerHTML = createDialogOptions(tableElement,[]);
+      hideColumns([]);
+      updateColumnOrder([]);
       dialog.hidePopover();
     });
 
@@ -374,7 +373,7 @@ class iamTableCustomisation extends HTMLElement {
       if(this.hasAttribute('data-customisation')) {
         this.setAttribute('data-customisation', JSON.stringify(newCustomisation));
       }
-      if(this.hasAttribute('data-save')) {
+      if(this.hasAttribute('data-save') && !this.closest('iam-table-customisation')) {
         localStorage.setItem(localStorageKey, JSON.stringify(newCustomisation));
       }
 
@@ -383,6 +382,7 @@ class iamTableCustomisation extends HTMLElement {
     }
 
     saveButton.addEventListener('click', () => {
+      this.setAttribute('data-customisation', JSON.stringify(customisation));
       saveCustomisation();
       optionsContainer?.innerHTML = createDialogOptions(tableElement, customisation);
       hideColumns(customisation);
@@ -397,18 +397,41 @@ class iamTableCustomisation extends HTMLElement {
     if(!this.hasAttribute('data-save')) {
       optionsContainer?.addEventListener('change', () => {
         const checkboxes = optionsContainer.querySelectorAll('input[type="checkbox"]');
+        const newCustomisation: Array<{ label: string, isVisible: boolean, isDisabled: boolean, order: number }> = [];
         checkboxes.forEach((checkbox, index) => {
           const label = checkbox.getAttribute('data-for') || '';
           const customisationItem = customisation.find(item => item.label === label);
           if(customisationItem) {
             customisationItem.isVisible = (checkbox as HTMLInputElement).checked;
+            newCustomisation.push({ label: label, isVisible: customisationItem.isVisible, isDisabled: customisationItem.isDisabled, order: index });
           }
+          newCustomisation.push({ label: label, isVisible: (checkbox as HTMLInputElement).checked, isDisabled: (checkbox as HTMLInputElement).disabled, order: index });
         });
-        hideColumns(customisation);
-        updateColumnOrder(customisation);
+        hideColumns(newCustomisation);
+        updateColumnOrder(newCustomisation);
       });
     }
     // #endregion
+  }
+
+  // Handle updates to the customisation data attribute
+  static get observedAttributes(): string[] {
+    return ['data-customisation'];
+  }
+
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+    if(name === 'data-customisation' && newValue) {
+      const newCustomisation = JSON.parse(newValue);
+      const tableElement = this.querySelector('table');
+      if(tableElement) {
+        const optionsContainer = this.querySelector('.options-container');
+        if(optionsContainer) {
+          optionsContainer.innerHTML = this.createDialogOptions(tableElement, newCustomisation);
+        }
+        this.hideColumns(newCustomisation);
+        this.updateColumnOrder(newCustomisation);
+      }
+    }
   }
 }
 

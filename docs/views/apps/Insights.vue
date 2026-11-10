@@ -45,8 +45,7 @@ const setupComponent = (event) => {
         "counter-text": "Properties most likely to switch",
         "cta-url-structure": "https://my.eco.iamproperty.group/iamproperty-one/login?return=/DataServices/PropertyProfile/:UDPRN/:UMRRN",
         "cta-text": "View property",
-      },
-      "customisation": [{"label": "Property", "isDisabled": true}]
+      }
     }
   });
   event.target.dispatchEvent(dispatchedEvent);
@@ -114,7 +113,7 @@ const insightAction = (event) => {
         <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
           <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
-          <AppInsights data-table-customisation='[{"label": "Property", "isVisible": true},{"label": "Date listed", "isVisible": false}]' @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
+          <AppInsights id="insights1" @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
             <table>
               <thead>
 
@@ -212,7 +211,7 @@ const insightAction = (event) => {
         <div class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
           <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
-          <AppInsights @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
+          <AppInsights  id="insights2" @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
             <table>
               <thead>
                 <tr>
@@ -311,7 +310,7 @@ const insightAction = (event) => {
         <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
           <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
-          <AppInsights @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
+          <AppInsights id="insights3" @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
             <table>
               <thead>
 
@@ -345,7 +344,7 @@ const insightAction = (event) => {
         <div class="admin-panel" :style="`--componentHeight: ${componentHeight};--componentHeight: 2000px;`">
           <h2 class="bg-primary gradient-info">Show me stock currently on market most likely to switch</h2>
 
-          <AppInsights @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
+          <AppInsights id="insights4" @component-loaded="(event) => { setupComponent(event); }" @insight-action="(event) => { insightAction(event); }" data-show="5">
             <table>
               <thead>
 
