@@ -636,6 +636,8 @@ class iamAppInsights extends HTMLElement {
     this.addEventListener('table-customisation-saved', (event: CustomEvent) => {
       // Handle table customisation changes here if needed
 
+      console.log(event.detail);
+
       this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
             action: 'table-customisation-saved',
