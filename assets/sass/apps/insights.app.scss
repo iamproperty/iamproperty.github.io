@@ -585,6 +585,9 @@ iam-table-advanced::part(table-filter):after {
 
 iam-table-customisation [class*="fa-"] {
   margin-right: 0.2em;
+
+  text-indent: -300%;
+  overflow: hidden;
 }
 iam-table-customisation [class*="fa-"]:before {
   height: 1.2em!important;
