@@ -289,6 +289,13 @@ class iamTableCustomisation extends HTMLElement {
 
     // Update the table layout based on the current customisation
     updateColumnOrder(customisation);
+    tableComponent.addEventListener('sort-by-heading', (event: CustomEvent) => {
+      if (!event.detail.sortBy) {
+        setDataLabel();
+        hideColumns(customisation);
+        updateColumnOrder(customisation);
+      }
+    });
     // #endregion
 
     // #region Option reordering event listeners
