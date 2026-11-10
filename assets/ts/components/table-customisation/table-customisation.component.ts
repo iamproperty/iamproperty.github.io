@@ -324,6 +324,16 @@ class iamTableCustomisation extends HTMLElement {
           }
         }
       }
+      if (!this.hasAttribute('data-save') && event.target.matches('.btn-up, .btn-down')) {
+        const checkboxes = optionsContainer.querySelectorAll('input[type="checkbox"]');
+        customisation = Array.from(checkboxes).map((checkbox, index) => ({
+          label: checkbox.getAttribute('data-for') || '',
+          isVisible: (checkbox as HTMLInputElement).checked,
+          isDisabled: (checkbox as HTMLInputElement).disabled,
+          order: index
+        }));
+        updateColumnOrder(customisation);
+      }
     });
     // #endregion
 
