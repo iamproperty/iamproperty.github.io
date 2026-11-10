@@ -10,6 +10,7 @@
 
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
 
+  import { tableCustomisation as events } from '../../events.js';
 </script>
 
 <template>
@@ -19,7 +20,6 @@
     </DSHeader>
 
     <p class="lead">When an <a href="/components/actionbar">action bar </a>is used with the Expanded or Advance table we can add the ability to customise the table. This allows users to customise what columns are shown or hidden and change which order they display.  </p>
-
 
     <h2>Dialog</h2>
 
@@ -31,21 +31,29 @@
 
     <p>An ajax call can be used to receive the new columns if desired.</p><!-- Requirement -->
 
+
+    <hr class="mb-5"/>
+
+    <h3>Show/hide on change</h3>
+
+
     <div class="container visualtest mb-5 bg-light">
       <TableAdvanced class="table--fullwidth">
         <Actionbar data-selectall>
 
-          <TableCustomisation />
+          <TableCustomisation data-open></TableCustomisation>
         </Actionbar>
         <table>
           <thead>
             <tr>
               <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
-              <th class="d-none">Criteria match</th>
+              <th>Criteria match</th>
+
               <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
               <th data-sort data-filters data-format="price">Current list price</th>
               <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
               <th data-sort>Weeks on market</th>
+
               <th class="th--fixed"></th>
             </tr>
           </thead>
@@ -53,28 +61,34 @@
             <tr>
               <td>59 The Glen, NE68 3LS</td>
               <td>full</td>
+
               <td>23-04-26</td>
               <td>600000</td>
               <td>Heaton</td>
               <td>11 weeks</td>
+
               <td><a href="/">View property</a></td>
             </tr>
             <tr>
               <td>59 Oak Street, NE68 3LS</td>
               <td>full</td>
+
               <td>27/04/2026</td>
               <td>£300,000</td>
               <td>Heaton</td>
               <td>13 weeks</td>
+
               <td><a href="/">View property</a></td>
             </tr>
             <tr>
               <td>59 The South Gate Wood, NE68 3LS</td>
               <td>full</td>
+
               <td>28/04/2026</td>
               <td>£500,000</td>
               <td>Cramlington</td>
               <td>213 weeks</td>
+
               <td><a href="/">View property</a></td>
             </tr>
             <tr>
@@ -92,17 +106,78 @@
     </div>
 
 
-    <hr class="mb-5"/>
-
-    <h3>Show/hide on change</h3>
-
-    <p>image</p>
-
     <p>Each column in the table has a checkbox adjacent to it. Un-checked columns will be hidden from the table.</p>
 
     <p>Checkboxes that are in the disabled state are columns that can’t be hidden</p><!-- Requirement -->
 
-    <p>image</p>
+    <div class="container visualtest mb-5 bg-light">
+      <TableAdvanced class="table--fullwidth">
+        <Actionbar data-selectall>
+
+          <TableCustomisation data-customisation='[{"label": "Property", "isDisabled": true},{"label": "Date listed", "isVisible": false}, {"label":"Current list price"}]' data-open></TableCustomisation>
+        </Actionbar>
+        <table>
+          <thead>
+            <tr>
+              <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
+              <th>Criteria match</th>
+
+              <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
+              <th data-sort data-filters data-format="price">Current list price</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
+              <th data-sort>Weeks on market</th>
+
+              <th class="th--fixed"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>59 The Glen, NE68 3LS</td>
+              <td>full</td>
+
+              <td>23-04-26</td>
+              <td>600000</td>
+              <td>Heaton</td>
+              <td>11 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>full</td>
+
+              <td>27/04/2026</td>
+              <td>£300,000</td>
+              <td>Heaton</td>
+              <td>13 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 The South Gate Wood, NE68 3LS</td>
+              <td>full</td>
+
+              <td>28/04/2026</td>
+              <td>£500,000</td>
+              <td>Cramlington</td>
+              <td>213 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>partial</td>
+              <td>27/06/2026</td>
+              <td>£1,300,000</td>
+              <td>Gosforth</td>
+              <td>21 days 3 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableAdvanced>
+    </div>
+
 
     <p>If the user clicks ‘Reset to default’ then the menu should return to the default values specified by the system.</p>
 
@@ -110,7 +185,76 @@
     <p>A blue dot appears on the edit table button to show the user that the table has been configured and saved so the user is aware changes have been applied when visiting it later. </p><!-- Requirement -->
 
     <h3>Table customise on save</h3>
-    <p>Image</p>
+
+    <div class="container visualtest mb-5 bg-light">
+      <TableAdvanced class="table--fullwidth">
+        <Actionbar data-selectall>
+
+          <TableCustomisation data-save data-customisation='[{"label": "Property", "isDisabled": true},{"label": "Date listed", "order": 2 }, {"label":"Current list price", "order": 1}]' data-open></TableCustomisation>
+        </Actionbar>
+        <table>
+          <thead>
+            <tr>
+              <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
+              <th>Criteria match</th>
+
+              <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
+              <th data-sort data-filters data-format="price">Current list price</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
+              <th data-sort>Weeks on market</th>
+
+              <th class="th--fixed"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>59 The Glen, NE68 3LS</td>
+              <td>full</td>
+
+              <td>23-04-26</td>
+              <td>600000</td>
+              <td>Heaton</td>
+              <td>11 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>full</td>
+
+              <td>27/04/2026</td>
+              <td>£300,000</td>
+              <td>Heaton</td>
+              <td>13 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 The South Gate Wood, NE68 3LS</td>
+              <td>full</td>
+
+              <td>28/04/2026</td>
+              <td>£500,000</td>
+              <td>Cramlington</td>
+              <td>213 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>partial</td>
+              <td>27/06/2026</td>
+              <td>£1,300,000</td>
+              <td>Gosforth</td>
+              <td>21 days 3 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableAdvanced>
+    </div>
+
+
 
     <p>Each column in the table has a checkbox adjacent to it. Un-checked columns will be hidden from the table on save and a success toast notification will be displayed to give the user confirmation that the save has occurred.</p>
 
@@ -118,13 +262,81 @@
 
     <p>If the user clicks ‘Reset to default’ then the menu should return to the default values specified by the system.</p>
 
-    <p>Image</p>
+    <div class="container visualtest mb-5 bg-light">
+      <TableAdvanced class="table--fullwidth">
+        <Actionbar data-selectall>
+
+          <TableCustomisation data-save data-customisation='[{"label": "Property", "isDisabled": true},{"label": "Date listed", "order": 2 }, {"label":"Current list price", "order": 1}]'></TableCustomisation>
+        </Actionbar>
+        <table>
+          <thead>
+            <tr>
+              <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
+              <th>Criteria match</th>
+
+              <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
+              <th data-sort data-filters data-format="price">Current list price</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
+              <th data-sort>Weeks on market</th>
+
+              <th class="th--fixed"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>59 The Glen, NE68 3LS</td>
+              <td>full</td>
+
+              <td>23-04-26</td>
+              <td>600000</td>
+              <td>Heaton</td>
+              <td>11 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>full</td>
+
+              <td>27/04/2026</td>
+              <td>£300,000</td>
+              <td>Heaton</td>
+              <td>13 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 The South Gate Wood, NE68 3LS</td>
+              <td>full</td>
+
+              <td>28/04/2026</td>
+              <td>£500,000</td>
+              <td>Cramlington</td>
+              <td>213 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>partial</td>
+              <td>27/06/2026</td>
+              <td>£1,300,000</td>
+              <td>Gosforth</td>
+              <td>21 days 3 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableAdvanced>
+    </div>
+
+
 
     <p>When the user clicks save it hides the column. A ‘saved’ customised state can only be cleared if the user ‘resets’ table, supersedes a save or clears cookies.</p>
 
     <p>A blue dot appears on the edit table button to show the user that the table has been configured and saved so the user is aware changes have been applied when visiting it later.</p>
 
-    <h2>Re ordering columns</h2>
+    <h2>Re-ordering columns</h2>
 
     <p>When an action bar is used with a table we can add the ability to re-order columns via the ‘Customise’ button. </p>
 
@@ -132,85 +344,159 @@
 
     <p>An ajax call can be used to receive the new column order if desired.</p>
 
-    <p>Image</p>
+    <div class="container visualtest mb-5 bg-light">
+      <TableAdvanced class="table--fullwidth">
+        <Actionbar data-selectall>
+
+          <TableCustomisation data-orderable data-customisation='[{"label": "Property", "isDisabled": true},{"label": "Date listed", "order": 2 }, {"label":"Current list price", "order": 1}]' data-open></TableCustomisation>
+        </Actionbar>
+        <table>
+          <thead>
+            <tr>
+              <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
+              <th>Criteria match</th>
+
+              <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
+              <th data-sort data-filters data-format="price">Current list price</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
+              <th data-sort>Weeks on market</th>
+
+              <th class="th--fixed"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>59 The Glen, NE68 3LS</td>
+              <td>full</td>
+
+              <td>23-04-26</td>
+              <td>600000</td>
+              <td>Heaton</td>
+              <td>11 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>full</td>
+
+              <td>27/04/2026</td>
+              <td>£300,000</td>
+              <td>Heaton</td>
+              <td>13 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 The South Gate Wood, NE68 3LS</td>
+              <td>full</td>
+
+              <td>28/04/2026</td>
+              <td>£500,000</td>
+              <td>Cramlington</td>
+              <td>213 weeks</td>
+
+              <td><a href="/">View property</a></td>
+            </tr>
+            <tr>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>partial</td>
+              <td>27/06/2026</td>
+              <td>£1,300,000</td>
+              <td>Gosforth</td>
+              <td>21 days 3 weeks</td>
+              <td><a href="/">View property</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableAdvanced>
+    </div>
+
 
     <h2>Loading state example</h2>
 
     <p>In the event of the table customisation taking more the 3 secs a ‘fetching data’ loading state with animated spinner will display to provide feedback to the user that the action is taking place, it’s just taking longer than expected.   </p>
 
-    <p>Image</p>
+    <div class="container visualtest mb-5 bg-light">
+      <TableAdvanced class="table--fullwidth">
+        <Actionbar data-selectall>
 
-    <Integration component="table-customisation" componentName="iam-table-customisation" >
-      <template #details>
-        <h4>Component Overview</h4>
+          <TableCustomisation data-customisation='[{"label": "Property", "isDisabled": true},{"label": "Date listed", "order": 2 }, {"label":"Current list price", "order": 1}]' data-open class="loading"></TableCustomisation>
+        </Actionbar>
         <table>
           <thead>
             <tr>
-              <th>Component</th>
-              <th>Use case</th>
+              <th class="th--fixed" data-sort data-filters='[{"operator": "equals", "type": "text"}]'>Property</th>
+              <th>Criteria match</th>
+
+              <th data-sort data-filters='[{"operator": "equals", "type": "date"}]' data-format="date">Date listed</th>
+              <th data-sort data-filters data-format="price">Current list price</th>
+              <th data-sort data-filters='[{"operator": "equals", "type": "select"}]'>Branch</th>
+              <th data-sort>Weeks on market</th>
+
+              <th class="th--fixed"></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th class="text-nowrap"><a href="/elements/tables" class="mb-1">Table element</a></th>
-              <td>A basic table without pagination.</td>
+              <td>59 The Glen, NE68 3LS</td>
+              <td>full</td>
+
+              <td>23-04-26</td>
+              <td>600000</td>
+              <td>Heaton</td>
+              <td>11 weeks</td>
+
+              <td><a href="/">View property</a></td>
             </tr>
             <tr>
-              <th class="text-nowrap"><a href="/tables/basic" class="mb-1">Basic table</a></th>
-              <td>A basic table with pagination and some additional features.</td>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>full</td>
+
+              <td>27/04/2026</td>
+              <td>£300,000</td>
+              <td>Heaton</td>
+              <td>13 weeks</td>
+
+              <td><a href="/">View property</a></td>
             </tr>
             <tr>
-              <th class="text-nowrap"><a href="/tables/default" class="mb-1">Table (Default)</a></th>
-              <td>A table which can use an actionbar or can have an attached form to do filtering.</td>
+              <td>59 The South Gate Wood, NE68 3LS</td>
+              <td>full</td>
+
+              <td>28/04/2026</td>
+              <td>£500,000</td>
+              <td>Cramlington</td>
+              <td>213 weeks</td>
+
+              <td><a href="/">View property</a></td>
             </tr>
             <tr>
-              <th class="text-nowrap"><a href="/tables/advanced" class="mb-1">Advanced Table</a></th>
-              <td>A table with inline column filtering and sorting.</td>
-            </tr>
-            <tr>
-              <th class="text-nowrap"><a href="/tables/ajax" class="mb-1">Ajax Table</a></th>
-              <td>A table with ajax data loading.</td>
+              <td>59 Oak Street, NE68 3LS</td>
+              <td>partial</td>
+              <td>27/06/2026</td>
+              <td>£1,300,000</td>
+              <td>Gosforth</td>
+              <td>21 days 3 weeks</td>
+              <td><a href="/">View property</a></td>
             </tr>
           </tbody>
         </table>
+      </TableAdvanced>
+    </div>
 
-        <p class="note mb-5"><strong>Note:</strong> Each component is an evolution of the previous ones. Features are cumulative, so the advanced table has all the features of the basic and expanded tables. </p>
 
-        <h4>Features comparison</h4>
-        <table>
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Table element</th>
-              <th>Basic Table</th>
-              <th>Expanded Table</th>
-              <th>Advanced Table</th>
-              <th>Ajax Table</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="feature in tableFeatures" :key="feature">
-              <th>{{ feature }}{{ feature == 'Responsive Mobile view' ? ' [1]' : '' }}</th>
-              <td><i v-if="elementTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
-              <td><i v-if="basicTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
-              <td><i v-if="expandedTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
-              <td><i v-if="advancedTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
-              <td><i v-if="ajaxTableFeatures.includes(feature)" class="fa-regular fa-check text-complete"></i></td>
-            </tr>
-          </tbody>
-        </table>
+    <Integration component="table-customisation" componentName="iam-table-customisation">
 
-        <p>[1] Responsive Mobile view is not supported in the Advanced Table or the ajax table that uses the filtering and sorting via the column headers.</p>
-      </template>
       <template #web-component>
-        <pre><code>{{`<iam-${componentType}>
-  <table>
-    <thead>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-  </iam-${componentType}>`}}</code></pre>
+        <pre><code>{{`<iam-actionbar><iam-table-customisation></iam-table-customisation></iam-actionbar>
+<table>
+  <thead>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+      `}}</code></pre>
       </template>
 
       <template #attr>
@@ -226,49 +512,68 @@
           </thead>
           <tbody>
             <tr>
-              <th>data-show (Passed down to the pagination)</th>
-              <td>15</td>
-              <td>Number</td>
-              <td>No</td>
-              <td>Set the number rows shown on page load</td>
-            </tr>
-            <tr>
-              <th>data-increment (Passed down to the pagination)</th>
-              <td>15</td>
-              <td>Number</td>
-              <td>No</td>
-              <td>Set the number rows added to the page when loading more</td>
-            </tr>
-            <tr>
-              <th>data-page (Passed down to the pagination)</th>
-              <td>1</td>
-              <td>Number</td>
-              <td>No</td>
-              <td>Set the page shown</td>
-            </tr>
-            <tr>
-              <th>data-total (Passed down to the pagination)</th>
+              <th>data-title</th>
               <td></td>
-              <td>Number</td>
+              <td>String</td>
+              <td>No</td>
+              <td>Set the title of the table customisation dialog</td>
+            </tr>
+            <tr>
+              <th class="text-nowrap">data-customisation</th>
+              <td></td>
+              <td>Array</td>
+              <td>No</td>
+              <td>Set the initial customisation settings for the table</td>
+            </tr>
+            <tr>
+              <th>data-save</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>Set whether the customisation should be saved</td>
+            </tr>
+            <tr>
+              <th>data-order</th>
+              <td>false</td>
+              <td>Flag</td>
               <td>Yes</td>
               <td>
-                Set the total of results that could be shown, used to work button actions. If the total is calculated
-                via javascript and by querying the dom by default.
+                Set whether the table columns can be reordered. If set, the order of the columns can be changed by the user.
               </td>
             </tr>
+          </tbody>
+        </table>
+
+        <span class="h4">Customisation array object items</span>
+        <p>The customisation array should contain objects with the following properties:</p>
+        <table>
+          <thead>
             <tr>
-              <th>data-submit</th>
-              <td></td>
-              <td>Flag</td>
-              <td>No</td>
-              <td>When set will submit the attached or generated form of the table. Causing the page to reload with the form data.</td>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>label</th>
+              <td>String</td>
+              <td>The label of the column to customise</td>
             </tr>
             <tr>
-              <th>data-selectall</th>
-              <td></td>
+              <th>isDisabled</th>
               <td>Flag</td>
-              <td>No</td>
-              <td>Creates a select box for each row</td>
+              <td>Set whether the column is disabled or not</td>
+            </tr>
+            <tr>
+              <th>isVisible</th>
+              <td>Flag</td>
+              <td>Set whether the column is visible</td>
+            </tr>
+            <tr>
+              <th>order</th>
+              <td>Number</td>
+              <td>Set the order of the column</td>
             </tr>
           </tbody>
         </table>
@@ -284,54 +589,8 @@
           </thead>
           <tbody>
             <tr>
-              <th>.table-fullwidth</th>
-              <td>The table will always be fullwidth even on mobile phones.</td>
-            </tr>
-            <tr>
-              <th>.table-cta</th>
-              <td>Fixes the last column of the table to the right so the rows CTA is always visible.</td>
-            </tr>
-            <tr>
-              <th>.mh-sm</th>
-              <td>
-                Set a small max height onto the table, when used set a large data-total attribute so that the pagination
-                doesn't show.
-              </td>
-            </tr>
-            <tr>
-              <th>.mh-md</th>
-              <td>
-                Set a medium max height onto the table, when used set a large data-total attribute so that the
-                pagination doesn't show.
-              </td>
-            </tr>
-            <tr>
-              <th>.mh-large</th>
-              <td>
-                Set a large max height onto the table, when used set a large data-total attribute so that the pagination
-                doesn't show.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
-
-      <template #parts>
-        <table>
-          <thead>
-            <tr>
-              <th>Part</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>container</th>
-              <td>A container div</td>
-            </tr>
-            <tr>
-              <th>wrapper</th>
-              <td>A wrapper div</td>
+              <th>.loading</th>
+              <td>Show a loading state in the dialog.</td>
             </tr>
           </tbody>
         </table>
@@ -341,16 +600,6 @@
         <span v-html="events"></span>
       </template>
 
-      <template #criteria>
-        <ul>
-          <li>The pagination should only show when it it needed.</li>
-          <li>The main row CTA should always be shown.</li>
-          <li>The mobile view of the row should only show the basics until expanded</li>
-        </ul>
-      </template>
-      <template #data-layer>
-        <span v-html="events"></span>
-      </template>
     </Integration>
     <Versions pdf="/pdfs/table-customisation.pdf">
       <table>

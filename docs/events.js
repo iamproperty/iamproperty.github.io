@@ -180,6 +180,33 @@ export const table = `<table>
   </tbody>
 </table>`;
 
+export const tableCustomisation = `<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Dispatched</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>table-customisation-cancelled</th>
+      <td>When the table customisation has been cancelled</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>table-customisation-reset</th>
+      <td>When the table customisation has been reset</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>table-customisation-saved</th>
+      <td>When the table customisation has been saved</td>
+      <td>{ "detail": '[{ "label": "column1", "isVisible": true, "isDisabled": false, "order": 0 }]' }</td>
+    </tr>
+  </tbody>
+</table>`;
+
 export const tabs = `<table>
   <thead>
     <tr>

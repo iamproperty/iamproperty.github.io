@@ -4,6 +4,7 @@ import iamActionbar from '../../js/components/actionbar/actionbar.component.min.
 import iamMenu from '../../js/components/menu/menu.component.min.js';
 import iamMap from '../../js/components/map/map.component.min.js';
 import iamNotification from '../../js/components/notification/notification.component.min.js';
+import iamTableCustomisation from '../../js/components/table-customisation/table-customisation.component.min.js';
 import iamTooltip from '../../js/components/tooltip/tooltip.component.min.js';
 import iamAppInsights from './insights.app.min.js';
 
@@ -26,6 +27,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
   if (!window.customElements.get(`iam-map`) && iamMap)
     window.customElements.define(`iam-map`, iamMap);
+
+  if (!window.customElements.get(`iam-table-customisation`) && iamTableCustomisation)
+    window.customElements.define(`iam-table-customisation`, iamTableCustomisation);
 
   if (!window.customElements.get(`iam-tooltip`) && iamTooltip)
     window.customElements.define(`iam-tooltip`, iamTooltip);

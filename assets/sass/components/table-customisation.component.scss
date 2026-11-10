@@ -2,8 +2,10 @@
 
 @use '../elements/buttons--global.css';
 @use '../elements/buttons--action.css';
+@use '../elements/buttons--compact.css';
 @use '../elements/forms.scss';
 @use '../elements/input.scss';
+@use '../elements/spinner.css';
 
 
 @use '../elements/dropdown' as *;
@@ -37,18 +39,82 @@ label {
 
 // #endregion checkboxes
 
-// #region buttons
+// #region Up and down buttons
+
+.customisation-option {
+  display: flex;
+  align-items: center;
+  gap: 0rem;
+}
+
+
+@layer elements {
+  .customisation-option .btn-compact {
+    --compact-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .customisation-option .btn-compact:before {
+    content: ""!important;
+    display: block!important;
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 1em 1em;
+  }
+
+  .customisation-option div {
+    margin-left: auto;
+    padding-left: 1rem;
+  }
+
+  .customisation-option .btn-up {
+
+    margin-left: auto;
+
+    &:before {
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M160 128C142.3 128 128 142.3 128 160L128 480C128 497.7 142.3 512 160 512L480 512C497.7 512 512 497.7 512 480L512 160C512 142.3 497.7 128 480 128L160 128zM96 160C96 124.7 124.7 96 160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM331.3 228.7L403.3 300.7C409.5 306.9 409.5 317.1 403.3 323.3C397.1 329.5 386.9 329.5 380.7 323.3L336 278.6L336 400C336 408.8 328.8 416 320 416C311.2 416 304 408.8 304 400L304 278.6L259.3 323.3C253.1 329.5 242.9 329.5 236.7 323.3C230.5 317.1 230.5 306.9 236.7 300.7L308.7 228.7C314.9 222.5 325.1 222.5 331.3 228.7z'/%3E%3C/svg%3E");
+    }
+  }
+  .customisation-option .btn-down {
+
+    &:before {
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M160 128C142.3 128 128 142.3 128 160L128 480C128 497.7 142.3 512 160 512L480 512C497.7 512 512 497.7 512 480L512 160C512 142.3 497.7 128 480 128L160 128zM96 160C96 124.7 124.7 96 160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM308.7 411.3L236.7 339.3C230.5 333.1 230.5 322.9 236.7 316.7C242.9 310.5 253.1 310.5 259.3 316.7L304 361.4L304 240C304 231.2 311.2 224 320 224C328.8 224 336 231.2 336 240L336 361.4L380.7 316.7C386.9 310.5 397.1 310.5 403.3 316.7C409.5 322.9 409.5 333.1 403.3 339.3L331.3 411.3C325.1 417.5 314.9 417.5 308.7 411.3z'/%3E%3C/svg%3E");
+    }
+  }
+  .customisation-option:has(input:disabled) :is(.btn-up,.btn-down) {
+    display: none;
+  }
+  .customisation-option:first-child .btn-up {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .customisation-option:has(input:disabled) + .customisation-option .btn-up {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .customisation-option:last-child .btn-down {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .customisation-option:has(+ .customisation-option input:disabled) .btn-down {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+}
+// #endregion Up and down buttons
+
+// #region action buttons
 #dialog-actions {
   padding-top: 1rem;
   display: flex;
-  justify-content: flex-end;
   gap: 0.5rem;
 }
 
 #reset-button {
   margin-right: 1rem!important;
   border: none;
-
   outline: 1px solid var(--colour-muted);
   
   &:not(:hover, :focus) {
@@ -56,4 +122,76 @@ label {
     outline: none;
   }
 }
+
+#reset-button + * {
+
+  margin-left: auto!important;
+}
+
+:host(:not([data-save])) :is(#cancel-button, #save-button) {
+  display: none;
+}
 // #endregion buttons
+
+// #region indicators
+
+
+:host([data-customisation]) #customisation-button {
+  position: relative;
+}
+
+:host([data-customisation]) #customisation-button:before {
+
+  content: '';
+  position: absolute;
+  top: 0.25rem;
+  left: 1.1rem;
+  margin: 0!important;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--colour-info);
+  z-index: 1;
+}
+
+// #endregion action buttons
+
+
+// #region loading state
+:is(#spinner, #fetching-data) {
+  display: none;
+}
+
+#spinner {
+
+  text-align: center;
+  --spinner-size: 1.5rem;
+  padding-inline: 3rem;
+  padding-block: 1rem;
+}
+
+#fetching-data {
+  text-align: center;
+  font-size: var(--h4-fs);
+  line-height: var(--h4-lh);
+  padding-bottom: var(--h4-pb);
+  max-width: var(--content-max-width);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: var(--font-heading);
+  font-style: normal;
+  font-weight: bold;
+
+  color: var(--colour-heading);
+  clear: both;
+  padding-inline: 3rem;
+}
+
+:host(.loading) :is(#spinner, #fetching-data) {
+  display: block;
+}
+
+:host(.loading) dialog > :not(#spinner):not(#fetching-data) {
+  display: none;
+}
+// #endregion
