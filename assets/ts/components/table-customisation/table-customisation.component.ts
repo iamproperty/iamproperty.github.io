@@ -166,7 +166,13 @@ class iamTableCustomisation extends HTMLElement {
 
           // Create a label with a checkbox for the column customisation option
           const label = document.createElement('label');
-          label.innerHTML = /*HTML*/`<input type="checkbox" data-for="${columnHeader}" ${isVisible ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>${columnHeader}`;
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.setAttribute('data-for', columnHeader);
+          checkbox.defaultChecked = isVisible;
+          checkbox.disabled = isDisabled;
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(columnHeader));
           option.appendChild(label);
 
           // Create up and down buttons for reordering columns
