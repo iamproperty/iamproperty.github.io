@@ -648,6 +648,15 @@ class iamAppInsights extends HTMLElement {
         composed: true
       }));
 
+      setTimeout(() => {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+        }, 1000);
     });
 
     this.addEventListener('table-customisation-reset', (event: CustomEvent) => {
@@ -661,6 +670,15 @@ class iamAppInsights extends HTMLElement {
         composed: true
       }));
 
+      setTimeout(() => {
+
+        const dispatchedEvent = new CustomEvent('update-height', {
+          detail: {
+            height: this.offsetHeight
+          },
+        });
+        this.dispatchEvent(dispatchedEvent);
+      }, 1000);
     });
 
 
