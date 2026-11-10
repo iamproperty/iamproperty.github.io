@@ -639,6 +639,16 @@ class iamAppInsights extends HTMLElement {
       console.log('Table customisation saved:', event.detail);
       if(this.hasAttribute('id'))
         localStorage.setItem(`insight-customisation#${this.getAttribute('id')}`, JSON.stringify(event.detail));
+
+      this.dispatchEvent(new CustomEvent('insight-action', {
+          detail: {
+            action: 'table-customisation-saved',
+            customisation: event.detail
+          },
+          bubbles: true,
+          composed: true
+        }));
+
     });
 
 
