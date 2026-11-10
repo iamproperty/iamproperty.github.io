@@ -314,6 +314,7 @@ class iamTableCustomisation extends HTMLElement {
     // #region Actions and events
     cancelButton.addEventListener('click', () => {
 
+      this.dispatchEvent(new CustomEvent('table-customisation-cancelled'));
       // Reload the original customisation options
       optionsContainer?.innerHTML = createDialogOptions(tableElement,customisation);
 
@@ -327,6 +328,7 @@ class iamTableCustomisation extends HTMLElement {
       }
 
       localStorage.removeItem(localStorageKey);
+      this.dispatchEvent(new CustomEvent('table-customisation-reset'));
 
 
       optionsContainer?.innerHTML = createDialogOptions(tableElement,[]);
@@ -341,7 +343,6 @@ class iamTableCustomisation extends HTMLElement {
         newCustomisation.push({ label: checkbox.getAttribute('data-for') || '', isVisible: (checkbox as HTMLInputElement).checked, isDisabled: (checkbox as HTMLInputElement).disabled, order: index });
       });
 
-      console.log(newCustomisation);
       customisation = newCustomisation;
       // Save the new customisation settings to either local storage or the data attribute on the component itself
       if(this.hasAttribute('data-customisation')) {
