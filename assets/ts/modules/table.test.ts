@@ -1,6 +1,6 @@
 import { describe, expect, it } from './test.ts';
 import { createElement, installTestDom } from './test-dom.ts';
-import { setFixedCellsViaHeaders } from './table.ts';
+import { fixTableCells, setFixedCellsViaHeaders } from './table.ts';
 
 installTestDom();
 
@@ -57,5 +57,50 @@ describe('Table fixed columns', () => {
     } finally {
       globalThis.ResizeObserver = originalObserver;
     }
+  });
+});
+
+
+describe('Table cell formatting', () => {
+  it('reads each header once and preserves labels, formats, classes and statuses', () => {
+    const table = createElement('table');
+    const thead = createElement('thead');
+    const headRow = createElement('tr');
+    const heading = createElement('th', { dataTdClass: 'status-cell', dataFormat: 'capitalise', class: 'd-none' });
+    const label = createElement('span', { class: 'th__content' }, 'Status');
+    heading.appendChild(label);
+    headRow.appendChild(heading);
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+    const tbody = createElement('tbody');
+    table.appendChild(tbody);
+    const cells = ['pending', 'complete', 'other'].map((value) => {
+      const row = createElement('tr');
+      const cell = createElement('td', {}, value);
+      row.appendChild(cell);
+      // A surplus cell must remain untouched when it has no matching heading.
+      row.appendChild(createElement('td', {}, 'Unconfigured'));
+      tbody.appendChild(row);
+      return cell;
+    });
+    let headerReads = 0;
+    const querySelector = heading.querySelector.bind(heading);
+    heading.querySelector = (selector): ReturnType<typeof querySelector> => {
+      headerReads++;
+      return querySelector(selector);
+    };
+    fixTableCells(table);
+    expect(headerReads === 1);
+    cells.forEach((cell, index) => {
+      expect(cell.getAttribute('data-label') === 'Status');
+      expect(cell.classList.contains('status-cell') && cell.classList.contains('d-none'));
+      expect(cell.getAttribute('data-format') === 'capitalise');
+      expect(cell.getAttribute('data-original-value') === ['pending', 'complete', 'other'][index]);
+      expect(cell.textContent === ['Pending', 'Complete', 'Other'][index]);
+      expect(!cell.nextElementSibling.hasAttribute('data-label'));
+    });
+    expect(cells[0].getAttribute('data-content') === 'pending');
+    expect(cells[1].getAttribute('data-content') === 'complete');
+    expect(!cells[2].hasAttribute('data-content'));
   });
 });

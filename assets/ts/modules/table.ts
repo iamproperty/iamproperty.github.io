@@ -308,59 +308,65 @@ export const paginateRows = (component, table, pagination): void => {
 };
 
 export const fixTableCells = (table): void => {
-  const colHeadings = Array.from(table.querySelectorAll('thead th'));
+  // Header HTML and formatting metadata are shared by every row in a column.
+  const columns = Array.from(table.querySelectorAll('thead th')).map((heading: HTMLElement) => {
+    const label = document.createElement('div');
+    label.innerHTML = heading.querySelector('.th__content')?.innerHTML || heading.innerHTML;
+    return {
+      label: label.textContent || label.innerText || '',
+      cellClass: heading.getAttribute('data-td-class'),
+      format: heading.getAttribute('data-format'),
+      hidden: heading.classList.contains('d-none'),
+    };
+  });
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
+
+  const statuses = new Set([
+    '0',
+    'low',
+    'medium',
+    'high',
+    'unknown',
+    'n/a',
+    'pending',
+    'verified',
+    'due',
+    'overdue',
+    'incomplete',
+    'complete',
+    'completed',
+    'approval required',
+    'upcoming',
+    'requires approval',
+    'to do',
+    'on track',
+    'not started',
+    'warning',
+    'successful',
+    'failed',
+  ]);
 
   colRows.forEach((row) => {
     const cells = Array.from(row.querySelectorAll('th, td'));
-    const statuses = [
-      '0',
-      'low',
-      'medium',
-      'high',
-      'unknown',
-      'n/a',
-      'pending',
-      'verified',
-      'due',
-      'overdue',
-      'incomplete',
-      'complete',
-      'completed',
-      'approval required',
-      'upcoming',
-      'requires approval',
-      'to do',
-      'on track',
-      'not started',
-      'warning',
-      'successful',
-      'failed',
-    ];
 
     cells.forEach((cell, cellIndex) => {
-      const heading = colHeadings[cellIndex];
-      if (typeof heading != 'undefined') {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
-        const headingText = tempDiv.textContent || tempDiv.innerText || '';
-        cell.setAttribute('data-label', headingText);
+      const column = columns[cellIndex];
+      if (column) {
+        cell.setAttribute('data-label', column.label);
 
-        if (heading.hasAttribute('data-td-class')) cell.setAttribute('class', heading.getAttribute('data-td-class'));
+        if (column.cellClass !== null) cell.setAttribute('class', column.cellClass);
 
-        if (heading.hasAttribute('data-format')) {
-          cell.setAttribute('data-original-value', cell.textContent.trim());
-          cell.setAttribute('data-format', heading.getAttribute('data-format'));
-          cell.innerHTML = formatData(heading.getAttribute('data-format'), cell.textContent.trim()); //Make sure date format is consistent
+        if (column.format !== null) {
+          const originalValue = cell.textContent.trim();
+          cell.setAttribute('data-original-value', originalValue);
+          cell.setAttribute('data-format', column.format);
+          cell.innerHTML = formatData(column.format, originalValue);
         }
 
-        if (heading.classList.contains('d-none')) {
-          cell.classList.add('d-none');
-        }
+        if (column.hidden) cell.classList.add('d-none');
 
-        if (statuses.includes(cell.textContent.trim().toLowerCase())) {
-          cell.setAttribute('data-content', cell.textContent.trim().toLowerCase());
-        }
+        const status = cell.textContent.trim().toLowerCase();
+        if (statuses.has(status)) cell.setAttribute('data-content', status);
       }
     });
   });
