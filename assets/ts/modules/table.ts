@@ -136,22 +136,6 @@ export const fixTablebody = (component, table, pagination): void => {
 };
 
 export const setFixedCellsViaHeaders = (table): void => {
-  const updateLeftOffsets = (): void => {
-    table.querySelectorAll('th, td').forEach((cell) => {
-
-      const previousColWidths =
-        cell.previousElementSibling && cell.previousElementSibling.dataset.previousColWidths
-          ? parseInt(cell.previousElementSibling.dataset.previousColWidths) + (cell.previousElementSibling.classList.contains('th--fixed') || cell.previousElementSibling.classList.contains('td--fixed') ? cell.previousElementSibling.offsetWidth : 0)
-          : 0;
-
-      cell.dataset.previousColWidths = previousColWidths;
-      cell.style.setProperty('--left-offset', `${previousColWidths}px`);
-    });
-  };
-
-  updateLeftOffsets();
-  new ResizeObserver(updateLeftOffsets).observe(table);
-
   table.querySelectorAll('thead th.th--fixed').forEach((th) => {
 
     const thIndex = Array.prototype.slice.call(th.parentNode.children).indexOf(th) + 1;
@@ -164,6 +148,33 @@ export const setFixedCellsViaHeaders = (table): void => {
       }
     });
   });
+
+  const updateLeftOffsets = (): void => {
+    // Measure every fixed cell before changing attributes or inline styles.
+    const cells = Array.from(table.querySelectorAll('th, td')) as HTMLElement[];
+    const widths = new Map<HTMLElement, number>();
+    cells.forEach((cell) => {
+      if (cell.classList.contains('th--fixed') || cell.classList.contains('td--fixed')) {
+        widths.set(cell, cell.offsetWidth);
+      }
+    });
+
+    const offsets = new Map<Element, number>();
+    cells.forEach((cell) => {
+      const previous = cell.previousElementSibling;
+      offsets.set(cell, previous ? (offsets.get(previous) || 0) + (widths.get(previous as HTMLElement) || 0) : 0);
+    });
+
+    cells.forEach((cell) => {
+      const offset = String(offsets.get(cell));
+      const value = `${offset}px`;
+      if (cell.dataset.previousColWidths !== offset) cell.dataset.previousColWidths = offset;
+      if (cell.style.getPropertyValue('--left-offset') !== value) cell.style.setProperty('--left-offset', value);
+    });
+  };
+
+  updateLeftOffsets();
+  new ResizeObserver(updateLeftOffsets).observe(table);
 };
 
 export const highlightRows = (component): void => {
