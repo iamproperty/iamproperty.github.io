@@ -489,30 +489,39 @@ export const addSelectboxes = (component, table): void => {
     return;
 
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
-    if (row.querySelector('.expand-button-heading') && !row.querySelector('.selectrow-heading'))
-      row.querySelector('.expand-button-heading').insertAdjacentHTML('afterend', `<th class="th--fixed selectrow-heading"></th>`);
-    else if(!row.querySelector('.selectrow-heading'))
-      row.insertAdjacentHTML('afterbegin', `<th class="th--fixed selectrow-heading"></th>`);
+    if (row.querySelector('.selectrow-heading')) return;
+    const heading = document.createElement('th');
+    heading.setAttribute('class', 'th--fixed selectrow-heading');
+    const expand = row.querySelector('.expand-button-heading');
+    row.insertBefore(heading, expand ? expand.nextSibling : row.firstChild);
   });
+
+  // Build the static markup once instead of parsing the same HTML for every row.
+  const selectionCell = document.createElement('td');
+  selectionCell.setAttribute('class', 'td--fixed selectrow selected');
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.setAttribute('name', 'row');
+  const label = document.createElement('label');
+  const text = document.createElement('span');
+  text.setAttribute('class', 'visually-hidden');
+  text.textContent = 'Select row';
+  label.appendChild(text);
+  selectionCell.appendChild(checkbox);
+  selectionCell.appendChild(label);
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     row.setAttribute('data-index', index + 1);
-    if (!row.querySelector('.selectrow')) {
-      const rowID = `row${uniqueID(index)}`;
+    if (row.querySelector('.selectrow')) return;
 
-      if (row.querySelector('.td--expand'))
-        row
-          .querySelector('.td--expand')
-          .insertAdjacentHTML(
-            'afterend',
-            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-          );
-      else
-        row.insertAdjacentHTML(
-          'afterbegin',
-          `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-        );
-    }
+    const cell = selectionCell.cloneNode(true) as HTMLTableCellElement;
+    const rowID = `row${uniqueID(index)}`;
+    const input = cell.querySelector('input');
+    input.setAttribute('id', rowID);
+    if (row.hasAttribute('data-selected')) input.setAttribute('checked', 'true');
+    cell.querySelector('label').setAttribute('for', rowID);
+    const expand = row.querySelector('.td--expand');
+    row.insertBefore(cell, expand ? expand.nextSibling : row.firstChild);
   });
 
 };

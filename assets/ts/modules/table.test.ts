@@ -1,6 +1,6 @@
 import { describe, expect, it } from './test.ts';
 import { createElement, installTestDom } from './test-dom.ts';
-import { fixTableCells, setFixedCellsViaHeaders } from './table.ts';
+import { addSelectboxes, fixTableCells, setFixedCellsViaHeaders } from './table.ts';
 
 installTestDom();
 
@@ -102,5 +102,60 @@ describe('Table cell formatting', () => {
     expect(cells[0].getAttribute('data-content') === 'pending');
     expect(cells[1].getAttribute('data-content') === 'complete');
     expect(!cells[2].hasAttribute('data-content'));
+  });
+});
+
+
+describe('Table row selection setup', () => {
+  it('preserves selection placement, initial state, labels and existing controls', () => {
+    const component = createElement('iam-table-advanced', { dataSelectall: '' });
+    const table = createElement('table');
+    const thead = createElement('thead');
+    const heading = createElement('tr');
+    const expandHeading = createElement('th', { class: 'expand-button-heading' });
+    heading.appendChild(expandHeading);
+    thead.appendChild(heading);
+    table.appendChild(thead);
+    const tbody = createElement('tbody');
+    table.appendChild(tbody);
+    const rows = [createElement('tr', { dataSelected: '' }), createElement('tr'), createElement('tr')];
+    const expand = createElement('td', { class: 'td--expand' });
+    rows[0].appendChild(expand);
+    const existing = createElement('td', { class: 'selectrow' });
+    rows[2].appendChild(existing);
+    rows.forEach((row) => {
+      row.appendChild(createElement('td', {}, 'Property'));
+      tbody.appendChild(row);
+    });
+    addSelectboxes(component, table);
+    const selected = rows[0].querySelector('.selectrow');
+    const unselected = rows[1].querySelector('.selectrow');
+    expect(expandHeading.nextElementSibling.classList.contains('selectrow-heading'));
+    expect(expand.nextElementSibling === selected);
+    expect(rows[1].firstChild === unselected);
+    expect(selected.querySelector('input').hasAttribute('checked'));
+    expect(!unselected.querySelector('input').hasAttribute('checked'));
+    const ids = [selected, unselected].map((cell) => {
+      const input = cell.querySelector('input');
+      expect(input.getAttribute('type') === 'checkbox' && input.getAttribute('name') === 'row');
+      expect(cell.querySelector('label').getAttribute('for') === input.getAttribute('id'));
+      expect(cell.querySelector('span').textContent === 'Select row');
+      return input.getAttribute('id');
+    });
+    expect(ids[0] !== ids[1]);
+    expect(rows.map((row) => row.getAttribute('data-index')).join() === '1,2,3');
+    addSelectboxes(component, table);
+    expect(heading.querySelectorAll('.selectrow-heading').length === 1);
+    expect(rows.every((row) => row.querySelectorAll('.selectrow').length === 1));
+    expect(rows[0].querySelector('.selectrow') === selected);
+    expect(rows[2].querySelector('.selectrow') === existing);
+  });
+
+  it('leaves tables without data-selectall untouched', () => {
+    const component = createElement('iam-table-advanced');
+    const table = createElement('table');
+    const before = table.outerHTML;
+    addSelectboxes(component, table);
+    expect(table.outerHTML === before);
   });
 });
