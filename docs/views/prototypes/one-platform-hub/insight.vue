@@ -11,6 +11,8 @@ import Modal from '@/components/Modal/Modal.vue';
 
 import Notification from '@/components/Notification/Notification.vue';
 
+import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
+
 import Header from '@/components/Header/Header.vue';
 // #endregion
 
@@ -525,7 +527,19 @@ const loadDashboards = async (): any => {
 
 
     <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
-      <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
+
+      <div class="admin-panel__heading bg-white">
+
+        <h2 id="hub-question-title" ref="questionTitle">{{ insightTitle }}</h2>
+
+        <BranchSelector class="branch-selector-expanded">
+          <label><input type="checkbox" name="all-branches" />All</label>
+          <label><input type="checkbox" name="branch" />Gosforth Agent</label>
+          <label><input type="checkbox" name="branch" />Heaton Agent & co</label>
+          <label><input type="checkbox" name="branch" />Jesmond Agent</label>
+          <label><input type="checkbox" name="branch" />Newcastle Branch</label>
+        </BranchSelector>
+      </div>
 
       <!--<Properties></Properties>-->
 

@@ -26,6 +26,7 @@ class iamBranchSelector extends HTMLElement {
           <i class="fa-regular fa-building-circle-check"></i>
           <span class="indicator"></span>
           <span class="selected">Branch</span>
+          <i class="fa-light fa-chevron-down"></i>
         </button>
         <div
           class="dropdown"
@@ -61,9 +62,9 @@ class iamBranchSelector extends HTMLElement {
     const menuButton = this.shadowRoot?.querySelector('#menuButton');
     const dropdown = this.shadowRoot?.querySelector('#dropdown');
 
-    let selected = this.querySelector('input:checked')
-      ? this.querySelector('input:checked')
-      : this.querySelector('input'); // By default the first input is checked if an input hasn't been checked on load
+    const selected = this.querySelector('input:not([name="all-branches"]):checked')
+      ? this.querySelector('input:not([name="all-branches"]):checked')
+      : this.querySelector('input:not([name="all-branches"])'); // By default the first input is checked if an input hasn't been checked on load
     selected.checked = true;
 
     menuButton?.querySelector('span.selected').textContent = selected?.closest('label').textContent;
@@ -79,21 +80,38 @@ class iamBranchSelector extends HTMLElement {
     });
 
     // If all of the inputs are disabled then disable the button
-    if (this.querySelectorAll('input:disabled').length && !this.querySelectorAll('input:not(:disabled)').length)
+    if (this.querySelectorAll('input:not([name="all-branches"]):disabled').length && !this.querySelectorAll('input:not([name="all-branches"]):not(:disabled)').length)
       menuButton?.setAttribute('disabled', 'disabled');
 
-    this.addEventListener('change', (): void => {
-      selected = this.querySelector('input:checked')
-        ? this.querySelector('input:checked')
-        : this.querySelector('input');
+    this.addEventListener('change', (event): void => {
+      const target = event.target as HTMLInputElement;
+
+      if(target?.name === 'all-branches') {
+
+        if(target.checked) {
+          Array.from(this.querySelectorAll('input')).forEach((input) => {
+            input.checked = target.checked;
+          });
+        }
+      }
+      else {
+        const allBranchesCheckbox = this.querySelector('input[name="all-branches"]') as HTMLInputElement;
+        if (allBranchesCheckbox) {
+          allBranchesCheckbox.checked = false;
+        }
+      }
+
+      const selected = this.querySelector('input:not([name="all-branches"]):checked')
+        ? this.querySelector('input:not([name="all-branches"]):checked')
+        : this.querySelector('input:not([name="all-branches"])');
       selected.checked = true;
 
       menuButton?.querySelector('span.selected').innerHTML = selected?.closest('label').textContent;
-      menuButton?.setAttribute('data-checked-count', this.querySelectorAll('input:checked').length - 1);
+      menuButton?.setAttribute('data-checked-count', this.querySelectorAll('input:not([name="all-branches"]):checked').length - 1);
 
-      if (this.querySelectorAll('input[type="checkbox"]:checked').length == 1) {
+      if (this.querySelectorAll('input[type="checkbox"]:not([name="all-branches"]):checked').length <= 1) {
         selected?.closest('label').classList.add('pe-none');
-      } else if (this.querySelectorAll('input[type="checkbox"]:checked').length > 1) {
+      } else if (this.querySelectorAll('input[type="checkbox"]:not([name="all-branches"]):checked').length > 1) {
         this.querySelector('label.pe-none')?.classList.remove('pe-none');
       }
     });
