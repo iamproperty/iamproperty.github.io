@@ -12,12 +12,11 @@ class iamAppInsights extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */`
-    <style>.empty-state { display: none; }</style>
     <style>
     ${loadCSS}
     </style>
 
-    <div class="wrapper" aria-busy="true">
+    <div class="wrapper">
       <div class="insights-header pb-2">
         <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
         <div id="view-controls" class="d-none">
@@ -379,7 +378,7 @@ class iamAppInsights extends HTMLElement {
 
     // Absence of rows is only an empty result once the table is constructed.
     // This also keeps the loading message visible while AJAX supplies the table.
-    this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
+    //this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
 
     // List all of the branches present in the table, make sure they are unique
     const listBranches = [...new Set(Array.from(component.querySelectorAll('tr[data-branch]')).map(el => el.getAttribute('data-branch') || ''))];
