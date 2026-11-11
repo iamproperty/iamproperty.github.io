@@ -81,6 +81,12 @@
   align-items: center;
 }
 
+// #region print campaign button styles
+#create-print-campaign-btn[disabled] {
+  display: none;
+}
+// #endregion 
+
 //#region view controls
 #view-controls label{
   margin: 1px;
@@ -259,6 +265,7 @@ table .criteria-match-indicator[data-value="partial"]::before {
 
 // #region: Icon fixes
 [class*="fa-"]:not(.suffix, .prefix, [slot="icon"]),
+iam-notification [class*="fa-"][slot="icon"],
 iam-table-customisation [class*="fa-"][slot="icon"] {
 
   position: relative;
@@ -303,7 +310,6 @@ iam-table-customisation [class*="fa-"][slot="icon"] {
 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M303.5 473C312.9 482.4 328.1 482.4 337.4 473L537.4 273C546.8 263.6 546.8 248.4 537.4 239.1C528 229.8 512.8 229.7 503.5 239.1L320.5 422.1L137.5 239.1C128.1 229.7 112.9 229.7 103.6 239.1C94.3 248.5 94.2 263.7 103.6 273L303.6 473z'/%3E%3C/svg%3E");
 }
-
 
 .fa-cog:before {
 

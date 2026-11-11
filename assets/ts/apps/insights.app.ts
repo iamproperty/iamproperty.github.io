@@ -17,6 +17,13 @@ class iamAppInsights extends HTMLElement {
     </style>
 
     <div class="wrapper">
+
+      <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
+        <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
+        <strong>The print campaign action is unavailable for multiple branches</strong><br/>
+        You can still select properties to create CRM tasks or export data. To create a print campaign, select a single branch.
+      </iam-notification>
+
       <div class="insights-header pb-2">
         <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
         <div id="view-controls" class="d-none">
@@ -71,12 +78,6 @@ class iamAppInsights extends HTMLElement {
       <span class="text-heading me-1" id="full-match">Full match</span>
       <span class="text-heading me-1" id="partial-match">Partial match</span>
     </p>
-
-    <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info">
-      <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
-      <span class="text-heading">Some bulk actions are disabled</span>
-      Some actions are disabled because they require the items to be from the same branch. If you wish to apply these actions, please filter on a specific branch or select items for the same branch in the table below..
-    </iam-notification>
 
     <iam-table-advanced data-selectall>
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
