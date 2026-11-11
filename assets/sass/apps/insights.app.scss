@@ -559,7 +559,7 @@ iam-table-advanced::part(table-filter):after {
 }
 
 
-.wrapper:not(:has(tbody tr)) + .empty-state {
+.wrapper:not(:has(tbody tr)):not(:has(.loading)) + .empty-state {
   display: block;
   padding-top: 1rem;
 }
