@@ -381,9 +381,13 @@ class iamAppInsights extends HTMLElement {
     // This also keeps the loading message visible while AJAX supplies the table.
     this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
 
+    // List all of the branches present in the table, make sure they are unique
+    const listBranches = [...new Set(component.querySelectorAll('tr[data-label="Branch"]').map(el => el.getAttribute('data-branch') || ''))];
+
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
-        height: component.offsetHeight
+        height: component.offsetHeight,
+        branches: listBranches
       },
     });
 
