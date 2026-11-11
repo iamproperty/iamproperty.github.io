@@ -43,21 +43,21 @@
       }
     }
 
-    a:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
-    &:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+    a:not(.btn-primary):is(:hover, :focus, .hover, :focus-within, [aria-expanded="true"]):not([disabled], :active, .active) &,
+    &:not(.btn-primary):is(:hover, :focus, .hover, :focus-within, [aria-expanded="true"]):not([disabled], :active, .active) {
       background: var(--colour-btn-action-hover-bg);
     }
 
-    .btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
-    &.btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+    .btn-primary:is(:hover, :focus, .hover, :focus-within, [aria-expanded="true"]):not([disabled], :active, .active) &,
+    &.btn-primary:is(:hover, :focus, .hover, :focus-within, [aria-expanded="true"]):not([disabled], :active, .active) {
       filter: brightness(90%);
       background: var(--colour-btn-bg);
       border: var(--btn-border-width) solid var(--colour-btn-border);
       color: var(--colour-btn);
     }
 
-    a:is(:active, .active):not([disabled]):not(.btn-primary) &,
-    &:is(:active, .active):not([disabled]):not(.btn-primary) {
+    a:is(:active, .active, [aria-expanded="true"]):not([disabled]):not(.btn-primary) &,
+    &:is(:active, .active, [aria-expanded="true"]):not([disabled]):not(.btn-primary) {
       filter: brightness(85%);
       transition: all 0.1s;
       color: var(--colour-heading);

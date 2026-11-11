@@ -10,6 +10,7 @@ import {
   setupAdvancedTable,
 } from '../../modules/table';
 
+
 class iamTableAdvanced extends HTMLElement {
   // Store records and selection independently of rendered rows.
   private dataModel = new TableData();

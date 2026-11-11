@@ -3,6 +3,8 @@ class iamAppInsights extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
 
+
+
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
@@ -10,18 +12,40 @@ class iamAppInsights extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */`
-    <style>.empty-state { display: none; }</style>
     <style>
     ${loadCSS}
     </style>
 
-    <div class="wrapper" aria-busy="true">
-      <strong class="d-block pb-3 insight-count">Showing <span id="count"></span> <span id="count-text"></span></strong>
+    <div class="wrapper">
 
+      <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
+        <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
+        <strong>The print campaign action is unavailable for multiple branches</strong><br/>
+        You can still select properties to create CRM tasks or export data. To create a print campaign, select a single branch.
+      </iam-notification>
+
+      <div class="insights-header pb-2">
+        <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
+        <div id="view-controls" class="d-none">
+
+          <label class="tag tag--toggle"><input type="radio" name="view" value="split"><i class="fa-regular fa-table-columns"></i> Split</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="list"><i class="fa-regular fa-list"></i> List</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="map"><i class="fa-regular fa-map"></i> Map</label>
+        </div>
+      </div>
+
+
+      <div id="branch-wrapper"></div>
 
       <div id="map-wrapper"></div>
 
-      <div id="table-wrapper">Loading table...</div>
+      <div id="table-wrapper">
+
+        <div class="loading">
+          <span class="spinner"></span>
+          <strong class="lead">Loading...</strong>
+        </div>
+      </div>
     </div>
     <div class="empty-state">
       <img src="/img/illustrations/estate-agents.png" alt="" loading="lazy" />
@@ -34,18 +58,26 @@ class iamAppInsights extends HTMLElement {
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
 
+/*
+    const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
+    table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
+
+      if (index >= 15) return;
+
+      tempTbody.appendChild(row.cloneNode(true));
+    });
+
+    const tempTable = document.createElement('table') as HTMLTableElement;
+    tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
+*/
+
+
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
       <strong class="me-1">Criteria match key: </strong>
       <span class="text-heading me-1" id="full-match">Full match</span>
       <span class="text-heading me-1" id="partial-match">Partial match</span>
     </p>
-
-    <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info">
-      <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
-      <span class="text-heading">Some bulk actions are disabled</span>
-      Some actions are disabled because they require the items to be from the same branch. If you wish to apply these actions, please filter on a specific branch or select items for the same branch in the table below..
-    </iam-notification>
 
     <iam-table-advanced data-selectall>
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
@@ -86,6 +118,9 @@ class iamAppInsights extends HTMLElement {
     const notification = this.shadowRoot?.getElementById('branch-notification');
     const countElement = this.shadowRoot?.querySelector('#count');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+
+    const initialCountOnload = tableComponent?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    const needToReload = parseInt(initialCountOnload) >= this.rowlimit;
 
     if (actionbar && notification) {
       // Example event listener
@@ -189,24 +224,54 @@ class iamAppInsights extends HTMLElement {
       mapWrapper.innerHTML = this.createMapContent();
 
       const tableFilteredEvent = new CustomEvent('table-filtered', {
-        detail: event.detail
+        detail: { ...event.detail, reload: needToReload }
       });
 
       this.dispatchEvent(tableFilteredEvent);
+
+      // Update the height
+      setTimeout(() => {
+        const dispatchedEvent = new CustomEvent('update-height', {
+          detail: {
+            height: this.offsetHeight
+          },
+        });
+        this.dispatchEvent(dispatchedEvent);
+      }, 300);
     });
   };
 
+
   createMapContent = (): string => {
 
-    if(!this.querySelector('table tr[data-latitude][data-longitude]'))
+    // Load the table from the shadow root so the table formatting is correct and CTA's created
+    const table = this.shadowRoot?.querySelector('table');
+    table.setAttribute('id','properties-table');
+
+    if(!table.querySelector('tr[data-latitude][data-longitude]'))
       return '';
 
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
+  createBranchContent = (): string => {
 
-    if (!table) return table;
+    const options = Array.from(this.querySelectorAll('table th[data-label="Branch"]')).map(th => th.innerText);
+
+
+    return `<iam-branch-selector data-for="properties-table"></iam-branch-selector>`;
+  };
+
+  createComponent = (component, table): void => {
+
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
+    const countElement = this.shadowRoot?.querySelector('#count');
+    const viewControls = this.shadowRoot?.querySelector('#view-controls');
+
+    // #region fix original table
+    // table.setAttribute('id','properties-table');
 
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
@@ -220,49 +285,89 @@ class iamAppInsights extends HTMLElement {
     }
 
     // Give the table formatting info
-    table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
+    table.querySelectorAll('th[data-field-type="date_date"],th[data-field-type="date"]').forEach(th => th.setAttribute('data-format', 'date'));
+    table.querySelectorAll('th[data-field-type="number"]').forEach(th => th.setAttribute('data-format', 'number'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
-
-    return table;
-  };
-
-
-
-  updateComponent = (component, table):void => {
-    //this.createComponent(component, table);
-    console.log('hey');
-
-    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
-    const countElement = this.shadowRoot?.querySelector('#count');
-
-    table.setAttribute('id','properties-table');
-    table = this.fixOriginalTable(table);
+    // #endregion fix original table
 
     tableWrapper.innerHTML = this.createTableContent(component, table);
     mapWrapper.innerHTML = this.createMapContent();
 
+    // #region set the view controls
 
-    /* Set the property column to fixed */
-    tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
-    tableWrapper?.querySelectorAll('table td[data-label="Property"]')?.forEach(element => {
-      element.classList.add('td--fixed');
+    if(this.querySelector('table tr[data-latitude][data-longitude]')) {
+      viewControls?.classList.remove('d-none');
+      viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
+      this.setAttribute('data-view', 'split');
+    }
+
+    viewControls?.addEventListener('change', (event) => {
+      const target = event.target as HTMLInputElement;
+      if(target?.name === 'view') {
+
+        this.setAttribute('data-view', target.value);
+
+        setTimeout(() => {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+        }, 300);
+      }
     });
 
-  }
+    // #endregion set the view controls
 
-  createComponent = (component, table): void => {
 
-    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
-    const countElement = this.shadowRoot?.querySelector('#count');
+    // #region add titles to the table cells
 
-    table.setAttribute('id','properties-table');
-    table = this.fixOriginalTable(table);
 
-    tableWrapper.innerHTML = this.createTableContent(component, table);
-    mapWrapper.innerHTML = this.createMapContent();
 
+    tableWrapper.querySelectorAll('thead tr th').forEach(th => {
+      const label = th.getAttribute('data-label');
+      switch(label) {
+        case 'Property':
+          th.setAttribute('title', 'Property address');
+          break;
+        case 'Listing Agent':
+          th.setAttribute('title', 'Agent the property is currently listed with');
+          break;
+        case 'Current Price':
+          th.setAttribute('title', 'Current price of the property');
+          break;
+        case 'Listed Date':
+          th.setAttribute('title', 'Date the property was listed');
+          break;
+        case 'Original Price':
+          th.setAttribute('title', 'Original price of the property');
+          break;
+        case 'Price Reduction':
+          th.setAttribute('title', 'Date of the latest price reduction');
+          break;
+        case 'Days on Market':
+          th.setAttribute('title', 'Number of days the property has been on the market');
+          break;
+        case 'Fall Through':
+          th.setAttribute('title', 'Date of the latest fall through');
+          break;
+      }
+    });
+
+    tableWrapper.querySelectorAll('tbody tr td:not([data-label="Property"])').forEach(td => {
+      const label = td.getAttribute('data-label');
+      if(label) {
+        td.setAttribute('title', label);
+      }
+    });
+
+    // #endregion
+
+    if(table.querySelector('th[data-label="Branch"]')) {
+      //branchWrapper?.innerHTML = this.createBranchContent();
+    }
 
     /* Set the property column to fixed */
     tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
@@ -274,18 +379,22 @@ class iamAppInsights extends HTMLElement {
 
     // Absence of rows is only an empty result once the table is constructed.
     // This also keeps the loading message visible while AJAX supplies the table.
-    this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
+    //this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
+
+    // List all of the branches present in the table, make sure they are unique
+    const listBranches = [...new Set(Array.from(component.querySelectorAll('tr[data-branch]')).map(el => el.getAttribute('data-branch') || ''))];
 
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
-        height: component.offsetHeight
+        height: component.offsetHeight,
+        branches: listBranches
       },
     });
 
     component.dispatchEvent(dispatchedEvent);
 
     const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
-    countElement?.innerHTML = initialCount;
+    countElement?.innerHTML = `${parseInt(initialCount) > 0 ? 'Showing' : ''} ${initialCount}`;
 
     const countTextElement = this.shadowRoot?.querySelector('#count-text');
 
@@ -304,7 +413,6 @@ class iamAppInsights extends HTMLElement {
 
 
 
-
     const tooltip = this.shadowRoot?.querySelector('iam-tooltip');
     if(tooltip) {
       tooltip.setAttribute('title', 'Some properties may not be in your initial view and we recommend filtering to reveal them.');
@@ -318,7 +426,7 @@ class iamAppInsights extends HTMLElement {
         },
       });
       component.dispatchEvent(dispatchedEvent);
-    }, 1000);
+    }, 300);
   };
 
   createActionButtons = (component, actions): void => {
@@ -327,8 +435,42 @@ class iamAppInsights extends HTMLElement {
     actions.forEach(action => {
 
       const icon = action.action == "export-table-data" ? `<i class="fa-regular fa-file-export"></i>` : ``;
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${icon}${action.label}</button>`);
+      if(!actionbar?.querySelector('#' + action.action + '-btn')) {
+        actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${icon}${action.label}</button>`);
+        actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" disabled title="Select items from the table to use this action.">${icon}${action.label}</button>`);
+      }
+
     });
+
+
+  };
+
+  createCustomisationButton = (component, customisation): void => {
+
+    if(!customisation) customisation = [];
+
+    const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
+
+    if(!actionbar?.querySelector('iam-table-customisation')) {
+      const tableCustomisation = document.createElement('iam-table-customisation');
+      tableCustomisation.setAttribute('data-orderable', true);
+      tableCustomisation.setAttribute('data-save', true);
+
+      if(customisation && customisation.length > 0)
+        tableCustomisation.setAttribute('data-customisation', JSON.stringify(customisation));
+
+      actionbar?.insertAdjacentElement('beforeend', tableCustomisation);
+      // Fake button to be displayed in the action bar when the selection is required for the customisation action, to maintain layout consistency
+      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" slot="selected" disabled>Customise</button>`);
+
+      // Listen for the table customisation saved event and re-dispatch it from the parent component
+      tableCustomisation.addEventListener('table-customisation-saved', (event) => {
+        this.dispatchEvent(new CustomEvent('table-customisation-saved', { detail: event.detail }));
+      });
+      tableCustomisation.addEventListener('table-customisation-reset', (event) => {
+        this.dispatchEvent(new CustomEvent('table-customisation-reset'));
+      });
+    }
   };
 
   createMatchCriteriaFilter = (component, matchCriteriaColumn, matchCriteriaIndicatorColumn): void => {
@@ -429,36 +571,38 @@ class iamAppInsights extends HTMLElement {
 
     const shadowTable = this.shadowRoot?.querySelector('table');
 
-    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
 
-    shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
+    if(!shadowTable?.querySelector('[data-cta-heading]')) {
 
-      ctaLink = ctaUrlStructure.toLowerCase();
+      shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap" data-cta-heading></th>`);
 
-      searches.forEach(search => {
-        let datasetSearch = search;
+      shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
 
-        // Update the datasearch to match looker columns
-        if(search == "appraisalid")
-          datasetSearch = 'appraisal-id';
-        else if(search == "transactionid")
-          datasetSearch = 'transaction-id';
-        else if(search == "transaction")
-          datasetSearch = 'mb-transaction-id';
+        ctaLink = ctaUrlStructure.toLowerCase();
+
+        searches.forEach(search => {
+          let datasetSearch = search;
+
+          // Update the datasearch to match looker columns
+          if(search == "appraisalid")
+            datasetSearch = 'appraisal-id';
+          else if(search == "transactionid")
+            datasetSearch = 'transaction-id';
+          else if(search == "transaction")
+            datasetSearch = 'mb-transaction-id';
 
 
-        if(row.hasAttribute('data-' + datasetSearch.toLowerCase()) && row.getAttribute('data-' + datasetSearch.toLowerCase()) !== '') {
-          ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.getAttribute('data-' + datasetSearch.toLowerCase()));
-        } else {
-          areSearchesMet = false;
-        }
+          if(row.hasAttribute('data-' + datasetSearch.toLowerCase()) && row.getAttribute('data-' + datasetSearch.toLowerCase()) !== '') {
+            ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.getAttribute('data-' + datasetSearch.toLowerCase()));
+          } else {
+            areSearchesMet = false;
+          }
+        });
+
+        if(!row.querySelector('[data-cta]'))
+          row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank" data-cta>${ctaText ?? 'View details'}</a></td>`);
       });
-
-      //if(areSearchesMet)
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
-      //else
-      //  row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
-    });
+    }
   };
 
   hideNullValues(): void {
@@ -471,7 +615,6 @@ class iamAppInsights extends HTMLElement {
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
     const createComponent = this.createComponent;
-    const updateComponent = this.updateComponent;
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
@@ -482,8 +625,9 @@ class iamAppInsights extends HTMLElement {
       //this.setCounterText(this, event.detail.properties['counter-text']);
       this.hideNullValues();
       this.createActionButtons(this, event.detail.actions);
-      this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
-      this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
+      this.createCustomisationButton(this, event.detail.customisation);
+      //this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
+      //this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
       this.createPopupTitles(this, event.detail.properties['title-column']);
       this.createActionTitles(this, event.detail.properties['title-column']);
       this.createMultibranchFlag(this, event.detail.properties['branch-column']);
@@ -495,6 +639,52 @@ class iamAppInsights extends HTMLElement {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
       //this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0'); // This also clears the seleted items in the table
     });
+
+    this.addEventListener('table-customisation-saved', (event: CustomEvent) => {
+      // Handle table customisation changes here if needed
+
+      this.dispatchEvent(new CustomEvent('insight-action', {
+        detail: {
+          action: 'table-customisation-saved',
+          customisation: event.detail
+        },
+        bubbles: true,
+        composed: true
+      }));
+
+      setTimeout(() => {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+        }, 1000);
+    });
+
+    this.addEventListener('table-customisation-reset', (event: CustomEvent) => {
+      // Handle table customisation changes here if needed
+
+      this.dispatchEvent(new CustomEvent('insight-action', {
+        detail: {
+          action: 'table-customisation-reset'
+        },
+        bubbles: true,
+        composed: true
+      }));
+
+      setTimeout(() => {
+
+        const dispatchedEvent = new CustomEvent('update-height', {
+          detail: {
+            height: this.offsetHeight
+          },
+        });
+        this.dispatchEvent(dispatchedEvent);
+      }, 1000);
+    });
+
 
     if (table){
 
@@ -512,11 +702,13 @@ class iamAppInsights extends HTMLElement {
           mutation.type === 'attributes'
         ) {
 
-          if (this.querySelector('table')) {
+          //console.log('HTML updated mutation:', mutation);
+
+          if (this.querySelector('table') && mutation.addedNodes.length) {
 
             const table = this.querySelector('table');
 
-            updateComponent(this, table);
+            createComponent(this, table);
           }
         }
       }

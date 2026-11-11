@@ -24,14 +24,21 @@
       font-size: 1.33em;
     }
 
+    i.fa-chevron-down {
+      display: none!important;
+    }
+
     &:not(:hover, :focus) {
       background-color: transparent;
       outline: none;
     }
 
-    &[data-checked-count]:not([data-checked-count='0']):after {
+    &[data-checked-count]:not([data-checked-count='0']) {
+      --checked-count: attr(data-checked-count);
+    }
+    &[data-checked-count]:not([data-checked-count='0']) .selected:after {
       display: inline !important;
-      content: ' +' attr(data-checked-count);
+      content: ' +' var(--checked-count);
       color: var(--colour-body);
       padding-left: 0.25em;
     }
@@ -166,5 +173,24 @@
     padding-left: 0.25em;
   }
   
+  /* #endregion */
+  /* #region Expanded style */
+  :host(.branch-selector-expanded) {
+    /* Expanded style for inline branch selector */
+
+    .btn-action:not(:hover, :focus) {
+      outline: var(--btn-border-width) solid var(--colour-muted);
+    }
+
+    .btn-action .selected:before {
+      content: 'Branch: ';
+    }
+
+    .btn-action i.fa-chevron-down {
+      display: inline-block!important;    
+      font-size: 1em;
+      margin-left: 0.5em;
+    }
+  }
   /* #endregion */
 }

@@ -193,6 +193,15 @@ export const getSwipeDirection = (touchstartX, touchstartY, touchendX, touchendY
   }
 };
 
+export const isStringValidJSON = (str: string): boolean => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
 export const uniqueID = (index = 1): number => {
   const ID = Math.floor(Math.random() * Date.now() * (index + 1));
 

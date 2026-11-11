@@ -10,6 +10,10 @@ import Nav from '@/components/Nav/Nav.vue';
 import Modal from '@/components/Modal/Modal.vue';
 
 import Notification from '@/components/Notification/Notification.vue';
+
+import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
+
+import Header from '@/components/Header/Header.vue';
 // #endregion
 
 // #region load vue components
@@ -46,6 +50,17 @@ const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/
 // #region question panel
 const question = ref('');
 const search = ref('');
+// #endregion
+
+// #region looker filters
+
+//const lookerFilters = ref<Record<string, unknown>>({});
+const filterCausingNoReload = ref<{ column: string, operator: string, value: string } | null>(null);
+const cachedFilters = ref<{ column: string, operator: string, value: string }[]>([]);
+const filterAliases = ref<Record<string, string>>({
+  "Weeks on Market": "Weeks on the Market",
+});
+
 // #endregion
 
 // #region insight panel
@@ -189,6 +204,8 @@ onMounted(async () => {
         "properties": getInsightProperties(insightSlug.value)
       };
 
+      const tableCustomisation = [{"label": "Date listed", "isVisible": false}];
+
       setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
         isLoading.value = false;
       }, 1000);
@@ -200,7 +217,8 @@ onMounted(async () => {
             type: "top-window-details",
             detail: {
               class: "inside-hub",
-              ...JSON.parse(JSON.stringify(insightConfig))
+              ...JSON.parse(JSON.stringify(insightConfig)),
+              customisation: tableCustomisation
             }
           },
           { targetOrigin: '*' }
@@ -264,49 +282,131 @@ onMounted(async () => {
 
     if (message.type == "table-filtered") {
 
-      console.log(message.detail?.filters);
-      console.log(message.detail?.rowCount);
-
-      const iframe = document.querySelector("#looker-dashboard");
+      let filters: Array<{ column: string, operator: string, value: string }> = [];
 
 
-      const messagefilters = message.detail?.filters || [];
+      message.detail?.filters.forEach((filter: { column: string, operator: string, value: string }) => {
 
-      const filterOperator = (operator) => {
+        let filterValue = filter.value;
 
-        switch(operator) {
-          case 'equals':
-            return '';
-          default:
-            return operator;
+        // first character is % them remove it
+        if (filterValue?.startsWith('%')) {
+          filterValue = filterValue.slice(1);
         }
+        if (filterValue?.startsWith('-')) {
+          filterValue = filterValue.slice(1);
+        }
+        if (filterValue?.endsWith('%')) {
+          filterValue = filterValue.slice(0, -1);
+        }
+
+        filterValue = filterValue?.trim();
+
+
+
+        // Correct filter names that dont match up with the display name
+        if (filterAliases.value[filter.column]) {
+          filter.column = filterAliases.value[filter.column];
+        }
+
+        console.log('Processing filter:', filter);
+
+        // Make sure string is kept intacked if it contains commas
+        switch (filter.operator.toLowerCase()) {
+          case "equals":
+          case "does not equal":
+              if(filterValue.includes(',')) {
+                filterValue = `"${filterValue}"`;
+              }
+            break;
+        }
+
+        switch (filter.operator.toLowerCase()) {
+          case "contains":
+            filterValue = `%${filterValue}%`;
+            break;
+          case "does not contain":
+            filterValue = `-%${filterValue}%`;
+            break;
+          case "equals":
+            filterValue = `${filterValue}`;
+            break;
+          case "does not equal":
+            filterValue = `-${filterValue}`;
+            break;
+          case "begins with":
+            filterValue = `${filterValue}%`;
+            break;
+          case "ends with":
+            filterValue = `%${filterValue}`;
+            break;
+          case "less than":
+            filterValue = `<${parseFloat(filterValue)}`;
+            break;
+          case "greater than":
+            filterValue = `>${parseFloat(filterValue)}`;
+            break;
+          case "between":
+            filterValue = `[${filterValue}]`; // You might want to format this differently depending on how "between" is represented
+            break;
+        }
+
+        filters.push({ column: filter.column, operator: filter.operator, value: filterValue });
+      });
+
+      let shouldLookerFilters = false;
+
+      // if reload true then reload the dashboard
+      if (message.detail?.reload) {
+        shouldLookerFilters = true;
+
+        // See what the new filters are, will hopefully only be one
+        const newFilters = filters.filter(f => !cachedFilters.value.some(cf => cf.column === f.column && cf.operator === f.operator && cf.value === f.value));
+
+        // Save the first new filter as the one causing no reload, i.e. changing the filter functionality
+        filterCausingNoReload.value = newFilters[0];
+      }
+      else if(!filters.find(f => f.column === filterCausingNoReload.value?.column && f.operator === filterCausingNoReload.value?.operator && f.value === filterCausingNoReload.value?.value)) {
+        // Do something if the filter causing no reload is not present in the filters
+        console.log('Filter causing no reload is not present:', filterCausingNoReload.value);
+
+        shouldLookerFilters = true;
+
+        if(!filters.length) {
+          filters = [{ column: filterCausingNoReload.value.column, operator: filterCausingNoReload.value.operator, value: "" }];
+        }
+
+        filterCausingNoReload.value = null;
       }
 
-      const filters = messagefilters.map(filter => {
+      if (shouldLookerFilters) {
 
-        let column = filter.column.replaceAll(' ','+');
-        let operator = filterOperator(filter.operator);
-        let value = filter.value.replaceAll(' ','+');
+        const filtersString = filters.map(f => `${f.column}=${encodeURIComponent(f.value)}`).join('&');
 
-        return `${column}=${operator}${filter.type == "text" ? '"' : ''}${value}${filter.type == "text" ? '"' : ''}`
+        const iframe = document.querySelector("#looker-dashboard");
+        iframe.setAttribute('src', `${iframeSrc.value}&${filtersString.replace(/ /g,'+')}`);
+
+        /* #region Hube code only
+        const filterObject = filters.reduce((acc, f) => {
+          acc[f.column] = f.value;
+          return acc;
+        }, {} as Record<string, string>);
+        dashboardConnection?.updateFilters(filterObject);
+        dashboardConnection?.run();
+        /* #endregion */
       }
-      ).join('&');
-
-      const filtersString = JSON.stringify(filters);
 
 
-      console.log(`${iframe.src}&${filtersString}`);
-
-      iframe.setAttribute('src', `${iframeSrc.value}&${encodeURI(filtersString.replaceAll('"',''))}`);
+      cachedFilters.value = [ ...filters ];
     }
 
-    console.log(message);
+    //console.log(message);
 
     if(message.type == "dashboard:run:complete") {
 
       const layouts = message.dashboard?.options?.layouts;
 
-      console.log(layouts);
+      //console.log(layouts);
     }
   });
 
@@ -333,7 +433,7 @@ onMounted(async () => {
   );
 
   const urlParams = new URLSearchParams(window.location.search);
-  console.log(urlParams.has('question')); // true
+  //console.log(urlParams.has('question')); // true
 
   if (urlParams.has('question')) {
     question.value = urlParams.get('question');
@@ -415,16 +515,31 @@ const loadDashboards = async (): any => {
   </nav>
 
   <main class="enable-lg-breakpoint">
-    <div class="bg-primary full-width questions-container">
-      <div class="container">
 
-      </div>
+    <Header>
 
-      <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
-    </div>
+      <ul class="breadcrumbs">
+        <li><a href="/">One hub</a></li>
+        <li>One insights</li>
+      </ul>
+      <Questions v-if="dashboards.length" class="one-insights-inline" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
+    </Header>
+
 
     <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
-      <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
+
+      <div class="admin-panel__heading bg-white">
+
+        <h2 id="hub-question-title" ref="questionTitle">{{ insightTitle }}</h2>
+
+        <BranchSelector class="branch-selector-expanded">
+          <label><input type="checkbox" name="all-branches" />All</label>
+          <label><input type="checkbox" name="branch" />Gosforth Agent</label>
+          <label><input type="checkbox" name="branch" />Heaton Agent & co</label>
+          <label><input type="checkbox" name="branch" />Jesmond Agent</label>
+          <label><input type="checkbox" name="branch" />Newcastle Branch</label>
+        </BranchSelector>
+      </div>
 
       <!--<Properties></Properties>-->
 
@@ -493,7 +608,7 @@ const loadDashboards = async (): any => {
 <style lang="scss" scoped>
 
 .questions-container {
-  margin-bottom: 7rem;
+  margin-bottom: 2rem;
   display: grid;
   grid-template-columns: subgrid;
 }
@@ -553,5 +668,12 @@ const loadDashboards = async (): any => {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+iam-header::part(gradient-background) {
+  left: 0%;
+}
+iam-header {
+  --padding-bottom: 0!important;
 }
 </style>
