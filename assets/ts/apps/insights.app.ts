@@ -382,7 +382,7 @@ class iamAppInsights extends HTMLElement {
     this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
 
     // List all of the branches present in the table, make sure they are unique
-    const listBranches = [...new Set(component.querySelectorAll('tr[data-label="Branch"]').map(el => el.getAttribute('data-branch') || ''))];
+    const listBranches = [...new Set(Array.from(component.querySelectorAll('tr[data-label="Branch"]')).map(el => el.getAttribute('data-branch') || ''))];
 
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
