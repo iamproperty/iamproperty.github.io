@@ -136,22 +136,6 @@ export const fixTablebody = (component, table, pagination): void => {
 };
 
 export const setFixedCellsViaHeaders = (table): void => {
-  const updateLeftOffsets = (): void => {
-    table.querySelectorAll('th, td').forEach((cell) => {
-
-      const previousColWidths =
-        cell.previousElementSibling && cell.previousElementSibling.dataset.previousColWidths
-          ? parseInt(cell.previousElementSibling.dataset.previousColWidths) + (cell.previousElementSibling.classList.contains('th--fixed') || cell.previousElementSibling.classList.contains('td--fixed') ? cell.previousElementSibling.offsetWidth : 0)
-          : 0;
-
-      cell.dataset.previousColWidths = previousColWidths;
-      cell.style.setProperty('--left-offset', `${previousColWidths}px`);
-    });
-  };
-
-  updateLeftOffsets();
-  new ResizeObserver(updateLeftOffsets).observe(table);
-
   table.querySelectorAll('thead th.th--fixed').forEach((th) => {
 
     const thIndex = Array.prototype.slice.call(th.parentNode.children).indexOf(th) + 1;
@@ -164,6 +148,33 @@ export const setFixedCellsViaHeaders = (table): void => {
       }
     });
   });
+
+  const updateLeftOffsets = (): void => {
+    // Measure every fixed cell before changing attributes or inline styles.
+    const cells = Array.from(table.querySelectorAll('th, td')) as HTMLElement[];
+    const widths = new Map<HTMLElement, number>();
+    cells.forEach((cell) => {
+      if (cell.classList.contains('th--fixed') || cell.classList.contains('td--fixed')) {
+        widths.set(cell, cell.offsetWidth);
+      }
+    });
+
+    const offsets = new Map<Element, number>();
+    cells.forEach((cell) => {
+      const previous = cell.previousElementSibling;
+      offsets.set(cell, previous ? (offsets.get(previous) || 0) + (widths.get(previous as HTMLElement) || 0) : 0);
+    });
+
+    cells.forEach((cell) => {
+      const offset = String(offsets.get(cell));
+      const value = `${offset}px`;
+      if (cell.dataset.previousColWidths !== offset) cell.dataset.previousColWidths = offset;
+      if (cell.style.getPropertyValue('--left-offset') !== value) cell.style.setProperty('--left-offset', value);
+    });
+  };
+
+  updateLeftOffsets();
+  new ResizeObserver(updateLeftOffsets).observe(table);
 };
 
 export const highlightRows = (component): void => {
@@ -297,59 +308,65 @@ export const paginateRows = (component, table, pagination): void => {
 };
 
 export const fixTableCells = (table): void => {
-  const colHeadings = Array.from(table.querySelectorAll('thead th'));
+  // Header HTML and formatting metadata are shared by every row in a column.
+  const columns = Array.from(table.querySelectorAll('thead th')).map((heading: HTMLElement) => {
+    const label = document.createElement('div');
+    label.innerHTML = heading.querySelector('.th__content')?.innerHTML || heading.innerHTML;
+    return {
+      label: label.textContent || label.innerText || '',
+      cellClass: heading.getAttribute('data-td-class'),
+      format: heading.getAttribute('data-format'),
+      hidden: heading.classList.contains('d-none'),
+    };
+  });
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
+
+  const statuses = new Set([
+    '0',
+    'low',
+    'medium',
+    'high',
+    'unknown',
+    'n/a',
+    'pending',
+    'verified',
+    'due',
+    'overdue',
+    'incomplete',
+    'complete',
+    'completed',
+    'approval required',
+    'upcoming',
+    'requires approval',
+    'to do',
+    'on track',
+    'not started',
+    'warning',
+    'successful',
+    'failed',
+  ]);
 
   colRows.forEach((row) => {
     const cells = Array.from(row.querySelectorAll('th, td'));
-    const statuses = [
-      '0',
-      'low',
-      'medium',
-      'high',
-      'unknown',
-      'n/a',
-      'pending',
-      'verified',
-      'due',
-      'overdue',
-      'incomplete',
-      'complete',
-      'completed',
-      'approval required',
-      'upcoming',
-      'requires approval',
-      'to do',
-      'on track',
-      'not started',
-      'warning',
-      'successful',
-      'failed',
-    ];
 
     cells.forEach((cell, cellIndex) => {
-      const heading = colHeadings[cellIndex];
-      if (typeof heading != 'undefined') {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
-        const headingText = tempDiv.textContent || tempDiv.innerText || '';
-        cell.setAttribute('data-label', headingText);
+      const column = columns[cellIndex];
+      if (column) {
+        cell.setAttribute('data-label', column.label);
 
-        if (heading.hasAttribute('data-td-class')) cell.setAttribute('class', heading.getAttribute('data-td-class'));
+        if (column.cellClass !== null) cell.setAttribute('class', column.cellClass);
 
-        if (heading.hasAttribute('data-format')) {
-          cell.setAttribute('data-original-value', cell.textContent.trim());
-          cell.setAttribute('data-format', heading.getAttribute('data-format'));
-          cell.innerHTML = formatData(heading.getAttribute('data-format'), cell.textContent.trim()); //Make sure date format is consistent
+        if (column.format !== null) {
+          const originalValue = cell.textContent.trim();
+          cell.setAttribute('data-original-value', originalValue);
+          cell.setAttribute('data-format', column.format);
+          cell.innerHTML = formatData(column.format, originalValue);
         }
 
-        if (heading.classList.contains('d-none')) {
-          cell.classList.add('d-none');
-        }
+        if (column.hidden) cell.classList.add('d-none');
 
-        if (statuses.includes(cell.textContent.trim().toLowerCase())) {
-          cell.setAttribute('data-content', cell.textContent.trim().toLowerCase());
-        }
+        const status = cell.textContent.trim().toLowerCase();
+        if (statuses.has(status)) cell.setAttribute('data-content', status);
       }
     });
   });
@@ -472,30 +489,39 @@ export const addSelectboxes = (component, table): void => {
     return;
 
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
-    if (row.querySelector('.expand-button-heading') && !row.querySelector('.selectrow-heading'))
-      row.querySelector('.expand-button-heading').insertAdjacentHTML('afterend', `<th class="th--fixed selectrow-heading"></th>`);
-    else if(!row.querySelector('.selectrow-heading'))
-      row.insertAdjacentHTML('afterbegin', `<th class="th--fixed selectrow-heading"></th>`);
+    if (row.querySelector('.selectrow-heading')) return;
+    const heading = document.createElement('th');
+    heading.setAttribute('class', 'th--fixed selectrow-heading');
+    const expand = row.querySelector('.expand-button-heading');
+    row.insertBefore(heading, expand ? expand.nextSibling : row.firstChild);
   });
+
+  // Build the static markup once instead of parsing the same HTML for every row.
+  const selectionCell = document.createElement('td');
+  selectionCell.setAttribute('class', 'td--fixed selectrow selected');
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.setAttribute('name', 'row');
+  const label = document.createElement('label');
+  const text = document.createElement('span');
+  text.setAttribute('class', 'visually-hidden');
+  text.textContent = 'Select row';
+  label.appendChild(text);
+  selectionCell.appendChild(checkbox);
+  selectionCell.appendChild(label);
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     row.setAttribute('data-index', index + 1);
-    if (!row.querySelector('.selectrow')) {
-      const rowID = `row${uniqueID(index)}`;
+    if (row.querySelector('.selectrow')) return;
 
-      if (row.querySelector('.td--expand'))
-        row
-          .querySelector('.td--expand')
-          .insertAdjacentHTML(
-            'afterend',
-            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-          );
-      else
-        row.insertAdjacentHTML(
-          'afterbegin',
-          `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-        );
-    }
+    const cell = selectionCell.cloneNode(true) as HTMLTableCellElement;
+    const rowID = `row${uniqueID(index)}`;
+    const input = cell.querySelector('input');
+    input.setAttribute('id', rowID);
+    if (row.hasAttribute('data-selected')) input.setAttribute('checked', 'true');
+    cell.querySelector('label').setAttribute('for', rowID);
+    const expand = row.querySelector('.td--expand');
+    row.insertBefore(cell, expand ? expand.nextSibling : row.firstChild);
   });
 
 };
