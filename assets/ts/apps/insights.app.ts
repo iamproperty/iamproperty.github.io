@@ -71,6 +71,9 @@ class iamAppInsights extends HTMLElement {
     tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
 */
 
+    const generateTbody = (dataRows: string | null): string => {
+      return `<tbody>${dataRows?.toString() || ''}</tbody>`;
+    };
 
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
@@ -83,7 +86,10 @@ class iamAppInsights extends HTMLElement {
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
         <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
-      ${table.outerHTML}
+      <table>
+        ${table.querySelector('thead')?.outerHTML || ''}
+        ${table.querySelector('tbody')?.hasAttribute('data-html') ? generateTbody(table.querySelector('tbody')?.getAttribute('data-html')) :table.querySelector('tbody')?.outerHTML || ''}
+      </table>
       <iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
     </iam-table-advanced>`;
   };
@@ -613,7 +619,7 @@ class iamAppInsights extends HTMLElement {
   connectedCallback(): void {
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const table = this.querySelector('table');
+
     const createComponent = this.createComponent;
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
@@ -685,7 +691,7 @@ class iamAppInsights extends HTMLElement {
       }, 1000);
     });
 
-
+    const table = this.querySelector('table');
     if (table){
 
       createComponent(this, table);
