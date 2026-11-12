@@ -487,7 +487,6 @@ export const setupExpandedTable = (component, table, actionbar, form): void => {
 };
 
 export const indexRows = (table): void => {
-  if(table.classList.contains('tabled--indexed')) return;
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     if(!row.hasAttribute('data-index'))
       row.setAttribute('data-index', index + 1);
