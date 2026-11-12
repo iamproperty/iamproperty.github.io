@@ -24,7 +24,7 @@
       },
     },
     mounted() {
-      if (document.querySelector('main')) helpers.checkElements(document.querySelector('main'));
+      //if (document.querySelector('main')) helpers.checkElements(document.querySelector('main'));
     },
   };
 </script>
