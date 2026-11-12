@@ -1257,17 +1257,14 @@ export const sortViaHeader = (component, table, actionbar, pagination, heading, 
   if(!heading.hasAttribute('data-order-by') || heading.getAttribute('data-order-by') == '') {
     heading.setAttribute('data-order-by', 'asc');
     btn.setAttribute('title', 'Click to sort descending');
-    btn.blur();
   }
   else if(heading.hasAttribute('data-order-by') && heading.getAttribute('data-order-by') == 'asc') {
     heading.setAttribute('data-order-by', 'desc');
     btn.setAttribute('title', 'Remove sorting');
-    btn.blur();
   }
   else if(heading.hasAttribute('data-order-by') && heading.getAttribute('data-order-by') == 'desc') {
     heading.removeAttribute('data-order-by');
     btn.setAttribute('title', `Sort by ${headingText}`);
-    btn.blur();
   }
 
   // Work out what to do based on the state of the heading
