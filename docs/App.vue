@@ -31,8 +31,6 @@
         </svg>
         <span>Design system<br />&amp; framework</span>
       </a>
-
-      <router-link to="/principles">Principles</router-link>
       <router-link to="/foundations">Foundations</router-link>
       <router-link
         to="/elements"
@@ -40,7 +38,8 @@
         >Elements</router-link
       >
       <router-link to="/components">Components</router-link>
-      <router-link to="/patterns">Patterns & templates</router-link>
+      <router-link to="/patterns">Patterns</router-link>
+      <router-link to="/page-types">Page types</router-link>
 
       <form novalidate method="GET" slot="search" id="searchform" action="/search" ref="searchForm">
         <label class="mb-0"

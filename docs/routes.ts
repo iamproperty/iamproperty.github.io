@@ -1,12 +1,6 @@
 const routes: Array<any> = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
-  {
-    name: 'Principles',
-    path: '/principles',
-    component: () => import('./views/Principles.vue'),
-    meta: { title: 'Principles | iamkey' },
-    searchterms: 'relative units, variables, progressively enhance',
-  },
+
   {
     name: 'Search',
     path: '/search',
@@ -24,6 +18,13 @@ const routes: Array<any> = [
           title: 'Foundations | iamkey',
         },
         component: () => import('./views/foundations/Index.vue'),
+      },
+      {
+        name: 'Principles',
+        path: 'principles',
+        component: () => import('./views/foundations/Principles.vue'),
+        meta: { title: 'Principles | iamkey' },
+        searchterms: 'relative units, variables, progressively enhance',
       },
       {
         path: 'accessibility',
@@ -1369,6 +1370,31 @@ const routes: Array<any> = [
     ],
   },
   {
+    /* Page types */ path: '/page-types',
+    name: 'Page types',
+    meta: {
+      title: 'Page types | iamkey',
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "page-types" */ './views/PageTypes.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/page-types/Index.vue'),
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        meta: {
+          title: 'Dashboard | Page types | iamkey',
+        },
+        component: () => import('./views/page-types/Dashboard.vue'),
+      },
+    ],
+  },
+  {
     path: '/launch',
     name: 'Launch list',
     meta: {
@@ -2002,6 +2028,14 @@ const routes: Array<any> = [
         name: 'Product with one platform nav',
         path: 'one-platform-nav',
         component: () => import('./views/prototypes/one-platform-hub/product.vue'),
+      },
+      {
+        path: 'dashboard',
+        name: 'Standalone Dashboard',
+        meta: {
+          title: 'Standalone Dashboard | iamkey',
+        },
+        component: () => import('./views/prototypes/dashboard/Index.vue'),
       },
     ],
   },

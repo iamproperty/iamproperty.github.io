@@ -232,7 +232,7 @@
     }
   }
 
-  div:has(main) {
+  div:has(main,[role='main']) {
     display: contents !important;
   }
 
@@ -240,6 +240,10 @@
     display: grid;
     grid-column: full-width !important;
     grid-template-columns: subgrid;
+  }
+
+  [role='main'] {
+    grid-column: full-width !important;
   }
 
   nav {
