@@ -301,7 +301,7 @@ class iamAppInsights extends HTMLElement {
 
     // #region set the view controls
 
-    if(this.querySelector('table tr[data-latitude][data-longitude]')) {
+    if(tableWrapper.querySelector('table tr[data-latitude][data-longitude]')) {
       viewControls?.classList.remove('d-none');
       viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
       this.setAttribute('data-view', 'split');
