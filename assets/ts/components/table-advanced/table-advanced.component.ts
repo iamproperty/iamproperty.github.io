@@ -8,6 +8,7 @@ import {
   setupBasicTable,
   setupExpandedTable,
   setupAdvancedTable,
+  profileTableStep,
 } from '../../modules/table';
 
 
@@ -120,23 +121,32 @@ class iamTableAdvanced extends HTMLElement {
       return;
     }
 
+    const profile = window as Window & {
+      __iamInsightsProfile?: boolean;
+      __iamInsightsTableProfile?: Array<{ stage: string; elapsedMs: number }>;
+    };
+    if (profile.__iamInsightsProfile) profile.__iamInsightsTableProfile = [];
     const pagination = this.querySelector('iam-pagination') || this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
     const form = findForm(this, table);
     const actionbar = findActionbar(this, form);
-    const savedTableBody = table.querySelector('tbody').cloneNode(true); // Used for the sort functionality to reset the table to its original state
+    const savedTableBody = profileTableStep('original-rows-snapshot', () => table.querySelector('tbody').cloneNode(true)); // Used for sorting reset
 
     actionbar?.setAttribute('slot', 'before');
-    setupBasicTable(this, table, pagination, form);
-    setupExpandedTable(this, table, actionbar, form);
-    setupAdvancedTable(
+    profileTableStep('basic-setup-total', () => setupBasicTable(this, table, pagination, form));
+    profileTableStep('expanded-setup-total', () => setupExpandedTable(this, table, actionbar, form));
+    profileTableStep('advanced-setup-total', () => setupAdvancedTable(
       this,
       table,
       actionbar,
       pagination,
       form,
       savedTableBody
-    ); /* pagination and sorting is handled by the basic and expanded table setup functions */
+    )); /* pagination and sorting is handled by the basic and expanded table setup functions */
+    if (profile.__iamInsightsProfile) {
+      console.info('[iam Insights table profile] Table setup complete; totals include their child stages');
+      console.table(profile.__iamInsightsTableProfile);
+    }
   }
 }
 

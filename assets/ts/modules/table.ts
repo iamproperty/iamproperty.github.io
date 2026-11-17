@@ -1,5 +1,20 @@
 import { ucfirst, isNumeric, zeroPad, uniqueID, resolvePath, formatData, prepareData, convertToNumber, convertToDate, convertToUnixTimestamp, isStringValidJSON } from './helpers.js';
 
+// Enabled only by the local diagnostic override; no table content is recorded.
+export const profileTableStep = <T>(stage: string, action: () => T): T => {
+  const target = window as Window & {
+    __iamInsightsProfile?: boolean;
+    __iamInsightsTableProfile?: Array<{ stage: string; elapsedMs: number }>;
+  };
+  if (!target.__iamInsightsProfile || !target.__iamInsightsTableProfile) return action();
+  const started = performance.now();
+  try {
+    return action();
+  } finally {
+    target.__iamInsightsTableProfile.push({ stage, elapsedMs: Math.round(performance.now() - started) });
+  }
+};
+
 export const tableHTML = `<div class="table__container" part="container">
   <div class="table-filters" part="filters"></div>
   <slot name="before"></slot>
@@ -112,7 +127,7 @@ export const setupBasicTable = (component, table, pagination, form): void => {
     component.classList.add('table--fullwidth');
   }
 
-  setupPagination(component, table, pagination, form);
+  profileTableStep('pagination-controls', () => setupPagination(component, table, pagination, form));
   fixTablebody(component, table, pagination);
 
   // Max height
@@ -127,31 +142,15 @@ export const setupBasicTable = (component, table, pagination, form): void => {
 
 export const fixTablebody = (component, table, pagination): void => {
 
-  createExpandButton(component, table);
-  fixTableCells(table);
-  addMenuButtons(component, table);
-  setFixedCellsViaHeaders(table);
-  highlightRows(component); // Is this still needed?
-  paginateRows(component, table, pagination);
+  profileTableStep('row-expansion', () => createExpandButton(component, table));
+  profileTableStep('cell-formatting', () => fixTableCells(table));
+  profileTableStep('row-menus', () => addMenuButtons(component, table));
+  profileTableStep('fixed-column-measurements', () => setFixedCellsViaHeaders(table));
+  profileTableStep('row-highlights', () => highlightRows(component));
+  profileTableStep('initial-pagination', () => paginateRows(component, table, pagination));
 };
 
 export const setFixedCellsViaHeaders = (table): void => {
-  const updateLeftOffsets = (): void => {
-    table.querySelectorAll('th, td').forEach((cell) => {
-
-      const previousColWidths =
-        cell.previousElementSibling && cell.previousElementSibling.dataset.previousColWidths
-          ? parseInt(cell.previousElementSibling.dataset.previousColWidths) + (cell.previousElementSibling.classList.contains('th--fixed') || cell.previousElementSibling.classList.contains('td--fixed') ? cell.previousElementSibling.offsetWidth : 0)
-          : 0;
-
-      cell.dataset.previousColWidths = previousColWidths;
-      cell.style.setProperty('--left-offset', `${previousColWidths}px`);
-    });
-  };
-
-  updateLeftOffsets();
-  new ResizeObserver(updateLeftOffsets).observe(table);
-
   table.querySelectorAll('thead th.th--fixed').forEach((th) => {
 
     const thIndex = Array.prototype.slice.call(th.parentNode.children).indexOf(th) + 1;
@@ -164,6 +163,33 @@ export const setFixedCellsViaHeaders = (table): void => {
       }
     });
   });
+
+  const updateLeftOffsets = (): void => {
+    // Measure every fixed cell before changing attributes or inline styles.
+    const cells = Array.from(table.querySelectorAll('th, td')) as HTMLElement[];
+    const widths = new Map<HTMLElement, number>();
+    cells.forEach((cell) => {
+      if (cell.classList.contains('th--fixed') || cell.classList.contains('td--fixed')) {
+        widths.set(cell, cell.offsetWidth);
+      }
+    });
+
+    const offsets = new Map<Element, number>();
+    cells.forEach((cell) => {
+      const previous = cell.previousElementSibling;
+      offsets.set(cell, previous ? (offsets.get(previous) || 0) + (widths.get(previous as HTMLElement) || 0) : 0);
+    });
+
+    cells.forEach((cell) => {
+      const offset = String(offsets.get(cell));
+      const value = `${offset}px`;
+      if (cell.dataset.previousColWidths !== offset) cell.dataset.previousColWidths = offset;
+      if (cell.style.getPropertyValue('--left-offset') !== value) cell.style.setProperty('--left-offset', value);
+    });
+  };
+
+  updateLeftOffsets();
+  new ResizeObserver(updateLeftOffsets).observe(table);
 };
 
 export const highlightRows = (component): void => {
@@ -297,59 +323,70 @@ export const paginateRows = (component, table, pagination): void => {
 };
 
 export const fixTableCells = (table): void => {
-  const colHeadings = Array.from(table.querySelectorAll('thead th'));
+  // Header HTML and formatting metadata are shared by every row in a column.
+  const columns = Array.from(table.querySelectorAll('thead th')).map((heading: HTMLElement) => {
+    const label = document.createElement('div');
+    label.innerHTML = heading.querySelector('.th__content')?.innerHTML || heading.innerHTML;
+    return {
+      label: label.textContent || label.innerText || '',
+      cellClass: heading.getAttribute('data-td-class'),
+      format: heading.getAttribute('data-format'),
+      hidden: heading.classList.contains('d-none'),
+    };
+  });
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
+
+  const statuses = new Set([
+    '0',
+    'low',
+    'medium',
+    'high',
+    'unknown',
+    'n/a',
+    'pending',
+    'verified',
+    'due',
+    'overdue',
+    'incomplete',
+    'complete',
+    'completed',
+    'approval required',
+    'upcoming',
+    'requires approval',
+    'to do',
+    'on track',
+    'not started',
+    'warning',
+    'successful',
+    'failed',
+  ]);
 
   colRows.forEach((row) => {
     const cells = Array.from(row.querySelectorAll('th, td'));
-    const statuses = [
-      '0',
-      'low',
-      'medium',
-      'high',
-      'unknown',
-      'n/a',
-      'pending',
-      'verified',
-      'due',
-      'overdue',
-      'incomplete',
-      'complete',
-      'completed',
-      'approval required',
-      'upcoming',
-      'requires approval',
-      'to do',
-      'on track',
-      'not started',
-      'warning',
-      'successful',
-      'failed',
-    ];
 
     cells.forEach((cell, cellIndex) => {
-      const heading = colHeadings[cellIndex];
-      if (typeof heading != 'undefined') {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = heading.querySelector('.th__content')?.innerHTML ? heading.querySelector('.th__content')?.innerHTML : heading.innerHTML;
-        const headingText = tempDiv.textContent || tempDiv.innerText || '';
-        cell.setAttribute('data-label', headingText);
+      const column = columns[cellIndex];
+      if (column) {
+        cell.setAttribute('data-label', column.label);
 
-        if (heading.hasAttribute('data-td-class')) cell.setAttribute('class', heading.getAttribute('data-td-class'));
+        if (column.cellClass !== null) cell.setAttribute('class', column.cellClass);
 
-        if (heading.hasAttribute('data-format')) {
-          cell.setAttribute('data-original-value', cell.textContent.trim());
-          cell.setAttribute('data-format', heading.getAttribute('data-format'));
-          cell.innerHTML = formatData(heading.getAttribute('data-format'), cell.textContent.trim()); //Make sure date format is consistent
+        if (column.format !== null) {
+          const originalValue = cell.textContent.trim();
+          cell.setAttribute('data-original-value', originalValue);
+          cell.setAttribute('data-format', column.format);
+          const formattedValue = formatData(column.format, originalValue);
+          if (column.format === 'date' || column.format === 'datetime' || column.format === 'price') {
+            cell.textContent = formattedValue;
+          } else {
+            cell.innerHTML = formattedValue;
+          }
         }
 
-        if (heading.classList.contains('d-none')) {
-          cell.classList.add('d-none');
-        }
+        if (column.hidden) cell.classList.add('d-none');
 
-        if (statuses.includes(cell.textContent.trim().toLowerCase())) {
-          cell.setAttribute('data-content', cell.textContent.trim().toLowerCase());
-        }
+        const status = cell.textContent.trim().toLowerCase();
+        if (statuses.has(status)) cell.setAttribute('data-content', status);
       }
     });
   });
@@ -448,9 +485,9 @@ export const setupExpandedTable = (component, table, actionbar, form): void => {
     component.setAttribute('data-selectall', actionbar.getAttribute('data-selectall'));
   }
 
-  createSearchDataList(component, table);
+  profileTableStep('search-suggestions', () => createSearchDataList(component, table));
 
-  addSelectboxes(component, table, actionbar);
+  profileTableStep('selection-controls', () => addSelectboxes(component, table));
   addSelectboxesEvents(component, table, actionbar);
 
 
@@ -472,30 +509,40 @@ export const addSelectboxes = (component, table): void => {
     return;
 
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
-    if (row.querySelector('.expand-button-heading') && !row.querySelector('.selectrow-heading'))
-      row.querySelector('.expand-button-heading').insertAdjacentHTML('afterend', `<th class="th--fixed selectrow-heading"></th>`);
-    else if(!row.querySelector('.selectrow-heading'))
-      row.insertAdjacentHTML('afterbegin', `<th class="th--fixed selectrow-heading"></th>`);
+    if (row.querySelector('.selectrow-heading')) return;
+    const heading = document.createElement('th');
+    heading.setAttribute('class', 'th--fixed selectrow-heading');
+    const expand = row.querySelector('.expand-button-heading');
+    row.insertBefore(heading, expand ? expand.nextSibling : row.firstChild);
   });
+
+  // Build the static markup once instead of parsing the same HTML for every row.
+  const selectionCell = document.createElement('td');
+  selectionCell.setAttribute('class', 'td--fixed selectrow selected');
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.setAttribute('name', 'row');
+  const label = document.createElement('label');
+  const text = document.createElement('span');
+  text.setAttribute('class', 'visually-hidden');
+  text.textContent = 'Select row';
+  label.appendChild(text);
+  selectionCell.appendChild(checkbox);
+  selectionCell.appendChild(label);
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     row.setAttribute('data-index', index + 1);
-    if (!row.querySelector('.selectrow')) {
-      const rowID = `row${uniqueID(index)}`;
+    if (row.querySelector('.selectrow')) return;
 
-      if (row.querySelector('.td--expand'))
-        row
-          .querySelector('.td--expand')
-          .insertAdjacentHTML(
-            'afterend',
-            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-          );
-      else
-        row.insertAdjacentHTML(
-          'afterbegin',
-          `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-        );
-    }
+    const cell = selectionCell.cloneNode(true) as HTMLTableCellElement;
+    const rowID = `row${uniqueID(index)}`;
+    const input = cell.firstElementChild as HTMLInputElement;
+    input.setAttribute('id', rowID);
+    if (row.hasAttribute('data-selected')) input.setAttribute('checked', 'true');
+    cell.children[1].setAttribute('for', rowID);
+    const first = row.firstElementChild;
+    const expand = first?.classList.contains('td--expand') ? first : row.querySelector('.td--expand');
+    row.insertBefore(cell, expand ? expand.nextSibling : row.firstChild);
   });
 
 };
@@ -1143,12 +1190,12 @@ export const setupAdvancedTable = (component, table, actionbar, pagination, form
     }
   });
 
-  populateFiltersFromActionbar(component, table, actionbar);
-  populateFilterOptions(component, table);
-  setActionbarEvents(component, table, actionbar, pagination);
-  createInlineHeaderButtons(component, table);
-  filterAdvancedTable(component, table, actionbar, pagination);
-  paginateRows(component, table, pagination);
+  profileTableStep('actionbar-filters', () => populateFiltersFromActionbar(component, table, actionbar));
+  profileTableStep('filter-options', () => populateFilterOptions(component, table));
+  profileTableStep('actionbar-events', () => setActionbarEvents(component, table, actionbar, pagination));
+  profileTableStep('header-controls', () => createInlineHeaderButtons(component, table));
+  profileTableStep('initial-filtering', () => filterAdvancedTable(component, table, actionbar, pagination));
+  profileTableStep('filtered-pagination', () => paginateRows(component, table, pagination));
 
   table.querySelectorAll('thead tr th[data-sort] [data-sort-btn]').forEach((btn) => {
 
@@ -1830,13 +1877,14 @@ export const filterAdvancedTable = (component, table, actionbar, pagination, col
   console.log('Column Filters:', columnFilters);
   const appliedFilters = [];
   const filtersSet = new Set();
-  table.classList.remove('table--filtered');
+  if (table.classList.contains('table--filtered')) table.classList.remove('table--filtered');
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+  const rows = Array.from(table.querySelectorAll('tbody tr')) as HTMLTableRowElement[];
+  rows.forEach((row) => {
 
-    row.classList.remove('filtered--matched');
-    row.classList.remove('filtered--show');
-    row.classList.remove('filtered');
+    if (row.classList.contains('filtered--matched') || row.classList.contains('filtered--show') || row.classList.contains('filtered')) {
+      row.classList.remove('filtered--matched', 'filtered--show', 'filtered');
+    }
   });
 
   if(columnFilters.length == 0) return;
@@ -1949,7 +1997,7 @@ export const filterAdvancedTable = (component, table, actionbar, pagination, col
   });
 
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+  rows.forEach((row) => {
 
     if (!row.classList.contains('filtered')) {
       row.classList.add('filtered--matched');

@@ -1,6 +1,8 @@
 import { describe, it, expect } from './test.js';
 import {
   getSwipeDirection,
+  formatData,
+  prepareData,
   isNumeric,
   isTraversable,
   isValidPostcode,
@@ -23,6 +25,29 @@ describe('MathUtils Tests', function () {
 
 describe('The general helper functions', () => {
   installTestDom();
+
+  it('preserves locale output for dates, times, prices and invalid values', () => {
+    for (const value of ['17/11/2026', '29/02/2024', '2026-01-02', '', 'not-date']) {
+      const expected = new Date(prepareData('date', value)).toLocaleDateString('en-gb', {
+        day: 'numeric', month: 'numeric', year: 'numeric',
+      });
+      expect(formatData('date', value) === expected);
+    }
+    for (const value of ['2026-11-17T13:45:00Z', '2026-07-01T23:59:00Z', '', 'not-date']) {
+      const date = new Date(value);
+      const expected = date.toLocaleDateString('en-gb', {
+        weekday: 'short', year: '2-digit', month: 'long', day: 'numeric',
+      }) + ' ' + date.toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' });
+      expect(formatData('datetime', value) === expected);
+    }
+    for (const value of ['£0.00', '£1,200', '£-1,200.50', '12.01', '', 'not-price']) {
+      const expected = new Intl.NumberFormat('en-GB', {
+        style: 'currency', currency: 'GBP', minimumFractionDigits: 2,
+        maximumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger',
+      }).format(prepareData('price', value));
+      expect(formatData('price', value) === expected);
+    }
+  });
 
   it('should identify numeric strings only', () => {
     expect(isNumeric('12.5'));

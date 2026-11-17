@@ -72,6 +72,23 @@ class iamAppInsights extends HTMLElement {
 */
 
 
+    // Newer visualisations supply rows as HTML on the body rather than mounted rows.
+    // Assemble the markup without parsing every encoded row into a temporary DOM.
+    // Shallow copies preserve table/body metadata and leave the Looker payload intact.
+    let tableMarkup: string;
+    if (table.querySelector('tbody[data-html]')) {
+      const shell = table.cloneNode(false) as HTMLTableElement;
+      const children = Array.from(table.children).map((child) => {
+        if (child.tagName !== 'TBODY' || !child.hasAttribute('data-html')) return child.outerHTML;
+        const body = child.cloneNode(false) as HTMLTableSectionElement;
+        body.removeAttribute('data-html');
+        return body.outerHTML.replace(/<\/tbody>$/, () => `${child.getAttribute('data-html') || ''}</tbody>`);
+      });
+      tableMarkup = shell.outerHTML.replace(/<\/table>$/, () => `${children.join('')}</table>`);
+    } else {
+      tableMarkup = table.outerHTML;
+    }
+
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
       <strong class="me-1">Criteria match key: </strong>
@@ -83,7 +100,7 @@ class iamAppInsights extends HTMLElement {
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
         <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
-      ${table.outerHTML}
+      ${tableMarkup}
       <iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
     </iam-table-advanced>`;
   };
@@ -264,6 +281,18 @@ class iamAppInsights extends HTMLElement {
 
   createComponent = (component, table): void => {
 
+    const profileWindow = window as Window & {
+      __iamInsightsProfile?: boolean;
+      __iamInsightsBuildSequence?: number;
+    };
+    const profile = profileWindow.__iamInsightsProfile;
+    const build = profile ? (profileWindow.__iamInsightsBuildSequence = (profileWindow.__iamInsightsBuildSequence || 0) + 1) : 0;
+    const setupStarted = performance.now();
+    const timings: Array<{ stage: string; elapsedMs: number }> = [];
+    const measure = (stage: string, started: number): void => {
+      if (profile) timings.push({ stage, elapsedMs: Math.round(performance.now() - started) });
+    };
+
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
     const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
@@ -290,12 +319,19 @@ class iamAppInsights extends HTMLElement {
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
     // #endregion fix original table
 
-    tableWrapper.innerHTML = this.createTableContent(component, table);
+    const markupStarted = performance.now();
+    const tableMarkup = this.createTableContent(component, table);
+    measure('table-markup', markupStarted);
+    const tableStarted = performance.now();
+    tableWrapper.innerHTML = tableMarkup;
+    measure('table-mount-and-setup', tableStarted);
+    const mapStarted = performance.now();
     mapWrapper.innerHTML = this.createMapContent();
+    measure('map-mount-and-setup', mapStarted);
 
     // #region set the view controls
 
-    if(this.querySelector('table tr[data-latitude][data-longitude]')) {
+    if(tableWrapper.querySelector('table tr[data-latitude][data-longitude]')) {
       viewControls?.classList.remove('d-none');
       viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
       this.setAttribute('data-view', 'split');
@@ -382,7 +418,7 @@ class iamAppInsights extends HTMLElement {
     //this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
 
     // List all of the branches present in the table, make sure they are unique
-    const listBranches = [...new Set(Array.from(component.querySelectorAll('tr[data-branch]')).map(el => el.getAttribute('data-branch') || ''))];
+    const listBranches = [...new Set(Array.from(tableWrapper.querySelectorAll('tr[data-branch]')).map(el => el.getAttribute('data-branch') || ''))];
 
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
@@ -391,6 +427,18 @@ class iamAppInsights extends HTMLElement {
       },
     });
 
+    measure('component-setup-total', setupStarted);
+    if (profile) {
+      console.info('[iam Insights profile] Component setup complete');
+      console.table(timings);
+      console.info('[iam Insights lifecycle]', JSON.stringify({
+        build,
+        frameStartEpochMs: Math.round(performance.timeOrigin),
+        setupStartEpochMs: Math.round(performance.timeOrigin + setupStarted),
+        readyEpochMs: Math.round(performance.timeOrigin + performance.now()),
+        setupMs: Math.round(performance.now() - setupStarted),
+      }));
+    }
     component.dispatchEvent(dispatchedEvent);
 
     const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
@@ -692,28 +740,23 @@ class iamAppInsights extends HTMLElement {
     }
 
     // HTML Observer - needed for when the table is loaded via AJAX or other means after the component has been initialized
-    const htmlUpdated = (mutationList: any, observer: any): void => {
+    const htmlUpdated = (mutationList: MutationRecord[], observer: MutationObserver): void => {
       observer.disconnect();
-
-      for (const mutation of mutationList) {
-        if (
-          mutation.type == 'characterData' ||
-          (mutation.type == 'childList' && mutation.addedNodes.length) ||
-          mutation.type === 'attributes'
-        ) {
-
-          //console.log('HTML updated mutation:', mutation);
-
-          if (this.querySelector('table') && mutation.addedNodes.length) {
-
-            const table = this.querySelector('table');
-
-            createComponent(this, table);
-          }
+      try {
+        // A batch can contain several additions for the same final table.
+        // Build that final state once, including updates to encoded row payloads.
+        const shouldRender = mutationList.some((mutation) =>
+          (mutation.type === 'childList' && mutation.addedNodes.length > 0) ||
+          (mutation.type === 'attributes' && mutation.attributeName === 'data-html' &&
+            (mutation.target as Element).tagName === 'TBODY')
+        );
+        const table = this.querySelector('table');
+        if (table && shouldRender) {
+          createComponent(this, table);
         }
+      } finally {
+        observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
       }
-
-      observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
     };
 
     const observer = new MutationObserver(htmlUpdated);
