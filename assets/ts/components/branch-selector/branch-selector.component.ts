@@ -142,6 +142,11 @@ class iamBranchSelector extends HTMLElement {
 
       if(selected)
         selected.checked = true;
+      else {
+        menuButton?.querySelector('span.selected').textContent = "Select branch";
+        menuButton?.querySelector('span.selected').removeAttribute('data-content');
+        menuButton?.removeAttribute('data-checked-count');
+      }
 
       if (this.querySelectorAll('input[type="checkbox"]:not([name="all-branches"]):checked').length <= 1) {
         selected?.closest('label').classList.add('pe-none');
