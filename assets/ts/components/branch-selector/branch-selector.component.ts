@@ -87,12 +87,9 @@ class iamBranchSelector extends HTMLElement {
       const target = event.target as HTMLInputElement;
 
       if(target?.name === 'all-branches') {
-
-        if(target.checked) {
-          Array.from(this.querySelectorAll('input')).forEach((input) => {
-            input.checked = target.checked;
-          });
-        }
+        Array.from(this.querySelectorAll('input')).forEach((input) => {
+          input.checked = target.checked;
+        });
       }
       else {
         const allBranchesCheckbox = this.querySelector('input[name="all-branches"]') as HTMLInputElement;
