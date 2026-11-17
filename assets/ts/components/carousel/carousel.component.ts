@@ -20,6 +20,7 @@ class iamCarousel extends HTMLElement {
         ${loadCSS}
       </style>
       <slot></slot>
+      <slot name="insight"></slot>
       <div class="carousel__controls" part="carousel__controls">
         <div class="carousel__pips" part="carousel__pips"></div>
         <div class="carousel__progress carousel__progress-xs" part="carousel__progress-xs">

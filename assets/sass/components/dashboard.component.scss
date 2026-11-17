@@ -1,3 +1,145 @@
+@use 'sass:map';
+@use '../utilities/grid.scss' as *;
+@use '../elements/container.scss' as *;
+
+@use '../utilities/max-height.scss' as *;
+
+@use '../components/carousel.config.scss' as *;
+
+
+
+@layer legacy, reset, elements, components, templates, overrides, utilities, debug;
+
+
+slot[name="insight"] {
+  display: contents;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
 .wrapper {
+  display: grid;
+  grid-template-columns: subgrid;
+
+}
+
+/*
+.insights {
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+@media screen and (min-width: 36em) {
+  ::slotted([slot="insight"]) {
+    grid-column: auto / span 6 !important;
+  }
+}
+@media screen and (min-width: 62em) {
+  ::slotted([slot="insight"]) {
+    grid-column: auto / span 3 !important;
+  }
+}
+
+*/
+
+:host([data-layout="layout2"]){
+  
+  ::slotted([slot="title"]) {
+    grid-column: col-1 / col-12;
+    grid-row: 1;
+  }
+  ::slotted([slot="button"]) {
+    grid-column: col-1 / col-12;
+    grid-row: 2;
+  }
+
+  #insight-wrapper {
+    order: 1;
+    grid-column: col-9 / col-12;
+    grid-row: 3;
+
+    iam-carousel {
+      display: contents;
+
+      & > * {
+        min-height: auto;
+        margin: 0 0 2rem 0;
+      }
+    }
+
+    iam-carousel::scroll-button,
+    iam-carousel::scroll-marker-group {
+      display: none;
+    }
+  }
+
+  slot:not([name]) {
+    order: 2;
+    display: block;
+    grid-column: col-1 / col-8;
+    grid-row: 3;
+  }
+
+}
+
+// #region widget slot styles
+slot[name="widget"] {
+  display: grid;
+  grid-template-columns: subgrid;
+  gap-row: 1rem;
+
+}
+
+#widgetWrapper {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+::slotted(.admin-panel[slot="widget"]) {
+  grid-column: auto / span var(--col-span, 6)!important;
+  resize: block!important;
+  overflow: auto;
+
+  max-width: 100%;
+  min-height: calc(var(--max-height-md) - var(--mh-modifier, 0rem));
+}
+
+
+::slotted(hr[slot="widget"]) {
+
+  height: 10px!important;
+  margin: 1rem 0;
+  background: black!important;
+  resize: none;
+  grid-column: 1 / span 12!important;
+
+}
+
+::slotted(.admin-panel[slot="widget"][data-resizing="true"]) {
+  resize: both!important;
+}
+
+
+::slotted(.admin-panel.widget-md) {
+  height: calc(var(--max-height-md) - var(--mh-modifier, 0rem));
+}
+
+::slotted(.admin-panel.widget-lg) {
+  height: calc(var(--max-height-lg) - var(--mh-modifier, 0rem));
+}
+
+
+.widget-row {
+  min-height: 100px;
+
+  margin-bottom: 2rem;
+
   background: red;
 }
+// #endregion
+
