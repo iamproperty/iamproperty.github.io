@@ -68,6 +68,11 @@ class iamBranchSelector extends HTMLElement {
     selected.checked = true;
 
     menuButton?.querySelector('span.selected').textContent = selected?.closest('label').textContent;
+
+    if(this.querySelector('input[name="all-branches"]:checked')) {
+      menuButton?.querySelector('span.selected').textContent = "All";
+    }
+
     menuButton?.setAttribute('data-checked-count', this.querySelectorAll('input:checked').length - 1);
 
     if (this.hasAttribute('data-indicator'))
@@ -104,6 +109,11 @@ class iamBranchSelector extends HTMLElement {
       selected.checked = true;
 
       menuButton?.querySelector('span.selected').innerHTML = selected?.closest('label').textContent;
+
+      if(this.querySelector('input[name="all-branches"]:checked')) {
+        menuButton?.querySelector('span.selected').textContent = "All";
+      }
+
       menuButton?.setAttribute('data-checked-count', this.querySelectorAll('input:not([name="all-branches"]):checked').length - 1);
 
       if (this.querySelectorAll('input[type="checkbox"]:not([name="all-branches"]):checked').length <= 1) {
