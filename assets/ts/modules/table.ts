@@ -488,6 +488,10 @@ export const setupExpandedTable = (component, table, actionbar, form): void => {
 
   profileTableStep('search-suggestions', () => createSearchDataList(component, table));
 
+  if (table.querySelector('thead th[data-sort]')) {
+    profileTableStep('row-indexing', () => indexRows(table));
+  }
+
   profileTableStep('selection-controls', () => addSelectboxes(component, table));
   addSelectboxesEvents(component, table, actionbar);
 
@@ -502,6 +506,14 @@ export const setupExpandedTable = (component, table, actionbar, form): void => {
       });
     }
   }
+};
+
+export const indexRows = (table): void => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+    if(!row.hasAttribute('data-index'))
+      row.setAttribute('data-index', index + 1);
+  });
+  table.classList.add('tabled--indexed');
 };
 
 export const addSelectboxes = (component, table): void => {
@@ -532,7 +544,7 @@ export const addSelectboxes = (component, table): void => {
   selectionCell.appendChild(label);
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-    row.setAttribute('data-index', index + 1);
+    if (!row.hasAttribute('data-index')) row.setAttribute('data-index', index + 1);
     if (row.querySelector('.selectrow')) return;
 
     const cell = selectionCell.cloneNode(true) as HTMLTableCellElement;
@@ -1278,13 +1290,32 @@ export const sortViaHeader = (component, table, actionbar, pagination, heading, 
   // Work out what to do based on the state of the heading
   if(!heading.hasAttribute('data-order-by')) {
 
-    // Reset the table to the original order
+    // Restore the table order via the data-index attribute
     const tbody = table.querySelector('tbody');
-    tbody.innerHTML = savedTableBody.innerHTML;
+    const tableArr = [];
+    Array.from(tbody.querySelectorAll('tr')).forEach((tableRow) => {
+      let rowIndex = tableRow.getAttribute('data-index');
 
-    addSelectboxes(component, table, actionbar);
-    fixTablebody(component, table, pagination);
-    filterAdvancedTable(component, table, actionbar, pagination);
+      if (!isNaN(parseFloat(rowIndex))) { // Check if the rowIndex is numeric or can be converted to a number i.e. starts with a number like "13 weeks" or "5 days"
+        rowIndex = zeroPad(parseFloat(rowIndex), 10);
+      }
+
+      const dataRow = {
+        index: rowIndex,
+        row: tableRow,
+      };
+      tableArr.push(dataRow);
+    });
+
+    tableArr.sort((a, b) => (a.index > b.index ? 1 : -1)); // Sort array alphabetically
+
+    // Create a string to return and populate the tbody
+    let strTbody = '';
+    tableArr.forEach((tableRow) => {
+      strTbody += tableRow.row.outerHTML;
+    });
+    tbody.innerHTML = strTbody;
+
     paginateRows(component, table, pagination);
 
     // Dispatch event
@@ -1317,6 +1348,7 @@ export const sortViaHeader = (component, table, actionbar, pagination, heading, 
 
     paginateRows(component, table, pagination);
   }
+
 };
 
 export const setActionbarEvents = (component, table, actionbar, pagination): void => {

@@ -222,6 +222,8 @@ export class InsightsDataController {
   disconnect(): void {
     this.abort.abort();
     this.fixedObserver.disconnect();
+    // The legacy fallback controls its empty state with CSS, not this inline override.
+    this.owner.shadowRoot?.querySelector<HTMLElement>('.empty-state')?.style.removeProperty('display');
   }
 
   private selected(): InsightsRecord[] {

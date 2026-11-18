@@ -1,6 +1,6 @@
 import { describe, expect, it } from './test.ts';
 import { createElement, installTestDom } from './test-dom.ts';
-import { addSelectboxes, fixTableCells, profileTableStep, setFixedCellsViaHeaders } from './table.ts';
+import { addSelectboxes, fixTableCells, indexRows, profileTableStep, setFixedCellsViaHeaders } from './table.ts';
 import { formatData } from './helpers.ts';
 
 installTestDom();
@@ -217,6 +217,24 @@ describe('Table row selection setup', () => {
     expect(rows.every((row) => row.querySelectorAll('.selectrow').length === 1));
     expect(rows[0].querySelector('.selectrow') === selected);
     expect(rows[2].querySelector('.selectrow') === existing);
+  });
+
+  it('preserves original row indices when indexing or adding selection controls after reordering', () => {
+    const component = createElement('iam-table-advanced', { dataSelectall: '' });
+    const table = createElement('table');
+    const body = createElement('tbody');
+    const original = createElement('tr', { dataIndex: '41' });
+    const next = createElement('tr');
+    [original, next].forEach((row) => { row.appendChild(createElement('td', {}, 'Property')); body.appendChild(row); });
+    table.appendChild(body);
+    indexRows(table);
+    addSelectboxes(component, table);
+    body.appendChild(original);
+    indexRows(table);
+    addSelectboxes(component, table);
+    expect(original.getAttribute('data-index') === '41');
+    expect(next.getAttribute('data-index') === '2');
+    expect(original.querySelectorAll('.selectrow').length === 1 && next.querySelectorAll('.selectrow').length === 1);
   });
 
   it('leaves tables without data-selectall untouched', () => {

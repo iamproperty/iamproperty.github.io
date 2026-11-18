@@ -213,6 +213,14 @@ async function rendererScenario({ compatibility, deniedStorage }) {
     element.append(app);
     await tick();
     assert.equal(app.shadowRoot.querySelector('iam-table-advanced').getRecords().length, 0);
+    // Switching from an empty data-backed result to unsupported markup must
+    // restore legacy empty-state/view behaviour rather than retain inline state.
+    source.tBodies[0].setAttribute('data-html', '<tr><td colspan="3">Merged result</td></tr>');
+    await tick();
+    assert.equal(app.shadowRoot.querySelector('iam-table-advanced').hasAttribute('data-backed'), false);
+    assert.equal(app.shadowRoot.querySelector('.empty-state').style.display, '');
+    assert.equal(app.getAttribute('data-view'), 'list');
+    assert.equal(app.shadowRoot.querySelector('#view-controls').classList.contains('d-none'), true);
     const beforeReset = messages.filter((message) => message.type === 'insight-action').length;
     app.dispatchEvent(new w.CustomEvent('table-customisation-reset'));
     assert.equal(messages.filter((message) => message.type === 'insight-action').length, beforeReset + 1);
@@ -225,6 +233,29 @@ async function rendererScenario({ compatibility, deniedStorage }) {
     );
   } finally {
     await new Promise((resolve) => setImmediate(resolve));
+    dom.window.close();
+  }
+}
+
+function legacyTableIndexing() {
+  const { dom, window: w, errors } = environment();
+  try {
+    w.eval(loader);
+    w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+    const table = w.document.createElement('iam-table-advanced');
+    table.setAttribute('data-selectall', '');
+    table.innerHTML =
+      '<iam-actionbar data-selectall></iam-actionbar><table><thead><tr><th data-sort>Property</th></tr></thead><tbody><tr data-index="41"><td>One</td></tr><tr><td>Two</td></tr></tbody></table>';
+    w.document.body.append(table);
+    assert.equal(table.querySelectorAll('tbody input[type="checkbox"]').length, 2);
+    assert.equal(table.querySelector('tbody tr').getAttribute('data-index'), '41');
+    assert.equal(table.querySelectorAll('tbody tr')[1].getAttribute('data-index'), '2');
+    assert.deepEqual(
+      errors.map((error) => error.cause?.stack || error.detail?.stack || error.stack),
+      []
+    );
+    console.log('PASS: legacy sortable HTML table retains stable row indices and selection controls');
+  } finally {
     dom.window.close();
   }
 }
@@ -331,6 +362,7 @@ function payloadParity() {
 }
 
 (async () => {
+  legacyTableIndexing();
   paginationReconnect();
   payloadParity();
   await rendererScenario({ compatibility: false, deniedStorage: false });
