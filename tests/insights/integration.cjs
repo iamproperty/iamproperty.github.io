@@ -74,9 +74,22 @@ function environment() {
   };
   window.CSS = { supports: () => true, escape: (value) => value };
   window.HTMLElement.prototype.scrollTo = () => {};
-  window.HTMLElement.prototype.hidePopover = () => {};
+  const popovers = new WeakSet();
+  const toggle = (element, newState) => {
+    const event = new window.Event('toggle');
+    Object.defineProperty(event, 'newState', { value: newState });
+    element.dispatchEvent(event);
+  };
+  window.HTMLElement.prototype.showPopover = function () {
+    assert.equal(this.isConnected, true);
+    popovers.add(this);
+    toggle(this, 'open');
+  };
+  window.HTMLElement.prototype.hidePopover = function () {
+    if (popovers.delete(this)) toggle(this, 'closed');
+  };
   window.HTMLDialogElement.prototype.showModal = function () {
-    this.open = true;
+    throw new Error('Table filters must use a non-modal popover');
   };
   window.HTMLDialogElement.prototype.close = function () {
     this.open = false;
@@ -237,6 +250,123 @@ async function rendererScenario({ compatibility, deniedStorage }) {
   }
 }
 
+function inlineFilters() {
+  const { dom, window: w, errors } = environment();
+  try {
+    w.eval(loader);
+    w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+    const host = w.document.createElement('iam-table-advanced');
+    host.setAttribute('data-backed', '');
+    host.setAttribute('data-selectall', '');
+    const records = Array.from({ length: 5000 }, (_, id) => ({
+      id,
+      name: `Property ${id}`,
+      price: 100000 + id,
+      date: id % 2 ? '2026-01-02' : '2026-01-01',
+      branch: id % 2 ? 'South' : 'North',
+    }));
+    host.setData(records, {
+      rowKey: 'id',
+      columns: [
+        { key: 'name', label: 'Property', filters: true },
+        { key: 'price', label: 'Price', format: 'price', filters: [{ type: 'price' }] },
+        { key: 'date', label: 'Date', format: 'date', filters: [{ type: 'date' }] },
+        { key: 'branch', label: 'Branch', filters: [{ type: 'select', options: ['North', 'South'] }] },
+      ],
+    });
+    w.document.body.append(host);
+    assert.equal(host.querySelectorAll('tbody tr').length, 50);
+    assert.equal(host.querySelector('datalist'), null, 'Do not build suggestion lists during initial setup');
+    const open = (index) => {
+      host.querySelector(`[data-filter-btn][data-column-index="${index}"]`).click();
+      return host.querySelector('dialog');
+    };
+    let dialog = open(0);
+    assert.equal(dialog.classList.contains('dialog--inline-filter'), true);
+    assert.equal(dialog.getAttribute('popover'), 'auto');
+    assert.equal(dialog.open, false, 'Popover must not activate modal dialog behaviour');
+    assert.equal(dialog.querySelector('h2'), null);
+    const input = dialog.querySelector('input');
+    assert.equal(input.list.options.length, 5000);
+    assert.ok(Array.from(input.list.options).some((option) => option.value === 'Property 4999'));
+    assert.equal(w.document.activeElement, input);
+    assert.equal(host.querySelector('[data-filter-btn]').getAttribute('aria-expanded'), 'true');
+    input.value = 'Property 4999';
+    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    assert.equal(host.getMatchingRecords().length, 1);
+    assert.equal(host.querySelector('dialog'), null);
+    assert.equal(w.document.activeElement, host.querySelector('[data-filter-btn]'));
+    dialog = open(0);
+    assert.equal(
+      dialog.querySelector('input').list.options.length,
+      5000,
+      'Suggestions must include filtered-out records'
+    );
+    Array.from(dialog.querySelectorAll('button'))
+      .find((button) => button.textContent === 'Reset')
+      .click();
+    assert.equal(host.getMatchingRecords().length, 5000);
+    dialog = open(1);
+    const operator = dialog.querySelector('[data-operator]');
+    operator.value = 'between';
+    operator.dispatchEvent(new w.Event('change'));
+    const [from, to] = dialog.querySelectorAll('input');
+    assert.ok(Array.from(from.list.options).some((option) => option.value === '104999'));
+    from.value = '100000';
+    from.dispatchEvent(new w.Event('input'));
+    to.value = '99999';
+    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    assert.equal(host.querySelector('dialog'), dialog, 'Invalid ranges keep the filter open');
+    assert.ok(to.validationMessage);
+    assert.equal(host.getMatchingRecords().length, 5000);
+    to.value = '100002';
+    to.dispatchEvent(new w.Event('input'));
+    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    assert.equal(host.getMatchingRecords().length, 3);
+    dialog = open(2);
+    assert.equal(dialog.querySelector('datalist'), null);
+    assert.equal(dialog.querySelector('input').type, 'date');
+    dialog.querySelector('input').value = '2026-01-02';
+    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    assert.equal(host.getMatchingRecords().length, 1);
+    dialog = open(3);
+    const choices = dialog.querySelector('select:not([data-operator])');
+    assert.deepEqual(
+      Array.from(choices.options, (option) => option.value),
+      ['', 'North', 'South']
+    );
+    choices.value = 'South';
+    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    assert.equal(host.getMatchingRecords()[0].id, 1);
+    dialog = open(0);
+    dialog.hidePopover();
+    assert.equal(host.querySelector('dialog'), null, 'Light dismissal removes controls without applying changes');
+    assert.equal(host.getMatchingRecords().length, 1);
+    dialog = open(0);
+    host.querySelector('[data-filter-btn]').click();
+    assert.equal(host.querySelector('dialog'), null, 'Clicking the same heading closes its filter');
+    dialog = open(0);
+    const replacement = open(1);
+    assert.equal(dialog.isConnected, false);
+    assert.equal(host.querySelectorAll('.dialog--inline-filter').length, 1);
+    const pagination = host.querySelector('iam-pagination') || host.shadowRoot.querySelector('iam-pagination');
+    pagination.dispatchEvent(new w.CustomEvent('update-page', { detail: { page: 1 } }));
+    assert.equal(replacement.isConnected, false, 'Rendering a different page must remove stale anchored controls');
+    dialog = open(0);
+    host.remove();
+    assert.equal(dialog.isConnected, false);
+    assert.deepEqual(
+      errors.map((error) => error.cause?.stack || error.stack),
+      []
+    );
+    console.log(
+      'PASS: non-modal anchored filters, all-record suggestions, reset, numeric/date/select filters, ranges and dismissal'
+    );
+  } finally {
+    dom.window.close();
+  }
+}
+
 function legacyTableIndexing() {
   const { dom, window: w, errors } = environment();
   try {
@@ -362,6 +492,7 @@ function payloadParity() {
 }
 
 (async () => {
+  inlineFilters();
   legacyTableIndexing();
   paginationReconnect();
   payloadParity();

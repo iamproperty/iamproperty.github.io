@@ -1,4 +1,4 @@
-import { activeFilter, comparableValue, filterOperators } from './table-data-columns';
+import { activeFilter, comparableValue, filterOperators, filterSuggestions } from './table-data-columns';
 import { TableData, type DataColumn, type DataFilter, type RowId } from './table-data';
 
 const priceFormatter = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
@@ -16,6 +16,7 @@ export class TableDataView {
   private checkboxPrefix = `table-data-${++nextTableId}`;
   private selectAllInput: HTMLInputElement | null = null;
   private filterDialog: HTMLDialogElement | null = null;
+  private dismissFilter: (() => void) | null = null;
   private get columns(): DataColumn[] {
     return this.data.columns;
   }
@@ -119,8 +120,7 @@ export class TableDataView {
   }
 
   disconnect(): void {
-    this.filterDialog?.remove();
-    this.filterDialog = null;
+    this.dismissFilter?.();
     this.abort.abort();
   }
 
@@ -172,6 +172,7 @@ export class TableDataView {
   }
 
   render(): void {
+    this.dismissFilter?.();
     const positiveInt = (value: string | null, fallback: number): number => {
       const number = Number(value);
       return Number.isSafeInteger(number) && number > 0 ? number : fallback;
@@ -293,6 +294,7 @@ export class TableDataView {
     button.setAttribute(`data-${type}-btn`, '');
     button.title = label;
     button.setAttribute('aria-label', label);
+    if (type === 'filter') button.setAttribute('aria-expanded', 'false');
     const glyph = document.createElement('i');
     glyph.className = `fa-solid ${icon} m-0`;
     glyph.setAttribute('aria-hidden', 'true');
@@ -300,16 +302,48 @@ export class TableDataView {
     return button;
   }
 
-  // Build filter controls on demand and apply them to the full dataset.
+  // Reuse the existing inline-filter presentation, with options from all records.
   private openFilter(column: DataColumn, index: number): void {
-    this.filterDialog?.remove();
+    const sameColumn = this.filterDialog?.dataset.columnKey === column.key;
+    this.dismissFilter?.();
+    if (sameColumn) return;
+    const button = this.table.querySelector<HTMLButtonElement>(
+      `button[data-filter-btn][data-column-index="${index}"]`
+    )!;
+    const heading = button.closest('th')!;
+    const anchor = `--${this.checkboxPrefix}-filter`;
+    const previousAnchor = heading.style.getPropertyValue('anchor-name');
+    heading.style.setProperty('anchor-name', anchor);
     const dialog = document.createElement('dialog');
     this.filterDialog = dialog;
+    dialog.id = `${this.checkboxPrefix}-filter`;
+    dialog.dataset.columnKey = column.key;
+    dialog.className = 'dialog--inline-filter';
+    dialog.setAttribute('popover', 'auto');
     dialog.setAttribute('aria-label', `Filter ${column.label ?? column.key}`);
-    const title = document.createElement('h2');
-    title.className = 'h4';
-    title.textContent = `Filter ${column.label ?? column.key}`;
-    dialog.append(title);
+    dialog.style.setProperty('position-anchor', anchor);
+    button.setAttribute('aria-expanded', 'true');
+    button.setAttribute('aria-controls', dialog.id);
+    const cleanup = (): void => {
+      dialog.remove();
+      button.setAttribute('aria-expanded', 'false');
+      button.removeAttribute('aria-controls');
+      if (heading.style.getPropertyValue('anchor-name') === anchor) {
+        if (previousAnchor) heading.style.setProperty('anchor-name', previousAnchor);
+        else heading.style.removeProperty('anchor-name');
+      }
+      if (this.filterDialog === dialog) {
+        this.filterDialog = null;
+        this.dismissFilter = null;
+      }
+    };
+    this.dismissFilter = (): void => {
+      if (dialog.isConnected) dialog.hidePopover();
+      cleanup();
+    };
+    dialog.addEventListener('toggle', ((event: ToggleEvent) => {
+      if (event.newState === 'closed' && this.filterDialog === dialog) cleanup();
+    }) as EventListener);
     const form = document.createElement('form');
     const definitions = this.data.columnFilters.get(column.key) || [{ type: 'text' }];
     const controls: Array<{
@@ -318,10 +352,13 @@ export class TableDataView {
       first: HTMLInputElement | HTMLSelectElement;
       second: HTMLInputElement;
     }> = [];
-    definitions.forEach((filter) => {
+    definitions.forEach((filter, filterIndex) => {
       const fieldset = document.createElement('fieldset');
       const type = filter.type || 'text';
+      const suggestions = filterSuggestions(this.data.records, column, filter);
       const operator = document.createElement('select');
+      operator.className = 'mt-0 select--minimal';
+      operator.setAttribute('data-operator', '');
       filterOperators(type).forEach((value) => {
         const option = document.createElement('option');
         option.value = value;
@@ -329,31 +366,54 @@ export class TableDataView {
         operator.append(option);
       });
       operator.value = (filter.operator || filterOperators(type)[0]).toLowerCase();
-      const addLabel = (text: string, input: HTMLElement): HTMLLabelElement => {
+      const addLabel = (text: string, input: HTMLElement, valueField = false): HTMLLabelElement => {
         const label = document.createElement('label');
-        label.append(document.createTextNode(text), input);
+        label.className = valueField ? 'mb-0' : 'mb-0 text-heading w-100';
+        const caption = document.createElement('span');
+        caption.className = 'visually-hidden';
+        caption.textContent = text;
+        label.append(caption);
+        if (valueField) {
+          label.setAttribute('data-filter-label', '');
+          const wrapper = document.createElement('span');
+          if (type === 'price') {
+            const prefix = document.createElement('span');
+            prefix.className = 'prefix fa-regular fa-sterling-sign';
+            prefix.setAttribute('aria-hidden', 'true');
+            wrapper.append(prefix);
+          }
+          wrapper.append(input);
+          if (type === 'text' || type === 'date') {
+            const suffix = document.createElement('span');
+            suffix.className = `suffix ${type === 'date' ? 'fa-regular fa-calendar-days' : 'fa-solid fa-magnifying-glass'}`;
+            suffix.setAttribute('aria-hidden', 'true');
+            wrapper.append(suffix);
+          }
+          label.append(wrapper);
+        } else label.append(input);
         fieldset.append(label);
         return label;
       };
       addLabel('Operator', operator);
       const first = document.createElement(type === 'select' ? 'select' : 'input');
       if (first instanceof HTMLSelectElement) {
-        const options = filter.options || [
-          ...new Set(this.data.records.map((record) => String(record[column.key] ?? ''))),
-        ];
-        ['', ...options.filter((value) => String(value) !== '')].forEach((value) => {
+        first.className = 'mt-0';
+        ['', ...suggestions].forEach((value) => {
           const option = document.createElement('option');
-          option.value = String(value);
-          option.textContent = value === '' ? 'Any value' : String(value);
+          option.value = value;
+          option.textContent = value === '' ? 'Any value' : value;
           first.append(option);
         });
       } else {
         first.type = type === 'date' ? 'date' : type === 'number' || type === 'price' ? 'number' : 'text';
         first.step = 'any';
+        first.autocomplete = 'off';
       }
+      first.autofocus = filterIndex === 0;
       const second = document.createElement('input');
       second.type = type === 'date' ? 'date' : type === 'number' || type === 'price' ? 'number' : 'text';
       second.step = 'any';
+      second.autocomplete = 'off';
       const inputValue = (value: unknown): string => {
         if (value == null || value === '') return '';
         if (type === 'date') {
@@ -371,8 +431,21 @@ export class TableDataView {
           : [filter.value];
       first.value = inputValue(values[0]);
       second.value = inputValue(values[1]);
-      addLabel('Value', first);
-      const secondLabel = addLabel('To', second);
+      addLabel('Value', first, true);
+      const secondLabel = addLabel('To', second, true);
+      if (type !== 'select' && suggestions.length) {
+        const list = document.createElement('datalist');
+        list.id = `${dialog.id}-${filterIndex}-options`;
+        suggestions.forEach((value) => {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = value;
+          list.append(option);
+        });
+        first.setAttribute('list', list.id);
+        second.setAttribute('list', list.id);
+        fieldset.append(list);
+      }
       const updateRange = (): void => {
         secondLabel.hidden = operator.value !== 'between';
         second.required = operator.value === 'between' && first.value !== '';
@@ -385,17 +458,11 @@ export class TableDataView {
       controls.push({ filter, operator, first, second });
       form.append(fieldset);
     });
-    const close = (): void => {
-      dialog.close();
-      dialog.remove();
-      this.filterDialog = null;
-      this.table.querySelector<HTMLButtonElement>(`button[data-filter-btn][data-column-index="${index}"]`)?.focus();
-    };
     const apply = (filters: DataFilter[]): void => {
       this.data.setColumnFilters(column.key, filters);
       this.host.setAttribute('data-page', '1');
       this.render();
-      close();
+      this.table.querySelector<HTMLButtonElement>(`button[data-filter-btn][data-column-index="${index}"]`)?.focus();
       this.emit('filters-updated', { column: column.key, filters, rowCount: this.data.matching.length });
     };
     form.addEventListener('submit', (event) => {
@@ -420,25 +487,25 @@ export class TableDataView {
       );
     });
     const buttons = document.createElement('div');
-    buttons.className = 'btn-group';
-    ['Update', 'Reset', 'Cancel'].forEach((text) => {
-      const button = document.createElement('button');
-      button.type = text === 'Update' ? 'submit' : 'button';
-      button.className = 'btn btn-action';
-      button.textContent = text;
-      if (text === 'Reset')
-        button.addEventListener('click', () => apply(definitions.map((filter) => ({ ...filter, value: null }))));
-      if (text === 'Cancel') button.addEventListener('click', close);
-      buttons.append(button);
-    });
+    buttons.className = 'btn-group pt-1';
+    const update = document.createElement('button');
+    update.type = 'submit';
+    update.className = 'btn btn-action mb-0';
+    update.textContent = 'Update';
+    buttons.append(update);
+    if (definitions.some(activeFilter)) {
+      const reset = document.createElement('button');
+      reset.type = 'button';
+      reset.className = 'btn btn-action mb-0';
+      reset.textContent = 'Reset';
+      reset.addEventListener('click', () => apply(definitions.map((filter) => ({ ...filter, value: null }))));
+      buttons.append(reset);
+    }
     form.append(buttons);
     dialog.append(form);
-    dialog.addEventListener('cancel', (event) => {
-      event.preventDefault();
-      close();
-    });
     this.host.append(dialog);
-    dialog.showModal();
+    dialog.showPopover();
+    controls[0]?.first.focus();
   }
 
   private checkbox(cell: HTMLElement, id: string, text: string): HTMLInputElement {

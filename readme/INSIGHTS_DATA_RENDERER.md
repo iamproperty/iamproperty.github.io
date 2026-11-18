@@ -8,7 +8,10 @@ Actions and maps still receive the complete relevant dataset.
 ## What changed
 
 - The advanced table has a record/selection store independent of mounted rows,
-  with paging, header filtering and sorting. Its Vue wrapper exposes the same
+  with paging, header filtering and sorting. Filters use the existing anchored
+  non-modal popover presentation and native search suggestions, built on demand
+  from all records rather than just the mounted page. Configured options, numeric
+  suggestions, date/range controls and reset remain supported. Its Vue wrapper exposes the same
   opt-in data API. `/standalone/table-data` demonstrates this independently.
 - Insights parses `tbody[data-html]` in an inert document and adapts it into
   records. Only the current page is imported into the live table. Rich cell

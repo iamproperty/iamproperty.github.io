@@ -315,7 +315,7 @@
         property links.
       </p>
       <p>
-        Record rendering, pagination and filter dialogs are owned by the web component. Vue owns the demo controls,
+        Record rendering, pagination and inline filter popovers are owned by the web component. Vue owns the demo controls,
         input records, table lifecycle and property preview.
       </p>
     </div>

@@ -39,6 +39,21 @@ export const comparableValue = (value: unknown, type = 'text'): string | number 
   return String(value).trim().toLocaleLowerCase();
 };
 
+// Suggestions come from records, never just the currently mounted page. Build
+// them when a filter opens so initial table setup does not create hidden options.
+export const filterSuggestions = (records: TableRecord[], column: DataColumn, filter: DataFilter): string[] => {
+  const type = filter.type || 'text';
+  if (type === 'date') return [];
+  const values = filter.options?.length ? filter.options : records.map((record) => record[column.key]);
+  const options = new Set<string>();
+  values.forEach((value) => {
+    if (value === null || value === undefined) return;
+    const comparable = type === 'number' || type === 'price' ? comparableValue(value, type) : String(value).trim();
+    if (comparable !== null && comparable !== '') options.add(String(comparable));
+  });
+  return [...options];
+};
+
 export const matchesColumnFilter = (value: unknown, filter: DataFilter): boolean => {
   if (!activeFilter(filter)) return true;
   const type = filter.type || 'text';

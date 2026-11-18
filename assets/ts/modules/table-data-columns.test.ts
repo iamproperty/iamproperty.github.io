@@ -1,6 +1,6 @@
 import { describe, expect, it } from './test';
 import { TableData } from './table-data';
-import { comparableValue, matchesColumnFilter, readHeaderColumns } from './table-data-columns';
+import { comparableValue, filterSuggestions, matchesColumnFilter, readHeaderColumns } from './table-data-columns';
 import { createElement, installTestDom } from './test-dom';
 
 installTestDom();
@@ -110,5 +110,37 @@ describe('Data-backed column filtering and sorting', () => {
     expect(columns[1].format === 'date');
     expect(columns[2].filters === true);
     expect(Array.isArray(columns[3].filters) && columns[3].filters[0].value === '11');
+  });
+});
+
+describe('Data-backed filter suggestions', () => {
+  it('reads the full record set, deduplicates values and keeps zero without changing source records', () => {
+    const records = Array.from({ length: 5000 }, (_, id) => ({ name: `Property ${id}` }));
+    const suggestions = filterSuggestions(records, { key: 'name' }, { type: 'text' });
+    expect(suggestions.length === 5000 && suggestions.includes('Property 4999'));
+    expect(
+      filterSuggestions(
+        [{ value: ' A ' }, { value: 'A' }, { value: '' }, { value: null }, { value: 0 }],
+        { key: 'value' },
+        { type: 'text' }
+      ).join('|') === 'A|0'
+    );
+    expect(records[0].name === 'Property 0');
+  });
+
+  it('uses configured options and normalises numeric suggestions for number inputs', () => {
+    expect(
+      filterSuggestions(
+        [{ price: 99 }],
+        { key: 'price' },
+        { type: 'price', options: ['£1,200.50', 0, 'invalid', '£1,200.50'] }
+      ).join('|') === '1200.5|0'
+    );
+    expect(
+      filterSuggestions([{ branch: 'Other' }], { key: 'branch' }, { type: 'select', options: ['North', 'South'] }).join(
+        '|'
+      ) === 'North|South'
+    );
+    expect(filterSuggestions([{ date: '2026-11-18' }], { key: 'date' }, { type: 'date' }).length === 0);
   });
 });
