@@ -174,4 +174,4 @@ execution, with maps enabled. It intercepts registration only for the reviewed
 `one_hub_prod.updateAsync` signature and retains upstream changes on a mismatch.
 That bridge is kept opt-in for comparison and rollback investigations. It is not
 the production activation mechanism; use the direct artifact above. See
-[`assets/looker/README.md`](../assets/looker/README.md) for the guard and fixtures.
+[Looker payload source guide](./INSIGHTS_LOOKER_PAYLOAD.md) for the guard and fixtures.

@@ -5,7 +5,7 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 
 const root = path.resolve(__dirname, '../..');
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
-const original = read('assets/looker/fixtures/one_hub_prod.original.js');
+const original = read('tests/insights/fixtures/one_hub_prod.original.js');
 const loader = read('assets/js/apps/insights-loader.app.min.js');
 const production = read('assets/js/apps/insights-looker.app.min.js');
 const escape = (value) =>

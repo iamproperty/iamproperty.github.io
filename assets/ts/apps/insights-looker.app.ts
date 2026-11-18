@@ -1,4 +1,4 @@
-import { insightsLookerVisualization } from '../../looker/one_hub_prod.js';
+import { insightsLookerVisualization } from '../modules/insights-payload.js';
 
 declare const looker: {
   plugins: { visualizations: { add(definition: typeof insightsLookerVisualization): void } };

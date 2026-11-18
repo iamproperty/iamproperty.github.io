@@ -1,4 +1,4 @@
-import { insightsLookerVisualization } from '../../looker/one_hub_prod.js';
+import { insightsLookerVisualization } from './insights-payload.js';
 
 export interface InsightsVisualization {
   id?: string;

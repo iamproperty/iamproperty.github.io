@@ -40,7 +40,7 @@ const loadBuilder = (): { build: Builder; parses: () => number } => {
     },
   };
   runInNewContext(
-    readFileSync(resolve(__dirname, '../../looker/one_hub_prod.js'), 'utf8').replace(/^export /gm, ''),
+    readFileSync(resolve(__dirname, './insights-payload.js'), 'utf8').replace(/^export /gm, ''),
     sandbox
   );
   return {
@@ -168,7 +168,7 @@ describe('Looker Insights HTML payload builder', () => {
 
 const originalDefinition = (): InsightsVisualization => {
   let definition: InsightsVisualization = {};
-  runInNewContext(readFileSync(resolve(__dirname, '../../looker/fixtures/one_hub_prod.original.js'), 'utf8'), {
+  runInNewContext(readFileSync(resolve(__dirname, '../../../tests/insights/fixtures/one_hub_prod.original.js'), 'utf8'), {
     looker: {
       plugins: {
         visualizations: {

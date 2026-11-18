@@ -18,10 +18,11 @@
     // Source Map
     "sourceMap": false, // enables the use of source maps for debuggers and error reporting etc
     // "sourceRoot": "/", // Specify the location where a debugger should locate TypeScript files instead of relative source locations.
-    "noCheck": true, 
+    "noCheck": true,
+    "allowJs": true,
     "skipLibCheck": true
   },
-  "include": ["assets/ts/**/*.ts"],
+  "include": ["assets/ts/**/*.ts", "assets/ts/modules/insights-payload.js"],
   "exclude": [
     "node_modules"
   ]
