@@ -65,13 +65,12 @@
             },
             { once: true }
           );
-          const rect = input.getBoundingClientRect();
-          report({
-            state: 'ready-for-enter',
-            update: true,
-            reset: true,
-            input: { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 },
+          window.addEventListener('message', (event) => {
+            if (event.source !== parent || event.data !== 'focus-filter-input') return;
+            input.focus();
+            report({ state: 'input-focused', focused: document.activeElement === input && document.hasFocus() });
           });
+          report({ state: 'ready-for-enter', update: true, reset: true });
         } catch (error) {
           report({ state: 'failed', error: String(error) });
         }

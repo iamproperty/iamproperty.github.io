@@ -112,17 +112,29 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     assert.equal(result.state, 'ready-for-enter', JSON.stringify(result));
     assert.equal(await evaluate("document.querySelector('iframe').getAttribute('sandbox')"), 'allow-scripts');
     await command('Page.bringToFront');
-    const rect = await evaluate(
-      "(()=>{const r=document.querySelector('iframe').getBoundingClientRect();return {x:r.x,y:r.y}})()"
-    );
-    const position = { x: rect.x + result.input.x, y: rect.y + result.input.y };
-    await command('Input.dispatchMouseEvent', { type: 'mousePressed', ...position, button: 'left', clickCount: 1 });
-    await command('Input.dispatchMouseEvent', { type: 'mouseReleased', ...position, button: 'left', clickCount: 1 });
-    for (const type of ['keyDown', 'keyUp'])
-      await command('Input.dispatchKeyEvent', { type, key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
+    // Headless Windows may have no OS-focused window. Emulate page focus before
+    // sending native input; coordinate clicks can instead dismiss the popover
+    // when platform fonts or asynchronous styles change its position.
+    await command('Emulation.setFocusEmulationEnabled', { enabled: true });
+    await evaluate("document.querySelector('iframe').contentWindow.postMessage('focus-filter-input', '*')");
     for (let index = 0; index < 50; index++) {
       result = JSON.parse(await evaluate('document.body.dataset.testResult'));
       if (result.state !== 'ready-for-enter') break;
+      await delay(100);
+    }
+    assert.equal(result.state, 'input-focused', JSON.stringify(result));
+    assert.equal(result.focused, true, JSON.stringify(result));
+    for (const type of ['keyDown', 'keyUp'])
+      await command('Input.dispatchKeyEvent', {
+        type,
+        key: 'Enter',
+        code: 'Enter',
+        windowsVirtualKeyCode: 13,
+        nativeVirtualKeyCode: process.platform === 'darwin' ? 36 : 13,
+      });
+    for (let index = 0; index < 50; index++) {
+      result = JSON.parse(await evaluate('document.body.dataset.testResult'));
+      if (result.state !== 'input-focused') break;
       await delay(100);
     }
     assert.equal(result.state, 'passed', JSON.stringify(result));
