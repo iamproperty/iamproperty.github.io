@@ -1,3 +1,4 @@
+import { installInsightsPayloadOptimisation } from '../modules/insights-looker';
 import iamTableAdvanced from '../../js/components/table-advanced/table-advanced.component.min.js';
 import iamPagination from '../../js/components/pagination/pagination.component.min.js';
 import iamActionbar from '../../js/components/actionbar/actionbar.component.min.js';
@@ -7,6 +8,8 @@ import iamNotification from '../../js/components/notification/notification.compo
 import iamTableCustomisation from '../../js/components/table-customisation/table-customisation.component.min.js';
 import iamTooltip from '../../js/components/tooltip/tooltip.component.min.js';
 import iamAppInsights from './insights.app.min.js';
+
+installInsightsPayloadOptimisation();
 
 document.addEventListener('DOMContentLoaded', (): void => {
 

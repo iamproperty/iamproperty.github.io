@@ -1,4 +1,19 @@
+import { InsightsDataController, insightsMapDisabled, readInsightsSnapshot } from '../modules/insights-data';
+
 class iamAppInsights extends HTMLElement {
+  rowlimit = 500;
+  private dataController: InsightsDataController | null = null;
+  private dataSourceMarkup: string | null = null;
+  private dataDetails: Parameters<InsightsDataController['configure']>[0] | null = null;
+
+  private renderedInputMarkup: string | null = null;
+  private renderedPreparedMarkup: string | null = null;
+  private renderedTable: HTMLTableElement | null = null;
+  private renderedBranches: string[] = [];
+  private renderedRowLimit: number | undefined;
+  private sourceObserver: MutationObserver | null = null;
+  private componentEvents: AbortController | null = null;
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -53,24 +68,9 @@ class iamAppInsights extends HTMLElement {
     </div>`;
 
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
-    this.rowlimit = 500;
   }
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
-
-/*
-    const tempTbody = document.createElement('tbody') as HTMLTableSectionElement;
-    table.querySelectorAll('tbody tr:not(.filtered)').forEach((row, index)=> {
-
-      if (index >= 15) return;
-
-      tempTbody.appendChild(row.cloneNode(true));
-    });
-
-    const tempTable = document.createElement('table') as HTMLTableElement;
-    tempTable.innerHTML = `<thead>${table.querySelector('thead')?.innerHTML || ''}</thead><tbody>${tempTbody.innerHTML}</tbody>`;
-*/
-
 
     // Newer visualisations supply rows as HTML on the body rather than mounted rows.
     // Assemble the markup without parsing every encoded row into a temporary DOM.
@@ -260,6 +260,7 @@ class iamAppInsights extends HTMLElement {
 
 
   createMapContent = (): string => {
+    if (insightsMapDisabled(this)) return '';
 
     // Load the table from the shadow root so the table formatting is correct and CTA's created
     const table = this.shadowRoot?.querySelector('table');
@@ -279,15 +280,85 @@ class iamAppInsights extends HTMLElement {
     return `<iam-branch-selector data-for="properties-table"></iam-branch-selector>`;
   };
 
-  createComponent = (component, table): void => {
+  createComponent = (component, table, trigger = 'initial'): void => {
+    const dataMode = this.hasAttribute('data-backed') ||
+      (window as Window & { __iamInsightsDataBacked?: boolean }).__iamInsightsDataBacked === true;
+    if (dataMode) {
+      const started = performance.now();
+      const markup = this.createTableContent(component, table);
+      if (this.dataController && markup === this.dataSourceMarkup) {
+        this.dataController.ready();
+        if ((window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile) {
+          console.info('[iam Insights data renderer]', JSON.stringify({ reused: true, records: this.dataController.snapshot.records.length, mountedRows: this.dataController.host.querySelectorAll('tbody tr[data-row-id]').length }));
+        }
+        return;
+      }
+      let snapshot: ReturnType<typeof readInsightsSnapshot> | null = null;
+      try {
+        snapshot = readInsightsSnapshot(markup);
+      } catch (error) {
+        console.warn('[iam Insights data renderer] Using HTML renderer:', error instanceof Error ? error.message : String(error));
+      }
+      this.dataController?.disconnect();
+      this.dataController = null;
+      this.dataSourceMarkup = null;
+      if (snapshot) {
+        this.dataController = new InsightsDataController(this, snapshot);
+        this.dataSourceMarkup = markup;
+        if (this.dataDetails) this.dataController.configure(this.dataDetails);
+        this.dataController.ready();
+        if ((window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile) console.info('[iam Insights data renderer]', JSON.stringify({
+          records: snapshot.records.length,
+          mountedRows: this.dataController.host.querySelectorAll('tbody tr[data-row-id]').length,
+          setupMs: Math.round(performance.now() - started),
+          mapEnabled: !insightsMapDisabled(this),
+          reused: false,
+        }));
+        return;
+      }
+    }
+
 
     const profileWindow = window as Window & {
       __iamInsightsProfile?: boolean;
       __iamInsightsBuildSequence?: number;
+      __iamInsightsPreviousSource?: { owner: HTMLElement; rows: string; header: string };
     };
     const profile = profileWindow.__iamInsightsProfile;
     const build = profile ? (profileWindow.__iamInsightsBuildSequence = (profileWindow.__iamInsightsBuildSequence || 0) + 1) : 0;
     const setupStarted = performance.now();
+    let sourceProfile: {
+      trigger: string;
+      sameComponentAsPreviousBuild: boolean;
+      inputRowsUnchanged: boolean;
+      inputHeaderUnchanged: boolean;
+    } | undefined;
+    if (profile) {
+      const previous = profileWindow.__iamInsightsPreviousSource;
+      const rows = Array.from(table.tBodies as HTMLCollectionOf<HTMLTableSectionElement>)
+        .map((body) => body.getAttribute('data-html') ?? body.innerHTML).join('\n');
+      const header = table.querySelector('thead')?.outerHTML || '';
+      sourceProfile = {
+        trigger,
+        sameComponentAsPreviousBuild: previous?.owner === this,
+        inputRowsUnchanged: previous?.rows === rows,
+        inputHeaderUnchanged: previous?.header === header,
+      };
+      profileWindow.__iamInsightsPreviousSource = { owner: this, rows, header };
+    }
+    const logLifecycle = (reused: boolean): void => {
+      if (!profile) return;
+      const ready = performance.now();
+      console.info('[iam Insights lifecycle]', JSON.stringify({
+        build,
+        ...sourceProfile,
+        reused,
+        frameStartEpochMs: Math.round(performance.timeOrigin),
+        setupStartEpochMs: Math.round(performance.timeOrigin + setupStarted),
+        readyEpochMs: Math.round(performance.timeOrigin + ready),
+        setupMs: Math.round(ready - setupStarted),
+      }));
+    };
     const timings: Array<{ stage: string; elapsedMs: number }> = [];
     const measure = (stage: string, started: number): void => {
       if (profile) timings.push({ stage, elapsedMs: Math.round(performance.now() - started) });
@@ -298,6 +369,25 @@ class iamAppInsights extends HTMLElement {
     const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
     const countElement = this.shadowRoot?.querySelector('#count');
     const viewControls = this.shadowRoot?.querySelector('#view-controls');
+
+    const inputMarkup = this.createTableContent(component, table);
+    if (trigger === 'source-update' && this.renderedTable &&
+      tableWrapper?.querySelector('table') === this.renderedTable &&
+      this.renderedRowLimit === this.rowlimit &&
+      (inputMarkup === this.renderedInputMarkup || inputMarkup === this.renderedPreparedMarkup)) {
+      // Keep the existing selection, filters, view and listeners when Looker repeats
+      // the same source. Acknowledge readiness so the update protocol still completes.
+      if (profile) console.info('[iam Insights profile] Unchanged source reused');
+      const height = component.offsetHeight;
+      logLifecycle(true);
+      component.dispatchEvent(new CustomEvent('component-loaded', {
+        detail: { height, branches: [...this.renderedBranches], reused: true },
+      }));
+      setTimeout(() => component.dispatchEvent(new CustomEvent('update-height', {
+        detail: { height: component.offsetHeight },
+      })), 300);
+      return;
+    }
 
     // #region fix original table
     // table.setAttribute('id','properties-table');
@@ -331,7 +421,10 @@ class iamAppInsights extends HTMLElement {
 
     // #region set the view controls
 
-    if(tableWrapper.querySelector('table tr[data-latitude][data-longitude]')) {
+    if (insightsMapDisabled(this)) {
+      viewControls?.classList.add('d-none');
+      this.setAttribute('data-view', 'list');
+    } else if(tableWrapper.querySelector('table tr[data-latitude][data-longitude]')) {
       viewControls?.classList.remove('d-none');
       viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
       this.setAttribute('data-view', 'split');
@@ -420,6 +513,12 @@ class iamAppInsights extends HTMLElement {
     // List all of the branches present in the table, make sure they are unique
     const listBranches = [...new Set(Array.from(tableWrapper.querySelectorAll('tr[data-branch]')).map(el => el.getAttribute('data-branch') || ''))];
 
+    this.renderedInputMarkup = inputMarkup;
+    this.renderedPreparedMarkup = tableMarkup;
+    this.renderedTable = tableWrapper.querySelector('table');
+    this.renderedBranches = listBranches;
+    this.renderedRowLimit = this.rowlimit;
+
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
         height: component.offsetHeight,
@@ -431,14 +530,8 @@ class iamAppInsights extends HTMLElement {
     if (profile) {
       console.info('[iam Insights profile] Component setup complete');
       console.table(timings);
-      console.info('[iam Insights lifecycle]', JSON.stringify({
-        build,
-        frameStartEpochMs: Math.round(performance.timeOrigin),
-        setupStartEpochMs: Math.round(performance.timeOrigin + setupStarted),
-        readyEpochMs: Math.round(performance.timeOrigin + performance.now()),
-        setupMs: Math.round(performance.now() - setupStarted),
-      }));
     }
+    logLifecycle(false);
     component.dispatchEvent(dispatchedEvent);
 
     const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
@@ -599,66 +692,64 @@ class iamAppInsights extends HTMLElement {
     component.setAttribute('data-branch-column', branchColumn);
   };
 
-  createCTAs = (component, ctaUrlStructure, ctaText): void => {
+  createCTAs = (component, ctaUrlStructure, ctaText, suppliedTable?: HTMLTableElement): void => {
     if(!ctaUrlStructure) return;
+    const shadowTable = suppliedTable || this.shadowRoot?.querySelector('table');
+    if (!shadowTable || shadowTable.querySelector('[data-cta-heading]')) return;
 
-    const searches = [];
-    let ctaLink = ctaUrlStructure;
-    let areSearchesMet = true;
+    const url = ctaUrlStructure.toLowerCase();
+    const searches = [
+      ['udprn', 'data-udprn'],
+      ['umrrn', 'data-umrrn'],
+      ['appraisalid', 'data-appraisal-id'],
+      ['transactionid', 'data-transaction-id'],
+      ['transaction', 'data-mb-transaction-id'],
+    ].filter(([token]) => url.includes(`:${token}`));
+    const heading = document.createElement('th');
+    heading.className = 'th--fixed text-nowrap';
+    heading.setAttribute('data-cta-heading', '');
+    shadowTable.querySelector('thead tr')?.appendChild(heading);
 
-    if(ctaUrlStructure.toLowerCase().includes(':udprn'))
-      searches.push('udprn');
-    if(ctaUrlStructure.toLowerCase().includes(':umrrn'))
-      searches.push('umrrn');
-    if(ctaUrlStructure.toLowerCase().includes(':appraisalid'))
-      searches.push('appraisalid');
-    if(ctaUrlStructure.toLowerCase().includes(':transactionid'))
-      searches.push('transactionid');
-    if(ctaUrlStructure.toLowerCase().includes(':transaction'))
-      searches.push('transaction');
-
-    const shadowTable = this.shadowRoot?.querySelector('table');
-
-
-    if(!shadowTable?.querySelector('[data-cta-heading]')) {
-
-      shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap" data-cta-heading></th>`);
-
-      shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
-
-        ctaLink = ctaUrlStructure.toLowerCase();
-
-        searches.forEach(search => {
-          let datasetSearch = search;
-
-          // Update the datasearch to match looker columns
-          if(search == "appraisalid")
-            datasetSearch = 'appraisal-id';
-          else if(search == "transactionid")
-            datasetSearch = 'transaction-id';
-          else if(search == "transaction")
-            datasetSearch = 'mb-transaction-id';
-
-
-          if(row.hasAttribute('data-' + datasetSearch.toLowerCase()) && row.getAttribute('data-' + datasetSearch.toLowerCase()) !== '') {
-            ctaLink = ctaLink.toLowerCase().replace(`:${search.toLowerCase()}`, row.getAttribute('data-' + datasetSearch.toLowerCase()));
-          } else {
-            areSearchesMet = false;
-          }
-        });
-
-        if(!row.querySelector('[data-cta]'))
-          row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank" data-cta>${ctaText ?? 'View details'}</a></td>`);
+    // Parse the common label and URL template once; retain rich HTML labels.
+    const template = document.createElement('td');
+    template.className = 'td--fixed';
+    template.innerHTML = `<a href="${url}" class="link text-nowrap" target="_blank" data-cta>${ctaText ?? 'View details'}</a>`;
+    const baseUrl = template.firstElementChild.getAttribute('href') || '';
+    shadowTable.querySelectorAll('tbody tr').forEach((row) => {
+      if (row.querySelector('[data-cta]')) return;
+      let href = baseUrl;
+      searches.forEach(([token, attribute]) => {
+        const value = row.getAttribute(attribute);
+        // Keep the existing replacement order and casing behaviour.
+        if (value !== null && value !== '') href = href.toLowerCase().replace(`:${token}`, value);
       });
-    }
+      const cell = template.cloneNode(true) as HTMLTableCellElement;
+      cell.firstElementChild.setAttribute('href', href);
+      row.appendChild(cell);
+    });
   };
 
   hideNullValues(): void {
     const shadowTable = this.shadowRoot?.querySelector('table');
-    shadowTable?.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach(td => td.innerText = '');
+    shadowTable?.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach((td) => {
+      if (td.firstChild) td.textContent = '';
+    });
+  }
+
+  disconnectedCallback(): void {
+    this.sourceObserver?.disconnect();
+    this.sourceObserver = null;
+    this.componentEvents?.abort();
+    this.componentEvents = null;
+    this.dataController?.disconnect();
+    this.dataController = null;
+    this.dataSourceMarkup = null;
   }
 
   connectedCallback(): void {
+    this.componentEvents?.abort();
+    this.componentEvents = new AbortController();
+    const eventOptions = { signal: this.componentEvents.signal };
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
     const table = this.querySelector('table');
@@ -666,27 +757,48 @@ class iamAppInsights extends HTMLElement {
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
+      this.dataDetails = event.detail;
+      if (this.dataController) {
+        this.dataController.configure(event.detail || {});
+        return;
+      }
+
+
+      const profile = (window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile;
+      const started = performance.now();
+      const steps: Array<{ stage: string; elapsedMs: number }> = [];
+      const configure = (stage: string, action: () => void): void => {
+        const stepStarted = performance.now();
+        action();
+        if (profile) steps.push({ stage, elapsedMs: Math.round(performance.now() - stepStarted) });
+      };
 
       if(event.detail && event.detail.properties && event.detail.properties.class)
         this.classList.add(event.detail.properties.class);
 
       //this.setCounterText(this, event.detail.properties['counter-text']);
-      this.hideNullValues();
-      this.createActionButtons(this, event.detail.actions);
-      this.createCustomisationButton(this, event.detail.customisation);
+      configure('null-values', () => this.hideNullValues());
+      configure('action-buttons', () => this.createActionButtons(this, event.detail.actions));
+      configure('customisation-controls', () => this.createCustomisationButton(this, event.detail.customisation));
       //this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
       //this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
-      this.createPopupTitles(this, event.detail.properties['title-column']);
-      this.createActionTitles(this, event.detail.properties['title-column']);
-      this.createMultibranchFlag(this, event.detail.properties['branch-column']);
-      this.createCTAs(this, event.detail.properties['cta-url-structure'], event.detail.properties['cta-text']);
-    });
+      configure('popup-titles-and-map', () => this.createPopupTitles(this, event.detail.properties['title-column']));
+      configure('action-titles', () => this.createActionTitles(this, event.detail.properties['title-column']));
+      configure('branch-metadata', () => this.createMultibranchFlag(this, event.detail.properties['branch-column']));
+      configure('row-links', () => this.createCTAs(this, event.detail.properties['cta-url-structure'], event.detail.properties['cta-text']));
+      if (profile) console.info('[iam Insights configuration profile]', JSON.stringify({
+        elapsedMs: Math.round(performance.now() - started),
+        steps,
+        atEpochMs: Math.round(performance.timeOrigin + performance.now()),
+      }));
+
+    }, eventOptions);
 
     // When the insight action has been completed, re-enable the button that was clicked
     this.addEventListener('insight-action-completed', (event: CustomEvent) => {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
       //this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0'); // This also clears the seleted items in the table
-    });
+    }, eventOptions);
 
     this.addEventListener('table-customisation-saved', (event: CustomEvent) => {
       // Handle table customisation changes here if needed
@@ -709,7 +821,7 @@ class iamAppInsights extends HTMLElement {
           });
           this.dispatchEvent(dispatchedEvent);
         }, 1000);
-    });
+    }, eventOptions);
 
     this.addEventListener('table-customisation-reset', (event: CustomEvent) => {
       // Handle table customisation changes here if needed
@@ -731,7 +843,7 @@ class iamAppInsights extends HTMLElement {
         });
         this.dispatchEvent(dispatchedEvent);
       }, 1000);
-    });
+    }, eventOptions);
 
 
     if (table){
@@ -752,14 +864,16 @@ class iamAppInsights extends HTMLElement {
         );
         const table = this.querySelector('table');
         if (table && shouldRender) {
-          createComponent(this, table);
+          createComponent(this, table, 'source-update');
         }
       } finally {
-        observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
+        if (this.isConnected) observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
       }
     };
 
+    this.sourceObserver?.disconnect();
     const observer = new MutationObserver(htmlUpdated);
+    this.sourceObserver = observer;
     observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
 
   }

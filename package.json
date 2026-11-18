@@ -42,7 +42,8 @@
     "deploy:404": "node local_modules/create404.cjs",
     "lint": "eslint assets/ts/scripts.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts",
     "lint:fix": "eslint assets/ts/scripts.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts --fix",
-    "prettier": "prettier assets/ts assets/sass src docs --write"
+    "prettier": "prettier assets/ts assets/sass src docs --write",
+    "test:insights": "npm run compile && node tests/insights/integration.cjs"
   },
   "dependencies": {
     "@iamproperty/components": "^7.9.0--beta.7",
@@ -72,6 +73,7 @@
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-vue": "^10.7.0",
+    "jsdom": "26.1.0",
     "path": "^0.12.7",
     "postcss": "^8.4.21",
     "postcss-css-variables": "^0.18.0",

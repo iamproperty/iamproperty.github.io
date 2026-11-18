@@ -95,7 +95,7 @@ describe('Table fixed columns', () => {
 
 
 describe('Table cell formatting', () => {
-  it('renders dates and prices without assigning HTML and retains their original values', () => {
+  it('renders plain formatted values without assigning HTML and retains their original values', () => {
     const table = createElement('table');
     const head = createElement('thead');
     const headings = createElement('tr');
@@ -105,6 +105,9 @@ describe('Table cell formatting', () => {
       { format: 'date', value: '29/02/2024' },
       { format: 'datetime', value: '2026-11-17T13:45:00Z' },
       { format: 'price', value: '£1,200.50' },
+      { format: 'number', value: '1,234.50' },
+      { format: 'number', value: '0' },
+      { format: 'capitalise', value: 'pending' },
     ];
     const cells = values.map(({ format, value }) => {
       headings.appendChild(createElement('th', { dataFormat: format }, format));

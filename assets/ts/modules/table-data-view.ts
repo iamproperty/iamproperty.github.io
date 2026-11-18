@@ -162,7 +162,10 @@ export class TableDataView {
     });
     this.syncing = true;
     try {
-      this.actionbar?.setAttribute('data-selected', all ? 'all' : String(this.data.selected.size));
+      const selectedCount = this.host.hasAttribute('data-selection-matching')
+        ? this.data.matching.filter((record) => this.data.selected.has(this.data.id(record))).length
+        : this.data.selected.size;
+      this.actionbar?.setAttribute('data-selected', all ? 'all' : String(selectedCount));
     } finally {
       this.syncing = false;
     }
@@ -279,6 +282,7 @@ export class TableDataView {
       this.syncing = false;
     }
     this.syncSelection();
+    this.emit('table-rendered', { rowCount: records.length, total: this.data.matching.length });
   }
 
   private headerButton(index: number, type: 'sort' | 'filter', label: string, icon: string): HTMLButtonElement {

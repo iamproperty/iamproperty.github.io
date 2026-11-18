@@ -376,7 +376,8 @@ export const fixTableCells = (table): void => {
           cell.setAttribute('data-original-value', originalValue);
           cell.setAttribute('data-format', column.format);
           const formattedValue = formatData(column.format, originalValue);
-          if (column.format === 'date' || column.format === 'datetime' || column.format === 'price') {
+          if (column.format === 'date' || column.format === 'datetime' || column.format === 'price' ||
+            (typeof formattedValue === 'string' && !/[<&]/.test(formattedValue))) {
             cell.textContent = formattedValue;
           } else {
             cell.innerHTML = formattedValue;
@@ -1359,7 +1360,7 @@ const populateFiltersFromActionbar = (component, table, actionbar): void => {
 
 };
 
-const cleanFilterValues = (filters): Array<any> => {
+export const cleanFilterValues = (filters): Array<any> => {
 
   const cleanedFilters = [];
   filters.forEach((filter) => {

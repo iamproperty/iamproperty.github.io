@@ -38,6 +38,15 @@ class iamTableAdvanced extends HTMLElement {
     }
   }
 
+  // Consumers such as Insights maps must use all matching records, including other pages.
+  getRecords(): TableRecord[] {
+    return this.dataModel.records.slice();
+  }
+
+  getMatchingRecords(): TableRecord[] {
+    return this.dataModel.matching.slice();
+  }
+
   // Return selected original records across all pages.
   getSelectedRecords(): TableRecord[] {
     return this.dataModel.selectedRecords();
