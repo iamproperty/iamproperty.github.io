@@ -344,7 +344,6 @@ export class TableDataView {
     dialog.addEventListener('toggle', ((event: ToggleEvent) => {
       if (event.newState === 'closed' && this.filterDialog === dialog) cleanup();
     }) as EventListener);
-    const form = document.createElement('form');
     const definitions = this.data.columnFilters.get(column.key) || [{ type: 'text' }];
     const controls: Array<{
       filter: DataFilter;
@@ -456,7 +455,7 @@ export class TableDataView {
       second.addEventListener('input', () => second.setCustomValidity(''));
       updateRange();
       controls.push({ filter, operator, first, second });
-      form.append(fieldset);
+      dialog.append(fieldset);
     });
     const apply = (filters: DataFilter[]): void => {
       this.data.setColumnFilters(column.key, filters);
@@ -465,10 +464,13 @@ export class TableDataView {
       this.table.querySelector<HTMLButtonElement>(`button[data-filter-btn][data-column-index="${index}"]`)?.focus();
       this.emit('filters-updated', { column: column.key, filters, rowCount: this.data.matching.length });
     };
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
+    const updateFilters = (): void => {
       for (const control of controls) {
-        if (control.operator.value === 'between' && control.first.value !== '') {
+        const range = control.operator.value === 'between' && control.first.value !== '';
+        control.second.setCustomValidity('');
+        control.second.required = range;
+        if (!control.first.reportValidity() || (range && !control.second.reportValidity())) return;
+        if (range) {
           const from = comparableValue(control.first.value, control.filter.type);
           const to = comparableValue(control.second.value, control.filter.type);
           if (from === null || to === null || from > to) {
@@ -485,11 +487,26 @@ export class TableDataView {
           value: first.value === '' ? null : operator.value === 'between' ? [first.value, second.value] : first.value,
         }))
       );
+    };
+    // Avoid native form submission: Looker's sandbox intentionally omits allow-forms.
+    // Apply on keyup so native datalist selection can finish before reading the value.
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && event.target instanceof HTMLInputElement && event.target.form) {
+        event.preventDefault();
+      }
+    });
+    dialog.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter' && !event.isComposing && event.target instanceof HTMLInputElement) {
+        event.preventDefault();
+        updateFilters();
+      }
     });
     const buttons = document.createElement('div');
     buttons.className = 'btn-group pt-1';
     const update = document.createElement('button');
-    update.type = 'submit';
+    update.type = 'button';
+    update.setAttribute('data-filter-update', '');
+    update.addEventListener('click', updateFilters);
     update.className = 'btn btn-action mb-0';
     update.textContent = 'Update';
     buttons.append(update);
@@ -501,8 +518,7 @@ export class TableDataView {
       reset.addEventListener('click', () => apply(definitions.map((filter) => ({ ...filter, value: null }))));
       buttons.append(reset);
     }
-    form.append(buttons);
-    dialog.append(form);
+    dialog.append(buttons);
     this.host.append(dialog);
     dialog.showPopover();
     controls[0]?.first.focus();

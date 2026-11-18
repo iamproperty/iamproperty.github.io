@@ -203,7 +203,7 @@ async function rendererScenario({ compatibility, deniedStorage }) {
     filteredHost.querySelector('[data-filter-btn]').click();
     const dialog = filteredHost.querySelector('dialog');
     dialog.querySelector('input').value = 'Property 4999';
-    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    dialog.querySelector('[data-filter-update]').click();
     const filter = messages.findLast((message) => message.type === 'table-filtered');
     assert.equal(filter.detail.rowCount, 1);
     assert.equal(filter.detail.filters[0].column, 'Property');
@@ -284,6 +284,8 @@ function inlineFilters() {
     let dialog = open(0);
     assert.equal(dialog.classList.contains('dialog--inline-filter'), true);
     assert.equal(dialog.getAttribute('popover'), 'auto');
+    assert.equal(dialog.querySelector('form'), null, 'Sandboxed filters must not create forms');
+    assert.equal(dialog.querySelector('[data-filter-update]').type, 'button');
     assert.equal(dialog.open, false, 'Popover must not activate modal dialog behaviour');
     assert.equal(dialog.querySelector('h2'), null);
     const input = dialog.querySelector('input');
@@ -292,7 +294,7 @@ function inlineFilters() {
     assert.equal(w.document.activeElement, input);
     assert.equal(host.querySelector('[data-filter-btn]').getAttribute('aria-expanded'), 'true');
     input.value = 'Property 4999';
-    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    dialog.querySelector('[data-filter-update]').click();
     assert.equal(host.getMatchingRecords().length, 1);
     assert.equal(host.querySelector('dialog'), null);
     assert.equal(w.document.activeElement, host.querySelector('[data-filter-btn]'));
@@ -306,6 +308,17 @@ function inlineFilters() {
       .find((button) => button.textContent === 'Reset')
       .click();
     assert.equal(host.getMatchingRecords().length, 5000);
+    dialog = open(0);
+    const enterInput = dialog.querySelector('input');
+    enterInput.value = 'Property 4999';
+    enterInput.dispatchEvent(new w.KeyboardEvent('keyup', { key: 'Enter', bubbles: true, isComposing: true }));
+    assert.equal(host.getMatchingRecords().length, 5000, 'IME confirmation must not apply a filter');
+    enterInput.dispatchEvent(new w.KeyboardEvent('keyup', { key: 'Enter', bubbles: true }));
+    assert.equal(host.getMatchingRecords().length, 1, 'Enter applies without a native form submission');
+    dialog = open(0);
+    Array.from(dialog.querySelectorAll('button'))
+      .find((button) => button.textContent === 'Reset')
+      .click();
     dialog = open(1);
     const operator = dialog.querySelector('[data-operator]');
     operator.value = 'between';
@@ -315,19 +328,19 @@ function inlineFilters() {
     from.value = '100000';
     from.dispatchEvent(new w.Event('input'));
     to.value = '99999';
-    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    dialog.querySelector('[data-filter-update]').click();
     assert.equal(host.querySelector('dialog'), dialog, 'Invalid ranges keep the filter open');
     assert.ok(to.validationMessage);
     assert.equal(host.getMatchingRecords().length, 5000);
     to.value = '100002';
     to.dispatchEvent(new w.Event('input'));
-    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    dialog.querySelector('[data-filter-update]').click();
     assert.equal(host.getMatchingRecords().length, 3);
     dialog = open(2);
     assert.equal(dialog.querySelector('datalist'), null);
     assert.equal(dialog.querySelector('input').type, 'date');
     dialog.querySelector('input').value = '2026-01-02';
-    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    dialog.querySelector('[data-filter-update]').click();
     assert.equal(host.getMatchingRecords().length, 1);
     dialog = open(3);
     const choices = dialog.querySelector('select:not([data-operator])');
@@ -336,7 +349,7 @@ function inlineFilters() {
       ['', 'North', 'South']
     );
     choices.value = 'South';
-    dialog.querySelector('form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    dialog.querySelector('[data-filter-update]').click();
     assert.equal(host.getMatchingRecords()[0].id, 1);
     dialog = open(0);
     dialog.hidePopover();

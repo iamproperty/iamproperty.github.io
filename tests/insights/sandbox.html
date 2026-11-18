@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Insights sandbox filter regression</title>
+  </head>
+  <body>
+    <h1>Sandbox filter regression</h1>
+    <p>This fixture intentionally grants scripts only. It must not need allow-forms or allow-same-origin.</p>
+    <output id="result">Starting…</output>
+    <iframe
+      id="frame"
+      sandbox="allow-scripts"
+      title="Sandboxed filter controls"
+      style="width: 100%; height: 500px; border: 0"
+    ></iframe>
+    <script>
+      const frame = document.querySelector('#frame');
+      window.addEventListener('message', (event) => {
+        if (event.source !== frame.contentWindow || event.data?.channel !== 'insights-sandbox-test') return;
+        document.body.dataset.testState = event.data.state;
+        document.body.dataset.testResult = JSON.stringify(event.data);
+        document.querySelector('#result').textContent = JSON.stringify(event.data);
+      });
+      function checkFilters() {
+        const report = (result) => parent.postMessage({ channel: 'insights-sandbox-test', ...result }, '*');
+        try {
+          const host = document.createElement('iam-table-advanced');
+          host.setAttribute('data-backed', '');
+          host.setData(
+            [
+              { id: 'church', property: 'Church Road' },
+              { id: 'park', property: 'Park Lane' },
+              { id: 'high', property: 'High Street' },
+            ],
+            { rowKey: 'id', columns: [{ key: 'property', label: 'Property', filters: true }] }
+          );
+          document.body.append(host);
+          const open = () => {
+            host.querySelector('[data-filter-btn]').click();
+            return host.querySelector('dialog');
+          };
+          let dialog = open();
+          dialog.querySelector('input').value = 'Church Road';
+          // Use the real button activation path, not a synthetic submit event.
+          [...dialog.querySelectorAll('button')].find((button) => button.textContent === 'Update').click();
+          if (host.getMatchingRecords().length !== 1)
+            throw new Error('Update failed under the sandbox form restriction');
+          dialog = open();
+          [...dialog.querySelectorAll('button')].find((button) => button.textContent === 'Reset').click();
+          if (host.getMatchingRecords().length !== 3) throw new Error('Reset failed');
+          dialog = open();
+          const input = dialog.querySelector('input');
+          input.value = 'High Street';
+          input.focus();
+          host.addEventListener(
+            'filters-updated',
+            () => {
+              const records = host.getMatchingRecords();
+              report(
+                records.length === 1 && records[0].id === 'high'
+                  ? { state: 'passed', update: true, reset: true, enter: true }
+                  : { state: 'failed', error: 'Enter did not apply the expected filter' }
+              );
+            },
+            { once: true }
+          );
+          const rect = input.getBoundingClientRect();
+          report({
+            state: 'ready-for-enter',
+            update: true,
+            reset: true,
+            input: { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 },
+          });
+        } catch (error) {
+          report({ state: 'failed', error: String(error) });
+        }
+      }
+      const loader = new URL('../../assets/js/apps/insights-loader.app.min.js', location.href).href;
+      frame.srcdoc =
+        '<!doctype html><meta charset="utf-8"><body><script src="' +
+        loader +
+        '"><' +
+        '/script><script>document.addEventListener("DOMContentLoaded",' +
+        checkFilters.toString() +
+        ');<' +
+        '/script></body>';
+    </script>
+  </body>
+</html>

@@ -160,7 +160,7 @@
       priceHeading().click();
       element.querySelector('th[data-key="weeksOnMarket"] [data-filter-btn]').click();
       element.querySelector('dialog input').value = String(originalRecords[0].weeksOnMarket);
-      element.querySelector('dialog form').requestSubmit();
+      element.querySelector('dialog [data-filter-update]').click();
       assert(
         Number(element.dataset.total) ===
           originalRecords.filter((record) => record.weeksOnMarket === originalRecords[0].weeksOnMarket).length,

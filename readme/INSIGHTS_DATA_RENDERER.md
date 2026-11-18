@@ -11,7 +11,9 @@ Actions and maps still receive the complete relevant dataset.
   with paging, header filtering and sorting. Filters use the existing anchored
   non-modal popover presentation and native search suggestions, built on demand
   from all records rather than just the mounted page. Configured options, numeric
-  suggestions, date/range controls and reset remain supported. Its Vue wrapper exposes the same
+  suggestions, date/range controls and reset remain supported. Filter actions use
+  buttons and explicit validation rather than native form submission, so they work
+  in Looker without granting `allow-forms`. Its Vue wrapper exposes the same
   opt-in data API. `/standalone/table-data` demonstrates this independently.
 - Insights parses `tbody[data-html]` in an inert document and adapts it into
   records. Only the current page is imported into the live table. Rich cell
@@ -83,10 +85,14 @@ Merging this branch alone does not update a separately maintained Looker project
    npm ci --force
    npm test
    npm run test:insights
+   npm run test:insights:sandbox
    ```
 
    `test:insights` compiles Sass, TypeScript, components and app bundles before
-   running the integration checks. Generated assets remain ignored by Git.
+   running the integration checks. `test:insights:sandbox` uses an isolated local
+   Chrome profile to check Update, Reset and Enter inside an iframe granting only
+   `allow-scripts`; Chrome must be installed (or selected with `CHROME_BIN`).
+   Generated assets remain ignored by Git.
 
 2. Publish the updated loader, component CSS and supporting assets through the
    existing hosting/release process. The current Looker sandbox dependency is

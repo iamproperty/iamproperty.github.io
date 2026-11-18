@@ -43,7 +43,8 @@
     "lint": "eslint assets/ts/scripts.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts",
     "lint:fix": "eslint assets/ts/scripts.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts --fix",
     "prettier": "prettier assets/ts assets/sass src docs --write",
-    "test:insights": "npm run compile && node tests/insights/integration.cjs"
+    "test:insights": "npm run compile && node tests/insights/integration.cjs",
+    "test:insights:sandbox": "node tests/insights/sandbox-chrome.cjs"
   },
   "dependencies": {
     "@iamproperty/components": "^7.9.0--beta.7",
