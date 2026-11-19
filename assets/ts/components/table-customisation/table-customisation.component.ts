@@ -43,7 +43,7 @@ class iamTableCustomisation extends HTMLElement {
   connectedCallback(): void {
 
     // Component only works when it is placed inside a table component
-    const tableComponent = this.closest('iam-table, iam-table-advanced, iam-table-ajax');
+    const tableComponent = this.closest('iam-table, iam-table-advanced, iam-table-data, iam-table-ajax');
     const tableElement = tableComponent?.querySelector('table');
 
     if (!tableComponent || !tableElement) {

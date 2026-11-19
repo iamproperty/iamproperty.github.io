@@ -281,8 +281,8 @@ class iamAppInsights extends HTMLElement {
   };
 
   createComponent = (component, table, trigger = 'initial'): void => {
-    const dataMode = this.hasAttribute('data-backed') ||
-      (window as Window & { __iamInsightsDataBacked?: boolean }).__iamInsightsDataBacked === true;
+    // Adapt the existing HTML transport by default; retain an explicit HTML rollback.
+    const dataMode = this.getAttribute('data-renderer') !== 'html';
     if (dataMode) {
       const started = performance.now();
       const markup = this.createTableContent(component, table);

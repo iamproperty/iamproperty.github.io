@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue';
   import Header from '@/components/Header/Header.vue';
-  import TableAdvanced from '@/components/Table/TableAdvanced.vue';
+  import TableData from '@/components/Table/TableData.vue';
   import { createColumns, generateRecords } from './data/table-data-records';
 
   type DemoRecord = ReturnType<typeof generateRecords>[number];
@@ -17,7 +17,7 @@
   const selectedCount = ref(0);
   const selectionMessage = ref('');
   const checks = ref('');
-  const advancedTable = ref<InstanceType<typeof TableAdvanced> | null>(null);
+  const dataTable = ref<InstanceType<typeof TableData> | null>(null);
   const legacyTable = ref<HTMLElement | null>(null);
   const previewDialog = ref<HTMLDialogElement | null>(null);
   const previewRecord = shallowRef<DemoRecord | null>(null);
@@ -30,15 +30,15 @@
   // Load both implementations before timing either table.
   onMounted(async () => {
     try {
-      const [pagination, table, advanced] = await Promise.all([
+      const [pagination, table, data] = await Promise.all([
         import('../../../assets/js/components/pagination/pagination.component.min.js'),
         import('../../../assets/js/components/table/table.component.min.js'),
-        import('../../../assets/js/components/table-advanced/table-advanced.component.min.js'),
+        import('../../../assets/js/components/table-data/table-data.component.min.js'),
       ]);
       for (const [name, component] of [
         ['iam-pagination', pagination.default],
         ['iam-table', table.default],
-        ['iam-table-advanced', advanced.default],
+        ['iam-table-data', data.default],
       ]) {
         if (!customElements.get(name)) customElements.define(name, component);
       }
@@ -84,7 +84,7 @@
     await frame();
     await frame();
     if (disposed || currentRun !== run.value) return;
-    const element = mode.value === 'data' ? advancedTable.value.$el : legacyTable.value;
+    const element = mode.value === 'data' ? dataTable.value.$el : legacyTable.value;
     result.value = `${mode.value === 'data' ? 'Data-backed' : 'HTML'}: ${records.value.length} records, ${element.querySelectorAll('tbody tr').length} mounted rows, ${(performance.now() - startedAt).toFixed(1)} ms to two animation frames.`;
     loading.value = false;
   }
@@ -95,16 +95,16 @@
   }
 
   function retrieveSelection(): void {
-    const selected = advancedTable.value.getSelectedRecords();
+    const selected = dataTable.value.getSelectedRecords();
     selectionMessage.value = `Retrieved ${selected.length} original records; first ID: ${selected[0]?.id ?? 'none'}`;
   }
 
   function filterFullMatches(): void {
-    advancedTable.value.setFilter((record) => record.matchCriteria === 'full');
+    dataTable.value.setFilter((record) => record.matchCriteria === 'full');
   }
 
   function sortPriceDescending(): void {
-    advancedTable.value.setSort((a, b) => b.currentPrice - a.currentPrice);
+    dataTable.value.setSort((a, b) => b.currentPrice - a.currentPrice);
   }
 
   // Exercise the public API without moving Vue-owned elements out of the DOM.
@@ -114,7 +114,7 @@
       if (!condition) throw new Error(message);
     };
     const originalRecords = records.value;
-    const table = advancedTable.value;
+    const table = dataTable.value;
     const element = table.$el;
     const rowCount = (): number => element.querySelectorAll('tbody tr').length;
     try {
@@ -201,8 +201,8 @@
 
     <div class="container py-4">
       <p>
-        Compare the data-backed advanced table with the original HTML table using the same property records. Timings
-        include rendering and two animation frames; downloads and record generation are excluded.
+        Compare the data table with the original HTML table using the same property records. Timings include rendering
+        and two animation frames; downloads and record generation are excluded.
       </p>
       <p>
         The first 15 rows use the supplied property examples. Additional rows are synthetic, with calculated price
@@ -226,16 +226,16 @@
       </div>
       <p role="status">{{ loading ? 'Loading table…' : result }}</p>
       <div v-if="mode === 'data'" class="d-flex flex-wrap gap-2">
-        <button type="button" class="btn btn-secondary" :disabled="disabled" @click="advancedTable.selectAll()">
+        <button type="button" class="btn btn-secondary" :disabled="disabled" @click="dataTable.selectAll()">
           Select all matching
         </button>
-        <button type="button" class="btn btn-secondary" :disabled="disabled" @click="advancedTable.clearSelection()">
+        <button type="button" class="btn btn-secondary" :disabled="disabled" @click="dataTable.clearSelection()">
           Clear selection
         </button>
         <button type="button" class="btn btn-secondary" :disabled="disabled" @click="filterFullMatches">
           Full matches only
         </button>
-        <button type="button" class="btn btn-secondary" :disabled="disabled" @click="advancedTable.setFilter(null)">
+        <button type="button" class="btn btn-secondary" :disabled="disabled" @click="dataTable.setFilter(null)">
           Clear filter
         </button>
         <button type="button" class="btn btn-secondary" :disabled="disabled" @click="sortPriceDescending">
@@ -253,11 +253,10 @@
     </div>
 
     <div class="admin-panel" :aria-busy="loading || checking">
-      <TableAdvanced
+      <TableData
         v-if="mode === 'data'"
         :key="run"
-        ref="advancedTable"
-        data-backed
+        ref="dataTable"
         data-selectall
         data-show="50"
         :items="records"
@@ -302,7 +301,7 @@
 
     <div class="container py-4">
       <h2>Using the Vue component</h2>
-      <pre><code>&lt;TableAdvanced ref="table" data-backed data-selectall data-show="50"
+      <pre><code>&lt;TableData ref="table" data-selectall data-show="50"
   :items="records" :fields="columns" row-key="id" /&gt;</code></pre>
       <p>
         Keep large record arrays in a shallowRef and replace the array when data changes. Column definitions accept key,
@@ -315,8 +314,8 @@
         property links.
       </p>
       <p>
-        Record rendering, pagination and inline filter popovers are owned by the web component. Vue owns the demo controls,
-        input records, table lifecycle and property preview.
+        Record rendering, pagination and inline filter popovers are owned by the web component. Vue owns the demo
+        controls, input records, table lifecycle and property preview.
       </p>
     </div>
   </main>

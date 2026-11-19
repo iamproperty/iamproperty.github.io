@@ -121,9 +121,8 @@ export class InsightsDataController {
     readonly snapshot: InsightsSnapshot
   ) {
     const root = owner.shadowRoot!;
-    const host = document.createElement('iam-table-advanced') as DataTable;
+    const host = document.createElement('iam-table-data') as DataTable;
     this.host = host;
-    host.setAttribute('data-backed', '');
     host.setAttribute('data-selectall', '');
     host.setAttribute('data-selection-matching', '');
     host.setAttribute('data-show', '50');

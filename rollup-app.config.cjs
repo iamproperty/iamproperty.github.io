@@ -8,7 +8,7 @@ const ESM = process.env.ESM === 'true';
 
 const rollupConfig = [];
 
-const components = ['insights', 'insights-loader', 'insights-looker'];
+const components = ['insights', 'insights-loader'];
 
 components.forEach((component) => {
   let css = '';
@@ -28,8 +28,8 @@ components.forEach((component) => {
     output: {
       banner,
       file: path.resolve(__dirname, `assets/js/apps/${component}.app.min.js`),
-      format: component === 'insights-looker' ? 'iife' : 'esm',
-      name: component === 'insights-looker' ? 'iamInsightsLooker' : `iam-${component}`,
+      format: 'esm',
+      name: `iam-${component}`,
     },
     plugins: [
       replace({

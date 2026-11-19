@@ -25,8 +25,7 @@
       function checkFilters() {
         const report = (result) => parent.postMessage({ channel: 'insights-sandbox-test', ...result }, '*');
         try {
-          const host = document.createElement('iam-table-advanced');
-          host.setAttribute('data-backed', '');
+          const host = document.createElement('iam-table-data');
           host.setData(
             [
               { id: 'church', property: 'Church Road' },
