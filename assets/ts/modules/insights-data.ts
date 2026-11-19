@@ -26,6 +26,7 @@ export interface InsightsRecord extends TableRecord {
   id: number;
   source: HTMLTableRowElement;
   cells: HTMLTableCellElement[];
+  exportText?: string[];
 }
 
 export interface InsightsSnapshot {
@@ -34,6 +35,64 @@ export interface InsightsSnapshot {
   columns: DataColumn[];
   headings: HTMLTableCellElement[];
 }
+
+// Only inline text whose rendering is independent of layout can be exported
+// without mounting source rows. Keep complex/visibility-dependent cells on the
+// HTML renderer, whose native innerText preserves their established behaviour.
+const inlineTextTags = new Set([
+  'A',
+  'ABBR',
+  'B',
+  'BDI',
+  'BDO',
+  'CITE',
+  'CODE',
+  'DEL',
+  'EM',
+  'I',
+  'INS',
+  'KBD',
+  'MARK',
+  'S',
+  'SAMP',
+  'SMALL',
+  'SPAN',
+  'STRONG',
+  'SUB',
+  'SUP',
+  'TIME',
+  'U',
+  'VAR',
+]);
+const lookerTextClasses = new Set([
+  'drillable-item',
+  'drillable-item-content',
+  'drillable-item-icon-wrapper',
+  'drill-menu-bauble',
+  'null',
+]);
+export const insightCellExportText = (cell: HTMLTableCellElement): string | null => {
+  if (cell.hasAttribute('style') || cell.hasAttribute('hidden')) return null;
+  const elements = Array.from(cell.querySelectorAll<HTMLElement>('*'));
+  if (
+    elements.some(
+      (element) =>
+        !inlineTextTags.has(element.tagName) ||
+        element.hasAttribute('hidden') ||
+        element.hasAttribute('style') ||
+        (element.getAttribute('class') || '').split(/\s+/).some((name) => name && !lookerTextClasses.has(name))
+    )
+  )
+    return null;
+  // CSS text transformations on the cell itself also require the native path.
+  if (
+    (cell.getAttribute('class') || '')
+      .split(/\s+/)
+      .some((name) => name && !['td--fixed', 'text-nowrap', 'text-truncate'].includes(name))
+  )
+    return null;
+  return (cell.textContent || '').replace(/[ \t\r\n\f]+/g, ' ').trim();
+};
 
 // Parse in an inert document: custom elements in 5,000 source rows must not mount.
 // The source supplied by Looker is never modified.
@@ -78,9 +137,12 @@ export const readInsightsSnapshot = (markup: string): InsightsSnapshot => {
   fixTableCells(table);
   const records = rows.map((source, id): InsightsRecord => {
     const cells = Array.from(source.cells);
-    const record: InsightsRecord = { id, source, cells };
+    const record: InsightsRecord = { id, source, cells, exportText: [] };
     cells.forEach((cell, index) => {
       if (cell.dataset.originalValue === '∅' || cell.textContent?.trim() === '∅') cell.textContent = '';
+      const text = insightCellExportText(cell);
+      if (text === null) throw new Error('Insights rich-cell export requires the HTML renderer.');
+      record.exportText!.push(text);
       record[columns[index].key] =
         cell.dataset.originalValue === '∅' ? null : (cell.dataset.originalValue ?? cell.textContent?.trim() ?? '');
     });
@@ -100,11 +162,11 @@ export const readInsightsSnapshot = (markup: string): InsightsSnapshot => {
 
 // Keep the established action contract; never export renderer IDs or DOM references.
 export const insightActionProperties = (records: InsightsRecord[]): object[] =>
-  records.map(({ source, cells }) => {
+  records.map(({ source, cells, exportText }) => {
     const columns: Record<string, string> = {};
-    cells.forEach((cell) => {
+    cells.forEach((cell, index) => {
       const label = cell.dataset.label;
-      if (label) columns[label] = cell.textContent?.trim() || '';
+      if (label) columns[label] = exportText?.[index] ?? cell.textContent?.trim() ?? '';
     });
     return { ...source.dataset, columns };
   });

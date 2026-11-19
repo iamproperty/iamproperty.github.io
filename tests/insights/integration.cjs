@@ -328,6 +328,53 @@ function inlineFilters() {
   }
 }
 
+function dataControlsAndCustomisation() {
+  const { dom, window: w, errors } = environment();
+  try {
+    w.eval(loader);
+    w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+    const host = w.document.createElement('iam-table-data');
+    for (const flag of ['data-per-page', 'data-page-jump', 'data-item-count']) host.setAttribute(flag, '');
+    host.setData(
+      Array.from({ length: 100 }, (_, id) => ({ id, name: `Name ${id}` })),
+      {
+        columns: [{ key: 'name', label: 'Name', sort: true, filters: true }],
+      }
+    );
+    const bar = w.document.createElement('iam-actionbar');
+    const custom = w.document.createElement('iam-table-customisation');
+    bar.append(custom);
+    host.append(bar);
+    w.document.body.append(host);
+    const pagination = host.shadowRoot.querySelector('iam-pagination');
+    for (const flag of ['data-per-page', 'data-page-jump', 'data-item-count'])
+      assert.equal(pagination.getAttribute(flag), 'true');
+    const checkbox = custom.shadowRoot.querySelector('input[type="checkbox"]');
+    checkbox.checked = false;
+    checkbox.dispatchEvent(new w.Event('change', { bubbles: true }));
+    const hidden = () => host.querySelector('th[data-label="Name"]').classList.contains('d-none');
+    assert.equal(hidden(), true);
+    pagination.dispatchEvent(new w.CustomEvent('update-page', { detail: { page: 2 } }));
+    assert.equal(hidden(), true);
+    host.querySelector('[data-sort-btn]').click();
+    assert.equal(hidden(), true);
+    host.setFilter((record) => record.id < 10);
+    assert.equal(hidden(), true);
+    assert.equal(checkbox.checked, false);
+    checkbox.checked = true;
+    checkbox.dispatchEvent(new w.Event('change', { bubbles: true }));
+    host.setFilter(null);
+    assert.equal(hidden(), false);
+    assert.deepEqual(
+      errors.map((error) => error.cause?.stack || error.stack),
+      []
+    );
+    console.log('PASS: host pagination controls and immediate column visibility survive paging, sorting and filtering');
+  } finally {
+    dom.window.close();
+  }
+}
+
 function legacyTableIndexing() {
   const { dom, window: w, errors } = environment();
   try {
@@ -386,6 +433,7 @@ function paginationReconnect() {
 (async () => {
   inlineFilters();
   legacyTableIndexing();
+  dataControlsAndCustomisation();
   paginationReconnect();
   await rendererScenario({ deniedStorage: false });
   await rendererScenario({ deniedStorage: true });

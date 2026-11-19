@@ -274,6 +274,9 @@ export class TableDataView {
       this.host.setAttribute('data-total', String(this.data.matching.length));
       this.host.setAttribute('data-page', String(page));
       this.host.setAttribute('data-show', String(size));
+      for (const flag of ['data-per-page', 'data-page-jump', 'data-item-count']) {
+        if (this.host.hasAttribute(flag)) this.pagination?.setAttribute(flag, 'true');
+      }
       this.pagination?.setAttribute('data-minimal', 'true');
       this.pagination?.setAttribute('data-total', String(this.data.matching.length));
       this.pagination?.setAttribute('data-show', String(size));

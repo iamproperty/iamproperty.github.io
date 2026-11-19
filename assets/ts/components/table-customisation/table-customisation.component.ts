@@ -436,6 +436,7 @@ class iamTableCustomisation extends HTMLElement {
           }
           newCustomisation.push({ label: label, isVisible: (checkbox as HTMLInputElement).checked, isDisabled: (checkbox as HTMLInputElement).disabled, order: index });
         });
+        customisation = newCustomisation;
         hideColumns(newCustomisation);
         updateColumnOrder(newCustomisation);
       });

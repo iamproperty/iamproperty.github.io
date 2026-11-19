@@ -30,6 +30,7 @@ export class TableData {
   columnFilters = new Map<string, DataFilter[]>();
   columnSort: { key: string; direction: 'asc' | 'desc' } | null = null;
   private predicate: ((record: TableRecord) => boolean) | null = null;
+  private filterDefinitions = new Map<string, string>();
   private comparator: ((a: TableRecord, b: TableRecord) => number) | null = null;
 
   id(record: TableRecord): RowId {
@@ -65,13 +66,34 @@ export class TableData {
   configureColumns(columns: DataColumn[]): void {
     this.columns = columns;
     const filters = new Map<string, DataFilter[]>();
+    const definitions = new Map<string, string>();
     columns.forEach((column) => {
       if (!column.filters) return;
       const defaults =
         Array.isArray(column.filters) && column.filters.length ? column.filters : [{ type: column.format || 'text' }];
-      filters.set(column.key, this.columnFilters.get(column.key) || defaults.map((filter) => ({ ...filter })));
+      // Snapshot definitions, not the live user filters or caller-owned arrays.
+      const signature = JSON.stringify(
+        defaults.map((filter) => ({
+          type: filter.type || 'text',
+          operator: filter.operator || '',
+          value: filter.value ?? null,
+          options: filter.options ?? null,
+        }))
+      );
+      definitions.set(column.key, signature);
+      const previous = this.filterDefinitions.get(column.key) === signature ? this.columnFilters.get(column.key) : null;
+      filters.set(
+        column.key,
+        previous ||
+          defaults.map((filter) => ({
+            ...filter,
+            options: filter.options?.slice(),
+            value: Array.isArray(filter.value) ? filter.value.slice() : filter.value,
+          }))
+      );
     });
     this.columnFilters = filters;
+    this.filterDefinitions = definitions;
     if (this.columnSort && !columns.some((column) => column.key === this.columnSort!.key && column.sort)) {
       this.columnSort = null;
     }

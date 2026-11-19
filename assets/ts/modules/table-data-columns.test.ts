@@ -29,6 +29,45 @@ describe('Data-backed column filtering and sorting', () => {
     expect(matchesColumnFilter('anything', { value: null }));
   });
 
+  it('keeps empty text/select cells for negative filters without accepting invalid typed values', () => {
+    for (const type of ['text', 'select'] as const) {
+      for (const value of [null, undefined, '', '   ']) {
+        expect(matchesColumnFilter(value, { type, operator: 'does not equal', value: 'London' }));
+        expect(matchesColumnFilter(value, { type, operator: 'does not contain', value: 'London' }));
+        expect(!matchesColumnFilter(value, { type, operator: 'equals', value: 'London' }));
+        expect(!matchesColumnFilter(value, { type, operator: 'contains', value: 'London' }));
+      }
+    }
+    for (const type of ['number', 'price', 'date'] as const) {
+      expect(!matchesColumnFilter(null, { type, operator: 'does not equal', value: '10' }));
+      expect(!matchesColumnFilter('invalid', { type, operator: 'does not equal', value: '10' }));
+    }
+  });
+
+  it('retains user filters only while the configured definitions remain unchanged', () => {
+    const data = new TableData();
+    data.replace([
+      { id: 1, branch: 'North' },
+      { id: 2, branch: 'East' },
+    ]);
+    const columns = [{ key: 'branch', filters: [{ type: 'select' as const, options: ['North', 'South'] }] }];
+    data.configureColumns(columns);
+    data.setColumnFilters('branch', [
+      { type: 'select', options: ['North', 'South'], operator: 'equals', value: 'North' },
+    ]);
+    data.configureColumns([{ ...columns[0], label: 'Renamed branch' }]);
+    expect(data.columnFilters.get('branch')![0].value === 'North');
+    expect(data.matching.length === 1);
+    columns[0].filters[0].options.splice(0, 2, 'East', 'West');
+    data.configureColumns(columns);
+    expect(data.columnFilters.get('branch')![0].options!.join() === 'East,West');
+    expect(data.columnFilters.get('branch')![0].value === undefined);
+    expect(data.matching.length === 2);
+    data.configureColumns([{ key: 'branch', filters: [{ type: 'text', operator: 'contains', value: 'East' }] }]);
+    expect(data.columnFilters.get('branch')![0].type === 'text');
+    expect(data.matching.length === 1 && data.matching[0].id === 2);
+  });
+
   it('combines column filters with application filtering across all 5,000 records', () => {
     const data = new TableData();
     data.replace(Array.from({ length: 5000 }, (_, id) => ({ id, weeks: id % 20, branch: id % 2 ? 'North' : 'South' })));

@@ -58,7 +58,8 @@ export const matchesColumnFilter = (value: unknown, filter: DataFilter): boolean
   if (!activeFilter(filter)) return true;
   const type = filter.type || 'text';
   const operator = (filter.operator || filterOperators(type)[0]).toLowerCase();
-  const actual = comparableValue(value, type);
+  // Empty text behaves like an empty rendered cell; invalid typed values remain invalid.
+  const actual = comparableValue(value, type) ?? (['text', 'select'].includes(type) ? '' : null);
   if (actual === null) return false;
   if (operator === 'between') {
     const bounds = Array.isArray(filter.value) ? filter.value : String(filter.value).split(',');

@@ -18,7 +18,8 @@ and can be deployed independently.
   formatting, links and business metadata, and passes records to `iam-table-data`.
   No Looker registration hook, override flag or new records API is required.
 - Unsupported schemas (merged/nested cells, interactive source cells or unknown
-  filter definitions) use the existing `iam-table-advanced` fallback. Set
+  filter definitions), and rich cells whose visible export text depends on layout
+  or custom visibility/style rules, use the existing `iam-table-advanced` fallback. Set
   `data-renderer="html"` on `iam-app-insights` to explicitly use the HTML renderer.
 - Selection, exports and bulk actions use matching records across all pages.
   Renderer IDs and DOM references do not enter action payloads. Branch restrictions

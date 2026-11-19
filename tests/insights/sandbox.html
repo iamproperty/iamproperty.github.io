@@ -55,12 +55,25 @@
           host.addEventListener(
             'filters-updated',
             () => {
-              const records = host.getMatchingRecords();
-              report(
-                records.length === 1 && records[0].id === 'high'
-                  ? { state: 'passed', update: true, reset: true, enter: true }
-                  : { state: 'failed', error: 'Enter did not apply the expected filter' }
-              );
+              try {
+                const records = host.getMatchingRecords();
+                if (records.length !== 1 || records[0].id !== 'high')
+                  throw new Error('Enter did not apply the expected filter');
+                const app = document.createElement('iam-app-insights');
+                app.innerHTML =
+                  '<table><thead><tr><th>Property</th></tr></thead><tbody><tr><td>One<br>Two<span hidden>Secret</span></td></tr></tbody></table>';
+                document.body.append(app);
+                if (
+                  app.shadowRoot.querySelector('iam-table-data') ||
+                  !app.shadowRoot.querySelector('iam-table-advanced')
+                )
+                  throw new Error('Layout-dependent rich text must use the HTML fallback');
+                const text = app.shadowRoot.querySelector('tbody td[data-label="Property"]').innerText.trim();
+                if (text !== 'One\nTwo') throw new Error('Native export text mismatch: ' + JSON.stringify(text));
+                report({ state: 'passed', update: true, reset: true, enter: true, richTextFallback: true });
+              } catch (error) {
+                report({ state: 'failed', error: String(error) });
+              }
             },
             { once: true }
           );

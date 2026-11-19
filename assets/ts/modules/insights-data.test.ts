@@ -1,6 +1,11 @@
 import { describe, expect, it } from './test';
 import { createElement, installTestDom } from './test-dom';
-import { insightActionProperties, insightsMapDisabled, type InsightsRecord } from './insights-data';
+import {
+  insightActionProperties,
+  insightCellExportText,
+  insightsMapDisabled,
+  type InsightsRecord,
+} from './insights-data';
 
 installTestDom();
 
@@ -25,6 +30,31 @@ describe('Insights data action contract', () => {
     expect(properties[0].columns.Property === 'One High Street');
     expect(properties[0].columns.Price === '£123,000' && properties[0].columns.Missing === '');
     expect(!('id' in properties[0]) && !('source' in properties[0]) && !('cells' in properties[0]));
+  });
+
+  it('uses snapshot export text rather than detached cell text', () => {
+    const source = createElement('tr', { dataUdprn: '1' });
+    const cell = createElement('td', { dataLabel: 'Property' }, 'One    Two');
+    const record = { id: 1, source, cells: [cell], exportText: ['One Two'] } as unknown as InsightsRecord;
+    expect(
+      (insightActionProperties([record])[0] as { columns: Record<string, string> }).columns.Property === 'One Two'
+    );
+  });
+
+  it('accepts plain inline text and rejects layout/visibility-dependent export markup', () => {
+    const cell = createElement('td', {}, ' One   Two ');
+    expect(insightCellExportText(cell as unknown as HTMLTableCellElement) === 'One Two');
+    for (const child of [
+      createElement('br'),
+      createElement('div', {}, 'Block'),
+      createElement('span', { hidden: '' }, 'Secret'),
+      createElement('span', { style: 'display:none' }, 'Secret'),
+      createElement('span', { class: 'custom-visibility' }, 'Secret'),
+    ]) {
+      const rich = createElement('td');
+      rich.appendChild(child);
+      expect(insightCellExportText(rich as unknown as HTMLTableCellElement) === null);
+    }
   });
 
   it('supports all-page batches independently of mounted rows and does not mutate source metadata', () => {

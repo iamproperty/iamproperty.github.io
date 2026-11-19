@@ -139,7 +139,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     }
     assert.equal(result.state, 'passed', JSON.stringify(result));
     console.log(
-      'PASS: native Chrome sandbox (allow-scripts only), Update, Reset and trusted Enter filtering without allow-forms'
+      'PASS: native Chrome sandbox (allow-scripts only), Update, Reset and trusted Enter filtering without allow-forms; native rich-text fallback'
     );
     await send('Browser.close');
   } finally {
