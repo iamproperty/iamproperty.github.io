@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Insights sandbox filter regression</title>
+  </head>
+  <body>
+    <h1>Sandbox filter regression</h1>
+    <p>This fixture intentionally grants scripts only. It must not need allow-forms or allow-same-origin.</p>
+    <output id="result">Starting…</output>
+    <iframe
+      id="frame"
+      sandbox="allow-scripts"
+      title="Sandboxed filter controls"
+      style="width: 100%; height: 500px; border: 0"
+    ></iframe>
+    <script>
+      const frame = document.querySelector('#frame');
+      window.addEventListener('message', (event) => {
+        if (event.source !== frame.contentWindow || event.data?.channel !== 'insights-sandbox-test') return;
+        document.body.dataset.testState = event.data.state;
+        document.body.dataset.testResult = JSON.stringify(event.data);
+        document.querySelector('#result').textContent = JSON.stringify(event.data);
+      });
+      function checkFilters() {
+        const report = (result) => parent.postMessage({ channel: 'insights-sandbox-test', ...result }, '*');
+        try {
+          const host = document.createElement('iam-table-data');
+          host.setData(
+            [
+              { id: 'church', property: 'Church Road' },
+              { id: 'park', property: 'Park Lane' },
+              { id: 'high', property: 'High Street' },
+            ],
+            { rowKey: 'id', columns: [{ key: 'property', label: 'Property', filters: true }] }
+          );
+          document.body.append(host);
+          const open = () => {
+            host.querySelector('[data-filter-btn]').click();
+            return host.querySelector('dialog');
+          };
+          let dialog = open();
+          dialog.querySelector('input').value = 'Church Road';
+          // Use the real button activation path, not a synthetic submit event.
+          [...dialog.querySelectorAll('button')].find((button) => button.textContent === 'Update').click();
+          if (host.getMatchingRecords().length !== 1)
+            throw new Error('Update failed under the sandbox form restriction');
+          dialog = open();
+          [...dialog.querySelectorAll('button')].find((button) => button.textContent === 'Reset').click();
+          if (host.getMatchingRecords().length !== 3) throw new Error('Reset failed');
+          dialog = open();
+          const input = dialog.querySelector('input');
+          input.value = 'High Street';
+          input.focus();
+          host.addEventListener(
+            'filters-updated',
+            () => {
+              try {
+                const records = host.getMatchingRecords();
+                if (records.length !== 1 || records[0].id !== 'high')
+                  throw new Error('Enter did not apply the expected filter');
+                const app = document.createElement('iam-app-insights');
+                app.innerHTML =
+                  '<table><thead><tr><th>Property</th></tr></thead><tbody><tr><td>One<br>Two<span hidden>Secret</span></td></tr></tbody></table>';
+                document.body.append(app);
+                if (
+                  app.shadowRoot.querySelector('iam-table-data') ||
+                  !app.shadowRoot.querySelector('iam-table-advanced')
+                )
+                  throw new Error('Layout-dependent rich text must use the HTML fallback');
+                const text = app.shadowRoot.querySelector('tbody td[data-label="Property"]').innerText.trim();
+                if (text !== 'One\nTwo') throw new Error('Native export text mismatch: ' + JSON.stringify(text));
+                report({ state: 'passed', update: true, reset: true, enter: true, richTextFallback: true });
+              } catch (error) {
+                report({ state: 'failed', error: String(error) });
+              }
+            },
+            { once: true }
+          );
+          window.addEventListener('message', (event) => {
+            if (event.source !== parent || event.data !== 'focus-filter-input') return;
+            input.focus();
+            report({ state: 'input-focused', focused: document.activeElement === input && document.hasFocus() });
+          });
+          report({ state: 'ready-for-enter', update: true, reset: true });
+        } catch (error) {
+          report({ state: 'failed', error: String(error) });
+        }
+      }
+      const loader = new URL('../../assets/js/apps/insights-loader.app.min.js', location.href).href;
+      frame.srcdoc =
+        '<!doctype html><meta charset="utf-8"><body><script src="' +
+        loader +
+        '"><' +
+        '/script><script>document.addEventListener("DOMContentLoaded",' +
+        checkFilters.toString() +
+        ');<' +
+        '/script></body>';
+    </script>
+  </body>
+</html>

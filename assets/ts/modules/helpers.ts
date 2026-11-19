@@ -238,35 +238,47 @@ export const prepareData = (format, data): any => {
   }
 };
 
+// Reuse locale formatters across rows instead of constructing one per cell.
+let priceFormatter: Intl.NumberFormat;
+let dateFormatter: Intl.DateTimeFormat;
+let dateTimeDateFormatter: Intl.DateTimeFormat;
+let dateTimeTimeFormatter: Intl.DateTimeFormat;
+
 export const formatData = (format, data): any => {
   switch (format) {
-    case 'datetime':
-      return (
-        new Date(data).toLocaleDateString('en-gb', {
+    case 'datetime': {
+      const date = new Date(data);
+      if (Number.isNaN(date.getTime())) return `${date.toLocaleDateString('en-gb')} ${date.toLocaleTimeString('en-gb')}`;
+      dateTimeDateFormatter ??= new Intl.DateTimeFormat('en-gb', {
           weekday: 'short',
           year: '2-digit',
           month: 'long',
           day: 'numeric',
-        }) +
-        ' ' +
-        new Date(data).toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' })
-      );
-    case 'date':
-      return new Date(prepareData('date', data)).toLocaleDateString('en-gb', {
+      });
+      dateTimeTimeFormatter ??= new Intl.DateTimeFormat('en-gb', { hour: '2-digit', minute: '2-digit' });
+      return `${dateTimeDateFormatter.format(date)} ${dateTimeTimeFormatter.format(date)}`;
+    }
+    case 'date': {
+      const date = new Date(prepareData('date', data));
+      if (Number.isNaN(date.getTime())) return date.toLocaleDateString('en-gb');
+      dateFormatter ??= new Intl.DateTimeFormat('en-gb', {
         day: 'numeric',
         month: 'numeric',
         year: 'numeric',
       });
+      return dateFormatter.format(date);
+    }
     case 'capitalise':
       return (data = ucfirst(data));
     case 'price':
-      return (new Intl.NumberFormat('en-GB', {
+      priceFormatter ??= new Intl.NumberFormat('en-GB', {
         style: 'currency',
         currency: 'GBP',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
         trailingZeroDisplay: 'stripIfInteger'
-      }).format(prepareData('price', data)));
+      });
+      return priceFormatter.format(prepareData('price', data));
     default:
       return data;
   }

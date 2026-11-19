@@ -43,7 +43,7 @@ class iamTableCustomisation extends HTMLElement {
   connectedCallback(): void {
 
     // Component only works when it is placed inside a table component
-    const tableComponent = this.closest('iam-table, iam-table-advanced, iam-table-ajax');
+    const tableComponent = this.closest('iam-table, iam-table-advanced, iam-table-data, iam-table-ajax');
     const tableElement = tableComponent?.querySelector('table');
 
     if (!tableComponent || !tableElement) {
@@ -280,11 +280,15 @@ class iamTableCustomisation extends HTMLElement {
     this.setAttribute('data-selector', tableCustomisationSelector);
     const localStorageKey = `${this.getAttribute('data-selector') || ''}@${window.location.pathname}`;
 
-    if(this.hasAttribute('data-save') && !this.closest('iam-table-customisation')) {
-      const savedCustomisation = localStorage.getItem(localStorageKey) || '[]';
-
-      if(savedCustomisation) {
-        customisation = JSON.parse(savedCustomisation);
+    if(this.hasAttribute('data-save') && !this.parentElement?.closest('iam-table-customisation')) {
+      try {
+        const savedCustomisation = localStorage.getItem(localStorageKey);
+        if (savedCustomisation) {
+          const saved = JSON.parse(savedCustomisation);
+          if (Array.isArray(saved)) customisation = saved;
+        }
+      } catch {
+        // Sandboxed embeds can deny storage; retain the settings supplied by the Hub.
       }
     }
     // #endregion
@@ -301,6 +305,11 @@ class iamTableCustomisation extends HTMLElement {
 
     // Update the table layout based on the current customisation
     updateColumnOrder(customisation);
+    tableComponent.addEventListener('table-rendered', () => {
+      setDataLabel();
+      hideColumns(customisation);
+      updateColumnOrder(customisation);
+    });
     tableComponent.addEventListener('sort-by-heading', (event: CustomEvent) => {
       if (!event.detail.sortBy) {
         setDataLabel();
@@ -359,8 +368,14 @@ class iamTableCustomisation extends HTMLElement {
     resetButton.addEventListener('click', () => {
 
       this.removeAttribute('data-customisation');
-      if(!this.closest('iam-table-customisation'))
-        localStorage.removeItem(localStorageKey);
+      customisation = [];
+      if(!this.parentElement?.closest('iam-table-customisation')) {
+        try {
+          localStorage.removeItem(localStorageKey);
+        } catch {
+          // The reset event still persists the change through the embedding app.
+        }
+      }
 
       this.dispatchEvent(new CustomEvent('table-customisation-reset'));
 
@@ -383,8 +398,12 @@ class iamTableCustomisation extends HTMLElement {
       if(this.hasAttribute('data-customisation')) {
         this.setAttribute('data-customisation', JSON.stringify(newCustomisation));
       }
-      if(this.hasAttribute('data-save') && !this.closest('iam-table-customisation')) {
-        localStorage.setItem(localStorageKey, JSON.stringify(newCustomisation));
+      if(this.hasAttribute('data-save') && !this.parentElement?.closest('iam-table-customisation')) {
+        try {
+          localStorage.setItem(localStorageKey, JSON.stringify(newCustomisation));
+        } catch {
+          // Local storage is optional; always notify the embedding app below.
+        }
       }
 
       const saveEvent = new CustomEvent('table-customisation-saved', { detail: newCustomisation });
@@ -417,6 +436,7 @@ class iamTableCustomisation extends HTMLElement {
           }
           newCustomisation.push({ label: label, isVisible: (checkbox as HTMLInputElement).checked, isDisabled: (checkbox as HTMLInputElement).disabled, order: index });
         });
+        customisation = newCustomisation;
         hideColumns(newCustomisation);
         updateColumnOrder(newCustomisation);
       });

@@ -1,8 +1,41 @@
 import { describe, expect, it } from './test.ts';
 import { createElement, installTestDom } from './test-dom.ts';
-import { addSelectboxes, fixTableCells, setFixedCellsViaHeaders } from './table.ts';
+import { addSelectboxes, fixTableCells, indexRows, profileTableStep, setFixedCellsViaHeaders } from './table.ts';
+import { formatData } from './helpers.ts';
 
 installTestDom();
+
+describe('Optional table diagnostics', () => {
+  it('preserves return values and thrown errors when profiling is enabled', () => {
+    const target = window as Window & {
+      __iamInsightsProfile?: boolean;
+      __iamInsightsTableProfile?: Array<{ stage: string; elapsedMs: number }>;
+    };
+    const enabled = target.__iamInsightsProfile;
+    const previous = target.__iamInsightsTableProfile;
+    try {
+      target.__iamInsightsProfile = false;
+      target.__iamInsightsTableProfile = [];
+      expect(profileTableStep('disabled', () => 42) === 42);
+      expect(target.__iamInsightsTableProfile.length === 0);
+      target.__iamInsightsProfile = true;
+      expect(profileTableStep('result', () => 42) === 42);
+      const failure = new Error('Expected test failure');
+      let caught: unknown;
+      try {
+        profileTableStep('failure', () => { throw failure; });
+      } catch (error) {
+        caught = error;
+      }
+      expect(caught === failure);
+      expect(target.__iamInsightsTableProfile.map((entry) => entry.stage).join() === 'result,failure');
+      expect(target.__iamInsightsTableProfile.every((entry) => entry.elapsedMs >= 0));
+    } finally {
+      target.__iamInsightsProfile = enabled;
+      target.__iamInsightsTableProfile = previous;
+    }
+  });
+});
 
 describe('Table fixed columns', () => {
   it('measures before writing, preserves row offsets and skips unchanged resize writes', () => {
@@ -62,6 +95,41 @@ describe('Table fixed columns', () => {
 
 
 describe('Table cell formatting', () => {
+  it('renders plain formatted values without assigning HTML and retains their original values', () => {
+    const table = createElement('table');
+    const head = createElement('thead');
+    const headings = createElement('tr');
+    const body = createElement('tbody');
+    const row = createElement('tr');
+    const values = [
+      { format: 'date', value: '29/02/2024' },
+      { format: 'datetime', value: '2026-11-17T13:45:00Z' },
+      { format: 'price', value: '£1,200.50' },
+      { format: 'number', value: '1,234.50' },
+      { format: 'number', value: '0' },
+      { format: 'capitalise', value: 'pending' },
+    ];
+    const cells = values.map(({ format, value }) => {
+      headings.appendChild(createElement('th', { dataFormat: format }, format));
+      const cell = createElement('td', {}, value);
+      Object.defineProperty(cell, 'innerHTML', {
+        set(): void { throw new Error('Plain formatted values must not be parsed as HTML'); },
+      });
+      row.appendChild(cell);
+      return cell;
+    });
+    head.appendChild(headings);
+    body.appendChild(row);
+    table.appendChild(head);
+    table.appendChild(body);
+    fixTableCells(table);
+    values.forEach(({ format, value }, index) => {
+      expect(cells[index].textContent === formatData(format, value));
+      expect(cells[index].getAttribute('data-original-value') === value);
+      expect(cells[index].getAttribute('data-format') === format);
+    });
+  });
+
   it('reads each header once and preserves labels, formats, classes and statuses', () => {
     const table = createElement('table');
     const thead = createElement('thead');
@@ -149,6 +217,24 @@ describe('Table row selection setup', () => {
     expect(rows.every((row) => row.querySelectorAll('.selectrow').length === 1));
     expect(rows[0].querySelector('.selectrow') === selected);
     expect(rows[2].querySelector('.selectrow') === existing);
+  });
+
+  it('preserves original row indices when indexing or adding selection controls after reordering', () => {
+    const component = createElement('iam-table-advanced', { dataSelectall: '' });
+    const table = createElement('table');
+    const body = createElement('tbody');
+    const original = createElement('tr', { dataIndex: '41' });
+    const next = createElement('tr');
+    [original, next].forEach((row) => { row.appendChild(createElement('td', {}, 'Property')); body.appendChild(row); });
+    table.appendChild(body);
+    indexRows(table);
+    addSelectboxes(component, table);
+    body.appendChild(original);
+    indexRows(table);
+    addSelectboxes(component, table);
+    expect(original.getAttribute('data-index') === '41');
+    expect(next.getAttribute('data-index') === '2');
+    expect(original.querySelectorAll('.selectrow').length === 1 && next.querySelectorAll('.selectrow').length === 1);
   });
 
   it('leaves tables without data-selectall untouched', () => {

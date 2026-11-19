@@ -196,7 +196,7 @@ iam-notification {
   overflow: clip;
 }
 
-iam-table-advanced {
+iam-table-advanced, iam-table-data {
   --table__container-display: contents;
 }
 
@@ -506,7 +506,7 @@ iam-pagination[data-total="0"] {
 
 }
 
-iam-table-advanced::part(table-filter):after {
+iam-table-advanced::part(table-filter):after, iam-table-data::part(table-filter):after {
   content: "";
 
   background-size: 1em 1em!important;
