@@ -38,7 +38,7 @@ export class TableDataView {
     if (this.actionbar && host.contains(this.actionbar)) this.actionbar.setAttribute('slot', 'before');
     host.classList.add('table--component', 'table--fullwidth');
     const params = new URLSearchParams(window.location.search);
-    if (!host.hasAttribute('data-show')) host.setAttribute('data-show', params.get('show') || '50');
+    if (!host.hasAttribute('data-show')) host.setAttribute('data-show', params.get('show') || '15');
     if (!host.hasAttribute('data-page')) host.setAttribute('data-page', params.get('page') || '1');
     const options = { signal: this.abort.signal };
     this.pagination?.addEventListener(
@@ -178,7 +178,7 @@ export class TableDataView {
       const number = Number(value);
       return Number.isSafeInteger(number) && number > 0 ? number : fallback;
     };
-    const size = positiveInt(this.host.getAttribute('data-show'), 50);
+    const size = positiveInt(this.host.getAttribute('data-show'), 15);
     const page = Math.min(
       positiveInt(this.host.getAttribute('data-page'), 1),
       Math.max(1, Math.ceil(this.data.matching.length / size))

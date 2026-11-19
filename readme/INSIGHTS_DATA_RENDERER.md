@@ -7,7 +7,7 @@ and can be deployed independently.
 ## Component library changes
 
 - `iam-table-data` owns the record model, selection, paging, sorting and inline
-  filters. It mounts 50 rows by default while retaining all records. Its Vue
+  filters. It mounts 15 rows by default while retaining all records. Its Vue
   wrapper is `TableData`, exported from the package. `/standalone/table-data`
   demonstrates the API and compares it with the HTML table.
 - `iam-table-advanced` and its Vue wrapper retain their existing HTML-table
@@ -65,7 +65,7 @@ npm run build:docs
 ```
 
 `test:insights` compiles assets and runs component-owned integration checks against
-synthetic HTML transport fixtures. They cover 5,000 records, 50 mounted rows,
+synthetic HTML transport fixtures. They cover 5,000 records, 15 mounted rows,
 all-record suggestions and filters, full/filtered actions, maps, paging,
 customisation, denied storage, reuse, reconnect and HTML fallback. They do not
 require the Looker project or its generated bundle. The native Chrome check uses

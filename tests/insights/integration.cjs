@@ -112,7 +112,7 @@ async function rendererScenario({ deniedStorage }) {
     const host = app.shadowRoot.querySelector('iam-table-data');
     assert.equal(ready, 1);
     assert.equal(host.getRecords().length, 5000);
-    assert.equal(host.querySelectorAll('tbody tr').length, 50);
+    assert.equal(host.querySelectorAll('tbody tr').length, 15);
     assert.equal(app.getAttribute('data-view'), 'split');
     assert.ok(maps > 0);
     assert.equal(app.shadowRoot.querySelector('iam-map').data.features.length, 5000);
@@ -138,10 +138,10 @@ async function rendererScenario({ deniedStorage }) {
     assert.equal(action.detail.properties[4999].columns.Price, '£104,999');
     assert.equal('id' in action.detail.properties[4999], false, 'Internal row ID must not leak into actions');
     host.querySelector('iam-pagination').dispatchEvent(new w.CustomEvent('update-page', { detail: { page: 2 } }));
-    assert.equal(host.querySelector('tbody tr').dataset.udprn, '50');
+    assert.equal(host.querySelector('tbody tr').dataset.udprn, '15');
     assert.equal(host.querySelector('tbody input').checked, true);
     assert.equal(host.querySelector('tbody td[data-label="Branch"]').classList.contains('d-none'), true);
-    assert.equal(host.querySelector('tbody [data-cta]').getAttribute('href'), '/record/50');
+    assert.equal(host.querySelector('tbody [data-cta]').getAttribute('href'), '/record/15');
     const source = app.querySelector('table');
     source.tHead.rows[0].cells[0].setAttribute('data-filters', '[{"type":"text","operator":"contains"}]');
     // A real header change rebuilds the snapshot; an identical source update reuses it.
@@ -200,7 +200,7 @@ async function rendererScenario({ deniedStorage }) {
       []
     );
     console.log(
-      `PASS: HTML adapter, storage ${deniedStorage ? 'denied' : 'allowed'}; 5,000 records, 50 rows, maps, full/filtered actions, paging, customisation and reconnect`
+      `PASS: HTML adapter, storage ${deniedStorage ? 'denied' : 'allowed'}; 5,000 records, 15 rows, maps, full/filtered actions, paging, customisation and reconnect`
     );
   } finally {
     await new Promise((resolve) => setImmediate(resolve));
@@ -232,7 +232,7 @@ function inlineFilters() {
       ],
     });
     w.document.body.append(host);
-    assert.equal(host.querySelectorAll('tbody tr').length, 50);
+    assert.equal(host.querySelectorAll('tbody tr').length, 15);
     assert.equal(host.querySelector('datalist'), null, 'Do not build suggestion lists during initial setup');
     const open = (index) => {
       host.querySelector(`[data-filter-btn][data-column-index="${index}"]`).click();
@@ -490,6 +490,34 @@ function legacyTableIndexing() {
   }
 }
 
+function pageSizeDefaults() {
+  const { dom, window: w, errors } = environment();
+  try {
+    w.eval(loader);
+    w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+    const records = Array.from({ length: 100 }, (_, id) => ({ id, name: `Property ${id}` }));
+    const mount = (show) => {
+      const host = w.document.createElement('iam-table-data');
+      if (show !== undefined) host.setAttribute('data-show', show);
+      host.setData(records, { columns: [{ key: 'name' }] });
+      w.document.body.append(host);
+      return host;
+    };
+    assert.equal(mount().querySelectorAll('tbody tr').length, 15);
+    w.history.replaceState(null, '', '?show=25');
+    assert.equal(mount().querySelectorAll('tbody tr').length, 25);
+    assert.equal(mount('50').querySelectorAll('tbody tr').length, 50);
+    assert.equal(mount('invalid').querySelectorAll('tbody tr').length, 15);
+    assert.deepEqual(
+      errors.map((error) => error.cause?.stack || error.stack),
+      []
+    );
+    console.log('PASS: 15-row default, query page size, explicit page size and invalid-value fallback');
+  } finally {
+    dom.window.close();
+  }
+}
+
 function paginationReconnect() {
   const { dom, window: w, errors } = environment();
   try {
@@ -527,6 +555,7 @@ function paginationReconnect() {
   appliedFilterChips();
   dataControlsAndCustomisation();
   paginationReconnect();
+  pageSizeDefaults();
   await rendererScenario({ deniedStorage: false });
   await rendererScenario({ deniedStorage: true });
 })().catch((error) => {
