@@ -1,3 +1,4 @@
+import { createAppliedFilterButton } from './table';
 import { activeFilter, comparableValue, filterOperators, filterSuggestions } from './table-data-columns';
 import { TableData, type DataColumn, type DataFilter, type RowId } from './table-data';
 
@@ -37,7 +38,7 @@ export class TableDataView {
     if (this.actionbar && host.contains(this.actionbar)) this.actionbar.setAttribute('slot', 'before');
     host.classList.add('table--component', 'table--fullwidth');
     const params = new URLSearchParams(window.location.search);
-    if (!host.hasAttribute('data-show')) host.setAttribute('data-show', params.get('show') || '50');
+    if (!host.hasAttribute('data-show')) host.setAttribute('data-show', params.get('show') || '15');
     if (!host.hasAttribute('data-page')) host.setAttribute('data-page', params.get('page') || '1');
     const options = { signal: this.abort.signal };
     this.pagination?.addEventListener(
@@ -177,7 +178,7 @@ export class TableDataView {
       const number = Number(value);
       return Number.isSafeInteger(number) && number > 0 ? number : fallback;
     };
-    const size = positiveInt(this.host.getAttribute('data-show'), 50);
+    const size = positiveInt(this.host.getAttribute('data-show'), 15);
     const page = Math.min(
       positiveInt(this.host.getAttribute('data-page'), 1),
       Math.max(1, Math.ceil(this.data.matching.length / size))
@@ -285,8 +286,38 @@ export class TableDataView {
     } finally {
       this.syncing = false;
     }
+    this.renderAppliedFilters();
     this.syncSelection();
     this.emit('table-rendered', { rowCount: records.length, total: this.data.matching.length });
+  }
+
+  private applyColumnFilters(column: DataColumn, index: number, filters: DataFilter[]): void {
+    this.data.setColumnFilters(column.key, filters);
+    this.host.setAttribute('data-page', '1');
+    this.render();
+    this.table.querySelector<HTMLButtonElement>(`button[data-filter-btn][data-column-index="${index}"]`)?.focus();
+    this.emit('filters-updated', { column: column.key, filters, rowCount: this.data.matching.length });
+  }
+
+  private renderAppliedFilters(): void {
+    const container = this.host.shadowRoot?.querySelector('.table-filters');
+    if (!container) return;
+    const chips: HTMLButtonElement[] = [];
+    this.columns.forEach((column, index) => {
+      const filters = this.data.columnFilters.get(column.key) || [];
+      if (!filters.some(activeFilter)) return;
+      const button = createAppliedFilterButton(column.label ?? column.key, () => {
+        this.applyColumnFilters(
+          column,
+          index,
+          filters.map((filter) => ({ ...filter, value: null }))
+        );
+      });
+      button.dataset.filterColumn = column.key;
+      chips.push(button);
+    });
+    container.replaceChildren(...chips);
+    this.table.classList.toggle('table--filtered', chips.length > 0);
   }
 
   private headerButton(index: number, type: 'sort' | 'filter', label: string, icon: string): HTMLButtonElement {
@@ -461,11 +492,7 @@ export class TableDataView {
       dialog.append(fieldset);
     });
     const apply = (filters: DataFilter[]): void => {
-      this.data.setColumnFilters(column.key, filters);
-      this.host.setAttribute('data-page', '1');
-      this.render();
-      this.table.querySelector<HTMLButtonElement>(`button[data-filter-btn][data-column-index="${index}"]`)?.focus();
-      this.emit('filters-updated', { column: column.key, filters, rowCount: this.data.matching.length });
+      this.applyColumnFilters(column, index, filters);
     };
     const updateFilters = (): void => {
       for (const control of controls) {

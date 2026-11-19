@@ -59,6 +59,11 @@
                 const records = host.getMatchingRecords();
                 if (records.length !== 1 || records[0].id !== 'high')
                   throw new Error('Enter did not apply the expected filter');
+                const chip = host.shadowRoot.querySelector('[part="table-filter"]');
+                if (!chip || chip.type !== 'button') throw new Error('Applied-filter chip missing');
+                chip.click();
+                if (host.getMatchingRecords().length !== 3 || host.shadowRoot.querySelector('[part="table-filter"]'))
+                  throw new Error('Removing an applied-filter chip did not clear its filter');
                 const app = document.createElement('iam-app-insights');
                 app.innerHTML =
                   '<table><thead><tr><th>Property</th></tr></thead><tbody><tr><td>One<br>Two<span hidden>Secret</span></td></tr></tbody></table>';

@@ -112,7 +112,7 @@ async function rendererScenario({ deniedStorage }) {
     const host = app.shadowRoot.querySelector('iam-table-data');
     assert.equal(ready, 1);
     assert.equal(host.getRecords().length, 5000);
-    assert.equal(host.querySelectorAll('tbody tr').length, 50);
+    assert.equal(host.querySelectorAll('tbody tr').length, 15);
     assert.equal(app.getAttribute('data-view'), 'split');
     assert.ok(maps > 0);
     assert.equal(app.shadowRoot.querySelector('iam-map').data.features.length, 5000);
@@ -138,10 +138,10 @@ async function rendererScenario({ deniedStorage }) {
     assert.equal(action.detail.properties[4999].columns.Price, '£104,999');
     assert.equal('id' in action.detail.properties[4999], false, 'Internal row ID must not leak into actions');
     host.querySelector('iam-pagination').dispatchEvent(new w.CustomEvent('update-page', { detail: { page: 2 } }));
-    assert.equal(host.querySelector('tbody tr').dataset.udprn, '50');
+    assert.equal(host.querySelector('tbody tr').dataset.udprn, '15');
     assert.equal(host.querySelector('tbody input').checked, true);
     assert.equal(host.querySelector('tbody td[data-label="Branch"]').classList.contains('d-none'), true);
-    assert.equal(host.querySelector('tbody [data-cta]').getAttribute('href'), '/record/50');
+    assert.equal(host.querySelector('tbody [data-cta]').getAttribute('href'), '/record/15');
     const source = app.querySelector('table');
     source.tHead.rows[0].cells[0].setAttribute('data-filters', '[{"type":"text","operator":"contains"}]');
     // A real header change rebuilds the snapshot; an identical source update reuses it.
@@ -161,6 +161,15 @@ async function rendererScenario({ deniedStorage }) {
     action = messages.findLast((message) => message.type === 'insight-action');
     assert.equal(action.detail.properties.length, 1);
     assert.equal(action.detail.properties[0].udprn, '4999');
+    const chip = filteredHost.shadowRoot.querySelector('[part="table-filter"]');
+    assert.ok(chip);
+    assert.equal(chip.textContent, 'Property');
+    chip.click();
+    const cleared = messages.findLast((message) => message.type === 'table-filtered');
+    assert.equal(cleared.detail.filters.length, 0);
+    assert.equal(cleared.detail.rowCount, 5000);
+    assert.equal(cleared.detail.reload, true);
+    assert.equal(app.shadowRoot.querySelector('iam-map').data.features.length, 5000);
     const selectedBefore = filteredHost.getSelectedRecords().length;
     app.createComponent(app, source, 'source-update');
     assert.equal(app.shadowRoot.querySelector('iam-table-data'), filteredHost);
@@ -191,7 +200,7 @@ async function rendererScenario({ deniedStorage }) {
       []
     );
     console.log(
-      `PASS: HTML adapter, storage ${deniedStorage ? 'denied' : 'allowed'}; 5,000 records, 50 rows, maps, full/filtered actions, paging, customisation and reconnect`
+      `PASS: HTML adapter, storage ${deniedStorage ? 'denied' : 'allowed'}; 5,000 records, 15 rows, maps, full/filtered actions, paging, customisation and reconnect`
     );
   } finally {
     await new Promise((resolve) => setImmediate(resolve));
@@ -223,7 +232,7 @@ function inlineFilters() {
       ],
     });
     w.document.body.append(host);
-    assert.equal(host.querySelectorAll('tbody tr').length, 50);
+    assert.equal(host.querySelectorAll('tbody tr').length, 15);
     assert.equal(host.querySelector('datalist'), null, 'Do not build suggestion lists during initial setup');
     const open = (index) => {
       host.querySelector(`[data-filter-btn][data-column-index="${index}"]`).click();
@@ -375,6 +384,88 @@ function dataControlsAndCustomisation() {
   }
 }
 
+function appliedFilterChips() {
+  const { dom, window: w, errors } = environment();
+  try {
+    w.eval(loader);
+    w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+    const host = w.document.createElement('iam-table-data');
+    host.setData(
+      [
+        { id: 1, name: 'One', branch: 'North' },
+        { id: 2, name: 'Two', branch: 'North' },
+        { id: 3, name: 'Three', branch: 'South' },
+      ],
+      {
+        columns: [
+          {
+            key: 'name',
+            label: 'Property',
+            sort: true,
+            filters: [{ type: 'text', operator: 'contains', value: 'One' }],
+          },
+          {
+            key: 'branch',
+            label: 'Branch',
+            filters: [{ type: 'select', options: ['North', 'South'], value: 'North' }],
+          },
+        ],
+      }
+    );
+    w.document.body.append(host);
+    const chips = () => host.shadowRoot.querySelectorAll('[part="table-filter"]');
+    assert.equal(chips().length, 2, 'Initial filters have chips');
+    const events = [];
+    host.addEventListener('filters-updated', (event) => events.push(event.detail));
+    host.querySelector('[data-sort-btn]').click();
+    assert.equal(chips().length, 2);
+    host.setAttribute('data-page', '2');
+    host.shadowRoot.querySelector('[data-filter-column="name"]').click();
+    assert.equal(host.getMatchingRecords().length, 2);
+    assert.equal(host.getAttribute('data-page'), '1');
+    assert.equal(chips().length, 1);
+    assert.equal(chips()[0].textContent, 'Branch');
+    assert.equal(events.at(-1).column, 'name');
+    assert.equal(events.at(-1).filters[0].value, null);
+    assert.equal(events.at(-1).rowCount, 2);
+    assert.equal(w.document.activeElement, host.querySelector('[data-filter-btn][data-column-index="0"]'));
+    chips()[0].click();
+    assert.equal(host.getMatchingRecords().length, 3);
+    assert.equal(chips().length, 0);
+    assert.equal(host.querySelector('table').classList.contains('table--filtered'), false);
+    host.querySelector('[data-filter-btn]').click();
+    const dialog = host.querySelector('dialog');
+    dialog.querySelector('input').value = 'Two';
+    dialog.querySelector('[data-filter-update]').click();
+    assert.equal(chips().length, 1);
+    assert.equal(chips()[0].textContent, 'Property');
+    host.querySelector('[data-filter-btn]').click();
+    [...host.querySelector('dialog').querySelectorAll('button')]
+      .find((button) => button.textContent === 'Reset')
+      .click();
+    assert.equal(chips().length, 0);
+    assert.equal(host.getMatchingRecords().length, 3);
+    const legacy = w.document.createElement('iam-table-advanced');
+    legacy.innerHTML = `<iam-actionbar></iam-actionbar><table><thead><tr><th data-filters='[{"type":"text","operator":"contains","value":"One"}]'>Property</th></tr></thead><tbody><tr><td>One</td></tr><tr><td>Two</td></tr></tbody></table>`;
+    w.document.body.append(legacy);
+    const legacyChip = legacy.shadowRoot.querySelector('[part="table-filter"]');
+    assert.ok(legacyChip, 'The HTML renderer retains the same shared chip presentation');
+    assert.equal(legacyChip.type, 'button');
+    legacyChip.click();
+    assert.equal(legacy.shadowRoot.querySelectorAll('[part="table-filter"]').length, 0);
+    assert.equal(legacy.querySelectorAll('tbody tr:not(.filtered)').length, 2);
+    assert.deepEqual(
+      errors.map((error) => error.cause?.stack || error.stack),
+      []
+    );
+    console.log(
+      'PASS: initial and updated applied-filter chips, per-column removal, reset, retained filters and removal events'
+    );
+  } finally {
+    dom.window.close();
+  }
+}
+
 function legacyTableIndexing() {
   const { dom, window: w, errors } = environment();
   try {
@@ -394,6 +485,34 @@ function legacyTableIndexing() {
       []
     );
     console.log('PASS: legacy sortable HTML table retains stable row indices and selection controls');
+  } finally {
+    dom.window.close();
+  }
+}
+
+function pageSizeDefaults() {
+  const { dom, window: w, errors } = environment();
+  try {
+    w.eval(loader);
+    w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+    const records = Array.from({ length: 100 }, (_, id) => ({ id, name: `Property ${id}` }));
+    const mount = (show) => {
+      const host = w.document.createElement('iam-table-data');
+      if (show !== undefined) host.setAttribute('data-show', show);
+      host.setData(records, { columns: [{ key: 'name' }] });
+      w.document.body.append(host);
+      return host;
+    };
+    assert.equal(mount().querySelectorAll('tbody tr').length, 15);
+    w.history.replaceState(null, '', '?show=25');
+    assert.equal(mount().querySelectorAll('tbody tr').length, 25);
+    assert.equal(mount('50').querySelectorAll('tbody tr').length, 50);
+    assert.equal(mount('invalid').querySelectorAll('tbody tr').length, 15);
+    assert.deepEqual(
+      errors.map((error) => error.cause?.stack || error.stack),
+      []
+    );
+    console.log('PASS: 15-row default, query page size, explicit page size and invalid-value fallback');
   } finally {
     dom.window.close();
   }
@@ -433,8 +552,10 @@ function paginationReconnect() {
 (async () => {
   inlineFilters();
   legacyTableIndexing();
+  appliedFilterChips();
   dataControlsAndCustomisation();
   paginationReconnect();
+  pageSizeDefaults();
   await rendererScenario({ deniedStorage: false });
   await rendererScenario({ deniedStorage: true });
 })().catch((error) => {

@@ -1,9 +1,22 @@
 import { describe, expect, it } from './test.ts';
 import { createElement, installTestDom } from './test-dom.ts';
-import { addSelectboxes, fixTableCells, indexRows, profileTableStep, setFixedCellsViaHeaders } from './table.ts';
+import { createAppliedFilterButton, addSelectboxes, fixTableCells, indexRows, profileTableStep, setFixedCellsViaHeaders } from './table.ts';
 import { formatData } from './helpers.ts';
 
 installTestDom();
+
+describe('Shared applied-filter chip', () => {
+  it('uses the existing presentation and an explicit removal button', () => {
+    let removed = false;
+    const button = createAppliedFilterButton('Property', () => { removed = true; });
+    expect(button.getAttribute('part') === 'table-filter');
+    expect(button.type === 'button');
+    expect(button.classList.contains('tag') && button.classList.contains('wider-colour-3'));
+    expect(button.getAttribute('aria-label') === 'Remove filter: Property');
+    button.click();
+    expect(removed);
+  });
+});
 
 describe('Optional table diagnostics', () => {
   it('preserves return values and thrown errors when profiling is enabled', () => {

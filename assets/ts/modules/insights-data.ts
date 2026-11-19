@@ -187,7 +187,6 @@ export class InsightsDataController {
     this.host = host;
     host.setAttribute('data-selectall', '');
     host.setAttribute('data-selection-matching', '');
-    host.setAttribute('data-show', '50');
     host.innerHTML =
       '<iam-actionbar slot="before" data-selectall data-disable-responsive></iam-actionbar><iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>';
     const table = document.importNode(snapshot.table.cloneNode(false), false) as HTMLTableElement;
