@@ -31,7 +31,9 @@ and can be deployed independently.
   snapshots reset selection because row position is not a persistent business ID.
 - Filters use anchored non-modal popovers and native suggestions from all records.
   Update/Reset and Enter use explicit actions and validation, without submitting
-  a form or requiring `allow-forms` in Looker's iframe.
+  a form or requiring `allow-forms` in Looker's iframe. Applied-filter chips above
+  the actionbar show active columns; removing a chip clears that column and updates
+  the matching rows, map and Hub filter event.
 - Saved column settings, denied sandbox storage, empty results, remounts and
   pagination refresh are covered by the regression suite.
 

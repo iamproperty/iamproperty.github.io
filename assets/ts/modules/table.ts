@@ -2079,6 +2079,18 @@ export const setFilterIndicator = (component, table, actionbar, appliedFilters):
   });
 };
 
+// Shared presentation for both HTML and record-backed applied-filter chips.
+export const createAppliedFilterButton = (label: string, remove: () => void): HTMLButtonElement => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.setAttribute('part', 'table-filter');
+  button.setAttribute('aria-label', `Remove filter: ${label}`);
+  button.classList.add('tag', 'wider-colour-3');
+  button.textContent = label;
+  button.addEventListener('click', remove);
+  return button;
+};
+
 export const createAppliedFilters = (component, table, actionbar, pagination, appliedFilters): void => {
 
   const appliedFiltersContainer = component.shadowRoot.querySelector('.table-filters');
@@ -2089,18 +2101,11 @@ export const createAppliedFilters = (component, table, actionbar, pagination, ap
 
   appliedFilters.forEach((filter) => {
 
-    const filterElement = document.createElement('button');
-    filterElement.setAttribute('part', 'table-filter');
-    filterElement.classList.add('tag');
-    filterElement.classList.add('wider-colour-3');
-    filterElement.textContent = filter;
-    appliedFiltersContainer.appendChild(filterElement);
-
-    filterElement.addEventListener('click', (event) => {
-
-      filterElement.remove();
+    const filterElement = createAppliedFilterButton(filter, () => {
       removeAppliedFilter(component, table, actionbar, pagination, filter);
     });
+    appliedFiltersContainer.appendChild(filterElement);
+
   });
 };
 
