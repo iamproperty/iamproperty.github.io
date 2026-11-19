@@ -79,4 +79,13 @@
       color: var(--colour-body);
     }
   }
+
+  iam-dashboard {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    grid-column: container !important;
+    padding: var(--container-padding);
+  }
 }

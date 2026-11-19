@@ -104,45 +104,8 @@ const layout = ref('layout1');
       </table>
 
     </div>
-    <div class="admin-panel" slot="widget">
-      <h2>Admin Panel 4</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-          </tr>
-        </tbody>
-      </table>
-
-    </div>
-    <div class="admin-panel" slot="widget">
-      <h2>Admin Panel 4</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-          </tr>
-        </tbody>
-      </table>
-
-    </div>
 
 
-    <hr slot="widget" />
     <h2>Smart leads</h2>
     <table>
       <thead>

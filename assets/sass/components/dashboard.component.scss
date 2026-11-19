@@ -6,10 +6,14 @@
 
 @use '../components/carousel.config.scss' as *;
 
+@use '../elements/admin-panel.css' as *;
 
 
 @layer legacy, reset, elements, components, templates, overrides, utilities, debug;
 
+:host {
+  display: contents!important;
+}
 
 slot[name="insight"] {
   display: contents;
@@ -95,35 +99,22 @@ slot[name="widget"] {
 
 #widgetWrapper {
   display: block;
-  max-width: 100%;
+  width: calc(100% + 2rem);
+  max-width: calc(100%);
+  padding: 0 1rem;
   overflow: hidden;
   margin-bottom: 2rem;
+  margin-inline: -1rem;
 }
 
 ::slotted(.admin-panel[slot="widget"]) {
-  grid-column: auto / span var(--col-span, 6)!important;
+  grid-column: auto / span var(--col-span, 4)!important;
   resize: block!important;
   overflow: auto;
 
   max-width: 100%;
   min-height: calc(var(--max-height-md) - var(--mh-modifier, 0rem));
 }
-
-
-::slotted(hr[slot="widget"]) {
-
-  height: 10px!important;
-  margin: 1rem 0;
-  background: black!important;
-  resize: none;
-  grid-column: 1 / span 12!important;
-
-}
-
-::slotted(.admin-panel[slot="widget"][data-resizing="true"]) {
-  resize: both!important;
-}
-
 
 ::slotted(.admin-panel.widget-md) {
   height: calc(var(--max-height-md) - var(--mh-modifier, 0rem));
@@ -133,12 +124,21 @@ slot[name="widget"] {
   height: calc(var(--max-height-lg) - var(--mh-modifier, 0rem));
 }
 
-
-.widget-row {
-  min-height: 100px;
-
-  margin-bottom: 2rem;
-
-}
 // #endregion
 
+// #region widget row styles 
+.widget-row > * {
+  
+  grid-column: auto / span var(--col-span, 4)!important;
+  resize: block!important;
+  overflow: auto;
+
+  max-width: 100%;
+  min-height: calc(var(--max-height-md) - var(--mh-modifier, 0rem));
+
+  &[data-resizing="true"] {
+    resize: both!important;
+  }
+}
+
+// #region 

@@ -22,15 +22,8 @@ class iamDashboard extends HTMLElement {
         <slot name="insight"></slot>
       </div>
       <div id="widgetWrapper">
-
-        <div class="widget-row" data-row="1">
-          <slot name="widget" class="sub-grid"></slot>
-        </div>
-        <div class="widget-row" data-row="2">
-          <slot name="widget2" class="sub-grid"></slot>
-        </div>
-        <div class="widget-row" data-row="3">
-          <slot name="widget3" class="sub-grid"></slot>
+        <div id="startup-widget-row" class="widget-row sub-grid">
+          <slot name="widget"></slot>
         </div>
       </div>
       <slot></slot>
@@ -38,8 +31,6 @@ class iamDashboard extends HTMLElement {
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
-
-
 
   connectedCallback(): void {
 
@@ -73,10 +64,126 @@ class iamDashboard extends HTMLElement {
 
     // #region widgets
 
-    const dragItems = this.querySelectorAll('.admin-panel[slot="widget"], .admin-panel[slot="widget2"], .admin-panel[slot="widget3"], hr[slot="widget"], hr[slot="widget2"], hr[slot="widget3"]');
-    const widgets = this.querySelectorAll('.admin-panel[slot="widget"], .admin-panel[slot="widget2"], .admin-panel[slot="widget3"]');
-    const rules = this.querySelectorAll('hr[slot="widget"], hr[slot="widget2"], hr[slot="widget3"]');
-    const widgetContainer = this.shadowRoot.querySelector('slot[name="widget"], slot[name="widget2"], slot[name="widget3"]');
+    const pageWidgets = this.querySelectorAll('div[slot="widget"]');
+
+    let widgets = [];
+    const widgetWrapper = this.shadowRoot.querySelector('#widgetWrapper');
+
+    widgetWrapper.innerHTML = '';
+
+    pageWidgets.forEach((widget,index) => {
+
+      // Create the widget which will then be given the controls to re-order and resize within the dashboard
+      const shadowWidget = document.createElement('div');
+      shadowWidget.classList.add('admin-panel');
+      shadowWidget.setAttribute('draggable', 'true');
+
+      // Create a slot for the shadow widget
+      const shadowWidgetSlot = document.createElement('slot');
+      shadowWidgetSlot.setAttribute('name', `widget-${index}`);
+
+      // Update the pages slot to match the shadow widget slot name
+      widget.setAttribute('slot', `widget-${index}`);
+      widget.className = '';
+
+      // Move the page widget title into the shadow widget
+      const title = widget.querySelector('h2');
+      if(title) {
+        shadowWidget.insertBefore(title.cloneNode(true), shadowWidget.firstChild);
+        title.classList.add('d-none');
+      }
+
+      // Either create a new row or append to an existing row
+
+      const currentWidgetRow = widgetWrapper.querySelector('.widget-row:last-child');
+
+      currentWidgetRow?.setAttribute('data-column-count', (parseInt(currentWidgetRow?.getAttribute('data-column-count') ?? '0') + 4).toString());
+
+      let widgetRow = currentWidgetRow ?? document.createElement('div');
+      if(!currentWidgetRow || currentWidgetRow.getAttribute('data-column-count') === '12') {
+        const newWidgetRow = document.createElement('div');
+        newWidgetRow.classList.add('widget-row', 'sub-grid');
+
+        newWidgetRow.addEventListener('dragover', event => {
+          event.preventDefault();
+        });
+        newWidgetRow.addEventListener('drop', event => {
+          event.preventDefault();
+
+        console.log('drop into row');
+          const dragId = event.dataTransfer?.getData('text/plain');
+          if(dragId !== undefined) {
+            const draggedItem = dragItems[parseInt(dragId)];
+            if(draggedItem) {
+              newWidgetRow.appendChild(draggedItem);
+            }
+          }
+        });
+
+
+        widgetWrapper.appendChild(newWidgetRow);
+
+        // Make sure we use the new widget row for subsequent appends
+        widgetRow = newWidgetRow;
+      }
+
+
+      // Append to shadow dom
+      shadowWidget.appendChild(shadowWidgetSlot);
+      widgetRow.appendChild(shadowWidget);
+    });
+
+
+    const dragItems = widgetWrapper.querySelectorAll('.admin-panel');
+    dragItems.forEach((item, index) => {
+      item.setAttribute('draggable', 'true');
+
+      item.addEventListener('dragstart', event => {
+
+        item.setAttribute('drag-id', index.toString());
+        event.dataTransfer?.setData('text/plain', index.toString());
+      });
+
+      item.addEventListener('dragover', event => {
+        event.preventDefault();
+      });
+
+      item.addEventListener('drop', event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        console.log('drop onto item');
+        const dragId = event.dataTransfer?.getData('text/plain');
+
+        if(dragId !== undefined) {
+          const parent = item.parentNode;
+          const draggedItem = dragItems[parseInt(dragId)];
+          if(parent) {
+            // if the dragged widget is already the sibling of the target widget, do nothing
+            if(draggedItem.nextSibling && draggedItem.nextSibling === item) {
+
+              parent.insertBefore(item, draggedItem);
+            }
+            else if(draggedItem && draggedItem !== item) {
+
+              parent.insertBefore(draggedItem, item);
+            }
+          }
+        }
+      });
+
+    });
+
+
+
+    /*
+    const dragItems = this.querySelectorAll('div[slot^="widget-"]');
+
+
+
+
+    const widgetContainer = this.shadowRoot.querySelector('slot[name="widget"]');
 
     dragItems.forEach((item, index) => {
       item.setAttribute('draggable', 'true');
@@ -116,56 +223,38 @@ class iamDashboard extends HTMLElement {
       });
     });
 
-    const widgetRows = this.querySelectorAll('.widget-row');
+    let activeWidget: HTMLElement | null = null;
 
-    widgetRows.forEach((row, index) => {
-      row.addEventListener('dragover', event => {
-        event.preventDefault();
-        console.log('Dragging over row:', row.getAttribute('data-row'));
-      });
-      row.addEventListener('drop', event => {
-        event.preventDefault();
+    const resizeObserver = new ResizeObserver(entries => {
+      for(const entry of entries) {
+        if(entry.target instanceof HTMLElement) {
 
-        console.log('Dropped on row:', row.getAttribute('data-row'));
-        event.stopImmediatePropagation();
-        event.stopPropagation();
-
-
-        const dragId = event.dataTransfer?.getData('text/plain');
-
-        if(dragId !== undefined) {
-
-          const draggedItem = dragItems[parseInt(dragId)];
-
-          console.log(row.getAttribute('data-row'));
-          console.log(draggedItem);
-
+          widgets.forEach((widget, index) => {
+            widget.classList.remove('widget-sm','widget-md','widget-lg');
+          });
         }
-      });
-
+      }
     });
 
-    let interacting = false;
 
     widgets.forEach((widget, index) => {
 
 
       widget.setAttribute('draggable', 'true');
+      widget.setAttribute('data-index', index.toString());
 
-      widget.setAttribute('data-index', index);
-
-      let resizeTimeout;
       const startingWidth = widget.offsetWidth;
       widget.setAttribute('data-resizing', 'true');
-
       widget.setAttribute('data-starting-width', startingWidth.toString());
 
       widget.style.setProperty('width', startingWidth + 'px');
 
 
       widget.addEventListener('mousedown', event => {
+        activeWidget = widget;
 
-        interacting = true;
+        console.log('Widget interaction started:', widget);
+        widgetContainer?.setAttribute('data-interacting', 'true');
 
         widgets.forEach((innerWidget, index) => {
 
@@ -181,19 +270,24 @@ class iamDashboard extends HTMLElement {
         widget.setAttribute('data-resizing', 'true');
       });
 
+      // check when the widget is being resized
+
+      // use a resizze observer to track changes in widget size
+
+      resizeObserver.observe(widget);
+
     });
 
     widgetContainer.addEventListener('dragover', event => {
       event.preventDefault();
     });
 
-    this.addEventListener('mouseup', event => {
-      interacting = false;
+    widgetContainer.addEventListener('mouseup', event => {
+      activeWidget = null;
 
+      const columnWidth = widgetContainer?.offsetWidth ? widgetContainer.offsetWidth / 12 : 0;
 
-      const columnWidth = widgetContainer.offsetWidth / 12;
       widgets.forEach((widget, index) => {
-
 
         widget.removeAttribute('data-resizing');
 
@@ -209,7 +303,6 @@ class iamDashboard extends HTMLElement {
         // Remove the width set
         widget.style.width = '';
 
-        widget.classList.remove('widget-sm','widget-md','widget-lg');
 
         const height = widget.offsetHeight;
         //console.log('Height:', height);
@@ -221,10 +314,19 @@ class iamDashboard extends HTMLElement {
         }
 
         widget.style.height = '';
-
       });
+
+
+      // Clear the data attributes used as flags for interaction and resizing
+
+      setTimeout(() => {
+        widgetContainer?.removeAttribute('data-interacting');
+        widgetContainer?.removeAttribute('data-resizing');
+      }, 10);
+
     });
 
+    */
     // #endregion widgets
   }
 
