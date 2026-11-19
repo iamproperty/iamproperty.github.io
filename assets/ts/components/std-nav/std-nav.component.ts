@@ -291,7 +291,7 @@ class iamSTDNav extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = populateNav(
-      isSecondary ? schema : schema.filter((section) => section.attributes.title !== 'Learning and support'),
+      isSecondary ? schema : schema.filter((section) => section.attributes.title !== 'Learning and support' && section.attributes.title !== 'One hub'),
       isSecondary ? 'secondary' : ''
     );
     this.generatedNavigation = Array.from(template.content.children);
