@@ -201,6 +201,9 @@ slot[name='selectall'] {
   margin-right: 0 !important;
   place-self: unset !important;
 }
+::slotted(.btn-action) {
+  margin-left: 0.25rem !important;
+}
 
 ::slotted(.btn:not(.btn-action)) {
   order: 2;

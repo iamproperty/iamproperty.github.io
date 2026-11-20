@@ -4,7 +4,6 @@
 <script>
   import Logo from '@/foundations/Logo/Logo.vue';
   import pkg from '../package.json';
-  import * as helpers from '../assets/ts/modules/helpers';
 
   export default {
     data() {
@@ -22,9 +21,6 @@
           return this.$route.path.indexOf(path) === 0; // current path starts with this path string
         });
       },
-    },
-    mounted() {
-      if (document.querySelector('main')) helpers.checkElements(document.querySelector('main'));
     },
   };
 </script>

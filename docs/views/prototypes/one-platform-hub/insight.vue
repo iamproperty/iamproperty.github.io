@@ -10,6 +10,10 @@ import Nav from '@/components/Nav/Nav.vue';
 import Modal from '@/components/Modal/Modal.vue';
 
 import Notification from '@/components/Notification/Notification.vue';
+
+import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
+
+import Header from '@/components/Header/Header.vue';
 // #endregion
 
 // #region load vue components
@@ -40,12 +44,23 @@ const dashboards = ref([]);
 
 const insight = ref(route.params.insight);
 
-const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/199?Agent+Name=&Branch+Name=&Property=&theme=hub_embed');
+const iframeSrc = ref('https://iampropertypbl.cloud.looker.com/embed/dashboards/199?theme=hub_embed');
 // #endregion
 
 // #region question panel
 const question = ref('');
 const search = ref('');
+// #endregion
+
+// #region looker filters
+
+//const lookerFilters = ref<Record<string, unknown>>({});
+const filterCausingNoReload = ref<{ column: string, operator: string, value: string } | null>(null);
+const cachedFilters = ref<{ column: string, operator: string, value: string }[]>([]);
+const filterAliases = ref<Record<string, string>>({
+  "Weeks on Market": "Weeks on the Market",
+});
+
 // #endregion
 
 // #region insight panel
@@ -189,6 +204,8 @@ onMounted(async () => {
         "properties": getInsightProperties(insightSlug.value)
       };
 
+      const tableCustomisation = [{"label": "Date listed", "isVisible": false}];
+
       setTimeout(() => { // delay the post message to allow the download to complete before the iframe update the UI
         isLoading.value = false;
       }, 1000);
@@ -200,7 +217,8 @@ onMounted(async () => {
             type: "top-window-details",
             detail: {
               class: "inside-hub",
-              ...JSON.parse(JSON.stringify(insightConfig))
+              ...JSON.parse(JSON.stringify(insightConfig)),
+              customisation: tableCustomisation
             }
           },
           { targetOrigin: '*' }
@@ -261,13 +279,134 @@ onMounted(async () => {
 
     }
 
-    console.log(message);
+
+    if (message.type == "table-filtered") {
+
+      let filters: Array<{ column: string, operator: string, value: string }> = [];
+
+
+      message.detail?.filters.forEach((filter: { column: string, operator: string, value: string }) => {
+
+        let filterValue = filter.value;
+
+        // first character is % them remove it
+        if (filterValue?.startsWith('%')) {
+          filterValue = filterValue.slice(1);
+        }
+        if (filterValue?.startsWith('-')) {
+          filterValue = filterValue.slice(1);
+        }
+        if (filterValue?.endsWith('%')) {
+          filterValue = filterValue.slice(0, -1);
+        }
+
+        filterValue = filterValue?.trim();
+
+
+
+        // Correct filter names that dont match up with the display name
+        if (filterAliases.value[filter.column]) {
+          filter.column = filterAliases.value[filter.column];
+        }
+
+        console.log('Processing filter:', filter);
+
+        // Make sure string is kept intacked if it contains commas
+        switch (filter.operator.toLowerCase()) {
+          case "equals":
+          case "does not equal":
+              if(filterValue.includes(',')) {
+                filterValue = `"${filterValue}"`;
+              }
+            break;
+        }
+
+        switch (filter.operator.toLowerCase()) {
+          case "contains":
+            filterValue = `%${filterValue}%`;
+            break;
+          case "does not contain":
+            filterValue = `-%${filterValue}%`;
+            break;
+          case "equals":
+            filterValue = `${filterValue}`;
+            break;
+          case "does not equal":
+            filterValue = `-${filterValue}`;
+            break;
+          case "begins with":
+            filterValue = `${filterValue}%`;
+            break;
+          case "ends with":
+            filterValue = `%${filterValue}`;
+            break;
+          case "less than":
+            filterValue = `<${parseFloat(filterValue)}`;
+            break;
+          case "greater than":
+            filterValue = `>${parseFloat(filterValue)}`;
+            break;
+          case "between":
+            filterValue = `[${filterValue}]`; // You might want to format this differently depending on how "between" is represented
+            break;
+        }
+
+        filters.push({ column: filter.column, operator: filter.operator, value: filterValue });
+      });
+
+      let shouldLookerFilters = false;
+
+      // if reload true then reload the dashboard
+      if (message.detail?.reload) {
+        shouldLookerFilters = true;
+
+        // See what the new filters are, will hopefully only be one
+        const newFilters = filters.filter(f => !cachedFilters.value.some(cf => cf.column === f.column && cf.operator === f.operator && cf.value === f.value));
+
+        // Save the first new filter as the one causing no reload, i.e. changing the filter functionality
+        filterCausingNoReload.value = newFilters[0];
+      }
+      else if(!filters.find(f => f.column === filterCausingNoReload.value?.column && f.operator === filterCausingNoReload.value?.operator && f.value === filterCausingNoReload.value?.value)) {
+        // Do something if the filter causing no reload is not present in the filters
+        console.log('Filter causing no reload is not present:', filterCausingNoReload.value);
+
+        shouldLookerFilters = true;
+
+        if(!filters.length) {
+          filters = [{ column: filterCausingNoReload.value.column, operator: filterCausingNoReload.value.operator, value: "" }];
+        }
+
+        filterCausingNoReload.value = null;
+      }
+
+      if (shouldLookerFilters) {
+
+        const filtersString = filters.map(f => `${f.column}=${encodeURIComponent(f.value)}`).join('&');
+
+        const iframe = document.querySelector("#looker-dashboard");
+        iframe.setAttribute('src', `${iframeSrc.value}&${filtersString.replace(/ /g,'+')}`);
+
+        /* #region Hube code only
+        const filterObject = filters.reduce((acc, f) => {
+          acc[f.column] = f.value;
+          return acc;
+        }, {} as Record<string, string>);
+        dashboardConnection?.updateFilters(filterObject);
+        dashboardConnection?.run();
+        /* #endregion */
+      }
+
+
+      cachedFilters.value = [ ...filters ];
+    }
+
+    //console.log(message);
 
     if(message.type == "dashboard:run:complete") {
 
       const layouts = message.dashboard?.options?.layouts;
 
-      console.log(layouts);
+      //console.log(layouts);
     }
   });
 
@@ -294,7 +433,7 @@ onMounted(async () => {
   );
 
   const urlParams = new URLSearchParams(window.location.search);
-  console.log(urlParams.has('question')); // true
+  //console.log(urlParams.has('question')); // true
 
   if (urlParams.has('question')) {
     question.value = urlParams.get('question');
@@ -324,132 +463,8 @@ onMounted(async () => {
   insightActions.value = selectedDashboard?.actions ?? [];
   insightProperties.value = selectedDashboard?.properties ?? {};
 
-/*
-const dashboardIframe = document.querySelector("#looker-dashboard");
-
-const lookerOrigin = "https://iampropertypbl.cloud.looker.com";
-
-// Set this to the origin that sends your custom visualization messages.
-// It may differ from the dashboard's origin.
-const visualizationOrigin = "https://your-visualization-origin.com";
-
-// The dashboard element ID of your iam-app-insights tile.
-const tileId = "123";
-
-let dashboardLayouts;
-let requestedHeightRows;
-let lastAppliedHeightRows;
-
-function parseMessage(data) {
-  if (typeof data !== "string") {
-    return data;
-  }
-
-  try {
-    return JSON.parse(data);
-  } catch {
-    return null;
-  }
-}
-
-function applyTileHeight() {
-  if (!dashboardLayouts || requestedHeightRows === undefined) {
-    return;
-  }
-
-  if (requestedHeightRows === lastAppliedHeightRows) {
-    return;
-  }
-
-  const layouts = structuredClone(dashboardLayouts);
-  let foundTile = false;
-
-  for (const layout of layouts) {
-    if (layout.active === false) {
-      continue;
-    }
-
-    for (const component of layout.dashboard_layout_components ?? []) {
-      if (String(component.dashboard_element_id) !== String(tileId)) {
-        continue;
-      }
-
-      // Looker only accepts properties returned in its layout options.
-      if (!Object.prototype.hasOwnProperty.call(component, "height")) {
-        continue;
-      }
-
-      component.height = requestedHeightRows;
-      foundTile = true;
-    }
-  }
-
-  if (!foundTile) {
-    return;
-  }
-
-  dashboardIframe.contentWindow.postMessage(
-    JSON.stringify({
-      type: "dashboard:options:set",
-      layouts
-    }),
-    lookerOrigin
-  );
-
-  dashboardLayouts = layouts;
-  lastAppliedHeightRows = requestedHeightRows;
-}
-
-window.addEventListener("message", event => {
-  const message = parseMessage(event.data);
-
-  if (!message || typeof message !== "object") {
-    return;
-  }
-
-  // Capture Looker's layout once the dashboard has finished running.
-  if (
-    event.origin === lookerOrigin &&
-    event.source === dashboardIframe.contentWindow &&
-    message.type === "dashboard:run:complete"
-  ) {
-    const layouts = message.dashboard?.options?.layouts;
-
-    if (Array.isArray(layouts)) {
-      dashboardLayouts = layouts;
-      lastAppliedHeightRows = undefined;
-
-      // Apply any height request received before the dashboard was ready.
-      applyTileHeight();
-    }
-
-    return;
-  }
-
-  // Receive the pixel height requested by your visualization.
-  if (
-    event.origin === visualizationOrigin &&
-    message.source === "vis" &&
-    message.type === "update-height"
-  ) {
-    const heightPx = Number(message.detail?.heightPx);
-
-    if (!Number.isFinite(heightPx) || heightPx <= 0) {
-      return;
-    }
-
-    // For a newspaper dashboard layout: approximately 50px per row.
-    requestedHeightRows = Math.max(
-      1,
-      Math.ceil(heightPx / 50)
-    );
-
-    applyTileHeight();
-  }
-});
 
 
-*/
 });
 
 
@@ -495,22 +510,36 @@ const loadDashboards = async (): any => {
       <a href="/">Action</a>
       <a href="/">Conveyancing</a>
 
-      <STDNav data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></STDNav>
-
+      <STDNav :get-access-token="() => null" data-mode="mock" data-product="crm"></STDNav>
     </Nav>
   </nav>
 
-  <main>
-    <div class="bg-primary full-width questions-container">
-      <div class="container">
+  <main class="enable-lg-breakpoint">
 
-      </div>
+    <Header>
 
-      <Questions v-if="dashboards.length" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
-    </div>
+      <ul class="breadcrumbs">
+        <li><a href="/">One hub</a></li>
+        <li>One insights</li>
+      </ul>
+      <Questions v-if="dashboards.length" class="one-insights-inline" :insight="insight" :search="search" :dashboards="dashboards" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="crm"></Questions>
+    </Header>
+
 
     <div v-if="insight" ref="panel" class="admin-panel" :style="`--componentHeight: ${componentHeight};`">
-      <h2 id="hub-question-title" ref="questionTitle" class="bg-primary gradient-info">{{ insightTitle }}</h2>
+
+      <div class="admin-panel__heading bg-white">
+
+        <h2 id="hub-question-title" ref="questionTitle">{{ insightTitle }}</h2>
+
+        <BranchSelector class="branch-selector-expanded">
+          <label><input type="checkbox" name="all-branches" />All</label>
+          <label><input type="checkbox" name="branch" />Gosforth Agent</label>
+          <label><input type="checkbox" name="branch" />Heaton Agent & co</label>
+          <label><input type="checkbox" name="branch" />Jesmond Agent</label>
+          <label><input type="checkbox" name="branch" />Newcastle Branch</label>
+        </BranchSelector>
+      </div>
 
       <!--<Properties></Properties>-->
 
@@ -545,7 +574,7 @@ const loadDashboards = async (): any => {
       <a :href="addedTask.value.cta" target="_blank" rel="noopener noreferrer" v-if="actionStatus == 'success'">View task</a>
     </Notification>
 
-    <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" >
+    <dialog id="addTaskDialog" ref="addTaskDialog" aria-labelledby="add-task-title" @close="() => {addTaskDialog.close(); postInsightCompleted('create-task');}">
       <Modal data-type="transactional" data-icon="" class="modal--lg" data-hide-buttons>
 
         <Notification :data-status="actionStatus" v-if="inlineAddedTask.value">
@@ -579,7 +608,7 @@ const loadDashboards = async (): any => {
 <style lang="scss" scoped>
 
 .questions-container {
-  margin-bottom: 7rem;
+  margin-bottom: 2rem;
   display: grid;
   grid-template-columns: subgrid;
 }
@@ -639,5 +668,12 @@ const loadDashboards = async (): any => {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+iam-header::part(gradient-background) {
+  left: 0%;
+}
+iam-header {
+  --padding-bottom: 0!important;
 }
 </style>

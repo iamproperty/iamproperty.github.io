@@ -119,3 +119,43 @@ $selector: '.table--component';
   /* display: none; */
 }
 /* #endregion */
+
+// #region Table re-ordering
+@layer elements {
+
+  table.table--ordered {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(0, 1fr));
+    grid-template-columns: var(--grid-template-columns, auto);
+  }
+  
+  table.table--ordered :is(thead,tbody) {
+    display: contents;
+  }
+
+  table.table--ordered tr {
+    
+    display: grid;
+    grid-column: 1 / calc(var(--column-count,99) + 1);
+    grid-template-columns: subgrid;
+  }
+
+  table.table--ordered thead tr {
+    --grid-row: 1;
+  }
+
+  table.table--ordered :is(th, td) {
+    grid-row: var(--grid-row)!important;
+    grid-column: auto;
+    order: var(--order, 0)!important;
+    min-width: min-content!important;
+  }
+
+  table.table--ordered :is(.th--fixed,.td--fixed) {
+    order: 0!important;
+  }
+  table.table--ordered :is(.th--fixed,.td--fixed):last-child {
+    order: 999!important;
+  }
+}
+// #endregion

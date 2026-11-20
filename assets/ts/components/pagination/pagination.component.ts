@@ -1,4 +1,5 @@
 class iamPagination extends HTMLElement {
+  private events: AbortController | null = null;
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -20,7 +21,7 @@ class iamPagination extends HTMLElement {
 
       <div class="minimal" part="minimal">
         <div class="page-jump">
-          <div><select class="select--minimal"></select></div>
+          <div part="select--minimal"><select class="select--minimal"></select></div>
           <span class="total-pages"></span>
         </div>
 
@@ -30,7 +31,7 @@ class iamPagination extends HTMLElement {
 
       <div class="item-count" part="item-count"></div>
       <div class="per-page" part="per-page">
-        <div>
+        <div part="select--minimal">
           <select class="select--minimal">
             <option value="15">15</option>
             <option value="25">25</option>
@@ -50,6 +51,9 @@ class iamPagination extends HTMLElement {
   }
 
   connectedCallback(): void {
+    this.events?.abort();
+    this.events = new AbortController();
+    const eventOptions = { signal: this.events.signal };
     // Set default attributes
     const params = new URLSearchParams(window.location.search);
 
@@ -75,41 +79,34 @@ class iamPagination extends HTMLElement {
     select.addEventListener('change', (event) => {
       this.setAttribute('data-show', this.getAttribute('data-increment'));
       this.setAttribute('data-page', event.target.value);
-    });
+    }, eventOptions);
 
     // Next and previous buttons will simply trigger and on change on the select which in turn will dispatch an event
     next.addEventListener('click', () => {
-      console.log(parseInt(this.getAttribute('data-page')));
-
       this.setAttribute('data-page', parseInt(this.getAttribute('data-page')) + 1);
-    });
+    }, eventOptions);
 
     prev.addEventListener('click', () => {
       this.setAttribute('data-page', parseInt(this.getAttribute('data-page')) - 1);
-    });
+    }, eventOptions);
 
     // Update how many is shown
     perPage.addEventListener('change', (event) => {
       this.setAttribute('data-increment', event.target.value);
-    });
+    }, eventOptions);
 
-    // Load more button
-
-    const increment = parseInt(this.getAttribute('data-increment'));
-    const show = parseInt(this.getAttribute('data-show'));
-
-    if (show >= parseInt(this.getAttribute('data-total'))) {
-      loadMore.remove();
-    }
-
+    // Keep the button for refreshed results and reconnections. Read current
+    // values per click instead of retaining the initial page size.
     loadMore.addEventListener('click', () => {
-      const newValue = show + increment;
-      this.setAttribute('data-show', newValue);
+      const show = parseInt(this.getAttribute('data-show'));
+      const increment = parseInt(this.getAttribute('data-increment'));
+      this.setAttribute('data-show', show + increment);
+    }, eventOptions);
+  }
 
-      if (newValue > parseInt(this.getAttribute('data-total'))) {
-        loadMore.remove();
-      }
-    });
+  disconnectedCallback(): void {
+    this.events?.abort();
+    this.events = null;
   }
 
   setup(): void {
@@ -129,7 +126,8 @@ class iamPagination extends HTMLElement {
     const increment = parseInt(this.getAttribute('data-increment'));
     const numberPages = Math.ceil(total / increment);
 
-    if (total > show) wrapper.classList.remove('d-none');
+    wrapper.classList.toggle('d-none', !(total > show));
+    this.shadowRoot.querySelector('.load-more')?.classList.toggle('d-none', !(total > show));
 
     // Populate the select input with the number of pages
     let strOptions = '';
@@ -190,8 +188,8 @@ class iamPagination extends HTMLElement {
         if (oldVal != newVal) {
           this.setAttribute('data-show', newVal);
           //this.setAttribute('data-page', 1);
-          this.setup();
           this.dispatchEvent(new CustomEvent('update-show', { detail: { show: newVal } }));
+          this.setup();
         }
         break;
       }

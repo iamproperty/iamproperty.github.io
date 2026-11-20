@@ -48,13 +48,23 @@ const routes: Array<any> = [
       },
       {
         path: 'spacing',
-        name: 'Spacing and Layout',
+        name: 'Spacing',
         meta: {
-          title: 'Spacing and Layout | Foundations | iamkey',
+          title: 'Spacing | Foundations | iamkey',
           status: 'stable',
           ver: '7.8.0',
         },
         component: () => import('./views/foundations/Spacing.vue'),
+        searchterms:
+          'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
+      },
+      {
+        path: 'layout',
+        name: 'Layout',
+        meta: {
+          title: 'Layout | Foundations | iamkey',
+        },
+        component: () => import('./views/foundations/Layout.vue'),
         searchterms:
           'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
       },
@@ -121,7 +131,7 @@ const routes: Array<any> = [
         path: 'icons',
         name: 'Icons',
         meta: {
-          title: 'Icons | Foundations | iamkey',
+          title: 'Icons | Elements | iamkey',
         },
         component: () => import('./views/elements/Icons.vue'),
         searchterms: 'svg, status, font awesome',
@@ -200,7 +210,7 @@ const routes: Array<any> = [
         path: 'container',
         name: 'Container (alpha)',
         meta: {
-          title: 'Container | Elemenets | iamkey',
+          title: 'Container | Elements | iamkey',
         },
         component: () => import('./views/elements/Container.vue'),
         searchterms: 'fundamental, backgrounds, curve',
@@ -1135,6 +1145,15 @@ const routes: Array<any> = [
         },
         component: () => import('./views/tables/AjaxTableDoc.vue'),
       },
+      {
+        path: 'table-customisation',
+        name: 'Table customisation',
+        meta: {
+          title: 'Table customisation | Components | iamkey',
+          desc: 'Table customisation options to give further customisation functionality to the user when used the action bar is use in conjunction with expanded/advanced tables.',
+        },
+        component: () => import('./views/tables/TableCustomisation.vue'),
+      },
     ],
   },
   {
@@ -1876,6 +1895,12 @@ const routes: Array<any> = [
           title: 'Account switched | iamkey',
         },
         component: () => import('./views/standalone/AccountSwitched.vue'),
+      },
+      {
+        path: 'table-data',
+        name: 'Table performance comparison',
+        meta: { title: 'Table performance comparison | iamkey' },
+        component: () => import('./views/standalone/TableData.vue'),
       },
       {
         path: 'movebutler',

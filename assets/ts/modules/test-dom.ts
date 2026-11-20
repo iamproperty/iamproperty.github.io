@@ -622,11 +622,11 @@ const matchesSelector = (element, selector) => {
   if (current.startsWith(':scope')) current = current.replace(':scope', '').trim();
   if (!current) return true;
 
-  const notMatches = current.match(/:not\((.+)\)$/);
-  if (notMatches) {
-    current = current.slice(0, notMatches.index);
-    if (matchesSelector(element, notMatches[1])) return false;
+  const notMatches = Array.from(current.matchAll(/:not\(([^()]*)\)/g));
+  for (const match of notMatches) {
+    if (matchesSelector(element, match[1])) return false;
   }
+  current = current.replace(/:not\([^()]*\)/g, '');
 
   const isMatches = current.match(/:is\((.+)\)/);
   if (isMatches) {

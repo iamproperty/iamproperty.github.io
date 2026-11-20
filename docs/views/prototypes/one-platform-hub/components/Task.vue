@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
+import AdvancedSelect from '@/components/AdvancedSelect/AdvancedSelect.vue';
 
 const props = defineProps({
   task: {
@@ -81,12 +82,12 @@ const addLast = () => {
 
     <label v-if="assignees.length > 0">
       Task assignee(s)
-      <select
-        v-model="task.assignee"
-        required
-      >
-        <option v-for="assignee in assignees" :key="assignee" :value="assignee">{{ assignee }}</option>
-      </select>
+      <AdvancedSelect>
+        <input name="assignee" v-model="task.assignee" :data-value="task.assignee" list="assignees" />
+        <datalist id="assignees">
+          <option v-for="assignee in assignees" :key="assignee" :value="assignee">{{ assignee }}</option>
+        </datalist>
+      </AdvancedSelect>
     </label>
 
     <div class="dates">
@@ -160,12 +161,31 @@ const addLast = () => {
   .checklist-item {
     display: flex;
 
+    span {
+      padding-top: 0.5rem;
+      flex-basis: 100%;
+      color: var(--colour-heading);
+      font-weight: bold;
+    }
+
     &:has(input[type="checkbox"]:checked) span{
       text-decoration: line-through;
     }
     .btn-compact {
       margin-top: auto;
       margin-bottom: 0;
+    }
+  }
+
+  .btn__group {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    * {
+      flex-basis: 50%;
+      max-width: unset;
     }
   }
 

@@ -1,6 +1,9 @@
 <script setup>
-  import { onMounted } from 'vue';
+  import { onMounted, ref } from 'vue';
 
+  const props = defineProps({ getAccessToken: { type: Function, required: true } });
+  const element = ref(null);
+  defineExpose({ refresh: () => element.value?.refresh?.() });
   const component = 'std-nav';
 
   onMounted(() => {
@@ -16,7 +19,10 @@
 </script>
 
 <template>
-  <iam-std-nav>
+  <iam-std-nav
+    ref="element"
+    :getAccessToken.prop="props.getAccessToken"
+  >
     <slot></slot>
   </iam-std-nav>
 </template>

@@ -148,7 +148,7 @@
   };
 </script>
 <template>
-  <div class="insights-panel bg-primary">
+  <div class="insights-panel bg-primary col-start-1 col-end-12 lg-col-start-3 lg-col-end-10">
     <div class="text-center">
       <div class="brand brand--insights p-1">
         <svg viewBox="0 0 600 130" preserveAspectRatio="xMinYMid meet">
@@ -254,7 +254,7 @@
 
     padding-inline: 2rem;
 
-    grid-column: col-1-start / col-12-end;
+    //grid-column: col-1-start / col-12-end;
 
     background-image:
       radial-gradient(ellipse 90% 190% at 0% 0%, var(--colour-primary) 15%, transparent 80%),
@@ -332,4 +332,54 @@
       font-weight: 700;
     }
   }
+
+  .one-insights-inline {
+    margin-bottom: 1.5rem;
+    min-height: 3rem;
+    background-image:
+      radial-gradient(ellipse 190% 400% at 0% 0%, var(--colour-primary) 15%, transparent 80%),
+      linear-gradient(var(--colour-info), var(--colour-info)) !important;
+
+    margin-top: -1rem;
+  }
+
+  @media screen and (min-width: 36em) {
+    .one-insights-inline .text-center {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+  }
+
+  .one-insights-inline .brand {
+    width: 2.923076923076923rem;
+    margin: 0;
+    font-size: 5rem;
+  }
+  @layer utilities {
+
+    .one-insights-inline .brand {
+      padding: 0 !important;
+    }
+  }
+  .one-insights-inline .strapline {
+    display: none;
+  }
+  .one-insights-inline iam-search {
+    width: 100%;
+    flex-grow: 1;
+    margin: 0!important;
+  }
+
+  @media screen and (min-width: 36em) {
+
+    @layer utilities {
+
+      .one-insights-inline iam-search {
+        margin: 0!important;
+      }
+    }
+  }
+
 </style>

@@ -1,4 +1,15 @@
+import { readMapTableData, type MapTableData } from '../../modules/map-data';
+
 class iamMap extends HTMLElement {
+  private mapGeneration = 0;
+  private suppliedData: MapTableData | null = null;
+
+  // Data-backed tables mount only one page; maps still receive the complete matching set.
+  setData(data: MapTableData): void {
+    this.suppliedData = data;
+    if (this.isConnected) this.connectedCallback();
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -34,6 +45,9 @@ class iamMap extends HTMLElement {
 
   connectedCallback(): void {
 
+    const generation = ++this.mapGeneration;
+    this.resizeObserver?.disconnect();
+
     let table;
 
     // Hide the table if it is a child of the map component
@@ -46,15 +60,20 @@ class iamMap extends HTMLElement {
 
     // If the map component is inside a shadow root, we need to query the table from the shadow root instead of the document
     // This lookup should trump the previous lookup, as this case covers the map and table being part of the app insights component
-    if(this.getRootNode() instanceof ShadowRoot){
+    if(!table && this.getRootNode() instanceof ShadowRoot){
 
-      table = (this.getRootNode() as ShadowRoot).querySelector(`table`);
+      table = (this.getRootNode() as ShadowRoot).querySelector(`table[id="${this.getAttribute("data-for")}"]`);
     }
 
-    if(!table) return;
+    if(!table && !this.suppliedData) return;
 
     import(`https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js`)
     .then((Module) => {
+
+      // A replacement map can be mounted before the shared import resolves.
+      // Removed instances must not prepare thousands of rows or create a worker.
+      if (!this.isConnected || generation !== this.mapGeneration) return;
+      const preparedAt = performance.now();
 
       const longitude = Number(this.getAttribute("data-longitude")) || Number(this.querySelector('tr[data-longitude]')?.dataset.longitude) || 2.23;
       const latitude = Number(this.getAttribute("data-latitude")) || Number(this.querySelector('tr[data-latitude]')?.dataset.latitude) || 54.31;
@@ -62,69 +81,21 @@ class iamMap extends HTMLElement {
       const maxZoom = Number(this.getAttribute("data-max-zoom")) || 12;
       const mapContainer = this.shadowRoot.querySelector("#map");
       const bounds = new maplibregl.LngLatBounds();
-      const features = [];
+      const { features, pinCount, boundsCoordinates, onloadPopup } = this.suppliedData || readMapTableData(table);
+      boundsCoordinates.forEach((coordinates) => bounds.extend(coordinates));
+      if ((window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile) {
+        console.info('[iam Insights map profile]', JSON.stringify({
+          stage: 'feature-preparation',
+          elapsedMs: Math.round(performance.now() - preparedAt),
+          featureCount: features.length,
+          atEpochMs: Math.round(performance.timeOrigin + performance.now()),
+        }));
+      }
 
-      const pinCount = table.querySelectorAll('tr[data-longitude][data-latitude]').length;
       const clusterMidCount = Math.max(1, Math.round(pinCount * 0.25));
       const clusterHighCount = Math.max(clusterMidCount + 1, Math.round(pinCount * 0.5));
 
-      const tableHeadings = Array.from(table.querySelectorAll("thead th")).map((th) => th.querySelector(".th__content")?.textContent?.trim() || th.textContent?.trim() || "");
-      let onloadPopup;
-
-      table.querySelectorAll('tr[data-longitude][data-latitude]').forEach((row, index) => {
-        const rowLongitude = Number(row.dataset.longitude);
-        const rowLatitude = Number(row.dataset.latitude);
-
-
-        if (!Number.isFinite(rowLongitude) || !Number.isFinite(rowLatitude)) {
-          return;
-        }
-
-        // Only extend the bounds for the first 15 rows, this represents the first pagination of results and prevents the map from zooming out too far when there are many rows in the table
-        if (index <= 15) {
-          bounds.extend([rowLongitude, rowLatitude]);
-        }
-
-        const rowData: Record<string, string> = {};
-        tableHeadings.forEach((heading, headingIndex) => {
-          const cell = row.querySelector(`td:nth-child(${headingIndex + 1})`);
-
-          if (
-            !cell?.hasAttribute("data-popup-title") &&
-            !cell?.querySelector("a:first-child:last-child") &&
-            !cell.classList.contains("selectrow") &&
-            !cell.classList.contains("d-none") &&
-            !cell.classList.contains("td--expand")
-          ) {
-            rowData[heading] = cell.querySelector(".td__content")?.textContent?.trim() || cell?.textContent?.trim() || "";
-          }
-        });
-
-        // Populate the features array with the table data to be used later for the map markers and popups
-
-        const feature = {
-          type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [rowLongitude, rowLatitude]
-          },
-          properties: {
-            title: row.querySelector('[data-popup-title]')?.textContent?.trim() || "",
-            link: row.querySelector('a:first-child:last-child')?.href || "",
-            linkText: row.querySelector('a:first-child:last-child')?.textContent?.trim() || "",
-            ...rowData
-          }
-        }
-
-        features.push(feature);
-
-        // Set the "data-open-popup" attribute on the first row to open the popup for that property when the map is loaded
-        if(row.hasAttribute("data-open-popup")){
-
-          onloadPopup = feature;
-        }
-      });
-
+      const initialisationStarted = performance.now();
       this.map?.remove();
 
       this.map = new maplibregl.Map({
@@ -141,8 +112,16 @@ class iamMap extends HTMLElement {
         new maplibregl.NavigationControl(),
         "top-left"
       );
+      if ((window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile) {
+        console.info('[iam Insights map profile]', JSON.stringify({
+          stage: 'map-initialisation',
+          elapsedMs: Math.round(performance.now() - initialisationStarted),
+          atEpochMs: Math.round(performance.timeOrigin + performance.now()),
+        }));
+      }
       // TO DO: add dark mode support to the cluster colours and pin icon when the user has dark mode enabled on their device
       this.map.on("load", () => {
+        if (!this.isConnected || generation !== this.mapGeneration || !this.map) return;
         this.map.addSource("properties", {
           type: "geojson",
           data: {
@@ -232,6 +211,7 @@ class iamMap extends HTMLElement {
 
         const pinImage = new Image();
         pinImage.onload = () => {
+          if (!this.isConnected || generation !== this.mapGeneration || !this.map) return;
 
           this.map.addImage("property-pin", pinImage);
 
@@ -253,6 +233,7 @@ class iamMap extends HTMLElement {
 
         // Event listener for clicking on clusters to zoom in and expand them
         this.map.on("click", "property-clusters", async (event) => {
+          if (!this.isConnected || generation !== this.mapGeneration || !this.map) return;
           const cluster = this.map.queryRenderedFeatures(event.point, {
             layers: ["property-clusters"]
           })[0];
@@ -263,6 +244,7 @@ class iamMap extends HTMLElement {
 
           const source = this.map.getSource("properties");
           const zoom = await source.getClusterExpansionZoom(cluster.properties.cluster_id);
+          if (!this.isConnected || generation !== this.mapGeneration || !this.map) return;
 
           this.map.easeTo({
             center: cluster.geometry.coordinates,
@@ -272,6 +254,7 @@ class iamMap extends HTMLElement {
 
         // Event listener for clicking on individual property points to show a popup with details
         const openPopup = (event) => {
+          if (!this.isConnected || generation !== this.mapGeneration || !this.map) return;
           const property = event.features?.[0];
 
           if (!property) {
@@ -342,10 +325,11 @@ class iamMap extends HTMLElement {
           this.map.easeTo({
             center: property.geometry.coordinates,
             zoom: Math.max(this.map.getZoom(), 12),
-            padding: { left: 0, top: 270, right: 0, bottom: 0 }
+            padding: { left: 0, top: 280, right: 0, bottom: 0 }
           });
 
           setTimeout(() => {
+            if (!this.isConnected || generation !== this.mapGeneration || !this.map) return;
             new maplibregl.Popup({
               offset: 14,
               closeButton: true,
@@ -377,7 +361,8 @@ class iamMap extends HTMLElement {
           this.map.fitBounds(bounds, {
             padding: 60,
             minZoom,
-            maxZoom
+            maxZoom,
+            animate: false
           });
         }
 
@@ -395,10 +380,6 @@ class iamMap extends HTMLElement {
         this.map.on("click", (event) => {
           const center = this.map.getCenter();
           const zoom = this.map.getZoom();
-          console.log("Map clicked");
-          console.log("Center:", center.lat, center.lng);
-          console.log("Current zoom:", zoom);
-          console.log("Clicked coordinates:", event.lngLat.lat, event.lngLat.lng);
         });
       }
 
@@ -421,6 +402,16 @@ class iamMap extends HTMLElement {
     this.resizeObserver.observe(this);
     // #endregion
 
+  }
+
+  disconnectedCallback(): void {
+    ++this.mapGeneration;
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = null;
+    cancelAnimationFrame(this.resizeFrame);
+    this.resizeFrame = null;
+    this.map?.remove();
+    this.map = null;
   }
 }
 

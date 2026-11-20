@@ -1,0 +1,426 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-180 -180 360 360" width="360" height="360"
+  role="img" aria-label="Loading One Insights">
+  <title>One Insights loading animation</title>
+  <style>
+    .oi-loader__intro {
+      animation: oi-loader-intro 1.93333s steps(1, end) forwards;
+    }
+    .oi-loader__loop {
+      animation: oi-loader-reveal 1.93333s steps(1, end) forwards,
+                 oi-loader-pulse 2.45s 2.6s cubic-bezier(.42, 0, .58, 1) infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .oi-loader__gradient {
+      animation: oi-loader-fade-in 1.067s 1.93333s both;
+    }
+    .oi-loader__rotation {
+      animation: oi-loader-spin 4.736842s 1.93333s linear infinite;
+      transform: rotate(53.5deg);
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    @keyframes oi-loader-intro { from { opacity: 1 } to { opacity: 0 } }
+    @keyframes oi-loader-reveal { from { opacity: 0 } to { opacity: 1 } }
+    @keyframes oi-loader-fade-in { from { opacity: 0 } to { opacity: 1 } }
+    @keyframes oi-loader-spin { to { transform: rotate(233.5deg) } }
+    @keyframes oi-loader-pulse {
+      0%, 100% { transform: scale(1) }
+      50% { transform: scale(1.19) }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .oi-loader__intro { display: none }
+      .oi-loader__loop, .oi-loader__gradient, .oi-loader__rotation { animation: none }
+    }
+  </style>
+
+  <defs>
+    <filter id="oi-ring-edge" x="-180" y="-180" width="360" height="360"
+      filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation=".55"/>
+    </filter>
+    <mask id="oi-ring" maskUnits="userSpaceOnUse" x="-180" y="-180" width="360" height="360">
+      <path fill="white" fill-rule="evenodd" filter="url(#oi-ring-edge)"
+        d="M138 0a138 138 0 1 0-276 0 138 138 0 1 0 276 0
+           M76 0a76 76 0 1 0-152 0 76 76 0 1 0 152 0"/>
+    </mask>
+    <filter id="oi-soften" x="-180" y="-180" width="360" height="360"
+      filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="4.5"/>
+    </filter>
+    <linearGradient id="oi-shade-0" gradientUnits="userSpaceOnUse"
+      x1="77.840" y1="0.000" x2="136.220" y2="0.000">
+      <stop offset="0" stop-color="#2ab3b6"/>
+      <stop offset="0.238" stop-color="#35c4c7"/>
+      <stop offset="0.5" stop-color="#3fd8da"/>
+      <stop offset="0.762" stop-color="#48e8eb"/>
+      <stop offset="1" stop-color="#4ff4f5"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-1" gradientUnits="userSpaceOnUse"
+      x1="77.544" y1="6.784" x2="135.702" y2="11.872">
+      <stop offset="0" stop-color="#2db0b5"/>
+      <stop offset="0.238" stop-color="#36c2c6"/>
+      <stop offset="0.5" stop-color="#3ed5d8"/>
+      <stop offset="0.762" stop-color="#46e4e6"/>
+      <stop offset="1" stop-color="#4ceef1"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-2" gradientUnits="userSpaceOnUse"
+      x1="76.657" y1="13.517" x2="134.151" y2="23.654">
+      <stop offset="0" stop-color="#2badb2"/>
+      <stop offset="0.238" stop-color="#34bdc2"/>
+      <stop offset="0.5" stop-color="#3cced2"/>
+      <stop offset="0.762" stop-color="#44dcde"/>
+      <stop offset="1" stop-color="#48e6e6"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-3" gradientUnits="userSpaceOnUse"
+      x1="75.188" y1="20.146" x2="131.578" y2="35.256">
+      <stop offset="0" stop-color="#2aa8ad"/>
+      <stop offset="0.238" stop-color="#30b7ba"/>
+      <stop offset="0.5" stop-color="#37c6c8"/>
+      <stop offset="0.762" stop-color="#3ed2d5"/>
+      <stop offset="1" stop-color="#44dadd"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-4" gradientUnits="userSpaceOnUse"
+      x1="73.146" y1="26.623" x2="128.005" y2="46.590">
+      <stop offset="0" stop-color="#25a1a6"/>
+      <stop offset="0.238" stop-color="#2eb0b4"/>
+      <stop offset="0.5" stop-color="#34bcc0"/>
+      <stop offset="0.762" stop-color="#3ac6ca"/>
+      <stop offset="1" stop-color="#40ced0"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-5" gradientUnits="userSpaceOnUse"
+      x1="70.547" y1="32.897" x2="123.457" y2="57.569">
+      <stop offset="0" stop-color="#239a9e"/>
+      <stop offset="0.238" stop-color="#2aa6ab"/>
+      <stop offset="0.5" stop-color="#2fb0b5"/>
+      <stop offset="0.762" stop-color="#34babe"/>
+      <stop offset="1" stop-color="#38c0c4"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-6" gradientUnits="userSpaceOnUse"
+      x1="67.411" y1="38.920" x2="117.970" y2="68.110">
+      <stop offset="0" stop-color="#209298"/>
+      <stop offset="0.238" stop-color="#269ca0"/>
+      <stop offset="0.5" stop-color="#2aa4a8"/>
+      <stop offset="0.762" stop-color="#2eaaaf"/>
+      <stop offset="1" stop-color="#31aeb2"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-7" gradientUnits="userSpaceOnUse"
+      x1="63.763" y1="44.647" x2="111.585" y2="78.133">
+      <stop offset="0" stop-color="#1c8a92"/>
+      <stop offset="0.238" stop-color="#219096"/>
+      <stop offset="0.5" stop-color="#24979e"/>
+      <stop offset="0.762" stop-color="#279ba2"/>
+      <stop offset="1" stop-color="#289fa4"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-8" gradientUnits="userSpaceOnUse"
+      x1="59.629" y1="50.035" x2="104.351" y2="87.561">
+      <stop offset="0" stop-color="#198288"/>
+      <stop offset="0.238" stop-color="#1c858c"/>
+      <stop offset="0.5" stop-color="#1f898f"/>
+      <stop offset="0.762" stop-color="#208c92"/>
+      <stop offset="1" stop-color="#238e94"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-9" gradientUnits="userSpaceOnUse"
+      x1="55.041" y1="55.041" x2="96.322" y2="96.322">
+      <stop offset="0" stop-color="#167a82"/>
+      <stop offset="0.238" stop-color="#187c82"/>
+      <stop offset="0.5" stop-color="#1a7c82"/>
+      <stop offset="0.762" stop-color="#1b7c82"/>
+      <stop offset="1" stop-color="#1c7d84"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-10" gradientUnits="userSpaceOnUse"
+      x1="50.035" y1="59.629" x2="87.561" y2="104.351">
+      <stop offset="0" stop-color="#137178"/>
+      <stop offset="0.238" stop-color="#136e76"/>
+      <stop offset="0.5" stop-color="#156e75"/>
+      <stop offset="0.762" stop-color="#146c74"/>
+      <stop offset="1" stop-color="#166d74"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-11" gradientUnits="userSpaceOnUse"
+      x1="44.647" y1="63.763" x2="78.133" y2="111.585">
+      <stop offset="0" stop-color="#106970"/>
+      <stop offset="0.238" stop-color="#10646c"/>
+      <stop offset="0.5" stop-color="#106069"/>
+      <stop offset="0.762" stop-color="#0f5e66"/>
+      <stop offset="1" stop-color="#0f5c65"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-12" gradientUnits="userSpaceOnUse"
+      x1="38.920" y1="67.411" x2="68.110" y2="117.970">
+      <stop offset="0" stop-color="#0c6068"/>
+      <stop offset="0.238" stop-color="#0c5a63"/>
+      <stop offset="0.5" stop-color="#0a535c"/>
+      <stop offset="0.762" stop-color="#0a5058"/>
+      <stop offset="1" stop-color="#094c56"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-13" gradientUnits="userSpaceOnUse"
+      x1="32.897" y1="70.547" x2="57.569" y2="123.457">
+      <stop offset="0" stop-color="#0a5a62"/>
+      <stop offset="0.238" stop-color="#08515a"/>
+      <stop offset="0.5" stop-color="#064852"/>
+      <stop offset="0.762" stop-color="#05414c"/>
+      <stop offset="1" stop-color="#043e4a"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-14" gradientUnits="userSpaceOnUse"
+      x1="26.623" y1="73.146" x2="46.590" y2="128.005">
+      <stop offset="0" stop-color="#06525a"/>
+      <stop offset="0.238" stop-color="#044852"/>
+      <stop offset="0.5" stop-color="#023e48"/>
+      <stop offset="0.762" stop-color="#023640"/>
+      <stop offset="1" stop-color="#01303c"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-15" gradientUnits="userSpaceOnUse"
+      x1="20.146" y1="75.188" x2="35.256" y2="131.578">
+      <stop offset="0" stop-color="#054b54"/>
+      <stop offset="0.238" stop-color="#03404c"/>
+      <stop offset="0.5" stop-color="#003440"/>
+      <stop offset="0.762" stop-color="#002c38"/>
+      <stop offset="1" stop-color="#002632"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-16" gradientUnits="userSpaceOnUse"
+      x1="13.517" y1="76.657" x2="23.654" y2="134.151">
+      <stop offset="0" stop-color="#044852"/>
+      <stop offset="0.238" stop-color="#013a46"/>
+      <stop offset="0.5" stop-color="#002d3a"/>
+      <stop offset="0.762" stop-color="#002430"/>
+      <stop offset="1" stop-color="#001d29"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-17" gradientUnits="userSpaceOnUse"
+      x1="6.784" y1="77.544" x2="11.872" y2="135.702">
+      <stop offset="0" stop-color="#01444d"/>
+      <stop offset="0.238" stop-color="#013641"/>
+      <stop offset="0.5" stop-color="#002835"/>
+      <stop offset="0.762" stop-color="#001f29"/>
+      <stop offset="1" stop-color="#001824"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-18" gradientUnits="userSpaceOnUse"
+      x1="0.000" y1="77.840" x2="0.000" y2="136.220">
+      <stop offset="0" stop-color="#02444d"/>
+      <stop offset="0.238" stop-color="#003640"/>
+      <stop offset="0.5" stop-color="#002731"/>
+      <stop offset="0.762" stop-color="#001c27"/>
+      <stop offset="1" stop-color="#001421"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-19" gradientUnits="userSpaceOnUse"
+      x1="-6.784" y1="77.544" x2="-11.872" y2="135.702">
+      <stop offset="0" stop-color="#02444e"/>
+      <stop offset="0.238" stop-color="#003640"/>
+      <stop offset="0.5" stop-color="#002732"/>
+      <stop offset="0.762" stop-color="#001c27"/>
+      <stop offset="1" stop-color="#001421"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-20" gradientUnits="userSpaceOnUse"
+      x1="-13.517" y1="76.657" x2="-23.654" y2="134.151">
+      <stop offset="0" stop-color="#034650"/>
+      <stop offset="0.238" stop-color="#023742"/>
+      <stop offset="0.5" stop-color="#002934"/>
+      <stop offset="0.762" stop-color="#001e28"/>
+      <stop offset="1" stop-color="#001823"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-21" gradientUnits="userSpaceOnUse"
+      x1="-20.146" y1="75.188" x2="-35.256" y2="131.578">
+      <stop offset="0" stop-color="#034952"/>
+      <stop offset="0.238" stop-color="#023c48"/>
+      <stop offset="0.5" stop-color="#002e3a"/>
+      <stop offset="0.762" stop-color="#00222f"/>
+      <stop offset="1" stop-color="#001c27"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-22" gradientUnits="userSpaceOnUse"
+      x1="-26.623" y1="73.146" x2="-46.590" y2="128.005">
+      <stop offset="0" stop-color="#064e56"/>
+      <stop offset="0.238" stop-color="#02424c"/>
+      <stop offset="0.5" stop-color="#00343e"/>
+      <stop offset="0.762" stop-color="#002b36"/>
+      <stop offset="1" stop-color="#002430"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-23" gradientUnits="userSpaceOnUse"
+      x1="-32.897" y1="70.547" x2="-57.569" y2="123.457">
+      <stop offset="0" stop-color="#06555e"/>
+      <stop offset="0.238" stop-color="#054a54"/>
+      <stop offset="0.5" stop-color="#023f4a"/>
+      <stop offset="0.762" stop-color="#003640"/>
+      <stop offset="1" stop-color="#02323e"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-24" gradientUnits="userSpaceOnUse"
+      x1="-38.920" y1="67.411" x2="-68.110" y2="117.970">
+      <stop offset="0" stop-color="#0a5862"/>
+      <stop offset="0.238" stop-color="#09545d"/>
+      <stop offset="0.5" stop-color="#074d56"/>
+      <stop offset="0.762" stop-color="#054650"/>
+      <stop offset="1" stop-color="#04424c"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-25" gradientUnits="userSpaceOnUse"
+      x1="-44.647" y1="63.763" x2="-78.133" y2="111.585">
+      <stop offset="0" stop-color="#0d666d"/>
+      <stop offset="0.238" stop-color="#0e606a"/>
+      <stop offset="0.5" stop-color="#0b5a62"/>
+      <stop offset="0.762" stop-color="#0c5760"/>
+      <stop offset="1" stop-color="#0c555e"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-26" gradientUnits="userSpaceOnUse"
+      x1="-50.035" y1="59.629" x2="-87.561" y2="104.351">
+      <stop offset="0" stop-color="#0f7078"/>
+      <stop offset="0.238" stop-color="#126d74"/>
+      <stop offset="0.5" stop-color="#126a72"/>
+      <stop offset="0.762" stop-color="#126a70"/>
+      <stop offset="1" stop-color="#126871"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-27" gradientUnits="userSpaceOnUse"
+      x1="-55.041" y1="55.041" x2="-96.322" y2="96.322">
+      <stop offset="0" stop-color="#157a81"/>
+      <stop offset="0.238" stop-color="#177c82"/>
+      <stop offset="0.5" stop-color="#187c84"/>
+      <stop offset="0.762" stop-color="#197c82"/>
+      <stop offset="1" stop-color="#197c84"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-28" gradientUnits="userSpaceOnUse"
+      x1="-59.629" y1="50.035" x2="-104.351" y2="87.561">
+      <stop offset="0" stop-color="#18848a"/>
+      <stop offset="0.238" stop-color="#1e888e"/>
+      <stop offset="0.5" stop-color="#1e8c92"/>
+      <stop offset="0.762" stop-color="#208f94"/>
+      <stop offset="1" stop-color="#239399"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-29" gradientUnits="userSpaceOnUse"
+      x1="-63.763" y1="44.647" x2="-111.585" y2="78.133">
+      <stop offset="0" stop-color="#1a8c94"/>
+      <stop offset="0.238" stop-color="#209398"/>
+      <stop offset="0.5" stop-color="#259ca2"/>
+      <stop offset="0.762" stop-color="#28a2a8"/>
+      <stop offset="1" stop-color="#2ca8ac"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-30" gradientUnits="userSpaceOnUse"
+      x1="-67.411" y1="38.920" x2="-117.970" y2="68.110">
+      <stop offset="0" stop-color="#20979e"/>
+      <stop offset="0.238" stop-color="#26a1a6"/>
+      <stop offset="0.5" stop-color="#2babb0"/>
+      <stop offset="0.762" stop-color="#32b5ba"/>
+      <stop offset="1" stop-color="#34babe"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-31" gradientUnits="userSpaceOnUse"
+      x1="-70.547" y1="32.897" x2="-123.457" y2="57.569">
+      <stop offset="0" stop-color="#23a0a7"/>
+      <stop offset="0.238" stop-color="#2bacb0"/>
+      <stop offset="0.5" stop-color="#30babc"/>
+      <stop offset="0.762" stop-color="#36c6c8"/>
+      <stop offset="1" stop-color="#3cced0"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-32" gradientUnits="userSpaceOnUse"
+      x1="-73.146" y1="26.623" x2="-128.005" y2="46.590">
+      <stop offset="0" stop-color="#26a6aa"/>
+      <stop offset="0.238" stop-color="#30b6ba"/>
+      <stop offset="0.5" stop-color="#37c6c9"/>
+      <stop offset="0.762" stop-color="#3ed4d8"/>
+      <stop offset="1" stop-color="#42dee1"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-33" gradientUnits="userSpaceOnUse"
+      x1="-75.188" y1="20.146" x2="-131.578" y2="35.256">
+      <stop offset="0" stop-color="#2aaaac"/>
+      <stop offset="0.238" stop-color="#32bcc0"/>
+      <stop offset="0.5" stop-color="#3aced1"/>
+      <stop offset="0.762" stop-color="#42dfe0"/>
+      <stop offset="1" stop-color="#49ebec"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-34" gradientUnits="userSpaceOnUse"
+      x1="-76.657" y1="13.517" x2="-134.151" y2="23.654">
+      <stop offset="0" stop-color="#2cb0b4"/>
+      <stop offset="0.238" stop-color="#34c2c6"/>
+      <stop offset="0.5" stop-color="#3ed5d7"/>
+      <stop offset="0.762" stop-color="#46e6e8"/>
+      <stop offset="1" stop-color="#4cf2f3"/>
+    </linearGradient>
+    <linearGradient id="oi-shade-35" gradientUnits="userSpaceOnUse"
+      x1="-77.544" y1="6.784" x2="-135.702" y2="11.872">
+      <stop offset="0" stop-color="#2bb0b6"/>
+      <stop offset="0.238" stop-color="#36c3c7"/>
+      <stop offset="0.5" stop-color="#40d8da"/>
+      <stop offset="0.762" stop-color="#48eaec"/>
+      <stop offset="1" stop-color="#4ef5f6"/>
+    </linearGradient>
+    <g id="oi-half-gradient">
+      <path fill="url(#oi-shade-0)" d="M0 0 169.767 -8.897 169.767 8.897Z"/>
+      <path fill="url(#oi-shade-1)" d="M0 0 169.896 5.933 168.346 23.659Z"/>
+      <path fill="url(#oi-shade-2)" d="M0 0 168.733 20.718 165.643 38.242Z"/>
+      <path fill="url(#oi-shade-3)" d="M0 0 166.285 35.345 161.680 52.533Z"/>
+      <path fill="url(#oi-shade-4)" d="M0 0 162.572 49.703 156.486 66.424Z"/>
+      <path fill="url(#oi-shade-5)" d="M0 0 157.621 63.683 150.101 79.810Z"/>
+      <path fill="url(#oi-shade-6)" d="M0 0 151.471 77.178 142.574 92.589Z"/>
+      <path fill="url(#oi-shade-7)" d="M0 0 144.168 90.086 133.962 104.662Z"/>
+      <path fill="url(#oi-shade-8)" d="M0 0 135.768 102.309 124.330 115.940Z"/>
+      <path fill="url(#oi-shade-9)" d="M0 0 126.335 113.752 113.752 126.335Z"/>
+      <path fill="url(#oi-shade-10)" d="M0 0 115.940 124.330 102.309 135.768Z"/>
+      <path fill="url(#oi-shade-11)" d="M0 0 104.662 133.962 90.086 144.168Z"/>
+      <path fill="url(#oi-shade-12)" d="M0 0 92.589 142.574 77.178 151.471Z"/>
+      <path fill="url(#oi-shade-13)" d="M0 0 79.810 150.101 63.683 157.621Z"/>
+      <path fill="url(#oi-shade-14)" d="M0 0 66.424 156.486 49.703 162.572Z"/>
+      <path fill="url(#oi-shade-15)" d="M0 0 52.533 161.680 35.345 166.285Z"/>
+      <path fill="url(#oi-shade-16)" d="M0 0 38.242 165.643 20.718 168.733Z"/>
+      <path fill="url(#oi-shade-17)" d="M0 0 23.659 168.346 5.933 169.896Z"/>
+      <path fill="url(#oi-shade-18)" d="M0 0 8.897 169.767 -8.897 169.767Z"/>
+      <path fill="url(#oi-shade-19)" d="M0 0 -5.933 169.896 -23.659 168.346Z"/>
+      <path fill="url(#oi-shade-20)" d="M0 0 -20.718 168.733 -38.242 165.643Z"/>
+      <path fill="url(#oi-shade-21)" d="M0 0 -35.345 166.285 -52.533 161.680Z"/>
+      <path fill="url(#oi-shade-22)" d="M0 0 -49.703 162.572 -66.424 156.486Z"/>
+      <path fill="url(#oi-shade-23)" d="M0 0 -63.683 157.621 -79.810 150.101Z"/>
+      <path fill="url(#oi-shade-24)" d="M0 0 -77.178 151.471 -92.589 142.574Z"/>
+      <path fill="url(#oi-shade-25)" d="M0 0 -90.086 144.168 -104.662 133.962Z"/>
+      <path fill="url(#oi-shade-26)" d="M0 0 -102.309 135.768 -115.940 124.330Z"/>
+      <path fill="url(#oi-shade-27)" d="M0 0 -113.752 126.335 -126.335 113.752Z"/>
+      <path fill="url(#oi-shade-28)" d="M0 0 -124.330 115.940 -135.768 102.309Z"/>
+      <path fill="url(#oi-shade-29)" d="M0 0 -133.962 104.662 -144.168 90.086Z"/>
+      <path fill="url(#oi-shade-30)" d="M0 0 -142.574 92.589 -151.471 77.178Z"/>
+      <path fill="url(#oi-shade-31)" d="M0 0 -150.101 79.810 -157.621 63.683Z"/>
+      <path fill="url(#oi-shade-32)" d="M0 0 -156.486 66.424 -162.572 49.703Z"/>
+      <path fill="url(#oi-shade-33)" d="M0 0 -161.680 52.533 -166.285 35.345Z"/>
+      <path fill="url(#oi-shade-34)" d="M0 0 -165.643 38.242 -168.733 20.718Z"/>
+      <path fill="url(#oi-shade-35)" d="M0 0 -168.346 23.659 -169.896 5.933Z"/>
+    </g>
+  </defs>
+
+  <g class="oi-loader__intro" fill="#2ec3c8">
+    <circle id="oi-dot" cx="215" r="6" opacity="0">
+      <animate attributeName="cx" dur=".93333s" fill="freeze"
+        keyTimes="0;0.25;0.28571;0.32143;0.35714;0.39286;0.42857;0.46429;0.5;0.53571;0.57143;0.60714;0.64286;0.67857;0.71429;0.75;0.78571;0.82143;0.85714;0.89286;0.92857;0.96429;1"
+        values="215;199;137;84;41;12;2.9;4.1;10.3;21.7;34.2;46.9;58.3;69;78;85.7;92;96.9;100.9;103.8;105.8;106.9;107"/>
+      <animate attributeName="opacity" dur=".93333s" fill="freeze"
+        keyTimes="0;.22;.2857;.999;1" values="0;0;1;1;0"/>
+    </circle>
+    <use href="#oi-dot" transform="rotate(180)"/>
+    <g fill="none" stroke="#034450" stroke-width="1.3" opacity="0">
+      <animate attributeName="opacity" begin=".39s" dur=".85s" fill="freeze"
+        keyTimes="0;.16;.32;.63;1" values="0;.5;.38;.17;0"/>
+      <g>
+        <animateTransform attributeName="transform" type="scale" begin=".39s" dur=".85s"
+          values=".08;1;1.18" keyTimes="0;.54;1" fill="freeze"/>
+        <animateTransform attributeName="transform" type="rotate" begin=".39s" dur=".85s"
+          values="0;96" additive="sum" fill="freeze"/>
+        <circle cx="-16" cy="-16" r="3.3"/>
+        <circle cx="16" cy="16" r="3.3"/>
+        <circle cx="16" cy="-16" r="2" opacity=".7"/>
+        <circle cx="-16" cy="16" r="2" opacity=".7"/>
+      </g>
+    </g>
+    <circle id="oi-arc" r="107" pathLength="100" fill="none" stroke="#2ec3c8"
+      stroke-width="12" stroke-linecap="round" opacity="0" stroke-dasharray=".005 100">
+      <set attributeName="opacity" to="1" begin=".93333s" fill="freeze"/>
+      <animate attributeName="stroke-width" begin=".93333s" dur="1s" fill="freeze"
+        values="12;12;12;13;13.5;15;16.4;18;19.6;21.5;23.7;25.8;28.1;30.5;33.1;35.7;38;40.9;43.3;45.8;48.1;50.6;52.9;54.7;56.8;58.5;60.2;61.3;62.4;62.9;63.5;64;64"/>
+      <animate attributeName="stroke-dasharray" begin=".93333s" dur="1s" fill="freeze"
+        values="0.0050 100;0.0278 100;0.1111 100;0.5833 100;1.3333 100;2.4167 100;3.6667 100;5.1389 100;6.8611 100;8.6667 100;10.7500 100;12.8889 100;15.1667 100;17.5556 100;19.9444 100;22.4167 100;24.9167 100;27.3889 100;29.8056 100;32.2500 100;34.6944 100;37.0000 100;39.1667 100;41.2500 100;43.1667 100;44.8611 100;46.3056 100;47.5278 100;48.5000 100;49.2778 100;49.7222 100;50.0000 100;50.0000 100"/>
+    </circle>
+    <use href="#oi-arc" transform="rotate(180)"/>
+  </g>
+
+  <g class="oi-loader__loop">
+    <g mask="url(#oi-ring)">
+      <rect x="-180" y="-180" width="360" height="360" fill="#2ec3c8"/>
+      <g class="oi-loader__gradient">
+        <g class="oi-loader__rotation">
+          <g filter="url(#oi-soften)">
+            <use href="#oi-half-gradient"/>
+            <use href="#oi-half-gradient" transform="rotate(180)"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

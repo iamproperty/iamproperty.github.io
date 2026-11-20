@@ -1,3 +1,4 @@
+import { applySavedNavigationVariables } from '../../modules/navigation-variables';
 import {
   createTitle,
   replaceShortcode,
@@ -76,17 +77,8 @@ class iamContent extends HTMLElement {
             buttons.parentNode.replaceChild(fragment, buttons);
           });
 
-          // This allows for content added dynamically via the standardised nav to be added after the content is loaded
-          Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
-            if (
-              document.querySelector(
-                `[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`
-              )
-            )
-              element.innerHTML = document
-                .querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`)
-                ?.getAttribute('data-variable-value');
-          });
+          // Bind late content through the navigation owner so logout restores it too.
+          applySavedNavigationVariables();
 
           // Dispatch the loaded event for external JS and save to the data layer
           const eventDetails = { url: url };

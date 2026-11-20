@@ -44,7 +44,7 @@
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
-      <STDNav slot="secondary" data-sso-subject="one_VzjolCY4CSy2oxaJhmXgmiReJ0sj23gK" data-product="iamsold"></STDNav>
+      <STDNav slot="secondary" :get-access-token="() => null" data-mode="mock" data-product="iamsold"></STDNav>
     </Nav>
   </nav>
 

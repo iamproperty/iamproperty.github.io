@@ -1,7 +1,24 @@
+import { InsightsDataController, insightsMapDisabled, readInsightsSnapshot } from '../modules/insights-data';
+
 class iamAppInsights extends HTMLElement {
+  rowlimit = 500;
+  private dataController: InsightsDataController | null = null;
+  private dataSourceMarkup: string | null = null;
+  private dataDetails: Parameters<InsightsDataController['configure']>[0] | null = null;
+
+  private renderedInputMarkup: string | null = null;
+  private renderedPreparedMarkup: string | null = null;
+  private renderedTable: HTMLTableElement | null = null;
+  private renderedBranches: string[] = [];
+  private renderedRowLimit: number | undefined;
+  private sourceObserver: MutationObserver | null = null;
+  private componentEvents: AbortController | null = null;
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+
+
 
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
@@ -14,16 +31,63 @@ class iamAppInsights extends HTMLElement {
     ${loadCSS}
     </style>
 
-    <strong class="d-block pb-3"><span id="count"></span> <!--<span id="count-text"></span>-->properties</strong>
+    <div class="wrapper">
 
-    <div id="map-wrapper"></div>
+      <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
+        <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
+        <strong>The print campaign action is unavailable for multiple branches</strong><br/>
+        You can still select properties to create CRM tasks or export data. To create a print campaign, select a single branch.
+      </iam-notification>
 
-    <div id="table-wrapper">Loading table...</div>`;
+      <div class="insights-header pb-2">
+        <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
+        <div id="view-controls" class="d-none">
+
+          <label class="tag tag--toggle"><input type="radio" name="view" value="split"><i class="fa-regular fa-table-columns"></i> Split</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="list"><i class="fa-regular fa-list"></i> List</label>
+          <label class="tag tag--toggle"><input type="radio" name="view" value="map"><i class="fa-regular fa-map"></i> Map</label>
+        </div>
+      </div>
+
+
+      <div id="branch-wrapper"></div>
+
+      <div id="map-wrapper"></div>
+
+      <div id="table-wrapper">
+
+        <div class="loading">
+          <span class="spinner"></span>
+          <strong class="lead">Loading...</strong>
+        </div>
+      </div>
+    </div>
+    <div class="empty-state">
+      <img src="/img/illustrations/estate-agents.png" alt="" loading="lazy" />
+      <span class="lead text-heading">No results found</span>
+    </div>`;
 
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   createTableContent = (component: HTMLElement, table: HTMLTableElement): string => {
+
+    // Newer visualisations supply rows as HTML on the body rather than mounted rows.
+    // Assemble the markup without parsing every encoded row into a temporary DOM.
+    // Shallow copies preserve table/body metadata and leave the Looker payload intact.
+    let tableMarkup: string;
+    if (table.querySelector('tbody[data-html]')) {
+      const shell = table.cloneNode(false) as HTMLTableElement;
+      const children = Array.from(table.children).map((child) => {
+        if (child.tagName !== 'TBODY' || !child.hasAttribute('data-html')) return child.outerHTML;
+        const body = child.cloneNode(false) as HTMLTableSectionElement;
+        body.removeAttribute('data-html');
+        return body.outerHTML.replace(/<\/tbody>$/, () => `${child.getAttribute('data-html') || ''}</tbody>`);
+      });
+      tableMarkup = shell.outerHTML.replace(/<\/table>$/, () => `${children.join('')}</table>`);
+    } else {
+      tableMarkup = table.outerHTML;
+    }
 
     return /* HTML */`
     <p class="pb-2 d-none" id="criteria-match-key">
@@ -32,18 +96,12 @@ class iamAppInsights extends HTMLElement {
       <span class="text-heading me-1" id="partial-match">Partial match</span>
     </p>
 
-    <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info">
-      <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
-      <span class="text-heading">Some bulk actions are disabled</span>
-      Some actions are disabled because they require the items to be from the same branch. If you wish to apply these actions, please filter on a specific branch or select items for the same branch in the table below..
-    </iam-notification>
-
     <iam-table-advanced data-selectall>
       <iam-actionbar slot="before" data-selectall data-disable-responsive>
         <div id="criteria-match-wrapper"></div>
       </iam-actionbar>
-      ${table.outerHTML}
-      <iam-pagination slot="pagination"></iam-pagination>
+      ${tableMarkup}
+      <iam-pagination slot="pagination" data-page-jump="true" data-per-page="true" data-item-count="true"></iam-pagination>
     </iam-table-advanced>`;
   };
 
@@ -71,9 +129,15 @@ class iamAppInsights extends HTMLElement {
   };
 
   setEvents = (): void => {
-    const table = this.shadowRoot?.querySelector('iam-table-advanced table');
+    const table = this.shadowRoot?.querySelector('iam-table-advanced table') as HTMLTableElement | null;
+    const tableComponent = this.shadowRoot?.querySelector('iam-table-advanced') as HTMLElement | null;
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
     const notification = this.shadowRoot?.getElementById('branch-notification');
+    const countElement = this.shadowRoot?.querySelector('#count');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+
+    const initialCountOnload = tableComponent?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    const needToReload = parseInt(initialCountOnload) >= this.rowlimit;
 
     if (actionbar && notification) {
       // Example event listener
@@ -152,22 +216,181 @@ class iamAppInsights extends HTMLElement {
 
       }
     });
-
     // #endregion
 
+    tableComponent.addEventListener('table-filtered', (event) => {
+
+      const initialCount = tableComponent?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+      countElement?.innerHTML = initialCount;
+
+      const countTextElement = this.shadowRoot?.querySelector('#count-text');
+
+      if(parseInt(initialCount) == 1) {
+
+        countTextElement?.innerHTML = /* HTML */`property`;
+      }
+      else if(parseInt(initialCount) < this.rowlimit) {
+
+        countTextElement?.innerHTML = /* HTML */`properties`;
+      }
+      else {
+
+        countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
+      }
+
+      mapWrapper.innerHTML = this.createMapContent();
+
+      const tableFilteredEvent = new CustomEvent('table-filtered', {
+        detail: { ...event.detail, reload: needToReload }
+      });
+
+      this.dispatchEvent(tableFilteredEvent);
+
+      // Update the height
+      setTimeout(() => {
+        const dispatchedEvent = new CustomEvent('update-height', {
+          detail: {
+            height: this.offsetHeight
+          },
+        });
+        this.dispatchEvent(dispatchedEvent);
+      }, 300);
+    });
   };
 
-  createMapContent = (): string => {
 
-    if(!this.querySelector('table tr[data-latitude][data-longitude]'))
+  createMapContent = (): string => {
+    if (insightsMapDisabled(this)) return '';
+
+    // Load the table from the shadow root so the table formatting is correct and CTA's created
+    const table = this.shadowRoot?.querySelector('table');
+    table.setAttribute('id','properties-table');
+
+    if(!table.querySelector('tr[data-latitude][data-longitude]'))
       return '';
 
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
 
-  fixOriginalTable = (table: HTMLTableElement): HTMLTableElement => {
+  createBranchContent = (): string => {
 
-    if (!table) return table;
+    const options = Array.from(this.querySelectorAll('table th[data-label="Branch"]')).map(th => th.innerText);
+
+
+    return `<iam-branch-selector data-for="properties-table"></iam-branch-selector>`;
+  };
+
+  createComponent = (component, table, trigger = 'initial'): void => {
+    // Adapt the existing HTML transport by default; retain an explicit HTML rollback.
+    const dataMode = this.getAttribute('data-renderer') !== 'html';
+    if (dataMode) {
+      const started = performance.now();
+      const markup = this.createTableContent(component, table);
+      if (this.dataController && markup === this.dataSourceMarkup) {
+        this.dataController.ready();
+        if ((window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile) {
+          console.info('[iam Insights data renderer]', JSON.stringify({ reused: true, records: this.dataController.snapshot.records.length, mountedRows: this.dataController.host.querySelectorAll('tbody tr[data-row-id]').length }));
+        }
+        return;
+      }
+      let snapshot: ReturnType<typeof readInsightsSnapshot> | null = null;
+      try {
+        snapshot = readInsightsSnapshot(markup);
+      } catch (error) {
+        console.warn('[iam Insights data renderer] Using HTML renderer:', error instanceof Error ? error.message : String(error));
+      }
+      this.dataController?.disconnect();
+      this.dataController = null;
+      this.dataSourceMarkup = null;
+      if (snapshot) {
+        this.dataController = new InsightsDataController(this, snapshot);
+        this.dataSourceMarkup = markup;
+        if (this.dataDetails) this.dataController.configure(this.dataDetails);
+        this.dataController.ready();
+        if ((window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile) console.info('[iam Insights data renderer]', JSON.stringify({
+          records: snapshot.records.length,
+          mountedRows: this.dataController.host.querySelectorAll('tbody tr[data-row-id]').length,
+          setupMs: Math.round(performance.now() - started),
+          mapEnabled: !insightsMapDisabled(this),
+          reused: false,
+        }));
+        return;
+      }
+    }
+
+
+    const profileWindow = window as Window & {
+      __iamInsightsProfile?: boolean;
+      __iamInsightsBuildSequence?: number;
+      __iamInsightsPreviousSource?: { owner: HTMLElement; rows: string; header: string };
+    };
+    const profile = profileWindow.__iamInsightsProfile;
+    const build = profile ? (profileWindow.__iamInsightsBuildSequence = (profileWindow.__iamInsightsBuildSequence || 0) + 1) : 0;
+    const setupStarted = performance.now();
+    let sourceProfile: {
+      trigger: string;
+      sameComponentAsPreviousBuild: boolean;
+      inputRowsUnchanged: boolean;
+      inputHeaderUnchanged: boolean;
+    } | undefined;
+    if (profile) {
+      const previous = profileWindow.__iamInsightsPreviousSource;
+      const rows = Array.from(table.tBodies as HTMLCollectionOf<HTMLTableSectionElement>)
+        .map((body) => body.getAttribute('data-html') ?? body.innerHTML).join('\n');
+      const header = table.querySelector('thead')?.outerHTML || '';
+      sourceProfile = {
+        trigger,
+        sameComponentAsPreviousBuild: previous?.owner === this,
+        inputRowsUnchanged: previous?.rows === rows,
+        inputHeaderUnchanged: previous?.header === header,
+      };
+      profileWindow.__iamInsightsPreviousSource = { owner: this, rows, header };
+    }
+    const logLifecycle = (reused: boolean): void => {
+      if (!profile) return;
+      const ready = performance.now();
+      console.info('[iam Insights lifecycle]', JSON.stringify({
+        build,
+        ...sourceProfile,
+        reused,
+        frameStartEpochMs: Math.round(performance.timeOrigin),
+        setupStartEpochMs: Math.round(performance.timeOrigin + setupStarted),
+        readyEpochMs: Math.round(performance.timeOrigin + ready),
+        setupMs: Math.round(ready - setupStarted),
+      }));
+    };
+    const timings: Array<{ stage: string; elapsedMs: number }> = [];
+    const measure = (stage: string, started: number): void => {
+      if (profile) timings.push({ stage, elapsedMs: Math.round(performance.now() - started) });
+    };
+
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
+    const countElement = this.shadowRoot?.querySelector('#count');
+    const viewControls = this.shadowRoot?.querySelector('#view-controls');
+
+    const inputMarkup = this.createTableContent(component, table);
+    if (trigger === 'source-update' && this.renderedTable &&
+      tableWrapper?.querySelector('table') === this.renderedTable &&
+      this.renderedRowLimit === this.rowlimit &&
+      (inputMarkup === this.renderedInputMarkup || inputMarkup === this.renderedPreparedMarkup)) {
+      // Keep the existing selection, filters, view and listeners when Looker repeats
+      // the same source. Acknowledge readiness so the update protocol still completes.
+      if (profile) console.info('[iam Insights profile] Unchanged source reused');
+      const height = component.offsetHeight;
+      logLifecycle(true);
+      component.dispatchEvent(new CustomEvent('component-loaded', {
+        detail: { height, branches: [...this.renderedBranches], reused: true },
+      }));
+      setTimeout(() => component.dispatchEvent(new CustomEvent('update-height', {
+        detail: { height: component.offsetHeight },
+      })), 300);
+      return;
+    }
+
+    // #region fix original table
+    // table.setAttribute('id','properties-table');
 
     if(table.querySelector('tbody tr td:last-child a:first-child:last-child')){
 
@@ -181,41 +404,163 @@ class iamAppInsights extends HTMLElement {
     }
 
     // Give the table formatting info
-    table.querySelectorAll('th[data-field-type="date_date"]').forEach(th => th.setAttribute('data-format', 'date'));
+    table.querySelectorAll('th[data-field-type="date_date"],th[data-field-type="date"]').forEach(th => th.setAttribute('data-format', 'date'));
+    table.querySelectorAll('th[data-field-type="number"]').forEach(th => th.setAttribute('data-format', 'number'));
     table.querySelectorAll('th[data-value-format-name="gbp_0"]').forEach(th => th.setAttribute('data-format', 'price'));
+    // #endregion fix original table
 
-    return table;
-  };
-
-  createComponent = (component, table): void => {
-
-    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
-    const countElement = this.shadowRoot?.querySelector('#count');
-
-    countElement?.innerHTML = table?.querySelectorAll('tbody tr').length.toString() || '0';
-    table.setAttribute('id','properties-table');
-    table = this.fixOriginalTable(table);
-
-    tableWrapper.innerHTML = this.createTableContent(component, table);
+    const markupStarted = performance.now();
+    const tableMarkup = this.createTableContent(component, table);
+    measure('table-markup', markupStarted);
+    const tableStarted = performance.now();
+    tableWrapper.innerHTML = tableMarkup;
+    measure('table-mount-and-setup', tableStarted);
+    const mapStarted = performance.now();
     mapWrapper.innerHTML = this.createMapContent();
+    measure('map-mount-and-setup', mapStarted);
 
+    // #region set the view controls
+
+    if (insightsMapDisabled(this)) {
+      viewControls?.classList.add('d-none');
+      this.setAttribute('data-view', 'list');
+    } else if(tableWrapper.querySelector('table tr[data-latitude][data-longitude]')) {
+      viewControls?.classList.remove('d-none');
+      viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
+      this.setAttribute('data-view', 'split');
+    } else {
+      viewControls?.classList.add('d-none');
+      this.setAttribute('data-view', 'list');
+    }
+
+    viewControls?.addEventListener('change', (event) => {
+      const target = event.target as HTMLInputElement;
+      if(target?.name === 'view') {
+
+        this.setAttribute('data-view', target.value);
+
+        setTimeout(() => {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+        }, 300);
+      }
+    });
+
+    // #endregion set the view controls
+
+
+    // #region add titles to the table cells
+
+
+
+    tableWrapper.querySelectorAll('thead tr th').forEach(th => {
+      const label = th.getAttribute('data-label');
+      switch(label) {
+        case 'Property':
+          th.setAttribute('title', 'Property address');
+          break;
+        case 'Listing Agent':
+          th.setAttribute('title', 'Agent the property is currently listed with');
+          break;
+        case 'Current Price':
+          th.setAttribute('title', 'Current price of the property');
+          break;
+        case 'Listed Date':
+          th.setAttribute('title', 'Date the property was listed');
+          break;
+        case 'Original Price':
+          th.setAttribute('title', 'Original price of the property');
+          break;
+        case 'Price Reduction':
+          th.setAttribute('title', 'Date of the latest price reduction');
+          break;
+        case 'Days on Market':
+          th.setAttribute('title', 'Number of days the property has been on the market');
+          break;
+        case 'Fall Through':
+          th.setAttribute('title', 'Date of the latest fall through');
+          break;
+      }
+    });
+
+    tableWrapper.querySelectorAll('tbody tr td:not([data-label="Property"])').forEach(td => {
+      const label = td.getAttribute('data-label');
+      if(label) {
+        td.setAttribute('title', label);
+      }
+    });
+
+    // #endregion
+
+    if(table.querySelector('th[data-label="Branch"]')) {
+      //branchWrapper?.innerHTML = this.createBranchContent();
+    }
 
     /* Set the property column to fixed */
-    tableWrapper?.querySelector('table th[data-label="Property"]').classList.add('th--fixed');
-    tableWrapper?.querySelectorAll('table td[data-label="Property"]').forEach(element => {
+    tableWrapper?.querySelector('table th[data-label="Property"]')?.classList.add('th--fixed');
+    tableWrapper?.querySelectorAll('table td[data-label="Property"]')?.forEach(element => {
       element.classList.add('td--fixed');
-    })
+    });
 
     this.setEvents();
 
+    // Absence of rows is only an empty result once the table is constructed.
+    // This also keeps the loading message visible while AJAX supplies the table.
+    //this.shadowRoot?.querySelector('.wrapper')?.setAttribute('aria-busy', 'false');
+
+    // List all of the branches present in the table, make sure they are unique
+    const listBranches = [...new Set(Array.from(tableWrapper.querySelectorAll('tr[data-branch]')).map(el => el.getAttribute('data-branch') || ''))];
+
+    this.renderedInputMarkup = inputMarkup;
+    this.renderedPreparedMarkup = tableMarkup;
+    this.renderedTable = tableWrapper.querySelector('table');
+    this.renderedBranches = listBranches;
+    this.renderedRowLimit = this.rowlimit;
+
     const dispatchedEvent = new CustomEvent('component-loaded', {
       detail: {
-        height: component.offsetHeight
+        height: component.offsetHeight,
+        branches: listBranches
       },
     });
 
+    measure('component-setup-total', setupStarted);
+    if (profile) {
+      console.info('[iam Insights profile] Component setup complete');
+      console.table(timings);
+    }
+    logLifecycle(false);
     component.dispatchEvent(dispatchedEvent);
+
+    const initialCount = tableWrapper?.querySelector('table')?.querySelectorAll('tbody tr:not(.filtered)').length.toString() || '0';
+    countElement?.innerHTML = `${parseInt(initialCount) > 0 ? 'Showing' : ''} ${initialCount}`;
+
+    const countTextElement = this.shadowRoot?.querySelector('#count-text');
+
+    if(parseInt(initialCount) == 1) {
+
+      countTextElement?.innerHTML = /* HTML */`property`;
+    }
+    else if(parseInt(initialCount) < this.rowlimit) {
+
+      countTextElement?.innerHTML = /* HTML */`properties`;
+    }
+    else {
+
+      countTextElement?.innerHTML = /* HTML */`of properties available <iam-tooltip title="Some properties may not be in your initial view and we recommend filtering to reveal them."><i class="fa-solid fa-circle-info" slot="icon"></i></iam-tooltip>`;
+    }
+
+
+
+    const tooltip = this.shadowRoot?.querySelector('iam-tooltip');
+    if(tooltip) {
+      tooltip.setAttribute('title', 'Some properties may not be in your initial view and we recommend filtering to reveal them.');
+    }
 
     setTimeout(() => {
 
@@ -225,23 +570,51 @@ class iamAppInsights extends HTMLElement {
         },
       });
       component.dispatchEvent(dispatchedEvent);
-    }, 1000);
+    }, 300);
   };
-
-  /*setCounterText = (component, text): void => {
-    const counterText = this.shadowRoot?.querySelector('#count-text');
-    if(counterText) {
-      counterText.innerHTML = text || '';
-    }
-  };*/
 
   createActionButtons = (component, actions): void => {
     const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
 
     actions.forEach(action => {
 
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${action.label}</button>`);
+      const icon = action.action == "export-table-data" ? `<i class="fa-regular fa-file-export"></i>` : ``;
+      if(!actionbar?.querySelector('#' + action.action + '-btn')) {
+        actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" data-action="${action.action}" id="${action.action}-btn" slot="selected">${icon}${action.label}</button>`);
+        actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" disabled title="Select items from the table to use this action.">${icon}${action.label}</button>`);
+      }
+
     });
+
+
+  };
+
+  createCustomisationButton = (component, customisation): void => {
+
+    if(!customisation) customisation = [];
+
+    const actionbar = this.shadowRoot?.querySelector('iam-actionbar');
+
+    if(!actionbar?.querySelector('iam-table-customisation')) {
+      const tableCustomisation = document.createElement('iam-table-customisation');
+      tableCustomisation.setAttribute('data-orderable', true);
+      tableCustomisation.setAttribute('data-save', true);
+
+      if(customisation && customisation.length > 0)
+        tableCustomisation.setAttribute('data-customisation', JSON.stringify(customisation));
+
+      actionbar?.insertAdjacentElement('beforeend', tableCustomisation);
+      // Fake button to be displayed in the action bar when the selection is required for the customisation action, to maintain layout consistency
+      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" slot="selected" disabled>Customise</button>`);
+
+      // Listen for the table customisation saved event and re-dispatch it from the parent component
+      tableCustomisation.addEventListener('table-customisation-saved', (event) => {
+        this.dispatchEvent(new CustomEvent('table-customisation-saved', { detail: event.detail }));
+      });
+      tableCustomisation.addEventListener('table-customisation-reset', (event) => {
+        this.dispatchEvent(new CustomEvent('table-customisation-reset'));
+      });
+    }
   };
 
   createMatchCriteriaFilter = (component, matchCriteriaColumn, matchCriteriaIndicatorColumn): void => {
@@ -322,96 +695,188 @@ class iamAppInsights extends HTMLElement {
     component.setAttribute('data-branch-column', branchColumn);
   };
 
-  createCTAs = (component, ctaUrlStructure, ctaText): void => {
+  createCTAs = (component, ctaUrlStructure, ctaText, suppliedTable?: HTMLTableElement): void => {
     if(!ctaUrlStructure) return;
+    const shadowTable = suppliedTable || this.shadowRoot?.querySelector('table');
+    if (!shadowTable || shadowTable.querySelector('[data-cta-heading]')) return;
 
-    const searches = [];
-    let ctaLink = ctaUrlStructure;
-    let areSearchesMet = true;
+    const url = ctaUrlStructure.toLowerCase();
+    const searches = [
+      ['udprn', 'data-udprn'],
+      ['umrrn', 'data-umrrn'],
+      ['appraisalid', 'data-appraisal-id'],
+      ['transactionid', 'data-transaction-id'],
+      ['transaction', 'data-mb-transaction-id'],
+    ].filter(([token]) => url.includes(`:${token}`));
+    const heading = document.createElement('th');
+    heading.className = 'th--fixed text-nowrap';
+    heading.setAttribute('data-cta-heading', '');
+    shadowTable.querySelector('thead tr')?.appendChild(heading);
 
-    if(ctaUrlStructure.toLowerCase().includes(':udprn'))
-      searches.push('udprn');
-    if(ctaUrlStructure.toLowerCase().includes(':umrrn'))
-      searches.push('umrrn');
-
-    const shadowTable = this.shadowRoot?.querySelector('table');
-
-    shadowTable?.querySelector('thead tr')?.insertAdjacentHTML('beforeend', `<th class="th--fixed text-nowrap"></th>`);
-
-    shadowTable?.querySelectorAll(`tbody tr`).forEach(row => {
-
-      searches.forEach(search => {
-        const datasetSearch = search;
-        if(row.dataset[datasetSearch] && row.dataset[datasetSearch] !== '' &&  row.dataset[datasetSearch] !== '0') {
-          ctaLink = ctaLink.toLowerCase().replace(`:${search}`, row.dataset[datasetSearch]);
-        } else {
-          areSearchesMet = false;
-        }
+    // Parse the common label and URL template once; retain rich HTML labels.
+    const template = document.createElement('td');
+    template.className = 'td--fixed';
+    template.innerHTML = `<a href="${url}" class="link text-nowrap" target="_blank" data-cta>${ctaText ?? 'View details'}</a>`;
+    const baseUrl = template.firstElementChild.getAttribute('href') || '';
+    shadowTable.querySelectorAll('tbody tr').forEach((row) => {
+      if (row.querySelector('[data-cta]')) return;
+      let href = baseUrl;
+      searches.forEach(([token, attribute]) => {
+        const value = row.getAttribute(attribute);
+        // Keep the existing replacement order and casing behaviour.
+        if (value !== null && value !== '') href = href.toLowerCase().replace(`:${token}`, value);
       });
-
-      if(areSearchesMet)
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><a href="${ctaLink}" class="link text-nowrap" target="_blank">${ctaText ?? 'View details'}</a></td>`);
-      else
-        row?.insertAdjacentHTML('beforeend', `<td class="td--fixed"><button class="link text-nowrap" disabled title="Required data not available">${ctaText ?? 'View details'}</button></td>`);
+      const cell = template.cloneNode(true) as HTMLTableCellElement;
+      cell.firstElementChild.setAttribute('href', href);
+      row.appendChild(cell);
     });
   };
 
+  hideNullValues(): void {
+    const shadowTable = this.shadowRoot?.querySelector('table');
+    shadowTable?.querySelectorAll('tbody tr td[data-original-value="∅"]').forEach((td) => {
+      if (td.firstChild) td.textContent = '';
+    });
+  }
+
+  disconnectedCallback(): void {
+    this.sourceObserver?.disconnect();
+    this.sourceObserver = null;
+    this.componentEvents?.abort();
+    this.componentEvents = null;
+    this.dataController?.disconnect();
+    this.dataController = null;
+    this.dataSourceMarkup = null;
+  }
+
   connectedCallback(): void {
+    this.componentEvents?.abort();
+    this.componentEvents = new AbortController();
+    const eventOptions = { signal: this.componentEvents.signal };
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const table = this.querySelector('table');
+
     const createComponent = this.createComponent;
 
     // The top window will give details about the insight, including the actions that should be available and the criteria match for the properties in the table. This is sent from the top window to this component via a postMessage event.
     this.addEventListener('top-window-details', (event: CustomEvent) => {
+      this.dataDetails = event.detail;
+      if (this.dataController) {
+        this.dataController.configure(event.detail || {});
+        return;
+      }
+
+
+      const profile = (window as Window & { __iamInsightsProfile?: boolean }).__iamInsightsProfile;
+      const started = performance.now();
+      const steps: Array<{ stage: string; elapsedMs: number }> = [];
+      const configure = (stage: string, action: () => void): void => {
+        const stepStarted = performance.now();
+        action();
+        if (profile) steps.push({ stage, elapsedMs: Math.round(performance.now() - stepStarted) });
+      };
 
       if(event.detail && event.detail.properties && event.detail.properties.class)
         this.classList.add(event.detail.properties.class);
 
       //this.setCounterText(this, event.detail.properties['counter-text']);
-      this.createActionButtons(this, event.detail.actions);
-      this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
-      this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
-      this.createPopupTitles(this, event.detail.properties['title-column']);
-      this.createActionTitles(this, event.detail.properties['title-column']);
-      this.createMultibranchFlag(this, event.detail.properties['branch-column']);
-      this.createCTAs(this, event.detail.properties['cta-url-structure'], event.detail.properties['cta-text']);
-    });
+      configure('null-values', () => this.hideNullValues());
+      configure('action-buttons', () => this.createActionButtons(this, event.detail.actions));
+      configure('customisation-controls', () => this.createCustomisationButton(this, event.detail.customisation));
+      //this.createMatchCriteriaFilter(this, event.detail.properties['match-criteria-column'],event.detail.properties['title-column']);
+      //this.showCriteriaMatchKey(this, event.detail.properties['match-criteria-column']);
+      configure('popup-titles-and-map', () => this.createPopupTitles(this, event.detail.properties['title-column']));
+      configure('action-titles', () => this.createActionTitles(this, event.detail.properties['title-column']));
+      configure('branch-metadata', () => this.createMultibranchFlag(this, event.detail.properties['branch-column']));
+      configure('row-links', () => this.createCTAs(this, event.detail.properties['cta-url-structure'], event.detail.properties['cta-text']));
+      if (profile) console.info('[iam Insights configuration profile]', JSON.stringify({
+        elapsedMs: Math.round(performance.now() - started),
+        steps,
+        atEpochMs: Math.round(performance.timeOrigin + performance.now()),
+      }));
+
+    }, eventOptions);
 
     // When the insight action has been completed, re-enable the button that was clicked
     this.addEventListener('insight-action-completed', (event: CustomEvent) => {
       this.shadowRoot?.querySelector(`[data-action="${event.detail.action}"]`)?.removeAttribute('disabled');
-      this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0');
-    });
+      //this.shadowRoot?.querySelector('iam-actionbar')?.setAttribute('data-selected', '0'); // This also clears the seleted items in the table
+    }, eventOptions);
 
+    this.addEventListener('table-customisation-saved', (event: CustomEvent) => {
+      // Handle table customisation changes here if needed
+
+      this.dispatchEvent(new CustomEvent('insight-action', {
+        detail: {
+          action: 'table-customisation-saved',
+          customisation: event.detail
+        },
+        bubbles: true,
+        composed: true
+      }));
+
+      setTimeout(() => {
+
+          const dispatchedEvent = new CustomEvent('update-height', {
+            detail: {
+              height: this.offsetHeight
+            },
+          });
+          this.dispatchEvent(dispatchedEvent);
+        }, 1000);
+    }, eventOptions);
+
+    this.addEventListener('table-customisation-reset', (event: CustomEvent) => {
+      // Handle table customisation changes here if needed
+
+      this.dispatchEvent(new CustomEvent('insight-action', {
+        detail: {
+          action: 'table-customisation-reset'
+        },
+        bubbles: true,
+        composed: true
+      }));
+
+      setTimeout(() => {
+
+        const dispatchedEvent = new CustomEvent('update-height', {
+          detail: {
+            height: this.offsetHeight
+          },
+        });
+        this.dispatchEvent(dispatchedEvent);
+      }, 1000);
+    }, eventOptions);
+
+    const table = this.querySelector('table');
     if (table){
 
       createComponent(this, table);
     }
 
     // HTML Observer - needed for when the table is loaded via AJAX or other means after the component has been initialized
-    const htmlUpdated = (mutationList: any, observer: any): void => {
+    const htmlUpdated = (mutationList: MutationRecord[], observer: MutationObserver): void => {
       observer.disconnect();
-
-      for (const mutation of mutationList) {
-        if (
-          mutation.type == 'characterData' ||
-          (mutation.type == 'childList' && mutation.addedNodes.length) ||
-          mutation.type === 'attributes'
-        ) {
-
-          if (this.querySelector('table') && tableWrapper.querySelector('iam-table-advanced') === null) {
-
-            const table = this.querySelector('table');
-            createComponent(this, table);
-          }
+      try {
+        // A batch can contain several additions for the same final table.
+        // Build that final state once, including updates to encoded row payloads.
+        const shouldRender = mutationList.some((mutation) =>
+          (mutation.type === 'childList' && mutation.addedNodes.length > 0) ||
+          (mutation.type === 'attributes' && mutation.attributeName === 'data-html' &&
+            (mutation.target as Element).tagName === 'TBODY')
+        );
+        const table = this.querySelector('table');
+        if (table && shouldRender) {
+          createComponent(this, table, 'source-update');
         }
+      } finally {
+        if (this.isConnected) observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
       }
-
-      observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
     };
 
+    this.sourceObserver?.disconnect();
     const observer = new MutationObserver(htmlUpdated);
+    this.sourceObserver = observer;
     observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
 
   }

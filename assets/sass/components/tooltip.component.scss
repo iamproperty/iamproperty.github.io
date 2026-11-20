@@ -28,7 +28,7 @@
   }
 
   ::slotted([slot='icon']) {
-    display: inline !important;
+    display: inline;
     color: var(--icon-colour, var(--colour-info));
     font-size: 1em;
     width: 1em;
