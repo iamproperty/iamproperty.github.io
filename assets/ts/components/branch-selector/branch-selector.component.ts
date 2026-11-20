@@ -206,6 +206,18 @@ class iamBranchSelector extends HTMLElement {
       inputs[nextIndex].focus();
     });
     // #endregion
+
+
+    // #region close the drop down when scrolling
+    window.addEventListener('scroll', () => {
+
+      // check if the drop down is below 100px from the the top of the viewport
+      if (dropdown?.getBoundingClientRect().top < 120 && dropdown?.matches(':popover-open')) {
+
+        dropdown?.hidePopover();
+      }
+    });
+    // #endregion
   }
 }
 
