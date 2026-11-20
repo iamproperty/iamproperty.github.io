@@ -608,3 +608,9 @@ iam-table-customisation [class*="fa-"]:before {
   height: 1.2em!important;
   width: 1.2em;
 }
+
+// #region hide the weird checkbox added via the data-table
+.selectrow-heading > * {
+  display: none!important;
+}
+// #endregion
