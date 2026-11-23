@@ -15,6 +15,7 @@ import {
   resetNavigationAccessState
 } from '../../modules/nav';
 
+
 class iamSTDNav extends HTMLElement {
   private tokenProvider?: NavigationTokenProvider;
   private request?: AbortController;
@@ -291,7 +292,7 @@ class iamSTDNav extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = populateNav(
-      isSecondary ? schema : schema.filter((section) => section.attributes.title !== 'Learning and support' && section.attributes.title !== 'One hub'),
+      isSecondary ? schema : schema.filter((section) => section.attributes.title !== 'Learning and support'),
       isSecondary ? 'secondary' : ''
     );
     this.generatedNavigation = Array.from(template.content.children);

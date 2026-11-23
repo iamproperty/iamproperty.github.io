@@ -1,0 +1,728 @@
+{
+    "jsonapi": {
+        "version": "1.1"
+    },
+    "meta": {
+        "schemaVersion": "2026-05-18",
+        "navigationType": "ecosystem-switcher",
+        "owner": "hub"
+    },
+    "data": [
+        {
+            "type": "navigation-group",
+            "id": "leadgen",
+            "attributes": {
+                "title": "Lead generation",
+                "sections": [
+                    {
+                        "id": "leadgen-mtk-features",
+                        "title": "Marketing Toolkit features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "mtk-all-features",
+                                "title": "Marketing Toolkit all features",
+                                "productKey": "mtk",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/Property-Homepage",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-on-market-prospecting",
+                                "title": "On-market prospecting",
+                                "productKey": "mtk",
+                                "featureKey": "onMarketProspecting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DirectMail/Triggers?s_Id=4&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/on-market-prospecting/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/on-market-prospecting/"
+                                }
+                            },
+                            {
+                                "id": "mtk-off-market-prospecting",
+                                "title": "Off-market prospecting",
+                                "productKey": "mtk",
+                                "featureKey": "offMarketProspecting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DirectMail/Advanced?s_Id=6&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/off-market-prospecting/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/off-market-prospecting/"
+                                }
+                            },
+                            {
+                                "id": "mtk-recent-sales-success",
+                                "title": "Recent sales success",
+                                "productKey": "mtk",
+                                "featureKey": "recentSalesSuccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DirectMail/RecentSuccess?s_Id=2&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/prospecting-triggers-and-automations/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/prospecting-triggers-and-automations/"
+                                }
+                            },
+                            {
+                                "id": "mtk-recent-listings",
+                                "title": "Recent listings",
+                                "productKey": "mtk",
+                                "featureKey": "recentListings",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DirectMail/JustListed?s_Id=23&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-trigger-automation",
+                                "title": "Trigger automation",
+                                "productKey": "mtk",
+                                "featureKey": "triggerAutomation",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/Admin/JobAutomation?s_Id=3004&sg_Id=11&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "ma",
+            "attributes": {
+                "title": "Market Appraisal",
+                "sections": [
+                    {
+                        "id": "ma-crm-features",
+                        "title": "CRM feature",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "crm-book-sales-appraisal",
+                                "title": "Book sales appraisal",
+                                "productKey": "crm",
+                                "featureKey": "bookSalesAppraisal",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Create/Sales/Appraisal",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-book-lettings-appraisal",
+                                "title": "Book lettings appraisal",
+                                "productKey": "crm",
+                                "featureKey": "bookLettingsAppraisal",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Create/Lettings/Appraisal",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ma-mtk-features",
+                        "title": "Marketing toolkit features",
+                        "description": null,
+                        "layout": "double",
+                        "links": [
+                            {
+                                "id": "mtk-market-appraisal-overview",
+                                "title": "Market Appraisal overview",
+                                "productKey": "mtk",
+                                "featureKey": "marketAppraisalsOverview",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/MarketAppraisals/Sales/Overview?sg_Id=12&s_Id=4001&tt_Id=1&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-add-sales-appraisal",
+                                "title": "Add sales appraisal",
+                                "productKey": "mtk",
+                                "featureKey": "addSalesAppraisal",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/MarketAppraisals/Sales/Appraisals/New?s_Id=4003&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                },
+                                "visibility": {
+                                    "hideWhenAny": [
+                                        {
+                                            "productKey": "crm",
+                                            "featureKey": "productAccess"
+                                        },
+                                        {
+                                            "productKey": "mtk",
+                                            "featureKey": "hasExternalCRMIntegration"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "mtk-sales-appraisals",
+                                "title": "Sales appraisals",
+                                "productKey": "mtk",
+                                "featureKey": "addSalesAppraisal",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/MarketAppraisals/Sales/Appraisals?s_Id=4003&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-sales-presentation-reporting",
+                                "title": "Sales presentation reporting",
+                                "productKey": "mtk",
+                                "featureKey": "salesPresentationReporting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/MarketAppraisals/Sales/Overview?s_Id=4001&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-add-lettings-appraisals",
+                                "title": "Add lettings appraisal",
+                                "productKey": "mtk",
+                                "featureKey": "lettingsPresentations",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/MarketAppraisals/Lettings/Appraisals/New?s_Id=4103&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                },
+                                "visibility": {
+                                    "hideWhenAny": [
+                                        {
+                                            "productKey": "crm",
+                                            "featureKey": "productAccess"
+                                        },
+                                        {
+                                            "productKey": "mtk",
+                                            "featureKey": "hasExternalCRMIntegration"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "mtk-lettings-appraisals",
+                                "title": "Lettings appraisals",
+                                "productKey": "mtk",
+                                "featureKey": "lettingsPresentations",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/MarketAppraisals/Lettings/Appraisals?s_Id=4103&sg_Id=0&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-lettings-presentation-reporting",
+                                "title": "Lettings presentation reporting",
+                                "productKey": "mtk",
+                                "featureKey": "lettingsPresentationReporting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/MarketAppraisals/Lettings/Overview?sg_Id=0&s_Id=4101&tt_Id=0&isnew=0&profileId=0",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "insights",
+            "attributes": {
+                "title": "Insights",
+                "sections": [
+                    {
+                        "id": "insights-mtk-features",
+                        "title": "Marketing Toolkit features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "mtk-property-insights",
+                                "title": "Property insights",
+                                "productKey": "mtk",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/Property-Homepage",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-competitor-analysis",
+                                "title": "Competitor analysis",
+                                "productKey": "mtk",
+                                "featureKey": "competitorAnalysis",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DataServices/CompetitorAnalysis/4/1008?tt_Id=-1&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-sales-property-reports",
+                                "title": "Sales property reports",
+                                "productKey": "mtk",
+                                "featureKey": "salesPropertyReports",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DataServices/PropertyReport/0/1000/1?sg_Id=8&s_Id=1000&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-lettings-property-reports",
+                                "title": "Lettings property reports",
+                                "productKey": "mtk",
+                                "featureKey": "lettingsPropertyReports",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DataServices/PropertyReport/0/1004/1?sg_Id=9&s_Id=1000&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-sales-comparables",
+                                "title": "Sales comparables",
+                                "productKey": "mtk",
+                                "featureKey": "salesComparables",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DataServices/PropertyComparison/0/1007?tt_Id=-1&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-lettings-comparables",
+                                "title": "Lettings comparables",
+                                "productKey": "mtk",
+                                "featureKey": "lettingsComparables",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MTK_BASE_URL__/DataServices/PropertyComparison/0/1009?tt_Id=-1&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "onboarding",
+            "attributes": {
+                "title": "Onboarding",
+                "sections": [
+                    {
+                        "id": "onboarding-movebutler-features",
+                        "title": "movebutler features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "movebutler-onboarding-dashboard",
+                                "title": "Onboarding dashboard",
+                                "productKey": "movebutler",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/ic/dashboard",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/"
+                                }
+                            },
+                            {
+                                "id": "movebutler-start-compliance",
+                                "title": "Start compliance",
+                                "productKey": "movebutler",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/ic/add-new-property",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/compliance/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/compliance/"
+                                }
+                            },
+                            {
+                                "id": "movebutler-payments-and-billing",
+                                "title": "Payments and billing",
+                                "productKey": "movebutler",
+                                "featureKey": "hasPaymentsAndBilling",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/cp/payments-billing/intelligent-compliance",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "onboarding-crm-features",
+                        "title": "CRM features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "crm-start-compliance",
+                                "title": "Start compliance",
+                                "productKey": "crm",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Search#tabSearchSalesCompliances",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "crm",
+            "attributes": {
+                "title": "CRM",
+                "sections": [
+                    {
+                        "id": "crm-crm-features",
+                        "title": "CRM features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "crm-my-day",
+                                "title": "My day",
+                                "productKey": "crm",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/MyDay",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-calendar",
+                                "title": "Calendar",
+                                "productKey": "crm",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Calendar",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-sales-dashboard",
+                                "title": "Sales dashboard",
+                                "productKey": "crm",
+                                "featureKey": "salesDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Dashboards/Sales",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-lettings-dashboard",
+                                "title": "Lettings dashboard",
+                                "productKey": "crm",
+                                "featureKey": "lettingsDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Dashboards/Lettings",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-accounts-dashboard",
+                                "title": "Accounts dashboard",
+                                "productKey": "crm",
+                                "featureKey": "accountsDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Dashboards/Accounts",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-enhanced-reporting",
+                                "title": "Enhanced reporting",
+                                "productKey": "dynamicagent",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__HUB_BASE_URL__/launch/dynamic-agent",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-reporting-dashboard",
+                                "title": "Reporting dashboard",
+                                "productKey": "crm",
+                                "featureKey": "reportingDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Reporting/Sales-Reporting/",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-add-record",
+                                "title": "Add record",
+                                "productKey": "crm",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/MyDay?openAddRecord=true",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "auction",
+            "attributes": {
+                "title": "Auction",
+                "sections": [
+                    {
+                        "id": "auction-iamsold-features",
+                        "title": "iamsold features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "ias-my-day",
+                                "title": "Auction dashboard",
+                                "productKey": "auction",
+                                "featureKey": "auctionDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__IAS_BASE_URL__/ias",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/auction/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/auction/"
+                                }
+                            },
+                            {
+                                "id": "ias-calendar",
+                                "title": "Add viewing",
+                                "productKey": "auction",
+                                "featureKey": "auctionAddViewing",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__IAS_BASE_URL__/ias/property/upload-viewing",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/auction/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/auction/"
+                                }
+                            },
+                            {
+                                "id": "ias-sales-dashboard",
+                                "title": "Upload auction property lead",
+                                "productKey": "auction",
+                                "featureKey": "auctionPropertyLead",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__IAS_BASE_URL__/ias/property/create",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/auction/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/auction/"
+                                }
+                            },
+                            {
+                                "id": "ias-lettings-dashboard",
+                                "title": "Your rewards",
+                                "productKey": "auction",
+                                "featureKey": "auctionRewards",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__IAS_BASE_URL__/ias/rewards",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/auction/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/auction/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "conveyancing",
+            "attributes": {
+                "title": "Conveyancing",
+                "sections": [
+                    {
+                        "id": "conveyancing-movebutler-features",
+                        "title": "movebutler features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "movebutler-conveyancing-opportunities",
+                                "title": "Conveyancing opportunities",
+                                "productKey": "movebutler",
+                                "featureKey": "hasConveyancing",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/ic/conveyancing/cases/all?unquoted=1&from=2026-02-11",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/"
+                                }
+                            },
+                            {
+                                "id": "movebutler-instructed-cases",
+                                "title": "Instructed cases",
+                                "productKey": "movebutler",
+                                "featureKey": "hasConveyancing",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/ic/conveyancing/cases/all?status=instructed",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/"
+                                }
+                            },
+                            {
+                                "id": "movebutler-protocol-forms",
+                                "title": "Protocol forms",
+                                "productKey": "movebutler",
+                                "featureKey": "hasConveyancing",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/ic/information-requests?filter%5Btype%5D=protocol-forms",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/"
+                                }
+                            },
+                            {
+                                "id": "movebutler-my-conveyancers",
+                                "title": "My conveyancers",
+                                "productKey": "movebutler",
+                                "featureKey": "hasConveyancing",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/ic/conveyancing/solicitors/panel",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/"
+                                }
+                            },
+                            {
+                                "id": "movebutler-conveyancing-marketplace",
+                                "title": "Conveyancing marketplace",
+                                "productKey": "movebutler",
+                                "featureKey": "hasConveyancing",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__MB_BASE_URL__/ic/conveyancing/solicitors",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/movebutler-onboarding/conveyancing-your-way/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "learning-and-support",
+            "attributes": {
+                "title": "One hub",
+                "sections": [
+                    {
+                        "id": "learning-and-support-links",
+                        "title": null,
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "ls-iamproperty-one",
+                                "title": "One hub",
+                                "productKey": "iampropertyOne",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__HUB_BASE_URL__/dashboard",
+                                    "linkedDisabled": "__HUB_BASE_URL__/dashboard",
+                                    "unlinked": "__HUB_BASE_URL__/dashboard"
+                                }
+                            },
+                            {
+                                "id": "ls-agent-learning",
+                                "title": "Agent learning",
+                                "productKey": "iampropertyOne",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__THINQI_SSO_URL__",
+                                    "linkedDisabled": "__THINQI_SSO_URL__",
+                                    "unlinked": "__THINQI_SSO_URL__"
+                                }
+                            },
+                            {
+                                "id": "ls-helpcentre",
+                                "title": "Helpcentre",
+                                "productKey": "iampropertyOne",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__HELPCENTRE_BASE_URL__/hc/en-gb",
+                                    "linkedDisabled": "__HELPCENTRE_BASE_URL__/hc/en-gb",
+                                    "unlinked": "__HELPCENTRE_BASE_URL__/hc/en-gb"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -107,7 +107,10 @@ export const getNavigationEnvironment = (mode?: string | null): { hub: string; a
 };
 
 export const loadNavData = async (mode?: string | null): Promise<any> => {
-  const ajaxURL = `${getNavigationEnvironment(mode).hub}/data/ecosystem-switcher.json`;
+
+  console.log(mode);
+
+  const ajaxURL = mode == "mock" ? `/ecosystem-switcher.json` : `${getNavigationEnvironment(mode).hub}/data/ecosystem-switcher.json`;
 
   try {
     const response = await fetch(ajaxURL, {
