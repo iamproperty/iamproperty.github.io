@@ -212,7 +212,7 @@ class iamBranchSelector extends HTMLElement {
     window.addEventListener('scroll', () => {
 
       // check if the drop down is below 100px from the the top of the viewport
-      if (dropdown?.getBoundingClientRect().top < 120 && dropdown?.matches(':popover-open')) {
+      if (dropdown?.getBoundingClientRect().top < 160 && dropdown?.matches(':popover-open')) {
 
         dropdown?.hidePopover();
       }
