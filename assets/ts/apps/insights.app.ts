@@ -56,10 +56,6 @@ class iamAppInsights extends HTMLElement {
 
       <div id="table-wrapper">
 
-        <div class="loading">
-          <span class="spinner"></span>
-          <strong class="lead">Loading...</strong>
-        </div>
       </div>
     </div>
     <div class="empty-state">

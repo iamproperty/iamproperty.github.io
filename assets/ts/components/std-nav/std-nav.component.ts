@@ -15,7 +15,6 @@ import {
   resetNavigationAccessState
 } from '../../modules/nav';
 
-
 class iamSTDNav extends HTMLElement {
   private tokenProvider?: NavigationTokenProvider;
   private request?: AbortController;

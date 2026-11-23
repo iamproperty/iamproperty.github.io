@@ -421,10 +421,12 @@
             "id": "crm",
             "attributes": {
                 "title": "CRM",
+                "sub-title": "CRM features",
+                "layout": "grid",
                 "sections": [
                     {
                         "id": "crm-crm-features",
-                        "title": "CRM features",
+                        "title": "General",
                         "description": null,
                         "layout": "default",
                         "links": [
@@ -453,6 +455,25 @@
                                 }
                             },
                             {
+                                "id": "crm-add-record",
+                                "title": "Add record",
+                                "productKey": "crm",
+                                "featureKey": "productAccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/MyDay?openAddRecord=true",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "crm-crm-features",
+                        "title": "Sales",
+                        "description": null,
+                        "links": [
+                            {
                                 "id": "crm-sales-dashboard",
                                 "title": "Sales dashboard",
                                 "productKey": "crm",
@@ -465,25 +486,100 @@
                                 }
                             },
                             {
+                                "id": "crm-sales-properties",
+                                "title": "Sales Properties",
+                                "productKey": "crm",
+                                "featureKey": "salesDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Search#tabSearchPropertiesSales",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-sales-progression",
+                                "title": "Sales Progression",
+                                "productKey": "crm",
+                                "featureKey": "salesDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Sales/SalesProgression",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "crm-crm-lettings",
+                        "title": "Lettings",
+                        "description": null,
+                        "links": [
+                            {
                                 "id": "crm-lettings-dashboard",
                                 "title": "Lettings dashboard",
                                 "productKey": "crm",
                                 "featureKey": "lettingsDashboard",
                                 "isAvailable": true,
                                 "destinations": {
-                                    "linkedEnabled": "__CRM_BASE_URL__/Dashboards/Lettings",
+                                    "linkedEnabled": "__CRM_BASE_URL__/Search#tabSearchPropertiesLettings",
                                     "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/",
                                     "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/"
                                 }
                             },
                             {
-                                "id": "crm-accounts-dashboard",
-                                "title": "Accounts dashboard",
+                                "id": "crm-property-maintenance",
+                                "title": "Property Maintenance",
                                 "productKey": "crm",
-                                "featureKey": "accountsDashboard",
+                                "featureKey": "lettingsDashboard",
                                 "isAvailable": true,
                                 "destinations": {
-                                    "linkedEnabled": "__CRM_BASE_URL__/Dashboards/Accounts",
+                                    "linkedEnabled": "__CRM_BASE_URL__/Dashboards/PropertyManagement",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-lettings-accounts",
+                                "title": "Accounts",
+                                "productKey": "crm",
+                                "featureKey": "lettingsDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Dashboards/PropertyManagement",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/sales-and-lettings-crm/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "crm-crm-reporting",
+                        "title": "Reporting",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "crm-sales-reporting",
+                                "title": "Sales Reporting",
+                                "productKey": "crm",
+                                "featureKey": "reportingDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Reporting/Sales-Reporting/",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
+                                }
+                            },
+                            {
+                                "id": "crm-lettings-reporting",
+                                "title": "Lettings reporting",
+                                "productKey": "crm",
+                                "featureKey": "lettingsDashboard",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "__CRM_BASE_URL__/Reporting/Lettings-Reporting/",
                                     "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
                                     "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
                                 }
@@ -496,30 +592,6 @@
                                 "isAvailable": true,
                                 "destinations": {
                                     "linkedEnabled": "__HUB_BASE_URL__/launch/dynamic-agent",
-                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
-                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
-                                }
-                            },
-                            {
-                                "id": "crm-reporting-dashboard",
-                                "title": "Reporting dashboard",
-                                "productKey": "crm",
-                                "featureKey": "reportingDashboard",
-                                "isAvailable": true,
-                                "destinations": {
-                                    "linkedEnabled": "__CRM_BASE_URL__/Reporting/Sales-Reporting/",
-                                    "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
-                                    "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
-                                }
-                            },
-                            {
-                                "id": "crm-add-record",
-                                "title": "Add record",
-                                "productKey": "crm",
-                                "featureKey": "productAccess",
-                                "isAvailable": true,
-                                "destinations": {
-                                    "linkedEnabled": "__CRM_BASE_URL__/MyDay?openAddRecord=true",
                                     "linkedDisabled": "https://iamproperty.com/ecosystem/iamproperty-crm/",
                                     "unlinked": "https://iamproperty.com/ecosystem/iamproperty-crm/"
                                 }
