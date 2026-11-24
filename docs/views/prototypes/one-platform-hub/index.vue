@@ -94,7 +94,7 @@ const loadDashboards = async (): any => {
 </script>
 <template>
   <nav>
-    <Nav class="nav--btn-compact nav--sticky">
+    <Nav data-account-btn-title="My account"  class="nav--sticky nav--dual">
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
           <title>iam key</title>
@@ -103,15 +103,16 @@ const loadDashboards = async (): any => {
       </a>
 
       <!-- These links will be removed -->
-      <a href="/">Lead generation</a>
-      <a href="/">Market Appraisals</a>
-      <a href="/">Insights</a>
-      <a href="/">Onboarding</a>
-      <a href="/">CRM</a>
-      <a href="/">Action</a>
-      <a href="/">Conveyancing</a>
+      <a href="/" aria-current='page'>One Hub</a>
+      <a href="https://iampropertysuccesshub.thinqi.co.uk/sso/login?scheme=IAmSoldSamlv2&redirectUrl=https%3A%2F%2Fiampropertysuccesshub.thinqi.co.uk%2Fhomepage" target="_blank">Success Hub</a>
+      <a href="https://helpcentre.iamproperty.com/hc/en-gb" target="_blank">Product support</a>
+      <a href="https://iamproperty.com/insights-and-resources/" target="_blank">Marketing resources</a>
 
-      <STDNav :get-access-token="() => null" data-mode="mock" data-product="crm"></STDNav>
+      <a href="/"slot="account">Agency settings</a>
+      <a href="/" slot="account">Control panel</a>
+      <a href="/" slot="account">Contact us</a>
+
+      <STDNav :get-access-token="() => null" data-mode="mock" slot="secondary"></STDNav>
     </Nav>
   </nav>
 

@@ -114,37 +114,6 @@ iam-table-customisation {
 
 // #endregion Table customisation button styles
 
-// #region Loading spinner styles
-
-.loading {
-  padding-block: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.loading .spinner {
-  --spinner-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.loading .lead {
-  margin-inline: auto;
-}
-
-.spinner::before{
-  content: "";
-  height: var(--spinner-size);
-  width: var(--spinner-size);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M521 436C532.5 442.6 547.3 438.7 552.8 426.7C567.7 394.2 576 358.1 576 320C576 186.7 474.1 77.2 344 65.1C330.8 63.9 320 74.7 320 88C320 101.3 330.8 111.9 344 113.4C447.6 125.3 528 213.3 528 320C528 349.3 521.9 377.3 511 402.6C505.7 414.8 509.5 429.4 521 436.1z'/%3E%3C/svg%3E");
-}
-// #endregion Loading spinner styles
-
 // #region utilities
 .w-100 {
   width: 100%;
@@ -196,7 +165,7 @@ iam-notification {
   overflow: clip;
 }
 
-iam-table-advanced {
+iam-table-advanced, iam-table-data {
   --table__container-display: contents;
 }
 
@@ -286,7 +255,7 @@ iam-table-customisation [class*="fa-"][slot="icon"] {
   }
 }
 
-:is(.fa-arrow-down-arrow-up){
+:is(.fa-arrow-down-arrow-up, .fa-arrow-up, .fa-arrow-down){
 
   &:after {
     position: absolute;
@@ -367,13 +336,24 @@ iam-notification::part(dismiss-btn):before {
 }
 
 
-.fa-arrow-down-arrow-up:before {
+:is(.fa-arrow-up,.fa-arrow-down,.fa-arrow-down-arrow-up):before {
 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M265.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L352 109.3 352 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-370.7 41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0l-96 96z'/%3E%3C/svg%3E");
 }
-.fa-arrow-down-arrow-up:after {
+
+:is(.fa-arrow-up,.fa-arrow-down,.fa-arrow-down-arrow-up):after {
 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M105.4 502.6c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 160 32c0-17.7-14.3-32-32-32S96 14.3 96 32l0 370.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96z'/%3E%3C/svg%3E");
+}
+
+.fa-arrow-up:after {
+
+  opacity: 0.5;
+}
+
+.fa-arrow-down:before {
+
+  opacity: 0.5;
 }
 
 .fa-circle-info {
@@ -506,7 +486,7 @@ iam-pagination[data-total="0"] {
 
 }
 
-iam-table-advanced::part(table-filter):after {
+iam-table-advanced::part(table-filter):after, iam-table-data::part(table-filter):after {
   content: "";
 
   background-size: 1em 1em!important;
@@ -597,3 +577,9 @@ iam-table-customisation [class*="fa-"]:before {
   height: 1.2em!important;
   width: 1.2em;
 }
+
+// #region hide the weird checkbox added via the data-table
+.selectrow-heading > * {
+  display: none!important;
+}
+// #endregion

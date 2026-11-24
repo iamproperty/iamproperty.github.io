@@ -62,21 +62,32 @@ class iamBranchSelector extends HTMLElement {
     const menuButton = this.shadowRoot?.querySelector('#menuButton');
     const dropdown = this.shadowRoot?.querySelector('#dropdown');
 
-    const selected = this.querySelector('input:not([name="all-branches"]):checked')
+    let selected = this.querySelector('input:not([name="all-branches"]):checked')
       ? this.querySelector('input:not([name="all-branches"]):checked')
       : this.querySelector('input:not([name="all-branches"])'); // By default the first input is checked if an input hasn't been checked on load
-    selected.checked = true;
+
 
     menuButton?.querySelector('span.selected').removeAttribute('data-content');
     menuButton?.querySelector('span.selected').textContent = selected?.closest('label').textContent;
 
     menuButton?.setAttribute('data-checked-count', this.querySelectorAll('input:checked').length - 1);
 
+    // #region all-branches changes
+    if(this.querySelector('input[name="all-branches"]')) {
+      selected = this.querySelector('input:not([name="all-branches"]):checked')
+      ? this.querySelector('input:not([name="all-branches"]):checked')
+      : null;
+    }
+
     if(this.querySelector('input[name="all-branches"]:checked')) {
       menuButton?.querySelector('span.selected').textContent = "All";
       menuButton?.querySelector('span.selected').setAttribute('data-content', 'All');
       menuButton?.removeAttribute('data-checked-count');
     }
+    // #endregion
+
+    if(selected)
+      selected.checked = true;
 
     if (this.hasAttribute('data-indicator'))
       menuButton?.querySelector('span.indicator').setAttribute('data-indicator', this.getAttribute('data-indicator'));
@@ -106,19 +117,34 @@ class iamBranchSelector extends HTMLElement {
         }
       }
 
-      const selected = this.querySelector('input:not([name="all-branches"]):checked')
+      let selected = this.querySelector('input:not([name="all-branches"]):checked')
         ? this.querySelector('input:not([name="all-branches"]):checked')
         : this.querySelector('input:not([name="all-branches"])');
-      selected.checked = true;
+
 
       menuButton?.querySelector('span.selected').removeAttribute('data-content');
       menuButton?.querySelector('span.selected').innerHTML = selected?.closest('label').textContent;
-
       menuButton?.setAttribute('data-checked-count', this.querySelectorAll('input:not([name="all-branches"]):checked').length - 1);
+
+      // #region all-branches changes
+      if(this.querySelector('input[name="all-branches"]')) {
+        selected = this.querySelector('input:not([name="all-branches"]):checked')
+        ? this.querySelector('input:not([name="all-branches"]):checked')
+        : null;
+      }
 
       if(this.querySelector('input[name="all-branches"]:checked')) {
         menuButton?.querySelector('span.selected').textContent = "All";
         menuButton?.querySelector('span.selected').setAttribute('data-content', 'All');
+        menuButton?.removeAttribute('data-checked-count');
+      }
+      // #endregion
+
+      if(selected)
+        selected.checked = true;
+      else {
+        menuButton?.querySelector('span.selected').textContent = "Select branch";
+        menuButton?.querySelector('span.selected').removeAttribute('data-content');
         menuButton?.removeAttribute('data-checked-count');
       }
 
@@ -178,6 +204,18 @@ class iamBranchSelector extends HTMLElement {
         : (currentIndex + direction + inputs.length) % inputs.length;
 
       inputs[nextIndex].focus();
+    });
+    // #endregion
+
+
+    // #region close the drop down when scrolling
+    window.addEventListener('scroll', () => {
+
+      // check if the drop down is below 100px from the the top of the viewport
+      if (dropdown?.getBoundingClientRect().top < 160 && dropdown?.matches(':popover-open')) {
+
+        dropdown?.hidePopover();
+      }
     });
     // #endregion
   }

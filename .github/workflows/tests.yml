@@ -27,3 +27,5 @@ jobs:
           cache: 'npm'
       - run: npm ci --force
       - run: npm run test:unit
+      - run: npm run test:insights
+      - run: npm run test:insights:sandbox

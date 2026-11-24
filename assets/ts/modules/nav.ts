@@ -45,9 +45,9 @@ export const populateNav = (data, slot = ''): void => {
 
   data.forEach((feature) => {
     if (feature.attributes.sections.length)
-      html += `<details name="megamenu" ${slot != '' ? `slot="${slot}"` : ''}><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateSections(feature.attributes.sections)}</div></details>`;
+      html += `<details name="megamenu" ${slot != '' ? `slot="${slot}"` : ''}><summary>${feature.attributes.title}</summary>${feature.attributes['sub-title'] ? `<span class="summary-sub-title text-body">${feature.attributes['sub-title']}</span>` : ''}<div data-title="${feature.attributes.title}" ${feature.attributes.layout != '' ? `data-layout="${feature.attributes.layout}"` : ''}>${populateSections(feature.attributes.sections)}</div></details>`;
     else if (feature.attributes.links)
-      html += `<details name="megamenu" ${slot != '' ? `slot="${slot}"` : ''}><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateLinks(feature.attributes.links)}</div></details>`;
+      html += `<details name="megamenu" ${slot != '' ? `slot="${slot}"` : ''}><summary>${feature.attributes.title}</summary>${feature.attributes['sub-title'] ? `<span class="summary-sub-title text-body">${feature.attributes['sub-title']}</span>` : ''}<div data-title="${feature.attributes.title}" ${feature.attributes.layout != '' ? `data-layout="${feature.attributes.layout}"` : ''}>${populateLinks(feature.attributes.links)}</div></details>`;
     else html += `<a href="/" ${slot != '' ? `slot="${slot}"` : ''}>${feature.attributes.title}</a>`;
   });
 
@@ -107,7 +107,10 @@ export const getNavigationEnvironment = (mode?: string | null): { hub: string; a
 };
 
 export const loadNavData = async (mode?: string | null): Promise<any> => {
-  const ajaxURL = `${getNavigationEnvironment(mode).hub}/data/ecosystem-switcher.json`;
+
+  console.log(mode);
+
+  const ajaxURL = mode == "mock" ? `/ecosystem-switcher.json` : `${getNavigationEnvironment(mode).hub}/data/ecosystem-switcher.json`;
 
   try {
     const response = await fetch(ajaxURL, {
