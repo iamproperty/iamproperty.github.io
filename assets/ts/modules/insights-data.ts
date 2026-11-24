@@ -228,7 +228,7 @@ export class InsightsDataController {
         const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-action]');
         if (!button || button.disabled) return;
         const properties = insightActionProperties(this.selected());
-        button.disabled = true;
+        //button.disabled = true;
         owner.dispatchEvent(
           new CustomEvent('insight-action', {
             detail: { action: button.dataset.action, properties },
