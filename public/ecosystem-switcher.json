@@ -744,56 +744,12 @@
             }
         },
         {
-            "type": "navigation-group",
+            "type": "navigation-link",
             "id": "learning-and-support",
             "attributes": {
                 "title": "One hub",
-                "sections": [
-                    {
-                        "id": "learning-and-support-links",
-                        "title": null,
-                        "description": null,
-                        "layout": "default",
-                        "links": [
-                            {
-                                "id": "ls-iamproperty-one",
-                                "title": "One hub",
-                                "productKey": "iampropertyOne",
-                                "featureKey": "productAccess",
-                                "isAvailable": true,
-                                "destinations": {
-                                    "linkedEnabled": "__HUB_BASE_URL__/dashboard",
-                                    "linkedDisabled": "__HUB_BASE_URL__/dashboard",
-                                    "unlinked": "__HUB_BASE_URL__/dashboard"
-                                }
-                            },
-                            {
-                                "id": "ls-agent-learning",
-                                "title": "Agent learning",
-                                "productKey": "iampropertyOne",
-                                "featureKey": "productAccess",
-                                "isAvailable": true,
-                                "destinations": {
-                                    "linkedEnabled": "__THINQI_SSO_URL__",
-                                    "linkedDisabled": "__THINQI_SSO_URL__",
-                                    "unlinked": "__THINQI_SSO_URL__"
-                                }
-                            },
-                            {
-                                "id": "ls-helpcentre",
-                                "title": "Helpcentre",
-                                "productKey": "iampropertyOne",
-                                "featureKey": "productAccess",
-                                "isAvailable": true,
-                                "destinations": {
-                                    "linkedEnabled": "__HELPCENTRE_BASE_URL__/hc/en-gb",
-                                    "linkedDisabled": "__HELPCENTRE_BASE_URL__/hc/en-gb",
-                                    "unlinked": "__HELPCENTRE_BASE_URL__/hc/en-gb"
-                                }
-                            }
-                        ]
-                    }
-                ]
+                "link": "__HUB_BASE_URL__/dashboard",
+                "sections": []
             }
         }
     ]
