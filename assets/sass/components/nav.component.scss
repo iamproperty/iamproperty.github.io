@@ -450,7 +450,7 @@
   ::slotted(a[slot='secondary']:not(#insights-button)) {
     font-size: 0.75rem !important;
     line-height: 2rem !important;
-    margin: 0 !important;
+    margin: 0 0 0 1.5rem !important;
 
     &:after {
       display: none;
