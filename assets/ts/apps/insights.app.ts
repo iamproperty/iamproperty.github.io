@@ -33,11 +33,6 @@ class iamAppInsights extends HTMLElement {
 
     <div class="wrapper">
 
-      <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
-        <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
-        <strong>The print campaign action is unavailable for multiple branches</strong><br/>
-        You can still select properties to create CRM tasks or export data. To create a print campaign, select a single branch.
-      </iam-notification>
 
       <div class="insights-header pb-2">
         <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
@@ -54,6 +49,12 @@ class iamAppInsights extends HTMLElement {
 
       <div id="map-wrapper"></div>
 
+
+      <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
+        <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
+        <strong>The print campaign action is unavailable for multiple branches</strong><br/>
+        You can still select properties to create CRM tasks or export data. To create a print campaign, select a single branch.
+      </iam-notification>
       <div id="table-wrapper">
 
       </div>
@@ -145,7 +146,7 @@ class iamAppInsights extends HTMLElement {
           // #region Create print campaign button / branch notification
           if(createPrintCampaignButton && this.isMultiBranchSelected(this,table)) {
             notification?.classList.remove('d-none');
-            createPrintCampaignButton.setAttribute('disabled', 'true');
+            //createPrintCampaignButton.setAttribute('disabled', 'true');
           }
           else {
             notification?.classList.add('d-none');
@@ -199,7 +200,7 @@ class iamAppInsights extends HTMLElement {
             properties.push(dataKeyValueObject);
           }
         }
-        event.target?.setAttribute('disabled', 'true');
+        //event.target?.setAttribute('disabled', 'true');
 
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
@@ -600,8 +601,6 @@ class iamAppInsights extends HTMLElement {
         tableCustomisation.setAttribute('data-customisation', JSON.stringify(customisation));
 
       actionbar?.insertAdjacentElement('beforeend', tableCustomisation);
-      // Fake button to be displayed in the action bar when the selection is required for the customisation action, to maintain layout consistency
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" slot="selected" disabled>Customise</button>`);
 
       // Listen for the table customisation saved event and re-dispatch it from the parent component
       tableCustomisation.addEventListener('table-customisation-saved', (event) => {
