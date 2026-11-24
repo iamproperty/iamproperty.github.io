@@ -1,4 +1,4 @@
-
+import { createWidgets, attachDragEvents, attachDragEventsToRows, attachResizeEvents } from '../../modules/widgets';
 class iamDashboard extends HTMLElement {
   constructor() {
     super();
@@ -10,7 +10,7 @@ class iamDashboard extends HTMLElement {
 
     const loadCSS = `@import "${assetLocation}/css/components/dashboard.component.css";`;
     const template = document.createElement('template');
-    template.innerHTML = `
+    template.innerHTML = /* HTML */`
     <style>
     ${loadCSS}
     </style>
@@ -22,6 +22,7 @@ class iamDashboard extends HTMLElement {
         <slot name="insight"></slot>
       </div>
       <div id="widgetWrapper">
+        <!-- Initial widget row template, will be dynamically updated and split into multiple rows by JavaScript -->
         <div id="startup-widget-row" class="widget-row sub-grid">
           <slot name="widget"></slot>
         </div>
@@ -33,7 +34,6 @@ class iamDashboard extends HTMLElement {
   }
 
   connectedCallback(): void {
-
 
     // #region fix carousel slot
     const slot = this.shadowRoot.querySelector("slot[name='insight']");
@@ -63,165 +63,22 @@ class iamDashboard extends HTMLElement {
 
 
     // #region widgets
-
-    const pageWidgets = this.querySelectorAll('div[slot="widget"]');
-
-    let widgets = [];
+    const slottedItems = Array.from(this.querySelectorAll('[slot="widget"]')) as HTMLElement[];
     const widgetWrapper = this.shadowRoot.querySelector('#widgetWrapper');
 
-    widgetWrapper.innerHTML = '';
+    const [widgets, widgetRows] = createWidgets(widgetWrapper, slottedItems);
 
-    pageWidgets.forEach((widget,index) => {
+    console.log('widgets:', widgets);
+    console.log('widgetRows:', widgetRows);
 
-      // Create the widget which will then be given the controls to re-order and resize within the dashboard
-      const shadowWidget = document.createElement('div');
-      shadowWidget.classList.add('admin-panel');
-      shadowWidget.setAttribute('draggable', 'true');
+    attachDragEventsToRows(widgetWrapper, widgetRows);
+    attachDragEvents(widgetWrapper, widgets);
 
-      // Create a slot for the shadow widget
-      const shadowWidgetSlot = document.createElement('slot');
-      shadowWidgetSlot.setAttribute('name', `widget-${index}`);
+    attachResizeEvents(widgetWrapper, widgets);
 
-      // Update the pages slot to match the shadow widget slot name
-      widget.setAttribute('slot', `widget-${index}`);
-      widget.className = '';
-
-      // Move the page widget title into the shadow widget
-      const title = widget.querySelector('h2');
-      if(title) {
-        shadowWidget.insertBefore(title.cloneNode(true), shadowWidget.firstChild);
-        title.classList.add('d-none');
-      }
-
-      // Either create a new row or append to an existing row
-
-      const currentWidgetRow = widgetWrapper.querySelector('.widget-row:last-child');
-
-      currentWidgetRow?.setAttribute('data-column-count', (parseInt(currentWidgetRow?.getAttribute('data-column-count') ?? '0') + 4).toString());
-
-      let widgetRow = currentWidgetRow ?? document.createElement('div');
-      if(!currentWidgetRow || currentWidgetRow.getAttribute('data-column-count') === '12') {
-        const newWidgetRow = document.createElement('div');
-        newWidgetRow.classList.add('widget-row', 'sub-grid');
-
-        newWidgetRow.addEventListener('dragover', event => {
-          event.preventDefault();
-        });
-        newWidgetRow.addEventListener('drop', event => {
-          event.preventDefault();
-
-        console.log('drop into row');
-          const dragId = event.dataTransfer?.getData('text/plain');
-          if(dragId !== undefined) {
-            const draggedItem = dragItems[parseInt(dragId)];
-            if(draggedItem) {
-              newWidgetRow.appendChild(draggedItem);
-            }
-          }
-        });
-
-
-        widgetWrapper.appendChild(newWidgetRow);
-
-        // Make sure we use the new widget row for subsequent appends
-        widgetRow = newWidgetRow;
-      }
-
-
-      // Append to shadow dom
-      shadowWidget.appendChild(shadowWidgetSlot);
-      widgetRow.appendChild(shadowWidget);
-    });
-
-
-    const dragItems = widgetWrapper.querySelectorAll('.admin-panel');
-    dragItems.forEach((item, index) => {
-      item.setAttribute('draggable', 'true');
-
-      item.addEventListener('dragstart', event => {
-
-        item.setAttribute('drag-id', index.toString());
-        event.dataTransfer?.setData('text/plain', index.toString());
-      });
-
-      item.addEventListener('dragover', event => {
-        event.preventDefault();
-      });
-
-      item.addEventListener('drop', event => {
-
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        console.log('drop onto item');
-        const dragId = event.dataTransfer?.getData('text/plain');
-
-        if(dragId !== undefined) {
-          const parent = item.parentNode;
-          const draggedItem = dragItems[parseInt(dragId)];
-          if(parent) {
-            // if the dragged widget is already the sibling of the target widget, do nothing
-            if(draggedItem.nextSibling && draggedItem.nextSibling === item) {
-
-              parent.insertBefore(item, draggedItem);
-            }
-            else if(draggedItem && draggedItem !== item) {
-
-              parent.insertBefore(draggedItem, item);
-            }
-          }
-        }
-      });
-
-    });
-
-
-
+    console.log('hey')
     /*
-    const dragItems = this.querySelectorAll('div[slot^="widget-"]');
 
-
-
-
-    const widgetContainer = this.shadowRoot.querySelector('slot[name="widget"]');
-
-    dragItems.forEach((item, index) => {
-      item.setAttribute('draggable', 'true');
-
-      item.addEventListener('dragstart', event => {
-
-        item.setAttribute('drag-id', index.toString());
-        event.dataTransfer?.setData('text/plain', index.toString());
-      });
-
-      item.addEventListener('dragover', event => {
-        event.preventDefault();
-      });
-
-      item.addEventListener('drop', event => {
-
-        event.preventDefault();
-        const dragId = event.dataTransfer?.getData('text/plain');
-
-
-        if(dragId !== undefined) {
-          const parent = item.parentNode;
-          const draggedItem = dragItems[parseInt(dragId)];
-          if(parent) {
-            // if the dragged widget is already the sibling of the target widget, do nothing
-            if(draggedItem.nextSibling && draggedItem.nextSibling === item) {
-
-              parent.insertBefore(item, draggedItem);
-            }
-            else if(draggedItem && draggedItem !== item) {
-
-              parent.insertBefore(draggedItem, item);
-            }
-          }
-        }
-
-      });
-    });
 
     let activeWidget: HTMLElement | null = null;
 
@@ -235,6 +92,7 @@ class iamDashboard extends HTMLElement {
         }
       }
     });
+
 
 
     widgets.forEach((widget, index) => {
@@ -325,6 +183,7 @@ class iamDashboard extends HTMLElement {
       }, 10);
 
     });
+
 
     */
     // #endregion widgets
