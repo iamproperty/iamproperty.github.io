@@ -418,6 +418,7 @@ class iamAppInsights extends HTMLElement {
 
     // #region set the view controls
 
+    this.setAttribute('data-view', 'split');
     if (insightsMapDisabled(this)) {
       viewControls?.classList.add('d-none');
       this.setAttribute('data-view', 'list');
