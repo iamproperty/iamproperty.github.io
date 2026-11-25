@@ -286,12 +286,8 @@ class iamAppInsights extends HTMLElement {
 
   createComponent = (component, table, trigger = 'initial'): void => {
 
-    console.log('createComponent called with component:', component, 'trigger:', trigger);
     // Adapt the existing HTML transport by default; retain an explicit HTML rollback.
     const dataMode = this.getAttribute('data-renderer') !== 'html';
-
-
-    console.log('dataMode:', dataMode);
 
     if (dataMode) {
       const started = performance.now();
@@ -314,7 +310,8 @@ class iamAppInsights extends HTMLElement {
       this.dataSourceMarkup = null;
       if (snapshot) {
 
-        console.log(insightsMapDisabled(this));
+        if(!insightsMapDisabled(this))
+          this.setAttribute('data-view', 'split');
 
         this.dataController = new InsightsDataController(this, snapshot);
         this.dataSourceMarkup = markup;
@@ -330,8 +327,6 @@ class iamAppInsights extends HTMLElement {
         return;
       }
     }
-    console.log('this hits');
-
 
     const profileWindow = window as Window & {
       __iamInsightsProfile?: boolean;
