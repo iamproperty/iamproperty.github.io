@@ -286,6 +286,7 @@ class iamAppInsights extends HTMLElement {
 
   createComponent = (component, table, trigger = 'initial'): void => {
 
+    console.log('createComponent called with component:', component, 'trigger:', trigger);
     // Adapt the existing HTML transport by default; retain an explicit HTML rollback.
     const dataMode = this.getAttribute('data-renderer') !== 'html';
     if (dataMode) {
