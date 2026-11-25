@@ -313,7 +313,9 @@ class iamAppInsights extends HTMLElement {
       this.dataController = null;
       this.dataSourceMarkup = null;
       if (snapshot) {
-        console.log('snapshot created with records:', snapshot.records.length);
+
+        console.log(insightsMapDisabled(this));
+
         this.dataController = new InsightsDataController(this, snapshot);
         this.dataSourceMarkup = markup;
         if (this.dataDetails) this.dataController.configure(this.dataDetails);
