@@ -313,6 +313,7 @@ class iamAppInsights extends HTMLElement {
       this.dataController = null;
       this.dataSourceMarkup = null;
       if (snapshot) {
+        console.log('snapshot created with records:', snapshot.records.length);
         this.dataController = new InsightsDataController(this, snapshot);
         this.dataSourceMarkup = markup;
         if (this.dataDetails) this.dataController.configure(this.dataDetails);
@@ -327,6 +328,7 @@ class iamAppInsights extends HTMLElement {
         return;
       }
     }
+    console.log('this hits');
 
 
     const profileWindow = window as Window & {
