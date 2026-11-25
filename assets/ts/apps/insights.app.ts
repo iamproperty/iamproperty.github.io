@@ -431,6 +431,8 @@ class iamAppInsights extends HTMLElement {
       this.setAttribute('data-view', 'list');
     }
 
+    console.log(insightsMapDisabled(this));
+
     viewControls?.addEventListener('change', (event) => {
       const target = event.target as HTMLInputElement;
       if(target?.name === 'view') {
