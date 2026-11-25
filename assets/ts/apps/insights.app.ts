@@ -285,6 +285,7 @@ class iamAppInsights extends HTMLElement {
     const countElement = this.shadowRoot?.querySelector('#count');
     const viewControls = this.shadowRoot?.querySelector('#view-controls');
 
+    this.setAttribute('data-view', 'split');
     if (insightsMapDisabled(this)) {
       viewControls?.classList.add('d-none');
       this.setAttribute('data-view', 'list');
