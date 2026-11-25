@@ -310,8 +310,8 @@ class iamAppInsights extends HTMLElement {
       this.dataSourceMarkup = null;
       if (snapshot) {
 
-        if(!insightsMapDisabled(this))
-          this.setAttribute('data-view', 'split');
+        // If the map is not disabled, set the view to 'split' to show both the table and the map.
+        if(!insightsMapDisabled(this)) this.setAttribute('data-view', 'split');
 
         this.dataController = new InsightsDataController(this, snapshot);
         this.dataSourceMarkup = markup;
