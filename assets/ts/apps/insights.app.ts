@@ -257,6 +257,11 @@ class iamAppInsights extends HTMLElement {
 
 
   createMapContent = (): string => {
+
+    console.log('createMapContent called');
+
+    console.log('insightsMapDisabled:', insightsMapDisabled(this));
+
     if (insightsMapDisabled(this)) return '';
 
     // Load the table from the shadow root so the table formatting is correct and CTA's created
