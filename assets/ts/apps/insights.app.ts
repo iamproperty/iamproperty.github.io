@@ -278,7 +278,25 @@ class iamAppInsights extends HTMLElement {
   };
 
   createComponent = (component, table, trigger = 'initial'): void => {
-    console.log('hi');
+
+    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
+    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
+    const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
+    const countElement = this.shadowRoot?.querySelector('#count');
+    const viewControls = this.shadowRoot?.querySelector('#view-controls');
+
+    if (insightsMapDisabled(this)) {
+      viewControls?.classList.add('d-none');
+      this.setAttribute('data-view', 'list');
+    } else if(tableWrapper.querySelector('table tr[data-latitude][data-longitude]')) {
+      viewControls?.classList.remove('d-none');
+      viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
+      this.setAttribute('data-view', 'split');
+    } else {
+      viewControls?.classList.add('d-none');
+      this.setAttribute('data-view', 'list');
+    }
+
     // Adapt the existing HTML transport by default; retain an explicit HTML rollback.
     const dataMode = this.getAttribute('data-renderer') !== 'html';
     if (dataMode) {
@@ -362,12 +380,6 @@ class iamAppInsights extends HTMLElement {
       if (profile) timings.push({ stage, elapsedMs: Math.round(performance.now() - started) });
     };
 
-    const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
-    const mapWrapper = this.shadowRoot?.querySelector('#map-wrapper');
-    const branchWrapper = this.shadowRoot?.querySelector('#branch-wrapper');
-    const countElement = this.shadowRoot?.querySelector('#count');
-    const viewControls = this.shadowRoot?.querySelector('#view-controls');
-
     const inputMarkup = this.createTableContent(component, table);
     if (trigger === 'source-update' && this.renderedTable &&
       tableWrapper?.querySelector('table') === this.renderedTable &&
@@ -418,21 +430,6 @@ class iamAppInsights extends HTMLElement {
     measure('map-mount-and-setup', mapStarted);
 
     // #region set the view controls
-
-    this.setAttribute('data-view', 'split');
-    if (insightsMapDisabled(this)) {
-      viewControls?.classList.add('d-none');
-      this.setAttribute('data-view', 'list');
-    } else if(tableWrapper.querySelector('table tr[data-latitude][data-longitude]')) {
-      viewControls?.classList.remove('d-none');
-      viewControls?.querySelector('[name="view"][value="split"]')?.setAttribute('checked', 'true');
-      this.setAttribute('data-view', 'split');
-    } else {
-      viewControls?.classList.add('d-none');
-      this.setAttribute('data-view', 'list');
-    }
-
-    console.log(insightsMapDisabled(this));
 
     viewControls?.addEventListener('change', (event) => {
       const target = event.target as HTMLInputElement;
