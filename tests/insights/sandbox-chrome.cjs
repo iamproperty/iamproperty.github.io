@@ -116,7 +116,16 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     // sending native input; coordinate clicks can instead dismiss the popover
     // when platform fonts or asynchronous styles change its position.
     await command('Emulation.setFocusEmulationEnabled', { enabled: true });
-    await evaluate("document.querySelector('iframe').contentWindow.postMessage('focus-filter-input', '*')");
+    // Focus the opaque sandbox's browsing context first. Page focus emulation
+    // alone does not give its document focus, so input.focus() can leave native
+    // key events targeting the outer page instead of the filter input.
+    await evaluate(`
+      (() => {
+        const frame = document.querySelector('iframe');
+        frame.focus();
+        frame.contentWindow.postMessage('focus-filter-input', '*');
+      })()
+    `);
     for (let index = 0; index < 50; index++) {
       result = JSON.parse(await evaluate('document.body.dataset.testResult'));
       if (result.state !== 'ready-for-enter') break;

@@ -518,6 +518,79 @@ function pageSizeDefaults() {
   }
 }
 
+function insightsHeightChanges() {
+  const { dom, window: w } = environment();
+  try {
+    const observers = [];
+    const frames = new Map();
+    let frameId = 0;
+    w.requestAnimationFrame = (callback) => {
+      frames.set(++frameId, callback);
+      return frameId;
+    };
+    w.cancelAnimationFrame = (id) => frames.delete(id);
+    w.ResizeObserver = class {
+      constructor(callback) {
+        this.callback = callback;
+        observers.push(this);
+      }
+      observe(target) { this.target = target; }
+      disconnect() { this.target = null; }
+    };
+    const flush = () => {
+      const pending = [...frames.values()];
+      frames.clear();
+      pending.forEach((callback) => callback());
+    };
+    w.eval(loader);
+    w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+    const app = w.document.createElement('iam-app-insights');
+    let height = 1200;
+    w.document.createElement('iam-app-insights');
+    assert.equal(w.document.querySelectorAll('#insightsViewportStyle').length, 1);
+    assert.match(w.document.querySelector('#insightsViewportStyle').textContent, /scrollbar-gutter: stable/);
+    Object.defineProperty(app, 'offsetHeight', { get: () => height });
+    const reports = [];
+    app.addEventListener('update-height', (event) => reports.push(event.detail.height));
+    w.document.body.append(app);
+    let observer = observers.findLast((item) => item.target === app);
+    assert.ok(observer, 'Both renderers must observe the Insights content height');
+    observer.callback();
+    flush();
+    assert.deepEqual(reports, [1200]);
+    // Wrapped rows on a different sorted page can grow and shrink the table
+    // without table-filtered. Width-only changes must not repeat tile updates.
+    height = 1400;
+    observer.callback();
+    observer.callback();
+    assert.equal(frames.size, 1);
+    flush();
+    observer.callback();
+    flush();
+    height = 1100;
+    observer.callback();
+    flush();
+    assert.deepEqual(reports, [1200, 1400, 1100]);
+    height = 0;
+    observer.callback();
+    flush();
+    assert.equal(reports.length, 3, 'Hidden content must not collapse the tile');
+    height = 1500;
+    observer.callback();
+    app.remove();
+    assert.equal(observer.target, null);
+    assert.equal(frames.size, 0, 'Disconnect must cancel pending height reports');
+    w.document.body.append(app);
+    observer = observers.findLast((item) => item.target === app);
+    observer.callback();
+    flush();
+    assert.deepEqual(reports, [1200, 1400, 1100, 1500]);
+    console.log('PASS: Insights content height changes, deduplication, hidden state and reconnect');
+  } finally {
+    dom.window.close();
+  }
+}
+
 function paginationReconnect() {
   const { dom, window: w, errors } = environment();
   try {
@@ -555,6 +628,7 @@ function paginationReconnect() {
   appliedFilterChips();
   dataControlsAndCustomisation();
   paginationReconnect();
+  insightsHeightChanges();
   pageSizeDefaults();
   await rendererScenario({ deniedStorage: false });
   await rendererScenario({ deniedStorage: true });
