@@ -37,6 +37,8 @@ export const navTemplate = /* HTML */ `<div class="container">
       </div>
     </div>
   </div>
+  <hr />
+  <slot name="notifications"></slot>
   <div class="backdrop" part="backdrop"></div>`;
 
 // #region Standadised Nav

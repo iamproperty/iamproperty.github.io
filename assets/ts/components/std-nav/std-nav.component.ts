@@ -240,6 +240,22 @@ class iamSTDNav extends HTMLElement {
     const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
     const mode = this.getAttribute('data-mode');
 
+
+
+    // #region notifications
+
+    const notification = document.createElement('iam-notification');
+    notification.className = 'bg-danger';
+
+    notification.setAttribute('data-status', 'danger');
+    notification.setAttribute('data-dismiss', true);
+    notification.setAttribute('data-type', 'alert');
+    notification.setAttribute('slot', 'notifications');
+    notification.textContent = 'notifications';
+
+    nav.insertAdjacentElement('beforeend', notification);
+    // #endregion
+
     // #region Add in the non-sso standard links then stop further processing for non-sso mode
     if (this.hasAttribute('data-non-sso')) {
 
