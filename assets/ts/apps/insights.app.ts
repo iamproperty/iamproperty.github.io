@@ -13,13 +13,23 @@ class iamAppInsights extends HTMLElement {
   private renderedRowLimit: number | undefined;
   private sourceObserver: MutationObserver | null = null;
   private componentEvents: AbortController | null = null;
+  private heightObserver: ResizeObserver | null = null;
+  private heightFrame: number | null = null;
+  private observedHeight: number | null = null;
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
 
-
-
+    // Looker hosts the visualisation in its own document. Reserve its scrollbar
+    // space so overflow changes cannot alternate the table/map viewport width,
+    // including at fractional browser zoom and Windows display scaling.
+    if (!document.getElementById('insightsViewportStyle')) {
+      const style = document.createElement('style');
+      style.id = 'insightsViewportStyle';
+      style.textContent = 'html:has(iam-app-insights) { scrollbar-gutter: stable; }';
+      document.head.append(style);
+    }
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
@@ -748,6 +758,11 @@ class iamAppInsights extends HTMLElement {
   }
 
   disconnectedCallback(): void {
+    this.heightObserver?.disconnect();
+    this.heightObserver = null;
+    if (this.heightFrame !== null) cancelAnimationFrame(this.heightFrame);
+    this.heightFrame = null;
+    this.observedHeight = null;
     this.sourceObserver?.disconnect();
     this.sourceObserver = null;
     this.componentEvents?.abort();
@@ -761,6 +776,23 @@ class iamAppInsights extends HTMLElement {
     this.componentEvents?.abort();
     this.componentEvents = new AbortController();
     const eventOptions = { signal: this.componentEvents.signal };
+
+    // Sorting, paging and late font/style loads can change the rendered height
+    // without a filter event. Keep Looker's tile sized to the actual content so
+    // its internal scrollbar does not resize the map during those changes.
+    this.heightObserver?.disconnect();
+    this.heightObserver = new ResizeObserver(() => {
+      if (this.heightFrame !== null) cancelAnimationFrame(this.heightFrame);
+      this.heightFrame = requestAnimationFrame(() => {
+        this.heightFrame = null;
+        if (!this.isConnected) return;
+        const height = this.offsetHeight;
+        if (height <= 0 || height === this.observedHeight) return;
+        this.observedHeight = height;
+        this.dispatchEvent(new CustomEvent('update-height', { detail: { height } }));
+      });
+    });
+    this.heightObserver.observe(this);
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
 
