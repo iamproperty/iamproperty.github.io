@@ -27,7 +27,7 @@ class iamNotification extends HTMLElement {
       <div class="notification__inner"><div class="notification__text"><slot></slot></div><div class="notification__btns"><slot name="btns"></slot></div></div>
       <div class="notification__dismiss"></div>
     </div>
-    
+
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 

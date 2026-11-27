@@ -32,7 +32,6 @@ nav:has(.nav--sticky) {
 
   .nav--sticky {
     position: fixed;
-    outline: 2px solid #eeeeee;
     transition: margin 1s;
     pointer-events: all;
   }

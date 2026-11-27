@@ -14,6 +14,10 @@ import {
   getEnvUrl,
   resetNavigationAccessState
 } from '../../modules/nav';
+import {
+  loadNotifications
+} from '../../modules/content';
+
 
 class iamSTDNav extends HTMLElement {
   private tokenProvider?: NavigationTokenProvider;
@@ -239,6 +243,15 @@ class iamSTDNav extends HTMLElement {
 
     const isSecondary = this.hasAttribute('slot') && this.getAttribute('slot') === 'secondary';
     const mode = this.getAttribute('data-mode');
+
+
+    // #region notifications
+    loadNotifications(nav,'global',mode);
+
+    if(this.hasAttribute('data-product'))
+      loadNotifications(nav,this.getAttribute('data-product'),mode);
+
+    // #endregion
 
     // #region Add in the non-sso standard links then stop further processing for non-sso mode
     if (this.hasAttribute('data-non-sso')) {
