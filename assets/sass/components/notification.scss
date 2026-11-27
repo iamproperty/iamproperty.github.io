@@ -59,6 +59,7 @@
 }
 
 :host(.bg-danger) .notification {
+  --colour: var(--colour-white);
   color: var(--colour-white);
 }
 
@@ -156,7 +157,7 @@
       display: none;
     }
 
-    margin-block: -0.1rem;
+    margin-block: -1rem;
     flex-grow: 0;
     padding-left: 1rem;
 
@@ -164,6 +165,7 @@
       display: inline-block;
       position: relative;
       margin: 0;
+
       color: currentColor;
 
       &:hover {

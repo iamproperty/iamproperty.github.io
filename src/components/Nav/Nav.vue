@@ -4,14 +4,6 @@
   const component = 'nav';
 
   onMounted(() => {
-    import(`../../../assets/js/components/notification/notification.component.min.js`)
-      .then((module) => {
-        if (!window.customElements.get(`iam-notification`))
-          window.customElements.define(`iam-notification`, module.default);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
 
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {

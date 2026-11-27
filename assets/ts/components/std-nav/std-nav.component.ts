@@ -14,6 +14,10 @@ import {
   getEnvUrl,
   resetNavigationAccessState
 } from '../../modules/nav';
+import {
+  loadNotifications
+} from '../../modules/content';
+
 
 class iamSTDNav extends HTMLElement {
   private tokenProvider?: NavigationTokenProvider;
@@ -241,19 +245,12 @@ class iamSTDNav extends HTMLElement {
     const mode = this.getAttribute('data-mode');
 
 
-
     // #region notifications
+    loadNotifications(nav,'global',mode);
 
-    const notification = document.createElement('iam-notification');
-    notification.className = 'bg-danger';
+    if(this.hasAttribute('data-product'))
+      loadNotifications(nav,this.getAttribute('data-product'),mode);
 
-    notification.setAttribute('data-status', 'danger');
-    notification.setAttribute('data-dismiss', true);
-    notification.setAttribute('data-type', 'alert');
-    notification.setAttribute('slot', 'notifications');
-    notification.textContent = 'notifications';
-
-    nav.insertAdjacentElement('beforeend', notification);
     // #endregion
 
     // #region Add in the non-sso standard links then stop further processing for non-sso mode

@@ -886,4 +886,8 @@ slot[name="notifications"] {
   width: 100vw;
 }
 
+
+::slotted([slot="notifications"]) {
+  position: static!important;
+}
 /* #endregion */

@@ -1,5 +1,5 @@
-export const loadComponents = (component): void => {
-  const components = ['skeleton', 'bone', 'carousel', 'card', 'banner', 'notification'];
+export const loadComponents = (component, components = ['skeleton', 'bone', 'carousel', 'card', 'banner', 'notification']): void => {
+
   const assetLocation = document.body.hasAttribute('data-assets-location')
     ? document.body.getAttribute('data-assets-location')
     : '/assets';
@@ -55,4 +55,68 @@ export const transformButtons = (buttons): DocumentFragment => {
   });
 
   return fragment;
+};
+
+export const loadNotifications = (nav, slug, mode): void => {
+
+  const newXHRRequest = new XMLHttpRequest();
+
+  let url = `https://iamcontent.iamproperty.com/wp-json/wp/v2/notification?slug=${slug}`
+
+  switch (mode) {
+    case 'dev':
+    case 'mock':
+      url = `https://iamcontent.dev.iamproperty.group/wp-json/wp/v2/notification?slug=${slug}`
+      break;
+    case 'local':
+      url = `http://localhost:8080/wp-json/wp/v2/notification?slug=${slug}`
+      break;
+  }
+
+  newXHRRequest.open('GET', url, true);
+
+  newXHRRequest.onload = function (): void {
+    if (this.status === 200) {
+
+      let response = JSON.parse(this.responseText);
+
+      if(response.length === 0) return;
+
+      const notifications = response.filter((item: any) => item.slug == slug).map((item: any) => item)[0];
+
+      console.log(notifications);
+
+      const temp = document.createElement('div');
+      temp.innerHTML = notifications.content.rendered;
+
+      temp.querySelectorAll(`:scope > *:empty`).forEach((element) => {
+        element.remove();
+      });
+
+      temp.querySelectorAll(`:scope > iam-notification`).forEach((notification) => {
+
+        if(notification.hasAttribute('id')) {
+
+          if(window.localStorage.getItem(`notification-dismissed-${notification.getAttribute('id')?.replace(' ', '-')}`) === 'true') {
+            return;
+          }
+          // Mark the notification as dismissible
+          notification.setAttribute('data-dismiss', true);
+          // When dismissed, remove the notification and mark it as dismissed in localStorage
+          notification.addEventListener('dismiss', () => {
+            notification.remove();
+            window.localStorage.setItem(`notification-dismissed-${notification.getAttribute('id')?.replace(' ', '-')}`, 'true');
+          });
+        }
+        notification.setAttribute('data-type', 'alert');
+        notification.setAttribute('slot', 'notifications');
+
+        nav.insertAdjacentElement('beforeend', notification);
+      });
+
+      loadComponents(nav, ['notification']);
+    }
+  };
+
+  newXHRRequest.send();
 };
