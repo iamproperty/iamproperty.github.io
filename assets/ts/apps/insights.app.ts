@@ -13,13 +13,23 @@ class iamAppInsights extends HTMLElement {
   private renderedRowLimit: number | undefined;
   private sourceObserver: MutationObserver | null = null;
   private componentEvents: AbortController | null = null;
+  private heightObserver: ResizeObserver | null = null;
+  private heightFrame: number | null = null;
+  private observedHeight: number | null = null;
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
 
-
-
+    // Looker hosts the visualisation in its own document. Reserve its scrollbar
+    // space so overflow changes cannot alternate the table/map viewport width,
+    // including at fractional browser zoom and Windows display scaling.
+    if (!document.getElementById('insightsViewportStyle')) {
+      const style = document.createElement('style');
+      style.id = 'insightsViewportStyle';
+      style.textContent = 'html:has(iam-app-insights) { scrollbar-gutter: stable; }';
+      document.head.append(style);
+    }
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
@@ -33,11 +43,6 @@ class iamAppInsights extends HTMLElement {
 
     <div class="wrapper">
 
-      <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
-        <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
-        <strong>The print campaign action is unavailable for multiple branches</strong><br/>
-        You can still select properties to create CRM tasks or export data. To create a print campaign, select a single branch.
-      </iam-notification>
 
       <div class="insights-header pb-2">
         <strong class="d-block insight-count"><span id="count"></span> <span id="count-text"></span></strong>
@@ -54,6 +59,12 @@ class iamAppInsights extends HTMLElement {
 
       <div id="map-wrapper"></div>
 
+
+      <iam-notification id="branch-notification" class="mt-2 mb-4 d-none" type="info" data-dismiss>
+        <i class="fa-solid fa-circle-info text-info" slot="icon"></i>
+        <strong>The print campaign action is unavailable for multiple branches</strong><br/>
+        You can still select properties to create CRM tasks or export data. To create a print campaign, select a single branch.
+      </iam-notification>
       <div id="table-wrapper">
 
       </div>
@@ -145,7 +156,7 @@ class iamAppInsights extends HTMLElement {
           // #region Create print campaign button / branch notification
           if(createPrintCampaignButton && this.isMultiBranchSelected(this,table)) {
             notification?.classList.remove('d-none');
-            createPrintCampaignButton.setAttribute('disabled', 'true');
+            //createPrintCampaignButton.setAttribute('disabled', 'true');
           }
           else {
             notification?.classList.add('d-none');
@@ -199,7 +210,7 @@ class iamAppInsights extends HTMLElement {
             properties.push(dataKeyValueObject);
           }
         }
-        event.target?.setAttribute('disabled', 'true');
+        //event.target?.setAttribute('disabled', 'true');
 
         this.dispatchEvent(new CustomEvent('insight-action', {
           detail: {
@@ -256,6 +267,11 @@ class iamAppInsights extends HTMLElement {
 
 
   createMapContent = (): string => {
+
+    console.log('createMapContent called');
+
+    console.log('insightsMapDisabled:', insightsMapDisabled(this));
+
     if (insightsMapDisabled(this)) return '';
 
     // Load the table from the shadow root so the table formatting is correct and CTA's created
@@ -264,6 +280,8 @@ class iamAppInsights extends HTMLElement {
 
     if(!table.querySelector('tr[data-latitude][data-longitude]'))
       return '';
+
+    this.setAttribute('data-view', 'split');
 
     return `<iam-map data-for="properties-table"></iam-map>`;
   };
@@ -277,8 +295,10 @@ class iamAppInsights extends HTMLElement {
   };
 
   createComponent = (component, table, trigger = 'initial'): void => {
+
     // Adapt the existing HTML transport by default; retain an explicit HTML rollback.
     const dataMode = this.getAttribute('data-renderer') !== 'html';
+
     if (dataMode) {
       const started = performance.now();
       const markup = this.createTableContent(component, table);
@@ -299,6 +319,10 @@ class iamAppInsights extends HTMLElement {
       this.dataController = null;
       this.dataSourceMarkup = null;
       if (snapshot) {
+
+        // If the map is not disabled, set the view to 'split' to show both the table and the map.
+        if(!insightsMapDisabled(this)) this.setAttribute('data-view', 'split');
+
         this.dataController = new InsightsDataController(this, snapshot);
         this.dataSourceMarkup = markup;
         if (this.dataDetails) this.dataController.configure(this.dataDetails);
@@ -313,7 +337,6 @@ class iamAppInsights extends HTMLElement {
         return;
       }
     }
-
 
     const profileWindow = window as Window & {
       __iamInsightsProfile?: boolean;
@@ -428,6 +451,7 @@ class iamAppInsights extends HTMLElement {
       viewControls?.classList.add('d-none');
       this.setAttribute('data-view', 'list');
     }
+
 
     viewControls?.addEventListener('change', (event) => {
       const target = event.target as HTMLInputElement;
@@ -600,8 +624,6 @@ class iamAppInsights extends HTMLElement {
         tableCustomisation.setAttribute('data-customisation', JSON.stringify(customisation));
 
       actionbar?.insertAdjacentElement('beforeend', tableCustomisation);
-      // Fake button to be displayed in the action bar when the selection is required for the customisation action, to maintain layout consistency
-      actionbar?.insertAdjacentHTML('beforeend', /* HTML */`<button class="btn btn-action" slot="selected" disabled>Customise</button>`);
 
       // Listen for the table customisation saved event and re-dispatch it from the parent component
       tableCustomisation.addEventListener('table-customisation-saved', (event) => {
@@ -736,6 +758,11 @@ class iamAppInsights extends HTMLElement {
   }
 
   disconnectedCallback(): void {
+    this.heightObserver?.disconnect();
+    this.heightObserver = null;
+    if (this.heightFrame !== null) cancelAnimationFrame(this.heightFrame);
+    this.heightFrame = null;
+    this.observedHeight = null;
     this.sourceObserver?.disconnect();
     this.sourceObserver = null;
     this.componentEvents?.abort();
@@ -749,6 +776,23 @@ class iamAppInsights extends HTMLElement {
     this.componentEvents?.abort();
     this.componentEvents = new AbortController();
     const eventOptions = { signal: this.componentEvents.signal };
+
+    // Sorting, paging and late font/style loads can change the rendered height
+    // without a filter event. Keep Looker's tile sized to the actual content so
+    // its internal scrollbar does not resize the map during those changes.
+    this.heightObserver?.disconnect();
+    this.heightObserver = new ResizeObserver(() => {
+      if (this.heightFrame !== null) cancelAnimationFrame(this.heightFrame);
+      this.heightFrame = requestAnimationFrame(() => {
+        this.heightFrame = null;
+        if (!this.isConnected) return;
+        const height = this.offsetHeight;
+        if (height <= 0 || height === this.observedHeight) return;
+        this.observedHeight = height;
+        this.dispatchEvent(new CustomEvent('update-height', { detail: { height } }));
+      });
+    });
+    this.heightObserver.observe(this);
 
     const tableWrapper = this.shadowRoot?.querySelector('#table-wrapper');
 

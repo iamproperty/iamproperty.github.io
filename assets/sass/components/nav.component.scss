@@ -22,6 +22,8 @@
 @use '../utilities/sizes' as *;
 @use '../utilities/display' as *;
 
+@use '../elements/hr' as *;
+
 /* #region Utilities */
 
 .text-center {
@@ -450,7 +452,7 @@
   ::slotted(a[slot='secondary']:not(#insights-button)) {
     font-size: 0.75rem !important;
     line-height: 2rem !important;
-    margin: 0 !important;
+    margin: 0 0 0 1.5rem !important;
 
     &:after {
       display: none;
@@ -856,5 +858,36 @@ slot[name='menus'] {
   #insights-menu.open {
     left: calc(100% - 40rem);
   }
+}
+/* #endregion */
+
+/* #region notifications */
+:host(.nav--sticky) {
+
+  hr {
+    border-top: 1px solid #eeeeee;
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin-left: -50vw;
+    width: 100vw;
+  }
+}
+
+
+slot[name="notifications"] {
+  display: block;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-left: -50vw;
+  width: 100vw;
+}
+
+
+::slotted([slot="notifications"]) {
+  position: static!important;
 }
 /* #endregion */
