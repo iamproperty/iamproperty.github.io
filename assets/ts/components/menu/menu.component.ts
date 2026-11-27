@@ -24,7 +24,11 @@ class iamMenu extends HTMLElement {
     this.classList.add('dropdown');
 
     const menuID = this.hasAttribute('id') ? this.getAttribute('id') : false;
-    const menuButton = document.querySelector(`[popovertarget="${menuID}"]`);
+    // Look the trigger up in our own root so menus rendered inside a shadow root find it too
+    const root = this.getRootNode() as Document | ShadowRoot;
+    const menuButton = root.querySelector(`[popovertarget="${menuID}"]`) as HTMLElement | null;
+    // keep-focus: non-modal behaviour, focus stays on the trigger and Tab moves into the menu
+    const keepFocus = this.hasAttribute('keep-focus');
 
     let topLevelmenuItems = this.querySelectorAll(':scope > a, :scope > button, :scope > details > summary');
     let menuItems = this.querySelectorAll('a, button');
@@ -48,20 +52,24 @@ class iamMenu extends HTMLElement {
       menuButton?.setAttribute('aria-haspopup', 'true');
       menuButton?.style['anchor-name'] = `--${menuID}`;
       menuButton?.setAttribute('aria-controls', menuID);
+
+      if (keepFocus) menuButton?.setAttribute('aria-expanded', 'false');
     }
 
     menuItems.forEach((item, index) => {
       item.setAttribute('role', 'menuitem');
       item.setAttribute('tabindex', '0');
 
-      if (index == 0) {
+      // A popover moves focus to its autofocus descendant when it opens
+      if (index == 0 && !keepFocus) {
         item.setAttribute('autofocus', true);
       }
     });
 
     this.addEventListener('keydown', (event) => {
       if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary')) {
-        const activeItem = document.activeElement;
+        // document.activeElement is the shadow host when the menu lives inside a shadow root
+        const activeItem = root.activeElement;
         const prevIndex = Array.from(topLevelmenuItems).indexOf(activeItem) - 1;
         const nextIndex = Array.from(topLevelmenuItems).indexOf(activeItem) + 1;
 
@@ -76,7 +84,7 @@ class iamMenu extends HTMLElement {
               activeItem.closest('details').querySelector(':scope summary').focus();
             } else {
               event.stopPropagation();
-              menuButton.focus();
+              menuButton?.focus();
             }
 
             break;
@@ -146,7 +154,7 @@ class iamMenu extends HTMLElement {
       this.dispatchEvent(updateEvent);
 
       // Fix the focus
-      if (this.closest('.menu__wrapper')) {
+      if (this.closest('.menu__wrapper') && !keepFocus) {
         menuItems[0].focus();
       }
 
@@ -156,12 +164,17 @@ class iamMenu extends HTMLElement {
         this.hidePopover();
       }
 
-      if (this.matches(':popover-open') && document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)) {
-        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.setAttribute('aria-pressed', 'true');
-        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.add('active');
+      const trigger = root.querySelector(`[popovertarget="${this.getAttribute('id')}"]`);
+      const isOpen = this.matches(':popover-open');
+
+      trigger?.classList.toggle('active', isOpen);
+
+      if (keepFocus) {
+        trigger?.setAttribute('aria-expanded', String(isOpen));
+      } else if (isOpen) {
+        trigger?.setAttribute('aria-pressed', 'true');
       } else {
-        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.removeAttribute('aria-pressed');
-        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.remove('active');
+        trigger?.removeAttribute('aria-pressed');
       }
     });
 
